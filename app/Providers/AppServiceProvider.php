@@ -72,6 +72,5 @@ class AppServiceProvider extends ServiceProvider
                 'q_2',
                 'q_3'
             ));
-
     }
 }
