@@ -82,7 +82,6 @@ class IndexController extends Controller
             if ($user->hasRole(['bidder'])) {
                 return redirect()->route('bidder.dashboard');
             }
-            dd('redirectUser');
         } else {
             return redirect()->route('home.index');
         }

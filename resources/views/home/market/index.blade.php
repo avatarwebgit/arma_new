@@ -102,17 +102,17 @@
                     <div class="col-12 col-md-6 mb-3">
                         <div class="bid_textarea">
                             <table class="table">
-                                <thead class="bg-blue text-center text-white">
+                                <thead class="bg-blue text-center text-white2">
                                 <tr>
-                                    <th class="text-white" colspan="3">Sell Order</th>
+                                    <th class="text-white2" colspan="3">Sell Order</th>
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
                                 <tr>
-                                    <th class="text-center text-white w-50">Max
+                                    <th class="text-center text-white2 w-50">Max
                                         Quantity( {{ $market->SalesForm->unit }} )
                                     </th>
-                                    <th class="text-center text-white w-50">Price
+                                    <th class="text-center text-white2 w-50">Price
                                         ( {{ $market->SalesForm->currency }} )
                                     </th>
                                 </tr>
@@ -126,19 +126,19 @@
                     <div class="col-12 col-md-6 mb-3">
                         <div class="bid_textarea">
                             <table class="table">
-                                <thead class="bg-success text-center text-white">
+                                <thead class="bg-success text-center text-white2">
                                 <tr>
-                                    <th class="text-white" colspan="3">Buy Order</th>
+                                    <th class="text-white2" colspan="3">Buy Order</th>
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
                                 <tr>
-                                    <th class="text-center text-white w-50">Quantity( {{ $market->SalesForm->unit }})
+                                    <th class="text-center text-white2 w-50">Quantity( {{ $market->SalesForm->unit }})
                                     </th>
-                                    <th class="text-center text-white w-50">Price ( {{ $market->SalesForm->currency }}
+                                    <th class="text-center text-white2 w-50">Price ( {{ $market->SalesForm->currency }}
                                         )
                                     </th>
-                                    <th class="text-center text-white w-50">
+                                    <th class="text-center text-white2 w-50">
 
                                     </th>
                                 </tr>
