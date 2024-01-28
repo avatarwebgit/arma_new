@@ -1,6 +1,6 @@
 @extends('home.homelayout.app')
 @section('title')
-    اطلاعات حساب کاربری
+Profile
 @endsection
 
 @section('style')
@@ -71,137 +71,243 @@
 @endsection
 
 @section('content')
-    <div class="my-account-wrapper main">
-        <div class="container card">
-            <div class="row card-body">
-                <div class="col-lg-3 col-md-4">
-                    <div class="myaccount-tab-menu nav" role="tablist">
-                        <div>
-                            <button id="mobile_menu_nav" class="btn btn-blue d-block d-md-none d-lg-none" style="width: 100%">
-                                <span class="  w-100"><span style="float:right">ناحیه کاربری</span><span id="icon-panel" class="positive" style="float:left">+</span></span>
-                            </button>
-                        </div>
-                        <div id="mobile_menu_nav_ul">
-                            <ul class="profile_sidebar_items">
-                                <li>
-                                    <a href="#"
-                                       class="">
-                                        <i class="w-icon-orders ml-1"></i>
-                                        سفارش های من
-                                    </a>
-                                </li>
 
-                                <li>
-                                    <a href="{{ route('logout') }}">
-                                        <i class="fa fa-sign-out-alt ml-1"></i>
-                                        logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+    <div class="settings mtb15">
+        <div class="container-fluid">
+            <div class="row">
 
-                    </div>
-                </div>
-                <div class="col-lg-9 col-md-8">
+               @include('home.profile.sidebar')
+                <div class="col-md-12 col-lg-9">
+                    @include('admin.sections.alert')
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="settings-profile" role="tabpanel" aria-labelledby="settings-profile-tab">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">General Information</h5>
+                                    <div class="settings-profile">
+                                        <form method="post" action="{{route('seller.update.profile',['user'=>$user->id])}}">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-row mt-4">
+                                                <div class="col-md-6">
+                                                    <label for="formFirst">Name</label>
+                                                    <input value="{{$user->name}}" name="name" id="formFirst" type="text" class="form-control" placeholder="First name">
+                                                </div>
 
-
-                    <div class="tab-content" id="myaccountContent">
-                        <div class="myaccount-content">
-                            <h3> اطلاعات حساب کاربری </h3>
-                            <div class="account-details-form">
-                                <form action="" method="POST"
-                                      enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
-                                                <label style="font-weight:bold" for="first_name" class="required">
-                                                    نام:
-                                                </label>
-                                                <input class="form-control form-control-sm" type="text" id="first_name"
-                                                       name="first_name" value="{{ $user->first_name }}"/>
+                                                <div class="col-md-12">
+                                                    <input type="submit" value="Update">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
-                                                <label style="font-weight:bold" for="last_name" class="required">
-                                                    نام خانوادگی:
-                                                </label>
-                                                <input class="form-control form-control-sm" type="text" id="last_name"
-                                                       name="last_name" value="{{ $user->last_name }}"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
-                                                <label style="font-weight:bold" for="national_code" class="required">
-                                                    کد ملی:
-                                                </label>
-                                                <input class="form-control form-control-sm" id="national_code"
-                                                       name="national_code" value="{{ $user->national_code }}"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
-                                                <label style="font-weight:bold" for="cellphone" class="required">
-                                                    شماره همراه:
-                                                </label>
-                                                <input id="cellphone" class="form-control form-control-sm" disabled
-                                                       value="{{ $user->cellphone }}"/>
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
-                                    <div class="single-input-item mt-3">
-
-                                        @if($user->first_name==null)
-                                            <button type="submit" class="ht-btn btn-blue black-btn"> تکمیل ثبت نام
-                                            </button>
-                                        @else
-                                            <button type="submit" style="font-size: 13px !important;
-height: 40px !important;" class="btn btn-blue black-btn"> ویرایش اطلاعات
-                                            </button>
-                                        @endif
-                                    </div>
-
-                                </form>
+                                </div>
                             </div>
-                            <div class="col-12 mt-3 mb-3">
-                                <hr>
-                            </div>
-                            <div class="account-details-form mt-3">
-                                <form action="" method="POST"
-                                      enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
-                                                <label for="password">رمز عبور:</label>
-                                                <input name="password" id="password" class="form-control mb-2 border">
-                                                @error('password')
-                                                <p class="input-error-validation">{{ $message }}</p>
-                                                @enderror
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Security Information</h5>
+                                    <div class="settings-profile">
+                                        <form method="post" action="{{route('seller.update.password',['user'=>$user->id])}}">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <label for="newPass">New password</label>
+                                                    <input name="password" id="newPass" type="text" class="form-control" placeholder="Enter new password">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input type="submit" value="Update">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
-                                                <label for="password_confirmation">تکرار رمز عبور:</label>
-                                                <input name="password_confirmation" id="password_confirmation"
-                                                       class="form-control mb-2 border">
-                                                @error('password_confirmation')
-                                                <p class="input-error-validation">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
-                                    <div class="single-input-item mt-3">
-                                        <button type="submit" style="font-size: 13px !important;
-height: 40px !important;" class="btn btn-blue black-btn"> ویرایش رمز عبور
-                                        </button>
-                                    </div>
-
-                                </form>
+                                </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="settings-wallet" role="tabpanel" aria-labelledby="settings-wallet-tab">
+                            <div class="wallet">
+                                <div class="row">
 
+                                    <div class="col-md-12 col-lg-12">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="coinBTC" role="tabpanel">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Latest Transactions</h5>
+                                                        <div class="wallet-history">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>type</th>
+                                                                    <th>Date</th>
+                                                                    <th>Status</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Description</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    @foreach($wallets as $item)
+                                                                        <td>{{$item->type}}</td>
+                                                                        <td>{{$item->created_at->format('Y/m/d')}}</td>
+                                                                        <td>{{$item->status}}</td>
+                                                                        <td>{{$item->amount}}</td>
+                                                                        <td>{{$item->description}}</td>
+                                                                    @endforeach
+
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Notifications</h5>
+                                    <div class="settings-notification">
+                                        <ul>
+                                            <li>
+                                                <div class="notification-info">
+                                                    <p>Update price</p>
+                                                    <span>Get the update price in your dashboard</span>
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="notification1">
+                                                    <label class="custom-control-label" for="notification1"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="notification-info">
+                                                    <p>2FA</p>
+                                                    <span>Unable two factor authentication service</span>
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="notification2" checked="">
+                                                    <label class="custom-control-label" for="notification2"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="notification-info">
+                                                    <p>Latest news</p>
+                                                    <span>Get the latest news in your mail</span>
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="notification3">
+                                                    <label class="custom-control-label" for="notification3"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="notification-info">
+                                                    <p>Email Service</p>
+                                                    <span>Get security code in your mail</span>
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="notification4" checked="">
+                                                    <label class="custom-control-label" for="notification4"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="notification-info">
+                                                    <p>Phone Notify</p>
+                                                    <span>Get transition notification in your phone </span>
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="notification5" checked="">
+                                                    <label class="custom-control-label" for="notification5"></label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card settings-profile">
+                                <div class="card-body">
+                                    <h5 class="card-title">Create API Key</h5>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label for="generateKey">Generate key name</label>
+                                            <input id="generateKey" type="text" class="form-control" placeholder="Enter your key name">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="rewritePassword">Confirm password</label>
+                                            <input id="rewritePassword" type="password" class="form-control" placeholder="Confirm your password">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="submit" value="Create API key">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Your API Keys</h5>
+                                    <div class="wallet-history">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Key</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>zRmWVcrAZ1C0RZkFMu7K5v0KWC9jUJLt</td>
+                                                <td>
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input" id="apiStatus1" checked="">
+                                                        <label class="custom-control-label" for="apiStatus1"></label>
+                                                    </div>
+                                                </td>
+                                                <td><i class="icon ion-md-trash"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Rv5dgnKdmVPyHwxeExBYz8uFwYQz3Jvg</td>
+                                                <td>
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input" id="apiStatus2">
+                                                        <label class="custom-control-label" for="apiStatus2"></label>
+                                                    </div>
+                                                </td>
+                                                <td><i class="icon ion-md-trash"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>VxEYIs1HwgmtKTUMA4aknjSEjjePZIWu</td>
+                                                <td>
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input" id="apiStatus3">
+                                                        <label class="custom-control-label" for="apiStatus3"></label>
+                                                    </div>
+                                                </td>
+                                                <td><i class="icon ion-md-trash"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>M01DueJ4x3awI1SSLGT3CP1EeLSnqt8o</td>
+                                                <td>
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input" id="apiStatus4">
+                                                        <label class="custom-control-label" for="apiStatus4"></label>
+                                                    </div>
+                                                </td>
+                                                <td><i class="icon ion-md-trash"></i></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

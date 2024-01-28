@@ -71,12 +71,14 @@ class IndexController extends Controller
     public function redirectUser()
     {
         $user_check = auth()->check();
+
         if ($user_check) {
             $user = auth()->user();
             if ($user->hasRole(['admin'])) {
                 return redirect()->route('admin.dashboard');
             }
             if ($user->hasRole(['seller'])) {
+
                 return redirect()->route('seller.dashboard');
             }
             if ($user->hasRole(['bidder'])) {

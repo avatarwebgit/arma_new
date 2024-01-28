@@ -11,4 +11,5 @@ class wallet extends Model
 
     protected $table = "wallets";
     protected $guarded = [];
+
 }
