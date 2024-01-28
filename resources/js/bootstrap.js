@@ -35,7 +35,8 @@ window.Echo = new Echo({
     wsHost: import.meta.env.PUSHER_HOST,
     wsPort: import.meta.env.PUSHER_PORT,
     disableStats: true,
-    forceTLS: true
+    forceTLS: true,
+    cluster: 'ap2',
 });
 
 Pusher.logToConsole=true;
