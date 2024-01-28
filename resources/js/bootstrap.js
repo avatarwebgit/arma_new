@@ -40,12 +40,23 @@ window.Pusher = Pusher;
 //     enabledTransports: ['ws','wss'],
 // });
 
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: import.meta.env.VITE_PUSHER_APP_KEY,
+//     wsHost: window.location.hostname,
+//     wsPort: import.meta.env.PUSHER_PORT,
+//     disableStats: true,
+//     forceTLS: false,
+//     cluster: 'ap2',
+//     enabledTransports: ['ws','wss'],
+// });
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: import.meta.env.VITE_PUSHER_APP_KEY,
     wsHost: window.location.hostname,
-    wsPort: 443,
-    forceTLS: true,
+    wsPort: 6001,
+    forceTLS: false,
     disableStats: false,
     cluster: import.meta.env.VITE_PUSHER_APP_KEY,
     enabledTransports: ['ws', 'wss'],
