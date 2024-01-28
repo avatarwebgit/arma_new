@@ -29,14 +29,26 @@ import Pusher from 'pusher-js';
 
 window.Pusher = Pusher;
 
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: import.meta.env.VITE_PUSHER_APP_KEY,
+//     wsHost: import.meta.env.PUSHER_HOST,
+//     wsPort: import.meta.env.PUSHER_PORT,
+//     disableStats: true,
+//     forceTLS: false,
+//     cluster: 'ap2',
+//     enabledTransports: ['ws','wss'],
+// });
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: import.meta.env.VITE_PUSHER_APP_KEY,
-    wsHost: import.meta.env.PUSHER_HOST,
-    wsPort: import.meta.env.PUSHER_PORT,
-    disableStats: true,
-    forceTLS: true,
-    cluster: 'ap2',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: false,
+    cluster: import.meta.env.VITE_PUSHER_APP_KEY,
+    enabledTransports: ['ws', 'wss'],
 });
 
 Pusher.logToConsole=true;
