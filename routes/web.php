@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Home\UserController as UserHomeController;
 use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\Home\MarketHomeController;
@@ -148,9 +149,18 @@ Route::post('/sales_form_change_status/',[FormController::class,'change_status']
 Route::get('sales_offer/show/{id}', [FormController::class, 'sales_form_show'])->name('sale_form.show');
 //seller
 Route::name('seller.')->prefix('/seller/')->group(function () {
-    Route::get('dashboard', [SellerController::class, 'dashboard'])->name('dashboard');
-    Route::get('profile', [SellerController::class, 'profile'])->name('profile');
+    Route::get('dashboard', [UserHomeController::class, 'dashboard'])->name('dashboard');
+    Route::put('update/profile/{user}', [UserHomeController::class, 'updateProfile'])->name('update.profile');
+    Route::put('update/password', [UserHomeController::class, 'updatePassword'])->name('update.password');
+    Route::get('profile', [UserHomeController::class, 'profile'])->name('profile');
     Route::get('requests', [SellerController::class, 'requests'])->name('requests');
+});
+Route::name('bidder.')->prefix('/bidder/')->group(function () {
+    Route::get('dashboard', [UserHomeController::class, 'dashboard'])->name('dashboard');
+    Route::put('update/profile/{user}', [UserHomeController::class, 'updateProfile'])->name('update.profile');
+    Route::put('update/password', [UserHomeController::class, 'updatePassword'])->name('update.password');
+    Route::get('profile', [UserHomeController::class, 'profile'])->name('profile');
+    Route::get('requests', [UserHomeController::class, 'requests'])->name('requests');
 
 });
 Route::name('profile.')->prefix('/profile/')->group(function () {

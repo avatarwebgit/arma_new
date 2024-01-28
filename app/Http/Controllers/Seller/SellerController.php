@@ -23,18 +23,65 @@ use App\Models\TargetMarket;
 use App\Models\THCIncluded;
 use App\Models\ToleranceWeightBy;
 use App\Models\Units;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SellerController extends Controller
 {
     public function dashboard()
     {
-        return view('seller.dashboard');
+        $user = auth()->user();
+        $wallets = $user->wallets;
+        return view('home.profile.index',compact('user','wallets'));
     }
-
     public function profile()
     {
-        return view('seller.profile');
+        $user = auth()->user();
+        return view('home.profile.index',compact('user'));
+    }
+    public function updateProfile(User $user,Request $request)
+{
+    $request->validate([
+        'name' =>'required',
+
+    ]);
+
+    $user->update([
+        'name' =>$request->name,
+
+
+    ]);
+
+    if ($request->has('password')){
+        $user->update([
+            'password' =>Hash::make($request->password),
+        ]);
+    }
+
+    session()->flash('success', 'Update Successfully');
+    return redirect()->back();
+
+}
+    public function updatePassword(Request $request)
+    {
+        $user = auth()->user();
+
+        $request->validate([
+            'password' =>'required',
+
+        ]);
+
+
+        if ($request->has('password')){
+            $user->update([
+                'password' =>Hash::make($request->password),
+            ]);
+        }
+
+        session()->flash('success', 'Update Successfully');
+        return redirect()->back();
+
     }
 
     public function requests()
