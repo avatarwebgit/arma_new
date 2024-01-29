@@ -36,7 +36,7 @@ window.Echo = new Echo({
     wsPort: 6001,
     disableStats: true,
     forceTLS: true,
-    cluster: 'mt1',
+    cluster: 'ap2',
 });
 
 Pusher.logToConsole=true;
