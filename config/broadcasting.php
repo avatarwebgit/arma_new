@@ -45,9 +45,9 @@ return [
 
         'pusher' => [
             'driver' => 'pusher',
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
-            'app_id' => env('PUSHER_APP_ID'),
+            'key' => env('MIX_PUSHER_APP_KEY'),
+            'secret' => env('MIX_PUSHER_APP_SECRET'),
+            'app_id' => env('MIX_PUSHER_APP_ID'),
             'options' => [
                 'cluster' => 'ap2',
                 'host' => '127.0.0.1',
