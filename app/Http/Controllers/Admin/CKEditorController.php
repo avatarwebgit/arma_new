@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CKEditorController extends Controller
 {
     public function upload(Request $request)
     {
+        Carbon::now();
         if($request->hasFile('upload')) {
             //get filename with extension
             $filenamewithextension = $request->file('upload')->getClientOriginalName();
