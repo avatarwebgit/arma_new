@@ -55,11 +55,10 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: import.meta.env.VITE_PUSHER_APP_KEY,
     wsHost: window.location.hostname,
-    wsPort: 6001,
-    forceTLS: false,
-    disableStats: false,
     cluster: import.meta.env.VITE_PUSHER_APP_KEY,
-    enabledTransports: ['ws', 'wss'],
+    wsPort: 6001,
+    wssPort: 6001,
+    disableStats: true,
 });
 
 Pusher.logToConsole=true;
