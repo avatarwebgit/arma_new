@@ -193,7 +193,7 @@ class MarketController extends Controller
             MarketSetting::where('key', $key)->update(['value' => $val]);
         }
         session()->flash('success', 'Successfully updated');
-        broadcast(new MarketTimeUpdated());
+        event(new MarketTimeUpdated());
         return redirect()->back();
     }
 

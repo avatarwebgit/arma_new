@@ -29,19 +29,42 @@ return [
     */
 
     'connections' => [
+//	'pusher' => [
+//            'driver' => 'pusher',
+//            'key' => env('VITE_PUSHER_APP_KEY'),
+//            'secret' =>env('VITE_PUSHER_APP_SECRET'),
+//            'app_id' => env('VITE_PUSHER_APP_ID'),
+//            'options' => [
+//                'cluster' => env('PUSHER_APP_CLUSTER'),
+//                'host' =>'localhost',
+//                'port' => '6001',
+//                'scheme' => 'http',
+//                'encrypted' => true,
+//                'verify_peer' => false,
+//                'useTLS' => true,
+//                'curl_options' => [
+ //                       CURLOPT_SSL_VERIFYHOST => 0,
+   //                     CURLOPT_SSL_VERIFYPEER => 0,
+     //           ],
+      //      ],
+       // ],
 
-        'pusher' => [
-            'driver' => 'pusher',
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
-            'app_id' => env('PUSHER_APP_ID'),
-            'options' => [
-                'cluster' => env('PUSHER_APP_CLUSTER'),
-                'host' => env('PUSHER_HOST'),
-                'port' => env('PUSHER_PORT'),
-                'scheme' => 'ws'
-            ],
-        ],
+	'pusher' => [
+ 		'driver' => 'pusher',
+                'key' => env('VITE_PUSHER_APP_KEY'),
+                'secret' =>env('VITE_PUSHER_APP_SECRET'),
+                'app_id' => env('VITE_PUSHER_APP_ID'),
+    		'options' => [
+        		'cluster' => 'ap2', // Not necessary for local WebSockets, consider removing
+        		'useTLS' => true, // Set to true if using SSL/TLS
+        		'encrypted' => true, // Deprecated in favor of useTLS, but can be set for older versions
+        		'host' => 'ws.armaitimex.com', // Your WebSocket server
+			'verify_peer' => false,
+        		'port' => 6001, // Your WebSocket server port
+        		'scheme' => 'http', // Set to https if using SSL/TLS
+    		],
+	],
+
 
         'ably' => [
             'driver' => 'ably',
