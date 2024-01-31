@@ -32,6 +32,8 @@
 
                                                 @include('admin.sales_form.unit_currency')
 
+                                                @include('admin.sales_form.contract')
+
                                                 @include('admin.sales_form.product')
 
                                                 @include('admin.sales_form.quantity')

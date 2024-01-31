@@ -29,24 +29,27 @@ Broadcast::channel('market-status-updated', function ($user, $id) {
 	return true;
     return (int) $user->id === (int) $id;
 });
+Broadcast::channel('change-sales-offer', function ($user, $id){ 
+    return true;
+    return (int) $user->id === (int) $id;
+});
+Broadcast::channel('new_bid_created', function ($user, $id) {
+    return true;
+    return (int) $user->id === (int) $id;
+});
+Broadcast::channel('market-status-updated', function ($user, $id) {
+    return true;
+    return (int) $user->id === (int) $id;
+});
 Broadcast::channel('change-sales-offer', function ($user, $id) {
-	return true;
+    return true;
     return (int) $user->id === (int) $id;
 });
 
-//Broadcast::channel('market-setting-updated-channel', function ($user, $id) {
-//    return (int) $user->id === (int) $id;
-//});
-
-Broadcast::channel('market-setting-updated-channel', function ($user) {
-	return true;  
-  if ($user) {
-        return ['id' => $user->id, 'name' => $user->name];
-    } else {
-        return false; // or handle guest users if you intend to allow them
-    }
+Broadcast::channel('market-setting-updated-channel', function ($user, $id) {
+    return true;
+    return (int) $user->id === (int) $id;
 });
-
 
 //
 //

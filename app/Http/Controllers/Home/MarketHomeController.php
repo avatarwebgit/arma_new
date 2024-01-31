@@ -44,9 +44,10 @@ class MarketHomeController extends Controller
         return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions'));
     }
 
-    public function GetMarket(Request $request){
-        $market_id=$request->market_id;
-        $market=Market::where('id',$market_id)->first();
+    public function GetMarket(Request $request)
+    {
+        $market_id = $request->market_id;
+        $market = Market::where('id', $market_id)->first();
         $result = $this->statusTimeMarket($market);
         $market['difference'] = $result[0];
         $market['status'] = $result[1];
@@ -56,8 +57,8 @@ class MarketHomeController extends Controller
         $market['benchmark4'] = $result[5];
         $market['benchmark5'] = $result[6];
         $market['benchmark6'] = $result[7];
-        $view=view('home.market.benchmark_info',compact('market'))->render();
-        return response()->json([1,$view]);
+        $view = view('home.market.benchmark_info', compact('market'))->render();
+        return response()->json([1, $view]);
     }
 
     public function refreshMarketTable()
@@ -167,17 +168,18 @@ class MarketHomeController extends Controller
     public function bid_market(Request $request)
     {
         $market = Market::find($request->market);
+
         if ($market->status == 6) {
             $validator = $request->validate([
                 'price' => 'required',
             ]);
-            $best_bid = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'asc')->first();
-            if ($best_bid){
+            $best_bid_exists = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'asc')->exists();
+            if ($best_bid_exists) {
+                $best_bid = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'asc')->first();
                 $request['quantity'] = $best_bid->quantity;
-            }else{
+            } else {
                 $message = 'You Cannot Permission To Bid Because You Didnot Enter Any Bid In Previous Level';
-                return ['alert','error',$message];
-
+                return ['alert', 'error', $message];
             }
         } else {
             $validator = $request->validate([
@@ -196,10 +198,10 @@ class MarketHomeController extends Controller
 
 
         try {
-//            $bid_permission = $this->Bid_Permissions();
-//            if ($bid_permission['response'] === 'error') {
-//                return response()->json([$bid_permission['response'], $bid_permission['message']]);
-//            }
+            $bid_permission = $this->Bid_Permissions();
+            if ($bid_permission['response'] === 'error') {
+                return response()->json([$bid_permission['response'], $bid_permission['message']]);
+            }
             $Opening_roles = $this->Opening_roles($request->all(), $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market);
             if (!$Opening_roles[0]) {
                 $error_type = $Opening_roles['validate_error'];
@@ -207,12 +209,12 @@ class MarketHomeController extends Controller
                 $message = $Opening_roles['message'];
                 return response()->json([$error_type, $key, $message]);
             }
-            $pre_user_bid=$market->Bids()->where('user_id', auth()->id())->first();
-            if ($pre_user_bid){
-                $tries=$pre_user_bid->tries+1;
+            $pre_user_bid = $market->Bids()->where('user_id', auth()->id())->first();
+            if ($pre_user_bid) {
+                $tries = $pre_user_bid->tries + 1;
                 $pre_user_bid->delete();
-            }else{
-                $tries=1;
+            } else {
+                $tries = 1;
             }
             BidHistory::create([
                 'user_id' => auth()->id(),
@@ -267,8 +269,9 @@ class MarketHomeController extends Controller
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
         if ($market->status === 3) {
-            $user_bids = $market->Bids()->where('user_id', auth()->id())->where('tries',3)->get();
-            if ($user_bids) {
+
+            $user_bids = $market->Bids()->where('user_id', auth()->id())->where('tries', 3)->get();
+            if (count($user_bids)>0) {
                 $key = 'bid number';
                 $message = 'Maximum number You Can Bid is: 3';
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
@@ -282,12 +285,15 @@ class MarketHomeController extends Controller
         }
         $bid_exists = $market->Bids()->exists();
         if ($bid_exists) {
-            $highest_price = $market->Bids()->orderBy('price', 'desc')->first();
-            $highest_price = $highest_price->price;
-            if ($request['price'] < $highest_price) {
-                $key = 'highest_price';
-                $message = 'Your New Bid Must Better Than Previous!';
-                return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+            $highest_price_exists = $market->Bids()->where('user_id',auth()->id)->orderBy('price', 'desc')->exists();
+            if ($highest_price_exists){
+                $highest_price = $market->Bids()->where('user_id',auth()->id)->orderBy('price', 'desc')->first();
+                $highest_price = $highest_price->price;
+                if ($request['price'] < $highest_price) {
+                    $key = 'highest_price';
+                    $message = 'Your New Bid Must Better Than Previous!';
+                    return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+                }
             }
         }
 
@@ -314,5 +320,18 @@ class MarketHomeController extends Controller
             return ['response' => 'error', 'message' => $msg];
         }
         return ['response' => true, 'message' => 'success'];
+    }
+
+    public function get_market_bit_result(Request $request)
+    {
+        try {
+            $market_id = $request->id;
+            $market = Market::where('market_id', $market_id)->first();
+            $bidhistories = $market->Bids;
+            $view = view('home.market.final_status', compact('bidhistories'))->render();
+            return response()->json([1, $view]);
+        } catch (\Exception $exception) {
+            return response()->json([0, $exception->getMessage()]);
+        }
     }
 }

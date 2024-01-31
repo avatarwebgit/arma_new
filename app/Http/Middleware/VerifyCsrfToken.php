@@ -9,5 +9,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'forms/fill/*',
         '/paytm-callback*',
+        '/get_market_bit_result'
     ];
 }

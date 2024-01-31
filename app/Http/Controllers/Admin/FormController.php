@@ -15,6 +15,7 @@ use App\Models\AssignFormUser;
 use App\Models\CargoInsurance;
 use App\Models\CompanyType;
 use App\Models\ContainerType;
+use App\Models\ContractType;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\Destination;
@@ -126,6 +127,7 @@ class FormController extends Controller
         $qualityQuantityInspector = QualityQuantityInspector::all();
         $InspectionPlace = InspectionPlace::all();
         $cargoInsurance = CargoInsurance::all();
+        $contract_types = ContractType::all();
         return view('admin.sales_form.create', compact(
             'sale_form_exist',
             'form',
@@ -149,6 +151,7 @@ class FormController extends Controller
             'qualityQuantityInspector',
             'InspectionPlace',
             'cargoInsurance',
+            'contract_types',
             'item',
             'role'
         ));
@@ -389,6 +392,10 @@ class FormController extends Controller
             'unit_other' => ['required_if:unit,other'],
             'currency' => 'required',
             'currency_other' => ['required_if:currency,other'],
+            //contract type
+            'contract_type' => 'required',
+            'contract_type_other' => ['required_unless:contract_type,type'],
+            //
             'commodity' => 'required',
             'type_grade' => 'required',
             'hs_code' => 'nullable',
@@ -404,6 +411,8 @@ class FormController extends Controller
             'tolerance_weight_by' => 'nullable',
             'partial_shipment' => 'nullable',
             'partial_shipment_number' => ['required_if:partial_shipment,Yes'],
+            'transshipment' => 'required',
+            'transshipment_other' => ['required_if:transshipment,Yes'],
             'increase_quantity' => 'nullable',
             'increase_quantity_value' => ['required_if:increase_quantity,Yes'],
             'shipment_more_detail' => 'nullable',

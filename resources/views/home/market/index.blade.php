@@ -7,8 +7,12 @@
         });
         window.Echo.channel('market-setting-updated-channel')
             .listen('MarketTimeUpdated', function (e) {
-                console.log('ok');
                 GetMarket({{ $market->id }});
+            });
+        window.Echo.channel('new_bid_created')
+            .listen('NewBidCreated', function (e) {
+                let market_id = e.market_id;
+                refreshBidTable(market_id);
             });
 
         function GetMarket(market_id){
@@ -40,6 +44,11 @@
 
 @section('style')
     <style>
+
+        .display-none{
+            display: none;
+        }
+
         .error {
             display: none
         }
@@ -49,7 +58,9 @@
             height: auto;
             border: 1px solid #7e7e7e;
         }
-
+        .bg-inactive{
+            background-color: #cecaca !important;
+        }
         .bid_deposit {
             width: 100%;
             height: fit-content;
@@ -61,7 +72,6 @@
             width: 100%;
             height: fit-content;
             border: 1px solid black;
-            background-color: #162fa2;
         }
 
         .bid_input {
@@ -75,7 +85,13 @@
         }
 
         .bg-blue {
-            background-color: #162fa2;
+            background-color: #162fa2 !important;
+        }
+        .justify-content-center{
+            justify-content: center !important;
+        }
+        .align-center{
+            align-items: center !important;
         }
 
     </style>
@@ -84,35 +100,40 @@
 @section('content')
     <div class="container mt-5 mb-5">
         <div class="row">
+            <div class="col-12 col-md-12 col-xl-4 mb-1 d-flex justify-content-center align-center">
+                <h5 class="text-center text-info text-center p-3" style="margin-bottom: 0 !important;">
+                    {{ $market->SalesForm->commodity }}
+                </h5>
+            </div>
+            <div class="col-12 col-md-12 col-xl-8 mb-1">
+                <h5 class="text-center status-box">
+                    Step : <span id="market-status-{{ $market->id }}"></span>
+                </h5>
+                <span id="market-difference-{{ $market->id }}" class="circle_timer">
+
+                        </span>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12 col-md-12 col-xl-4 mb-5">
                 @include('home.market.market_info')
             </div>
             <div class="col-12 col-md-12 col-xl-8 mb-5">
-                <div class="row mt-4 mb-4">
-                    <div class="col-12">
-                        <h5 class="text-center status-box">
-                            Step : <span id="market-status-{{ $market->id }}"></span>
-                        </h5>
-                        <span id="market-difference-{{ $market->id }}" class="circle_timer">
-
-                        </span>
-                    </div>
-                </div>
                 <div class="row mb-4">
                     <div class="col-12 col-md-6 mb-3">
                         <div class="bid_textarea">
                             <table class="table">
-                                <thead class="bg-blue text-center text-white2">
+                                <thead class="bg-blue text-center">
                                 <tr>
-                                    <th class="text-white2" colspan="3">Sell Order</th>
+                                    <th class="text-white" colspan="3">Sell Order</th>
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
                                 <tr>
-                                    <th class="text-center text-white2 w-50">Max
+                                    <th class="text-center text-white w-50">Max
                                         Quantity( {{ $market->SalesForm->unit }} )
                                     </th>
-                                    <th class="text-center text-white2 w-50">Price
+                                    <th class="text-center text-white w-50">Price
                                         ( {{ $market->SalesForm->currency }} )
                                     </th>
                                 </tr>
@@ -126,24 +147,24 @@
                     <div class="col-12 col-md-6 mb-3">
                         <div class="bid_textarea">
                             <table class="table">
-                                <thead class="bg-success text-center text-white2">
+                                <thead class="bg-success text-center text-white">
                                 <tr>
-                                    <th class="text-white2" colspan="3">Buy Order</th>
+                                    <th class="text-white" colspan="3">Buy Order</th>
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
                                 <tr>
-                                    <th class="text-center text-white2 w-50">Quantity( {{ $market->SalesForm->unit }})
+                                    <th class="text-center text-white w-50">Quantity( {{ $market->SalesForm->unit }})
                                     </th>
-                                    <th class="text-center text-white2 w-50">Price ( {{ $market->SalesForm->currency }}
+                                    <th class="text-center text-white w-50">Price ( {{ $market->SalesForm->currency }}
                                         )
                                     </th>
-                                    <th class="text-center text-white2 w-50">
+                                    <th class="text-center text-white w-50">
 
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody id="bidder_offer">
+                                <tbody id="bidder_offer_{{ $market->id }}">
                                 @include('home.market.bidder_table')
                                 </tbody>
                             </table>
@@ -212,20 +233,46 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 mt-3">
-                        @include('home.market.bid_deposit')
+                    <div class="col-12 mt-3 display-none" id="final_status_section-{{ $market->id }}">
+                        <div class="bid_textarea">
+                            <table class="table">
+                                <thead class="bg-blue text-center text-white">
+                                <tr>
+                                    <th class="text-white" colspan="3">final status</th>
+                                </tr>
+                                </thead>
+                                <thead class="bg-secondary">
+                                <tr>
+                                    <th class="text-center text-white w-50">Quantity( {{ $market->SalesForm->unit }})
+                                    </th>
+                                    <th class="text-center text-white w-50">Price ( {{ $market->SalesForm->currency }}
+                                        )
+                                    </th>
+                                    @if(auth()->user()->hasRole('admin'))
+                                        <th class="text-center text-white w-50">
+                                            user
+                                        </th>
+                                    @endif
+
+                                </tr>
+                                </thead>
+                                <tbody id="final_status_section_table-{{ $market->id }}">
+                                @include('home.market.final_status')
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 mt-3">
-                        @include('home.market.term_condition')
+                        @include('home.market.bid_deposit')
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12 mt-3">
-                @include('home.market.description')
+                @include('home.market.term_condition')
             </div>
         </div>
 

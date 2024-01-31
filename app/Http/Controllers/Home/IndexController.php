@@ -61,6 +61,7 @@ class IndexController extends Controller
                 }
             }
             $view_table = view('home.partials.market', compact('markets_groups'))->render();
+
             return response()->json([1,$view_table,$ids]);
         }catch (\Exception $e) {
             return response()->json([0,$e->getMessage()]);
