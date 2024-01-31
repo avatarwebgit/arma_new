@@ -65,6 +65,34 @@ return [
     		],
 	],
 
+<<<<<<< HEAD
+=======
+//        'pusher' => [
+//            'driver' => 'pusher',
+//            'key' => env('PUSHER_APP_KEY'),
+//            'secret' => env('PUSHER_APP_SECRET'),
+//            'app_id' => env('PUSHER_APP_ID'),
+//            'options' => [
+//                'cluster' => env('PUSHER_APP_CLUSTER'),
+//                'host' => env('PUSHER_HOST'),
+//                'port' => env('PUSHER_PORT'),
+//                'scheme' => 'ws'
+//            ],
+//        ],
+
+        'pusher' => [
+            'driver' => 'pusher',
+            'key' => env('MIX_PUSHER_APP_KEY'),
+            'secret' => env('MIX_PUSHER_APP_SECRET'),
+            'app_id' => env('MIX_PUSHER_APP_ID'),
+            'options' => [
+                'cluster' => 'ap2',
+                'host' => '127.0.0.1',
+                'port' => 6001,
+                'scheme' => 'http'
+            ],
+        ],
+>>>>>>> c4d8bc7dd171fc955a7955c2e27a08d93c3a1e31
 
         'ably' => [
             'driver' => 'ably',
