@@ -39,17 +39,19 @@ window.Pusher = Pusher;
 //    cluster: 'ap2',
 //});
 
+
 window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: import.meta.env.VITE_PUSHER_APP_KEY, // Make sure this is set correctly in your .env file
-    wsHost: 'ws.armaitimex.com', // Your WebSocket host without the protocol and trailing slash
-    wsPort: 443, // 443 for HTTPS
-    wssPort: 443, // 443 for HTTPS
+    broadcaster: "pusher",
+    key: "6c392d7dedc163e3cd4a",
+    wsHost: 'ws.armaitimex.com',
+    wsPort: 6001,
     disableStats: true,
-    encrypted: true,
-    enabledTransports: ['wss'], // Use 'wss' for secure WebSocket connections
-    forceTLS: true // Use TLS for secure connections
+    forceTLS: true,
+    cluster: "ap2",
+    enabledTransports: ['ws', 'wss'],
+
 });
+
 Pusher.logToConsole=true;
 
 
