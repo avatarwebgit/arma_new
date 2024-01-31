@@ -95,7 +95,7 @@
             } else if (benchmark4 < now && now < benchmark5) {
                 Quotation_2_2(benchmark5, now, id);
             } else if (benchmark5 < now && now < benchmark6) {
-                Competition(benchmark6, now, id,step);
+                Competition(benchmark6, now, id, step);
             } else {
                 Stop(id);
             }
@@ -103,7 +103,7 @@
 
         function check_continue_market(market_id, status) {
             let market_continue = true;
-            if (status === 4 || status ===6 || status ===7) {
+            if (status === 4 || status === 6 || status === 7) {
                 $.ajax({
                     url: "{{ route('admin.check_market_status_for_continue') }}",
                     data: {
@@ -151,6 +151,7 @@
         }
 
         function opening(benchmark3, now, id) {
+            close_bid_deposit(id);
             active_bid();
             let difference = benchmark3 - now;
             let status = 3;
@@ -162,6 +163,7 @@
 
         function Quotation_1_2(benchmark4, now, id) {
             remove_function();
+            close_bid_deposit(id);
             active_bid();
             let difference = benchmark4 - now;
             let status = 4;
@@ -173,6 +175,7 @@
 
         function Quotation_2_2(benchmark5, now, id) {
             remove_function();
+            close_bid_deposit(id);
             active_bid();
             let difference = benchmark5 - now;
             let status = 5;
@@ -182,9 +185,10 @@
             change_market_status(status, difference, change_color, color, statusText, id)
         }
 
-        function Competition(benchmark6, now, id,step) {
-            $('#bid_price').attr('onkeypress','step_price_competition(this,event)');
-            $('#bid_price').attr('step',step);
+        function Competition(benchmark6, now, id, step) {
+            close_bid_deposit(id);
+            $('#bid_price').attr('onkeypress', 'step_price_competition(this,event)');
+            $('#bid_price').attr('step', step);
             remove_function();
             Competition_Bid_buttons();
             let difference = benchmark6 - now;
@@ -196,6 +200,7 @@
         }
 
         function Stop(id) {
+            close_bid_deposit(id);
             remove_function();
             deactive_bid();
             let difference = 0;
@@ -207,6 +212,7 @@
         }
 
         function finish(id) {
+            close_bid_deposit(id);
             remove_function();
             deactive_bid();
             let difference = 0;
@@ -214,7 +220,30 @@
             let color = '#009800';
             let change_color = 1;
             let statusText = '<span>finish</span>';
-            change_market_status(status, difference, change_color, color, statusText, id)
+            change_market_status(status, difference, change_color, color, statusText, id);
+            show_market_result(id);
+        }
+
+        function close_bid_deposit(id) {
+            $('#bid_deposit_section-' + id).addClass('bg-inactive');
+            $('#bid_deposit_section-' + id).find('input').prop('disabled', true);
+        }
+
+        function show_market_result(id) {
+            $.ajax({
+                url: "{{ route('home.get_market_bit_result') }}",
+                data: {
+                    id: id,
+                },
+                success: function (msg) {
+                    if (msg[0] == 1) {
+                        $('#final_status_section_table-' + id).html(msg[1]);
+                        $('#final_status_section-' + id).show();
+                    } else {
+                        console.log('error');
+                    }
+                }
+            })
         }
 
         function change_market_status(status, difference, change_color, color, statusText, id) {
@@ -316,6 +345,11 @@
                 if (msg[0] === 'alert') {
                     alert(msg[2]);
                 }
+
+                if (msg[0]==1){
+                    refreshBidTable(market_id);
+                }
+
                 $('#bid_button').prop('disabled', false);
             },
             error: function (msg) {
@@ -511,7 +545,7 @@
             method: 'post',
             success: function (msg) {
                 if (msg) {
-                    $('#bidder_offer').html(msg[1]);
+                    $('#bidder_offer_'+market).html(msg[1]);
                 }
             }
         })

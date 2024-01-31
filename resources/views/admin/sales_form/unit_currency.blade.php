@@ -3,6 +3,13 @@
         Unit and Currency
     </strong>
 </div>
+
+<div class="col-12">
+    <strong>
+        Unit and Currency Text
+    </strong>
+</div>
+
 <div class="col-12 col-md-6 mb-3">
     @php
         $name='Unit';

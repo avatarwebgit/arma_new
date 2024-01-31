@@ -88,7 +88,7 @@
     @endphp
     <div>
         <label for="quality_inspection_report" class="mb-2">
-            quality inspection/analyse?
+            Analyse?
         </label>
         @error('quality_inspection_report')
         <p class="input-error-validate">

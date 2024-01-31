@@ -93,6 +93,7 @@ class MarketController extends Controller
             $request['status'] = 1;
         }
         $market->update($request->all());
+        broadcast(new MarketTimeUpdated());
         return redirect()->route('admin.markets.index')->with('success', 'Market updated successfully');
     }
 
@@ -193,7 +194,7 @@ class MarketController extends Controller
             MarketSetting::where('key', $key)->update(['value' => $val]);
         }
         session()->flash('success', 'Successfully updated');
-        event(new MarketTimeUpdated());
+        broadcast(new MarketTimeUpdated());
         return redirect()->back();
     }
 

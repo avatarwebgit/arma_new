@@ -23,6 +23,19 @@
             }
 
             startTime();
+
+            function slidemore(market_id) {
+                $('#more_table_' + market_id).slideToggle();
+                let svg = $('#slide_more_angle_' + market_id).find('svg');
+                let hasClass = svg.hasClass('fa-angle-down');
+                if (hasClass) {
+                    svg.removeClass('fa-angle-down');
+                    svg.addClass('fa-angle-up');
+                } else {
+                    svg.removeClass('fa-angle-up');
+                    svg.addClass('fa-angle-down');
+                }
+            }
         </script>
 
     <script type="module">
@@ -89,19 +102,7 @@
 
 
 
-        function slidemore(market_id) {
-            $('#more_table_' + market_id).slideToggle();
-            let svg = $('#slide_more_angle_' + market_id).find('svg');
-            let hasClass = svg.hasClass('fa-angle-down');
-            if (hasClass) {
-                svg.removeClass('fa-angle-down');
-                svg.addClass('fa-angle-up');
-            } else {
-                svg.removeClass('fa-angle-up');
-                svg.addClass('fa-angle-down');
-            }
 
-        }
 
         // $(document).ready(function () {
         //     setInterval(function () {

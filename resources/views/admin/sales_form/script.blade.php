@@ -10,8 +10,10 @@
         @endif
         check_unit();
         check_currency();
+        check_contract_type();
         check_quality_inspection_report_file();
         check_partial_shipment();
+        check_transshipment();
         check_increase_quantity();
         check_increase_quantity();
         check_incoterms();
@@ -200,6 +202,42 @@
         }
     }
 
+    function check_contract_type() {
+        let old_value = "{{ old('contract_type') }}";
+        let value;
+        let other_value;
+        let sale_form_exist = {{ $sale_form_exist }};
+        if (old_value !== '') {
+            value = old_value;
+        } else {
+            if (sale_form_exist === 1) {
+                value = "{{ isset($form['contract_type'])?$form['contract_type']:'' }}";
+
+            }
+        }
+        let has_currency_other = 0;
+        if(value=='other' || value=='Contract'){
+            has_currency_other=1;
+        }
+        if (has_currency_other) {
+            let has_old = "{{ old('contract_type_other') }}";
+            if (has_old !== '') {
+                other_value = "{{ old('contract_type_other') }}";
+            } else {
+                other_value = "{{ isset($form['contract_type_other'])?$form['contract_type_other']:'' }}"
+            }
+            hasOtherContractTypes($('#contract_type'));
+            $('#contract_type_other').val(other_value);
+        }
+        //check errors
+        let contract_type_other = "{{ $errors->has('contract_type_other') }}";
+        if (contract_type_other) {
+            let contract_type_other_error = "{{ $errors->first('contract_type_other') }}";
+            let error_message = `<p class="input-error-validate">${contract_type_other_error}</p>`;
+            $(error_message).insertAfter($('#contract_type_other'));
+        }
+    }
+
     function check_quality_inspection_report_file() {
         let old_value = "{{ old('quality_inspection_report') }}";
         let value;
@@ -256,6 +294,33 @@
             $(error_message).insertAfter($('#partial_shipment_number'));
         }
     }
+    function check_transshipment() {
+        let old_value = "{{ old('transshipment') }}";
+        let value;
+        let other_value;
+        let sale_form_exist = {{ $sale_form_exist }};
+        let src = null;
+        if (old_value !== '') {
+            value = old_value;
+        } else {
+            if (sale_form_exist === 1) {
+                value = "{{ isset($form['transshipment'])?$form['transshipment']:'' }}";
+                other_value = "{{ isset($form['transshipment_other'])?$form['transshipment_other']:'' }}";
+            }
+        }
+        let transshipment = value === 'Yes' ? 1 : 0;
+        if (transshipment === 1) {
+            addTransshipment($('#transshipment'));
+            $('#transshipment_other').val(other_value);
+        }
+        let transshipment_other_error = "{{ $errors->has('transshipment_other') }}";
+        if (transshipment_other_error) {
+            let transshipment_other = "{{ $errors->first('transshipment_other') }}";
+            let error_message = `<p class="input-error-validate">${transshipment_other}</p>`;
+            $(error_message).insertAfter($('#transshipment_other'));
+        }
+    }
+
     function check_increase_quantity() {
         let old_value = "{{ old('increase_quantity') }}";
         let value;
@@ -574,6 +639,24 @@
         }
     }
 
+    function hasOtherContractTypes(tag) {
+        let name = $(tag).attr('name');
+        let value = $(tag).val();
+        removeOtherElement(name);
+        console.log(name, value);
+        if (value === 'other' || value ==='Contract') {
+            let label='';
+            if (value === 'other'){
+                label ='Contract Details';
+            }
+            if (value === 'Contract'){
+                label ='Duration Months';
+            }
+            let element = createOtherContractElement(name,label);
+            $(element).insertAfter($(tag).parent().parent());
+        }
+    }
+
     function DestinationOption(tag) {
 
 
@@ -641,6 +724,18 @@
             $(('#' + field_name)).parent().remove();
         }
     }
+    function addTransshipment(tag) {
+        let value = $(tag).val();
+        let field_name = 'transshipment_other';
+        if (value === 'Yes') {
+            let element = '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2"><span class="text-danger">*</span></label>` +
+                '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" placeholder="more Details">' +
+                '</div>';
+            $(element).insertAfter($(tag).parent().parent().parent());
+        } else {
+            $(('#' + field_name)).parent().remove();
+        }
+    }
 
     function addIncreaseQuantity(tag) {
 
@@ -674,6 +769,12 @@
     function createOtherElement(name) {
         let field_name = name + '_other';
         return '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">Write Your ${name} <span class="text-danger">*</span></label>` +
+            '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
+            '</div>';
+    }
+    function createOtherContractElement(name,label) {
+        let field_name = name + '_other';
+        return '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">${label} <span class="text-danger">*</span></label>` +
             '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
             '</div>';
     }
@@ -851,7 +952,7 @@
             }
         }
         let is_open = value === 'open' ? 1 : 0;
-        if (!is_open && value!=='') {
+        if (!is_open && value !== '') {
             let has_old = "{{ old('exclude_market') }}";
 
             if (has_old !== '') {
