@@ -2830,3 +2830,8 @@ body {
     display: inline-block;
     width: 145px;
 }
+
+.input-error-validate{
+    font-size: 9pt;
+    color: red;
+}

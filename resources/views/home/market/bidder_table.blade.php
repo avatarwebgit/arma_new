@@ -1,6 +1,15 @@
 @foreach($bids as $key=>$bid)
     <tr>
-        <td class="text-center">{{ $bid->quantity }}</td>
+        <td class="text-center">
+            @auth
+                @if(auth()->id()===$bid->user_id)
+                    {{ $bid->User->email }}
+                @endif
+            @endauth
+        </td>
+        <td class="text-center">
+            {{ $bid->quantity }}
+        </td>
         <td class="text-center">{{ $bid->price }}</td>
         <td class="text-center">
             @if($key!=0 and $bid->user_id==auth()->id() and $bid->Market->status==3 )

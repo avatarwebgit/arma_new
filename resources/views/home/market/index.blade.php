@@ -33,10 +33,8 @@
             })
         }
         function step_price_competition(tag,event){
-
                 event.preventDefault();
                 alert('Use Arrow Buttons to Increase or Decrease');
-
         }
 
     </script>
@@ -149,17 +147,20 @@
                             <table class="table">
                                 <thead class="bg-success text-center text-white">
                                 <tr>
-                                    <th class="text-white" colspan="3">Buy Order</th>
+                                    <th class="text-white" colspan="4">Buy Order</th>
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
                                 <tr>
-                                    <th class="text-center text-white w-50">Quantity( {{ $market->SalesForm->unit }})
+                                    <th class="text-center text-white">
+
                                     </th>
-                                    <th class="text-center text-white w-50">Price ( {{ $market->SalesForm->currency }}
+                                    <th class="text-center text-white">Quantity( {{ $market->SalesForm->unit }})
+                                    </th>
+                                    <th class="text-center text-white">Price ( {{ $market->SalesForm->currency }}
                                         )
                                     </th>
-                                    <th class="text-center text-white w-50">
+                                    <th class="text-center text-white">
 
                                     </th>
                                 </tr>

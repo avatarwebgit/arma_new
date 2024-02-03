@@ -69,7 +69,6 @@ class MarketHomeController extends Controller
         $q_2 = MarketSetting::where('key', 'q_2')->pluck('value')->first();
         $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
         $endMinutes = $open_duration + $q_1 + $q_2 + $q_3 + 3;
-
         try {
             $markets = Market::where('start', '>', Carbon::yesterday())->orderBy('start', 'asc')->get();
             foreach ($markets as $market) {
@@ -99,7 +98,7 @@ class MarketHomeController extends Controller
 
     public function refreshBidTable(Request $request)
     {
-        $bids = BidHistory::where('market_id', $request->market)->orderBy('price', 'desc')->take(10)->get();
+        $bids = BidHistory::where('market_id', $request->market)->orderBy('price', 'desc')->orderBy('quantity', 'desc')->take(10)->get();
         $view = view('home.market.bidder_table', compact('bids'))->render();
         return response()->json([1, $view]);
     }
@@ -167,8 +166,8 @@ class MarketHomeController extends Controller
 
     public function bid_market(Request $request)
     {
-        $market = Market::find($request->market);
 
+        $market = Market::find($request->market);
         if ($market->status == 6) {
             $validator = $request->validate([
                 'price' => 'required',
@@ -199,10 +198,13 @@ class MarketHomeController extends Controller
 
         try {
             $bid_permission = $this->Bid_Permissions();
+
             if ($bid_permission['response'] === 'error') {
                 return response()->json([$bid_permission['response'], $bid_permission['message']]);
             }
+
             $Opening_roles = $this->Opening_roles($request->all(), $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market);
+
             if (!$Opening_roles[0]) {
                 $error_type = $Opening_roles['validate_error'];
                 $key = $Opening_roles['key'];
@@ -216,6 +218,7 @@ class MarketHomeController extends Controller
             } else {
                 $tries = 1;
             }
+
             BidHistory::create([
                 'user_id' => auth()->id(),
                 'market_id' => $request->market,
@@ -268,6 +271,7 @@ class MarketHomeController extends Controller
             $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
+
         if ($market->status === 3) {
 
             $user_bids = $market->Bids()->where('user_id', auth()->id())->where('tries', 3)->get();
@@ -283,19 +287,30 @@ class MarketHomeController extends Controller
             $message = 'Please enter different Bid';
             return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
         }
+
         $bid_exists = $market->Bids()->exists();
         if ($bid_exists) {
-            $highest_price_exists = $market->Bids()->where('user_id',auth()->id)->orderBy('price', 'desc')->exists();
+            $highest_price_exists = $market->Bids()->where('user_id',auth()->id())->exists();
             if ($highest_price_exists){
-                $highest_price = $market->Bids()->where('user_id',auth()->id)->orderBy('price', 'desc')->first();
+                $highest_price = $market->Bids()->where('user_id',auth()->id())->orderBy('price', 'desc')->first();
                 $highest_price = $highest_price->price;
-                if ($request['price'] < $highest_price) {
+                if ($request['price'] < $highest_price ) {
                     $key = 'highest_price';
                     $message = 'Your New Bid Must Better Than Previous!';
                     return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
                 }
+
+                if ($request['price'] == $highest_price ) {
+                    $highest_price = $market->Bids()->where('user_id',auth()->id())->orderBy('price', 'desc')->first();
+                    if ($request['quantity'] < $highest_price->quantity ) {
+                        $key = 'highest_price';
+                        $message = 'Your New Bid Must Better Than Previous!';
+                        return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+                    }
+                }
             }
         }
+
 
 
         return [0 => true];
