@@ -2,7 +2,7 @@
     @include('home.sections.header1')
     @include('home.sections.header2')
     <nav class="navbar navbar-expand-lg">
-        <a class='navbar-brand' href='{{ route('home') }}'><img src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="logo"></a>
+        <a class='navbar-brand' href='{{ route('home.index') }}'><img src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
                 aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
             <i class="icon ion-md-menu"></i>

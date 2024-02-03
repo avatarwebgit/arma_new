@@ -527,11 +527,7 @@
     //         let market_id = e.market_id;
     //         refreshBidTable(market_id);
     //     });
-    // window.Echo.channel('change-sales-offer')
-    //     .listen('ChangeSaleOffer', function (e) {
-    //         let market_id = e.market_id;
-    //         refreshSellerTable(market_id);
-    //     });
+
 
 
     function refreshBidTable(market) {
