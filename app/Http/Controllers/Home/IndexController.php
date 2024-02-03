@@ -38,6 +38,10 @@ class IndexController extends Controller
                 'market_open_finished_modal'));
     }
 
+    public function home(){
+        dd('okkk');
+    }
+
     public function MarketTableIndex()
     {
         try {

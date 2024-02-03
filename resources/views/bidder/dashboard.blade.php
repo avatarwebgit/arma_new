@@ -47,12 +47,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-lg-3">
-                @include('seller.sidebar')
+                @include('bidder.sidebar')
                 </div>
                 <div class="col-12 col-lg-9">
                     <div class="card">
                         <div class="card-body">
-                            seller Dashboard
+                            Bidder Dashboard
                         </div>
                     </div>
                 </div>
