@@ -33,55 +33,47 @@ class SellerController extends Controller
     {
         $user = auth()->user();
         $wallets = $user->wallets;
-        return view('home.profile.index',compact('user','wallets'));
+        return view('seller.dashboard', compact('user', 'wallets'));
     }
+
     public function profile()
     {
         $user = auth()->user();
-        return view('home.profile.index',compact('user'));
+        return view('seller.profile', compact('user'));
     }
-    public function updateProfile(User $user,Request $request)
-{
-    $request->validate([
-        'name' =>'required',
 
-    ]);
-
-    $user->update([
-        'name' =>$request->name,
-
-
-    ]);
-
-    if ($request->has('password')){
-        $user->update([
-            'password' =>Hash::make($request->password),
+    public function updateProfile(User $user, Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'company_name' => 'required',
+            'field' => 'required',
+            'mobile_number' => 'required',
         ]);
+        $user->update($request->except('new_password'));
+        if ($request->has('new_password')) {
+            $user->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+        }
+        session()->flash('success', 'User Updated Successfully');
+        return redirect()->back();
     }
 
-    session()->flash('success', 'Update Successfully');
-    return redirect()->back();
-
-}
     public function updatePassword(Request $request)
     {
         $user = auth()->user();
-
         $request->validate([
-            'password' =>'required',
-
+            'password' => 'required',
         ]);
-
-
-        if ($request->has('password')){
+        if ($request->has('password')) {
             $user->update([
-                'password' =>Hash::make($request->password),
+                'password' => Hash::make($request->password),
             ]);
         }
-
         session()->flash('success', 'Update Successfully');
         return redirect()->back();
-
     }
 
     public function requests()
