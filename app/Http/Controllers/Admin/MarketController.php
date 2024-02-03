@@ -66,7 +66,8 @@ class MarketController extends Controller
             'offer_price' => 'required',
             'description' => 'nullable',
         ]);
-        Market::create($request->all());
+        $market=Market::create($request->all());
+        $this->statusTimeMarket($market);
         session()->flash('success', 'New Market Created Successfully');
         return redirect()->route('admin.markets.index');
     }
@@ -79,6 +80,7 @@ class MarketController extends Controller
 
     public function update(Market $market, Request $request)
     {
+
         $request->validate([
             'date' => 'required|date',
             'time' => 'required',
@@ -88,11 +90,8 @@ class MarketController extends Controller
             'offer_price' => 'required',
             'description' => 'nullable',
         ]);
-        $request['status'] = 7;
-        if (Carbon::now() < $request->start) {
-            $request['status'] = 1;
-        }
         $market->update($request->all());
+        $this->statusTimeMarket($market,1);
         broadcast(new MarketTimeUpdated());
         return redirect()->route('admin.markets.index')->with('success', 'Market updated successfully');
     }

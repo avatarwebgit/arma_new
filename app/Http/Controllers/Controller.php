@@ -14,7 +14,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
-    public function statusTimeMarket($market)
+    public function statusTimeMarket($market, $force_determine_status = 0)
     {
 
         $ready_to_duration = MarketSetting::where('key', 'ready_to_open')->pluck('value')->first();
@@ -25,7 +25,7 @@ class Controller extends BaseController
         $endMinutes = $open_duration + $q_1 + $q_2 + $q_3 + 3;
         $date = $market->date;
         $time = $market->time;
-        $date_time = $date.' '.$time;
+        $date_time = $date . ' ' . $time;
 
         $startTime = Carbon::parse($date_time);
 
@@ -38,8 +38,10 @@ class Controller extends BaseController
         $benchmark6 = $benchmark5->copy()->addMinutes($q_3);
 
         $bids = $market->Bids;
-        if ($market->status == 7) {
-            return [0, $market->status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6,$date_time];
+        if ($force_determine_status == 0) {
+            if ($market->status == 7) {
+                return [0, $market->status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time];
+            }
         }
 
         if ($now < $benchmark1) {
@@ -68,7 +70,7 @@ class Controller extends BaseController
             }
             //exists min-price
 //            $bid_touch_price = $market->Bids()->where('price', '>=', $market->min_price)->exists();
-            $bid_touch_price=true;
+            $bid_touch_price = true;
             if (!$bid_touch_price) {
                 $status = 7;
                 $difference = 0;
@@ -99,7 +101,7 @@ class Controller extends BaseController
 
         }
         $market->update(['status' => $status]);
-        return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6,$date_time];
+        return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time];
     }
 
     public function convertTime($seconds)

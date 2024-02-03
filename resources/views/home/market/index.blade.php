@@ -2,9 +2,14 @@
 
 @section('script')
     <script type="module">
-        $(document).ready(function() {
+        $(document).ready(function () {
             MarketOnline({{ $market->id }});
         });
+        window.Echo.channel('change-sales-offer')
+            .listen('ChangeSaleOffer', function (e) {
+                let market_id = e.market_id;
+                refreshSellerTable(market_id);
+            });
         window.Echo.channel('market-setting-updated-channel')
             .listen('MarketTimeUpdated', function (e) {
                 GetMarket({{ $market->id }});
@@ -15,26 +20,27 @@
                 refreshBidTable(market_id);
             });
 
-        function GetMarket(market_id){
+        function GetMarket(market_id) {
             $.ajax({
-                url:"{{ route('home.GetMarket') }}",
-                data:{
-                    _token:"{{ csrf_token() }}",
-                    market_id:market_id,
+                url: "{{ route('home.GetMarket') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    market_id: market_id,
                 },
-                method:'post',
-                dataType:'json',
+                method: 'post',
+                dataType: 'json',
 
-                success:function(msg){
-                    let table_view=msg[1];
+                success: function (msg) {
+                    let table_view = msg[1];
                     $('#benchmark_info').html(table_view);
                     MarketOnline(market_id);
                 }
             })
         }
-        function step_price_competition(tag,event){
-                event.preventDefault();
-                alert('Use Arrow Buttons to Increase or Decrease');
+
+        function step_price_competition(tag, event) {
+            event.preventDefault();
+            alert('Use Arrow Buttons to Increase or Decrease');
         }
 
     </script>
@@ -43,7 +49,7 @@
 @section('style')
     <style>
 
-        .display-none{
+        .display-none {
             display: none;
         }
 
@@ -56,9 +62,11 @@
             height: auto;
             border: 1px solid #7e7e7e;
         }
-        .bg-inactive{
+
+        .bg-inactive {
             background-color: #cecaca !important;
         }
+
         .bid_deposit {
             width: 100%;
             height: fit-content;
@@ -85,10 +93,12 @@
         .bg-blue {
             background-color: #162fa2 !important;
         }
-        .justify-content-center{
+
+        .justify-content-center {
             justify-content: center !important;
         }
-        .align-center{
+
+        .align-center {
             align-items: center !important;
         }
 

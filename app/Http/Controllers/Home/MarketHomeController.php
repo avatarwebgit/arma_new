@@ -131,8 +131,8 @@ class MarketHomeController extends Controller
             $price = $request->price;
             $quantity = $request->quantity;
             $market_id = $request->market_id;
-            $status = $request->status;
             $market = Market::where('id', $market_id)->first();
+            $status=$market->status;
             $currency = $market->SalesForm->currency;
 //            if ($user_id != $market->user_id) {
 //                return response()->json([1, 'error','You Do Not Have Permission To Change Offer']);
