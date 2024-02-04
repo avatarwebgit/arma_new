@@ -132,7 +132,7 @@ class MarketHomeController extends Controller
             $quantity = $request->quantity;
             $market_id = $request->market_id;
             $market = Market::where('id', $market_id)->first();
-            $status=$market->status;
+            $status = $market->status;
             $currency = $market->SalesForm->currency;
 //            if ($user_id != $market->user_id) {
 //                return response()->json([1, 'error','You Do Not Have Permission To Change Offer']);
@@ -275,7 +275,7 @@ class MarketHomeController extends Controller
         if ($market->status === 3) {
 
             $user_bids = $market->Bids()->where('user_id', auth()->id())->where('tries', 3)->get();
-            if (count($user_bids)>0) {
+            if (count($user_bids) > 0) {
                 $key = 'bid number';
                 $message = 'Maximum number You Can Bid is: 3';
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
@@ -290,19 +290,19 @@ class MarketHomeController extends Controller
 
         $bid_exists = $market->Bids()->exists();
         if ($bid_exists) {
-            $highest_price_exists = $market->Bids()->where('user_id',auth()->id())->exists();
-            if ($highest_price_exists){
-                $highest_price = $market->Bids()->where('user_id',auth()->id())->orderBy('price', 'desc')->first();
+            $highest_price_exists = $market->Bids()->where('user_id', auth()->id())->exists();
+            if ($highest_price_exists) {
+                $highest_price = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'desc')->first();
                 $highest_price = $highest_price->price;
-                if ($request['price'] < $highest_price ) {
+                if ($request['price'] < $highest_price) {
                     $key = 'highest_price';
                     $message = 'Your New Bid Must Better Than Previous!';
                     return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
                 }
 
-                if ($request['price'] == $highest_price ) {
-                    $highest_price = $market->Bids()->where('user_id',auth()->id())->orderBy('price', 'desc')->first();
-                    if ($request['quantity'] < $highest_price->quantity ) {
+                if ($request['price'] == $highest_price) {
+                    $highest_price = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'desc')->first();
+                    if ($request['quantity'] < $highest_price->quantity) {
                         $key = 'highest_price';
                         $message = 'Your New Bid Must Better Than Previous!';
                         return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
@@ -310,7 +310,6 @@ class MarketHomeController extends Controller
                 }
             }
         }
-
 
 
         return [0 => true];
@@ -348,5 +347,19 @@ class MarketHomeController extends Controller
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
         }
+    }
+
+    public function get_market_info(Request $request)
+    {
+        try {
+            $market_id = $request->market_id;
+            $market = Market::where('id', $market_id)->first();
+            $status_text = $market->Status->title;
+            $status_color = $market->Status->color;
+            return response()->json([1, $status_text, $status_color]);
+        } catch (\Exception $exception) {
+            return response()->json([0, $exception->getMessage()]);
+        }
+
     }
 }

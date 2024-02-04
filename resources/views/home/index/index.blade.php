@@ -2,41 +2,41 @@
 
 @section('script')
 
-        <script>
-            @if($UserRegistered==true)
-            $(document).ready(function () {
-                let UserRegistered = {{ $UserRegistered }};
-                if (UserRegistered) {
-                    $('#UserRegisteredModal').modal('show');
-                }
-            });
-            @endif
-
-            function startTime() {
-                var dayOfWeek = moment().format("dddd");
-                let clock = moment().format("ll  h:mm a")
-                let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span>' + clock + '</span>'
-                $('#time_now').html(time_now);
-                t = setTimeout(function () {
-                    startTime()
-                }, 500);
+    <script>
+        @if($UserRegistered==true)
+        $(document).ready(function () {
+            let UserRegistered = {{ $UserRegistered }};
+            if (UserRegistered) {
+                $('#UserRegisteredModal').modal('show');
             }
+        });
+        @endif
 
-            startTime();
+        function startTime() {
+            var dayOfWeek = moment().format("dddd");
+            let clock = moment().format("ll  h:mm a")
+            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span>' + clock + '</span>'
+            $('#time_now').html(time_now);
+            t = setTimeout(function () {
+                startTime()
+            }, 500);
+        }
 
-            function slidemore(market_id) {
-                $('#more_table_' + market_id).slideToggle();
-                let svg = $('#slide_more_angle_' + market_id).find('svg');
-                let hasClass = svg.hasClass('fa-angle-down');
-                if (hasClass) {
-                    svg.removeClass('fa-angle-down');
-                    svg.addClass('fa-angle-up');
-                } else {
-                    svg.removeClass('fa-angle-up');
-                    svg.addClass('fa-angle-down');
-                }
+        startTime();
+
+        function slidemore(market_id) {
+            $('#more_table_' + market_id).slideToggle();
+            let svg = $('#slide_more_angle_' + market_id).find('svg');
+            let hasClass = svg.hasClass('fa-angle-down');
+            if (hasClass) {
+                svg.removeClass('fa-angle-down');
+                svg.addClass('fa-angle-up');
+            } else {
+                svg.removeClass('fa-angle-up');
+                svg.addClass('fa-angle-down');
             }
-        </script>
+        }
+    </script>
 
     <script type="module">
 
@@ -65,21 +65,27 @@
             .listen('MarketTimeUpdated', function (e) {
                 GetMarkets();
             });
-        function GetMarkets(){
+        window.Echo.channel('change-sales-offer')
+            .listen('ChangeSaleOffer', function (e) {
+                let market_id = e.market_id;
+                get_market_info(market_id)
+            });
+
+        function GetMarkets() {
             $.ajax({
-                url:"{{ route('home.MarketTableIndex') }}",
-                data:{
-                    _token:"{{ csrf_token() }}",
+                url: "{{ route('home.MarketTableIndex') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
                 },
-                method:'post',
-                dataType:'json',
-                beforeSend:function(){
-                    let loader='<div class="loader"></div>'
+                method: 'post',
+                dataType: 'json',
+                beforeSend: function () {
+                    let loader = '<div class="loader"></div>'
                     $('#market_table').html(loader);
                 },
-                success:function(msg){
-                    let table_view=msg[1];
-                    let ids=msg[2];
+                success: function (msg) {
+                    let table_view = msg[1];
+                    let ids = msg[2];
                     $('#market_table').html(table_view)
                     $.each(ids, function (i, val) {
                         MarketOnline(val);
@@ -88,7 +94,25 @@
             })
         }
 
-
+        function get_market_info(market_id) {
+            $.ajax({
+                url: "{{ route('home.get_market_info') }}",
+                dataType: "json",
+                method: "post",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    market_id: market_id,
+                },
+                success: function (msg) {
+                    if (msg[0] === 1) {
+                        let status_text = msg[1];
+                        let status_color = msg[2];
+                        $('#market-time-'+market_id).text(status_text);
+                        $('#market-time-'+market_id).css('color',status_color);
+                    }
+                }
+            })
+        }
 
         {{--var config = {--}}
         {{--    endDate: '{{ \Carbon\Carbon::parse($markets[0]->end)->format('Y-m-d') }} 17:00',--}}

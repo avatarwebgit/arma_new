@@ -93,7 +93,35 @@
     @include('admin.layouts.includes.datatable_css')
 @endpush
 @push('script')
-    <script>
+    <script type="module">
+
+        window.Echo.channel('market-status-updated')
+            .listen('MarketStatusUpdated', function (e) {
+                let market_id = e.market_id;
+                get_market_info(market_id)
+            });
+
+        function get_market_info(market_id) {
+
+            $.ajax({
+                url: "{{ route('home.get_market_info') }}",
+                dataType: "json",
+                method: "post",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    market_id: market_id,
+                },
+                success: function (msg) {
+                    if (msg[0] === 1) {
+                        console.log(msg);
+                        let status_text = msg[1];
+                        let status_color = msg[2];
+                        $('#market_status_'+market_id).text(status_text);
+                        $('#market_status_'+market_id).css('color',status_color);
+                    }
+                }
+            })
+        }
 
 
         function removeModal(id, e) {
