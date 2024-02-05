@@ -2513,6 +2513,11 @@ tbody.ob-heading {
     animation: my-animation 20s linear 1s infinite;
 }
 
+.scroll-container > div:hover {
+    cursor: grab;
+    animation-play-state: paused;
+}
+
 .header2Title {
     width: 79px;
 }

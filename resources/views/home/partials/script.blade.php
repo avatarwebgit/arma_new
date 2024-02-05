@@ -543,5 +543,14 @@
             }
         })
     }
+
+    $( "#scroll-container" ).hover(
+        function() {
+            $(this).find('div').css("animation-play-state", "paused");
+        }, function() {
+            $(this).find('div').css("animation-play-state", "running");
+        }
+    );
 </script>
+
 @yield('script')
