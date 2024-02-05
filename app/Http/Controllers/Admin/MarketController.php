@@ -45,7 +45,7 @@ class MarketController extends Controller
 {
     public function index()
     {
-        $group_markets = Market::all()->groupby('date');
+        $group_markets = Market::orderby('date')->get()->groupby('date');
         return view('admin.markets.index', compact('group_markets'));
     }
 
@@ -168,7 +168,9 @@ class MarketController extends Controller
         $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
         $bid_deposit_text_area=MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions=MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        return view('admin.markets.setting', compact('q_1', 'q_2', 'q_3', 'ready_to_open', 'opening','bid_deposit_text_area','term_conditions'));
+        $change_time=MarketSetting::where('key', 'change_time')->pluck('value')->first();
+        return view('admin.markets.setting', compact(
+            'q_1', 'q_2', 'q_3', 'ready_to_open', 'opening','bid_deposit_text_area','term_conditions','change_time'));
     }
 
     public function settings_update(Request $request)
@@ -178,6 +180,7 @@ class MarketController extends Controller
         $q_1 = $request->q_1;
         $q_2 = $request->q_2;
         $q_3 = $request->q_3;
+        $change_time = $request->change_time;
         $bid_deposit_text_area = $request->bid_deposit_text_area;
         $term_conditions = $request->term_conditions;
         $array = [
@@ -188,6 +191,7 @@ class MarketController extends Controller
             'q_3' => $q_3,
             'bid_deposit_text_area' => $bid_deposit_text_area,
             'term_conditions' => $term_conditions,
+            'change_time' => $change_time,
         ];
         foreach ($array as $key => $val) {
             MarketSetting::where('key', $key)->update(['value' => $val]);
