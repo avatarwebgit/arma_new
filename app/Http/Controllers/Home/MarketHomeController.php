@@ -340,9 +340,11 @@ class MarketHomeController extends Controller
     {
         try {
             $market_id = $request->id;
-            $market = Market::where('market_id', $market_id)->first();
+            $market = Market::where('id', $market_id)->first();
+
             $bidhistories = $market->Bids;
-            $view = view('home.market.final_status', compact('bidhistories'))->render();
+
+            $view = view('home.market.final_status', compact('bidhistories','market'))->render();
             return response()->json([1, $view]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);

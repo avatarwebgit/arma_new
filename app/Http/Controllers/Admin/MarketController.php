@@ -304,15 +304,6 @@ class MarketController extends Controller
                     ]);
                     return response()->json([1,'close']);
                 }
-                $bids_quantity = $market->Bids()->where('price', '>=', $price)->sum('quantity');
-                if ($max_quantity>=$bids_quantity){
-                    $market->update([
-                        'status'=>8
-                    ]);
-                    return response()->json([1,'finish']);
-                }else{
-                    return response()->json([1,'continue']);
-                }
             }
 
         }catch (\Exception $e) {
