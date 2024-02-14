@@ -86,7 +86,9 @@
                 success: function (msg) {
                     let table_view = msg[1];
                     let ids = msg[2];
-                    $('#market_table').html(table_view)
+                    let market_value = msg[3];
+                    $('#market_table').html(table_view);
+                    $('#market_value').html(market_value);
                     $.each(ids, function (i, val) {
                         MarketOnline(val);
                     });
@@ -185,7 +187,9 @@
                     {{--                    @endif--}}
                 </h3>
 
-                <span style="font-weight: bolder">Total Trade Value:$ 210.650.800</span>
+                <span style="font-weight: bolder">Today Trade Value:</span>
+                <span id="market_value" style="font-weight: bolder">0</span>
+                <span style="font-weight: bolder">$</span>
             </div>
             <div id="timer_section" class="col-12 col-md-4 d-flex justify-content-center mb-3">
                 <div class="clock">

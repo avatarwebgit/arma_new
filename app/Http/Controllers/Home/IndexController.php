@@ -16,8 +16,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $get_change_time_exists=MarketSetting::where('key','change_time')->exists();
-        if (!$get_change_time_exists){
+        $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
+        if (!$get_change_time_exists) {
             MarketSetting::create([
                 'key' => 'change_time',
                 'value' => '12:00:00',
@@ -55,14 +55,16 @@ class IndexController extends Controller
     {
         try {
             $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
-            $yesterday=Carbon::yesterday();
+            $yesterday = Carbon::yesterday();
             $pre_yesterday = Carbon::yesterday()->copy()->addDay(-1);
             $today = Carbon::today();
-            $tomorrow=Carbon::tomorrow();
+            $tomorrow = Carbon::tomorrow();
             $future = $yesterday->copy()->addDay(4);
-            $yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time','>',$change_time)->orderby('date','asc')->get()->groupby('date');
-            $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date','asc')->get()->groupby('date');
+            $yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time', '>', $change_time)->orderby('date', 'asc')->get()->groupby('date');
+            $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
+            $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
+
             foreach ($markets_groups as $markets) {
                 foreach ($markets as $market) {
                     $result = $this->statusTimeMarket($market);
@@ -78,6 +80,7 @@ class IndexController extends Controller
                     $ids[] = $market->id;
                 }
             }
+
             foreach ($yesterday_markets_groups as $markets) {
                 foreach ($markets as $market) {
                     $result = $this->statusTimeMarket($market);
@@ -93,9 +96,17 @@ class IndexController extends Controller
                     $ids[] = $market->id;
                 }
             }
-            $view_table = view('home.partials.market', compact('markets_groups','yesterday_markets_groups'))->render();
 
-            return response()->json([1, $view_table, $ids]);
+            $market_values = 0;
+            foreach ($today_markets_groups as $markets) {
+                foreach ($markets as $market) {
+                    $market_values = $market_values + $market->offer_price;
+                }
+            }
+
+            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups'))->render();
+
+            return response()->json([1, $view_table, $ids,number_format($market_values)]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
