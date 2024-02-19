@@ -265,7 +265,7 @@ header .navbar-brand {
 }
 
 header .navbar-brand img {
-    height: 45px;
+    height: 80px;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -2504,7 +2504,7 @@ tbody.ob-heading {
     }
 }
 
-.scroll-container > div {
+#scroll-container > div {
     -moz-transform: translateX(100%);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
@@ -2513,9 +2513,23 @@ tbody.ob-heading {
     animation: my-animation 20s linear 1s infinite;
 }
 
-.scroll-container > div:hover {
+#scroll-container > div:hover {
     cursor: grab;
     animation-play-state: paused;
+}
+
+.header_title{
+    position: relative;
+    margin-right: 10px;
+}
+
+.header_title:after{
+    margin-left: 10px;
+    position: absolute;
+    content: "";
+    width: 2px !important;
+    height: 100% !important;
+    background-color: black;
 }
 
 .header2Title {
@@ -2533,8 +2547,8 @@ tbody.ob-heading {
 
 .header2 {
     width: max-content;
-    background-color: #19244d;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 @media screen and (min-width: 1700px) {
@@ -2558,6 +2572,7 @@ tbody.ob-heading {
 @media (min-width: 1700px) {
     .header1 {
         width: max-content;
+        background-color: #e5e5e5 !important;
     }
 
     .header2 {

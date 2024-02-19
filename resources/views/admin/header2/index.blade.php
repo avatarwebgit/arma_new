@@ -157,6 +157,7 @@
                                 <tr class="bg-dark">
                                     <th>priority</th>
                                     <th>Title</th>
+                                    <th>Title 2</th>
                                     <th>Number 1(min)</th>
                                     <th>Number 2(max)</th>
                                     <th>Number 3</th>
@@ -172,6 +173,9 @@
                                         </td>
                                         <td>
                                             {{ $item->title }}
+                                        </td>
+                                        <td>
+                                            {{ $item->title_2 }}
                                         </td>
                                         <td class="{{ $item->number_1>0 ? 'text-success' : ($item->number_1<0 ? 'text-danger' : 'text-muted') }}">
                                             {{ $item->number_1 }}
@@ -196,7 +200,7 @@
                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
                                                data-bs-original-title="{{ __('Delete') }}"><i class="ti ti-trash mr-1"></i></a>
                                             {!! Form::close() !!}
-                                            <a data-action="/admin-panel/management/setting/header2/edit/{{ $item->id }}" style="margin-left: 10px" href="javascript:void(0);"
+                                            <a data-action="/admin-panel/management/setting/header2/edit/{{ $item->id }}" style="margin-left: 10px !important;" href="javascript:void(0);"
                                                class="btn btn-icon btn-primary btn-sm edit-header2">
                                                 <i class="ti ti-edit"></i>
                                             </a>
@@ -233,10 +237,8 @@
                 var action = $(this).data('action');
                 var modal = $('#common_modal');
                 $.get(action, function(response) {
-
                     modal.find('.modal-title').html('{{ __('Edit Header2') }}');
                     modal.find('.body').html(response.html);
-
                     modal.modal('show');
                 })
             });

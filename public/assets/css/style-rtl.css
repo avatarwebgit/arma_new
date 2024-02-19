@@ -27531,7 +27531,7 @@ body.anim-slip-from-top.modal-open .dash-header {
 
 [data-action] {
     display: block;
-    margin: 10px auto;
+    /*margin: 10px auto;*/
     font-size: 17px;
     min-width: 3em;
     text-align: center;

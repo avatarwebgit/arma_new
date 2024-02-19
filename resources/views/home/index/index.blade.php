@@ -87,8 +87,10 @@
                     let table_view = msg[1];
                     let ids = msg[2];
                     let market_value = msg[3];
+                    let Market_Status_Text = msg[4];
                     $('#market_table').html(table_view);
                     $('#market_value').html(market_value);
+                    $('#Market_Status_Text').html(Market_Status_Text);
                     $.each(ids, function (i, val) {
                         MarketOnline(val);
                     });
@@ -178,13 +180,10 @@
     <div class="landing-feature container">
         <div class="row justify-content-between">
             <div class="col-12 col-md-4 mb-3">
-                <h3>
+                <h3 id="Market_Status_Text">
                     <span>Market: </span>
 
                     <span class="text-success">Open</span>
-                    {{--                    @else--}}
-                    {{--                        <span class="text-danger">Close</span>--}}
-                    {{--                    @endif--}}
                 </h3>
 
                 <span style="font-weight: bolder">Today Trade Value:</span>
