@@ -77,7 +77,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-12 col-md-3 mb-3">
-                                                    <label for="offer_price">Offer Price</label>
+                                                    <label for="offer_price">Offer Price - Market Value (S)</label>
                                                     <input id="offer_price"  name="offer_price" class="form-control"
                                                            value="{{ $market->offer_price }}" type="number">
                                                     @error('offer_price')

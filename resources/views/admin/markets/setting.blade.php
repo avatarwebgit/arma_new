@@ -68,6 +68,17 @@
                                                     </p>
                                                     @enderror
                                                 </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="change_time">Change Market Table At(Time)</label>
+                                                    <input id="change_time" type="time" name="change_time"
+                                                           class="form-control"
+                                                           value="{{ $change_time }}">
+                                                    @error('change_time')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
                                                 <div class="col-12 mb-3">
                                                     <label for="bid_deposit_text_area">Bid Deposit</label>
                                                     <textarea id="bid_deposit_text_area" name="bid_deposit_text_area"

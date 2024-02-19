@@ -18,6 +18,16 @@
             @enderror
         </div>
         <div class="form-group">
+            <label class="col-form-label" for="title_2">Title 2</label>
+            <input id="title_2" type="text" name="title_2" class="form-control"
+                   placeholder="title_2" value="{{ $item->title_2 }}">
+            @error('title_2')
+            <p class="input-error-validate">
+                {{ $message }}
+            </p>
+            @enderror
+        </div>
+        <div class="form-group">
             <label  class="col-form-label" for="number_1">Number 1(min)</label>
             <input id="number_1" type="text" name="number_1" class="form-control"
                    placeholder="Number 1(min)" value="{{ $item->number_1 }}">

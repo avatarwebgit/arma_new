@@ -42,6 +42,7 @@
     @else
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
     @endif
+
 </head>
 
 <body class="{{ $color }}">

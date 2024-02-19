@@ -8,10 +8,20 @@
 <div class="modal-body">
     <div class="row">
         <div class="form-group">
-            <label class="col-form-label" for="title">Title</label>
+            <label class="col-form-label" for="title">Title 1 </label>
             <input id="title" type="text" name="title" class="form-control"
                    placeholder="title" value="{{ old('title') }}">
             @error('title')
+            <p class="input-error-validate">
+                {{ $message }}
+            </p>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="title_2">Title 2</label>
+            <input id="title_2" type="text" name="title_2" class="form-control"
+                   placeholder="title" value="{{ old('title_2') }}">
+            @error('title_2')
             <p class="input-error-validate">
                 {{ $message }}
             </p>

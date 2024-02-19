@@ -18,16 +18,11 @@
                 <span style="display: inline-block">
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
-                        <div class="animation_main_div">
-                              <div class="circle " style="background-color: {{ $color }} !important;"></div>
-                              <div class="circle2" style="background-color: {{ $color }} !important;"></div>
-                              <div class="circle3" style="background-color: {{ $color }} !important;"></div>
-                              <div class="circle4" style="background-color: {{ $color }} !important;"></div>
-                              <div class="logo-div-send">
-                              <!--logo or anything put here -->
-                              </div>
-                        </div>
-                        <span class="mr-2 header2Title">{{ $item->title }}</span>
+                        <span style="width: 35px;height: 35px;border-radius: 100%;background-color: {{ $color }}"></span>
+                    </div>
+                    <div class="ml-2 mr-2">
+                        <span class="d-block text-left">{{ $item->title }}</span>
+                        <span class="d-block text-left text-secondary">{{ $item->title_2 }}</span>
                     </div>
                     <div style="width: 80px">
                         <div>
@@ -75,7 +70,7 @@
                                     $class='text-muted';
                                 @endphp
                             @endif
-                <span class="{{ $class }}">( {{ $item->number_3 }} %)</span>
+                <span class="{{ $class }}">{{ $item->number_3 }}</span>
                         </div>
                     </div>
                     <span class="header2Pi">|</span>
@@ -103,16 +98,11 @@
                 <span style="display: inline-block">
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
-                        <div class="animation_main_div">
-                              <div class="circle " style="background-color: {{ $color }} !important;"></div>
-                              <div class="circle2" style="background-color: {{ $color }} !important;"></div>
-                              <div class="circle3" style="background-color: {{ $color }} !important;"></div>
-                              <div class="circle4" style="background-color: {{ $color }} !important;"></div>
-                              <div class="logo-div-send">
-                              <!--logo or anything put here -->
-                              </div>
-                        </div>
-                        <span class="mr-2 header2Title">{{ $item->title }}</span>
+                        <span style="width: 35px;height: 35px;border-radius: 100%;background-color: {{ $color }}"></span>
+                    </div>
+                    <div class="ml-2 mr-2">
+                        <span class="d-block text-left">{{ $item->title }}</span>
+                        <span class="d-block text-left text-secondary">{{ $item->title_2 }}</span>
                     </div>
                     <div style="width: 80px">
                         <div>
@@ -160,7 +150,7 @@
                                     $class='text-muted';
                                 @endphp
                             @endif
-                <span class="{{ $class }}">( {{ $item->number_3 }} %)</span>
+                <span class="{{ $class }}">{{ $item->number_3 }}</span>
                         </div>
                     </div>
                     <span class="header2Pi">|</span>

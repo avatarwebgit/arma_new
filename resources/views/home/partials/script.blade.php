@@ -60,11 +60,6 @@
                 delete this.interval;
                 Stop(id);
             },
-            finish: function () {
-                clearInterval(this.interval);
-                delete this.interval;
-                finish(id);
-            },
         }
         MarketSystem.start();
 
@@ -97,7 +92,7 @@
             } else if (benchmark5 < now && now < benchmark6) {
                 Competition(benchmark6, now, id, step);
             } else {
-                Stop(id);
+                MarketSystem.stop();
             }
         }
 
@@ -118,9 +113,6 @@
                         if (msg) {
                             if (msg[1] == 'close') {
                                 MarketSystem.stop();
-                            }
-                            if (msg[1] == 'finish') {
-                                MarketSystem.finish();
                             }
                         }
                     }
@@ -208,22 +200,9 @@
             let color = '#ff0707';
             let change_color = 1;
             let statusText = '<span>Close</span>';
-            change_market_status(status, difference, change_color, color, statusText, id)
-        }
-
-        function finish(id) {
-            close_bid_deposit(id);
-            remove_function();
-            deactive_bid();
-            let difference = 0;
-            let status = 8;
-            let color = '#009800';
-            let change_color = 1;
-            let statusText = '<span>finish</span>';
             change_market_status(status, difference, change_color, color, statusText, id);
             show_market_result(id);
         }
-
         function close_bid_deposit(id) {
             $('#bid_deposit_section-' + id).addClass('bg-inactive');
             $('#bid_deposit_section-' + id).find('input').prop('disabled', true);
@@ -235,6 +214,8 @@
                 data: {
                     id: id,
                 },
+                dataType: "json",
+                method: "POST",
                 success: function (msg) {
                     if (msg[0] == 1) {
                         $('#final_status_section_table-' + id).html(msg[1]);
@@ -346,7 +327,7 @@
                     alert(msg[2]);
                 }
 
-                if (msg[0]==1){
+                if (msg[0] == 1) {
                     refreshBidTable(market_id);
                 }
 
@@ -529,7 +510,6 @@
     //     });
 
 
-
     function refreshBidTable(market) {
         $.ajax({
             url: "{{ route('home.refreshBidTable') }}",
@@ -541,7 +521,7 @@
             method: 'post',
             success: function (msg) {
                 if (msg) {
-                    $('#bidder_offer_'+market).html(msg[1]);
+                    $('#bidder_offer_' + market).html(msg[1]);
                 }
             }
         })
@@ -563,5 +543,14 @@
             }
         })
     }
+
+    $( "#scroll-container" ).hover(
+        function() {
+            $(this).find('div').css("animation-play-state", "paused");
+        }, function() {
+            $(this).find('div').css("animation-play-state", "running");
+        }
+    );
 </script>
+
 @yield('script')
