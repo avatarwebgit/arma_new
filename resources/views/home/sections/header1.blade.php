@@ -30,7 +30,7 @@
                         $title='Crypto';
                     @endphp
                 @endif
-
+                {{ $title }}
             </strong>
             @foreach($header2 as $item)
                 @if($item->number_3>0)
