@@ -1,6 +1,6 @@
 
 <div id="scroll-container" class="bg-white header1 d-flex scroll-container">
-    @for($i=0;$i<1;$i++)
+    @for($i=0;$i<6;$i++)
         <div class="p-1  text-center d-flex">
             <strong class="header_title">
                 @if($i==0)
