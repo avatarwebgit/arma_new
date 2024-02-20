@@ -2481,6 +2481,16 @@ tbody.ob-heading {
     }
 }
 
+/* for Chrome */
+@-webkit-keyframes my-animation {
+    from {
+        -webkit-transform: translateX(-100%);
+    }
+    to {
+        -webkit-transform: translateX(100%);
+    }
+}
+
 @keyframes my-animation {
     from {
         -moz-transform: translateX(0);
@@ -2498,9 +2508,9 @@ tbody.ob-heading {
     -moz-transform: translateX(100%);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
-    -moz-animation: my-animation 1s linear infinite !important;
-    -webkit-animation: my-animation 1s linear infinite !important;
-    animation: my-animation 20s linear 1s infinite;
+    -moz-animation: my-animation 15s linear infinite !important;
+    -webkit-animation: my-animation 15s linear infinite !important;
+    animation: my-animation 20s linear 15s infinite;
 }
 
 #scroll-container > div:hover {
