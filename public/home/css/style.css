@@ -2500,6 +2500,24 @@ tbody.ob-heading {
     cursor: grab;
     animation-play-state: paused;
 }
+#scroll-container2{
+    background-color: #006;
+}
+#scroll-container2 > div {
+    background-color: #006;
+    color: white;
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-animation: my-animation 100s linear 1s infinite ;
+    -webkit-animation: my-animation 100s linear 1s infinite ;
+    animation: my-animation 100s linear 1s infinite;
+}
+
+#scroll-container2 > div:hover {
+    cursor: grab;
+    animation-play-state: paused;
+}
 .font13{
     font-size:13px;
 }
@@ -2518,6 +2536,22 @@ tbody.ob-heading {
     width: 2px !important;
     height: 100% !important;
     background-color: black;
+    right: -10px;
+}
+.header_title2{
+    position: relative;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.header_title2:after{
+    margin-left: 10px;
+    position: absolute;
+    content: "";
+    width: 2px !important;
+    height: 100% !important;
+    background-color: #ffffff;
     right: -10px;
 }
 

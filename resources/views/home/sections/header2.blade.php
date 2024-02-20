@@ -1,162 +1,83 @@
-<div id="scroll-container2" class="header2 d-flex">
-    <div class="p-3 text-center">
-            @foreach($header2 as $item)
-                @if($item->number_3>0)
-                    @php
-                        $color='#137713';
-                    @endphp
-                @elseif($item->number_3<0)
-                    @php
+<div id="scroll-container2" class="header2 d-flex scroll-container">
+    <div class="d-flex" >
+        @for($i=0;$i<6;$i++)
+            @if($i==0)
+                @php
+                    $title='Energy';
+                @endphp
 
-                        $color='#dc3545';
+            @elseif($i==1)
+                @php
+                    $title='Metal';
+                @endphp
+
+            @elseif($i==2)
+                @php
+                    $title='Industrial';
+                @endphp
+            @elseif($i==3)
+                @php
+                    $title='Agriculture';
+                @endphp
+            @elseif($i==4)
+                @php
+                    $title='Currency';
+                @endphp
+            @else($i==5)
+                @php
+                    $title='Crypto';
+                @endphp
+            @endif
+
+            @foreach($header2 as $key=>$item)
+
+                @if($item->number_1>0)
+                    @php
+                        $class='text-success';
+                        $color='green';
+                    @endphp
+                @elseif($item->number_1<0)
+                    @php
+                        $class='text-danger';
+                        $color='red';
                     @endphp
                 @else
                     @php
-                        $color='#6c757d';
+                        $class='text-muted';
+                        $color='gray'
                     @endphp
                 @endif
-                <span style="display: inline-block">
-                <div class="d-flex align-items-center">
-                    <div class="d-flex align-items-center">
-                        <span style="width: 35px;height: 35px;border-radius: 100%;background-color: {{ $color }}"></span>
-                    </div>
+                <div class="d-flex">
+                    @if($key==0)
+                        <div class="d-flex justify-content-center align-items-center">
+                            <strong class="header_title2 mr-4">
+                                {{ $title }}
+                            </strong>
+                        </div>
+                    @endif
+                        <div class="d-flex align-items-center justify-content-center ml-1 mr-1">
+                            <span style="display: block;width: 20px;height: 20px;border-radius: 100%;background-color: {{ $color }}"></span>
+                        </div>
                     <div class="ml-2 mr-2">
-                        <span class="d-block text-left">{{ $item->title }}</span>
-                        <span class="d-block text-left text-secondary">{{ $item->title_2 }}</span>
-                    </div>
-                    <div style="width: 80px">
-                        <div>
-                            @if($item->number_2>0)
-                                @php
-                                    $class='text-success';
-                                @endphp
-                            @elseif($item->number_2<0)
-                                @php
-                                    $class='text-danger';
-                                @endphp
-                            @else
-                                @php
-                                    $class='text-muted';
-                                @endphp
-                            @endif
-                <span class="{{ $class }}">{{ $item->number_2 }}</span>
-                             <span>-</span>
-                            @if($item->number_1>0)
-                                @php
-                                    $class='text-success';
-                                @endphp
-                            @elseif($item->number_1<0)
-                                @php
-                                    $class='text-danger';
-                                @endphp
-                            @else
-                                @php
-                                    $class='text-muted';
-                                @endphp
-                            @endif
-                <span class="{{ $class }}">{{ $item->number_1 }}</span>
+                        <div style="font-size: 15px">
+                            {{ $item->title }}
                         </div>
-                        <div class="text-center">
-                            @if($item->number_3>0)
-                                @php
-                                    $class='text-success';
-                                @endphp
-                            @elseif($item->number_3<0)
-                                @php
-                                    $class='text-danger';
-                                @endphp
-                            @else
-                                @php
-                                    $class='text-muted';
-                                @endphp
-                            @endif
-                <span class="{{ $class }}">{{ $item->number_3 }}</span>
+                        <div style="font-size: 12px">
+                            {{ $item->title_2 }}
                         </div>
                     </div>
-                    <span class="header2Pi">|</span>
+
+                    <div>
+                        <span class="d-block  text-center {{ $class }}">{{ $item->number_2.' - '.$item->number_3 }}</span>
+                        <span class="d-block  text-center {{ $class }}">{{ $item->number_1 }}</span>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                <span class="d-block"
+                      style="width: 1px;height: 70%;background-color: white;margin-left: 5px;margin-right: 5px"></span>
+                    </div>
                 </div>
-
-        </span>
             @endforeach
-    </div>
-    <div class="p-3 text-center">
-            @foreach($header2 as $item)
-                @if($item->number_3>0)
-                    @php
-                        $color='#137713';
-                    @endphp
-                @elseif($item->number_3<0)
-                    @php
-
-                        $color='#dc3545';
-                    @endphp
-                @else
-                    @php
-                        $color='#6c757d';
-                    @endphp
-                @endif
-                <span style="display: inline-block">
-                <div class="d-flex align-items-center">
-                    <div class="d-flex align-items-center">
-                        <span style="width: 35px;height: 35px;border-radius: 100%;background-color: {{ $color }}"></span>
-                    </div>
-                    <div class="ml-2 mr-2">
-                        <span class="d-block text-left">{{ $item->title }}</span>
-                        <span class="d-block text-left text-secondary">{{ $item->title_2 }}</span>
-                    </div>
-                    <div style="width: 80px">
-                        <div>
-                            @if($item->number_2>0)
-                                @php
-                                    $class='text-success';
-                                @endphp
-                            @elseif($item->number_2<0)
-                                @php
-                                    $class='text-danger';
-                                @endphp
-                            @else
-                                @php
-                                    $class='text-muted';
-                                @endphp
-                            @endif
-                <span class="{{ $class }}">{{ $item->number_2 }}</span>
-                             <span>-</span>
-                            @if($item->number_1>0)
-                                @php
-                                    $class='text-success';
-                                @endphp
-                            @elseif($item->number_1<0)
-                                @php
-                                    $class='text-danger';
-                                @endphp
-                            @else
-                                @php
-                                    $class='text-muted';
-                                @endphp
-                            @endif
-                <span class="{{ $class }}">{{ $item->number_1 }}</span>
-                        </div>
-                        <div class="text-center">
-                            @if($item->number_3>0)
-                                @php
-                                    $class='text-success';
-                                @endphp
-                            @elseif($item->number_3<0)
-                                @php
-                                    $class='text-danger';
-                                @endphp
-                            @else
-                                @php
-                                    $class='text-muted';
-                                @endphp
-                            @endif
-                <span class="{{ $class }}">{{ $item->number_3 }}</span>
-                        </div>
-                    </div>
-                    <span class="header2Pi">|</span>
-                </div>
-
-        </span>
-            @endforeach
+        @endfor
     </div>
 </div>
+
