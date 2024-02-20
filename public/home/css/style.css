@@ -2481,16 +2481,6 @@ tbody.ob-heading {
     }
 }
 
-/* for Chrome */
-@-webkit-keyframes my-animation {
-    from {
-        -webkit-transform: translateX(-100%);
-    }
-    to {
-        -webkit-transform: translateX(100%);
-    }
-}
-
 @keyframes my-animation {
     from {
         -moz-transform: translateX(0);
@@ -2508,8 +2498,8 @@ tbody.ob-heading {
     -moz-transform: translateX(100%);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
-    -moz-animation: my-animation 1s linear infinite;
-    -webkit-animation: my-animation 1s linear infinite;
+    -moz-animation: my-animation 1s linear infinite !important;
+    -webkit-animation: my-animation 1s linear infinite !important;
     animation: my-animation 20s linear 1s infinite;
 }
 
@@ -2517,10 +2507,15 @@ tbody.ob-heading {
     cursor: grab;
     animation-play-state: paused;
 }
+.font13{
+    font-size:13px;
+}
 
 .header_title{
     position: relative;
     margin-right: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .header_title:after{
@@ -2530,6 +2525,7 @@ tbody.ob-heading {
     width: 2px !important;
     height: 100% !important;
     background-color: black;
+    right: -10px;
 }
 
 .header2Title {

@@ -1,7 +1,7 @@
 
 <div id="scroll-container" class="bg-white header1 d-flex scroll-container">
-    @for($i=0;$i<6;$i++)
-        <div class="p-3 text-center d-flex">
+    @for($i=0;$i<1;$i++)
+        <div class="p-1 text-center d-flex">
             <strong class="header_title">
                 @if($i==0)
                     @php
@@ -32,7 +32,23 @@
                 @endif
                 {{ $title }}
             </strong>
-            @foreach($header2 as $item)
+            @foreach($header1 as $item)
+                @if($item->number_1>0)
+                    @php
+                        $class='text-success';
+                        $icon='<i class="fa fa-caret-up fa-2x mr-2 text-success"></i>';
+                    @endphp
+                @elseif($item->number_1<0)
+                    @php
+                        $class='text-danger';
+                        $icon='<i class="fa fa-caret-down fa-2x mr-2 text-danger"></i>';
+                    @endphp
+                @else
+                    @php
+                        $class='text-muted';
+                        $icon='';
+                    @endphp
+                @endif
                 @if($item->number_3>0)
                     @php
                         $color='#137713';
@@ -48,15 +64,15 @@
                     @endphp
                 @endif
 
-                <span style="display: inline-block">
+                <span style="display: inline-block;border-right: 1px solid black">
                 <div class="d-flex align-items-center ml-3">
                     <div class="d-flex align-items-center">
                         <div>
-                            <div>
-                                <span class="mr-2 header2Title">Crude Oil</span>
+                            <div class="text-left">
+                                <span class="mr-2 header2Title">{{ $item->title }}</span>
                             </div>
-                            <div>
-                                <span class="mr-2 header2Title">USD/Bbl</span>
+                            <div class="text-left">
+                                <span class="mr-2 header2Title font13">USD/Bbl</span>
                             </div>
                         </div>
                     </div>
@@ -66,42 +82,26 @@
         </span>
                     </div>
                     <div style="width: 80px">
-                        <div>
-                            @if($item->number_2>0)
-                                @php
-                                    $class='text-success';
-                                @endphp
-                            @elseif($item->number_2<0)
-                                @php
-                                    $class='text-danger';
-                                @endphp
-                            @else
-                                @php
-                                    $class='text-muted';
-                                @endphp
-                            @endif
-                <span class="{{ $class }} d-block text-right">70.023</span>
-                            @if($item->number_1>0)
-                                @php
-                                    $class='text-success';
-                                @endphp
-                            @elseif($item->number_1<0)
-                                @php
-                                    $class='text-danger';
-                                @endphp
-                            @else
-                                @php
-                                    $class='text-muted';
-                                @endphp
-                            @endif
-                <span class="{{ $class }} d-flex justify-content-between align-items-center">
-                    <i class="fa fa-caret-down fa-2x mr-2 {{ $class }}"></i>
-                    0.0120
+                        <div class="d-flex justify-content-center">
+                            <div class="d-flex align-items-center">
+                               {!! $icon !!}
+                            </div>
+ <div>
 
+
+                <span class="d-flex justify-content-center align-items-center">
+
+                    {{ $item->number_2.'-'.$item->number_3 }}
                 </span>
+
+                <span class="{{ $class }} d-flex justify-content-center align-items-center">
+                    {{ $item->number_1 }}
+                </span>
+                            </div>
                         </div>
+
                     </div>
-                    <span class="header2Pi">|</span>
+                    <span class="header2Pi"></span>
                 </div>
 
         </span>
