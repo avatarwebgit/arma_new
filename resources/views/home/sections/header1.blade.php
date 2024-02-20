@@ -74,10 +74,10 @@
                     @endif
                     <div>
                         <div style="font-size: 15px">
-                            Brazil Granutar
+                            {{ $item->title }}
                         </div>
                         <div style="font-size: 12px">
-                            USD/Bbl
+                            {{ $item->title }}
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
@@ -86,8 +86,12 @@
                         @endif
                     </div>
                     <div>
-                        <span class="d-block text-center {{ $class }}">440 - 444</span>
-                        <span class="d-block text-center {{ $class }}">20</span>
+                        <span class="d-block text-center {{ $class }}">
+                            {{ $item->number_2.' - '.$item->number_3 }}
+                        </span>
+                        <span class="d-block text-center {{ $class }}">
+                            {{ $item->number_1 }}
+                        </span>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
                 <span class="d-block"
