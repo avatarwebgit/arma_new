@@ -1,52 +1,53 @@
-
 <div id="scroll-container" class="bg-white header1 d-flex scroll-container">
-    @for($i=0;$i<6;$i++)
-        <div class="p-1  text-center d-flex">
-            <strong class="header_title">
-                @if($i==0)
-                    @php
-                        $title='Energy';
-                    @endphp
+    <div class="d-flex">
+        @for($i=0;$i<6;$i++)
+            @if($i==0)
+                @php
+                    $title='Energy';
+                @endphp
 
-                @elseif($i==1)
-                    @php
-                        $title='Metal';
-                    @endphp
+            @elseif($i==1)
+                @php
+                    $title='Metal';
+                @endphp
 
-                @elseif($i==2)
-                    @php
-                        $title='Industrial';
-                    @endphp
-                @elseif($i==3)
-                    @php
-                        $title='Agriculture';
-                    @endphp
-                @elseif($i==4)
-                    @php
-                        $title='Currency';
-                    @endphp
-                @else($i==5)
-                    @php
-                        $title='Crypto';
-                    @endphp
-                @endif
-                {{ $title }}
-            </strong>
-            @foreach($header1 as $item)
+            @elseif($i==2)
+                @php
+                    $title='Industrial';
+                @endphp
+            @elseif($i==3)
+                @php
+                    $title='Agriculture';
+                @endphp
+            @elseif($i==4)
+                @php
+                    $title='Currency';
+                @endphp
+            @else($i==5)
+                @php
+                    $title='Crypto';
+                @endphp
+            @endif
+
+            @foreach($header1 as $key=>$item)
+
                 @if($item->number_1>0)
                     @php
                         $class='text-success';
-                        $icon='<i class="fa fa-caret-up fa-2x mr-2 text-success"></i>';
+                        $src='home/img/green.png';
+                        $img_display=1;
                     @endphp
                 @elseif($item->number_1<0)
                     @php
                         $class='text-danger';
-                        $icon='<i class="fa fa-caret-down fa-2x mr-2 text-danger"></i>';
+                        $src='home/img/Red_triangle.svg.png';
+                        $img_display=1;
                     @endphp
                 @else
                     @php
                         $class='text-muted';
                         $icon='';
+                        $img_display=0;
                     @endphp
                 @endif
                 @if($item->number_3>0)
@@ -63,51 +64,38 @@
                         $color='#6c757d';
                     @endphp
                 @endif
-
-                <span style="display: inline-block;border-right: 1px solid black">
-                <div class="d-flex align-items-center ml-3">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <div class="text-left">
-                                <span class="mr-2 header2Title">{{ $item->title }}</span>
-                            </div>
-                            <div class="text-left">
-                                <span class="mr-2 header2Title font13">USD/Bbl</span>
-                            </div>
+                <div class="d-flex">
+                    @if($key==0)
+                        <div class="d-flex justify-content-center align-items-center">
+                            <strong class="header_title mr-4">
+                                {{ $title }}
+                            </strong>
+                        </div>
+                    @endif
+                    <div>
+                        <div style="font-size: 15px">
+                            Brazil Granutar
+                        </div>
+                        <div style="font-size: 12px">
+                            USD/Bbl
                         </div>
                     </div>
-                    <div class="ml-4">
-                        <span>
-
-        </span>
+                    <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
+                        @if($img_display)
+                            <img width="15" src="{{ asset($src) }}">
+                        @endif
                     </div>
-                    <div style="width: 80px">
-                        <div class="d-flex justify-content-center">
-                            <div class="d-flex align-items-center">
-                               {!! $icon !!}
-                            </div>
- <div>
-
-
-                <span class="d-flex justify-content-center align-items-center">
-
-                    {{ $item->number_2.'-'.$item->number_3 }}
-                </span>
-
-                <span class="{{ $class }} d-flex justify-content-center align-items-center">
-                    {{ $item->number_1 }}
-                </span>
-                            </div>
-                        </div>
-
+                    <div>
+                        <span class="d-block text-center {{ $class }}">440 - 444</span>
+                        <span class="d-block text-center {{ $class }}">20</span>
                     </div>
-                    <span class="header2Pi"></span>
+                    <div class="d-flex justify-content-center align-items-center">
+                <span class="d-block"
+                      style="width: 1px;height: 70%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
+                    </div>
                 </div>
-
-        </span>
             @endforeach
-        </div>
-    @endfor
-
+        @endfor
+    </div>
 </div>
 
