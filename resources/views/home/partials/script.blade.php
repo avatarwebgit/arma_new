@@ -544,13 +544,34 @@
             }
         })
     }
+    var screen_width=window.matchMedia("(max-width: 596px)").matches;
 
-    $('#scroll-container').on('touchstart',function(){
-        $('#scroll-container-first-div').addClass('animate_paused');
-    })
-    $('#scroll-container').on('touchend',function(){
-        $('#scroll-container-first-div').removeClass('animate_paused');
-    })
+    if (screen_width){
+        $('#scroll-container').on('touchstart',function(){
+            $('#scroll-container-first-div').addClass('animate_paused');
+        })
+        $('#scroll-container').on('touchend',function(){
+            $('#scroll-container-first-div').removeClass('animate_paused');
+        })
+        $('#scroll-container2').on('touchstart',function(){
+            $('#scroll-container-first-div2').addClass('animate_paused');
+        })
+        $('#scroll-container2').on('touchend',function(){
+            $('#scroll-container-first-div2').removeClass('animate_paused');
+        })
+    }else {
+        $('#scroll-container').hover(function(){
+            $('#scroll-container-first-div').addClass('animate_paused');
+        },function (){
+            $('#scroll-container-first-div').removeClass('animate_paused');
+        });
+        $('#scroll-container2').hover(function(){
+            $('#scroll-container-first-div2').addClass('animate_paused');
+        },function (){
+            $('#scroll-container-first-div2').removeClass('animate_paused');
+        });
+    }
+
 </script>
 
 @yield('script')
