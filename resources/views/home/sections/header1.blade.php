@@ -67,7 +67,7 @@
                 <div class="d-flex">
                     @if($key==0)
                         <div class="d-flex justify-content-center align-items-center">
-                            <strong class="header_title mr-4 ml-5">
+                            <strong class="header_title mr-4" style="margin-left: 80px !important;">
                                 {{ $title }}
                             </strong>
                         </div>

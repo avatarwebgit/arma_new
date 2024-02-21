@@ -50,7 +50,7 @@
                 <div class="d-flex">
                     @if($key==0)
                         <div class="d-flex justify-content-center align-items-center">
-                            <strong class="header_title mr-4 ml-5">
+                            <strong class="header_title2 mr-4" style="margin-left: 80px !important;">
                                 {{ $title }}
                             </strong>
                         </div>
@@ -82,7 +82,7 @@
 
                         @else
                             <span class="d-block"
-                                  style="width: 1px;height: 50%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
+                                  style="width: 1px;height: 50%;background-color: white;margin-left: 5px;margin-right: 5px"></span>
                         @endif
                     </div>
                 </div>
