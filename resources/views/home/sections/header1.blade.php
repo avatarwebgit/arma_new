@@ -67,7 +67,7 @@
                 <div class="d-flex">
                     @if($key==0)
                         <div class="d-flex justify-content-center align-items-center">
-                            <strong class="header_title mr-4">
+                            <strong class="header_title mr-4 ml-5">
                                 {{ $title }}
                             </strong>
                         </div>
@@ -94,8 +94,13 @@
                         </span>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                <span class="d-block"
-                      style="width: 1px;height: 70%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
+                        @if($loop->last)
+
+                        @else
+                            <span class="d-block"
+                                  style="width: 1px;height: 50%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
+                        @endif
+
                     </div>
                 </div>
             @endforeach

@@ -1,4 +1,4 @@
-<div id="scroll-container2" class="header2 d-flex scroll-container">
+<div id="scroll-container2" class="p-2 header2 d-flex scroll-container">
     <div class="d-flex" >
         @for($i=0;$i<6;$i++)
             @if($i==0)
@@ -50,13 +50,19 @@
                 <div class="d-flex">
                     @if($key==0)
                         <div class="d-flex justify-content-center align-items-center">
-                            <strong class="header_title2 mr-4">
+                            <strong class="header_title mr-4 ml-5">
                                 {{ $title }}
                             </strong>
                         </div>
                     @endif
-                        <div class="d-flex align-items-center justify-content-center ml-1 mr-1">
-                            <span style="display: block;width: 20px;height: 20px;border-radius: 100%;background-color: {{ $color }}"></span>
+                        <div class="animation_main_div">
+                            <div class="circle " style="background-color: {{ $color }} !important;"></div>
+                            <div class="circle2" style="background-color: {{ $color }} !important;"></div>
+                            <div class="circle3" style="background-color: {{ $color }} !important;"></div>
+                            <div class="circle4" style="background-color: {{ $color }} !important;"></div>
+                            <div class="logo-div-send">
+                                <!--logo or anything put here -->
+                            </div>
                         </div>
                     <div class="ml-2 mr-2">
                         <div style="font-size: 15px">
@@ -72,8 +78,12 @@
                         <span class="d-block  text-center {{ $class }}">{{ $item->number_1 }}</span>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                <span class="d-block"
-                      style="width: 1px;height: 70%;background-color: white;margin-left: 5px;margin-right: 5px"></span>
+                        @if($loop->last)
+
+                        @else
+                            <span class="d-block"
+                                  style="width: 1px;height: 50%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
+                        @endif
                     </div>
                 </div>
             @endforeach
