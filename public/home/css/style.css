@@ -2534,7 +2534,7 @@ tbody.ob-heading {
     position: absolute;
     content: "";
     width: 2px !important;
-    height: 100% !important;
+    height: 130% !important;
     background-color: black;
     right: -10px;
 }
@@ -2617,7 +2617,7 @@ tbody.ob-heading {
 .animation_main_div {
     display: block;
     width: 5px;
-    margin: 0 10px;
+    margin: 20px 10px;
 }
 
 
