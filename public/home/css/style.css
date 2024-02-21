@@ -2514,6 +2514,10 @@ tbody.ob-heading {
     animation: my-animation 100s linear 1s infinite;
 }
 
+.animate_paused {
+    animation-play-state: paused !important;
+}
+
 #scroll-container2 > div:hover {
     cursor: grab;
     animation-play-state: paused;
@@ -2877,8 +2881,4 @@ body {
 .input-error-validate{
     font-size: 9pt;
     color: red;
-}
-
-html{
-    overflow: hidden !important;
 }

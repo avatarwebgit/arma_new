@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="{{ asset('home/css/timer.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/developer.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/font-awsome.css') }}">
+    <style>
+        html{
+            overflow-x: hidden !important;
+        }
+    </style>
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
 </head>

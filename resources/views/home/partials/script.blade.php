@@ -203,6 +203,7 @@
             change_market_status(status, difference, change_color, color, statusText, id);
             show_market_result(id);
         }
+
         function close_bid_deposit(id) {
             $('#bid_deposit_section-' + id).addClass('bg-inactive');
             $('#bid_deposit_section-' + id).find('input').prop('disabled', true);
@@ -544,13 +545,9 @@
         })
     }
 
-    $( "#scroll-container" ).hover(
-        function() {
-            $(this).find('div').css("animation-play-state", "paused");
-        }, function() {
-            $(this).find('div').css("animation-play-state", "running");
-        }
-    );
+    $('#scroll-container').click(function () {
+        $('#scroll-container-first-div').toggleClass('animate_paused');
+    });
 </script>
 
 @yield('script')
