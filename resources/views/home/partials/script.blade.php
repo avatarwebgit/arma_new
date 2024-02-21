@@ -545,9 +545,12 @@
         })
     }
 
-    $('#scroll-container').click(function () {
-        $('#scroll-container-first-div').toggleClass('animate_paused');
-    });
+    $('#scroll-container').on('touchstart',function(){
+        $('#scroll-container-first-div').addClass('animate_paused');
+    })
+    $('#scroll-container').on('touchend',function(){
+        $('#scroll-container-first-div').removeClass('animate_paused');
+    })
 </script>
 
 @yield('script')
