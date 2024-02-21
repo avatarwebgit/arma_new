@@ -2496,10 +2496,10 @@ tbody.ob-heading {
     animation: my-animation 100s linear 1s infinite;
 }
 
-#scroll-container > div:hover {
-    cursor: grab;
-    animation-play-state: paused;
-}
+/*#scroll-container > div:hover {*/
+/*    cursor: grab;*/
+/*    animation-play-state: paused;*/
+/*}*/
 #scroll-container2{
     background-color: #006;
 }
