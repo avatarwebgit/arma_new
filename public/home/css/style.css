@@ -2875,3 +2875,15 @@ body {
     font-size: 9pt;
     color: red;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.align-items-center{
+    align-items: center !important;
+}
+img.logo{
+    width: 90px  !important;
+    height: auto;
+}

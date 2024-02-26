@@ -65,6 +65,7 @@ Route::post('/change_market_status', [MarketHomeController::class, 'change_marke
 Route::post('/seller_change_offer', [MarketHomeController::class, 'seller_change_offer'])->name('home.seller_change_offer');
 Route::post('/get_market_bit_result', [MarketHomeController::class, 'get_market_bit_result'])->name('home.get_market_bit_result');
 Route::post('/get_market_info', [MarketHomeController::class, 'get_market_info'])->name('home.get_market_info');
+Route::get('/menu/{menus}', [IndexController::class, 'menus'])->name('home.menus');
 Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

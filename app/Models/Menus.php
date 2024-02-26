@@ -14,7 +14,7 @@ class Menus extends Model
 
     public function Pages()
     {
-        return $this->belongsToMany(Page::class, 'menu_page', 'page_id', 'menu_id');
+        return $this->belongsToMany(Page::class, 'menu_page', 'menu_id','page_id');
     }
 
     public function children()
