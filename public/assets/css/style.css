@@ -28786,7 +28786,6 @@ table.dataTable tbody > tr.selected th.select-checkbox:after {
 }
 
 .img_setting{
-    border-radius: 100% !important;
     width: 80px;
     height: auto;
 }

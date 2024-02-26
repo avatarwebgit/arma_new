@@ -2,7 +2,7 @@
     @include('home.sections.header1')
     @include('home.sections.header2')
     <nav class="navbar navbar-expand-lg">
-        <a class='navbar-brand' href='{{ route('home.index') }}'><img src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="logo"></a>
+        <a class='navbar-brand' href='{{ route('home.index') }}'><img class="logo" src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
                 aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
             <i class="icon ion-md-menu"></i>
@@ -10,85 +10,31 @@
 
         <div class="collapse navbar-collapse" id="headerMenu">
             <ul class="navbar-nav mr-auto d-flex align-items-center">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                @php
+                $menus=\App\Models\Menus::where('parent',0)->get();
+                @endphp
+                @foreach($menus as $menu)
+                <li class="nav-item dropdown d-flex align-items-center mr-3">
+                    <a class="nav-link" href="{{ route('home.menus',['menus'=>$menu->id]) }}"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        Our Market
+                        {{ $menu->title }}
                     </a>
-                    <div class="dropdown-menu">
-                        <a class='dropdown-item' href='landing-page-dark.html'>Landing One</a>
-                        <a class='dropdown-item' href='landing-page-dark-two.html'>Landing Two</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">
-                        Registery
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class='dropdown-item' href='exchange-dark.html'>Exchange</a>
-                        <a class='dropdown-item' href='exchange-dark-live-price.html'>Exchange Live Price</a>
-                        <a class='dropdown-item' href='exchange-dark-ticker.html'>Exchange Ticker</a>
-                        <a class='dropdown-item' href='exchange-dark-fluid.html'>Exchange Fluid</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">
-                        Market News & Reports
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class='dropdown-item' href='markets-dark.html'>Markets</a>
-                        <a class='dropdown-item' href='market-capital-dark.html'>Markets Line</a>
-                        <a class='dropdown-item' href='market-capital-bar-dark.html'>Markets Bar</a>
-                        <a class='dropdown-item' href='market-overview-dark.html'>Market Overview</a>
-                        <a class='dropdown-item' href='market-screener-dark.html'>Market Screener</a>
-                        <a class='dropdown-item' href='market-crypto-dark.html'>Market Crypto</a>
-                    </div>
-                </li>
+                    <span class="dropdown-toggle cursor-pointer" role="button" data-toggle="dropdown">
+                            <i class="fa-angle-down"></i>
+                        </span>
+                    @if(count($menu->children)>0)
+                        <div class="dropdown-menu">
+                            @foreach($menu->children as $child)
+                                <a class='dropdown-item' href='{{ route('home.menus',['menus'=>$child->id]) }}'>
+                                    {{ $child->title }}
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">
-                        Terms $ Conditions
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class='dropdown-item' href='settings-profile-dark.html'>Profile</a>
-                        <a class='dropdown-item' href='settings-wallet-dark.html'>Wallet</a>
-                        <a class='dropdown-item' href='settings-dark.html'>Settings</a>
-                    </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">
-                        About Armaiti Trade
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class='dropdown-item' href='technical-analysis-dark.html'>Technical Analysis</a>
-                        <a class='dropdown-item' href='cross-rates-dark.html'>Cross Rates</a>
-                        <a class='dropdown-item' href='symbol-info-dark.html'>Symbol Info</a>
-                        <a class='dropdown-item' href='heat-map-dark.html'>Heat Map</a>
-                        <a class='dropdown-item' href='signin-dark.html'>Sign in</a>
-                        <a class='dropdown-item' href='signup-dark.html'>Sign up</a>
-                        <a class='dropdown-item' href='404-dark.html'>404</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">
-                        Help Center
-                    </a>
-                </li>
-                <li class="nav-item header-custom-icon position-relative mr-5">
-                    <input class="form-control form-control-sm" placeholder="search...">
-                    <i class="icon ion-md-search position-absolute" style="top: 4px;right: 10px"></i>
-                </li>
+                @endforeach
             </ul>
             <ul class="navbar-nav ml-auto d-flex align-items-center">
                 {{--                <li class="nav-item header-custom-icon">--}}
@@ -161,7 +107,10 @@
                 {{--                    </div>--}}
                 {{--                </li>--}}
 
-
+                <li class="nav-item header-custom-icon position-relative mr-5">
+                    <input class="form-control form-control-sm" placeholder="search...">
+                    <i class="icon ion-md-search position-absolute" style="top: 4px;right: 10px"></i>
+                </li>
                 @auth
                     <li class="nav-item dropdown header-img-icon">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -241,14 +190,10 @@
                         </div>
                     </li>
                 @else
-                    <li class="nav-item dropdown header-img-icon d-flex">
+                    <li title="login" class="nav-item dropdown header-img-icon d-flex">
                         <a style="font-size: 22px;color: #000 !important;" class="nav-link" href="{{ route('login') }}">
-                            Login
+                            <i class="fa fa-sign-in"></i>
                         </a>
-                        <a style="font-size: 22px;margin-left: 10px;color:#007bff !important;" class="nav-link " href="{{ route('register') }}">
-                            Register
-                        </a>
-
                     </li>
                 @endauth
             </ul>

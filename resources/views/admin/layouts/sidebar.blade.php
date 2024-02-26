@@ -138,6 +138,20 @@
 
                         </ul>
                     </li>
+
+                    <li class="dash-item dash-hasmenu">
+                        <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-apps"></i></span><span
+                                class="dash-mtext">{{ __('Page builder') }}</span><span class="dash-arrow"><i
+                                    data-feather="chevron-right"></i></span></a>
+                        <ul class="dash-submenu">
+                            <li class="dash-item ">
+                                <a class="dash-link" href="{{ route('admin.menus.index') }}">{{ __('Menus') }}</a>
+                            </li>
+                            <li class="dash-item ">
+                                <a class="dash-link" href="{{ route('admin.pages.index') }}">{{ __('Pages') }}</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li
                         class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/setting*') ? 'active dash-trigger' : 'collapsed' }}">
                         <a href="#!" class="dash-link"><span class="dash-micon"><i
@@ -146,10 +160,13 @@
                                     data-feather="chevron-right"></i></span></a>
                         <ul class="dash-submenu">
                             <li class="dash-item">
-                                <a class="dash-link" href="{{ route('admin.header1.index') }}">{{ __('Header 1') }}</a>
+                                <a class="dash-link" href="{{ route('admin.header_categories.index') }}">{{ __('Header Categories') }}</a>
                             </li>
                             <li class="dash-item">
-                                <a class="dash-link" href="{{ route('admin.header2.index') }}">{{ __('Header 2') }}</a>
+                                <a class="dash-link" href="{{ route('admin.header1.index') }}">{{ __('Line 1') }}</a>
+                            </li>
+                            <li class="dash-item">
+                                <a class="dash-link" href="{{ route('admin.header2.index') }}">{{ __('Line 2') }}</a>
                             </li>
 
                         </ul>

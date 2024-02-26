@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Header2Request;
 use App\Models\Header2;
+use App\Models\HeaderCategory;
+use http\Env\Request;
 
 class Header2Controller extends Controller
 {
@@ -16,15 +18,20 @@ class Header2Controller extends Controller
 
     public function create()
     {
-        $view =  view('admin.header2.create');
-        return ['html' => $view->render()];
+        $categories = HeaderCategory::all();
+        return view('admin.header2.create', compact('categories'));
     }
 
 
-    public function store(Header2Request $request)
+    public function store(\Illuminate\Http\Request $request)
     {
         try {
-            Header2::create($request->all());
+            $header = Header2::create($request->all());
+            if ($request->category!=null){
+                $header->Categories()->detach();
+                $header->Categories()->attach($request->category);
+            }
+
             $type = 'success';
             $msg = 'The Item Has Been Created Successfully';
 
@@ -38,17 +45,21 @@ class Header2Controller extends Controller
 
     public function edit($id)
     {
-        $item =  Header2::where('id',$id)->first();
-        $view =  view('admin.header2.edit',compact('item'));
-        return ['html' => $view->render()];
+        $categories = HeaderCategory::all();
+        $item = Header2::where('id', $id)->first();
+        return view('admin.header2.edit', compact('item','categories'));
     }
 
     public function update(Header2Request $request, $id)
     {
-        $item =  Header2::where('id',$id)->first();
+        $item = Header2::where('id', $id)->first();
         $item->update($request->all());
+        $item->Categories()->detach();
+        if ($request->category!=null){
+            $item->Categories()->attach($request->category);
+        }
         return redirect()->route('admin.header2.index')
-            ->with('success',  __('Header 2 updated successfully.'));
+            ->with('success', __('Header 2 updated successfully.'));
     }
 
     public function remove($id)

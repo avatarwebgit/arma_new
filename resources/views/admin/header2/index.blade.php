@@ -148,7 +148,9 @@
                 <div class="card-body">
                     <div class="table-responsive py-5 pb-4">
                         <div style="padding: 5px 26px;" class="btn-group">
-                            <a id="add_header2" class="btn btn-default btn-primary btn-sm no-corner " tabindex="0" aria-controls="users-table"><span><i class="ti ti-plus"></i> Create</span></a>
+                            <a href="{{ route('admin.header2.create') }}" class="btn btn-default btn-primary btn-sm no-corner"
+                               tabindex="0"
+                               aria-controls="users-table"><span><i class="ti ti-plus"></i> Create</span></a>
                         </div>
                         <div class="container-fluid">
 
@@ -158,6 +160,7 @@
                                     <th>priority</th>
                                     <th>Title</th>
                                     <th>Title 2</th>
+                                    <th>Category</th>
                                     <th>Number 1(min)</th>
                                     <th>Number 2(max)</th>
                                     <th>Number 3</th>
@@ -176,6 +179,15 @@
                                         </td>
                                         <td>
                                             {{ $item->title_2 }}
+                                        </td>
+                                        <td>
+                                            @if(count($item->Categories)>0)
+                                                @foreach($item->Categories as $category)
+                                                    {{ $category->title }}
+                                                @endforeach
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                         <td class="{{ $item->number_1>0 ? 'text-success' : ($item->number_1<0 ? 'text-danger' : 'text-muted') }}">
                                             {{ $item->number_1 }}
@@ -200,7 +212,7 @@
                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
                                                data-bs-original-title="{{ __('Delete') }}"><i class="ti ti-trash mr-1"></i></a>
                                             {!! Form::close() !!}
-                                            <a data-action="/admin-panel/management/setting/header2/edit/{{ $item->id }}" style="margin-left: 10px !important;" href="javascript:void(0);"
+                                            <a style="margin-left: 10px !important;" href="{{ route('admin.header2.edit',['id'=>$item->id]) }}"
                                                class="btn btn-icon btn-primary btn-sm edit-header2">
                                                 <i class="ti ti-edit"></i>
                                             </a>
