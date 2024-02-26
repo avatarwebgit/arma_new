@@ -2,121 +2,62 @@
     @include('home.sections.header1')
     @include('home.sections.header2')
     <nav class="navbar navbar-expand-lg">
-        <a class='navbar-brand' href='{{ route('home.index') }}'><img class="logo" src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
-                aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="icon ion-md-menu"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="headerMenu">
-            <ul class="navbar-nav mr-auto d-flex align-items-center">
+        <div class="col-2 col-2 d-flex justify-content-center">
+            <a class='navbar-brand' href='{{ route('home.index') }}'><img class="logo" src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
+                    aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="icon ion-md-menu"></i>
+            </button>
+        </div>
+        <div class="col-8 col-2 d-flex">
+            <ul class="navbar-nav d-flex align-items-center">
                 @php
-                $menus=\App\Models\Menus::where('parent',0)->get();
+                    $menus=\App\Models\Menus::where('parent',0)->get();
                 @endphp
                 @foreach($menus as $menu)
-                <li class="nav-item dropdown d-flex align-items-center mr-3">
-                    <a class="nav-link" href="{{ route('home.menus',['menus'=>$menu->id]) }}"
-                       aria-haspopup="true"
-                       aria-expanded="false">
-                        {{ $menu->title }}
-                    </a>
-                    <span class="dropdown-toggle cursor-pointer" role="button" data-toggle="dropdown">
-                            <i class="fa-angle-down"></i>
-                        </span>
-                    @if(count($menu->children)>0)
-                        <div class="dropdown-menu">
-                            @foreach($menu->children as $child)
-                                <a class='dropdown-item' href='{{ route('home.menus',['menus'=>$child->id]) }}'>
-                                    {{ $child->title }}
-                                </a>
-                            @endforeach
-                        </div>
+                    @if($menu->id==2)
+                        <li class="nav-item d-flex align-items-center mr-3">
+                            <a class="nav-link" href="{{ route('home.menus',['menus'=>$menu->id]) }}"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                {{ $menu->title }}
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item dropdown d-flex align-items-center mr-3">
+                            <a class="nav-link dropdown-toggle" href="{{ route('home.menus',['menus'=>$menu->id]) }}" data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                {{ $menu->title }}
+                            </a>
+                            @if(count($menu->children)>0)
+                                <div class="dropdown-menu">
+                                    @foreach($menu->children as $child)
+                                        <a class='dropdown-item' href='{{ route('home.menus',['menus'=>$child->id]) }}'>
+                                            {{ $child->title }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </li>
                     @endif
 
-                </li>
                 @endforeach
             </ul>
-            <ul class="navbar-nav ml-auto d-flex align-items-center">
-                {{--                <li class="nav-item header-custom-icon">--}}
-                {{--                    <a class="nav-link" href="#" id="clickFullscreen">--}}
-                {{--                        <i class="icon ion-md-expand"></i>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item dropdown header-custom-icon">--}}
-                {{--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"--}}
-                {{--                       aria-haspopup="true"--}}
-                {{--                       aria-expanded="false">--}}
-                {{--                        <i class="icon ion-md-notifications"></i>--}}
-                {{--                        <span class="circle-pulse"></span>--}}
-                {{--                    </a>--}}
-                {{--                    <div class="dropdown-menu">--}}
-                {{--                        <div class="dropdown-header d-flex align-items-center justify-content-between">--}}
-                {{--                            <p class="mb-0 font-weight-medium">6 New Notifications</p>--}}
-                {{--                            <a href="#!" class="text-muted">Clear all</a>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="dropdown-body">--}}
-                {{--                            <a href="#!" class="dropdown-item">--}}
-                {{--                                <div class="icon">--}}
-                {{--                                    <i class="icon ion-md-lock"></i>--}}
-                {{--                                </div>--}}
-                {{--                                <div class="content">--}}
-                {{--                                    <p>Account password change</p>--}}
-                {{--                                    <p class="sub-text text-muted">5 sec ago</p>--}}
-                {{--                                </div>--}}
-                {{--                            </a>--}}
-                {{--                            <a href="#!" class="dropdown-item">--}}
-                {{--                                <div class="icon">--}}
-                {{--                                    <i class="icon ion-md-alert"></i>--}}
-                {{--                                </div>--}}
-                {{--                                <div class="content">--}}
-                {{--                                    <p>Solve the security issue</p>--}}
-                {{--                                    <p class="sub-text text-muted">10 min ago</p>--}}
-                {{--                                </div>--}}
-                {{--                            </a>--}}
-                {{--                            <a href="#!" class="dropdown-item">--}}
-                {{--                                <div class="icon">--}}
-                {{--                                    <i class="icon ion-logo-android"></i>--}}
-                {{--                                </div>--}}
-                {{--                                <div class="content">--}}
-                {{--                                    <p>Download android app</p>--}}
-                {{--                                    <p class="sub-text text-muted">1 hrs ago</p>--}}
-                {{--                                </div>--}}
-                {{--                            </a>--}}
-                {{--                            <a href="#!" class="dropdown-item">--}}
-                {{--                                <div class="icon">--}}
-                {{--                                    <i class="icon ion-logo-bitcoin"></i>--}}
-                {{--                                </div>--}}
-                {{--                                <div class="content">--}}
-                {{--                                    <p>Bitcoin price is high now</p>--}}
-                {{--                                    <p class="sub-text text-muted">2 hrs ago</p>--}}
-                {{--                                </div>--}}
-                {{--                            </a>--}}
-                {{--                            <a href="#!" class="dropdown-item">--}}
-                {{--                                <div class="icon">--}}
-                {{--                                    <i class="icon ion-logo-usd"></i>--}}
-                {{--                                </div>--}}
-                {{--                                <div class="content">--}}
-                {{--                                    <p>Payment completed</p>--}}
-                {{--                                    <p class="sub-text text-muted">4 hrs ago</p>--}}
-                {{--                                </div>--}}
-                {{--                            </a>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="dropdown-footer d-flex align-items-center justify-content-center">--}}
-                {{--                            <a href="#!">View all</a>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </li>--}}
-
-                <li class="nav-item header-custom-icon position-relative mr-5">
-                    <input class="form-control form-control-sm" placeholder="search...">
-                    <i class="icon ion-md-search position-absolute" style="top: 4px;right: 10px"></i>
+        </div>
+        <div class="col-2 d-flex justify-content-center">
+            <ul class="navbar-nav d-flex align-items-center">
+                <li title="login" class="nav-item dropdown header-img-icon d-flex">
+                    <a style="font-size: 22px;color: #000 !important;" class="nav-link" href="">
+                        <i class="fa fa-search" style="color: #006 !important;"></i>
+                    </a>
                 </li>
                 @auth
                     <li class="nav-item dropdown header-img-icon">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        <a style="font-size: 22px;color: #000 !important;"class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false">
-                            <img src="{{ asset('home/img/avatar.svg') }}" alt="avatar">
+                            <i class="fa fa-sign-out" style="color: #006 !important;"></i>
                         </a>
                         <div class="dropdown-menu">
                             <div class="dropdown-header d-flex flex-column align-items-center">
@@ -192,11 +133,17 @@
                 @else
                     <li title="login" class="nav-item dropdown header-img-icon d-flex">
                         <a style="font-size: 22px;color: #000 !important;" class="nav-link" href="{{ route('login') }}">
-                            <i class="fa fa-sign-in"></i>
+                            <i class="fa fa-user"></i>
                         </a>
                     </li>
                 @endauth
             </ul>
         </div>
+
+
+{{--        <div class="collapse navbar-collapse" id="headerMenu">--}}
+{{--            --}}
+{{--           --}}
+{{--        </div>--}}
     </nav>
 </header>

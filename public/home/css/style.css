@@ -311,6 +311,11 @@ header .nav-link.btn {
 .dropdown-item {
     color: #18214d;
     font-size: 14px;
+    border-bottom: 1px solid #ededed;
+    padding: 10px;
+}
+.dropdown-menu>a:last-child{
+    border-bottom: none !important;
 }
 
 .dropdown-item:focus,
@@ -335,10 +340,11 @@ header .nav-link.btn {
 }
 
 .dropdown-menu {
-    max-width: 280px;
+    min-width: fit-content !important;
+    max-width: 340px;
     position: absolute;
     right: 0;
-    left: auto;
+    left: 0;
     border-radius: 5px;
     margin-top: 12px;
     border: 1px solid #f2f4f9;
@@ -355,7 +361,7 @@ header .nav-link.btn {
     background: #fff;
     position: absolute;
     top: -8px;
-    right: 5%;
+    left: 5%;
     transform: rotate(45deg);
     border-top: 1px solid #f2f4f9;
     border-left: 1px solid #f2f4f9;
