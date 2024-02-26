@@ -107,7 +107,10 @@
                 {{--                    </div>--}}
                 {{--                </li>--}}
 
-
+                <li class="nav-item header-custom-icon position-relative mr-5">
+                    <input class="form-control form-control-sm" placeholder="search...">
+                    <i class="icon ion-md-search position-absolute" style="top: 4px;right: 10px"></i>
+                </li>
                 @auth
                     <li class="nav-item dropdown header-img-icon">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -187,14 +190,10 @@
                         </div>
                     </li>
                 @else
-                    <li class="nav-item dropdown header-img-icon d-flex">
+                    <li title="login" class="nav-item dropdown header-img-icon d-flex">
                         <a style="font-size: 22px;color: #000 !important;" class="nav-link" href="{{ route('login') }}">
-                            Login
+                            <i class="fa fa-sign-in"></i>
                         </a>
-                        <a style="font-size: 22px;margin-left: 10px;color:#007bff !important;" class="nav-link " href="{{ route('register') }}">
-                            Register
-                        </a>
-
                     </li>
                 @endauth
             </ul>
