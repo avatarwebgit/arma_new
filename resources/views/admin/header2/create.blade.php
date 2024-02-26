@@ -1,13 +1,24 @@
-
-{!! Form::open([
-    'route' => 'admin.header2.store',
-    'method' => 'Post',
-    'data-validate',
-    'enctype' => 'multipart/form-data',
-]) !!}
-<div class="modal-body">
+@extends('admin.layouts.main')
+@section('title', __('Header 2'))
+@section('breadcrumb')
+    <div class="col-md-12">
+        <div class="page-header-title">
+            <h4 class="m-b-10">{{ __('Header 2') }}</h4>
+        </div>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">{!! Html::link(route('home'), __('Dashboard'), []) !!}</li>
+            <li class="breadcrumb-item active">{{ __('Header 2') }}</li>
+        </ul>
+    </div>
+@endsection
+@section('content')
+    {!! Form::open([
+        'route' => 'admin.header2.store',
+        'method' => 'Post',
+        'enctype' => 'multipart/form-data',
+    ]) !!}
     <div class="row">
-        <div class="form-group">
+        <div class="form-group col-md-4">
             <label class="col-form-label" for="title">Title 1 </label>
             <input id="title" type="text" name="title" class="form-control"
                    placeholder="title" value="{{ old('title') }}">
@@ -17,7 +28,7 @@
             </p>
             @enderror
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-4">
             <label class="col-form-label" for="title_2">Title 2</label>
             <input id="title_2" type="text" name="title_2" class="form-control"
                    placeholder="title" value="{{ old('title_2') }}">
@@ -27,8 +38,22 @@
             </p>
             @enderror
         </div>
-        <div class="form-group">
-            <label  class="col-form-label" for="number_1">Number 1(min)</label>
+        <div class="form-group col-md-4">
+            <label class="col-form-label" for="category">Category</label>
+            <select id="category" name="category" class="form-control">
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
+            </select>
+            @error('category')
+            <p class="input-error-validate">
+                {{ $message }}
+            </p>
+            @enderror
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-form-label" for="number_1">Number 1(min)</label>
             <input id="number_1" type="text" name="number_1" class="form-control"
                    placeholder="Number 1(min)" value="{{ old('number_1') }}">
             @error('number_1')
@@ -37,8 +62,8 @@
             </p>
             @enderror
         </div>
-        <div class="form-group">
-            <label  class="col-form-label" for="number_2">Number 2(max)</label>
+        <div class="form-group col-md-6">
+            <label class="col-form-label" for="number_2">Number 2(max)</label>
             <input id="number_2" type="text" name="number_2" class="form-control"
                    placeholder="Number 2(max)" value="{{ old('number_2') }}">
             @error('number_2')
@@ -47,8 +72,8 @@
             </p>
             @enderror
         </div>
-        <div class="form-group">
-            <label  class="col-form-label" for="number_3">Number 3(percent)</label>
+        <div class="form-group col-md-6">
+            <label class="col-form-label" for="number_3">Number 3(percent)</label>
             <input id="number_3" type="text" name="number_3" class="form-control"
                    placeholder="Number 3(percent)" value="{{ old('number_3') }}">
             @error('number_3')
@@ -57,8 +82,8 @@
             </p>
             @enderror
         </div>
-        <div class="form-group">
-            <label  class="col-form-label" for="priority">priority</label>
+        <div class="form-group col-md-6">
+            <label class="col-form-label" for="priority">priority</label>
             <input id="priority" type="text" name="priority" class="form-control"
                    placeholder="priority" value="{{ old('priority') }}">
             @error('priority')
@@ -69,13 +94,20 @@
         </div>
 
     </div>
-</div>
-<div class="modal-footer">
-    <div class="float-end">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-        {{ Form::button(__('Save'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+    <div class="row">
+        <div class="col-12">
+            <a href="{{ route('admin.header2.index') }}" type="button" class="btn btn-secondary"
+               data-bs-dismiss="modal">{{ __('Back') }}</a>
+            {{ Form::button(__('Save'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+        </div>
+
     </div>
-</div>
-{!! Form::close() !!}
+    {!! Form::close() !!}
+
+@endsection
+@push('script')
+
+@endpush
+
 
 

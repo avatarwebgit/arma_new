@@ -6,8 +6,11 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FormController;
 use App\Http\Controllers\Admin\Header1Controller;
 use App\Http\Controllers\Admin\Header2Controller;
+use App\Http\Controllers\Admin\HeaderCategoryController;
 use App\Http\Controllers\Admin\MarketController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MessagesController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -77,9 +80,31 @@ Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
         Route::get('setting/header2/create', [Header2Controller::class, 'create'])->name('header2.create');
         Route::post('setting/header2/store', [Header2Controller::class, 'store'])->name('header2.store');
         Route::get('setting/header2/edit/{id}', [Header2Controller::class, 'edit'])->name('header2.edit');
-        Route::put('setting/header2/update/{item}', [Header2Controller::class, 'update'])->name('header2.update');
+        Route::put('setting/header2/update/{id}', [Header2Controller::class, 'update'])->name('header2.update');
         Route::post('setting/header2/remove/{id}', [Header2Controller::class, 'remove'])->name('header2.remove');
     });
+
+    //menus
+    Route::get('menus/index',[MenuController::class,'index'])->name('menus.index');
+    Route::get('menu/create',[MenuController::class,'create'])->name('menu.create');
+    Route::post('menu/store',[MenuController::class,'store'])->name('menu.store');
+    Route::get('menu/edit/{menu}',[MenuController::class,'edit'])->name('menu.edit');
+    Route::put('menu/update/{menu}',[MenuController::class,'update'])->name('menu.update');
+    Route::post('menu/remove',[MenuController::class,'remove'])->name('menu.remove');
+    //pages
+    Route::get('pages/index',[PageController::class,'index'])->name('pages.index');
+    Route::get('page/create',[PageController::class,'create'])->name('page.create');
+    Route::post('page/store',[PageController::class,'store'])->name('page.store');
+    Route::get('page/edit/{page}',[PageController::class,'edit'])->name('page.edit');
+    Route::put('page/update/{page}',[PageController::class,'update'])->name('page.update');
+    Route::post('page/remove',[PageController::class,'remove'])->name('page.remove');
+    //header_category
+    Route::get('header_categories/index',[HeaderCategoryController::class,'index'])->name('header_categories.index');
+    Route::get('header_category/create',[HeaderCategoryController::class,'create'])->name('header_category.create');
+    Route::post('header_category/store',[HeaderCategoryController::class,'store'])->name('header_category.store');
+    Route::get('header_category/edit/{category}',[HeaderCategoryController::class,'edit'])->name('header_category.edit');
+    Route::put('header_category/update/{category}',[HeaderCategoryController::class,'update'])->name('header_category.update');
+    Route::post('header_category/remove',[HeaderCategoryController::class,'remove'])->name('header_category.remove');
 
 
     //Config
