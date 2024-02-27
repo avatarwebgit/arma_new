@@ -2893,3 +2893,22 @@ img.logo{
     width: 90px  !important;
     height: auto;
 }
+@media (min-width: 1200px){
+    .logo{
+        margin-right: 100px;
+    }
+    .navbar-nav > .header-custom-icon{
+        width: 400px;
+    }
+}
+.login_btn {
+    font-size: 13px;
+    color: #006 !important;
+    display: block;
+    width: auto;
+    border: 1px solid #006;
+    border-radius: 5px;
+}
+.login_btn > a {
+    padding: 5px;
+}
