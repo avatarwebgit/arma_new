@@ -2896,17 +2896,21 @@ img.logo{
 @media (min-width: 1200px){
     .logo{
         margin-right: 100px;
+        margin-left: 40px;
     }
     .navbar-nav > .header-custom-icon{
-        width: 400px;
+        width: 200px;
+    }
+    .search_and_btns{
+        margin-right: 80px;
     }
 }
 .login_btn {
     font-size: 13px;
-    color: #006 !important;
+    background-color: #bed2f2;
     display: block;
     width: auto;
-    border: 1px solid #006;
+    color: white;
     border-radius: 5px;
 }
 .login_btn > a {
