@@ -43,7 +43,7 @@
 
                 @endforeach
             </ul>
-            <ul class="navbar-nav ml-auto d-flex align-items-center">
+            <ul class="navbar-nav ml-auto d-flex align-items-center search_and_btns">
                 <li class="nav-item header-custom-icon position-relative mr-5">
                     <input class="form-control form-control-sm" placeholder="search...">
                     <i class="icon ion-md-search position-absolute" style="top: 4px;right: 10px"></i>
