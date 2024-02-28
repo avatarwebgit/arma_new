@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Jobs\SendNewUserRegisteredForAdminJob;
 use App\Jobs\SendNewUserRegisteredForUserJob;
 use App\Mail\NewUserRegisteredAdminMail;
+use App\Models\Commodity;
+use App\Models\CompanyFunction;
+use App\Models\Country;
+use App\Models\Salutation;
 use App\Models\Setting;
 use App\Models\Type;
 use App\Providers\RouteServiceProvider;
@@ -41,21 +45,25 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $types = Type::where('id','!=',1)->get();
-        return view('auth.register', compact('types'));
+        $types = Type::where('id', '!=', 1)->get();
+        $commodities = Commodity::all();
+        $countries = Country::all();
+        $companyFunction = CompanyFunction::all();
+        $salutation= Salutation::all();
+        return view('auth.register', compact('types', 'commodities','countries','companyFunction','salutation'));
 
     }
 
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-
         event(new Registered($user = $this->create($request->all())));
-        session()->put('UserRegistered','oooo');
+        session()->put('UserRegistered', true);
+        //email
         //send email with job
-        $admin = Setting::where('key', 'email')->pluck('value')->first();
-        dispatch(new SendNewUserRegisteredForAdminJob($admin));
-        dispatch(new SendNewUserRegisteredForUserJob($user->email));
+//        $admin = Setting::where('key', 'email')->pluck('value')->first();
+//        dispatch(new SendNewUserRegisteredForAdminJob($admin));
+//        dispatch(new SendNewUserRegisteredForUserJob($user->email));
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
@@ -81,12 +89,16 @@ class RegisterController extends Controller
     {
 
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'commodity' => ['required', 'string', 'max:255'],
             'company_name' => ['required', 'string', 'max:255'],
-            'field' => ['required', 'string', 'max:255'],
-            'type' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', function($attribute, $value,$fail)
-            {
+            'company_address' => ['required', 'string', 'max:255'],
+            'company_post_zip_code' => ['required', 'string', 'max:255'],
+            'company_city' => ['nullable', 'string', 'max:255'],
+            'company_state' => ['nullable', 'string', 'max:255'],
+            'company_country' => ['nullable', 'string', 'max:255'],
+            'company_phone' => ['required', 'string', 'max:255'],
+            'company_website' => ['nullable', 'string', 'max:255'],
+            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:users', function ($attribute, $value, $fail) {
                 if (str_contains($value, '@yahoo')
                     or str_contains($value, '@ymail')
                     or str_contains($value, '@gmail')
@@ -96,21 +108,39 @@ class RegisterController extends Controller
                     $fail('Please enter Company :attribute.',);
                 }
             }],
-            'mobile_number' => ['required', 'string'],
+            'user_type' => ['required', 'string'],
+            'salutation' => ['required', 'string'],
+            'full_name' => ['required', 'string'],
+            'company_title' => ['required', 'string'],
+            'function_in_company' => ['nullable', 'string'],
+            'email' => ['required', 'email'],
+            'skype' => ['nullable'],
+            'whatsapp' => ['nullable'],
+            'accept_term' => ['required'],
         ]);
     }
 
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'commodity' => $data['commodity'],
             'company_name' => $data['company_name'],
-            'field' => $data['field'],
-            'type' => 'User',
-            'role_request_id' => $data['type'],
+            'company_address' => $data['company_address'],
+            'company_post_zip_code' => $data['company_post_zip_code'],
+            'company_city' => $data['company_city'],
+            'company_state' => $data['company_state'],
+            'company_country' => $data['company_country'],
+            'company_phone' => $data['company_phone'],
+            'company_website' => $data['company_website'],
+            'company_email' => $data['company_email'],
+            'user_type' => $data['user_type'],
+            'salutation' => $data['salutation'],
+            'full_name' => $data['full_name'],
+            'company_title' => $data['company_title'],
+            'function_in_company' => $data['function_in_company'],
             'email' => $data['email'],
-            'mobile_number' => $data['mobile_number'],
-//            'password' => Hash::make($data['password']),
+            'skype' => $data['skype'],
+            'whatsapp' => $data['whatsapp'],
         ]);
     }
 }

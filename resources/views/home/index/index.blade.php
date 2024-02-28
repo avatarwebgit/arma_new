@@ -3,11 +3,12 @@
 @section('script')
 
     <script>
-        @if($UserRegistered==true)
+        @if($show_modal==true)
         $(document).ready(function () {
-            let UserRegistered = {{ $UserRegistered }};
-            if (UserRegistered) {
-                $('#UserRegisteredModal').modal('show');
+            let show_modal = {{ $show_modal }};
+
+            if (show_modal) {
+                $('#AlertModal').modal('show');
             }
         });
         @endif
@@ -330,20 +331,20 @@
 
     <!-- Button trigger modal -->
 
-    @if($UserRegistered)
+    @if($show_modal)
         <!-- Modal -->
-        <div class="modal fade" id="UserRegisteredModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="AlertModal" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ $UserRegistered_message->title }}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ $modal_message->title }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        {!! $UserRegistered_message->text !!}
+                        {!! $modal_message->text !!}
                     </div>
                 </div>
             </div>

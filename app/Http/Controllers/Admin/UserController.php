@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\AdminChangeStatusUserJob;
+use App\Models\Commodity;
+use App\Models\CompanyFunction;
+use App\Models\Country;
 use App\Models\MailMessages;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Salutation;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\UserStatus;
@@ -46,7 +50,26 @@ class UserController extends Controller
         $userTypes = Type::all();
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('admin.users.edit', compact('user', 'type', 'userStatus', 'messages', 'user_status', 'userTypes', 'permissions', 'roles'));
+        $types = Type::where('id', '!=', 1)->get();
+        $commodities = Commodity::all();
+        $countries = Country::all();
+        $companyFunction = CompanyFunction::all();
+        $salutation= Salutation::all();
+        return view('admin.users.edit', compact(
+            'user',
+            'type',
+            'userStatus',
+            'messages',
+            'user_status',
+            'userTypes',
+            'permissions',
+            'roles',
+            'types',
+            'commodities',
+            'countries',
+            'companyFunction',
+            'salutation'
+        ));
     }
 
     public function update_role(User $user, Request $request)
