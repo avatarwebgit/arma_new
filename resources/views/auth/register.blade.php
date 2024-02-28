@@ -17,6 +17,11 @@
                         <label for="commodity" class="mb-1">Commodities *</label>
                         <select name="commodity" id="commodity" class="form-control">
                             <option value="">Select Commodity</option>
+                            @foreach($commodities as $commodity)
+                                <option {{ old('commodity')==$commodity->id ? 'selected' : ''  }} value="{{ $commodity->id }}">
+                                    {{ $commodity->title }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('commodity')
                         <span class="invalid-feedback" role="alert">
@@ -31,7 +36,7 @@
                             type="text"
                             class="form-control @error('company_name') is-invalid @enderror"
                             name="company_name"
-                            value="{{ old('company_name') }}" required autofocus>
+                            value="{{ old('company_name') }}" required>
                         @error('company_name')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,7 +46,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <h5 class="mt-3">
+                        <h5 class="mt-3  text-center">
                             Company Address
                             <hr>
                         </h5>
@@ -83,7 +88,7 @@
                             type="text"
                             class="form-control @error('company_city') is-invalid @enderror"
                             name="company_city"
-                            value="{{ old('company_city') }}" required>
+                            value="{{ old('company_city') }}">
 
                         @error('company_city')
                         <span class="invalid-feedback" role="alert">
@@ -98,7 +103,7 @@
                             type="text"
                             class="form-control @error('company_state') is-invalid @enderror"
                             name="company_state"
-                            value="{{ old('company_state') }}" required>
+                            value="{{ old('company_state') }}">
                         @error('company_state')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -109,6 +114,9 @@
                         <label for="company_country" class="mb-1">Select Country</label>
                         <select name="company_country" id="company_country" class="form-control">
                             <option value="">Select Country</option>
+                            @foreach($countries as $country)
+                                <option {{ old('company_country')==$country->id ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->title }}</option>
+                            @endforeach
                         </select>
                         @error('company_country')
                         <span class="invalid-feedback" role="alert">
@@ -119,13 +127,13 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <h5 class="mt-3">
+                        <h5 class="mt-3 text-center">
                             Company Contact
                             <hr>
                         </h5>
                     </div>
                     <div class="form-group col-12 col-md-6">
-                        <label for="company_phone" class="mb-1">Main Telephone Number</label>
+                        <label for="company_phone" class="mb-1">Main Telephone Number *</label>
                         <input
                             id="company_phone"
                             type="text"
@@ -158,7 +166,7 @@
                         <label for="company_email" class="mb-1">Email</label>
                         <input
                             id="company_email"
-                            type="text"
+                            type="email"
                             class="form-control @error('company_email') is-invalid @enderror"
                             name="company_email"
                             value="{{ old('company_email') }}" required>
@@ -173,13 +181,13 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <h5>
+                        <h5 class="text-center">
                             Master User Details
                             <hr>
                         </h5>
                     </div>
                     <div class="form-group col-12 col-md-6">
-                        <label for="user_type" class="mb-1">User Type</label>
+                        <label for="user_type" class="mb-1">User Type *</label>
                         <select
                             id="user_type"
                             type="text"
@@ -187,8 +195,7 @@
                             name="user_type">
                             <option value="">Select User Type</option>
                             @foreach($types as $type)
-                                <option
-                                    {{ old('type')==$type->id ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->name }}</option>
+                                <option {{ old('type')==$type->id ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->name }}</option>
                             @endforeach
                         </select>
 
@@ -199,15 +206,16 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-md-6">
-                        <label for="salutation" class="mb-1">Salutation</label>
-                        <select
-                            id="salutation"
+                        <label for="salutation" class="mb-1">Salutation *</label>
+                        <select id="salutation"
                             type="text"
                             class="form-control @error('salutation') is-invalid @enderror"
-                            name="salutation">
+                                name="salutation">
                             <option value="">Select</option>
+                            @foreach($salutation as $item)
+                                <option {{ old('salutation')==$item->id  ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->title }}</option>
+                            @endforeach
                         </select>
-
                         @error('salutation')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -215,12 +223,15 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-md-6">
-                        <label for="full_name" class="mb-1">Full Name</label>
+                        <label for="full_name" class="mb-1">Full Name *</label>
                         <input
                             id="full_name"
                             type="text"
                             class="form-control @error('full_name') is-invalid @enderror"
-                            name="full_name">
+                            name="full_name"
+                        value="{{ old('full_name') }}"
+                            required
+                        >
                         @error('full_name')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -228,12 +239,15 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-md-6">
-                        <label for="company_title" class="mb-1">Company Title</label>
+                        <label for="company_title" class="mb-1">Company Title *</label>
                         <input
                             id="company_title"
                             type="text"
                             class="form-control @error('company_title') is-invalid @enderror"
-                            name="company_title">
+                            name="company_title"
+                            value="{{ old('company_title') }}"
+                            required
+                        >
                         @error('company_title')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -248,6 +262,9 @@
                             class="form-control @error('function_in_company') is-invalid @enderror"
                             name="function_in_company">
                             <option value="">Select</option>
+                            @foreach($companyFunction as $item)
+                                <option {{ old('function_in_company')==$item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->title }}</option>
+                            @endforeach
                         </select>
 
                         @error('function_in_company')
@@ -260,9 +277,11 @@
                         <label for="email" class="mb-1">Email *</label>
                         <input
                             id="email"
-                            type="text"
+                            type="email"
                             class="form-control @error('email') is-invalid @enderror"
-                            name="email">
+                            name="email"
+                            value="{{ old('email') }}"
+                            required>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -271,11 +290,10 @@
                     </div>
                     <div class="form-group col-12 col-md-6">
                         <label for="skype" class="mb-1">Skype</label>
-                        <input
-                            id="skype"
+                        <input id="skype"
                             type="text"
                             class="form-control @error('skype') is-invalid @enderror"
-                            name="skype">
+                            name="skype" value="{{ old('skype') }}">
                         @error('skype')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -288,7 +306,7 @@
                             id="whatsapp"
                             type="text"
                             class="form-control @error('whatsapp') is-invalid @enderror"
-                            name="whatsapp">
+                            name="whatsapp" value="{{ old('whatsapp') }}">
                         @error('whatsapp')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -302,6 +320,11 @@
                             <label class="custom-control-label" for="accept_term">
                                 I accept the Term and Conditions
                             </label>
+                            @error('accept_term')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                         </div>
                     </div>
                 </div>

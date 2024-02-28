@@ -23,10 +23,27 @@ class User extends Authenticatable
     use HasRoles;
     use HasFactory;
 
-    protected $fillable = [
-        'name', 'email', 'password', 'type','field', 'profile', 'active_status', 'email_verified_at', 'lang', 'created_by', 'country',
-        'country_code', 'phone', 'isVerified', 'phone_verified_at', 'role_request_id', 'company_name', 'mobile_number'
-    ];
+    protected $fillable = ['commodity',
+        'company_name',
+        'company_address',
+        'company_post_zip_code',
+        'company_city',
+        'company_state',
+        'company_country',
+        'company_phone',
+        'company_website',
+        'company_email',
+        'user_type',
+        'salutation',
+        'full_name',
+        'company_title',
+        'function_in_company',
+        'email',
+        'skype',
+        'whatsapp',
+        'note',
+        'active_status'
+        ];
 
     protected $hidden = [
         'password', 'remember_token',

@@ -24,9 +24,25 @@ class IndexController extends Controller
                 'value' => '12:00:00',
             ]);
         }
+        $modal_message=[];
+        $show_modal=0;
+        //message for Registered
         $UserRegistered = session()->exists('UserRegistered');
-        session()->forget('UserRegistered');
-        $UserRegistered_message = Message::where('type', 'UserRegistered')->first();
+        if ($UserRegistered){
+            $show_modal=1;
+            session()->forget('UserRegistered');
+            $modal_message = Message::where('type', 'UserRegistered')->first();
+        }
+
+        //message for User Is Deactivate
+        $user_inactive = session()->exists('user_inactive');
+        if ($user_inactive){
+            $show_modal=1;
+            session()->forget('user_inactive');
+            $modal_message = Message::where('type', 'user_inactive')->first();
+        }
+
+
 
         $market_open_finished_modal_exists = session()->exists('market_open_finished');
         if ($market_open_finished_modal_exists) {
@@ -41,10 +57,11 @@ class IndexController extends Controller
         session()->forget('market_open_finished');
 
         return view('home.index.index',
-            compact('UserRegistered',
-                'UserRegistered_message',
-                'market_open_finished_modal_exists',
-                'market_open_finished_modal'));
+            compact('market_open_finished_modal_exists',
+                'market_open_finished_modal',
+            'show_modal',
+            'modal_message'
+            ));
     }
 
     public function home()
@@ -129,6 +146,11 @@ class IndexController extends Controller
         $user_check = auth()->check();
         if ($user_check) {
             $user = auth()->user();
+            if ($user->active_status==0){
+                auth()->logout();
+                session()->put('user_inactive',1);
+                return redirect()->route('home.index');
+            }
             if ($user->hasRole(['admin'])) {
                 return redirect()->route('admin.dashboard');
             }
@@ -153,6 +175,6 @@ class IndexController extends Controller
     public function menus(Menus $menus)
     {
         $page = $menus->Pages()->first();
-        return view('home.page', compact('page'));
+        return view('home.page', compact('page','menus'));
     }
 }
