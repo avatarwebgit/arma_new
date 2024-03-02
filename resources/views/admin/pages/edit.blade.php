@@ -83,13 +83,13 @@
 @push('style')
 
 @endpush
-@push('script')
-    <script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
+@section('script')
     <script>
         CKEDITOR.replace( 'description' ,{
+            language: 'en',
             filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
         });
     </script>
-@endpush
+@endsection
 

@@ -215,12 +215,12 @@
 <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
 <script src="{{ asset('assets/js/dash.js') }}"></script>
 <script src="{{ asset('vendor/modules/tooltip.js') }}"></script>
-<script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/notifier.js') }}"></script>
 <script src="{{ asset('vendor/js/custom.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bouncer.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/form-validation.js') }}"></script>
+<script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
 
 @if (!empty(setting('gtag')))
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('gtag') }}"></script>
@@ -265,7 +265,7 @@
     })
 
 </script>
-
+@yield('script')
 @include('admin.layouts.includes.alerts')
 @stack('script')
 </body>
