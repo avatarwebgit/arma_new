@@ -1,7 +1,6 @@
 @extends('home.homelayout.app')
 
 @section('script')
-
     <script>
         @if($show_modal==true)
         $(document).ready(function () {
@@ -38,7 +37,6 @@
             }
         }
     </script>
-
     <script type="module">
 
         $(document).ready(function () {
@@ -183,7 +181,6 @@
             <div class="col-12 col-md-4 mb-3">
                 <h3 id="Market_Status_Text">
                     <span>Market: </span>
-
                     <span class="text-success">Open</span>
                 </h3>
 

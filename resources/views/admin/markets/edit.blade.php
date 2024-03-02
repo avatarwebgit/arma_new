@@ -77,10 +77,20 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-12 col-md-3 mb-3">
-                                                    <label for="offer_price">Offer Price - Market Value (S)</label>
+                                                    <label for="offer_price">Offer Price</label>
                                                     <input id="offer_price"  name="offer_price" class="form-control"
                                                            value="{{ $market->offer_price }}" type="number">
                                                     @error('offer_price')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 col-md-3 mb-3">
+                                                    <label for="market_value">Market Value (S)</label>
+                                                    <input id="market_value"  name="market_value" class="form-control"
+                                                           value="{{ $market->market_value }}" type="number">
+                                                    @error('market_value')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
                                                     </p>
