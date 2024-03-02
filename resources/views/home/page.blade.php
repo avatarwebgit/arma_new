@@ -29,7 +29,7 @@
 
 @section('content')
 
-    <div class="landing-feature">
+    <div>
         <div class="container">
             @if($page!=null)
                 <div class="row">
