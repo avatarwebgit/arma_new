@@ -36,6 +36,7 @@
                                                     <th>date</th>
                                                     <th>Time</th>
                                                     <th>status</th>
+                                                    <th>Market Value</th>
                                                     <th>action</th>
                                                 </tr>
                                                 </thead>
@@ -60,6 +61,9 @@
                                                         </td>
                                                         <td id="market_status_{{ $item->id }}" style="color: {{ $item->Status->color }}">
                                                             {{ $item->Status->title }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $item->market_value }}
                                                         </td>
                                                         <td>
                                                             <a title="Edit Market" href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"

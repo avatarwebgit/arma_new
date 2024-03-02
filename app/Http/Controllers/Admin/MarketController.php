@@ -64,6 +64,7 @@ class MarketController extends Controller
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
             'offer_price' => 'required',
+            'market_value' => 'required',
             'description' => 'nullable',
         ]);
         $market=Market::create($request->all());
@@ -88,6 +89,7 @@ class MarketController extends Controller
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
             'offer_price' => 'required',
+            'market_value' => 'required',
             'description' => 'nullable',
         ]);
         $market->update($request->all());

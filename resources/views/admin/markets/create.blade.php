@@ -91,6 +91,16 @@
                                                     </p>
                                                     @enderror
                                                 </div>
+                                                <div class="col-12 col-md-3 mb-3">
+                                                    <label for="market_value">Market Value (S)</label>
+                                                    <input id="market_value"  name="market_value" class="form-control"
+                                                           value="{{ old('market_value') }}" type="number">
+                                                    @error('market_value')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
                                                 <div class="col-12 mb-3">
                                                     <label for="description">Description</label>
                                                     <textarea id="description"  name="description" class="form-control"></textarea>
