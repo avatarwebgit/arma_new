@@ -92,7 +92,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-12 col-md-3 mb-3">
-                                                    <label for="market_value">Market Value (S)</label>
+                                                    <label for="market_value">Market Value ($)</label>
                                                     <input id="market_value"  name="market_value" class="form-control"
                                                            value="{{ old('market_value') }}" type="number">
                                                     @error('market_value')

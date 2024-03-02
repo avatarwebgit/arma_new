@@ -16,77 +16,28 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                        <div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-md-12 mb-3">
-                                        <a href="{{ route('admin.market.create') }}" class="btn btn-primary btn-sm">
-                                            Create
-                                        </a>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="markets-pair-list">
-                                            <div id="alert"></div>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>commodity</th>
-                                                    <th>User</th>
-                                                    <th>date</th>
-                                                    <th>Time</th>
-                                                    <th>status</th>
-                                                    <th>Market Value</th>
-                                                    <th>action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($group_markets as $markets)
-                                                @foreach($markets->sortBy('time') as $key=>$item)
-                                                    <tr>
-                                                        <td>
-                                                            {{ $key }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->SalesForm->commodity }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->SalesForm->User->name }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->date }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->time }}
-                                                        </td>
-                                                        <td id="market_status_{{ $item->id }}" style="color: {{ $item->Status->color }}">
-                                                            {{ $item->Status->title }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->market_value }}
-                                                        </td>
-                                                        <td>
-                                                            <a title="Edit Market" href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
-                                                               class="btn btn-sm btn-info">
-                                                                <i class="fa fa-pen"></i>
-                                                                 Market
-                                                            </a>
-                                                            <a title="Edit Commodity" href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
-                                                               class="btn btn-sm btn-primary">
-                                                                <i class="fa fa-list"></i>
-                                                                 Commodity
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                @endforeach
-                                                </tbody>
-                                            </table>
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-md-12 mb-3">
+                                    <a href="{{ route('admin.market.create') }}" class="btn btn-primary btn-sm">
+                                        Create
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    @foreach($group_markets as $key=>$m)
+                                        <div class="col-12 col-md-3 text-center">
+                                            <a href="{{ route('admin.markets.folder',['date'=>$key]) }}">
+                                                <img width="200" style="margin: auto"
+                                                     src="{{ asset('home/img/folder.jpg') }}">
+                                                <h5>{{ $key }}</h5>
+                                            </a>
                                         </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,8 +71,8 @@
                         console.log(msg);
                         let status_text = msg[1];
                         let status_color = msg[2];
-                        $('#market_status_'+market_id).text(status_text);
-                        $('#market_status_'+market_id).css('color',status_color);
+                        $('#market_status_' + market_id).text(status_text);
+                        $('#market_status_' + market_id).css('color', status_color);
                     }
                 }
             })

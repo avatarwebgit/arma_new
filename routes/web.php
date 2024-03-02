@@ -155,6 +155,7 @@ Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
     });
     //Markets
         Route::get('markets', [MarketController::class, 'index'])->name('markets.index');
+        Route::get('markets/folder/{date}', [MarketController::class, 'folder'])->name('markets.folder');
         Route::get('market/create', [MarketController::class, 'create'])->name('market.create');
         Route::post('market/store', [MarketController::class, 'store'])->name('market.store');
         Route::get('market/{market}/edit', [MarketController::class, 'edit'])->name('market.edit');
