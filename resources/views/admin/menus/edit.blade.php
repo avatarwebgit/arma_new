@@ -40,7 +40,7 @@
                                                     <select id="parent"  name="parent" class="form-control">
                                                         <option value="0" >Without Parent</option>
                                                         @foreach($parent_menus as $parent_menu)
-                                                            <option {{ $menu->id==$parent_menu->id ? 'selected' : '' }} value="{{ $parent_menu->id }}" >{{ $parent_menu->title }}</option>
+                                                            <option {{ $menu->parent==$parent_menu->id ? 'selected' : '' }} value="{{ $parent_menu->id }}" >{{ $parent_menu->title }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('parent')
