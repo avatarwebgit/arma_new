@@ -48,6 +48,11 @@ class MarketController extends Controller
         $group_markets = Market::orderby('date')->get()->groupby('date');
         return view('admin.markets.index', compact('group_markets'));
     }
+    public function folder($date)
+    {
+        $markets = Market::where('date', $date)->get();
+        return view('admin.markets.folder', compact('markets','date'));
+    }
 
     public function create()
     {
@@ -70,7 +75,7 @@ class MarketController extends Controller
         $market=Market::create($request->all());
         $this->statusTimeMarket($market);
         session()->flash('success', 'New Market Created Successfully');
-        return redirect()->route('admin.markets.index');
+        return redirect()->route('admin.markets.folder',['date'=>$market->date]);
     }
 
     public function edit(Market $market)
@@ -95,7 +100,7 @@ class MarketController extends Controller
         $market->update($request->all());
         $this->statusTimeMarket($market,1);
         broadcast(new MarketTimeUpdated());
-        return redirect()->route('admin.markets.index')->with('success', 'Market updated successfully');
+        return redirect()->route('admin.markets.folder',['date'=>$market->date])->with('success', 'Market updated successfully');
     }
 
     public function sales_form($page_type = 'Create', $item = 'null')
