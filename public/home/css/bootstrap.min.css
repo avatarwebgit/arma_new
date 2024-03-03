@@ -563,9 +563,14 @@ pre code {
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
         max-width: 1400px
+    }
+}
+@media (max-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1000px
     }
 }
 
