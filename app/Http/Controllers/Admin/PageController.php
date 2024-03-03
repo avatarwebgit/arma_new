@@ -24,8 +24,8 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:pages,title',
-            'description' => 'required',
+            'title' => 'nullable|unique:pages,title',
+            'description' => 'nullable',
             'menu' => 'required',
         ]);
         $page=Page::create($request->all());
@@ -43,8 +43,8 @@ class PageController extends Controller
     public function update(Request $request, Page $page)
     {
         $request->validate([
-            'title' => 'required|unique:pages,title,'.$page->id,
-            'description' => 'required',
+            'title' => 'nullable|unique:pages,title,'.$page->id,
+            'description' => 'nullable',
             'menu' => 'required',
         ]);
         $page->update($request->all());

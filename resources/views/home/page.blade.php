@@ -18,6 +18,9 @@
         height: 20px !important;
         background-color: #ffa700;
     }
+    .landing-feature{
+        text-align: justify !important;
+    }
 </style>
 @endsection
 
@@ -30,12 +33,14 @@
 @section('content')
 
     <div>
-        <div class="container">
+        <div class="landing-feature container">
             @if($page!=null)
                 <div class="row">
+                    @if($menus->id!=2)
                     <div class="col-md-12">
                         <h2>{{ $page->title }}</h2>
                     </div>
+                    @endif
                     <div class="col-md-12">
                         {!! $page->description !!}
                     </div>
@@ -47,7 +52,7 @@
                             <table class="table table-responsive-sm text-left">
                                 <thead class="p-5 text-white" style="background-color: #006">
                                 <tr>
-                                    <td style="font-size: 17pt">Market</td>
+                                    <td style="font-size: 17pt">Commodities</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
