@@ -2,6 +2,10 @@
 @import url("bootstrap.min.css");
 @import url("ionicons.min.css");
 @import url("jquery.mCustomScrollbar.min.css");
+@font-face {
+    font-family: "Digital";
+    src: url("../fonts/Tarhato/digital-7.ttf");
+}
 
 body {
     font-family: 'Overpass', sans-serif;
@@ -592,7 +596,7 @@ header .nav-link.btn {
 .landing-feature {
     text-align: center;
     /*border-top: 1px solid #e0e3eb;*/
-    padding: 60px 0;
+    padding-top: 60px;
 }
 
 .landing-feature h2 {

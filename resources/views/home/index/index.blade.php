@@ -167,6 +167,23 @@
     </script>
 @endsection
 
+@section('style')
+    <style>
+        #market_table{
+            padding: 0 !important;
+        }
+        .p-0{
+            padding: 0 !important;
+        }
+        #time_now > h3{
+            font-size: 30px;
+        }
+        #time_now > span{
+            font-size: 13px !important;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     <div id="time"></div>
@@ -178,17 +195,19 @@
     @endif
     <div class="landing-feature container">
         <div class="row justify-content-between">
-            <div class="col-12 col-md-4 mb-3">
+            <div class="col-12 col-xl-4 p-0 text-left" style="font-size: 13px;font-weight: bold">
                 <h3 id="Market_Status_Text">
                     <span>Market: </span>
                     <span class="text-success">Open</span>
                 </h3>
+                <div class="text-left">
+                    <span >Today Trade Value:</span>
+                    <span id="market_value">0</span>
+                    <span>$</span>
+                </div>
 
-                <span style="font-weight: bolder">Today Trade Value:</span>
-                <span id="market_value" style="font-weight: bolder">0</span>
-                <span style="font-weight: bolder">$</span>
             </div>
-            <div id="timer_section" class="col-12 col-md-4 d-flex justify-content-center mb-3">
+            <div id="timer_section" class="col-12 col-xl-4 d-flex justify-content-center mb-3 p-0 ">
                 <div class="clock">
                     <div class="column">
                         <div class="timer" id="hours"></div>
@@ -206,8 +225,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4 mb-3" id="time_now">
-                <h3>{{ Carbon\Carbon::now()->format('l') }}</h3>
+            <div class="col-12 col-xl-4 p-0 text-right" id="time_now">
+                <h3 >{{ Carbon\Carbon::now()->format('l') }}</h3>
                 <span>{{ Carbon\Carbon::now()->format('d M Y g:i A') }}</span>
             </div>
         </div>
