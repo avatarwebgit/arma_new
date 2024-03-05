@@ -33,6 +33,15 @@
 @section('content')
 
     <div>
+        @if($page->active_banner ==1)
+            <div class="position-relative">
+                <img  style="width: 100%;height: auto" alt="banner"
+                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->banner) }}">
+                <div style="position: absolute;top: 0;padding: 40px">
+                    {!! $page->banner_description !!}
+                </div>
+            </div>
+        @endif
         <div class="landing-feature container">
             @if($page!=null)
                 <div class="row">

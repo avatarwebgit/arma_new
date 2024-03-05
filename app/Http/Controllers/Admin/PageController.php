@@ -27,8 +27,23 @@ class PageController extends Controller
             'title' => 'nullable|unique:pages,title',
             'description' => 'nullable',
             'menu' => 'required',
+            'active_banner' => 'required',
+            'banner' => 'nullable|image',
         ]);
-        $page=Page::create($request->all());
+        if ($request->has('banner')) {
+            $env = env('UPLOAD_BANNER_PAGE');
+            $banner= generateFileName($request->banner->getClientOriginalName());
+            $request->banner->move(public_path($env), $banner);
+        } else {
+            $banner = null;
+        }
+        $page=Page::create([
+            'title'=>$request->title,
+            'active_banner'=>$request->active_banner,
+            'description'=>$request->description,
+            'banner_description'=>$request->banner_description,
+            'banner'=>$banner,
+        ]);
         $page->Menus()->attach($request->menu);
         session()->flash('success', 'New Page Created Successfully');
         return redirect()->route('admin.pages.index');
@@ -46,8 +61,24 @@ class PageController extends Controller
             'title' => 'nullable|unique:pages,title,'.$page->id,
             'description' => 'nullable',
             'menu' => 'required',
+            'active_banner' => 'required',
+            'banner' => 'nullable|image',
         ]);
-        $page->update($request->all());
+        if ($request->has('banner')) {
+            $env = env('UPLOAD_BANNER_PAGE');
+            $banner= generateFileName($request->banner->getClientOriginalName());
+            $request->banner->move(public_path($env), $banner);
+        } else {
+            $banner = $page->banner;
+        }
+
+        $page->update([
+            'title'=>$request->title,
+            'active_banner'=>$request->active_banner,
+            'description'=>$request->description,
+            'banner_description'=>$request->banner_description,
+            'banner'=>$banner,
+        ]);
         $page->Menus()->detach();
         $page->Menus()->attach($request->menu);
         session()->flash('success', 'Page Updated Successfully');

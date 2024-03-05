@@ -33,6 +33,7 @@
                                                     <th>#</th>
                                                     <th>Title</th>
                                                     <th>Related Menu</th>
+                                                    <th>banner</th>
                                                     <th>date</th>
                                                     <th>action</th>
                                                 </tr>
@@ -50,6 +51,12 @@
                                                             @foreach($item->menus as $menu)
                                                                 {{ $menu->title }}
                                                             @endforeach
+                                                        </td>
+                                                        <td>
+                                                            <div class="text-left position-relative">
+                                                                <img width="100" alt="banner"
+                                                                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$item->banner) }}">
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             {{ $item->created_at }}
