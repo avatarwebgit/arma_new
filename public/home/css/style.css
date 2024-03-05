@@ -2,6 +2,7 @@
 @import url("bootstrap.min.css");
 @import url("ionicons.min.css");
 @import url("jquery.mCustomScrollbar.min.css");
+
 @font-face {
     font-family: "Digital";
     src: url("../fonts/Tarhato/digital-7.ttf");
@@ -318,7 +319,8 @@ header .nav-link.btn {
     border-bottom: 1px solid #ededed;
     padding: 10px;
 }
-.dropdown-menu>a:last-child{
+
+.dropdown-menu > a:last-child {
     border-bottom: none !important;
 }
 
@@ -371,6 +373,7 @@ header .nav-link.btn {
     border-left: 1px solid #f2f4f9;
     z-index: -1;
 }
+
 .profile::before {
     content: '';
     width: 13px;
@@ -2360,7 +2363,7 @@ tbody.ob-heading {
     }
 
     .landing-feature {
-        padding:30px;
+        padding: 30px;
     }
 
     .landing-sub {
@@ -2495,7 +2498,6 @@ tbody.ob-heading {
 }
 
 
-
 @keyframes my-animation {
     from {
         -moz-transform: translateX(20%);
@@ -2514,22 +2516,23 @@ tbody.ob-heading {
     -moz-transform: translateX(100%);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
-    -moz-animation: my-animation 100s linear 1s infinite ;
-    -webkit-animation: my-animation 100s linear 1s infinite ;
+    -moz-animation: my-animation 100s linear 1s infinite;
+    -webkit-animation: my-animation 100s linear 1s infinite;
     animation: my-animation 100s linear 1s infinite;
 }
 
-#scroll-container2{
+#scroll-container2 {
     background-color: #006;
 }
+
 #scroll-container2 > div {
     background-color: #006;
     color: white;
     -moz-transform: translateX(100%);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
-    -moz-animation: my-animation 100s linear 1s infinite ;
-    -webkit-animation: my-animation 100s linear 1s infinite ;
+    -moz-animation: my-animation 100s linear 1s infinite;
+    -webkit-animation: my-animation 100s linear 1s infinite;
     animation: my-animation 100s linear 1s infinite;
 }
 
@@ -2538,18 +2541,18 @@ tbody.ob-heading {
     cursor: grab;
 }
 
-.font13{
-    font-size:13px;
+.font13 {
+    font-size: 13px;
 }
 
-.header_title{
+.header_title {
     position: relative;
     margin-right: 10px;
     display: flex;
     align-items: center;
 }
 
-.header_title:after{
+.header_title:after {
     margin-left: 10px;
     position: absolute;
     content: "";
@@ -2558,14 +2561,15 @@ tbody.ob-heading {
     background-color: black;
     right: -10px;
 }
-.header_title2{
+
+.header_title2 {
     position: relative;
     margin-right: 10px;
     display: flex;
     align-items: center;
 }
 
-.header_title2:after{
+.header_title2:after {
     margin-left: 10px;
     position: absolute;
     content: "";
@@ -2846,15 +2850,16 @@ body {
 #commodity_information > div:nth-child(2n) {
     background-color: #efefef;
 }
+
 #commodity_information > div:nth-child(2n+1) {
     background-color: #dcdcdc;
 }
 
-#commodity_information span{
+#commodity_information span {
     padding: 5px 10px;
 }
 
-.border-danger{
+.border-danger {
     border: 1px solid red;
     padding: 2px 30px;
 }
@@ -2866,12 +2871,12 @@ body {
     aspect-ratio: 1;
     display: grid;
     border-radius: 50%;
-    background:
-        linear-gradient(0deg ,rgb(0 0 0/50%) 30%,#0000 0 70%,rgb(0 0 0/100%) 0) 50%/8% 100%,
-        linear-gradient(90deg,rgb(0 0 0/25%) 30%,#0000 0 70%,rgb(0 0 0/75% ) 0) 50%/100% 8%;
+    background: linear-gradient(0deg, rgb(0 0 0/50%) 30%, #0000 0 70%, rgb(0 0 0/100%) 0) 50%/8% 100%,
+    linear-gradient(90deg, rgb(0 0 0/25%) 30%, #0000 0 70%, rgb(0 0 0/75%) 0) 50%/100% 8%;
     background-repeat: no-repeat;
     animation: l23 1s infinite steps(12);
 }
+
 .loader::before,
 .loader::after {
     content: "";
@@ -2881,12 +2886,16 @@ body {
     opacity: 0.915;
     transform: rotate(30deg);
 }
+
 .loader::after {
     opacity: 0.83;
     transform: rotate(60deg);
 }
+
 @keyframes l23 {
-    100% {transform: rotate(1turn)}
+    100% {
+        transform: rotate(1turn)
+    }
 }
 
 .table_in_table span {
@@ -2894,34 +2903,39 @@ body {
     width: 145px;
 }
 
-.input-error-validate{
+.input-error-validate {
     font-size: 9pt;
     color: red;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
-.align-items-center{
+.align-items-center {
     align-items: center !important;
 }
-img.logo{
-    width: 90px  !important;
+
+img.logo {
+    width: 90px !important;
     height: auto;
 }
-@media (min-width: 1200px){
-    .logo{
+
+@media (min-width: 1200px) {
+    .logo {
         margin-right: 100px;
         margin-left: 40px;
     }
-    .navbar-nav > .header-custom-icon{
+
+    .navbar-nav > .header-custom-icon {
         width: 200px;
     }
-    .search_and_btns{
+
+    .search_and_btns {
         margin-right: 80px;
     }
 }
+
 .login_btn {
     font-size: 13px;
     background-color: #bed2f2;
@@ -2930,6 +2944,19 @@ img.logo{
     color: white;
     border-radius: 5px;
 }
+
 .login_btn > a {
     padding: 5px;
+}
+
+.auth-form {
+    padding: 20px;
+    border: 1px solid #006;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 102, 0.8);
+    color: white;
+    box-shadow: 0 0 16px black;
+}
+.auth-form hr{
+    border-top: 1px solid #ffffff;
 }
