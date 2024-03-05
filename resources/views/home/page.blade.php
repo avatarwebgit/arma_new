@@ -152,7 +152,4 @@
 
         </div>
     </div>
-
-    @include('home.partials.footer')
-
 @endsection
