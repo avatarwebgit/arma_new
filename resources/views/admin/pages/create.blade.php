@@ -24,7 +24,7 @@
                                               action="{{ route('admin.page.store') }}">
                                             @csrf
                                             <div class="row mt-4">
-                                                <div class="col-12 col-md-4 mb-3">
+                                                <div class="col-12 col-md-6 mb-3">
                                                     <label for="title">Title</label>
                                                     <input id="title" name="title" class="form-control"
                                                            value="{{ old('title') }}">
@@ -34,7 +34,7 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-4 mb-3">
+                                                <div class="col-12 col-md-6 mb-3">
                                                     <label for="menu">Menu</label>
                                                     <select id="menu" name="menu" class="form-control">
                                                         <option value="">Select Menu</option>
@@ -47,6 +47,37 @@
                                                         @endforeach
                                                     </select>
                                                     @error('menu')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 col-md-6 mb20">
+                                                    <label for="active_banner">Active Banner</label>
+                                                    <select id="active_banner" name="active_banner" class="form-control">
+                                                        <option {{ old('active_banner')==1 ? 'selected' : '' }} value="1">Active</option>
+                                                        <option {{ old('active_banner')==0 ? 'selected' : '' }} value="0">Inactive</option>
+                                                    </select>
+                                                    @error('active_banner')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 col-md-6 mb20">
+                                                    <label for="title" class="mb20 text-left d-block">Banner</label>
+                                                    <input id="banner" type="file" name="banner"
+                                                           class="form-control">
+                                                    @error('banner')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 mb-3 mt-3">
+                                                    <label for="banner_description"ِ>Banner Description</label>
+                                                    <textarea class="form-control" id="banner_description" name="banner_description">{{ old('banner_description') }}</textarea>
+                                                    @error('banner_description')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
                                                     </p>
@@ -80,12 +111,21 @@
 @endsection
 
 @push('style')
-
+<style>
+    #cke_description .cke_contents{
+        height: 700px !important;
+    }
+</style>
 @endpush
 @push('script')
     <script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'description' ,{
+            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        });
+        CKEDITOR.replace( 'banner_description' ,{
+            language: 'en',
             filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
         });

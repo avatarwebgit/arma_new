@@ -20,12 +20,19 @@
                                         </a>
                                     </div>
                                     <div class="settings-profile">
-                                        <form method="POST"
+                                        <div class="col-12 mb20">
+                                            <div class="text-center position-relative">
+                                                <img class="small-image" alt="banner"
+                                                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->banner) }}">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <form method="POST" enctype="multipart/form-data"
                                               action="{{ route('admin.page.update',['page'=>$page->id]) }}">
                                             @method('put')
                                             @csrf
                                             <div class="row mt-4">
-                                                <div class="col-12 col-md-4 mb-3">
+                                                <div class="col-12 col-md-6 mb-3">
                                                     <label for="title">Title</label>
                                                     <input id="title" name="title" class="form-control"
                                                            value="{{ $page->title }}">
@@ -36,7 +43,7 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="col-12 col-md-4 mb-3">
+                                                <div class="col-12 col-md-6 mb-3">
                                                     <label for="menu">Menu</label>
                                                     <select id="menu" name="menu" class="form-control">
                                                         <option value="">Select Menu</option>
@@ -53,7 +60,33 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 mb-3">
+                                                <div class="col-12 col-md-6 mb20">
+                                                    <label for="active_banner">Active Banner</label>
+                                                    <select id="active_banner" name="active_banner" class="form-control">
+                                                        <option {{ $page->active_banner==1 ? 'selected' : '' }} value="1">Active</option>
+                                                        <option {{ $page->active_banner==0 ? 'selected' : '' }} value="0">Inactive</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb20">
+                                                    <label for="title" class="mb20 text-left d-block">Banner</label>
+                                                    <input id="banner" type="file" name="banner"
+                                                           class="form-control">
+                                                    @error('banner')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 mb-3 mt-3">
+                                                    <label for="banner_description"ِ>Banner Description</label>
+                                                    <textarea class="form-control" id="banner_description" name="banner_description">{{ $page->banner_description }}</textarea>
+                                                    @error('banner_description')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 mb-3 mt-3">
                                                     <label for="description"ِ>Description</label>
                                                     <textarea class="form-control" id="description" name="description">{{ $page->description }}</textarea>
                                                     @error('description')
@@ -81,11 +114,27 @@
 @endsection
 
 @push('style')
-
+<style>
+    .small-image {
+        width: 100px;
+        height: auto;
+        margin: 10px auto;
+    }
+    #cke_description .cke_contents{
+        height: 700px !important;
+    }
+</style>
 @endpush
 @section('script')
     <script>
         CKEDITOR.replace( 'description' ,{
+            language: 'en',
+            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        });
+    </script>
+    <script>
+        CKEDITOR.replace( 'banner_description' ,{
             language: 'en',
             filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
