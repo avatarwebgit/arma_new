@@ -388,6 +388,4 @@
             </div>
         </div>
     @endif
-    @include('home.partials.footer')
-
 @endsection

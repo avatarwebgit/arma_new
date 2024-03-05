@@ -294,8 +294,4 @@
     <div id="benchmark_info">
         @include('home.market.benchmark_info')
     </div>
-
-
-    @include('home.partials.footer')
-
 @endsection
