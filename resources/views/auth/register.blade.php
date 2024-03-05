@@ -318,7 +318,10 @@
                             <input {{ old('accept_term') ? 'checked' : '' }} type="checkbox" name="accept_term" id="accept_term"
                                    class="custom-control-input">
                             <label class="custom-control-label" for="accept_term">
-                                I accept the Term and Conditions
+                                I accept the
+                                <a href="{{ route('home.menus',['menus'=>16]) }}">
+                                    Term and Conditions
+                                </a>
                             </label>
                             @error('accept_term')
                             <span class="invalid-feedback" role="alert">
