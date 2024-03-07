@@ -2964,7 +2964,7 @@ img.logo {
 
 .more_btn {
     position: absolute;
-    left: 40px;
+    left: 0;
     bottom: 10px;
     background-color: #006;
     color: white;
