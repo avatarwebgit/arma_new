@@ -2957,6 +2957,19 @@ img.logo {
     color: white;
     box-shadow: 0 0 16px black;
 }
-.auth-form hr{
+
+.auth-form hr {
     border-top: 1px solid #ffffff;
+}
+
+.more_btn {
+    position: absolute;
+    left: 40px;
+    bottom: 10px;
+    background-color: #006;
+    color: white;
+}
+
+.more_btn:hover{
+    color: white;
 }

@@ -25,12 +25,36 @@
 @endsection
 
 @section('script')
-
+    <script>
+        $('.more_btn').click(function(){
+            let is_close = $(this).hasClass('is_close');
+            let button_html = '';
+            if (is_close) {
+                button_html = `show less
+                    <i class="fa fa-angle-up ml-3"></i>`;
+                $(this).parent().removeClass('page_description');
+                $(this).parent().addClass('page_description2');
+                $(this).removeClass('is_close');
+            } else {
+                button_html = `show more
+                    <i class="fa fa-angle-down ml-3"></i>`;
+                $(this).parent().removeClass('page_description2');
+                $(this).parent().addClass('page_description');
+                $(this).addClass('is_close');
+            }
+            $(this).html(button_html);
+        })
+    </script>
 @endsection
 
 
 
 @section('content')
+
+{{--    <div class="btn more_btn is_close">--}}
+{{--        show more--}}
+{{--        <i class="fa fa-angle-down ml-3"></i>--}}
+{{--     </div>--}}
 
     <div>
         @if($page->active_banner ==1)

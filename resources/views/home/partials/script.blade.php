@@ -11,6 +11,24 @@
 <script src="{{ asset('home/js/font-awsome.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+    $('.open_page_description').click(function () {
+        let is_open = $(this).attr('data-open');
+        let button_html = '';
+        if (is_open === 'no') {
+            button_html = `نمایش کمتر
+                    <i class="fa fa-angle-up ml-3"></i>`;
+            $(this).parent().removeClass('page_description');
+            $(this).parent().addClass('page_description2');
+            $(this).attr('data-open', 'yes');
+        } else {
+            button_html = `نمایش بیشتر
+                    <i class="fa fa-angle-down ml-3"></i>`;
+            $(this).parent().removeClass('page_description2');
+            $(this).parent().addClass('page_description');
+            $(this).attr('data-open', 'no');
+        }
+        $(this).html(button_html);
+    })
     let header1Width = $('#scroll-container').find('div')[0].clientWidth;
     let width = screen.width;
     if (header1Width > width) {
