@@ -20,24 +20,16 @@
             overflow-x: hidden !important;
         }
         .page_description {
-            height:300px;
             color:#000;
             overflow: hidden;
             position: relative;
             transition: all ease 3s;
             margin-bottom: 80px;
         }
-        .page_description:before {
-            content: '';
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: linear-gradient(transparent 150px, white);
+        .text_want_to_hide{
+            display: none;
         }
         .page_description2 {
-            height: auto;
             overflow: hidden;
             position: relative;
             transition: all ease 3s;
