@@ -21,7 +21,6 @@
         }
         .page_description {
             color:#000;
-            overflow: hidden;
             position: relative;
             transition: all ease 3s;
             margin-bottom: 80px;
