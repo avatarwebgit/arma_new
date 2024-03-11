@@ -131,16 +131,18 @@
                         </div>
                     </li>
                 @else
-                    <li title="login" class="login_btn">
-                        <a class="nav-link" href="{{ route('login') }}">
-                            login
-                        </a>
-                    </li>
-                    <li title="Register" class="login_btn ml-3">
-                        <a class="nav-link" href="{{ route('register') }}">
-                            Register
-                        </a>
-                    </li>
+                    <ul class="d-flex ">
+                        <li title="login" class="login_btn">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                login
+                            </a>
+                        </li>
+                        <li title="Register" class="login_btn ml-3">
+                            <a class="nav-link" href="{{ route('register') }}">
+                                Register
+                            </a>
+                        </li>
+                    </ul>
                 @endauth
             </ul>
         </div>
