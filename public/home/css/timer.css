@@ -29,7 +29,7 @@
     left: 0;
     height: 50%;
     width: 1px;
-    background-color:#006 !important;
+    background-color:#d5d5d5 !important;
 }
 
 #timer_section::after{
@@ -38,7 +38,7 @@
     right: 0;
     height: 50%;
     width: 1px;
-    background-color:#006 !important;
+    background-color:#d5d5d5 !important;
 }
 
 @media screen and (max-width: 867px) {
