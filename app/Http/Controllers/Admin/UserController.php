@@ -76,7 +76,7 @@ class UserController extends Controller
     {
         try {
             $user->syncRoles($request->role);
-            $permissions = $request->except(['_token', 'role']);
+            $permissions = $request->except(['_token', 'role','can_bid']);
             $user->syncPermissions($permissions);
             if ($request->has('can_bid')){
                 $can_bid=1;
@@ -95,6 +95,7 @@ class UserController extends Controller
 
     public function update(Request $request, $type, User $user)
     {
+
         $pre_active_status = $user->active_status;
         $active_status = $request->active_status;
         try {

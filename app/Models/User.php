@@ -42,7 +42,8 @@ class User extends Authenticatable
         'skype',
         'whatsapp',
         'note',
-        'active_status'
+        'active_status',
+        'can_bid'
         ];
 
     protected $hidden = [
