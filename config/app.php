@@ -193,9 +193,6 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-        Nwidart\Modules\LaravelModulesServiceProvider::class,
-
-
     ],
 
     /*
