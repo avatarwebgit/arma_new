@@ -5,9 +5,9 @@ namespace App\Providers;
 use App\Models\Header1;
 use App\Models\Header2;
 use App\Models\MarketSetting;
+use App\Models\Setting;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use Modules\Setting\app\Models\Setting;
 
 
 class AppServiceProvider extends ServiceProvider

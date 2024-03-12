@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BidderController;
 use App\Http\Controllers\Home\UserController as UserHomeController;
@@ -84,6 +85,11 @@ Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
         Route::put('setting/header2/update/{id}', [Header2Controller::class, 'update'])->name('header2.update');
         Route::post('setting/header2/remove/{id}', [Header2Controller::class, 'remove'])->name('header2.remove');
     });
+
+    //settings
+    Route::resource('setting', SettingController::class)->except('update','destroy')->names('settings');
+    Route::put('/admin/settings', [SettingController::class,'update'])->name('settings.update');
+    Route::post('/admin/settings/delete/{setting}', [SettingController::class,'destroy'])->name('settings.destroy');
 
     //menus
     Route::get('menus/index',[MenuController::class,'index'])->name('menus.index');
