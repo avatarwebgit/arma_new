@@ -243,33 +243,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Here are a few reasons why <br> you should choose Crypo</h2>
+                    <h2>Why Armaiti MEX?</h2>
                 </div>
                 <div class="col-md-4">
                     <div class="landing-feature-item">
                         <img src="{{ asset('home/img/landing/stroge.svg') }}" alt="">
-                        <h3>Secure storage</h3>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quaerat, quidem ut, fugiat
-                            blanditiis
-                            facere</p>
+                        <h3>Secure Transactions</h3>
+                        <p>
+                            With hard work and supervision, we present safe and secure transactions.
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="landing-feature-item">
                         <img src="{{ asset('home/img/landing/backup.svg') }}" alt="">
-                        <h3>Protected by insurance</h3>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quaerat, quidem ut, fugiat
-                            blanditiis
-                            facere</p>
+                        <h3>Verified Buyers and Sellers </h3>
+                        <p>verifying the identities of both buyers and sellers, ensuring that they are who they claim to be.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="landing-feature-item">
                         <img src="{{ asset('home/img/landing/managment.svg') }}" alt="">
-                        <h3>Industry best practices</h3>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quaerat, quidem ut, fugiat
-                            blanditiis
-                            facere</p>
+                        <h3>Competitive and Transparent Business</h3>
+                        <p>parties have access to details of transactions and they have competition to discover the best price.</p>
                     </div>
                 </div>
             </div>
