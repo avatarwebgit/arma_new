@@ -39,6 +39,10 @@ class AppServiceProvider extends ServiceProvider
         $alert_font_size =Setting::where('key', 'alert_font_size')->pluck('value')->first();
         $alert_height = Setting::where('key', 'alert_height')->pluck('value')->first();
         $alert_active=Setting::where('key', 'alert_active')->pluck('value')->first();
+        $about_arma=Setting::where('key', 'about_arma')->pluck('value')->first();
+        $facebook=Setting::where('key', 'facebook')->pluck('value')->first();
+        $twitter=Setting::where('key', 'twitter')->pluck('value')->first();
+        $linkedin=Setting::where('key', 'linkedin')->pluck('value')->first();
         $ready_to_duration=MarketSetting::where('key','ready_to_duration')->pluck('value')->first();
         $open_duration=MarketSetting::where('key','open_duration')->pluck('value')->first();
         $q_1=MarketSetting::where('key','q_1')->pluck('value')->first();
@@ -70,7 +74,11 @@ class AppServiceProvider extends ServiceProvider
                 'open_duration',
                 'q_1',
                 'q_2',
-                'q_3'
+                'q_3',
+                'about_arma',
+                'facebook',
+                'twitter',
+                'linkedin',
             ));
     }
 }

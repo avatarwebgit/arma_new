@@ -2,61 +2,39 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="">
-                <p>Crypo is the most advanced UI kit for making the Blockchain platform. This kit comes with 4 different
-                    exchange page, market, wallet and many more</p>
+                <a href="{{ route('home.index') }}">
+                    <img src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="">
+                </a>
+                <p>
+                    {{ $about_arma }}
+                </p>
                 <ul class="social-icon">
-                    <li><a href="#"><i class="icon ion-logo-facebook"></i></a></li>
-                    <li><a href="#"><i class="icon ion-logo-twitter"></i></a></li>
-                    <li><a href="#"><i class="icon ion-logo-linkedin"></i></a></li>
-                    <li><a href="#"><i class="icon ion-logo-pinterest"></i></a></li>
-                    <li><a href="#"><i class="icon ion-logo-github"></i></a></li>
+                    <li><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>
+                    <li><a href="/{{ $twitter }}"><i class="icon ion-logo-twitter"></i></a></li>
+                    <li><a href="/{{ $linkedin }}"><i class="icon ion-logo-linkedin"></i></a></li>
                 </ul>
             </div>
-            <div class="col-md-2">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Affiliates</a></li>
-                    <li><a href="#">Investors</a></li>
-                    <li><a href="#">Legal &amp; privacy</a></li>
-                    <li><a href="#">Cookie policy</a></li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <h3>Individuals</h3>
-                <ul>
-                    <li><a href="#">Buy &amp; sell</a></li>
-                    <li><a href="#">Earn free crypto</a></li>
-                    <li><a href="#">Wallet</a></li>
-                    <li><a href="#">Card</a></li>
-                    <li><a href="#">Payment methods</a></li>
-                    <li><a href="#">Account access</a></li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <h3>Support</h3>
-                <ul>
-                    <li><a href="#">Help center</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Create account</a></li>
-                    <li><a href="#">ID verification</a></li>
-                    <li><a href="#">Account information</a></li>
-                    <li><a href="#">Supported crypto</a></li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <h3>Learn</h3>
-                <ul>
-                    <li><a href="#">Browse crypto prices</a></li>
-                    <li><a href="#">Crypto basics</a></li>
-                    <li><a href="#">Tips &amp; tutorials</a></li>
-                    <li><a href="#">Market updates</a></li>
-                    <li><a href="#">How to send crypto</a></li>
-                    <li><a href="#">What is a blockchain?</a></li>
-                </ul>
-            </div>
+            @php
+                $menus=\App\Models\Menus::where('parent',0)->get();
+            @endphp
+            @foreach($menus as $menu)
+                @if($menu->id!=4)
+                    <div class="col-md-2">
+                        <h3>
+                            <a href="{{ route('home.menus',['menus'=>$menu->id]) }}">
+                            {{ $menu->title }}
+                            </a>
+                        </h3>
+                        <ul>
+                            @foreach($menu->children as $child)
+                                <li><a href="{{ route('home.menus',['menus'=>$child->id]) }}">
+                                        {{ $child->title }}
+                                    </a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
 </footer>

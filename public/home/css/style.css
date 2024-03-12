@@ -600,6 +600,7 @@ header .nav-link.btn {
     text-align: center;
     /*border-top: 1px solid #e0e3eb;*/
     padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 .landing-feature h2 {
