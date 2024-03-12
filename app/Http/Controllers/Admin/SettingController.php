@@ -7,17 +7,13 @@ use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Setting\Repositories\SettingRepo;
+
 
 class SettingController extends Controller
 {
 
-    private SettingRepo $settingRepos;
 
-    public function __construct(SettingRepo $settingRepos)
-    {
-        $this->settingRepos = $settingRepos;
-    }
+
 
     /**
      * Display a listing of the resource.
@@ -47,7 +43,7 @@ class SettingController extends Controller
         $facebook = Setting::where('key', 'facebook')->pluck('value')->first();
         $twitter = Setting::where('key', 'twitter')->pluck('value')->first();
         $linkedin = Setting::where('key', 'linkedin')->pluck('value')->first();
-        return view('setting::index', compact('logo',
+        return view('admin.setting.index', compact('logo',
             'fav_icon',
             'title',
             'meta_keywords',
