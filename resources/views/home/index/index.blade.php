@@ -276,21 +276,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <h2>$657B</h2>
+                    <h2>200</h2>
                     <p>Commodities </p>
                 </div>
                 <div class="col-md-3">
-                    <h2>100+</h2>
+                    <h2>$550M</h2>
                     <p>Quarterly volume traded
                     </p>
                 </div>
                 <div class="col-md-3">
-                    <h2>56+M</h2>
+                    <h2>275+</h2>
                     <p>Verified suppliers
                     </p>
                 </div>
                 <div class="col-md-3">
-                    <h2>56+M</h2>
+                    <h2>205+</h2>
                     <p>Verified buyers
                     </p>
                 </div>
