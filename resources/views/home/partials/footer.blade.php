@@ -6,7 +6,8 @@
                     <img src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="">
                 </a>
                 <p>
-                    {{ $about_arma }}
+                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos dolorem ea eos error est et eum
+                    fugiat ipsam laudantium magni nesciunt nostrum nulla
                 </p>
                 <ul class="social-icon">
                     <li><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>
