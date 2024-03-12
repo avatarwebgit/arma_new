@@ -1,4 +1,5 @@
-<script src="{{ asset('home/js/jquery-3.4.1.min.js') }}"></script>
+{{--<script src="{{ asset('home/js/jquery-3.4.1.min.js') }}"></script>--}}
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <script src="{{ asset('home/js/popper.min.js') }}"></script>
 <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('home/js/amcharts-core.min.js') }}"></script>
@@ -9,8 +10,16 @@
 <script src="{{ asset('home/js/timer.js') }}"></script>
 <script src="{{ asset('home/js/yscountdown.min.js') }}"></script>
 <script src="{{ asset('home/js/font-awsome.js') }}"></script>
+<script src="{{ asset('home/js/waypoints.js') }}"></script>
+<script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+    jQuery(document).ready(function($) {
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+    });
     $('.open_page_description').click(function () {
         let is_open = $(this).attr('data-open');
         let button_html = '';
@@ -562,30 +571,31 @@
             }
         })
     }
-    var screen_width=window.matchMedia("(max-width: 596px)").matches;
 
-    if (screen_width){
-        $('#scroll-container').on('touchstart',function(){
+    var screen_width = window.matchMedia("(max-width: 596px)").matches;
+
+    if (screen_width) {
+        $('#scroll-container').on('touchstart', function () {
             $('#scroll-container-first-div').addClass('animate_paused');
         })
-        $('#scroll-container').on('touchend',function(){
+        $('#scroll-container').on('touchend', function () {
             $('#scroll-container-first-div').removeClass('animate_paused');
         })
-        $('#scroll-container2').on('touchstart',function(){
+        $('#scroll-container2').on('touchstart', function () {
             $('#scroll-container-first-div2').addClass('animate_paused');
         })
-        $('#scroll-container2').on('touchend',function(){
+        $('#scroll-container2').on('touchend', function () {
             $('#scroll-container-first-div2').removeClass('animate_paused');
         })
-    }else {
-        $('#scroll-container').hover(function(){
+    } else {
+        $('#scroll-container').hover(function () {
             $('#scroll-container-first-div').addClass('animate_paused');
-        },function (){
+        }, function () {
             $('#scroll-container-first-div').removeClass('animate_paused');
         });
-        $('#scroll-container2').hover(function(){
+        $('#scroll-container2').hover(function () {
             $('#scroll-container-first-div2').addClass('animate_paused');
-        },function (){
+        }, function () {
             $('#scroll-container-first-div2').removeClass('animate_paused');
         });
     }
