@@ -9,6 +9,7 @@ use App\Models\MarketSetting;
 use App\Models\Menus;
 use App\Models\Message;
 use App\Models\Setting;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
