@@ -300,7 +300,7 @@ class MarketHomeController extends Controller
         //اگر کاربر در مرحله ی opening هیچ بیدی نذاشته بود نمیتواند در مراحل بعدی بید بزند
         $user_has_bid_exists=$market->Bids()->where('user_id', auth()->id())->exists();
 
-        if ($market->status ==4){
+        if ($market->status ==4 or $market->status ==5 or $market->status ==6 or $market->status ==7){
             if (!$user_has_bid_exists){
                 $key = 'error';
                 $message = 'چون شما در مرحله ی opening هیچ بیدی نذاشته اید نمیتوانید وارد رقابت شوید';
