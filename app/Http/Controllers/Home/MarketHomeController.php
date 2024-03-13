@@ -255,10 +255,12 @@ class MarketHomeController extends Controller
             $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
-        if ($request['price'] > $price) {
-            $key = 'price';
-            $message = 'Max price you can enter is: ' . $price . ' ' . $currency;
-            return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
+        if ($market->status !== 6) {
+            if ($request['price'] > $price) {
+                $key = 'price';
+                $message = 'Max price you can enter is: ' . $price . ' ' . $currency;
+                return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
+            }
         }
         if ($request['quantity'] > $max_quantity) {
             $key = 'quantity';
@@ -273,7 +275,6 @@ class MarketHomeController extends Controller
         }
 
         if ($market->status === 3) {
-
             $user_bids = $market->Bids()->where('user_id', auth()->id())->where('tries', 3)->get();
             if (count($user_bids) > 0) {
                 $key = 'bid number';
@@ -288,6 +289,14 @@ class MarketHomeController extends Controller
             return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
         }
 
+        //اگر کاربر در مرحله ی opening هیچ بیدی نذاشته بود نمیتواند در مراحل بعدی بید بزند
+        $user_has_bid_exists=$market->Bids()->where('user_id', auth()->id())->exists();
+        if (!$user_has_bid_exists and $market->status > 3){
+            $key = 'error';
+            $message = 'چون شما در مرحله ی opening هیچ بیدی نذاشته اید نمیتوانید وارد رقابت شوید';
+            return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+        }
+
         $bid_exists = $market->Bids()->exists();
         if ($bid_exists) {
             $highest_price_exists = $market->Bids()->where('user_id', auth()->id())->exists();
@@ -299,7 +308,6 @@ class MarketHomeController extends Controller
                     $message = 'Your New Bid Must Better Than Previous!';
                     return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
                 }
-
                 if ($request['price'] == $highest_price) {
                     $highest_price = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'desc')->first();
                     if ($request['quantity'] < $highest_price->quantity) {
@@ -310,7 +318,6 @@ class MarketHomeController extends Controller
                 }
             }
         }
-
 
         return [0 => true];
     }
@@ -323,7 +330,7 @@ class MarketHomeController extends Controller
             return ['response' => 'error', 'message' => $msg];
         }
 //            //user must bidder
-        if (!auth()->user()->hasRole('buyer')) {
+        if (!(auth()->user()->hasRole('buyer') and auth()->user()->hasRole('admin'))) {
             $msg = 'You must Buyer!';
             return ['response' => 'error', 'message' => $msg];
         }

