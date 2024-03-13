@@ -48,10 +48,11 @@ class MarketController extends Controller
         $group_markets = Market::orderby('date')->get()->groupby('date');
         return view('admin.markets.index', compact('group_markets'));
     }
+
     public function folder($date)
     {
         $markets = Market::where('date', $date)->get();
-        return view('admin.markets.folder', compact('markets','date'));
+        return view('admin.markets.folder', compact('markets', 'date'));
     }
 
     public function create()
@@ -72,10 +73,10 @@ class MarketController extends Controller
             'market_value' => 'required',
             'description' => 'nullable',
         ]);
-        $market=Market::create($request->all());
-        $this->statusTimeMarket($market,1);
+        $market = Market::create($request->all());
+        $this->statusTimeMarket($market, 1);
         session()->flash('success', 'New Market Created Successfully');
-        return redirect()->route('admin.markets.folder',['date'=>$market->date]);
+        return redirect()->route('admin.markets.folder', ['date' => $market->date]);
     }
 
     public function edit(Market $market)
@@ -98,9 +99,9 @@ class MarketController extends Controller
             'description' => 'nullable',
         ]);
         $market->update($request->all());
-        $this->statusTimeMarket($market,1);
+        $this->statusTimeMarket($market, 1);
         broadcast(new MarketTimeUpdated());
-        return redirect()->route('admin.markets.folder',['date'=>$market->date])->with('success', 'Market updated successfully');
+        return redirect()->route('admin.markets.folder', ['date' => $market->date])->with('success', 'Market updated successfully');
     }
 
     public function sales_form($page_type = 'Create', $item = 'null')
@@ -173,11 +174,11 @@ class MarketController extends Controller
         $q_1 = MarketSetting::where('key', 'q_1')->pluck('value')->first();
         $q_2 = MarketSetting::where('key', 'q_2')->pluck('value')->first();
         $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
-        $bid_deposit_text_area=MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
-        $term_conditions=MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        $change_time=MarketSetting::where('key', 'change_time')->pluck('value')->first();
+        $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
+        $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
+        $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
         return view('admin.markets.setting', compact(
-            'q_1', 'q_2', 'q_3', 'ready_to_open', 'opening','bid_deposit_text_area','term_conditions','change_time'));
+            'q_1', 'q_2', 'q_3', 'ready_to_open', 'opening', 'bid_deposit_text_area', 'term_conditions', 'change_time'));
     }
 
     public function settings_update(Request $request)
@@ -296,28 +297,40 @@ class MarketController extends Controller
             $market = Market::find($market_id);
             $price = $market->offer_price;
             $max_quantity = $market->SalesForm->max_quantity;
-            if ($status===4){
+            if ($status === 4) {
                 $base_price = $price / 2;
                 $bids = $market->Bids()->where('price', '>=', $base_price)->get();
-                if (count($bids)>0){
-                    return response()->json([1,'continue']);
+                if (count($bids) > 0) {
+                    return response()->json([1, 'continue']);
                 }
                 $market->update([
-                    'status'=>7
+                    'status' => 7
                 ]);
-                return response()->json([1,'close']);
+                return response()->json([1, 'close']);
             }
-            if ($status==6){
-                $bids_exists = $market->Bids()->where('price', '>=', $price)->exists();
-                if (!$bids_exists){
+            if ($status == 6) {
+                $bids_touch_price = $market->Bids()->where('price', '>=', $price)->get();
+                $total_quantity = 0;
+                foreach ($bids_touch_price as $bid) {
+                    $total_quantity = $total_quantity + $bid->quantity;
+                }
+                if ($total_quantity<$market->quantity) {
                     $market->update([
-                        'status'=>7
+                        'status' => 7
                     ]);
-                    return response()->json([1,'close']);
+                    return response()->json([1, 'close']);
+                }
+
+                $bids_exists_count = $market->Bids()->where('price', '>=', $price)->count();
+                if ($bids_exists_count<2) {
+                    $market->update([
+                        'status' => 7
+                    ]);
+                    return response()->json([1, 'close']);
                 }
             }
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
     }
