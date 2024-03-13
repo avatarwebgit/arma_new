@@ -275,6 +275,25 @@
                 check_continue_market(id, status);
             }
         }
+
+        function change_status_market(id, status) {
+            console.log('ok');
+            $.ajax({
+                url: "{{ route('home.change_market_status') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    market_id: id,
+                    status: status,
+                },
+                dataType: "json",
+                method: 'post',
+                success: function (msg) {
+                    if (msg==7){
+                        MarketSystem.stop();
+                    }
+                }
+            })
+        }
     }
 
     function active_bid() {
@@ -515,21 +534,7 @@
         return hDisplay + ':' + mDisplay + ':' + sDisplay;
     }
 
-    function change_status_market(id, status) {
-        $.ajax({
-            url: "{{ route('home.change_market_status') }}",
-            data: {
-                _token: "{{ csrf_token() }}",
-                market_id: id,
-                status: status,
-            },
-            dataType: "json",
-            method: 'post',
-            success: function (msg) {
 
-            }
-        })
-    }
 
     // window.Echo.channel('new_bid_created')
     //     .listen('NewBidCreated', function (e) {

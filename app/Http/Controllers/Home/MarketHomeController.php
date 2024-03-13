@@ -115,10 +115,16 @@ class MarketHomeController extends Controller
         try {
             $market_id = $request->market_id;
             $status = $request->status;
-            Market::where('id', $market_id)->update([
+            $market=Market::where('id', $market_id)->first();
+            $bids=$market->Bids;
+            if (count($bids)==0){
+                $status=7;
+            }
+            $market->update([
                 'status' => $status
             ]);
             broadcast(new MarketStatusUpdated($market_id));
+            return response()->json($status);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
@@ -330,7 +336,7 @@ class MarketHomeController extends Controller
             return ['response' => 'error', 'message' => $msg];
         }
 //            //user must bidder
-        if (!(auth()->user()->hasRole('buyer') and auth()->user()->hasRole('admin'))) {
+        if (auth()->user()->hasRole('seller')) {
             $msg = 'You must Buyer!';
             return ['response' => 'error', 'message' => $msg];
         }
