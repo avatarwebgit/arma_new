@@ -314,7 +314,7 @@ class MarketController extends Controller
                 foreach ($bids_touch_price as $bid) {
                     $total_quantity = $total_quantity + $bid->quantity;
                 }
-                if ($total_quantity<$market->quantity) {
+                if (!$total_quantity>$market->quantity) {
                     $market->update([
                         'status' => 7
                     ]);
