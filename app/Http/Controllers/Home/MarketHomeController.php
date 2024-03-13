@@ -115,11 +115,13 @@ class MarketHomeController extends Controller
         try {
             $market_id = $request->market_id;
             $status = $request->status;
-            $market=Market::where('id', $market_id)->first();
-            $bids=$market->Bids;
-            if (count($bids)==0){
-                $status=7;
-            }
+           if ($request->status>3){
+               $market=Market::where('id', $market_id)->first();
+               $bids=$market->Bids;
+               if (count($bids)==0){
+                   $status=7;
+               }
+           }
             $market->update([
                 'status' => $status
             ]);
