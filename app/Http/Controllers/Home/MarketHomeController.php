@@ -299,10 +299,12 @@ class MarketHomeController extends Controller
 
         //اگر کاربر در مرحله ی opening هیچ بیدی نذاشته بود نمیتواند در مراحل بعدی بید بزند
         $user_has_bid_exists=$market->Bids()->where('user_id', auth()->id())->exists();
-        if (!$user_has_bid_exists and $market->status > 3){
-            $key = 'error';
-            $message = 'چون شما در مرحله ی opening هیچ بیدی نذاشته اید نمیتوانید وارد رقابت شوید';
-            return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+        if ($market->status > 3){
+            if (!$user_has_bid_exists){
+                $key = 'error';
+                $message = 'چون شما در مرحله ی opening هیچ بیدی نذاشته اید نمیتوانید وارد رقابت شوید';
+                return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+            }
         }
 
         $bid_exists = $market->Bids()->exists();
