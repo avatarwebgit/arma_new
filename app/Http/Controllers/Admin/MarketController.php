@@ -87,7 +87,6 @@ class MarketController extends Controller
 
     public function update(Market $market, Request $request)
     {
-
         $request->validate([
             'date' => 'required|date',
             'time' => 'required',

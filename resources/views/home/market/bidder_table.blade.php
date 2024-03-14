@@ -3,7 +3,7 @@
         <td class="text-center">
             @auth
                 @if(auth()->id()===$bid->user_id)
-                    {{ $bid->User->email }}
+                    You
                 @endif
             @endauth
         </td>
