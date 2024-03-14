@@ -46,6 +46,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 use function App\Http\Controllers\public_path;
@@ -445,7 +446,7 @@ class FormController extends Controller
             'loading_port_city' => ['required_unless:loading_type,null'],
             'loading_from' => ['required_unless:loading_type,null'],
             'loading_to' => ['required_unless:loading_type,null'],
-            'bulk_loading_rate' => 'nullable|number|integer',
+            'bulk_loading_rate' => 'nullable|integer',
             'loading_bulk_shipping_term' => 'nullable',
             'loading_container_type' => 'nullable',
             'loading_container_thc_included' => 'nullable',
@@ -459,7 +460,7 @@ class FormController extends Controller
             'discharging_port_city' => ['required_unless:discharging_type,null'],
             'discharging_from' => ['required_unless:discharging_type,null'],
             'discharging_to' => ['required_unless:discharging_type,null'],
-            'bulk_discharging_rate' => 'nullable|number|integer',
+            'bulk_discharging_rate' => 'nullable|integer',
             'discharging_bulk_shipping_term' => 'nullable',
             'discharging_container_type' => 'nullable',
             'discharging_container_thc_included' => 'nullable',

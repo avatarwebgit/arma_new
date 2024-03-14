@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Home;
 
 use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\Market;
 use App\Models\MarketSetting;
 use App\Models\Menus;
 use App\Models\Message;
 use App\Models\Setting;
+use App\Models\Units;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,13 +21,13 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $password='buyer78@info.com';
-        $user=User::where('id',78)->first();
-        $user->update([
-            'email'=>'buyer78@info.com',
-            'password'=>Hash::make($password),
-            'active_status'=>1,
-            'can_bid'=>1
+        $other_currency=Currency::where('id',5)->first();
+        $other_currency->update([
+            'title'=>'other'
+        ]);
+        $other_unit=Units::where('id',7)->first();
+        $other_unit->update([
+            'title'=>'other'
         ]);
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
