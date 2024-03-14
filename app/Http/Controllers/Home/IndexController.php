@@ -21,14 +21,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $other_currency=Currency::where('id',5)->first();
-        $other_currency->update([
-            'title'=>'other'
-        ]);
-        $other_unit=Units::where('id',7)->first();
-        $other_unit->update([
-            'title'=>'other'
-        ]);
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
             MarketSetting::create([

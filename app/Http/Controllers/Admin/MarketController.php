@@ -205,6 +205,12 @@ class MarketController extends Controller
             MarketSetting::where('key', $key)->update(['value' => $val]);
         }
         session()->flash('success', 'Successfully updated');
+        $yesterday = Carbon::yesterday();
+        $future = $yesterday->copy()->addDay(4);
+        $markets = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get();
+        foreach ($markets as $market) {
+            $this->statusTimeMarket($market,1);
+        }
         broadcast(new MarketTimeUpdated());
         return redirect()->back();
     }
