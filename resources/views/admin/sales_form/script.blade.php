@@ -616,7 +616,6 @@
     }
 
     function hasOther(tag, is_yes = 0) {
-
         let name = $(tag).attr('name');
         let value = $(tag).val();
         if (is_yes === 0) {
