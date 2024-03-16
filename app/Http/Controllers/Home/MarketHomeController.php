@@ -38,6 +38,7 @@ class MarketHomeController extends Controller
         $market['benchmark4'] = $result[5];
         $market['benchmark5'] = $result[6];
         $market['benchmark6'] = $result[7];
+        $market['time_to_close_bid_deposit'] = $result[9];
         $bids = $market->Bids()->orderBy('price', 'desc')->take(10)->get();
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
@@ -358,10 +359,8 @@ class MarketHomeController extends Controller
         try {
             $market_id = $request->id;
             $market = Market::where('id', $market_id)->first();
-
-            $bidhistories = $market->Bids;
-
-            $view = view('home.market.final_status', compact('bidhistories','market'))->render();
+            $bidhistories_groups = $market->Bids()->orderby('price','desc')->get()->groupby('price');
+            $view = view('home.market.final_status', compact('bidhistories_groups','market'))->render();
             return response()->json([1, $view]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);

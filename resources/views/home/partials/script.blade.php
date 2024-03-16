@@ -1,5 +1,6 @@
 {{--<script src="{{ asset('home/js/jquery-3.4.1.min.js') }}"></script>--}}
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
 <script src="{{ asset('home/js/popper.min.js') }}"></script>
 <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('home/js/amcharts-core.min.js') }}"></script>
@@ -14,7 +15,7 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
-    jQuery(document).ready(function($) {
+    jQuery(document).ready(function ($) {
         $('.counter').counterUp({
             delay: 10,
             time: 1000
@@ -98,6 +99,7 @@
             let benchmark4 = market.attr('data-benchmark4');
             let benchmark5 = market.attr('data-benchmark5');
             let benchmark6 = market.attr('data-benchmark6');
+            let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
             let now = moment();
             benchmark1 = new Date(benchmark1);
@@ -106,6 +108,10 @@
             benchmark4 = new Date(benchmark4);
             benchmark5 = new Date(benchmark5);
             benchmark6 = new Date(benchmark6);
+            time_to_close_bid_deposit = new Date(time_to_close_bid_deposit);
+            if (now > time_to_close_bid_deposit) {
+                close_bid_deposit(id);
+            }
             if (now < benchmark1) {
                 waiting_to_open(benchmark1, now, id);
             } else if (benchmark1 < now && now < benchmark2) {
@@ -155,7 +161,7 @@
             let status = 1;
             let statusText = '<span>Waiting To Open</span>';
             let change_color = 0;
-            let color = '#6e6e0c';
+            let color = '#cbcb18';
             change_market_status(status, difference, change_color, color, statusText, id)
         }
 
@@ -288,7 +294,7 @@
                 dataType: "json",
                 method: 'post',
                 success: function (msg) {
-                    if (msg==7){
+                    if (msg == 7) {
                         MarketSystem.stop();
                     }
                 }
@@ -337,11 +343,12 @@
     }
 
     function Bid(market_id) {
+        $('#accept_term_alert').hide();
+        $('#bid_validate_error').hide();
         let is_checked = $('#CheckTermCondition_' + market_id).is(':checked');
         if (!is_checked) {
             window.location.href = "#CheckTermCondition_" + market_id;
-            $('#CheckTermCondition_' + market_id).parent().addClass('border-danger');
-            alert('Accept Term and Conditions');
+            $('#accept_term_alert').show();
             return;
         }
         $('.error_text').hide();
@@ -367,8 +374,10 @@
                     alert(msg[1]);
                 }
                 if (msg[0] === 'price_quantity') {
-                    $('#bid_' + msg[1] + '_error').text(msg[2]);
-                    $('#bid_' + msg[1] + '_error').show();
+                    $('#bid_validate_error').text(msg[2]);
+                    $('#bid_validate_error').show();
+                    // $('#bid_' + msg[1] + '_error').text(msg[2]);
+                    // $('#bid_' + msg[1] + '_error').show();
                 }
                 if (msg[0] === 'alert') {
                     alert(msg[2]);
@@ -383,9 +392,17 @@
             error: function (msg) {
                 if (msg.responseJSON.errors) {
                     let errors = msg.responseJSON.errors;
+                    let error_text = '';
+                    let j = 0;
                     $.each(errors, function (i, val) {
-                        $('#bid_' + i + '_error').text(val);
-                        $('#bid_' + i + '_error').show();
+                        if (j == 0) {
+                            error_text = '<i class="fa-solid fa-triangle-exclamation mr-2"></i>'+val;
+                        } else {
+                            error_text = error_text + '<br>' + '<i class="fa-solid fa-triangle-exclamation mr-2"></i>'+val;
+                        }
+                        j++;
+                        $('#bid_validate_error').html(error_text);
+                        $('#bid_validate_error').show();
                     })
                 }
                 active_bid();
@@ -533,7 +550,6 @@
 
         return hDisplay + ':' + mDisplay + ':' + sDisplay;
     }
-
 
 
     // window.Echo.channel('new_bid_created')

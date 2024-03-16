@@ -21,6 +21,7 @@ class IndexController extends Controller
 {
     public function index()
     {
+
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
             MarketSetting::create([
