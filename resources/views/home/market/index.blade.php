@@ -217,18 +217,23 @@
                     <div class="col-12  col-md-6">
                         @if(auth()->user()->hasRole('buyer') or auth()->user()->hasRole('admin'))
                             <div class="row">
+                                <div class="col-12">
+                                    <div id="bid_validate_error" class="alert alert-danger text-left p-2">
+
+                                    </div>
+                                </div>
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3">
                                         <label for="bid_quantity">Quantity( {{ $market->SalesForm->unit }} )</label>
                                         <input disabled id="bid_quantity" type="text" class="form-control">
-                                        <p id="bid_quantity_error" class="error_text">please enter quantity</p>
+{{--                                        <p id="bid_quantity_error" class="error_text">please enter quantity</p>--}}
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3">
                                         <label for="bid_price">Price( {{ $market->SalesForm->currency }} )</label>
                                         <input disabled id="bid_price" type="number" class="form-control">
-                                        <p id="bid_price_error" class="error_text">please enter price</p>
+{{--                                        <p id="bid_price_error" class="error_text">please enter price</p>--}}
                                     </div>
                                 </div>
                                 <div class="col-12 text-center mt-3">
@@ -249,7 +254,7 @@
                             <table class="table">
                                 <thead class="bg-blue text-center text-white">
                                 <tr>
-                                    <th class="text-white" colspan="3">final status</th>
+                                    <th class="text-white" colspan="4">final Result</th>
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
@@ -264,7 +269,9 @@
                                             user
                                         </th>
                                     @endif
-
+                                    <th class="text-center text-white w-50">
+                                        status
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody id="final_status_section_table-{{ $market->id }}">

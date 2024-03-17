@@ -2858,6 +2858,7 @@ body {
 
 #commodity_information span {
     padding: 5px 10px;
+    width: 140px;
 }
 
 .border-danger {
@@ -2999,4 +3000,12 @@ img.logo {
         position: absolute !important;
         top: 30px !important;
     }
+}
+
+#accept_term_alert{
+    display: none;
+}
+
+#bid_validate_error{
+    display: none;
 }

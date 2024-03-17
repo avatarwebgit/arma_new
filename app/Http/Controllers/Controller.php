@@ -30,6 +30,7 @@ class Controller extends BaseController
         $startTime = Carbon::parse($date_time);
 
         $now = Carbon::now();
+        $time_to_close_bid_deposit=$startTime->copy()->addMinutes(-120);
         $benchmark1 = $startTime->copy()->addMinutes(-$ready_to_duration);
         $benchmark2 = $startTime;
         $benchmark3 = $startTime->copy()->addMinutes($open_duration);
@@ -40,7 +41,7 @@ class Controller extends BaseController
         $bids = $market->Bids;
         if ($force_determine_status == 0) {
             if ($market->status == 7) {
-                return [0, $market->status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time];
+                return [0, $market->status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time,$time_to_close_bid_deposit];
             }
         }
 
@@ -101,7 +102,7 @@ class Controller extends BaseController
 
         }
         $market->update(['status' => $status]);
-        return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time];
+        return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time,$time_to_close_bid_deposit];
     }
 
     public function convertTime($seconds)
