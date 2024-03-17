@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactForm;
 use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -207,6 +208,19 @@ class SettingController extends Controller
         }
         return $fileNameImage;
     }
+    public function form_contact_index()
+    {
+        $contacts = ContactForm::paginate(25);
 
+        return view('admin.contact.index',compact('contacts'));
+    }
+
+    public function form_contact_show(ContactForm $contact)
+    {
+
+
+
+        return view('admin.contact.show',compact('contact'));
+    }
 
 }

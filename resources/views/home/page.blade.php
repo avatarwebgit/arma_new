@@ -1,27 +1,34 @@
 @extends('home.homelayout.app')
 
 @section('style')
-<style>
-    td,th{
-        border: none !important;
-    }
-    th{
-       color: #036f88  !important;
-        position: relative;
-    }
-    th:before{
-        content: "";
-        position: absolute;
-        top: 8px !important;
-        left: 10px !important;
-        width: 2px;
-        height: 20px !important;
-        background-color: #ffa700;
-    }
-    .landing-feature{
-        text-align: justify !important;
-    }
-</style>
+    <style>
+        td,th{
+            border: none !important;
+        }
+        th{
+            color: #036f88  !important;
+            position: relative;
+        }
+        th:before{
+            content: "";
+            position: absolute;
+            top: 8px !important;
+            left: 10px !important;
+            width: 2px;
+            height: 20px !important;
+            background-color: #ffa700;
+        }
+        .landing-feature{
+            text-align: justify !important;
+        }
+        label{
+            font-size: 16px;
+        }
+
+        #url,#option_value{
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('script')
@@ -42,6 +49,19 @@
             }
             $(this).html(button_html);
         })
+
+        function selectType(tag)
+        {
+
+            if($(tag).val() == 'Article Update'){
+                $('#url').fadeIn();
+                $('#option_value').fadeIn();
+            }else{
+                $('#url').fadeOut();
+                $('#option_value').fadeOut();
+            }
+
+        }
     </script>
 @endsection
 
@@ -49,16 +69,16 @@
 
 @section('content')
 
-{{--    <div class="btn more_btn is_close">--}}
-{{--        show more--}}
-{{--        <i class="fa fa-angle-down ml-3"></i>--}}
-{{--     </div>--}}
+    {{--    <div class="btn more_btn is_close">--}}
+    {{--        show more--}}
+    {{--        <i class="fa fa-angle-down ml-3"></i>--}}
+    {{--     </div>--}}
 
     <div>
         @if($page->active_banner ==1)
             <div class="position-relative">
                 <img  style="width: 100%;height: auto" alt="banner"
-                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->banner) }}">
+                      src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->banner) }}">
                 <div style="position: absolute;top: 0;padding: 40px">
                     {!! $page->banner_description !!}
                 </div>
@@ -68,108 +88,199 @@
             @if($page!=null)
                 <div class="row">
                     @if($menus->id!=2)
-                    <div class="col-md-12">
-                        <h2>{{ $page->title }}</h2>
-                    </div>
+                        <div class="col-md-12">
+                            <h2>{{ $page->title }}</h2>
+                        </div>
                     @endif
-                    <div class="col-md-12">
+                    <div class="{{$page->id == 20 ? 'col-md-6' : 'col-md-12'}}">
                         {!! $page->description !!}
                     </div>
+                    @if($page->id == 20)
+                        <div class="col-md-6">
+                            <div >
+                                <form method="post" action="{{route('form.contact')}}">
+                                    @csrf
+                                    @method('POST')
+                                    <div class="form-group">
+                                        <label for="" class="form-label fw-600">Your email address
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text"  class="form-control" name="email">
+                                        @error('email')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="form-label fw-600">
+
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select onchange="selectType(this)" class="form-select form-control" name="type">
+                                            <option>-</option>
+                                            <option >Article Update</option>
+                                            <option>Password Reset</option>
+                                            <option>Unsubscribe</option>
+                                            <option>Delete my Account</option>
+                                            <option>Content Licensing</option>
+                                            <option>General Support</option>
+                                            <option>Report a Bug</option>
+                                            <option>Other</option>
+
+                                        </select>
+                                        @error('type')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="form-label fw-600">Description
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <textarea rows="8"   class="form-control" name="description"></textarea>
+                                        <span>Please enter the details of your request below.</span>
+                                        @error('description')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div id="url" class="form-group">
+                                        <label for="" class="form-label fw-600">URL of article or web page
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text"  class="form-control" name="url">
+                                        @error('url')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div id="option_value" class="form-group">
+                                        <label for="" class="form-label fw-600">
+                                            Please select one of the article update options below:
+
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select class="form-select form-control" name="option_value">
+                                            <option>-</option>
+                                            <option>Corrections</option>
+                                            <option>Outdated content</option>
+                                            <option>Typos or Grammer</option>
+                                        </select>
+                                        @error('option')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="form-label fw-600">
+                                            Attachments
+
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file"  class="form-control" name="file">
+                                        @error('file')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group text-center">
+
+                                        <button type="submit"  class="btn btn-primary w-100" >submit</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             @endif
             @if($menus->id==2)
-                    <div class="row">
-                        <div class="col-12">
-                            <table class="table table-responsive-sm text-left">
-                                <thead class="p-5 text-white" style="background-color: #006">
-                                <tr>
-                                    <td style="font-size: 17pt">Commodities</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </thead>
-                                <thead>
-                                <tr>
-                                    <th scope="col">Chemical Fertilizer & Agricalture</th>
-                                    <th scope="col">Polymer</th>
-                                    <th scope="col">Chemicals</th>
-                                    <th scope="col">Aromatics</th>
-                                    <th scope="col">Fule</th>
-                                    <th scope="col">Refinery Products</th>
-                                    <th scope="col">Miniral</th>
-                                    <th scope="col">Metal</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Urea</td>
-                                    <td>HDEP</td>
-                                    <td>Butadiane</td>
-                                    <td>Banzen</td>
-                                    <td>Light Hydrocarbon</td>
-                                    <td>Bitumen</td>
-                                    <td>Iron ore</td>
-                                    <td>Copper</td>
-                                </tr>
-                                <tr>
-                                    <td>Phosphate</td>
-                                    <td>LDPE</td>
-                                    <td>Buten 1</td>
-                                    <td>Paralaizen</td>
-                                    <td>Heavey Hydeocarbon</td>
-                                    <td>Lubcat</td>
-                                    <td>Coal</td>
-                                    <td>Steel</td>
-                                </tr>
-                                <tr>
-                                    <td>AN</td>
-                                    <td>LLDPE</td>
-                                    <td>Aside Asetic</td>
-                                    <td>Ortolizen</td>
-                                    <td>LPG</td>
-                                    <td>Vacum Battom</td>
-                                    <td>Cement</td>
-                                    <td>Aluminum</td>
-                                </tr>
-                                <tr>
-                                    <td>UAN</td>
-                                    <td>ABS</td>
-                                    <td>Propylen</td>
-                                    <td>Toluen</td>
-                                    <td>C3+</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Weaht</td>
-                                    <td>PET</td>
-                                    <td>Methanol</td>
-                                    <td>Parazaelien</td>
-                                    <td>C5+</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Corn</td>
-                                    <td></td>
-                                    <td>Sulphur</td>
-                                    <td>Asetairen</td>
-                                    <td>MTBE</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-responsive-sm text-left">
+                            <thead class="p-5 text-white" style="background-color: #006">
+                            <tr>
+                                <td style="font-size: 17pt">Commodities</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <thead>
+                            <tr>
+                                <th scope="col">Chemical Fertilizer & Agricalture</th>
+                                <th scope="col">Polymer</th>
+                                <th scope="col">Chemicals</th>
+                                <th scope="col">Aromatics</th>
+                                <th scope="col">Fule</th>
+                                <th scope="col">Refinery Products</th>
+                                <th scope="col">Miniral</th>
+                                <th scope="col">Metal</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Urea</td>
+                                <td>HDEP</td>
+                                <td>Butadiane</td>
+                                <td>Banzen</td>
+                                <td>Light Hydrocarbon</td>
+                                <td>Bitumen</td>
+                                <td>Iron ore</td>
+                                <td>Copper</td>
+                            </tr>
+                            <tr>
+                                <td>Phosphate</td>
+                                <td>LDPE</td>
+                                <td>Buten 1</td>
+                                <td>Paralaizen</td>
+                                <td>Heavey Hydeocarbon</td>
+                                <td>Lubcat</td>
+                                <td>Coal</td>
+                                <td>Steel</td>
+                            </tr>
+                            <tr>
+                                <td>AN</td>
+                                <td>LLDPE</td>
+                                <td>Aside Asetic</td>
+                                <td>Ortolizen</td>
+                                <td>LPG</td>
+                                <td>Vacum Battom</td>
+                                <td>Cement</td>
+                                <td>Aluminum</td>
+                            </tr>
+                            <tr>
+                                <td>UAN</td>
+                                <td>ABS</td>
+                                <td>Propylen</td>
+                                <td>Toluen</td>
+                                <td>C3+</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Weaht</td>
+                                <td>PET</td>
+                                <td>Methanol</td>
+                                <td>Parazaelien</td>
+                                <td>C5+</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Corn</td>
+                                <td></td>
+                                <td>Sulphur</td>
+                                <td>Asetairen</td>
+                                <td>MTBE</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
+                </div>
             @endif
 
         </div>

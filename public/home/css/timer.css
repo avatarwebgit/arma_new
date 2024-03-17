@@ -23,20 +23,22 @@
     align-items: center !important;
 }
 
-#timer_section::before{
+.clock::before{
     content:" ";
     position: absolute;
     left: 0;
+    top: 11px;
     height: 50%;
     width: 1px;
     background-color:#d5d5d5 !important;
 }
 
-#timer_section::after{
+.clock::after{
     content:" ";
     position: absolute;
     right: 0;
     height: 50%;
+    top: 11px;
     width: 1px;
     background-color:#d5d5d5 !important;
 }

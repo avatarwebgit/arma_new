@@ -204,6 +204,35 @@
                             </li>
                         </ul>
                     </li>
+                <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/form-contact*') ? 'active dash-trigger' : 'collapsed' }}">
+                    <a href="{{route('admin.contact.index')}}" class="dash-link">
+                           <span class="dash-micon">
+                <i class="ti ti-table"></i></span>
+                        <span
+                            class="dash-mtext">{{ __('Contact Message') }}</span>
+                    </a>
+
+                </li>
+
+
+
+                <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/blog*') ? 'active dash-trigger' : 'collapsed' }}">
+                    <a href="#!" class="dash-link">
+                            <span class="dash-micon">
+                <i class="ti ti-table"></i></span><span
+                            class="dash-mtext">{{ __('Blogs') }}</span><span class="dash-arrow"><i
+                                data-feather="chevron-right"></i></span></a>
+                    <ul class="dash-submenu">
+                        <li class="dash-item {{ request()->is('admin-panel/management/messages/blogs*') ? 'active' : '' }}">
+                            <a class="dash-link"
+                               href="{{ route('admin.blog.index') }}">{{ __('Blog') }}</a>
+                        </li>
+                        <li class="dash-item {{ request()->is('admin-panel/management/messages/category*') ? 'active' : '' }}">
+                            <a class="dash-link"
+                               href="{{ route('admin.blog.category.index') }}">{{ __('Category') }}</a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </div>
