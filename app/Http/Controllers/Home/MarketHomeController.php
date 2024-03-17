@@ -116,13 +116,13 @@ class MarketHomeController extends Controller
         try {
             $market_id = $request->market_id;
             $status = $request->status;
-           if ($request->status>3){
-               $market=Market::where('id', $market_id)->first();
-               $bids=$market->Bids;
-               if (count($bids)==0){
-                   $status=7;
-               }
-           }
+            if ($request->status > 3) {
+                $market = Market::where('id', $market_id)->first();
+                $bids = $market->Bids;
+                if (count($bids) == 0) {
+                    $status = 7;
+                }
+            }
             $market->update([
                 'status' => $status
             ]);
@@ -299,9 +299,9 @@ class MarketHomeController extends Controller
         }
 
         //اگر کاربر در مرحله ی opening هیچ بیدی نذاشته بود نمیتواند در مراحل بعدی بید بزند
-        $user_has_bid_exists=$market->Bids()->where('user_id', auth()->id())->exists();
-        if ($market->status!=3 and $market->status!=2 and $market->status!=1 and $market->status!=0){
-            if (!$user_has_bid_exists){
+        $user_has_bid_exists = $market->Bids()->where('user_id', auth()->id())->exists();
+        if ($market->status != 3 and $market->status != 2 and $market->status != 1 and $market->status != 0) {
+            if (!$user_has_bid_exists) {
                 $key = 'error';
                 $message = 'چون شما در مرحله ی opening هیچ بیدی نذاشته اید نمیتوانید وارد رقابت شوید';
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
@@ -359,8 +359,9 @@ class MarketHomeController extends Controller
         try {
             $market_id = $request->id;
             $market = Market::where('id', $market_id)->first();
-            $bidhistories_groups = $market->Bids()->orderby('price','desc')->get()->groupby('price');
-            $view = view('home.market.final_status', compact('bidhistories_groups','market'))->render();
+            $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
+            $this->BidWinner($market);
+            $view = view('home.market.final_status', compact('bidhistories_groups', 'market'))->render();
             return response()->json([1, $view]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
@@ -379,5 +380,20 @@ class MarketHomeController extends Controller
             return response()->json([0, $exception->getMessage()]);
         }
 
+    }
+
+    public function BidWinner($market)
+    {
+        $sort_ids=[];
+        $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
+        foreach ($bidhistories_groups as $bidhistories){
+            $bidhistories_qroupedby_quantities=$bidhistories->sortByDesc('quantity')->groupby('quantity');
+            foreach($bidhistories_qroupedby_quantities as $key=>$bidhistories_qroupedby_quantity){
+                foreach($bidhistories_qroupedby_quantity->sortBy('created_at',false) as $item){
+                    $sort_ids[]=$item->id;
+                }
+            }
+        }
+        dd($sort_ids);
     }
 }
