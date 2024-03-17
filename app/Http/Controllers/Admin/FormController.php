@@ -14,6 +14,7 @@ use App\Models\AssignFormsUsers;
 use App\Models\AssignFormUser;
 use App\Models\CargoInsurance;
 use App\Models\CompanyType;
+use App\Models\ContactForm;
 use App\Models\ContainerType;
 use App\Models\ContractType;
 use App\Models\Country;
@@ -572,5 +573,39 @@ class FormController extends Controller
 
         }
         return $rules;
+    }
+
+
+    public function form_contact(Request $request)
+    {
+        $request->validate([
+            'email' =>'required|email',
+            'type' =>'required',
+            'description' =>'required',
+            'url' =>'nullable',
+            'option_value' =>'nullable',
+            'file' =>'nullable'
+        ]);
+
+
+        if ($request->has('file') and $request->file != null) {
+            $env = env('UPLOAD_SETTING');
+            $filename= generateFileName($request->file->getClientOriginalName());
+            $request->file->move(public_path($env), $filename);
+        } else {
+            $filename = null;
+        }
+        ContactForm::create([
+            'email' =>$request->email,
+            'type' =>$request->type,
+            'description' =>$request->description,
+            'url' =>$request->url,
+            'option_value' =>$request->option_value,
+            'file' =>$filename
+        ]);
+
+        session()->flash('success', 'Your message has been sent');
+        return redirect()->route('home.index');
+
     }
 }

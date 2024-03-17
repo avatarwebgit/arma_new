@@ -231,7 +231,7 @@
             </div>
         </div>
     </div>
-    <div class="landing-feature container">
+    <div style="padding-top: 30px !important;" class="landing-feature container">
         <div class="row">
             <div id="market_table" class="col-12">
 
@@ -331,20 +331,20 @@
         </div>
     </div>
 
-    <div class="landing-sub">
-        <div class="container">
-            <div class="row">
-                <div class="offset-md-1 col-md-10">
-                    <div class="landing-sub-content">
-                        <h2>Become part of a global community of people who have found their path to the crypto world
-                            with Crypo
-                        </h2>
-                        <a href='signup-dark.html'>Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{--    <div class="landing-sub">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="row">--}}
+    {{--                <div class="offset-md-1 col-md-10">--}}
+    {{--                    <div class="landing-sub-content">--}}
+    {{--                        <h2>Become part of a global community of people who have found their path to the crypto world--}}
+    {{--                            with Crypo--}}
+    {{--                        </h2>--}}
+    {{--                        <a href='signup-dark.html'>Get Started</a>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
 
     <!-- Button trigger modal -->
 

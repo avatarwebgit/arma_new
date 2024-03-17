@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Currency;
 use App\Models\Market;
 use App\Models\MarketSetting;
@@ -12,6 +13,7 @@ use App\Models\Message;
 use App\Models\Setting;
 use App\Models\Units;
 use App\Models\User;
+use App\Models\UserNews;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -181,5 +183,27 @@ class IndexController extends Controller
     {
         $page = $menus->Pages()->first();
         return view('home.page', compact('page','menus'));
+    }
+
+
+    public function blogs()
+    {
+        $blogs = Blog::all();
+        return view('home.blog.index',compact('blogs'));
+    }
+    public function blog_show(Blog $blog)
+    {
+
+        return view('home.blog.show',compact('blog'));
+    }
+    public function join_news(Request $request)
+    {
+
+        UserNews::create([
+            'email'=>$request->email
+        ]);
+        session()->flash('success', 'Join has been Successfully');
+        return redirect()->route('home.index');
+
     }
 }

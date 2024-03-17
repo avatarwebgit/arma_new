@@ -1,7 +1,7 @@
 @extends('home.homelayout.app')
 
 @section('content')
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12 col-md-4 border-1 m-auto pt-5 pb-5">
             <form method="POST" action="{{ route('login') }}" class="auth-form">
                 @csrf
@@ -43,15 +43,26 @@
                         @enderror
                     </div>
                     @if (Route::has('password.request'))
-                    <div class="col-12 d-flex justify-content-between align-items-center">
-                        <button type="submit" class="btn btn-primary">{{ __('Log In') }}</button>
-                        <div class="text-right">
-                            <a href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <button type="submit" class="btn btn-primary">{{ __('Log In') }}</button>
+
+                            <div class="text-right">
+                                <a href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="col-12 d-flex justify-content-start mt-2 align-items-center">
+                        <div class="text-left">
+
+                            <a class="text-white" href="{{ route('register') }}">
+                                You do not have an account ? <span>Register</span>
                             </a>
                         </div>
                     </div>
-                    @endif
+
                 </div>
             </form>
         </div>

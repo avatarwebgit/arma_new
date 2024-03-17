@@ -627,7 +627,7 @@ header .nav-link.btn {
 }
 
 .landing-number {
-    background: #007bff;
+    background: #18214D;
     text-align: center;
     color: #fff;
     padding: 40px 0;
@@ -743,16 +743,17 @@ footer.landing-footer-two img {
 
 footer.landing-footer-two p {
     margin: 20px 0;
+    color: #fff;
 }
 
 footer.landing-footer-two .social-icon li {
-    display: inline-block;
+
 }
 
 footer.landing-footer-two .social-icon li a {
-    color: #18214d;
+    color: #fff;
     font-size: 25px;
-    margin-right: 15px;
+
 }
 
 footer.landing-footer-two .social-icon li:last-child a {
@@ -765,8 +766,8 @@ footer.landing-footer-two h3 {
 }
 
 footer.landing-footer-two ul li a {
-    color: #18214d;
-    margin-top: 5px;
+    color: #fff;
+
     display: block;
 }
 
@@ -2858,7 +2859,6 @@ body {
 
 #commodity_information span {
     padding: 5px 10px;
-    width: 140px;
 }
 
 .border-danger {
@@ -2930,14 +2930,17 @@ img.logo {
     }
 
     .navbar-nav > .header-custom-icon {
-        width: 400px;
+        width: 65%;
+        min-width: 300px;
     }
 
     .search_and_btns {
         margin-right: 80px;
     }
 }
-
+.search_and_btns {
+    width:100% !important;
+}
 .login_btn {
     font-size: 13px;
     background-color: #bed2f2;
@@ -3000,6 +3003,46 @@ img.logo {
         position: absolute !important;
         top: 30px !important;
     }
+}
+
+
+footer{
+    background-color: #18214D !important;
+}
+.icon-social-media{
+    border-radius: 50%;
+
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px !important;
+    border: 2px solid #fff;
+}
+.social-icon {
+    display: flex;
+    justify-content: space-between;
+}
+footer h3 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+
+footer input{
+
+    width: 100%;
+    background-color: transparent !important;
+    border: 1px solid #fff;
+
+
+    color: #fff;
+    padding: 30px !important;
+}
+footer input::placeholder {
+    color: #fff !important;
+    font-weight:bold !important;
 }
 
 #accept_term_alert{

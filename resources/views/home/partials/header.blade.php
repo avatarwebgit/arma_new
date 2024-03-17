@@ -1,4 +1,4 @@
-<header class="dark-bb">
+<header >
     @include('home.sections.header1')
     @include('home.sections.header2')
     <nav class="navbar navbar-expand-lg">
@@ -45,19 +45,27 @@
                     @endif
 
                 @endforeach
+                <li class="nav-item d-flex align-items-center mr-3">
+                    <a class="nav-link" href="{{ route('home.blogs.index') }}"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        blogs
+                    </a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto d-flex align-items-center search_and_btns">
-                <li class="nav-item header-custom-icon position-relative mr-5">
+                <li style="margin-left: auto" class="nav-item header-custom-icon position-relative mr-5">
                     <input class="form-control form-control-sm" placeholder="search...">
                     <i class="icon ion-md-search position-absolute" style="top: 4px;right: 10px"></i>
                 </li>
                 @auth
                     <li class="nav-item dropdown header-img-icon">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        <a style="padding:0 !important; " class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false">
                             <img src="{{ asset('home/img/avatar.svg') }}" alt="avatar">
                         </a>
+                        <p class="mt-1 pr-4">hi ,{{ auth()->user()->full_name }}</p>
                         <div class="dropdown-menu profile" style="left: -130px !important;">
                             <div class="dropdown-header d-flex flex-column align-items-center">
                                 <div class="figure mb-3">
@@ -131,7 +139,7 @@
                         </div>
                     </li>
                 @else
-                    <ul class="d-flex ">
+                    <ul style="margin-left: auto" class="d-flex ">
                         <li title="login" class="login_btn">
                             <a class="nav-link" href="{{ route('login') }}">
                                 login
