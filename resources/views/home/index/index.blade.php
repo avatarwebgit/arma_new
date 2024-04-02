@@ -193,8 +193,8 @@
             <p style="color: {{ $alert_text_color }};font-size: {{ $alert_font_size }}px !important;margin: 0 !important;">{{ $alert_description }}</p>
         </div>
     @endif
-    <div class="landing-feature container">
-        <div class="row justify-content-between">
+    <div class="container">
+        <div class="row justify-content-between pt-5">
             <div class="col-12 col-xl-4 p-0 text-left" style="font-size: 13px;font-weight: bold">
                 <h3 id="Market_Status_Text">
                     <span>Market: </span>
@@ -231,8 +231,8 @@
             </div>
         </div>
     </div>
-    <div style="padding-top: 30px !important;" class="landing-feature container">
-        <div class="row">
+    <div class="container">
+        <div class="row pt-4">
             <div id="market_table" class="col-12">
 
             </div>

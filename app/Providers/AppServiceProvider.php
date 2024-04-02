@@ -48,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         $q_1=MarketSetting::where('key','q_1')->pluck('value')->first();
         $q_2=MarketSetting::where('key','q_2')->pluck('value')->first();
         $q_3=MarketSetting::where('key','q_3')->pluck('value')->first();
+        $copy_right=Setting::where('key','copy_right')->pluck('value')->first();
         view()->share(
             compact(
                 'header1',
@@ -79,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
                 'facebook',
                 'twitter',
                 'linkedin',
+                'copy_right',
             ));
     }
 }

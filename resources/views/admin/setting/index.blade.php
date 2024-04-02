@@ -190,6 +190,17 @@
                                                     </p>
                                                     @enderror
                                                 </div>
+                                                <div class="col-12 mb20">
+                                                    <label for="copy_right">Copy Right Text</label>
+                                                    <input id="copy_right" type="text" name="copy_right"
+                                                           class="form-control"
+                                                           value="{{ $copy_right }}">
+                                                    @error('copy_right')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
                                                 <div class="col-md-6 mb20">
                                                     <label for="start_market">Start Market</label>
                                                     <input id="start_market" type="time" name="start_market"
