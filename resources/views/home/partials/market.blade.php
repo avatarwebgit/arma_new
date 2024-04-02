@@ -218,11 +218,11 @@
                     {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}
                 </td>
                 <td id="slide_more_angle_{{ $market->id }}" onclick="slidemore({{ $market->id }})"
-                    class="slide_more_angle cursor-pointer">
+                    class="slide_more_angle cursor-pointer text-right">
                     <span>more</span>
                     <i class="fa fa-angle-down ml-2 mt-1"></i>
                 </td>
-                <td>
+                <td class="text-right" style="padding-right: 0">
                     <a href="{{ route('home.bid',['market'=>$market->id]) }}" class="btn btn-primary bid-bottom btn-sm">
                         Bid
                     </a>
@@ -230,7 +230,7 @@
             </tr>
             <tr id="more_table_{{ $market->id }}" style="display: none" class="slide_more_table">
                 <td colspan="11">
-                    <table class="table-striped table_in_table" style="width: 100%">
+                    <table class="table_in_table" style="width: 100%">
                         <tr>
                             <td class="text-left">
                                 <span class="text-bold" >Specification</span>
