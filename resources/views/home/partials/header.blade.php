@@ -45,13 +45,6 @@
                     @endif
 
                 @endforeach
-                <li class="nav-item d-flex align-items-center mr-3">
-                    <a class="nav-link" href="{{ route('home.blogs.index') }}"
-                       aria-haspopup="true"
-                       aria-expanded="false">
-                        blogs
-                    </a>
-                </li>
             </ul>
             <ul class="navbar-nav ml-auto d-flex align-items-center search_and_btns">
                 <li style="margin-left: auto" class="nav-item header-custom-icon position-relative mr-5">

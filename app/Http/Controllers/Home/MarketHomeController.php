@@ -360,8 +360,37 @@ class MarketHomeController extends Controller
             $market_id = $request->id;
             $market = Market::where('id', $market_id)->first();
             $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
-            $this->BidWinner($market);
-            $view = view('home.market.final_status', compact('bidhistories_groups', 'market'))->render();
+            $ids = $this->BidWinner($market);
+            $bids = [];
+            $max_quantity = $market->SalesForm->max_quantity;
+            $remain_quantity = $max_quantity;
+            foreach ($ids as $key => $id) {
+                $is_win=1;
+                $bid = BidHistory::where('id', $id)->first();
+                $bid_quantity = $bid->quantity;
+                if ($remain_quantity == 0) {
+                    $quantity_win = 0;
+                    $is_win = 0;
+                }else{
+                    if ($remain_quantity > $bid_quantity) {
+                        $quantity_win = $bid_quantity;
+                        $remain_quantity = $remain_quantity - $bid_quantity;
+                    } else {
+                        $quantity_win = $remain_quantity;
+                        $remain_quantity=0;
+                    }
+                }
+
+
+
+                $bid->update([
+                    'quantity_win'=> $quantity_win,
+                    'is_win'=> $is_win,
+                ]);
+
+                $bids[]=$bid;
+            }
+            $view = view('home.market.final_status', compact('bids', 'market'))->render();
             return response()->json([1, $view]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
@@ -384,16 +413,16 @@ class MarketHomeController extends Controller
 
     public function BidWinner($market)
     {
-        $sort_ids=[];
+        $sort_ids = [];
         $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
-        foreach ($bidhistories_groups as $bidhistories){
-            $bidhistories_qroupedby_quantities=$bidhistories->sortByDesc('quantity')->groupby('quantity');
-            foreach($bidhistories_qroupedby_quantities as $key=>$bidhistories_qroupedby_quantity){
-                foreach($bidhistories_qroupedby_quantity->sortBy('created_at',false) as $item){
-                    $sort_ids[]=$item->id;
+        foreach ($bidhistories_groups as $bidhistories) {
+            $bidhistories_qroupedby_quantities = $bidhistories->sortByDesc('quantity')->groupby('quantity');
+            foreach ($bidhistories_qroupedby_quantities as $key => $bidhistories_qroupedby_quantity) {
+                foreach ($bidhistories_qroupedby_quantity->sortBy('created_at', false) as $item) {
+                    $sort_ids[] = $item->id;
                 }
             }
         }
-        dd($sort_ids);
+        return $sort_ids;
     }
 }
