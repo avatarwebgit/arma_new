@@ -820,11 +820,15 @@ footer.landing-footer-two ul li a:hover {
     margin-bottom: 0;
 }
 
-.table td {
+.table  td {
     font-size: 13px;
     padding: 0 18px;
     vertical-align: middle;
 }
+.slide_more_table  td {
+    padding: 0;
+}
+
 
 .market-pairs tbody tr td i {
     color: #75869696;
@@ -2901,7 +2905,12 @@ body {
         transform: rotate(1turn)
     }
 }
-
+.table_in_table{
+    background-color: #f8f8f8;
+}
+.table_in_table td {
+    border-top: none;
+}
 .table_in_table span {
     display: inline-block;
     width: 145px;
