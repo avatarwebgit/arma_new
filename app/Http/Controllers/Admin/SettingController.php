@@ -44,6 +44,7 @@ class SettingController extends Controller
         $facebook = Setting::where('key', 'facebook')->pluck('value')->first();
         $twitter = Setting::where('key', 'twitter')->pluck('value')->first();
         $linkedin = Setting::where('key', 'linkedin')->pluck('value')->first();
+        $copy_right = Setting::where('key', 'copy_right')->pluck('value')->first();
         return view('admin.setting.index', compact('logo',
             'fav_icon',
             'title',
@@ -67,6 +68,7 @@ class SettingController extends Controller
         'facebook',
         'twitter',
         'linkedin',
+        'copy_right',
         ));
     }
 
@@ -148,6 +150,7 @@ class SettingController extends Controller
             $linkedin = $request->linkedin;
             $about_arma = $request->about_arma;
             $alert_active=$request->has('alert_active')?1:0;
+            $copy_right=$request->copy_right;
             $array = [
                 'logo' => $logo,
                 'fav_icon' => $fav_icon,
@@ -172,6 +175,7 @@ class SettingController extends Controller
                 'twitter' => $twitter,
                 'facebook' => $facebook,
                 'about_arma' => $about_arma,
+                'copy_right' => $copy_right,
             ];
             foreach ($array as $key => $value) {
                 $key_exists=Setting::where("key", $key)->exists();

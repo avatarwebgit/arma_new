@@ -62,11 +62,9 @@
             </div>
             <div class="col-md-12 mt-5">
                 <div class="d-flex flex-column align-items-start  justify-content-between">
-                    <span class="text-white text-muted">Amazon App Suite widget software © 2011-2013 Amazon.com, Inc. or its affiliates. All rights reserved.</span>
-                    <span class="text-white text-muted">© Copyright © China Petrochemical Corporation
-© 1995-2023 TOYOTA MOTOR CORPORATION. All Rights Reserved.
-</span>
-                    <span class="text-white text-muted">Copyright© 1995-2023 SAMSUNG. All Rights Reserved.</span>
+                    <span class="text-white text-muted">
+                        {{ $copy_right }}
+                    </span>
                 </div>
             </div>
 
