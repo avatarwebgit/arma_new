@@ -192,18 +192,6 @@
                 <div class="row">
                     <div class="col-12">
                         <table class="table table-responsive-sm text-left">
-                            <thead class="p-5 text-white" style="background-color: #006">
-                            <tr>
-                                <td style="font-size: 17pt">Commodities</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </thead>
                             <thead>
                             <tr>
                                 <th scope="col">Chemical Fertilizer & Agricalture</th>
