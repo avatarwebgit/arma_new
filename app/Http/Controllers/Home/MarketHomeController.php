@@ -99,7 +99,13 @@ class MarketHomeController extends Controller
 
     public function refreshBidTable(Request $request)
     {
-        $bids = BidHistory::where('market_id', $request->market)->orderBy('price', 'desc')->orderBy('quantity', 'desc')->take(10)->get();
+        $market = Market::where('id', $request->market)->first();
+        $ids = $this->BidWinner($market);
+        $bids=[];
+        foreach ($ids as $key => $id) {
+            $bid = BidHistory::where('id', $id)->first();
+            $bids[] = $bid;
+        }
         $view = view('home.market.bidder_table', compact('bids'))->render();
         return response()->json([1, $view]);
     }
@@ -360,9 +366,48 @@ class MarketHomeController extends Controller
             $market_id = $request->id;
             $market = Market::where('id', $market_id)->first();
             $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
-            $this->BidWinner($market);
-            $view = view('home.market.final_status', compact('bidhistories_groups', 'market'))->render();
-            return response()->json([1, $view]);
+            $ids = $this->BidWinner($market);
+            $bids = [];
+            $max_quantity = $market->SalesForm->max_quantity;
+            $remain_quantity = $max_quantity;
+            $win_user_ids = [];
+            foreach ($ids as $key => $id) {
+                $is_win = 1;
+                $bid = BidHistory::where('id', $id)->first();
+                $bid_quantity = $bid->quantity;
+                if ($remain_quantity == 0) {
+                    $quantity_win = 0;
+                    $is_win = 0;
+                } else {
+                    if ($remain_quantity > $bid_quantity) {
+                        $quantity_win = $bid_quantity;
+                        $remain_quantity = $remain_quantity - $bid_quantity;
+                    } else {
+                        $quantity_win = $remain_quantity;
+                        $remain_quantity = 0;
+                    }
+                }
+                if ($is_win == 1) {
+                    $win_user_ids[] = $bid->user_id;
+                }
+                $bid->update([
+                    'quantity_win' => $quantity_win,
+                    'is_win' => $is_win,
+                ]);
+                $bids[] = $bid;
+            }
+            $view = view('home.market.final_status', compact('bids', 'market'))->render();
+            $user_is_login = auth()->check();
+            $id_exists_in_array=0;
+            $show_win_modal=0;
+            if ($user_is_login){
+                $user_login_id=auth()->id();
+                $id_exists_in_array=in_array($user_login_id,$win_user_ids);
+            }
+            if ($id_exists_in_array==1){
+                $show_win_modal=1;
+            }
+            return response()->json([1,$view,$show_win_modal]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
         }
@@ -384,16 +429,16 @@ class MarketHomeController extends Controller
 
     public function BidWinner($market)
     {
-        $sort_ids=[];
+        $sort_ids = [];
         $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
-        foreach ($bidhistories_groups as $bidhistories){
-            $bidhistories_qroupedby_quantities=$bidhistories->sortByDesc('quantity')->groupby('quantity');
-            foreach($bidhistories_qroupedby_quantities as $key=>$bidhistories_qroupedby_quantity){
-                foreach($bidhistories_qroupedby_quantity->sortBy('created_at',false) as $item){
-                    $sort_ids[]=$item->id;
+        foreach ($bidhistories_groups as $bidhistories) {
+            $bidhistories_qroupedby_quantities = $bidhistories->sortByDesc('quantity')->groupby('quantity');
+            foreach ($bidhistories_qroupedby_quantities as $key => $bidhistories_qroupedby_quantity) {
+                foreach ($bidhistories_qroupedby_quantity->sortBy('created_at', false) as $item) {
+                    $sort_ids[] = $item->id;
                 }
             }
         }
-        dd($sort_ids);
+        return $sort_ids;
     }
 }

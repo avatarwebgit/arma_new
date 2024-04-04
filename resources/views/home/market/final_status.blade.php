@@ -1,18 +1,16 @@
-@if(isset($bidhistories_groups))
-    @foreach($bidhistories_groups as $bidhistories)
-        @php
-            $bidhistories_qroupedby_quantities=$bidhistories->sortByDesc('quantity')->groupby('quantity');
-        @endphp
-        @foreach($bidhistories_qroupedby_quantities as $key=>$bidhistories_qroupedby_quantity)
-            @foreach($bidhistories_qroupedby_quantity->sortBy('created_at',false) as $item)
-                <tr>
-                    <td class="text-center">{{ $item->quantity }}</td>
-                    <td class="text-center">{{ $item->price }}</td>
-                    <td class="text-center">{{ $item->User->id }}</td>
-                    <td class="text-center">{{ $item->id }}</td>
-                </tr>
-            @endforeach
-        @endforeach
-    @endforeach
-
-@endif
+@foreach($bids as $item)
+    <tr>
+        <td class="text-center">{{ $item->quantity }}</td>
+        <td class="text-center">{{ $item->price }}</td>
+        <td class="text-center">{{ $item->User->id }}</td>
+        <td class="text-center">{{ $item->quantity_win }}</td>
+        <td class="text-center">
+            @if($item->is_win==1)
+                <span class="text-success">
+                    <i class="fa fa-check-circle"></i>
+                </span>
+            @else
+                -
+            @endif
+    </tr>
+@endforeach

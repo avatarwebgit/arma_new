@@ -252,6 +252,10 @@
                 method: "POST",
                 success: function (msg) {
                     if (msg[0] == 1) {
+                        let is_winner=msg[2];
+                        if (is_winner){
+                            show_win_modal();
+                        }
                         $('#final_status_section_table-' + id).html(msg[1]);
                         $('#final_status_section-' + id).show();
                     } else {
@@ -259,6 +263,11 @@
                     }
                 }
             })
+        }
+
+        function show_win_modal(){
+            console.log('pppp');
+            $('#Winner_Modal').modal('show');
         }
 
         function change_market_status(status, difference, change_color, color, statusText, id) {

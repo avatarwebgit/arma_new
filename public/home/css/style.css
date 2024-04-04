@@ -276,6 +276,7 @@ header .navbar-brand img {
 .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
+    font-weight: bolder;
 }
 
 header nav .nav-item.active a {
@@ -822,11 +823,11 @@ footer.landing-footer-two ul li a:hover {
 
 .table  td {
     font-size: 13px;
-    padding: 0 18px;
+    padding: 3px 18px;
     vertical-align: middle;
 }
 .slide_more_table  td {
-    padding: 0;
+    padding: 2px 8px;
 }
 
 
@@ -2905,7 +2906,7 @@ body {
         transform: rotate(1turn)
     }
 }
-.table_in_table{
+.slide_more_table{
     background-color: #f8f8f8;
 }
 .table_in_table td {

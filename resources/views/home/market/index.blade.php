@@ -254,7 +254,7 @@
                             <table class="table">
                                 <thead class="bg-blue text-center text-white">
                                 <tr>
-                                    <th class="text-white" colspan="4">final Result</th>
+                                    <th class="text-white" colspan="5">final Result</th>
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
@@ -269,6 +269,9 @@
                                             user
                                         </th>
                                     @endif
+                                    <th class="text-center text-white w-50">
+                                        Quantity_win
+                                    </th>
                                     <th class="text-center text-white w-50">
                                         status
                                     </th>
@@ -301,4 +304,6 @@
     <div id="benchmark_info">
         @include('home.market.benchmark_info')
     </div>
+    @include('home.market.winner_modal')
+
 @endsection
