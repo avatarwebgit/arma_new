@@ -165,9 +165,9 @@
                                     <th class="text-center text-white">
 
                                     </th>
-                                    <th style="font-size: 12pt" class="text-center text-white">Quantity( {{ $market->SalesForm->unit }})
+                                    <th class="text-center text-white">Quantity( {{ $market->SalesForm->unit }})
                                     </th>
-                                    <th style="font-size: 12pt" class="text-center text-white">Price ( {{ $market->SalesForm->currency }}
+                                    <th class="text-center text-white">Price ( {{ $market->SalesForm->currency }}
                                         )
                                     </th>
                                     <th class="text-center text-white">
