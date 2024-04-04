@@ -317,7 +317,9 @@
                         <span>
               2
             </span>
-                        <h3>Link your bank account </h3>
+                        <h3>
+                            pay the deposit
+                        </h3>
                     </div>
                 </div>
                 <div class="col-md-4">
