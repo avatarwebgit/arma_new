@@ -23,7 +23,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
             MarketSetting::create([
@@ -105,7 +104,6 @@ class IndexController extends Controller
                     $ids[] = $market->id;
                 }
             }
-
             foreach ($yesterday_markets_groups as $markets) {
                 foreach ($markets as $market) {
                     $result = $this->statusTimeMarket($market);
@@ -121,7 +119,6 @@ class IndexController extends Controller
                     $ids[] = $market->id;
                 }
             }
-
             $market_values = 0;
             $market_is_open = 0;
             foreach ($today_markets_groups as $markets) {
@@ -132,15 +129,12 @@ class IndexController extends Controller
                     $market_values = $market_values + $market->offer_price;
                 }
             }
-
             if ($market_is_open === 1) {
                 $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
             } else {
                 $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
             }
-
             $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups'))->render();
-
             return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
