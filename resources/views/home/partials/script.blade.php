@@ -76,6 +76,7 @@
 
     });
 
+
     function MarketOnline(id) {
         var MarketSystem = {
             start: function () {
@@ -92,9 +93,7 @@
         MarketSystem.start();
 
         async function refreshMarketTablewithJs(id) {
-
             let market = $('#market-' + id);
-            let now = "{{ \Carbon\Carbon::now() }}";
             let benchmark1 = market.attr('data-benchmark1');
             let benchmark2 = market.attr('data-benchmark2');
             let benchmark3 = market.attr('data-benchmark3');
@@ -103,8 +102,8 @@
             let benchmark6 = market.attr('data-benchmark6');
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
-            now = moment().tz('UTC').format('Y-M-d h:mm:ss');
-            now = new Date(now);
+            var now = new Date();
+            now.setMinutes(now.getMinutes() - 210);
             benchmark1 = new Date(benchmark1);
             benchmark2 = new Date(benchmark2);
             benchmark3 = new Date(benchmark3);
@@ -120,7 +119,7 @@
             } else if (benchmark1 < now && now < benchmark2) {
                 ready_to_open(benchmark2, now, id)
             } else if (benchmark2 < now && now < benchmark3) {
-                opening(benchmark3, now, id)
+                opening(benchmark3, now, id);
             } else if (benchmark3 < now && now < benchmark4) {
                 Quotation_1_2(benchmark4, now, id);
             } else if (benchmark4 < now && now < benchmark5) {
@@ -154,8 +153,24 @@
                     }
                 })
             }
-
             return market_continue;
+        }
+
+        function Market_Table_Index_Status() {
+            $.ajax({
+                url: "{{ route('home.Market_Table_Index_Status') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                dataType: "json",
+                method: "POST",
+                async: false,
+                success: function (msg) {
+                    if (msg[0] == 1) {
+                        $('#Market_Status_Text').html(msg[1]);
+                    }
+                }
+            })
         }
 
         function waiting_to_open(benchmark1, now, id) {
@@ -294,7 +309,7 @@
         }
 
         function change_status_market(id, status) {
-
+            Market_Table_Index_Status();
             $.ajax({
                 url: "{{ route('home.change_market_status') }}",
                 data: {

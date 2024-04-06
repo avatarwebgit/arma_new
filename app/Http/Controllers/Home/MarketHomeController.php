@@ -134,6 +134,7 @@ class MarketHomeController extends Controller
             $market->update([
                 'status' => $status
             ]);
+
             broadcast(new MarketStatusUpdated($market_id));
             return response()->json($status);
         } catch (\Exception $e) {
@@ -418,6 +419,7 @@ class MarketHomeController extends Controller
     public function get_market_info(Request $request)
     {
         try {
+            $market_is_open=0;
             $market_id = $request->market_id;
             $market = Market::where('id', $market_id)->first();
             $status_text = $market->Status->title;
