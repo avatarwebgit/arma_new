@@ -188,6 +188,7 @@
             <tr style="color: {{ $row_color }} !important;" id="market-{{ $market->id }}"
                 data-status="{{ $market->status }}"
                 data-difference="{{ $market->difference }}"
+                data-now="{{ $now }}"
                 data-benchmark1="{{ $market->benchmark1 }}"
                 data-benchmark2="{{ $market->benchmark2 }}"
                 data-benchmark3="{{ $market->benchmark3 }}"

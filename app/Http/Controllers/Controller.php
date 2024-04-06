@@ -28,16 +28,16 @@ class Controller extends BaseController
         $date_time = $date . ' ' . $time;
 
         $startTime = Carbon::parse($date_time);
-
         $now = Carbon::now();
+
         $time_to_close_bid_deposit=$startTime->copy()->addMinutes(-120);
+
         $benchmark1 = $startTime->copy()->addMinutes(-$ready_to_duration);
         $benchmark2 = $startTime;
         $benchmark3 = $startTime->copy()->addMinutes($open_duration);
         $benchmark4 = $benchmark3->copy()->addMinutes($q_1);
         $benchmark5 = $benchmark4->copy()->addMinutes($q_2);
         $benchmark6 = $benchmark5->copy()->addMinutes($q_3);
-
         $bids = $market->Bids;
         if ($force_determine_status == 0) {
             if ($market->status == 7) {

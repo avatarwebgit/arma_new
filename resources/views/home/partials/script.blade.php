@@ -92,7 +92,9 @@
         MarketSystem.start();
 
         async function refreshMarketTablewithJs(id) {
+
             let market = $('#market-' + id);
+            let now = "{{ \Carbon\Carbon::now() }}";
             let benchmark1 = market.attr('data-benchmark1');
             let benchmark2 = market.attr('data-benchmark2');
             let benchmark3 = market.attr('data-benchmark3');
@@ -101,7 +103,8 @@
             let benchmark6 = market.attr('data-benchmark6');
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
-            let now = moment();
+            now = moment().tz('UTC').format('Y-M-d h:mm:ss');
+            now = new Date(now);
             benchmark1 = new Date(benchmark1);
             benchmark2 = new Date(benchmark2);
             benchmark3 = new Date(benchmark3);
@@ -252,8 +255,8 @@
                 method: "POST",
                 success: function (msg) {
                     if (msg[0] == 1) {
-                        let is_winner=msg[2];
-                        if (is_winner){
+                        let is_winner = msg[2];
+                        if (is_winner) {
                             show_win_modal();
                         }
                         $('#final_status_section_table-' + id).html(msg[1]);
@@ -265,8 +268,7 @@
             })
         }
 
-        function show_win_modal(){
-            console.log('pppp');
+        function show_win_modal() {
             $('#Winner_Modal').modal('show');
         }
 
@@ -292,7 +294,7 @@
         }
 
         function change_status_market(id, status) {
-            console.log('ok');
+
             $.ajax({
                 url: "{{ route('home.change_market_status') }}",
                 data: {
@@ -405,9 +407,9 @@
                     let j = 0;
                     $.each(errors, function (i, val) {
                         if (j == 0) {
-                            error_text = '<i class="fa-solid fa-triangle-exclamation mr-2"></i>'+val;
+                            error_text = '<i class="fa-solid fa-triangle-exclamation mr-2"></i>' + val;
                         } else {
-                            error_text = error_text + '<br>' + '<i class="fa-solid fa-triangle-exclamation mr-2"></i>'+val;
+                            error_text = error_text + '<br>' + '<i class="fa-solid fa-triangle-exclamation mr-2"></i>' + val;
                         }
                         j++;
                         $('#bid_validate_error').html(error_text);
