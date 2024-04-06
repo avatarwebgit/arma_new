@@ -42,7 +42,8 @@ class MarketHomeController extends Controller
         $bids = $market->Bids()->orderBy('price', 'desc')->take(10)->get();
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions'));
+        $now=Carbon::now();
+        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions','now'));
     }
 
     public function GetMarket(Request $request)
@@ -122,8 +123,9 @@ class MarketHomeController extends Controller
         try {
             $market_id = $request->market_id;
             $status = $request->status;
+            $market = Market::where('id', $market_id)->first();
             if ($request->status > 3) {
-                $market = Market::where('id', $market_id)->first();
+
                 $bids = $market->Bids;
                 if (count($bids) == 0) {
                     $status = 7;

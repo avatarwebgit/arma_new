@@ -61,12 +61,11 @@ class IndexController extends Controller
             $market_open_finished_modal = session()->get('market_open_finished');
         }
         session()->forget('market_open_finished');
-
         return view('home.index.index',
             compact('market_open_finished_modal_exists',
                 'market_open_finished_modal',
             'show_modal',
-            'modal_message'
+            'modal_message',
             ));
     }
 
@@ -78,6 +77,7 @@ class IndexController extends Controller
     public function MarketTableIndex()
     {
         try {
+
             $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
             $yesterday = Carbon::yesterday();
             $pre_yesterday = Carbon::yesterday()->copy()->addDay(-1);
@@ -134,7 +134,8 @@ class IndexController extends Controller
             } else {
                 $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
             }
-            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups'))->render();
+            $now=Carbon::now();
+            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups','now'))->render();
             return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);

@@ -13,8 +13,8 @@
         @endif
 
         function startTime() {
-            var dayOfWeek = moment().format("dddd");
-            let clock = moment().format("ll  h:mm a")
+            var dayOfWeek = moment().tz("UTC").format("dddd");
+            let clock = moment().tz("UTC").format("ll  h:mm a");
             let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span>' + clock + '</span>'
             $('#time_now').html(time_now);
             t = setTimeout(function () {
@@ -225,6 +225,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-xl-4 p-0 text-right" id="time_now">
                 <h3 >{{ Carbon\Carbon::now()->format('l') }}</h3>
                 <span>{{ Carbon\Carbon::now()->format('d M Y g:i A') }}</span>
