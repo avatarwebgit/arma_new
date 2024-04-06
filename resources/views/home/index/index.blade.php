@@ -90,6 +90,7 @@
                     $('#market_table').html(table_view);
                     $('#market_value').html(market_value);
                     $('#Market_Status_Text').html(Market_Status_Text);
+                    $('#Market_Status_Text').html(msg[4]);
                     $.each(ids, function (i, val) {
                         MarketOnline(val);
                     });
@@ -198,7 +199,7 @@
             <div class="col-12 col-xl-4 p-0 text-left" style="font-size: 13px;font-weight: bold">
                 <h3 id="Market_Status_Text">
                     <span>Market: </span>
-                    <span class="text-success">Open</span>
+                    <span class="text-success"></span>
                 </h3>
                 <div class="text-left">
                     <span >Today Trade Value:</span>

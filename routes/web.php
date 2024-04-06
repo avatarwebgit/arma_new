@@ -53,6 +53,7 @@ Route::post('/role-permission/{id}', [
 
 /////////////////////////////////web
 Route::get('/', [IndexController::class, 'index'])->name('home.index');
+Route::post('/Market_Table_Index_Status', [IndexController::class, 'Market_Table_Index_Status'])->name('home.Market_Table_Index_Status');
 Route::get('/home', [IndexController::class, 'home'])->name('home');
 Route::get('/redirect-user', [IndexController::class, 'redirectUser'])->name('profile');
 Route::post('/startBroadCast', [IndexController::class, 'startBroadCast'])->name('startBroadCast');
