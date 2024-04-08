@@ -59,12 +59,14 @@ class IndexController extends Controller
         if ($market_open_finished_modal_exists) {
             $market_open_finished_modal = session()->get('market_open_finished');
         }
+        $close_market = $this->close_market_today();
         session()->forget('market_open_finished');
         return view('home.index.index',
             compact('market_open_finished_modal_exists',
                 'market_open_finished_modal',
                 'show_modal',
                 'modal_message',
+            'close_market'
             ));
     }
 
@@ -76,28 +78,24 @@ class IndexController extends Controller
 
     public function Market_Table_Index_Status()
     {
-        try {
-            $yesterday = Carbon::yesterday();
-            $tomorrow = Carbon::tomorrow();
-            $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
-            $market_is_open = 0;
-            foreach ($today_markets_groups as $markets) {
-                foreach ($markets as $market) {
-                    $market_status_index = $this->market_status_index($market, $market_is_open);
-                    $market_is_open = $market_status_index[0];
-                }
-            }
-            if ($market_is_open === 1) {
-                $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
-            } else {
-                $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
-            }
-            return response()->json([1,$market_is_open_text]);
-        } catch (\Exception $e) {
-            return response()->json([0, $e->getMessage()]);
-        }
+        $yesterday = Carbon::yesterday();
+        $tomorrow = Carbon::tomorrow();
+        $markets = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get();
 
+        $market_is_open = 0;
+        foreach ($markets as $market) {
+            $market_status_index = $this->market_status_index($market, $market_is_open);
+            $market_is_open = $market_status_index[0];
+        }
+        if ($market_is_open === 1) {
+            $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
+        } else {
+            $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
+        }
+        $close_market = $this->close_market_today();
+        return response()->json([1, $market_is_open_text, $close_market]);
     }
+
     public function MarketTableIndex()
     {
         try {
@@ -155,19 +153,18 @@ class IndexController extends Controller
             } else {
                 $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
             }
-
             $now = Carbon::now();
             $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
-            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text]);
+            $close_market = $this->close_market_today();
+            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
-
     }
 
     function market_status_index($market, $market_is_open)
     {
-        if ($market->status == 3 or $market->status == 4 or $market->status == 5 or $market->status == 6) {
+        if ($market->status != 7) {
             $market_is_open = 1;
         }
         return [$market_is_open];
@@ -232,5 +229,21 @@ class IndexController extends Controller
         session()->flash('success', 'Join has been Successfully');
         return redirect()->route('home.index');
 
+    }
+
+    private function close_market_today()
+    {
+        $yesterday = Carbon::yesterday();
+        $tomorrow = Carbon::tomorrow();
+        $last_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'desc')->first();
+        $close_market=Carbon::yesterday();
+        if ($last_market){
+            $statusTimeMarket_result = $this->statusTimeMarket($last_market);
+            $close_market = $statusTimeMarket_result[7];
+        }
+        $hours = Carbon::parse($close_market)->format('Y/m/d');
+        $minute = Carbon::parse($close_market)->format('H:i:s');
+        $close_market = $hours . ' ' . $minute;
+        return $close_market;
     }
 }
