@@ -33,8 +33,7 @@
             delay: 10,
             time: 1000
         });
-        let endDate="{{ $close_market }}";
-        End_Market_Timer(endDate);
+
     });
     $('.open_page_description').click(function () {
         let is_open = $(this).attr('data-open');

@@ -5,7 +5,8 @@
     <script type="module">
 
         $(document).ready(function () {
-
+            let endDate="{{ $close_market }}";
+            End_Market_Timer(endDate);
             GetMarkets();
 
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
@@ -397,4 +398,7 @@
             </div>
         </div>
     @endif
+
+
+
 @endsection
