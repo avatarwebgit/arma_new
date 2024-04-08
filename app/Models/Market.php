@@ -10,7 +10,7 @@ class Market extends Model
     use HasFactory;
 
     protected $table = "markets";
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function SalesForm()
     {

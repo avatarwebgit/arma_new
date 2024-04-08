@@ -85,6 +85,18 @@ class MarketController extends Controller
         return view('admin.markets.edit', compact('market', 'sales_offer_form_copy'));
     }
 
+    public function remove(Request $request)
+    {
+        $market = Market::where('id', $request->id)->first();
+        $bids = $market->Bids;
+        foreach ($bids as $bid) {
+            $bid->delete();
+        }
+        $market->delete();
+        return redirect()->back();
+    }
+
+
     public function update(Market $market, Request $request)
     {
         $request->validate([
@@ -101,6 +113,18 @@ class MarketController extends Controller
         $this->statusTimeMarket($market, 1);
         broadcast(new MarketTimeUpdated());
         return redirect()->route('admin.markets.folder', ['date' => $market->date])->with('success', 'Market updated successfully');
+    }
+
+    public function copy(Request $request)
+    {
+        try {
+            $market = Market::where('id', $request->market_id)->first()->toArray();
+            Market::create($market);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
+        }
+
     }
 
     public function sales_form($page_type = 'Create', $item = 'null')
@@ -208,7 +232,7 @@ class MarketController extends Controller
         $future = $yesterday->copy()->addDay(4);
         $markets = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get();
         foreach ($markets as $market) {
-            $this->statusTimeMarket($market,1);
+            $this->statusTimeMarket($market, 1);
         }
         broadcast(new MarketTimeUpdated());
         return redirect()->back();
@@ -319,8 +343,8 @@ class MarketController extends Controller
                 foreach ($bids_touch_price as $bid) {
                     $total_quantity = $total_quantity + $bid->quantity;
                 }
-                $max_quantity=$market->SalesForm->max_quantity;
-                if ($total_quantity<$max_quantity or $total_quantity==$max_quantity) {
+                $max_quantity = $market->SalesForm->max_quantity;
+                if ($total_quantity < $max_quantity or $total_quantity == $max_quantity) {
                     $market->update([
                         'status' => 7
                     ]);
@@ -328,7 +352,7 @@ class MarketController extends Controller
                 }
 
                 $bids_exists_count = $market->Bids()->where('price', '>=', $price)->count();
-                if ($bids_exists_count<2) {
+                if ($bids_exists_count < 2) {
                     $market->update([
                         'status' => 7
                     ]);
