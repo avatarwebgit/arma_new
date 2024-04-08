@@ -1,42 +1,7 @@
 @extends('home.homelayout.app')
 
 @section('script')
-    <script>
-        @if($show_modal==true)
-        $(document).ready(function () {
-            let show_modal = {{ $show_modal }};
 
-            if (show_modal) {
-                $('#AlertModal').modal('show');
-            }
-        });
-        @endif
-
-        function startTime() {
-            var dayOfWeek = moment().tz("UTC").format("dddd");
-            let clock = moment().tz("UTC").format("ll  h:mm a");
-            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span>' + clock + '</span>'
-            $('#time_now').html(time_now);
-            t = setTimeout(function () {
-                startTime()
-            }, 500);
-        }
-
-        startTime();
-
-        function slidemore(market_id) {
-            $('#more_table_' + market_id).slideToggle();
-            let svg = $('#slide_more_angle_' + market_id).find('svg');
-            let hasClass = svg.hasClass('fa-angle-down');
-            if (hasClass) {
-                svg.removeClass('fa-angle-down');
-                svg.addClass('fa-angle-up');
-            } else {
-                svg.removeClass('fa-angle-up');
-                svg.addClass('fa-angle-down');
-            }
-        }
-    </script>
     <script type="module">
 
         $(document).ready(function () {
@@ -70,33 +35,7 @@
                 get_market_info(market_id)
             });
 
-        function GetMarkets() {
-            $.ajax({
-                url: "{{ route('home.MarketTableIndex') }}",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                },
-                method: 'post',
-                dataType: 'json',
-                beforeSend: function () {
-                    let loader = '<div class="loader"></div>'
-                    $('#market_table').html(loader);
-                },
-                success: function (msg) {
-                    let table_view = msg[1];
-                    let ids = msg[2];
-                    let market_value = msg[3];
-                    let Market_Status_Text = msg[4];
-                    $('#market_table').html(table_view);
-                    $('#market_value').html(market_value);
-                    $('#Market_Status_Text').html(Market_Status_Text);
-                    $('#Market_Status_Text').html(msg[4]);
-                    $.each(ids, function (i, val) {
-                        MarketOnline(val);
-                    });
-                }
-            })
-        }
+
 
         function get_market_info(market_id) {
             $.ajax({
@@ -166,6 +105,71 @@
 
 
     </script>
+    <script>
+        function GetMarkets() {
+            $.ajax({
+                url: "{{ route('home.MarketTableIndex') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                method: 'post',
+                dataType: 'json',
+                beforeSend: function () {
+                    let loader = '<div class="loader"></div>'
+                    $('#market_table').html(loader);
+                },
+                success: function (msg) {
+                    let table_view = msg[1];
+                    let ids = msg[2];
+                    let market_value = msg[3];
+                    let Market_Status_Text = msg[4];
+                    let endDate = msg[5];
+                    $('#market_table').html(table_view);
+                    $('#market_value').html(market_value);
+                    $('#Market_Status_Text').html(Market_Status_Text);
+                    $('#Market_Status_Text').html(msg[4]);
+                    $.each(ids, function (i, val) {
+                        MarketOnline(val);
+                    });
+                }
+            })
+        }
+
+        @if($show_modal==true)
+        $(document).ready(function () {
+            let show_modal = {{ $show_modal }};
+
+            if (show_modal) {
+                $('#AlertModal').modal('show');
+            }
+        });
+        @endif
+
+        function startTime() {
+            var dayOfWeek = moment().tz("UTC").format("dddd");
+            let clock = moment().tz("UTC").format("ll  h:mm a");
+            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span>' + clock + '</span>'
+            $('#time_now').html(time_now);
+            t = setTimeout(function () {
+                startTime()
+            }, 500);
+        }
+
+        startTime();
+
+        function slidemore(market_id) {
+            $('#more_table_' + market_id).slideToggle();
+            let svg = $('#slide_more_angle_' + market_id).find('svg');
+            let hasClass = svg.hasClass('fa-angle-down');
+            if (hasClass) {
+                svg.removeClass('fa-angle-down');
+                svg.addClass('fa-angle-up');
+            } else {
+                svg.removeClass('fa-angle-up');
+                svg.addClass('fa-angle-down');
+            }
+        }
+    </script>
 @endsection
 
 @section('style')
@@ -211,17 +215,17 @@
             <div id="timer_section" class="col-12 col-xl-4 d-flex justify-content-center mb-3 p-0 ">
                 <div class="clock">
                     <div class="column">
-                        <div class="timer" id="hours"></div>
+                        <div class="timer" id="Hours"></div>
                         <div class="text hour">Hour</div>
                     </div>
                     <div style="font-family:none !important" class="timer">:</div>
                     <div class="column">
-                        <div class="timer" id="minutes"></div>
+                        <div class="timer" id="Minutes"></div>
                         <div class="text">MIN</div>
                     </div>
                     <div style="font-family: normal !important" class="timer">:</div>
                     <div class="column">
-                        <div class="timer" id="seconds"></div>
+                        <div class="timer" id="Seconds"></div>
                         <div class="text">SEC</div>
                     </div>
                 </div>
