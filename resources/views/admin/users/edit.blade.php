@@ -7,7 +7,7 @@
 @push('script')
     <script>
         $(document).ready(function () {
-            $('#new_password').val(' ');
+            $('#new_password').val('');
         })
 
         // Generate a Password string
