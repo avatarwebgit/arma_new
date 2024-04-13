@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
     <link rel="stylesheet" href="{{ asset('vendor/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/developer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/bootstrap-clockpicker.min.css') }}">
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     @stack('style')
 </head>
@@ -221,6 +222,7 @@
 <script src="{{ asset('assets/js/plugins/bouncer.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/form-validation.js') }}"></script>
 <script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap-clockpicker.min.js') }}"></script>
 
 @if (!empty(setting('gtag')))
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('gtag') }}"></script>
@@ -263,7 +265,7 @@
     $('#profile-toggle').click(function () {
         $('#profile-dropdown').slideToggle();
     })
-
+    $('.clockpicker').clockpicker();
 </script>
 @yield('script')
 @include('admin.layouts.includes.alerts')

@@ -39,13 +39,17 @@
                                                 </div>
                                                 <div class="col-12 col-md-3 mb-3">
                                                     <label for="start">start(Time)</label>
-                                                    <input id="start" type="time" name="time" class="form-control"
-                                                           value="{{ old('time') }}">
-                                                    @error('time')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
+                                                    <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                                                        <input type="text" class="form-control" value="{{ old('time') }}" name="time">
+                                                        <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+                                                        @error('bid_deposit')
+                                                        <p class="input-error-validate">
+                                                            {{ $message }}
+                                                        </p>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="col-12 col-md-3 mb-3">
                                                     <label for="bid_deposit">Bid Deposit</label>
