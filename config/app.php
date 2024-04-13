@@ -250,8 +250,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Paytm' => Paytm\JsCheckout\Facades\Paytm::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Module' => Nwidart\Modules\Facades\Module::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class
 
     ])->toArray(),
 
