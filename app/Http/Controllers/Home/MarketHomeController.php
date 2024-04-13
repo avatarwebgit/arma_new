@@ -42,8 +42,8 @@ class MarketHomeController extends Controller
         $bids = $market->Bids()->orderBy('price', 'desc')->take(10)->get();
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        $now=Carbon::now();
-        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions','now'));
+        $now = Carbon::now();
+        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions', 'now'));
     }
 
     public function GetMarket(Request $request)
@@ -102,7 +102,7 @@ class MarketHomeController extends Controller
     {
         $market = Market::where('id', $request->market)->first();
         $ids = $this->BidWinner($market);
-        $bids=[];
+        $bids = [];
         foreach ($ids as $key => $id) {
             $bid = BidHistory::where('id', $id)->first();
             $bids[] = $bid;
@@ -401,16 +401,16 @@ class MarketHomeController extends Controller
             }
             $view = view('home.market.final_status', compact('bids', 'market'))->render();
             $user_is_login = auth()->check();
-            $id_exists_in_array=0;
-            $show_win_modal=0;
-            if ($user_is_login){
-                $user_login_id=auth()->id();
-                $id_exists_in_array=in_array($user_login_id,$win_user_ids);
+            $id_exists_in_array = 0;
+            $show_win_modal = 0;
+            if ($user_is_login) {
+                $user_login_id = auth()->id();
+                $id_exists_in_array = in_array($user_login_id, $win_user_ids);
             }
-            if ($id_exists_in_array==1){
-                $show_win_modal=1;
+            if ($id_exists_in_array == 1) {
+                $show_win_modal = 1;
             }
-            return response()->json([1,$view,$show_win_modal]);
+            return response()->json([1, $view, $show_win_modal]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
         }
@@ -419,12 +419,15 @@ class MarketHomeController extends Controller
     public function get_market_info(Request $request)
     {
         try {
-            $market_is_open=0;
+            $market_is_open = 0;
             $market_id = $request->market_id;
             $market = Market::where('id', $market_id)->first();
             $status_text = $market->Status->title;
             $status_color = $market->Status->color;
-            return response()->json([1, $status_text, $status_color]);
+            if ($market->status==2 or $market->status==3 or $market->status==4 or $market->status==5 or $market->status==6 or $market->status==7) {
+                $market_is_open=1;
+            }
+            return response()->json([1, $status_text, $status_color,$market_is_open]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
         }

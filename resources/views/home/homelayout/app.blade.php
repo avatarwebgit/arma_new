@@ -307,6 +307,9 @@
 
         function change_market_status(status, difference, change_color, color, statusText, id) {
             let previous_status = $('#previous_status-' + id).val();
+            let animation_main_div=$('#market-time-parent-' + id).find('.animation_main_div');
+            animation_main_div.removeClass('d-none');
+            animation_main_div.addClass('d-none');
             $('#previous_status-' + id).val(status);
             difference = parseInt(difference / 1000);
             if (change_color) {
@@ -318,6 +321,10 @@
             $('#market-status-' + id).html(statusText);
             if (status != 1) {
                 $('#market-time-' + id).html(statusText);
+            }
+            console.log(status);
+            if (status==2 || status==3 || status==4 || status==5) {
+                animation_main_div.removeClass('d-none');
             }
             sales_offer_buttons(status);
             if (previous_status != status) {

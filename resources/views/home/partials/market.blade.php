@@ -215,8 +215,23 @@
                 <td>
                     {{ \Carbon\Carbon::parse($market->date_time)->format('Y-m-d') }}
                 </td>
-                <td id="market-time-{{ $market->id }}">
-                    {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}
+                <td id="market-time-parent-{{ $market->id }}">
+                    <div class="d-flex align-items-center">
+                        <div class="animation_main_div d-none">
+                            <div class="circle " style="background-color: #0b2e13 !important;"></div>
+                            <div class="circle2" style="background-color: #0b2e13 !important;"></div>
+                            <div class="circle3" style="background-color: #0b2e13 !important;"></div>
+                            <div class="circle4" style="background-color: #0b2e13 !important;"></div>
+                            <div class="logo-div-send">
+                                <!--logo or anything put here -->
+                            </div>
+                        </div>
+                        <span id="market-time-{{ $market->id }}" style="margin-top: 10px;margin-left: 10px">
+                            {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}
+                        </span>
+                    </div>
+
+
                 </td>
                 <td id="slide_more_angle_{{ $market->id }}" onclick="slidemore({{ $market->id }})"
                     class="slide_more_angle cursor-pointer text-right">

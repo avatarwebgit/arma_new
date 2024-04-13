@@ -39,6 +39,9 @@
 
 
         function get_market_info(market_id) {
+            let target_div=$('#market-time-'+market_id);
+            let animation_main_div=target_div.find('animation_main_div');
+
             $.ajax({
                 url: "{{ route('home.get_market_info') }}",
                 dataType: "json",
@@ -51,8 +54,10 @@
                     if (msg[0] === 1) {
                         let status_text = msg[1];
                         let status_color = msg[2];
-                        $('#market-time-'+market_id).text(status_text);
-                        $('#market-time-'+market_id).css('color',status_color);
+                        let market_is_open = msg[3];
+                        target_div.text(status_text);
+                        target_div.css('color',status_color);
+                        console.log(market_is_open);
                     }
                 }
             })
