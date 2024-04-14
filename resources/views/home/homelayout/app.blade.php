@@ -28,6 +28,60 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+    var timerCountdown=0;
+    function makeTimer(endTime,market_is_open) {
+        if (market_is_open==0){
+            clearInterval(timerCountdown);
+            timerClose();
+        }else {
+            if (!timerCountdown==0){
+                clearInterval(timerCountdown);
+            }
+            timerCountdown = setInterval(function () {
+                Timer(endTime);
+            }, 1000);
+        }
+    }
+    function timerClose(){
+        var Hours = $('#Hours');
+        var Minutes = $('#Minutes');
+        var Seconds = $('#Seconds');
+        Hours.text('00');
+        Minutes.text('00');
+        Seconds.text('00');
+    }
+
+    function Timer(endTime) {
+        var Hours = $('#Hours');
+        var Minutes = $('#Minutes');
+        var Seconds = $('#Seconds');
+        endTime = new Date(endTime);
+        var now = new Date();
+        now = now.setMinutes(now.getMinutes() - 210);
+        now = new Date(now);
+        endTime = endTime.getTime()
+        now = now.getTime()
+        var timeLeft = endTime - now;
+        timeLeft = timeLeft / 1000;
+        var days = Math.floor(timeLeft / 86400);
+        var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+        var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
+        var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+        if (hours < "10") {
+            hours = "0" + hours;
+        }
+        if (minutes < "10") {
+            minutes = "0" + minutes;
+        }
+        if (seconds < "10") {
+            seconds = "0" + seconds;
+        }
+        Hours.text(hours);
+        Minutes.text(minutes);
+        Seconds.text(seconds);
+    }
+
+
     jQuery(document).ready(function ($) {
         $('.counter').counterUp({
             delay: 10,
@@ -65,33 +119,35 @@
     }
 
 
-    function End_Market_Timer(endDate) {
-        var Hours = $('#Hours');
-        var Minutes = $('#Minutes');
-        var Seconds = $('#Seconds');
-        let myCountDown = new ysCountDown(endDate, function (remaining, finished) {
-            var message = "";
-            if (finished) {
-                message = "Expired";
-                Hours.text('00');
-                Minutes.text('00');
-                Seconds.text('00');
-            } else {
-                if (remaining.seconds < 10) {
-                    remaining.seconds = '0' + remaining.seconds;
-                }
-                if (remaining.minutes < 10) {
-                    remaining.minutes = '0' + remaining.minutes;
-                }
-                if (remaining.hours < 10) {
-                    remaining.hours = '0' + remaining.hours;
-                }
-                Hours.text(remaining.hours);
-                Minutes.text(remaining.minutes);
-                Seconds.text(remaining.seconds);
-            }
-        });
-    }
+    // function End_Market_Timer(endDate) {
+    //     var Hours = $('#Hours');
+    //     var Minutes = $('#Minutes');
+    //     var Seconds = $('#Seconds');
+    //
+    //
+    //     let myCountDown = new ysCountDown(endDate, function (remaining,finished) {
+    //         var message = "";
+    //         if (finished) {
+    //             message = "Expired";
+    //             Hours.text('00');
+    //             Minutes.text('00');
+    //             Seconds.text('00');
+    //         } else {
+    //             if (remaining.seconds < 10) {
+    //                 remaining.seconds = '0' + remaining.seconds;
+    //             }
+    //             if (remaining.minutes < 10) {
+    //                 remaining.minutes = '0' + remaining.minutes;
+    //             }
+    //             if (remaining.hours < 10) {
+    //                 remaining.hours = '0' + remaining.hours;
+    //             }
+    //             Hours.text(remaining.hours);
+    //             Minutes.text(remaining.minutes);
+    //             Seconds.text(remaining.seconds);
+    //         }
+    //     });
+    // }
 
     function MarketOnline(id) {
         var MarketSystem = {
@@ -185,7 +241,8 @@
                     if (msg[0] == 1) {
                         $('#Market_Status_Text').html(msg[1]);
                         let endDate = msg[2];
-                        End_Market_Timer(endDate);
+                        let market_id_open = msg[3];
+                        makeTimer(endDate,market_id_open);
                     }
                 }
             })
@@ -307,7 +364,7 @@
 
         function change_market_status(status, difference, change_color, color, statusText, id) {
             let previous_status = $('#previous_status-' + id).val();
-            let animation_main_div=$('#market-time-parent-' + id).find('.animation_main_div');
+            let animation_main_div = $('#market-time-parent-' + id).find('.animation_main_div');
             animation_main_div.removeClass('d-none');
             animation_main_div.addClass('d-none');
             $('#previous_status-' + id).val(status);
@@ -323,7 +380,7 @@
                 $('#market-time-' + id).html(statusText);
             }
             console.log(status);
-            if (status==2 || status==3 || status==4 || status==5) {
+            if (status == 2 || status == 3 || status == 4 || status == 5) {
                 animation_main_div.removeClass('d-none');
             }
             sales_offer_buttons(status);
@@ -671,6 +728,7 @@
             $('#scroll-container-first-div2').removeClass('animate_paused');
         });
     }
+
 
 </script>
 
