@@ -56,7 +56,7 @@
 
                 <div class="col-md-1">
                     <a href="{{ route('home.index') }}">
-                        <img src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" alt="">
+                        <img src="{{ imageExist(env('UPLOAD_SETTING'),$footer_logo) }}" alt="">
                     </a>
                 </div>
             </div>
