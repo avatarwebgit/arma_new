@@ -145,7 +145,7 @@ class IndexController extends Controller
                 foreach ($markets as $market) {
                     $market_status_index = $this->market_status_index($market, $market_is_open);
                     $market_is_open = $market_status_index[0];
-                    $market_values = $market_values + $market->offer_price;
+                    $market_values = $market_values + $market->market_value;
                 }
             }
             if ($market_is_open === 1) {

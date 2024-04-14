@@ -73,15 +73,15 @@
                 <td colspan="11">
                     <table class="table-striped table_in_table" style="width: 100%">
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Specification</span>
                                 <span >Available</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Contract Type</span>
                                 <span > {{ $market->SalesForm->price_type }}</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Offer Price</span>
                                 <span >
                                     @auth
@@ -93,15 +93,15 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Partial Shipment</span>
                                 <span >{{ $market->SalesForm->partial_shipment }}</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Supplier</span>
                                 <span >{{ $market->SalesForm->company_type }}</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Peyment Term</span>
                                 <span >
                                     @auth
@@ -113,11 +113,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Insurance</span>
                                 <span >Available</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Target Market</span>
                                 <span >
                                     @auth
@@ -128,7 +128,7 @@
                                 </span>
                             </td>
 
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Delivery Date</span>
                                 <span >
                                     @auth
@@ -140,13 +140,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Min Order</span>
                                 <span >
                                    {{ $market->SalesForm->min_order }}
                                 </span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Inspection</span>
                                 <span >
                                     @auth
@@ -156,7 +156,7 @@
                                     @endauth
                                 </span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Documents</span>
                                 <span >
                                    @auth
@@ -216,7 +216,7 @@
                     {{ \Carbon\Carbon::parse($market->date_time)->format('Y-m-d') }}
                 </td>
                 <td id="market-time-parent-{{ $market->id }}">
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center justify-content-center">
                         <div class="animation_main_div d-none">
                             <div class="circle " style="background-color: #0b2e13 !important;"></div>
                             <div class="circle2" style="background-color: #0b2e13 !important;"></div>
@@ -248,15 +248,15 @@
                 <td colspan="11">
                     <table class="table_in_table" style="width: 100%">
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Specification</span>
                                 <span >Available</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Contract Type</span>
                                 <span > {{ $market->SalesForm->price_type }}</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Offer Price</span>
                                 <span >
                                     @auth
@@ -268,15 +268,15 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Partial Shipment</span>
                                 <span >{{ $market->SalesForm->partial_shipment }}</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Supplier</span>
                                 <span >{{ $market->SalesForm->company_type }}</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Peyment Term</span>
                                 <span >
                                     @auth
@@ -288,11 +288,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Insurance</span>
                                 <span >Available</span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Target Market</span>
                                 <span >
                                     @auth
@@ -303,7 +303,7 @@
                                 </span>
                             </td>
 
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Delivery Date</span>
                                 <span >
                                     @auth
@@ -315,13 +315,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Min Order</span>
                                 <span >
                                    {{ $market->SalesForm->min_order }}
                                 </span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Inspection</span>
                                 <span >
                                     @auth
@@ -331,7 +331,7 @@
                                     @endauth
                                 </span>
                             </td>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <span class="text-bold" >Documents</span>
                                 <span >
                                    @auth
