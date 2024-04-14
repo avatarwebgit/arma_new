@@ -183,6 +183,7 @@
     <style>
         #market_table{
             padding: 0 !important;
+            text-align: center
         }
         .p-0{
             padding: 0 !important;
@@ -192,6 +193,9 @@
         }
         #time_now > span{
             font-size: 13px !important;
+        }
+        .table_in_table span{
+            text-align: left !important;
         }
     </style>
 @endsection
