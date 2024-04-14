@@ -5,10 +5,7 @@
     <script type="module">
 
         $(document).ready(function () {
-            let endDate="{{ $close_market }}";
-            End_Market_Timer(endDate);
             GetMarkets();
-
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
             if (market_open_finished_modal_exists) {
                 $('#market_open_finished_modal_exists').modal('show');
@@ -20,8 +17,6 @@
             //         ids.push(val.id);
             //     })
             // })
-
-
             $('#market_open_finished_modal_exists_close').click(function () {
                 $('#market_open_finished_modal_exists').modal('hide');
             })
@@ -37,10 +32,9 @@
             });
 
 
-
         function get_market_info(market_id) {
-            let target_div=$('#market-time-'+market_id);
-            let animation_main_div=target_div.find('animation_main_div');
+            let target_div = $('#market-time-' + market_id);
+            let animation_main_div = target_div.find('animation_main_div');
 
             $.ajax({
                 url: "{{ route('home.get_market_info') }}",
@@ -56,7 +50,7 @@
                         let status_color = msg[2];
                         let market_is_open = msg[3];
                         target_div.text(status_text);
-                        target_div.css('color',status_color);
+                        target_div.css('color', status_color);
                         console.log(market_is_open);
                     }
                 }
@@ -130,6 +124,7 @@
                     let market_value = msg[3];
                     let Market_Status_Text = msg[4];
                     let endDate = msg[5];
+                    let market_id_open = msg[6];
                     $('#market_table').html(table_view);
                     $('#market_value').html(market_value);
                     $('#Market_Status_Text').html(Market_Status_Text);
@@ -137,6 +132,9 @@
                     $.each(ids, function (i, val) {
                         MarketOnline(val);
                     });
+                    makeTimer(endDate, market_id_open);
+
+
                 }
             })
         }
@@ -154,8 +152,8 @@
         function startTime() {
             var dayOfWeek = moment().tz("UTC").format("dddd");
             let clock = moment().tz("UTC").format("ll");
-            let a=moment().tz("UTC").format("h:mm A");
-            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 12pt !important">' + clock + '</span><span class="ml-3">'+a+'</span>'
+            let a = moment().tz("UTC").format("h:mm A");
+            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 12pt !important">' + clock + '</span><span class="ml-3">' + a + '</span>'
             $('#time_now').html(time_now);
             t = setTimeout(function () {
                 startTime()
@@ -181,20 +179,24 @@
 
 @section('style')
     <style>
-        #market_table{
+        #market_table {
             padding: 0 !important;
             text-align: center
         }
-        .p-0{
+
+        .p-0 {
             padding: 0 !important;
         }
-        #time_now > h3{
+
+        #time_now > h3 {
             font-size: 30px;
         }
-        #time_now > span{
+
+        #time_now > span {
             font-size: 13px !important;
         }
-        .table_in_table span{
+
+        .table_in_table span {
             text-align: left !important;
         }
     </style>
@@ -217,7 +219,7 @@
                     <span class="text-success"></span>
                 </h3>
                 <div class="text-left">
-                    <span >Today Trade Value:</span>
+                    <span>Today Trade Value:</span>
                     <span id="market_value">0</span>
                     <span>$</span>
                 </div>
@@ -243,7 +245,7 @@
             </div>
 
             <div class="col-12 col-xl-4 p-0 text-right" id="time_now">
-                <h3 >{{ Carbon\Carbon::now()->format('l') }}</h3>
+                <h3>{{ Carbon\Carbon::now()->format('l') }}</h3>
                 <span>{{ Carbon\Carbon::now()->format('d M Y g:i A') }}</span>
             </div>
         </div>
@@ -275,14 +277,16 @@
                     <div class="landing-feature-item">
                         <img src="{{ asset('home/img/2.jpg') }}" alt="">
                         <h3>Verified Buyers and Sellers </h3>
-                        <p>verifying the identities of both buyers and sellers, ensuring that they are who they claim to be.</p>
+                        <p>verifying the identities of both buyers and sellers, ensuring that they are who they claim to
+                            be.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="landing-feature-item">
                         <img src="{{ asset('home/img/3.png') }}" alt="">
                         <h3>Competitive and Transparent Business</h3>
-                        <p>parties have access to details of transactions and they have competition to discover the best price.</p>
+                        <p>parties have access to details of transactions and they have competition to discover the best
+                            price.</p>
                     </div>
                 </div>
             </div>
@@ -408,7 +412,5 @@
             </div>
         </div>
     @endif
-
-
 
 @endsection
