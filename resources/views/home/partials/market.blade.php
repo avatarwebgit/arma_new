@@ -234,11 +234,11 @@
 
                 </td>
                 <td id="slide_more_angle_{{ $market->id }}" onclick="slidemore({{ $market->id }})"
-                    class="slide_more_angle cursor-pointer text-right">
+                    class="slide_more_angle cursor-pointer">
                     <span>more</span>
                     <i class="fa fa-angle-down ml-2 mt-1"></i>
                 </td>
-                <td class="text-right" style="padding-right: 0">
+                <td>
                     <a href="{{ route('home.bid',['market'=>$market->id]) }}" class="btn btn-primary bid-bottom btn-sm">
                         Bid
                     </a>
