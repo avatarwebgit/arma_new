@@ -1,14 +1,16 @@
 @foreach($bids as $key=>$bid)
     <tr>
         <td class="text-center">
-            @auth
-                @if(auth()->id()===$bid->user_id)
-                    You
-                @endif
-            @endauth
-        </td>
-        <td class="text-center">
-            {{ $bid->quantity }}
+            <span>
+                @auth
+                    @if(auth()->id()===$bid->user_id)
+                        You
+                    @endif
+                @endauth
+            </span>
+           <span>
+                {{ $bid->quantity }}
+           </span>
         </td>
         <td class="text-center">{{ $bid->price }}</td>
         <td class="text-center">

@@ -88,6 +88,8 @@
 
         .text-light-blue {
             color: #162fa2;
+            width: 140px;
+            text-align: left !important;
         }
 
         .bg-blue {
@@ -101,6 +103,7 @@
         .align-center {
             align-items: center !important;
         }
+
 
     </style>
 @endsection
@@ -122,8 +125,8 @@
                         </span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-12 col-xl-4 mb-5">
+        <div class="row justify-content-between">
+            <div class="col-12 col-md-12 col-xl-3 mb-5">
                 @include('home.market.market_info')
             </div>
             <div class="col-12 col-md-12 col-xl-8 mb-5">
@@ -162,9 +165,6 @@
                                 </thead>
                                 <thead class="bg-secondary">
                                 <tr>
-                                    <th class="text-center text-white">
-
-                                    </th>
                                     <th class="text-center text-white">Quantity( {{ $market->SalesForm->unit }})
                                     </th>
                                     <th class="text-center text-white">Price ( {{ $market->SalesForm->currency }}
@@ -188,7 +188,7 @@
                             @if(auth()->user()->hasRole('seller') or auth()->user()->hasRole('admin'))
                                 <div class="row mb-4">
                                     <div class="col-12 col-md-6">
-                                        <div class="mt-3">
+                                        <div class="mt-3 text-center">
                                             <label for="seller_quantity">Quantity( {{ $market->SalesForm->unit }}
                                                 )</label>
                                             <input disabled id="seller_quantity" type="text" class="form-control"
@@ -197,7 +197,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <div class="mt-3">
+                                        <div class="mt-3 text-center">
                                             <label for="seller_price">Price( {{ $market->SalesForm->currency }}
                                                 )</label>
                                             <input disabled id="seller_price" type="text" class="form-control"
@@ -223,14 +223,14 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="mt-3">
+                                    <div class="mt-3 text-center">
                                         <label for="bid_quantity">Quantity( {{ $market->SalesForm->unit }} )</label>
                                         <input disabled id="bid_quantity" type="text" class="form-control">
 {{--                                        <p id="bid_quantity_error" class="error_text">please enter quantity</p>--}}
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="mt-3">
+                                    <div class="mt-3 text-center">
                                         <label for="bid_price">Price( {{ $market->SalesForm->currency }} )</label>
                                         <input disabled id="bid_price" type="number" class="form-control">
 {{--                                        <p id="bid_price_error" class="error_text">please enter price</p>--}}
