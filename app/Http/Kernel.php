@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+        \Statikbe\CookieConsent\CookieConsentMiddleware::class,
     ];
 
     /**
@@ -68,7 +69,7 @@ class Kernel extends HttpKernel
         'cors' => \App\Http\Middleware\Cors::class,
         'Setting' => \App\Http\Middleware\Setting::class,
         'verified_phone' => \App\Http\Middleware\EnsurePhoneIsVerified::class,
-
+        'cookie-consent' => \Statikbe\CookieConsent\CookieConsentMiddleware::class,
     ];
 
     /**

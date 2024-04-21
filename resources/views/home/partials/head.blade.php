@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('home/css/timer.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/developer.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/font-awsome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset("vendor/cookie-consent/css/cookie-consent.css")}}">
     <style>
         html{
             overflow-x: hidden !important;

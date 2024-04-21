@@ -42,6 +42,7 @@
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-database-mail-templates": "^3.5",
         "spatie/laravel-permission": "^5.7",
+        "statikbe/laravel-cookie-consent": "^1.8",
         "stevebauman/location": "^6.5",
         "stripe/stripe-php": "^10.0",
         "tecnickcom/tcpdf": "^6.5",
