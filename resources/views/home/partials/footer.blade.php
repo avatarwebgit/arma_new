@@ -69,5 +69,6 @@
             </div>
 
         </div>
+        <a href="javascript:void(0)" class="js-lcc-settings-toggle">@lang('cookie-consent::texts.alert_settings')</a>
     </div>
 </footer>
