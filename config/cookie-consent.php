@@ -5,7 +5,7 @@ return [
     'cookie_value_analytics' => '2',
     'cookie_value_marketing' => '3',
     'cookie_value_both' => 'true',
-    'cookie_value_none' => 'false',
+    'cookie_value_none' => 'true',
     'cookie_expiration_days' => '365',
     'gtm_event' => 'cookie_refresh',
     'ignored_paths' => [],
