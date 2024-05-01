@@ -31,9 +31,9 @@
 }
 
 .lcc-button {
-    background: none;
-    background-color:transparent;
-    border: 1px solid #111;
+    background: #c64507 !important;
+    border-radius: 5px !important;
+    border: none !important;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -42,12 +42,13 @@
     outline: none;
     padding: 6px 15px;
     transition: color .2s ease, background-color .2s ease, border-color .2s ease;
-    border: 1px solid #fff;
+
 }
 
 .lcc-button:focus, .lcc-button:hover {
-    background: #777;
-    border-color: #777
+    background: white !important;
+    color: #c64507 !important;
+    border: 1px solid !important;
 }
 
 .lcc-button.lcc-button--link {
@@ -59,9 +60,14 @@
 }
 
 .lcc-button.lcc-button--link:focus, .lcc-button.lcc-button--link:hover {
-    background: transparent;
-    border-color: transparent;
-    text-decoration: none
+    background: white !important;
+    color: #c64507 !important;
+    border: 1px solid !important;
+}
+.js-lcc-accept:hover {
+    background: white !important;
+    color: #c64507 !important;
+    border: 1px solid !important;
 }
 
 .lcc-button.lcc-button--link + .lcc-button.lcc-button--link {
@@ -105,17 +111,18 @@ input[id^=lcc-]:disabled + span {
 }
 
 .lcc-modal {
-    background: #39A7FF;
-    box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    background: #0a0000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
     left: 50%;
     max-height: 90%;
+    max-width: 90%;
     overflow: auto;
     padding: 30px;
     position: fixed;
-    bottom: 0;
-    transform: translate(-50%,0);
-    width: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 10001;
+    border-radius: 5px;
 }
 
 .lcc-modal .lcc-modal__close {
@@ -148,15 +155,18 @@ input[id^=lcc-]:disabled + span {
 .lcc-modal .lcc-modal__actions {
     margin-top: 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
 }
 
 .lcc-modal .lcc-modal__actions > * {
     display: block;
-    margin-top: 8px;
-    background: transparent;
-    border: 1px solid #fff;
+    margin-top: 8px !important;
+    background: #c64507;
     padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    height: 50px;
+    margin-left: 5px;
 }
 
 .lcc-modal.lcc-modal--settings {
