@@ -23,15 +23,16 @@
         </p>
     </div>
     <div class="lcc-modal__actions">
+        <button type="button" class="lcc-button lcc-button--link js-lcc-settings-toggle">
+            {{--            @lang('cookie-consent::texts.alert_settings')--}}
+            cookies setting
+        </button>
         <button type="button" class="lcc-button js-lcc-accept">
             @lang('cookie-consent::texts.alert_accept')
         </button>
-        <button type="button" class="lcc-button lcc-button--link js-lcc-essentials">
-            @lang('cookie-consent::texts.alert_essential_only')
-        </button>
-        <button type="button" class="lcc-button lcc-button--link js-lcc-settings-toggle">
-            @lang('cookie-consent::texts.alert_settings')
-        </button>
+{{--        <button type="button" class="lcc-button lcc-button--link js-lcc-essentials">--}}
+{{--            @lang('cookie-consent::texts.alert_essential_only')--}}
+{{--        </button>--}}
     </div>
 </div>
 
