@@ -3,7 +3,6 @@
 @section('script')
 
     <script type="module">
-
         $(document).ready(function () {
             GetMarkets();
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
@@ -179,6 +178,18 @@
 
 @section('style')
     <style>
+        @media screen and (max-width: 1200px) {
+            #Market_Status_Text {
+                text-align: center !important;
+            }
+            #total_trade_value{
+                text-align: center !important;
+            }
+            #time_now{
+                text-align: center !important;
+            }
+        }
+
         #market_table {
             padding: 0 !important;
             text-align: center
@@ -218,7 +229,7 @@
                     <span>Market: </span>
                     <span class="text-success"></span>
                 </h3>
-                <div class="text-left">
+                <div class="text-left" id="total_trade_value">
                     <span>Today Trade Value:</span>
                     <span id="market_value">0</span>
                     <span>$</span>

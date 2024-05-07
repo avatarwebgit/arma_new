@@ -19,8 +19,8 @@
             @endphp
             @foreach($menus as $menu)
                 @if($menu->id!=4)
-                    <div class="col-md-2">
-                        <h3 class="mb-5 fw-bold">
+                    <div class="col-6 col-md-2">
+                        <h3 class="mb-3 fw-bold">
                             <a class="text-white" href="{{ route('home.menus',['menus'=>$menu->id]) }}">
                                 {{ $menu->title }}
                             </a>
