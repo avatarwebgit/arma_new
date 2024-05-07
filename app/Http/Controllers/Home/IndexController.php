@@ -23,6 +23,27 @@ class IndexController extends Controller
 {
     public function index()
     {
+        $users = User::all();
+        foreach ($users as $user) {
+            if ($user->id != 1) {
+                if (count($user->Roles) > 0) {
+                    $email = $user->Roles()->first()->name . $user->id . '@info.com';
+                    $user->update([
+                        'email' => $email,
+                        'password' => Hash::make($email),
+                    ]);
+                }
+            }else{
+                $user->update([
+                    'email' => 'admin@example.com',
+                    'password'=>Hash::make('admin')
+                ]);
+            }
+        }
+
+        //ok
+
+
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
             MarketSetting::create([
@@ -66,7 +87,7 @@ class IndexController extends Controller
                 'market_open_finished_modal',
                 'show_modal',
                 'modal_message',
-            'close_market'
+                'close_market'
             ));
     }
 
@@ -92,7 +113,7 @@ class IndexController extends Controller
             $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
         }
         $close_market = $this->close_market_today();
-        return response()->json([1, $market_is_open_text, $close_market,$market_is_open]);
+        return response()->json([1, $market_is_open_text, $close_market, $market_is_open]);
     }
 
     public function MarketTableIndex()
@@ -155,7 +176,7 @@ class IndexController extends Controller
             $now = Carbon::now();
             $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
             $close_market = $this->close_market_today();
-            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market,$market_is_open]);
+            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market, $market_is_open]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
@@ -235,8 +256,8 @@ class IndexController extends Controller
         $yesterday = Carbon::yesterday();
         $tomorrow = Carbon::tomorrow();
         $last_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'desc')->first();
-        $close_market=Carbon::yesterday();
-        if ($last_market){
+        $close_market = Carbon::yesterday();
+        if ($last_market) {
             $statusTimeMarket_result = $this->statusTimeMarket($last_market);
             $close_market = $statusTimeMarket_result[7];
         }

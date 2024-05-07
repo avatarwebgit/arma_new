@@ -222,7 +222,6 @@ class FormController extends Controller
             return redirect()->back()->with('success', 'updated successfully');
 
         } else {
-
             $sale_form = SalesOfferForm::create($validate_items->except('_token')->all());
             $sale_form_id = $sale_form->id;
             $unique_number = 'Arma-' . $sale_form_id;
@@ -493,7 +492,7 @@ class FormController extends Controller
             'contact_person_name' => 'required',
             'contact_person_job_title' => 'required',
             'contact_person_email' => 'required',
-            'pre_code' => 'required',
+            'pre_code' => 'required|max:6',
             'contact_person_mobile_phone' => 'required',
             'platform' => 'required',
             //last part

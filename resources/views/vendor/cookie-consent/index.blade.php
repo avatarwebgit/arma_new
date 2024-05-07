@@ -16,22 +16,23 @@
 >
     <div class="lcc-modal__content">
         <h2 id="lcc-modal-alert-label" class="lcc-modal__title">
-            @lang('cookie-consent::texts.alert_title')
+            We use cookie to improve Armaiti Mex site
         </h2>
         <p id="lcc-modal-alert-desc" class="lcc-text">
-            {!! trans('cookie-consent::texts.alert_text') !!}
+            Some cookies are necessary for our website and services to function properly. Other optional coockies can be customized in setting. You can consent to all coockies or manage the optional coockies.
         </p>
     </div>
     <div class="lcc-modal__actions">
+        <button type="button" class="lcc-button lcc-button--link js-lcc-settings-toggle">
+            {{--            @lang('cookie-consent::texts.alert_settings')--}}
+            cookies setting
+        </button>
         <button type="button" class="lcc-button js-lcc-accept">
             @lang('cookie-consent::texts.alert_accept')
         </button>
-        <button type="button" class="lcc-button lcc-button--link js-lcc-essentials">
-            @lang('cookie-consent::texts.alert_essential_only')
-        </button>
-        <button type="button" class="lcc-button lcc-button--link js-lcc-settings-toggle">
-            @lang('cookie-consent::texts.alert_settings')
-        </button>
+{{--        <button type="button" class="lcc-button lcc-button--link js-lcc-essentials">--}}
+{{--            @lang('cookie-consent::texts.alert_essential_only')--}}
+{{--        </button>--}}
     </div>
 </div>
 
@@ -49,7 +50,10 @@
                 @lang('cookie-consent::texts.settings_title')
             </h2>
             <p id="lcc-modal-settings-desc" class="lcc-text">
-                {!! trans('cookie-consent::texts.settings_text', [ 'policyUrl' => config("cookie-consent.policy_url_$locale")]) !!}
+{{--                {!! trans('cookie-consent::texts.settings_text', [ 'policyUrl' => config("cookie-consent.policy_url_$locale")]) !!}--}}
+                This website uses cookies to enhance user experience and to analyze performance and traffic on our website. They helps our website and services to function properly.
+                <br>
+                You can consent cookies or decline them all. When you reject cookies, it affects both your user experience and privacy.
             </p>
             <div class="lcc-modal__section lcc-u-text-center">
                 <button type="button" class="lcc-button js-lcc-accept">
