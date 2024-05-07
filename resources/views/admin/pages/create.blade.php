@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="settings-profile">
                                         <form method="POST"
-                                              action="{{ route('admin.page.store') }}">
+                                              action="{{ route('admin.page.store') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row mt-4">
                                                 <div class="col-12 col-md-6 mb-3">

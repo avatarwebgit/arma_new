@@ -28,7 +28,7 @@ class PageController extends Controller
             'description' => 'nullable',
             'menu' => 'required',
             'active_banner' => 'required',
-            'banner' => 'nullable|image',
+            'banner' => 'nullable',
         ]);
         if ($request->has('banner')) {
             $env = env('UPLOAD_BANNER_PAGE');
