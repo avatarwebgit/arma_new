@@ -27,7 +27,7 @@
 
 .lcc-text {
     font-size: 16px;
-    margin: 0 0 22px
+    margin: 0 0 12px
 }
 
 .lcc-button {
@@ -64,6 +64,7 @@
     color: #ffffff !important;
     border: 1px solid !important;
 }
+
 .js-lcc-accept:hover {
     background: #1377ce !important;
     color: #ffffff !important;
@@ -127,6 +128,20 @@ input[id^=lcc-]:disabled + span {
     bottom: 0;
 }
 
+@media screen and (max-width: 1200px) {
+    .lcc-modal {
+        padding: 12px;
+    }
+    .lcc-text{
+        font-size: 15px;
+    }
+    .lcc-modal .lcc-modal__title{
+        font-size: 17px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+}
+
 .lcc-modal .lcc-modal__close {
     background: none;
     border: none;
@@ -147,15 +162,15 @@ input[id^=lcc-]:disabled + span {
 
 .lcc-modal .lcc-modal__title {
     font-size: 22px;
-    margin-bottom: 1em
+    margin-bottom: 5px;
 }
 
 .lcc-modal .lcc-modal__section {
-    margin-bottom: 20px
+    margin-bottom: 10px
 }
 
 .lcc-modal .lcc-modal__actions {
-    margin-top: 30px;
+    margin-top: 2px;
     display: flex;
     justify-content: end;
 }
@@ -171,6 +186,7 @@ input[id^=lcc-]:disabled + span {
     height: 40px;
     margin-left: 15px;
 }
+
 @media screen and (max-width: 768px) {
     height: auto !important;
 }
