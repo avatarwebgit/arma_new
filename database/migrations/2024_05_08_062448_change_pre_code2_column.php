@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sales_offer_form', function (Blueprint $table) {
-            $table->dropColumn('pre_code');
+            $table->addColumn('text','pre_code')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('sales_offer_form', function (Blueprint $table) {
-
+            //
         });
     }
 };
