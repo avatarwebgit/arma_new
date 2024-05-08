@@ -395,7 +395,7 @@ class FormController extends Controller
             'currency_other' => ['required_if:currency,other'],
             //contract type
             'contract_type' => 'required',
-            'contract_type_other' => ['required_unless:contract_type,type'],
+            'contract_type_other' => ['required_if:contract_type,other'],
             //
             'commodity' => 'required',
             'type_grade' => 'required',
