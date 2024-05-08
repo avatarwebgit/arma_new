@@ -51,56 +51,63 @@
             </h2>
             <p id="lcc-modal-settings-desc" class="lcc-text">
 {{--                {!! trans('cookie-consent::texts.settings_text', [ 'policyUrl' => config("cookie-consent.policy_url_$locale")]) !!}--}}
-                This website uses cookies to enhance user experience and to analyze performance and traffic on our website. They helps our website and services to function properly.
-                <br>
-                You can consent cookies or decline them all. When you reject cookies, it affects both your user experience and privacy.
+                This website uses cookies to enhance user experience and to analyze performance and traffic on our website. They helps our website and services to function properly.You can consent cookies or decline them all. When you reject cookies, it affects both your user experience and privacy.
             </p>
-            <div class="lcc-modal__section lcc-u-text-center">
-                <button type="button" class="lcc-button js-lcc-accept">
-                    @lang('cookie-consent::texts.settings_accept_all')
-                </button>
+{{--            <div class="lcc-modal__section lcc-u-text-center">--}}
+{{--                <button type="button" class="lcc-button js-lcc-accept">--}}
+{{--                    @lang('cookie-consent::texts.settings_accept_all')--}}
+{{--                </button>--}}
+{{--            </div>--}}
+            <div class="d-flex">
+                <div class="lcc-modal__section w-50">
+                    <label for="lcc-checkbox-essential" class="lcc-label">
+                        <input type="checkbox" id="lcc-checkbox-essential" disabled="disabled" checked="checked">
+                        <span>@lang('cookie-consent::texts.setting_essential')</span>
+                    </label>
+                    <p class="lcc-text">
+                        @lang('cookie-consent::texts.setting_essential_text')
+                    </p>
+                </div>
+                <div class="lcc-modal__section w-50">
+                    <label for="lcc-checkbox-funtcional" class="lcc-label">
+                        <input type="checkbox" id="lcc-checkbox-funtcional" disabled="disabled" checked="checked">
+                        <span>@lang('cookie-consent::texts.setting_functional')</span>
+                    </label>
+                    <p class="lcc-text">
+                        @lang('cookie-consent::texts.setting_functional_text')
+                    </p>
+                </div>
+
             </div>
-            <div class="lcc-modal__section">
-                <label for="lcc-checkbox-essential" class="lcc-label">
-                    <input type="checkbox" id="lcc-checkbox-essential" disabled="disabled" checked="checked">
-                    <span>@lang('cookie-consent::texts.setting_essential')</span>
-                </label>
-                <p class="lcc-text">
-                    @lang('cookie-consent::texts.setting_essential_text')
-                </p>
+            <div class="d-flex">
+                <div class="lcc-modal__section w-50">
+                    <label for="lcc-checkbox-analytics" class="lcc-label">
+                        <input type="checkbox" id="lcc-checkbox-analytics">
+                        <span>@lang('cookie-consent::texts.setting_analytics')</span>
+                    </label>
+                    <p class="lcc-text">
+                        @lang('cookie-consent::texts.setting_analytics_text')
+                    </p>
+                </div>
+                <div class="lcc-modal__section w-50">
+                    <label for="lcc-checkbox-marketing" class="lcc-label">
+                        <input type="checkbox" id="lcc-checkbox-marketing">
+                        <span>@lang('cookie-consent::texts.setting_marketing')</span>
+                    </label>
+                    <p class="lcc-text">
+                        @lang('cookie-consent::texts.setting_marketing_text')
+                    </p>
+                </div>
             </div>
-            <div class="lcc-modal__section">
-                <label for="lcc-checkbox-funtcional" class="lcc-label">
-                    <input type="checkbox" id="lcc-checkbox-funtcional" disabled="disabled" checked="checked">
-                    <span>@lang('cookie-consent::texts.setting_functional')</span>
-                </label>
-                <p class="lcc-text">
-                    @lang('cookie-consent::texts.setting_functional_text')
-                </p>
-            </div>
-            <div class="lcc-modal__section">
-                <label for="lcc-checkbox-analytics" class="lcc-label">
-                    <input type="checkbox" id="lcc-checkbox-analytics">
-                    <span>@lang('cookie-consent::texts.setting_analytics')</span>
-                </label>
-                <p class="lcc-text">
-                    @lang('cookie-consent::texts.setting_analytics_text')
-                </p>
-            </div>
-            <div class="lcc-modal__section">
-                <label for="lcc-checkbox-marketing" class="lcc-label">
-                    <input type="checkbox" id="lcc-checkbox-marketing">
-                    <span>@lang('cookie-consent::texts.setting_marketing')</span>
-                </label>
-                <p class="lcc-text">
-                    @lang('cookie-consent::texts.setting_marketing_text')
-                </p>
-            </div>
+
         </div>
     </div>
     <div class="lcc-modal__actions">
         <button type="button" class="lcc-button js-lcc-settings-save">
             @lang('cookie-consent::texts.settings_save')
+        </button>
+        <button type="button" class="lcc-button js-lcc-accept">
+            @lang('cookie-consent::texts.settings_accept_all')
         </button>
     </div>
 </div>

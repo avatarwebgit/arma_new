@@ -149,9 +149,10 @@
         @endif
 
         function startTime() {
-            var dayOfWeek = moment().tz("UTC").format("dddd");
-            let clock = moment().tz("UTC").format("ll");
-            let a = moment().tz("UTC").format("h:mm A");
+            var dayOfWeek = moment().tz("Europe/London").format("dddd");
+            let clock = moment().tz("Europe/London").format("ll");
+            let a = moment().tz("Europe/London").format("h:mm A");
+            console.log(a);
             let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 12pt !important">' + clock + '</span><span class="ml-3">' + a + '</span>'
             $('#time_now').html(time_now);
             t = setTimeout(function () {
