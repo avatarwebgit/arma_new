@@ -72,10 +72,10 @@
                                         <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                                     @elseif(auth()->user()->hasRole('seller'))
                                         <p class="email text-muted mb-3">Seller</p>
-                                        <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                        <a href="{{ route('seller.dashboard') }}">Dashboard</a>
                                     @elseif(auth()->user()->hasRole('buyer'))
                                         <p class="email text-muted mb-3">Buyer</p>
-                                        <a href="{{ route('profile.index') }}">profile</a>
+                                        <a href="{{ route('bidder.dashboard') }}">Dashboard</a>
                                     @endif
                                 </div>
                             </div>

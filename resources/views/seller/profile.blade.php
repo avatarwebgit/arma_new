@@ -1,4 +1,4 @@
-@extends('home.homelayout.app')
+@extends('seller.layouts.main')
 @section('title')
     Profile
 @endsection
@@ -98,16 +98,13 @@
     <div class="settings mtb15">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-lg-3">
-                    @include('seller.sidebar')
-                </div>
-                <div class="col-12 col-lg-9">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             @include('admin.sections.alert')
                             <div class="settings-profile">
                                 <form method="POST"
-                                      action="{{ route('seller.update.profile',['user'=>$user->id]) }}">
+                                      action="{{ route('bidder.update.profile',['user'=>$user->id]) }}">
                                     @csrf
                                     @method('put')
                                     <div class="row mt-4">

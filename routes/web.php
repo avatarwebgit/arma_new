@@ -89,24 +89,24 @@ Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
         Route::put('setting/header2/update/{id}', [Header2Controller::class, 'update'])->name('header2.update');
         Route::post('setting/header2/remove/{id}', [Header2Controller::class, 'remove'])->name('header2.remove');
     });
-    Route::get('/admin/contact/form', [SettingController::class,'form_contact_index'])->name('contact.index');
-    Route::get('/admin/contact/form/show/{contact}', [SettingController::class,'form_contact_show'])->name('contact.show');
+    Route::get('/admin/contact/form', [SettingController::class, 'form_contact_index'])->name('contact.index');
+    Route::get('/admin/contact/form/show/{contact}', [SettingController::class, 'form_contact_show'])->name('contact.show');
     //blog
 
-    Route::get('blogs/index',[BlogController::class,'index'])->name('blog.index');
-    Route::get('blog/create',[BlogController::class,'create'])->name('blog.create');
-    Route::post('blog/store',[BlogController::class,'store'])->name('blog.store');
-    Route::get('blog/edit/{blog}',[BlogController::class,'edit'])->name('blog.edit');
-    Route::put('blog/update/{blog}',[BlogController::class,'update'])->name('blog.update');
-    Route::post('blog/remove',[BlogController::class,'remove'])->name('blog.remove');
+    Route::get('blogs/index', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('blog/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::post('blog/store', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('blog/edit/{blog}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::put('blog/update/{blog}', [BlogController::class, 'update'])->name('blog.update');
+    Route::post('blog/remove', [BlogController::class, 'remove'])->name('blog.remove');
 
 
-    Route::get('category/index',[BlogCategoryController::class,'index'])->name('blog.category.index');
-    Route::get('category/create',[BlogCategoryController::class,'create'])->name('blog.category.create');
-    Route::post('category/store',[BlogCategoryController::class,'store'])->name('blog.category.store');
-    Route::get('category/edit/{category}',[BlogCategoryController::class,'edit'])->name('blog.category.edit');
-    Route::put('category/update/{category}',[BlogCategoryController::class,'update'])->name('blog.category.update');
-    Route::post('category/remove',[BlogCategoryController::class,'remove'])->name('blog.category.remove');
+    Route::get('category/index', [BlogCategoryController::class, 'index'])->name('blog.category.index');
+    Route::get('category/create', [BlogCategoryController::class, 'create'])->name('blog.category.create');
+    Route::post('category/store', [BlogCategoryController::class, 'store'])->name('blog.category.store');
+    Route::get('category/edit/{category}', [BlogCategoryController::class, 'edit'])->name('blog.category.edit');
+    Route::put('category/update/{category}', [BlogCategoryController::class, 'update'])->name('blog.category.update');
+    Route::post('category/remove', [BlogCategoryController::class, 'remove'])->name('blog.category.remove');
 
     //settings
     Route::resource('setting', SettingController::class)->except('update', 'destroy')->names('settings');
@@ -229,11 +229,9 @@ Route::post('ckeditor/image_upload', [CKEditorController::class, 'upload'])->nam
 Route::post('join/news', [IndexController::class, 'join_news'])->name('join.news');
 Route::get('blogs', [IndexController::class, 'blogs'])->name('home.blogs.index');
 Route::get('blog/show/{blog}', [IndexController::class, 'blog_show'])->name('home.blog.show');
-Route::post('/form/send-request/contact',[FormController::class,'form_contact'])->name('form.contact');
-
-Route::get('/login/77', function () {
-    $user = \App\Models\User::where('id', 77)->first();
-    \auth()->login($user);
+Route::post('/form/send-request/contact', [FormController::class, 'form_contact'])->name('form.contact');
+Route::get('/logout', function () {
+    \auth()->logout();
     return redirect()->route('home.index');
 });
 
