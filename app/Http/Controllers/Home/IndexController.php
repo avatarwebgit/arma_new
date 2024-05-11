@@ -6,6 +6,7 @@ use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Currency;
+use App\Models\FormStatus;
 use App\Models\Market;
 use App\Models\MarketSetting;
 use App\Models\Menus;
@@ -23,7 +24,10 @@ class IndexController extends Controller
 {
     public function index()
     {
-
+        $form_status=FormStatus::where('id',1)->first();
+        $form_status->update([
+           'title'=>'wait to confirm',
+        ]);
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
             MarketSetting::create([

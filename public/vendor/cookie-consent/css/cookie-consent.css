@@ -133,10 +133,11 @@ input[id^=lcc-]:disabled + span {
         padding: 12px;
     }
     .lcc-text{
-        font-size: 15px;
+        font-size: 12px !important;
+        line-height:14px !important;
     }
     .lcc-modal .lcc-modal__title{
-        font-size: 17px;
+        font-size: 17px !important;
         margin-bottom: 5px;
         font-weight: bold;
     }

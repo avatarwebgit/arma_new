@@ -25,7 +25,7 @@
     <div class="lcc-modal__actions">
         <button type="button" class="lcc-button lcc-button--link js-lcc-settings-toggle">
             {{--            @lang('cookie-consent::texts.alert_settings')--}}
-            cookies setting
+            Cookies settings
         </button>
         <button type="button" class="lcc-button js-lcc-accept">
             @lang('cookie-consent::texts.alert_accept')

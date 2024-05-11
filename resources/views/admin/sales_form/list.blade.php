@@ -18,7 +18,7 @@
                                 </h5>
                             </div>
                             <div class="col-md-12">
-                                <div class="markets-pair-list">
+                                <div class="markets-pair-list table-responsive-sm">
                                     <div id="alert"></div>
                                     <table class="table table-striped">
                                         <thead>

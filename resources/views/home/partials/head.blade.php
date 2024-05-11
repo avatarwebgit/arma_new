@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('home/css/developer.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/font-awsome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset("vendor/cookie-consent/css/cookie-consent.css")}}">
+{{--    <meta name="viewport" content="width=1024">--}}
     <style>
         html{
             overflow-x: hidden !important;
