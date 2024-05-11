@@ -24,10 +24,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $form_status=FormStatus::where('id',1)->first();
-        $form_status->update([
-           'title'=>'wait to confirm',
-        ]);
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
             MarketSetting::create([

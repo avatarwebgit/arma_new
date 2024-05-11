@@ -319,6 +319,7 @@ class FormController extends Controller
         $qualityQuantityInspector = QualityQuantityInspector::all();
         $InspectionPlace = InspectionPlace::all();
         $cargoInsurance = CargoInsurance::all();
+        $contract_types=ContainerType::all();
         $item = null;
         $is_show = 1;
         return view('admin.sales_form.create', compact(
@@ -344,6 +345,7 @@ class FormController extends Controller
             'qualityQuantityInspector',
             'InspectionPlace',
             'cargoInsurance',
+            'contract_types',
             'item',
             'is_show',
             'role'
