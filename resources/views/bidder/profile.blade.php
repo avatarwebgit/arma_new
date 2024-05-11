@@ -107,7 +107,7 @@
                             @include('admin.sections.alert')
                             <div class="settings-profile">
                                 <form method="POST"
-                                      action="{{ route('bidder.update.profile',['user'=>$user->id]) }}">
+                                      action="{{ route('seller.update.profile',['user'=>$user->id]) }}">
                                     @csrf
                                     @method('put')
                                     <div class="row mt-4">

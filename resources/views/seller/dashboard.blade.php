@@ -1,4 +1,4 @@
-@extends('home.homelayout.app')
+@extends('seller.layouts.main')
 @section('title')
    Dashboard
 @endsection
@@ -46,13 +46,10 @@
     <div class="settings mtb15">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-lg-3">
-                @include('seller.sidebar')
-                </div>
-                <div class="col-12 col-lg-9">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            seller Dashboard
+                            Bidder Dashboard
                         </div>
                     </div>
                 </div>

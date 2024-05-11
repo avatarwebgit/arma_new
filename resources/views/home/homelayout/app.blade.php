@@ -57,7 +57,7 @@
         var Seconds = $('#Seconds');
         endTime = new Date(endTime);
         var now = new Date();
-        now = now.setMinutes(now.getMinutes() - 210);
+        now = now.setMinutes(now.getMinutes() - 150);
         now = new Date(now);
         endTime = endTime.getTime()
         now = now.getTime()
@@ -175,7 +175,7 @@
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
             var now = new Date();
-            now.setMinutes(now.getMinutes() - 210);
+            now.setMinutes(now.getMinutes() - 150);
             benchmark1 = new Date(benchmark1);
             benchmark2 = new Date(benchmark2);
             benchmark3 = new Date(benchmark3);
