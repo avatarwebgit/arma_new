@@ -71,7 +71,7 @@ Route::post('/seller_change_offer', [MarketHomeController::class, 'seller_change
 Route::post('/get_market_bit_result', [MarketHomeController::class, 'get_market_bit_result'])->name('home.get_market_bit_result');
 Route::post('/get_market_info', [MarketHomeController::class, 'get_market_info'])->name('home.get_market_info');
 Route::get('/menu/{menus}', [IndexController::class, 'menus'])->name('home.menus');
-Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
+Route::name('admin.')->middleware('admin')->prefix('/admin-panel/management/')->group(function () {
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::middleware('permission:header-setting')->group(function () {
@@ -208,14 +208,14 @@ Route::post('/sales_form/update_or_store/{item?}', [FormController::class, 'sale
 Route::post('/sales_form_change_status/', [FormController::class, 'change_status'])->name('sale_form.change_status');
 Route::get('sales_offer/show/{id}', [FormController::class, 'sales_form_show'])->name('sale_form.show');
 //seller
-Route::name('seller.')->prefix('/seller/')->group(function () {
+Route::name('seller.')->prefix('/seller/')->middleware('seller')->group(function () {
     Route::get('dashboard', [SellerController::class, 'dashboard'])->name('dashboard');
     Route::put('update/profile/{user}', [SellerController::class, 'updateProfile'])->name('update.profile');
     Route::put('update/password', [SellerController::class, 'updatePassword'])->name('update.password');
     Route::get('profile', [SellerController::class, 'profile'])->name('profile');
     Route::get('requests', [SellerController::class, 'requests'])->name('requests');
 });
-Route::name('bidder.')->prefix('/bidder/')->group(function () {
+Route::name('bidder.')->prefix('/bidder/')->middleware('bidder')->group(function () {
     Route::get('dashboard', [BidderController::class, 'dashboard'])->name('dashboard');
     Route::put('update/profile/{user}', [BidderController::class, 'updateProfile'])->name('update.profile');
     Route::put('update/password', [BidderController::class, 'updatePassword'])->name('update.password');

@@ -70,6 +70,9 @@ class Kernel extends HttpKernel
         'Setting' => \App\Http\Middleware\Setting::class,
         'verified_phone' => \App\Http\Middleware\EnsurePhoneIsVerified::class,
         'cookie-consent' => \Statikbe\CookieConsent\CookieConsentMiddleware::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'seller' => \App\Http\Middleware\SellerMiddleware::class,
+        'bidder' => \App\Http\Middleware\BidderMiddleware::class
     ];
 
     /**
