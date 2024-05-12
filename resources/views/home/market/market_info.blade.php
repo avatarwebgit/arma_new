@@ -25,7 +25,9 @@
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Term</span>
-        <span class="text-bold text-light-blue ">????</span>
+        <span class="text-bold text-light-blue ">
+            {{ $market->SalesForm->incoterms }}
+        </span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Delivery period</span>
@@ -46,7 +48,7 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Offer Price</span>
         <span class="text-bold text-light-blue ">
-                           ???
+                           {{ $market->offer_price }}
                         </span>
     </div>
     <div class="d-flex justify-content-between">
@@ -63,7 +65,9 @@
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Destination</span>
-        <span class="text-bold text-light-blue ">????</span>
+        <span class="text-bold text-light-blue ">
+            {{ $market->SalesForm->destination }}
+        </span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Unit</span>
