@@ -30,6 +30,16 @@
                                             <a href="{{ route('admin.markets.folder',['date'=>$key]) }}">
                                                 <img width="200" style="margin: auto"
                                                      src="{{ asset('home/img/folder.jpg') }}">
+                                                {!! Form::open([
+'method' => 'POST',
+'route' => ['admin.market.folder.remove',['date'=>$key]],
+'class' => 'd-inline',
+]) !!}
+                                                <a href="#" class="btn btn-sm small btn-danger show_confirm"
+                                                   data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
+                                                   data-bs-original-title="{{ __('Delete') }}"><i
+                                                        class="ti ti-trash mr-1"></i></a>
+                                                {!! Form::close() !!}
                                                 <h5>{{ $key }}</h5>
                                             </a>
                                         </div>

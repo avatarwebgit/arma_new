@@ -88,12 +88,13 @@ class MarketController extends Controller
     public function remove(Request $request)
     {
         $market = Market::where('id', $request->id)->first();
-        $bids = $market->Bids;
-        foreach ($bids as $bid) {
-            $bid->delete();
+        $result = $this->remove_market($market);
+        if ($result[0] == 1) {
+            return redirect()->back();
         }
-        $market->delete();
-        return redirect()->back();
+
+        dd('Contact Programmer');
+
     }
 
 
@@ -550,5 +551,32 @@ class MarketController extends Controller
 
         }
         return $rules;
+    }
+
+    public function FolderMarketRemove(Request $request, $date)
+    {
+        $markets = Market::where('date', $date)->get();
+        foreach ($markets as $market) {
+            $result = $this->remove_market($market);
+            if ($result[0] != 1) {
+                dd('Contact Programmer');
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function remove_market($market)
+    {
+        try {
+            $bids = $market->Bids;
+            foreach ($bids as $bid) {
+                $bid->delete();
+            }
+            $market->delete();
+            return [1, 'success'];
+        } catch (\Exception $e) {
+            return [0, $e->getMessage()];
+        }
+
     }
 }
