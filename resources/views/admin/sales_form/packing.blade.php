@@ -1,6 +1,6 @@
 <div>
     <hr>
-    <strong>Packing</strong>
+{{--    <strong>Packing</strong>--}}
 </div>
 <div class="col-12 col-md-6 mb-3">
     @php
@@ -105,7 +105,7 @@
     @endphp
     <div>
         <label for="{{ filed_name($name) }}"
-               class="mb-2">{!! 'Do You have any picture from packing? '.$required_span !!}</label>
+               class="mb-2">{!! 'Packing Picture Of '.$required_span !!}</label>
         @error(filed_name($name))
         <p class="input-error-validate">
             {{ $message }}
@@ -161,7 +161,7 @@
     @endphp
     <div>
         <label for="{{ filed_name($name) }}"
-               class="mb-2">{!! 'Is Possible The Buyers Order Stencil Marked ?'.$required_span !!}</label>
+               class="mb-2">{!! 'Marking Stencil Allowed'.$required_span !!}</label>
         @error(filed_name($name))
         <p class="input-error-validate">
             {{ $message }}

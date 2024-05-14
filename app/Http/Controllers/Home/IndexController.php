@@ -5,17 +5,21 @@ namespace App\Http\Controllers\Home;
 use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Country;
 use App\Models\Currency;
 use App\Models\FormStatus;
 use App\Models\Market;
 use App\Models\MarketSetting;
 use App\Models\Menus;
 use App\Models\Message;
+use App\Models\Packing;
 use App\Models\Setting;
+use App\Models\ToleranceWeightBy;
 use App\Models\Units;
 use App\Models\User;
 use App\Models\UserNews;
 use Carbon\Carbon;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
@@ -245,5 +249,141 @@ class IndexController extends Controller
         $minute = Carbon::parse($close_market)->format('H:i:s');
         $close_market = $hours . ' ' . $minute;
         return $close_market;
+    }
+
+    public function create_countries()
+    {
+        $countries = [
+            'United States', 'Singapore', 'South Africa',
+            'China', 'Austria', 'Slovenia', 'Tajikistan',
+            'Russia', 'Nigeria', 'Ghana', 'Kyrgyzstan',
+            'India', 'United Arab Emirates', 'Myanmar',
+            'France', 'Vietnam', 'Jordan',
+            'Germany', 'Malaysia', 'Cameroon', 'Somalia',
+            'United Kingdom', 'Philippines', 'Latvia', 'Montenegro',
+            'Japan', 'Bangladesh', 'Sudan', 'South Sudan',
+            'Saudi Arabia', 'Denmark', 'Libya',
+            'Italy', 'South Africa', 'Bolivia',
+            'Israel', 'Hong Kong', 'Bahrain',
+            'Canada', 'Egypt',
+            'Brazil', 'Pakistan', 'Nepal',
+            'Australia', 'Iran', 'Estonia',
+            'Spain', 'Chile', 'Macau', 'South Korea', 'Romania', 'El Salvador',
+            'Netherlands', 'Colombia', 'Honduras',
+            'Turkey', 'Czech Republic', 'Djibouti',
+            'Switzerland', 'Finland', 'Senegal',
+            'Taiwan', 'Peru',
+            'Mexico', 'Iraq',
+            'Poland', 'Portugal', 'Zimbabwe',
+            'Argentina', 'New Zealand', 'Zambia',
+            'Belgium', 'Kazakhstan', 'Iceland',
+            'Sweden', 'Greece', 'Bosnia and Herzegovina',
+            'Ireland', 'Qatar', 'Pakistan',
+            'Thailand', 'Azerbaijan',
+            'Norway', 'DR Congo',
+        ];
+        $items = Country::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        foreach ($countries as $key => $country) {
+            Country::create([
+                'id' => $key + 1,
+                'title' => $country
+            ]);
+        }
+
+        dd('Congratulations');
+
+    }
+
+    public function create_currencies()
+    {
+        $currencies = [
+            'U.S.Dollar',
+            'Euro',
+            'Japanese Yen',
+            'British Pound',
+            'Swiss Franc',
+            'Canadian Dollar',
+            'Australian/N.Z. Dollar',
+            'South African Rand',
+            'Derham',
+            'Turkey Lir',
+            'Omani Rial',
+            'Kuwaiti Dinar',
+            'other'
+        ];
+        $items = Currency::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        foreach ($currencies as $key => $currency) {
+            Currency::create([
+                'id' => $key + 1,
+                'title' => $currency
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+
+    public function create_units()
+    {
+        $units = [
+            'Mt',
+            'St',
+            'Kg',
+            'Barrel',
+            'Gallon',
+            'Lb',
+            'other'
+        ];
+        $items = Units::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        foreach ($units as $key => $unit) {
+            Units::create([
+                'id' => $key + 1,
+                'title' => $unit
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+
+    public function tolerance_wight_by()
+    {
+
+        $items=ToleranceWeightBy::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items=['Seller','Buyer'];
+        foreach ($items as $key => $item) {
+            ToleranceWeightBy::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+    public function create_packing()
+    {
+        $items=Packing::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items=['25 kg Bag','50 kg Bag','Bulk','Drum','Flexi Tank','Jumbo Bag','other'];
+        foreach ($items as $key => $item) {
+            Packing::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
     }
 }

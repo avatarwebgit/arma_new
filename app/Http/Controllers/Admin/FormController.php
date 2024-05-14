@@ -416,8 +416,10 @@ class FormController extends Controller
             'partial_shipment_number' => ['required_if:partial_shipment,Yes'],
             'transshipment' => 'required',
             'transshipment_other' => ['required_if:transshipment,Yes'],
-            'increase_quantity' => 'nullable',
-            'increase_quantity_value' => ['required_if:increase_quantity,Yes'],
+
+//            'increase_quantity' => 'nullable',
+//            'increase_quantity_value' => ['required_if:increase_quantity,Yes'],
+
             'shipment_more_detail' => 'nullable',
             'incoterms' => 'required',
             'incoterms_other' => ['required_if:incoterms,other'],

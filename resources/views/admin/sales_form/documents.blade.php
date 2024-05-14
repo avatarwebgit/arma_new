@@ -141,7 +141,8 @@
             }
         }
     @endphp
-    <input name="{{ filed_name($name) }}" class="form-control" value="{{ $value }}" placeholder="more details">
+    <label>More Details</label>
+    <input name="{{ filed_name($name) }}" class="form-control" value="{{ $value }}">
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}

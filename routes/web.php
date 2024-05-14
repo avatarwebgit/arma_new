@@ -71,6 +71,13 @@ Route::post('/seller_change_offer', [MarketHomeController::class, 'seller_change
 Route::post('/get_market_bit_result', [MarketHomeController::class, 'get_market_bit_result'])->name('home.get_market_bit_result');
 Route::post('/get_market_info', [MarketHomeController::class, 'get_market_info'])->name('home.get_market_info');
 Route::get('/menu/{menus}', [IndexController::class, 'menus'])->name('home.menus');
+//
+Route::get('/create_countries', [IndexController::class, 'create_countries'])->name('home.create_countries');
+Route::get('/create_currencies', [IndexController::class, 'create_currencies'])->name('home.create_currencies');
+Route::get('/create_units', [IndexController::class, 'create_units'])->name('home.create_units');
+Route::get('/tolerance_wight_by', [IndexController::class, 'tolerance_wight_by'])->name('home.tolerance_wight_by');
+Route::get('/create_packing', [IndexController::class, 'create_packing'])->name('home.create_packing');
+
 Route::name('admin.')->middleware('admin')->prefix('/admin-panel/management/')->group(function () {
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

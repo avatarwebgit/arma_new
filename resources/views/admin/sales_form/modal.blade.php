@@ -28,11 +28,11 @@
 
             </div>
             <div class="modal-body p-5">
-                Do You Want To Use Previous Sales Form To Fill New Form?
+               Use Previous Sales Form?
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Use Previous Form</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-success">Previous sales Form</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">New sales Form</button>
             </div>
             <input type="hidden" name="previous_form" id="previous_form">
         </form>
