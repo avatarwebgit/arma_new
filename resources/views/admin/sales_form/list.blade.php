@@ -27,6 +27,7 @@
                                             <th>Commodity</th>
                                             <th>User</th>
                                             <th>Status</th>
+                                            <th>Date & Time</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -44,6 +45,9 @@
                                                 </td>
                                                 <td>
                                                     {{ $form->Status->title }}
+                                                </td>
+                                                <td>
+                                                    {{ \Carbon\Carbon::parse($form->crated_at)->format('m/d/Y H:m') }}
                                                 </td>
                                                 <td>
                                                     <a onclick="removeModal({{ $form->id }},event)"

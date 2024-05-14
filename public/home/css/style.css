@@ -821,12 +821,13 @@ footer.landing-footer-two ul li a:hover {
     margin-bottom: 0;
 }
 
-.table  td {
+.table td {
     font-size: 13px;
     padding: 3px 18px;
     vertical-align: middle;
 }
-.slide_more_table  td {
+
+.slide_more_table td {
     padding: 2px 8px;
 }
 
@@ -2906,12 +2907,15 @@ body {
         transform: rotate(1turn)
     }
 }
-.slide_more_table{
+
+.slide_more_table {
     background-color: #f8f8f8;
 }
+
 .table_in_table td {
     border-top: none;
 }
+
 .table_in_table span {
     display: inline-block;
     width: 145px;
@@ -2950,9 +2954,11 @@ img.logo {
         margin-right: 80px;
     }
 }
+
 .search_and_btns {
-    width:100% !important;
+    width: 100% !important;
 }
+
 .login_btn {
     font-size: 13px;
     background-color: #bed2f2;
@@ -2984,44 +2990,46 @@ img.logo {
     color: white;
 }
 
-.more_btn:hover{
+.more_btn:hover {
     color: white;
 }
 
-.ckeditor_context{
+.ckeditor_context {
     border-top: 1px solid #ededed;
     margin-top: 50px;
     padding-top: 20px;
 
 
-
 }
 
 @media screen and (max-width: 992px) {
-    .navbar-nav > li{
+    .navbar-nav > li {
         margin-right: 0 !important;
         margin-bottom: 20px !important;
         width: 50% !important;
     }
-    .navbar-nav > ul{
+
+    .navbar-nav > ul {
         width: 50% !important;
         justify-content: space-between !important;
     }
-    li.dropdown{
+
+    li.dropdown {
         position: relative;
     }
 
-    li .dropdown-menu{
+    li .dropdown-menu {
         position: absolute !important;
         top: 30px !important;
     }
 }
 
 
-footer{
+footer {
     background-color: #18214D !important;
 }
-.icon-social-media{
+
+.icon-social-media {
     border-radius: 50%;
 
     width: 50px;
@@ -3032,17 +3040,19 @@ footer{
     padding: 10px !important;
     border: 2px solid #fff;
 }
+
 .social-icon {
     display: flex;
     justify-content: space-between;
 }
+
 footer h3 {
     font-size: 25px;
     font-weight: 600;
 }
 
 
-footer input{
+footer input {
 
     width: 100%;
     background-color: transparent !important;
@@ -3052,15 +3062,18 @@ footer input{
     color: #fff;
     padding: 30px !important;
 }
+
 footer input::placeholder {
     color: #fff !important;
-    font-weight:bold !important;
+    font-weight: bold !important;
 }
 
-#accept_term_alert{
+#accept_term_alert {
     display: none;
 }
 
-#bid_validate_error{
+#bid_validate_error {
     display: none;
 }
+
+

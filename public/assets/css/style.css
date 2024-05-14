@@ -28789,3 +28789,6 @@ table.dataTable tbody > tr.selected th.select-checkbox:after {
     width: 80px;
     height: auto;
 }
+#NeedToSubmitModal .modal-footer {
+    justify-content: center !important;
+}

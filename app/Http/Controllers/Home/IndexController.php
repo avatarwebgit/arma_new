@@ -8,12 +8,16 @@ use App\Models\Blog;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\FormStatus;
+use App\Models\InspectionPlace;
 use App\Models\Market;
 use App\Models\MarketSetting;
 use App\Models\Menus;
 use App\Models\Message;
 use App\Models\Packing;
+use App\Models\PlatFom;
+use App\Models\QualityQuantityInspector;
 use App\Models\Setting;
+use App\Models\ShippingTerm;
 use App\Models\ToleranceWeightBy;
 use App\Models\Units;
 use App\Models\User;
@@ -379,6 +383,70 @@ class IndexController extends Controller
         $items=['25 kg Bag','50 kg Bag','Bulk','Drum','Flexi Tank','Jumbo Bag','other'];
         foreach ($items as $key => $item) {
             Packing::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+    public function shipping_term()
+    {
+        $items=ShippingTerm::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items=['FSHEX','SHEXFHEEX','SSHEX','FHINC','SSHINC','SHEX UU','SSHEX UU '];
+        foreach ($items as $key => $item) {
+            ShippingTerm::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+    public function quality_quantity_inspector()
+    {
+        $items=QualityQuantityInspector::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items=['seller','buyer','jointly seller and buyer'];
+        foreach ($items as $key => $item) {
+            QualityQuantityInspector::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+    public function InspectionPlace()
+    {
+        $items=InspectionPlace::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items=['discharge port','on board vessel','factory warehouse','load port'];
+        foreach ($items as $key => $item) {
+            InspectionPlace::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+    public function Platforms()
+    {
+        $items=PlatFom::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items=['Skype','WatsApp','Telegram','X (Twitter)','LinkedIn'];
+        foreach ($items as $key => $item) {
+            PlatFom::create([
                 'id' => $key + 1,
                 'title' => $item
             ]);

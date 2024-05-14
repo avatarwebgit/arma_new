@@ -30,6 +30,7 @@ use App\Models\IncotermsVersion;
 use App\Models\InspectionPlace;
 use App\Models\Packing;
 use App\Models\PaymentTerm;
+use App\Models\PlatFom;
 use App\Models\PriceType;
 use App\Models\QualityQuantityInspector;
 use App\Models\SalesOfferForm;
@@ -130,6 +131,7 @@ class FormController extends Controller
         $InspectionPlace = InspectionPlace::all();
         $cargoInsurance = CargoInsurance::all();
         $contract_types = ContractType::all();
+        $platforms = PlatFom::all();
         return view('admin.sales_form.create', compact(
             'sale_form_exist',
             'form',
@@ -154,6 +156,7 @@ class FormController extends Controller
             'InspectionPlace',
             'cargoInsurance',
             'contract_types',
+            'platforms',
             'item',
             'role'
         ));
@@ -319,7 +322,7 @@ class FormController extends Controller
         $qualityQuantityInspector = QualityQuantityInspector::all();
         $InspectionPlace = InspectionPlace::all();
         $cargoInsurance = CargoInsurance::all();
-        $contract_types=ContainerType::all();
+        $contract_types = ContainerType::all();
         $item = null;
         $is_show = 1;
         return view('admin.sales_form.create', compact(
@@ -582,29 +585,29 @@ class FormController extends Controller
     public function form_contact(Request $request)
     {
         $request->validate([
-            'email' =>'required|email',
-            'type' =>'required',
-            'description' =>'required',
-            'url' =>'nullable',
-            'option_value' =>'nullable',
-            'file' =>'nullable'
+            'email' => 'required|email',
+            'type' => 'required',
+            'description' => 'required',
+            'url' => 'nullable',
+            'option_value' => 'nullable',
+            'file' => 'nullable'
         ]);
 
 
         if ($request->has('file') and $request->file != null) {
             $env = env('UPLOAD_SETTING');
-            $filename= generateFileName($request->file->getClientOriginalName());
+            $filename = generateFileName($request->file->getClientOriginalName());
             $request->file->move(public_path($env), $filename);
         } else {
             $filename = null;
         }
         ContactForm::create([
-            'email' =>$request->email,
-            'type' =>$request->type,
-            'description' =>$request->description,
-            'url' =>$request->url,
-            'option_value' =>$request->option_value,
-            'file' =>$filename
+            'email' => $request->email,
+            'type' => $request->type,
+            'description' => $request->description,
+            'url' => $request->url,
+            'option_value' => $request->option_value,
+            'file' => $filename
         ]);
 
         session()->flash('success', 'Your message has been sent');

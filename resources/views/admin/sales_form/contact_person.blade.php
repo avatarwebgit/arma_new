@@ -104,8 +104,8 @@
 </div>
 <div class="col-12 col-md-1 mb-3">
     @php
-        $label='Pre Code';
-        $name=$label;
+        $label='Country code';
+        $name='pre code';
         $is_required=1;
         $required_span='';
         $required='';
@@ -125,7 +125,7 @@
         }
     @endphp
     <label for="{{ filed_name($name) }}"
-           class="mb-2">{!! 'Mobile Phone'.' '.$required_span !!}</label>
+           class="mb-2">{!! $label.$required_span !!}</label>
     <input {{ $required }} id="{{ filed_name($name) }}"
            name="{{ filed_name($name) }}" class="form-control" type="number"
            value="{{ $value }}">
@@ -142,7 +142,7 @@
         $is_required=1;
         $required_span='';
         $required='';
-                                //common conditional
+         //common conditional
         if ($is_required===1){
             $required_span='<span class="text-danger">*</span>';
             $required='required';
@@ -158,8 +158,8 @@
         }
     @endphp
     <label for="{{ filed_name($name) }}"
-           class="mb-2"></label>
-    <input style="margin-top: 9px" {{ $required }} id="{{ filed_name($name) }}"
+           class="mb-2">{!! $label.$required_span !!}</label>
+    <input {{ $required }} id="{{ filed_name($name) }}"
            name="{{ filed_name($name) }}" class="form-control" type="number"
            value="{{ $value }}">
     @error(filed_name($name))
@@ -169,14 +169,14 @@
     @enderror
 </div>
 
-<div class="col-12 col-md-4 mb-3">
+<div class="col-12 col-md-6 mb-3">
     @php
         $label='Select a Platform';
-        $name='platform';
-        $is_required=1;
+            $name='platform';
+            $is_required=1;
         $required_span='';
         $required='';
-                                //common conditional
+        //common conditional
         if ($is_required===1){
             $required_span='<span class="text-danger">*</span>';
             $required='required';
@@ -193,15 +193,22 @@
     @endphp
     <label for="{{ filed_name($name) }}"
            class="mb-2">{!! $label.' '.$required_span !!}</label>
-    <input {{ $required }} id="{{ filed_name($name) }}" type="text"
-           name="{{ filed_name($name) }}" class="form-control"
-           value="{{ $value }}">
+    <select onchange="hasOther(this)"
+            {{ $required }} id="{{ filed_name($name) }}" type="text"
+            name="{{ filed_name($name) }}" class="form-control ">
+        @foreach($platforms as $item)
+            <option
+                {{ $value==$item->title ? ' selected="selected"' : '' }}
+                value="{{ $item->title }}">{{ $item->title }}</option>
+        @endforeach
+    </select>
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}
     </p>
     @enderror
 </div>
+
 
 <div class="col-12">
     <hr>
