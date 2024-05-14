@@ -4,9 +4,7 @@
 </div>
 <div class="col-12">
     <strong>
-        Note: Only owner of the cargo can submit the form. If the cargo
-        is not available and/or you are a broker applying the form is
-        not permitted.
+        Note: ONLY CARGO OWNER Submit
     </strong>
 </div>
 <div class="col-12 col-md-6 mb-3">

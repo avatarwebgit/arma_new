@@ -170,11 +170,12 @@
             }
         }
     @endphp
+    <label>{{ $label }}</label>
     <textarea rows="2"
               {{ $required }} id="{{ filed_name($name) }}"
               type="text"
               name="{{ filed_name($name) }}"
-              class="form-control" placeholder="{{ $label }}">{{ $value }}</textarea>
+              class="form-control">{{ $value }}</textarea>
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}

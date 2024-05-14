@@ -216,8 +216,8 @@
             }
         }
         let has_currency_other = 0;
-        if(value=='other' || value=='Contract'){
-            has_currency_other=1;
+        if (value == 'other' || value == 'Contract') {
+            has_currency_other = 1;
         }
         if (has_currency_other) {
             let has_old = "{{ old('contract_type_other') }}";
@@ -294,6 +294,7 @@
             $(error_message).insertAfter($('#partial_shipment_number'));
         }
     }
+
     function check_transshipment() {
         let old_value = "{{ old('transshipment') }}";
         let value;
@@ -638,20 +639,50 @@
         }
     }
 
+    function numberFormat(tag) {
+        let number =$(tag).val();
+        let number_formatted=number_format_js(number);
+        $(tag).val(number_formatted);
+    }
+
+    function number_format_js(number, decimals, dec_point, thousands_sep) {
+        // Strip all characters but numerical ones.
+        number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function (n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+    }
+
     function hasOtherContractTypes(tag) {
         let name = $(tag).attr('name');
         let value = $(tag).val();
         removeOtherElement(name);
         console.log(name, value);
-        if (value === 'other' || value ==='Contract') {
-            let label='';
-            if (value === 'other'){
-                label ='Contract Details';
+        if (value === 'other' || value === 'Contract') {
+            let label = '';
+            if (value === 'other') {
+                label = 'Contract Details';
             }
-            if (value === 'Contract'){
-                label ='Duration Months';
+            if (value === 'Contract') {
+                label = 'Duration Months';
             }
-            let element = createOtherContractElement(name,label);
+            let element = createOtherContractElement(name, label);
             $(element).insertAfter($(tag).parent().parent());
         }
     }
@@ -723,12 +754,14 @@
             $(('#' + field_name)).parent().remove();
         }
     }
+
     function addTransshipment(tag) {
         let value = $(tag).val();
         let field_name = 'transshipment_other';
         if (value === 'Yes') {
-            let element = '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2"><span class="text-danger">*</span></label>` +
-                '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" placeholder="more Details">' +
+            let element = '<label>More Details</label>' +
+                '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2"><span class="text-danger">*</span></label>` +
+                '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control">' +
                 '</div>';
             $(element).insertAfter($(tag).parent().parent().parent());
         } else {
@@ -771,7 +804,8 @@
             '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
             '</div>';
     }
-    function createOtherContractElement(name,label) {
+
+    function createOtherContractElement(name, label) {
         let field_name = name + '_other';
         return '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">${label} <span class="text-danger">*</span></label>` +
             '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
