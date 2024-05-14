@@ -18,7 +18,7 @@
         }
  @endphp
     <div>
-        <label for="safety_product" class="mb-2">Safety? <span class="text-danger">*</span></label>
+        <label for="safety_product" class="mb-2">Material Safety Data Sheet(MSDS) ? <span class="text-danger">*</span></label>
     </div>
     <div>
         <div class="form-check form-check-inline mr-3">
