@@ -3,7 +3,7 @@
 @section('script')
 
     <script type="module">
-        $(document).ready(function () {
+        document.addEventListener('DOMContentLoaded', function() {
             GetMarkets();
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
             if (market_open_finished_modal_exists) {
@@ -132,8 +132,6 @@
                         MarketOnline(val);
                     });
                     makeTimer(endDate, market_id_open);
-
-
                 }
             })
         }
