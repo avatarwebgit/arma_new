@@ -78,7 +78,7 @@ Route::get('/create_units', [IndexController::class, 'create_units'])->name('hom
 Route::get('/tolerance_wight_by', [IndexController::class, 'tolerance_wight_by'])->name('home.tolerance_wight_by');
 Route::get('/create_packing', [IndexController::class, 'create_packing'])->name('home.create_packing');
 Route::get('/shipping_term', [IndexController::class, 'shipping_term'])->name('home.shipping_term');
-Route::get('/shipping_term', [IndexController::class, 'shipping_term'])->name('home.shipping_term');
+
 Route::get('/quality_quantity_inspector', [IndexController::class, 'quality_quantity_inspector'])->name('home.quality_quantity_inspector');
 Route::get('/InspectionPlace', [IndexController::class, 'InspectionPlace'])->name('home.InspectionPlace');
 Route::get('/Platforms', [IndexController::class, 'Platforms'])->name('home.Platforms');

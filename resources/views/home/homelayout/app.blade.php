@@ -28,13 +28,14 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
-    var timerCountdown=0;
-    function makeTimer(endTime,market_is_open) {
-        if (market_is_open==0){
+    var timerCountdown = 0;
+
+    function makeTimer(endTime, market_is_open) {
+        if (market_is_open == 0) {
             clearInterval(timerCountdown);
             timerClose();
-        }else {
-            if (!timerCountdown==0){
+        } else {
+            if (!timerCountdown == 0) {
                 clearInterval(timerCountdown);
             }
             timerCountdown = setInterval(function () {
@@ -42,7 +43,8 @@
             }, 1000);
         }
     }
-    function timerClose(){
+
+    function timerClose() {
         var Hours = $('#Hours');
         var Minutes = $('#Minutes');
         var Seconds = $('#Seconds');
@@ -55,14 +57,16 @@
         var Hours = $('#Hours');
         var Minutes = $('#Minutes');
         var Seconds = $('#Seconds');
-        endTime = new Date(endTime);
-        var now = new Date();
-        now = now.setMinutes(now.getMinutes() - 150);
-        now = new Date(now);
-        endTime = endTime.getTime()
-        now = now.getTime()
-        var timeLeft = endTime - now;
-        timeLeft = timeLeft / 1000;
+        // به‌روزرسانی زمان endTime با زمان فعلی
+        endTime = moment(endTime).format("MMMM Do YYYY h:mm:ss A");
+        // محاسبه زمان فعلی
+        var time_now = moment().tz("Europe/London").format("MMMM Do YYYY h:mm:ss A");
+        // محاسبه اختلاف زمانی بین endTime و time_now بر حسب میلی‌ثانیه
+        var diffMilliseconds = moment(endTime, "MMMM Do YYYY h:mm:ss A").diff(moment(time_now, "MMMM Do YYYY h:mm:ss A"));
+        // تبدیل اختلاف زمانی به ثانیه
+        var diffSeconds = Math.abs(diffMilliseconds) / 1000;
+        // نمایش اختلاف زمانی بین endTime و time_now به صورت دقیقه
+        let timeLeft = diffSeconds;
         var days = Math.floor(timeLeft / 86400);
         var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
         var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
@@ -174,14 +178,14 @@
             let benchmark6 = market.attr('data-benchmark6');
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
-            var now = new Date();
-            now.setMinutes(now.getMinutes() - 150);
-            benchmark1 = new Date(benchmark1);
-            benchmark2 = new Date(benchmark2);
-            benchmark3 = new Date(benchmark3);
-            benchmark4 = new Date(benchmark4);
-            benchmark5 = new Date(benchmark5);
-            benchmark6 = new Date(benchmark6);
+
+            var now=moment().tz("Europe/London").format("MMMM Do YYYY h:mm:ss A");
+            benchmark1=moment(benchmark1).format("MMMM Do YYYY h:mm:ss A");
+            benchmark2=moment(benchmark2).format("MMMM Do YYYY h:mm:ss A");
+            benchmark3=moment(benchmark3).format("MMMM Do YYYY h:mm:ss A");
+            benchmark4=moment(benchmark4).format("MMMM Do YYYY h:mm:ss A");
+            benchmark5=moment(benchmark5).format("MMMM Do YYYY h:mm:ss A");
+            benchmark6=moment(benchmark6).format("MMMM Do YYYY h:mm:ss A");
             time_to_close_bid_deposit = new Date(time_to_close_bid_deposit);
             if (now > time_to_close_bid_deposit) {
                 close_bid_deposit(id);
@@ -242,7 +246,7 @@
                         $('#Market_Status_Text').html(msg[1]);
                         let endDate = msg[2];
                         let market_id_open = msg[3];
-                        makeTimer(endDate,market_id_open);
+                        makeTimer(endDate, market_id_open);
                     }
                 }
             })
@@ -250,7 +254,7 @@
 
         function waiting_to_open(benchmark1, now, id) {
             deactive_bid();
-            let difference = benchmark1 - now;
+            let difference = moment(benchmark1, "MMMM Do YYYY h:mm:ss A").diff(moment(now, "MMMM Do YYYY h:mm:ss A"));
             let status = 1;
             let statusText = '<span>Waiting To Open</span>';
             let change_color = 0;
@@ -260,7 +264,7 @@
 
         function ready_to_open(benchmark2, now, id) {
             deactive_bid();
-            let difference = benchmark2 - now;
+            let difference =moment(benchmark2, "MMMM Do YYYY h:mm:ss A").diff(moment(now, "MMMM Do YYYY h:mm:ss A"));
             let status = 2;
             let statusText = '<span>Ready to open</span>';
             let change_color = 1;
@@ -271,7 +275,7 @@
         function opening(benchmark3, now, id) {
             close_bid_deposit(id);
             active_bid();
-            let difference = benchmark3 - now;
+            let difference = moment(benchmark3, "MMMM Do YYYY h:mm:ss A").diff(moment(now, "MMMM Do YYYY h:mm:ss A"));
             let status = 3;
             let color = '#1f9402';
             let change_color = 1;
@@ -283,7 +287,7 @@
             remove_function();
             close_bid_deposit(id);
             active_bid();
-            let difference = benchmark4 - now;
+            let difference = moment(benchmark4, "MMMM Do YYYY h:mm:ss A").diff(moment(now, "MMMM Do YYYY h:mm:ss A"));
             let status = 4;
             let color = '#135e00';
             let change_color = 1;
@@ -295,7 +299,7 @@
             remove_function();
             close_bid_deposit(id);
             active_bid();
-            let difference = benchmark5 - now;
+            let difference = moment(benchmark5, "MMMM Do YYYY h:mm:ss A").diff(moment(now, "MMMM Do YYYY h:mm:ss A"));
             let status = 5;
             let color = '#104800';
             let change_color = 1;
@@ -309,7 +313,7 @@
             $('#bid_price').attr('step', step);
             remove_function();
             Competition_Bid_buttons();
-            let difference = benchmark6 - now;
+            let difference = moment(benchmark6, "MMMM Do YYYY h:mm:ss A").diff(moment(now, "MMMM Do YYYY h:mm:ss A"));
             let status = 6;
             let color = '#0a2a00';
             let change_color = 1;
@@ -379,7 +383,6 @@
             if (status != 1) {
                 $('#market-time-' + id).html(statusText);
             }
-            console.log(status);
             if (status == 2 || status == 3 || status == 4 || status == 5) {
                 animation_main_div.removeClass('d-none');
             }
