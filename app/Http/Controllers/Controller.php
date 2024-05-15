@@ -17,6 +17,7 @@ class Controller extends BaseController
     public function statusTimeMarket($market, $force_determine_status = 0)
     {
 
+
         $ready_to_duration = MarketSetting::where('key', 'ready_to_open')->pluck('value')->first();
         $open_duration = MarketSetting::where('key', 'opening')->pluck('value')->first();
         $q_1 = MarketSetting::where('key', 'q_1')->pluck('value')->first();
@@ -29,7 +30,6 @@ class Controller extends BaseController
 
         $startTime = Carbon::parse($date_time);
         $now = Carbon::now();
-
         $time_to_close_bid_deposit=$startTime->copy()->addMinutes(-120);
 
         $benchmark1 = $startTime->copy()->addMinutes(-$ready_to_duration);
@@ -99,7 +99,6 @@ class Controller extends BaseController
             //close
             $difference = 0;
             $status = 7;
-
         }
         $market->update(['status' => $status]);
         return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time,$time_to_close_bid_deposit];

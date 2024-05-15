@@ -3,7 +3,7 @@
 @section('script')
 
     <script type="module">
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             GetMarkets();
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
             if (market_open_finished_modal_exists) {
@@ -180,10 +180,12 @@
             #Market_Status_Text {
                 text-align: center !important;
             }
-            #total_trade_value{
+
+            #total_trade_value {
                 text-align: center !important;
             }
-            #time_now{
+
+            #time_now {
                 text-align: center !important;
             }
         }
@@ -232,7 +234,6 @@
                     <span id="market_value">0</span>
                     <span>$</span>
                 </div>
-
             </div>
             <div id="timer_section" class="col-12 col-xl-4 d-flex justify-content-center mb-3 p-0 ">
                 <div class="clock">

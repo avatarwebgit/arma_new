@@ -179,45 +179,40 @@
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
 
-            var now = moment().tz("Europe/London");
-            benchmark1 = moment(benchmark1);
-            benchmark2 = moment(benchmark2);
-            benchmark3 = moment(benchmark3);
-            benchmark4 = moment(benchmark4);
-            benchmark5 = moment(benchmark5);
-            benchmark6 = moment(benchmark6);
+            var now = moment().tz("Europe/London", 'MMMM Do YYYY h:mm:ss A');
+            benchmark1 = moment(benchmark1, 'MMMM Do YYYY h:mm:ss A');
+            benchmark2 = moment(benchmark2, 'MMMM Do YYYY h:mm:ss A');
+            benchmark3 = moment(benchmark3, 'MMMM Do YYYY h:mm:ss A');
+            benchmark4 = moment(benchmark4, 'MMMM Do YYYY h:mm:ss A');
+            benchmark5 = moment(benchmark5, 'MMMM Do YYYY h:mm:ss A');
+            benchmark6 = moment(benchmark6, 'MMMM Do YYYY h:mm:ss A');
             time_to_close_bid_deposit = moment(time_to_close_bid_deposit);
             if (time_to_close_bid_deposit.isBefore(now)) {
                 close_bid_deposit(id);
             }
             if (now.isBefore(benchmark1)) {
-                benchmark1=benchmark1.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
+                console.log("1");
                 waiting_to_open(benchmark1, now, id);
             } else if (benchmark1.isBefore(now) && now.isBefore(benchmark2)) {
-                benchmark2=benchmark2.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
+                console.log("2");
                 ready_to_open(benchmark2, now, id)
             } else if (benchmark2.isBefore(now) && now.isBefore(benchmark3)) {
-                benchmark3=benchmark3.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
+                console.log("3");
                 opening(benchmark3, now, id);
             } else if (benchmark3.isBefore(now) && now.isBefore(benchmark4)) {
-                benchmark4=benchmark4.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
+                console.log("4");
                 Quotation_1_2(benchmark4, now, id);
             } else if (benchmark4.isBefore(now) && now.isBefore(benchmark5)) {
-                benchmark5=benchmark5.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
+                console.log("5");
                 Quotation_2_2(benchmark5, now, id);
             } else if (benchmark5.isBefore(now) && now.isBefore(benchmark6)) {
-                benchmark6=benchmark6.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
+                console.log("6");
                 Competition(benchmark6, now, id, step);
-            } else {
-                MarketSystem.stop();
-            }
+            } else
+                console.log("7--");
+            MarketSystem.stop();
         }
+
 
         function check_continue_market(market_id, status) {
             let market_continue = true;
@@ -266,12 +261,14 @@
 
         function waiting_to_open(benchmark1, now, id) {
             deactive_bid();
-            let difference = moment(benchmark1, "MMMM Do YYYY h:mm:ss A").diff(moment(now, "MMMM Do YYYY h:mm:ss A"));
+            let difference = moment(benchmark1).diff(moment(now));
             let status = 1;
             let statusText = '<span>Waiting To Open</span>';
             let change_color = 0;
             let color = '#cbcb18';
-            change_market_status(status, difference, change_color, color, statusText, id)
+
+                change_market_status(status, difference, change_color, color, statusText, id)
+
         }
 
         function ready_to_open(benchmark2, now, id) {
@@ -281,7 +278,9 @@
             let statusText = '<span>Ready to open</span>';
             let change_color = 1;
             let color = '#8a8a00';
-            change_market_status(status, difference, change_color, color, statusText, id)
+
+                change_market_status(status, difference, change_color, color, statusText, id)
+
         }
 
         function opening(benchmark3, now, id) {
@@ -292,7 +291,9 @@
             let color = '#1f9402';
             let change_color = 1;
             let statusText = '<span>Opening</span>';
-            change_market_status(status, difference, change_color, color, statusText, id)
+
+                change_market_status(status, difference, change_color, color, statusText, id)
+
         }
 
         function Quotation_1_2(benchmark4, now, id) {
@@ -304,7 +305,9 @@
             let color = '#135e00';
             let change_color = 1;
             let statusText = '<span>Quotation 1/2</span>';
-            change_market_status(status, difference, change_color, color, statusText, id)
+
+                change_market_status(status, difference, change_color, color, statusText, id)
+
         }
 
         function Quotation_2_2(benchmark5, now, id) {
@@ -316,7 +319,9 @@
             let color = '#104800';
             let change_color = 1;
             let statusText = '<span>Quotation 2/2</span>';
-            change_market_status(status, difference, change_color, color, statusText, id)
+
+                change_market_status(status, difference, change_color, color, statusText, id)
+
         }
 
         function Competition(benchmark6, now, id, step) {
@@ -330,7 +335,9 @@
             let color = '#0a2a00';
             let change_color = 1;
             let statusText = '<span>Competition</span>';
-            change_market_status(status, difference, change_color, color, statusText, id)
+
+                change_market_status(status, difference, change_color, color, statusText, id)
+
         }
 
         function Stop(id) {
@@ -342,7 +349,8 @@
             let color = '#ff0707';
             let change_color = 1;
             let statusText = '<span>Close</span>';
-            change_market_status(status, difference, change_color, color, statusText, id);
+
+                change_market_status(status, difference, change_color, color, statusText, id)
             show_market_result(id);
         }
 
@@ -383,6 +391,8 @@
             let animation_main_div = $('#market-time-parent-' + id).find('.animation_main_div');
             animation_main_div.removeClass('d-none');
             animation_main_div.addClass('d-none');
+            console.log('under');
+            console.log(status);
             $('#previous_status-' + id).val(status);
             difference = parseInt(difference / 1000);
             if (change_color) {
@@ -421,9 +431,10 @@
                         MarketSystem.stop();
                     }
                 }
-            })
+            });
         }
     }
+
 
     function active_bid() {
         $('#bid_quantity').prop('disabled', false);
