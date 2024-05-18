@@ -75,6 +75,7 @@ class MarketController extends Controller
         ]);
         $market = Market::create($request->all());
         $this->statusTimeMarket($market, 1);
+        broadcast(new MarketTimeUpdated());
         session()->flash('success', 'New Market Created Successfully');
         return redirect()->route('admin.markets.folder', ['date' => $market->date]);
     }

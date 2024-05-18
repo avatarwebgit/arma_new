@@ -179,14 +179,30 @@
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
 
-            var now = moment().tz("Europe/London");
-            benchmark1 = moment(benchmark1);
-            benchmark2 = moment(benchmark2);
-            benchmark3 = moment(benchmark3);
-            benchmark4 = moment(benchmark4);
-            benchmark5 = moment(benchmark5);
-            benchmark6 = moment(benchmark6);
-            time_to_close_bid_deposit = moment(time_to_close_bid_deposit);
+
+            let now = moment().tz("Europe/London");
+            now = moment(now).format('MMMM DD YYYY h:mm:ss');
+            now=moment(now,'MMMM DD YYYY h:mm:ss');
+
+            benchmark1 = moment(benchmark1).format('MMMM DD YYYY h:mm:ss');
+            benchmark1=moment(benchmark1,'MMMM DD YYYY h:mm:ss');
+
+            benchmark2 = moment(benchmark2).format('MMMM DD YYYY h:mm:ss');
+            benchmark2=moment(benchmark2,'MMMM DD YYYY h:mm:ss');
+
+            benchmark3 = moment(benchmark3).format('MMMM DD YYYY h:mm:ss');
+            benchmark3=moment(benchmark3,'MMMM DD YYYY h:mm:ss');
+
+            benchmark4 = moment(benchmark4).format('MMMM DD YYYY h:mm:ss');
+            benchmark4=moment(benchmark4,'MMMM DD YYYY h:mm:ss');
+
+            benchmark5 = moment(benchmark5).format('MMMM DD YYYY h:mm:ss');
+            benchmark5=moment(benchmark5,'MMMM DD YYYY h:mm:ss');
+
+            benchmark6 = moment(benchmark6).format('MMMM DD YYYY h:mm:ss');
+            benchmark6=moment(benchmark6,'MMMM DD YYYY h:mm:ss');
+
+            time_to_close_bid_deposit = moment(time_to_close_bid_deposit, 'MMMM Do YYYY h:mm:ss');
             if (time_to_close_bid_deposit.isBefore(now)) {
                 close_bid_deposit(id);
             }

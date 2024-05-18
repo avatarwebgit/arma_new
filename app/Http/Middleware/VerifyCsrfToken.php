@@ -16,5 +16,7 @@ class VerifyCsrfToken extends Middleware
         '/refreshSellerTable',
         '/change_market_status',
         '/get_market_info',
+        '/Market_Table_Index_Status',
+        '/check_market_status_for_continue',
     ];
 }
