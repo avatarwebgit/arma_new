@@ -70,8 +70,6 @@ class IndexController extends Controller
         }
         $close_market = $this->close_market_today();
         session()->forget('market_open_finished');
-
-
         return view('home.index.index',
             compact('market_open_finished_modal_exists',
                 'market_open_finished_modal',
@@ -119,7 +117,6 @@ class IndexController extends Controller
             $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
-
             foreach ($markets_groups as $markets) {
                 foreach ($markets as $market) {
                     $result = $this->statusTimeMarket($market);
@@ -135,7 +132,6 @@ class IndexController extends Controller
                     $ids[] = $market->id;
                 }
             }
-
             foreach ($yesterday_markets_groups as $markets) {
                 foreach ($markets as $market) {
                     $result = $this->statusTimeMarket($market);
@@ -153,7 +149,6 @@ class IndexController extends Controller
             }
             $market_values = 0;
             $market_is_open = 0;
-
             foreach ($today_markets_groups as $markets) {
                 foreach ($markets as $market) {
                     $market_status_index = $this->market_status_index($market, $market_is_open);

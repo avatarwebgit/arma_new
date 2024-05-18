@@ -181,54 +181,42 @@
 
 
             let now = moment().tz("Europe/London");
-            now = moment(now).format('MMMM DD YYYY h:mm:ss');
-            now=moment(now,'MMMM DD YYYY h:mm:ss');
+            now = moment(now).format('MMMM DD YYYY h:mm:ss A');
+            now=moment(now,'MMMM DD YYYY h:mm:ss A');
 
-            benchmark1 = moment(benchmark1).format('MMMM DD YYYY h:mm:ss');
-            benchmark1=moment(benchmark1,'MMMM DD YYYY h:mm:ss');
+            benchmark1 = moment(benchmark1).format('MMMM DD YYYY h:mm:ss A');
+            benchmark1=moment(benchmark1,'MMMM DD YYYY h:mm:ss A');
 
-            benchmark2 = moment(benchmark2).format('MMMM DD YYYY h:mm:ss');
-            benchmark2=moment(benchmark2,'MMMM DD YYYY h:mm:ss');
+            benchmark2 = moment(benchmark2).format('MMMM DD YYYY h:mm:ss A');
+            benchmark2=moment(benchmark2,'MMMM DD YYYY h:mm:ss A');
 
-            benchmark3 = moment(benchmark3).format('MMMM DD YYYY h:mm:ss');
-            benchmark3=moment(benchmark3,'MMMM DD YYYY h:mm:ss');
+            benchmark3 = moment(benchmark3).format('MMMM DD YYYY h:mm:ss A');
+            benchmark3=moment(benchmark3,'MMMM DD YYYY h:mm:ss A');
 
-            benchmark4 = moment(benchmark4).format('MMMM DD YYYY h:mm:ss');
-            benchmark4=moment(benchmark4,'MMMM DD YYYY h:mm:ss');
+            benchmark4 = moment(benchmark4).format('MMMM DD YYYY h:mm:ss A');
+            benchmark4=moment(benchmark4,'MMMM DD YYYY h:mm:ss A');
 
-            benchmark5 = moment(benchmark5).format('MMMM DD YYYY h:mm:ss');
-            benchmark5=moment(benchmark5,'MMMM DD YYYY h:mm:ss');
+            benchmark5 = moment(benchmark5).format('MMMM DD YYYY h:mm:ss A');
+            benchmark5=moment(benchmark5,'MMMM DD YYYY h:mm:ss A');
 
-            benchmark6 = moment(benchmark6).format('MMMM DD YYYY h:mm:ss');
-            benchmark6=moment(benchmark6,'MMMM DD YYYY h:mm:ss');
+            benchmark6 = moment(benchmark6).format('MMMM DD YYYY h:mm:ss A');
+            benchmark6=moment(benchmark6,'MMMM DD YYYY h:mm:ss A');
 
             time_to_close_bid_deposit = moment(time_to_close_bid_deposit, 'MMMM Do YYYY h:mm:ss');
             if (time_to_close_bid_deposit.isBefore(now)) {
                 close_bid_deposit(id);
             }
             if (now.isBefore(benchmark1)) {
-                benchmark1=benchmark1.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
                 waiting_to_open(benchmark1, now, id);
             } else if (benchmark1.isBefore(now) && now.isBefore(benchmark2)) {
-                benchmark2=benchmark2.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
                 ready_to_open(benchmark2, now, id)
             } else if (benchmark2.isBefore(now) && now.isBefore(benchmark3)) {
-                benchmark3=benchmark3.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
                 opening(benchmark3, now, id);
             } else if (benchmark3.isBefore(now) && now.isBefore(benchmark4)) {
-                benchmark4=benchmark4.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
                 Quotation_1_2(benchmark4, now, id);
             } else if (benchmark4.isBefore(now) && now.isBefore(benchmark5)) {
-                benchmark5=benchmark5.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
                 Quotation_2_2(benchmark5, now, id);
             } else if (benchmark5.isBefore(now) && now.isBefore(benchmark6)) {
-                benchmark6=benchmark6.format("MMMM Do YYYY h:mm:ss A");
-                now=now.format("MMMM Do YYYY h:mm:ss A");
                 Competition(benchmark6, now, id, step);
             } else {
                 MarketSystem.stop();
@@ -759,7 +747,6 @@
             $('#scroll-container-first-div2').removeClass('animate_paused');
         });
     }
-
 
 </script>
 
