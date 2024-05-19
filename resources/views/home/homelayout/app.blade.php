@@ -231,7 +231,6 @@
                 Competition(benchmark6, now, id, step);
             }
             if (benchmark6.isBefore(now)) {
-                level = 6;
                 MarketSystem.stop();
             }
         }
@@ -370,8 +369,8 @@
             let change_color = 1;
             let statusText = '<span>Close</span>';
 
-            change_market_status(status, difference, change_color, color, statusText, id);
             show_market_result(id);
+            change_market_status(status, difference, change_color, color, statusText, id);
         }
 
         function close_bid_deposit(id) {
@@ -447,7 +446,7 @@
                 method: 'post',
                 success: function (msg) {
                     if (msg == 7) {
-                        MarketSystem.stop();
+                        MarketSystem.stop(status);
                     }
                 }
             })
