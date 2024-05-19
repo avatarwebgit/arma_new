@@ -182,43 +182,56 @@
 
             let now = moment().tz("Europe/London");
             now = moment(now).format('MMMM DD YYYY h:mm:ss A');
-            now=moment(now,'MMMM DD YYYY h:mm:ss A');
+            now = moment(now, 'MMMM DD YYYY h:mm:ss A');
 
             benchmark1 = moment(benchmark1).format('MMMM DD YYYY h:mm:ss A');
-            benchmark1=moment(benchmark1,'MMMM DD YYYY h:mm:ss A');
+            benchmark1 = moment(benchmark1, 'MMMM DD YYYY h:mm:ss A');
 
             benchmark2 = moment(benchmark2).format('MMMM DD YYYY h:mm:ss A');
-            benchmark2=moment(benchmark2,'MMMM DD YYYY h:mm:ss A');
+            benchmark2 = moment(benchmark2, 'MMMM DD YYYY h:mm:ss A');
 
             benchmark3 = moment(benchmark3).format('MMMM DD YYYY h:mm:ss A');
-            benchmark3=moment(benchmark3,'MMMM DD YYYY h:mm:ss A');
+            benchmark3 = moment(benchmark3, 'MMMM DD YYYY h:mm:ss A');
 
             benchmark4 = moment(benchmark4).format('MMMM DD YYYY h:mm:ss A');
-            benchmark4=moment(benchmark4,'MMMM DD YYYY h:mm:ss A');
+            benchmark4 = moment(benchmark4, 'MMMM DD YYYY h:mm:ss A');
 
             benchmark5 = moment(benchmark5).format('MMMM DD YYYY h:mm:ss A');
-            benchmark5=moment(benchmark5,'MMMM DD YYYY h:mm:ss A');
+            benchmark5 = moment(benchmark5, 'MMMM DD YYYY h:mm:ss A');
 
             benchmark6 = moment(benchmark6).format('MMMM DD YYYY h:mm:ss A');
-            benchmark6=moment(benchmark6,'MMMM DD YYYY h:mm:ss A');
+            benchmark6 = moment(benchmark6, 'MMMM DD YYYY h:mm:ss A');
 
             time_to_close_bid_deposit = moment(time_to_close_bid_deposit, 'MMMM Do YYYY h:mm:ss');
             if (time_to_close_bid_deposit.isBefore(now)) {
                 close_bid_deposit(id);
             }
             if (now.isBefore(benchmark1)) {
+                level = 0;
                 waiting_to_open(benchmark1, now, id);
-            } else if (benchmark1.isBefore(now) && now.isBefore(benchmark2)) {
+            }
+            if (now.isBetween(benchmark1, benchmark2)) {
+                level = 1;
                 ready_to_open(benchmark2, now, id)
-            } else if (benchmark2.isBefore(now) && now.isBefore(benchmark3)) {
+            }
+            if (now.isBetween(benchmark2, benchmark3)) {
+                level = 2;
                 opening(benchmark3, now, id);
-            } else if (benchmark3.isBefore(now) && now.isBefore(benchmark4)) {
+            }
+            if (now.isBetween(benchmark3, benchmark4)) {
+                level = 3;
                 Quotation_1_2(benchmark4, now, id);
-            } else if (benchmark4.isBefore(now) && now.isBefore(benchmark5)) {
+            }
+            if (now.isBetween(benchmark4, benchmark5)) {
+                level = 4;
                 Quotation_2_2(benchmark5, now, id);
-            } else if (benchmark5.isBefore(now) && now.isBefore(benchmark6)) {
+            }
+            if (now.isBetween(benchmark5, benchmark6)) {
+                level = 5;
                 Competition(benchmark6, now, id, step);
-            } else {
+            }
+            if (benchmark6.isBefore(now)) {
+                level = 6;
                 MarketSystem.stop();
             }
         }
@@ -266,6 +279,16 @@
                     }
                 }
             })
+        }
+
+        function makeTimer(difference, id) {
+            if (difference != 0) {
+                setInterval(function () {
+                    difference = parseInt(difference / 1000);
+                    $('#market-difference-' + id).html(secondsToHms(difference));
+                    difference = difference - 1;
+                }, 1000)
+            }
         }
 
         function waiting_to_open(benchmark1, now, id) {
@@ -346,6 +369,7 @@
             let color = '#ff0707';
             let change_color = 1;
             let statusText = '<span>Close</span>';
+
             change_market_status(status, difference, change_color, color, statusText, id);
             show_market_result(id);
         }
@@ -388,12 +412,13 @@
             animation_main_div.removeClass('d-none');
             animation_main_div.addClass('d-none');
             $('#previous_status-' + id).val(status);
-            difference = parseInt(difference / 1000);
+
             if (change_color) {
                 $('#market-' + id).css('color', color);
                 $('.status-box').css('color', color);
                 $('.circle_timer').css('background', color);
             }
+            difference = parseInt(difference / 1000);
             $('#market-difference-' + id).html(secondsToHms(difference));
             $('#market-status-' + id).html(statusText);
             if (status != 1) {
