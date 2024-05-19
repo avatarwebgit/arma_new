@@ -286,11 +286,11 @@ class MarketHomeController extends Controller
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
 
-        if ($request['quantity'] < $min_order) {
-            $key = 'quantity';
-            $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
-            return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
-        }
+//        if ($request['quantity'] < $min_order) {
+//            $key = 'quantity';
+//            $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
+//            return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
+//        }
 
         if ($market->status === 3) {
             $user_bids = $market->Bids()->where('user_id', auth()->id())->where('tries', 3)->get();
@@ -300,6 +300,25 @@ class MarketHomeController extends Controller
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
             }
         }
+        if($market->status != 3){
+            if ($request['quantity'] < $min_order) {
+                $key = 'quantity';
+                $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
+                return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
+            }
+        }
+        if($market->status == 4){
+            $best_bid= $market->Bids()->max('price');
+            if($best_bid->user_id != auth()->user()->id){
+                if(!($price > $best_bid)){
+                    $key = 'bid number';
+                    $message = 'قیمتت کمه';
+                    return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+                }
+            }
+
+        }
+
         $this_my_bid_exists = $market->Bids()->where('price', $request['price'])->where('quantity', $request['quantity'])->where('user_id', auth()->id())->exists();
         if ($this_my_bid_exists) {
             $key = 'bid_exists';
