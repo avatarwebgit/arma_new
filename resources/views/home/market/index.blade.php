@@ -38,10 +38,7 @@
             })
         }
 
-        function step_price_competition(tag, event) {
-            event.preventDefault();
-            alert('Use Arrow Buttons to Increase or Decrease');
-        }
+
 
     </script>
 @endsection
@@ -231,7 +228,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3 text-center">
                                         <label for="bid_price">Price( {{ $market->SalesForm->currency }} )</label>
-                                        <input disabled id="bid_price" type="number" class="form-control">
+                                        <input disabled id="bid_price" class="form-control">
                                         <p id="bid_price_error" class="error_text">please enter price</p>
                                     </div>
                                 </div>
