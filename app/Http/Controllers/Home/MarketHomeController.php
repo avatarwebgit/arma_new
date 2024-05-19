@@ -268,6 +268,7 @@ class MarketHomeController extends Controller
 
     function Opening_roles($request, $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market)
     {
+
         if ($request['price'] < $base_price) {
             $key = 'price';
             $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
@@ -300,23 +301,21 @@ class MarketHomeController extends Controller
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
             }
         }
-        if($market->status != 3){
-            if ($request['quantity'] < $min_order) {
-                $key = 'quantity';
-                $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
-                return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
-            }
-        }
-        if($market->status == 4){
-            $best_bid= $market->Bids()->max('price');
-            if($best_bid->user_id != auth()->user()->id){
-                if(!($price > $best_bid)){
-                    $key = 'bid number';
-                    $message = 'قیمتت کمه';
-                    return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
-                }
-            }
 
+        if ($request['quantity'] < $min_order) {
+            $key = 'quantity';
+            $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
+            return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
+        }
+
+
+        if (in_array($market->status, array(4,5))) {
+            $best_bid = $market->Bids()->max('price');
+            if ($request['price'] < $best_bid) {
+                $key = 'bid number';
+                $message = 'قیمتت کمه';
+                return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+            }
         }
 
         $this_my_bid_exists = $market->Bids()->where('price', $request['price'])->where('quantity', $request['quantity'])->where('user_id', auth()->id())->exists();
@@ -349,10 +348,12 @@ class MarketHomeController extends Controller
                 }
                 if ($request['price'] == $highest_price) {
                     $highest_price = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'desc')->first();
-                    if ($request['quantity'] < $highest_price->quantity) {
-                        $key = 'highest_price';
-                        $message = 'Your New Bid Must Better Than Previous!';
-                        return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+                    if (!in_array($market->status, array(4,5))) {
+                        if ($request['quantity'] < $highest_price->quantity) {
+                            $key = 'highest_price';
+                            $message = 'Your New Bid Must Better Than Previous!';
+                            return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+                        }
                     }
                 }
             }
@@ -443,10 +444,10 @@ class MarketHomeController extends Controller
             $market = Market::where('id', $market_id)->first();
             $status_text = $market->Status->title;
             $status_color = $market->Status->color;
-            if ($market->status==2 or $market->status==3 or $market->status==4 or $market->status==5 or $market->status==6 or $market->status==7) {
-                $market_is_open=1;
+            if ($market->status == 2 or $market->status == 3 or $market->status == 4 or $market->status == 5 or $market->status == 6 or $market->status == 7) {
+                $market_is_open = 1;
             }
-            return response()->json([1, $status_text, $status_color,$market_is_open]);
+            return response()->json([1, $status_text, $status_color, $market_is_open]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
         }
