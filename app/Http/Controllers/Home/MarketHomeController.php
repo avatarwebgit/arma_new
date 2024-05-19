@@ -131,6 +131,11 @@ class MarketHomeController extends Controller
                     $status = 7;
                 }
             }
+            if ($market->status == 5) {
+                $market->update([
+                    'pre_status' => 5,
+                ]);
+            }
             $market->update([
                 'status' => $status
             ]);
@@ -165,16 +170,19 @@ class MarketHomeController extends Controller
             }
             if ($status == '5') {
                 //quotation 2/2
+                $pre_price = $market->offer_price;
                 $highest_price_exists = $market->Bids()->Orderby('price', 'desc')->exists();
                 if ($highest_price_exists) {
                     $highest = $market->Bids()->Orderby('price', 'desc')->first();
                     $highest_price = $highest->price;
-                    if ($price != $highest_price) {
-                        return response()->json([1, 'error', 'Your New Price Just Can be: ' . $highest_price . ' ' . $currency]);
+                    if ($price < $highest_price) {
+                        return response()->json([1, 'error', 'Minimum Price You Can Enter is: ' . $highest_price . ' ' . $currency]);
                     }
-                    $market->SalesForm()->update(['price' => $price]);
+                    if ($price > $pre_price) {
+                        return response()->json([1, 'error', 'Maximum Price You Can Enter is: ' . $pre_price . ' ' . $currency]);
+                    }
+                    $market->update(['offer_price' => $price]);
                 }
-
             }
             broadcast(new ChangeSaleOffer($market->id));
         } catch (\Exception $e) {
@@ -268,7 +276,6 @@ class MarketHomeController extends Controller
 
     function Opening_roles($request, $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market)
     {
-
         if ($request['price'] < $base_price) {
             $key = 'price';
             $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
@@ -309,7 +316,7 @@ class MarketHomeController extends Controller
         }
 
 
-        if (in_array($market->status, array(4,5))) {
+        if (in_array($market->status, array(4, 5))) {
             $best_bid = $market->Bids()->max('price');
             if ($request['price'] < $best_bid) {
                 $key = 'bid number';
@@ -348,7 +355,7 @@ class MarketHomeController extends Controller
                 }
                 if ($request['price'] == $highest_price) {
                     $highest_price = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'desc')->first();
-                    if (!in_array($market->status, array(4,5))) {
+                    if (!in_array($market->status, array(4, 5))) {
                         if ($request['quantity'] < $highest_price->quantity) {
                             $key = 'highest_price';
                             $message = 'Your New Bid Must Better Than Previous!';
@@ -410,15 +417,48 @@ class MarketHomeController extends Controller
                         $remain_quantity = 0;
                     }
                 }
+                if ($market->pre_status == 5) {
+                    $price = $market->offer_price;
+                    $best_bid = $market->Bids()->max('price');
+
+                    if ($best_bid == $price) {
+                        if ($bid->price == $best_bid) {
+                            $quantites = $market->Bids()->where('price', $best_bid)->get();
+                            $quantites = $quantites->sum('quantity');
+                            $count_price = $market->Bids()->where('price', $best_bid)->count();
+
+                            if ($count_price > 1) {
+                                if ($max_quantity == $quantites) {
+                                    $is_win = 1;
+                                } else {
+                                    $is_win = 0;
+                                }
+                            } else {
+                                $is_win = 1;
+                            }
+                        } else {
+
+                            $is_win = 0;
+                        }
+
+                    } else {
+                        $is_win = 0;
+                    }
+                }
                 if ($is_win == 1) {
                     $win_user_ids[] = $bid->user_id;
                 }
+
                 $bid->update([
                     'quantity_win' => $quantity_win,
                     'is_win' => $is_win,
                 ]);
+
+
                 $bids[] = $bid;
+
             }
+
             $view = view('home.market.final_status', compact('bids', 'market'))->render();
             $user_is_login = auth()->check();
             $id_exists_in_array = 0;
@@ -434,6 +474,7 @@ class MarketHomeController extends Controller
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
         }
+
     }
 
     public function get_market_info(Request $request)
