@@ -339,8 +339,15 @@ class MarketController extends Controller
                 ]);
                 return response()->json([1, 'close']);
             }
+
             if ($status == 6) {
                 $bids_touch_price = $market->Bids()->where('price', '>=', $price)->get();
+                if (count($bids_touch_price)==0){
+                    $market->update([
+                        'status' => 7
+                    ]);
+                    return response()->json([1, 'close']);
+                }
                 $total_quantity = 0;
                 foreach ($bids_touch_price as $bid) {
                     $total_quantity = $total_quantity + $bid->quantity;
@@ -353,13 +360,13 @@ class MarketController extends Controller
                     return response()->json([1, 'close']);
                 }
 
-                $bids_exists_count = $market->Bids()->where('price', '>=', $price)->count();
-                if ($bids_exists_count < 2) {
-                    $market->update([
-                        'status' => 7
-                    ]);
-                    return response()->json([1, 'close']);
-                }
+//                $bids_exists_count = $market->Bids()->where('price', '>=', $price)->count();
+//                if ($bids_exists_count < 2) {
+//                    $market->update([
+//                        'status' => 7
+//                    ]);
+//                    return response()->json([1, 'close']);
+//                }
             }
 
         } catch (\Exception $e) {
