@@ -124,6 +124,7 @@
                     let Market_Status_Text = msg[4];
                     let endDate = msg[5];
                     let market_id_open = msg[6];
+                    let now = msg[7];
                     $('#market_table').html(table_view);
                     $('#market_value').html(market_value);
                     $('#Market_Status_Text').html(Market_Status_Text);
@@ -131,7 +132,7 @@
                     $.each(ids, function (i, val) {
                         MarketOnline(val);
                     });
-                    makeTimer(endDate, market_id_open);
+                    makeTimer(endDate, market_id_open, now);
                 }
             })
         }
@@ -213,6 +214,7 @@
 
 @section('content')
 
+    <div id="clockNow" style="text-align: center;font-size:25px"></div>
     <div id="time"></div>
     @if($alert_active==1)
         <div style="background-color: {{ $alert_bg_color }} !important;height: {{ $alert_height.'px' }} !important;"
