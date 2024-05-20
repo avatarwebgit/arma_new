@@ -213,7 +213,6 @@
 @endsection
 
 @section('content')
-
     <div id="clockNow" style="text-align: center;font-size:25px"></div>
     <div id="time"></div>
     @if($alert_active==1)
