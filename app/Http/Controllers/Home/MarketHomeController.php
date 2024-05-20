@@ -42,7 +42,7 @@ class MarketHomeController extends Controller
         $bids = $market->Bids()->orderBy('price', 'desc')->take(10)->get();
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        $now = Carbon::now();
+        $now = Carbon::now()->timezone('ASia/Tehran');
         return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions', 'now'));
     }
 

@@ -113,7 +113,8 @@ class MarketController extends Controller
         ]);
         $market->update($request->all());
         $this->statusTimeMarket($market, 1);
-        broadcast(new MarketTimeUpdated());
+        $now=Carbon::now();
+        broadcast(new MarketTimeUpdated($now));
         return redirect()->route('admin.markets.folder', ['date' => $market->date])->with('success', 'Market updated successfully');
     }
 

@@ -168,11 +168,10 @@ class IndexController extends Controller
             } else {
                 $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
             }
-
-            $now = Carbon::now();
-            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
             $close_market = $this->close_market_today();
             $close_market=Carbon::parse($close_market);
+            $now = Carbon::now();
+            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
             return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market, $market_is_open,$now]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);

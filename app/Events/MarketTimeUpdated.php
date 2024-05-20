@@ -18,10 +18,13 @@ class MarketTimeUpdated implements ShouldBroadcast
      * Create a new event instance.
      *
      * @return void
+     *
      */
-    public function __construct()
+
+    public $now;
+    public function __construct($now)
     {
-        //
+        $this->now = $now;
     }
 
     /**

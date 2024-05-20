@@ -36,19 +36,23 @@
         // محاسبه زمان فعلی
         let time_now = moment(now).tz('Europe/London').format("MMMM Do YYYY h:mm:ss A");
         // محاسبه اختلاف زمانی بین endTime و time_now بر حسب میلی‌ثانیه
+        console.log(market_is_open);
         var diffMilliseconds = moment(endTime, "MMMM Do YYYY h:mm:ss A").diff(moment(time_now, "MMMM Do YYYY h:mm:ss A"));
         // تبدیل اختلاف زمانی به ثانیه
         var diffSeconds = Math.abs(diffMilliseconds) / 1000;
-        console.log(market_is_open);
 
-        if (!timerCountdown == 0) {
+        if (market_is_open == 0) {
             clearInterval(timerCountdown);
+            timerClose();
+        } else {
+            if (!timerCountdown == 0) {
+                clearInterval(timerCountdown);
+            }
+            timerCountdown = setInterval(function () {
+                Timer(diffSeconds);
+                diffSeconds = diffSeconds - 1;
+            }, 1000);
         }
-        timerCountdown = setInterval(function () {
-            Timer(diffSeconds);
-            diffSeconds = diffSeconds - 1;
-        }, 1000);
-
     }
 
     function timerClose() {
@@ -163,7 +167,6 @@
     function MarketOnline(id, now) {
         now = new Date(now).getTime();
 
-
         var MarketSystem = {
             start: function () {
                 this.interval = setInterval(function () {
@@ -192,60 +195,64 @@
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
 
-
-            now = moment(now).tz('Europe/London').format('MMMM DD YYYY h:mm:ss A');
-            now = moment(now, 'MMMM DD YYYY h:mm:ss A');
-
-
-            benchmark1 = moment(benchmark1).format('MMMM DD YYYY h:mm:ss A');
-            benchmark1 = moment(benchmark1, 'MMMM DD YYYY h:mm:ss A');
-
-            benchmark2 = moment(benchmark2).format('MMMM DD YYYY h:mm:ss A');
-            benchmark2 = moment(benchmark2, 'MMMM DD YYYY h:mm:ss A');
-
-            benchmark3 = moment(benchmark3).format('MMMM DD YYYY h:mm:ss A');
-            benchmark3 = moment(benchmark3, 'MMMM DD YYYY h:mm:ss A');
-
-            benchmark4 = moment(benchmark4).format('MMMM DD YYYY h:mm:ss A');
-            benchmark4 = moment(benchmark4, 'MMMM DD YYYY h:mm:ss A');
-
-            benchmark5 = moment(benchmark5).format('MMMM DD YYYY h:mm:ss A');
-            benchmark5 = moment(benchmark5, 'MMMM DD YYYY h:mm:ss A');
-
-            benchmark6 = moment(benchmark6).format('MMMM DD YYYY h:mm:ss A');
-            benchmark6 = moment(benchmark6, 'MMMM DD YYYY h:mm:ss A');
-
-            time_to_close_bid_deposit = moment(time_to_close_bid_deposit, 'MMMM Do YYYY h:mm:ss');
-
-            if (time_to_close_bid_deposit.isBefore(now)) {
-                close_bid_deposit(id);
-            }
-            if (now.isBefore(benchmark1)) {
-                level = 0;
-                waiting_to_open(benchmark1, now, id);
-            }
-            if (now.isBetween(benchmark1, benchmark2)) {
-                level = 1;
-                ready_to_open(benchmark2, now, id)
-            }
-            if (now.isBetween(benchmark2, benchmark3)) {
-                level = 2;
-                opening(benchmark3, now, id);
-            }
-            if (now.isBetween(benchmark3, benchmark4)) {
-                level = 3;
-                Quotation_1_2(benchmark4, now, id);
-            }
-            if (now.isBetween(benchmark4, benchmark5)) {
-                level = 4;
-                Quotation_2_2(benchmark5, now, id);
-            }
-            if (now.isBetween(benchmark5, benchmark6)) {
-                level = 5;
-                Competition(benchmark6, now, id, step);
-            }
-            if (benchmark6.isBefore(now)) {
+            if (status == 7) {
                 MarketSystem.stop();
+            } else {
+                now = moment(now).tz('Europe/London').format('MMMM DD YYYY h:mm:ss A');
+                now = moment(now, 'MMMM DD YYYY h:mm:ss A');
+
+
+                benchmark1 = moment(benchmark1).format('MMMM DD YYYY h:mm:ss A');
+                benchmark1 = moment(benchmark1, 'MMMM DD YYYY h:mm:ss A');
+
+                benchmark2 = moment(benchmark2).format('MMMM DD YYYY h:mm:ss A');
+                benchmark2 = moment(benchmark2, 'MMMM DD YYYY h:mm:ss A');
+
+                benchmark3 = moment(benchmark3).format('MMMM DD YYYY h:mm:ss A');
+                benchmark3 = moment(benchmark3, 'MMMM DD YYYY h:mm:ss A');
+
+                benchmark4 = moment(benchmark4).format('MMMM DD YYYY h:mm:ss A');
+                benchmark4 = moment(benchmark4, 'MMMM DD YYYY h:mm:ss A');
+
+                benchmark5 = moment(benchmark5).format('MMMM DD YYYY h:mm:ss A');
+                benchmark5 = moment(benchmark5, 'MMMM DD YYYY h:mm:ss A');
+
+                benchmark6 = moment(benchmark6).format('MMMM DD YYYY h:mm:ss A');
+                benchmark6 = moment(benchmark6, 'MMMM DD YYYY h:mm:ss A');
+
+                time_to_close_bid_deposit = moment(time_to_close_bid_deposit, 'MMMM Do YYYY h:mm:ss');
+
+
+                if (time_to_close_bid_deposit.isBefore(now)) {
+                    close_bid_deposit(id);
+                }
+                if (now.isBefore(benchmark1)) {
+                    level = 0;
+                    waiting_to_open(benchmark1, now, id);
+                }
+                if (now.isBetween(benchmark1, benchmark2)) {
+                    level = 1;
+                    ready_to_open(benchmark2, now, id)
+                }
+                if (now.isBetween(benchmark2, benchmark3)) {
+                    level = 2;
+                    opening(benchmark3, now, id);
+                }
+                if (now.isBetween(benchmark3, benchmark4)) {
+                    level = 3;
+                    Quotation_1_2(benchmark4, now, id);
+                }
+                if (now.isBetween(benchmark4, benchmark5)) {
+                    level = 4;
+                    Quotation_2_2(benchmark5, now, id);
+                }
+                if (now.isBetween(benchmark5, benchmark6)) {
+                    level = 5;
+                    Competition(benchmark6, now, id, step);
+                }
+                if (benchmark6.isBefore(now)) {
+                    MarketSystem.stop();
+                }
             }
 
 

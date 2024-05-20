@@ -50,7 +50,6 @@
                         let market_is_open = msg[3];
                         target_div.text(status_text);
                         target_div.css('color', status_color);
-                        console.log(market_is_open);
                     }
                 }
             })
