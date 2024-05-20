@@ -323,6 +323,7 @@ class MarketController extends Controller
     public function check_market_status_for_continue(Request $request)
     {
         try {
+            dd('ok');
             $market_id = $request->market_id;
             $status = $request->status;
             $market = Market::find($market_id);
@@ -341,7 +342,7 @@ class MarketController extends Controller
             }
 
             if ($status == 6) {
-                dd('ok');
+
                 $bids_touch_price = $market->Bids()->where('price', '>=', $price)->get();
                 if (count($bids_touch_price)==0){
                     $market->update([
