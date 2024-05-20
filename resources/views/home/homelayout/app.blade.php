@@ -31,6 +31,11 @@
     var timerCountdown = 0;
 
     function makeTimer(endTime, market_is_open) {
+        endTime = moment(endTime).format("MMMM Do YYYY h:mm:ss A");
+        var time_now = moment().tz("Europe/London").format("MMMM Do YYYY h:mm:ss A");
+        var diffMilliseconds = moment(endTime, "MMMM Do YYYY h:mm:ss A").diff(moment(time_now, "MMMM Do YYYY h:mm:ss A"));
+        var diffSeconds = Math.abs(diffMilliseconds) / 1000;
+        console.log(diffMilliseconds);
         if (market_is_open == 0) {
             clearInterval(timerCountdown);
             timerClose();
@@ -39,7 +44,8 @@
                 clearInterval(timerCountdown);
             }
             timerCountdown = setInterval(function () {
-                Timer(endTime);
+                Timer(diffSeconds);
+                diffSeconds=diffSeconds-1;
             }, 1000);
         }
     }
@@ -53,18 +59,18 @@
         Seconds.text('00');
     }
 
-    function Timer(endTime) {
+    function Timer(diffSeconds) {
         var Hours = $('#Hours');
         var Minutes = $('#Minutes');
         var Seconds = $('#Seconds');
         // به‌روزرسانی زمان endTime با زمان فعلی
-        endTime = moment(endTime).format("MMMM Do YYYY h:mm:ss A");
+
         // محاسبه زمان فعلی
-        var time_now = moment().tz("Europe/London").format("MMMM Do YYYY h:mm:ss A");
+
         // محاسبه اختلاف زمانی بین endTime و time_now بر حسب میلی‌ثانیه
-        var diffMilliseconds = moment(endTime, "MMMM Do YYYY h:mm:ss A").diff(moment(time_now, "MMMM Do YYYY h:mm:ss A"));
+
         // تبدیل اختلاف زمانی به ثانیه
-        var diffSeconds = Math.abs(diffMilliseconds) / 1000;
+
         // نمایش اختلاف زمانی بین endTime و time_now به صورت دقیقه
         let timeLeft = diffSeconds;
         var days = Math.floor(timeLeft / 86400);
@@ -204,9 +210,9 @@
             benchmark6 = moment(benchmark6, 'MMMM DD YYYY h:mm:ss A');
 
             time_to_close_bid_deposit = moment(time_to_close_bid_deposit, 'MMMM Do YYYY h:mm:ss');
-            if (status==7){
+            if (status == 7) {
                 MarketSystem.stop();
-            }else {
+            } else {
                 if (time_to_close_bid_deposit.isBefore(now)) {
                     close_bid_deposit(id);
                 }
@@ -782,11 +788,11 @@
         let has_on_key_up = $(this).attr('onkeyup');
         if (has_on_key_up == 'step_price_competition(this,event)') {
             let value = $(this).val();
-            value=parseInt(value);
+            value = parseInt(value);
             let step = $(this).attr('step');
-            step=parseInt(step);
+            step = parseInt(step);
             let remain = value % step;
-            remain=parseInt(remain);
+            remain = parseInt(remain);
             let new_value;
             if (remain == 0) {
                 new_value = value;
