@@ -146,6 +146,60 @@ class MarketHomeController extends Controller
             dd($e->getMessage());
         }
     }
+    public function check_market_status_for_continue(Request $request)
+    {
+        try {
+            $market_id = $request->market_id;
+            $status = $request->status;
+            $market = Market::find($market_id);
+            $price = $market->offer_price;
+            $max_quantity = $market->SalesForm->max_quantity;
+            if ($status === 4) {
+                $base_price = $price / 2;
+                $bids = $market->Bids()->where('price', '>=', $base_price)->get();
+                if (count($bids) > 0) {
+                    return response()->json([1, 'continue']);
+                }
+                $market->update([
+                    'status' => 7
+                ]);
+                return response()->json([1, 'close']);
+            }
+
+            if ($status == 6) {
+
+                $bids_touch_price = $market->Bids()->where('price', '>=', $price)->get();
+                if (count($bids_touch_price)==0){
+                    $market->update([
+                        'status' => 7
+                    ]);
+                    return response()->json([1, 'close']);
+                }
+                $total_quantity = 0;
+                foreach ($bids_touch_price as $bid) {
+                    $total_quantity = $total_quantity + $bid->quantity;
+                }
+                $max_quantity = $market->SalesForm->max_quantity;
+                if ($total_quantity < $max_quantity or $total_quantity == $max_quantity) {
+                    $market->update([
+                        'status' => 7
+                    ]);
+                    return response()->json([1, 'close']);
+                }
+
+//                $bids_exists_count = $market->Bids()->where('price', '>=', $price)->count();
+//                if ($bids_exists_count < 2) {
+//                    $market->update([
+//                        'status' => 7
+//                    ]);
+//                    return response()->json([1, 'close']);
+//                }
+            }
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
 
     public function seller_change_offer(Request $request)
     {

@@ -239,7 +239,7 @@
             let market_continue = true;
             if (status === 4 || status === 6 || status === 7) {
                 $.ajax({
-                    url: "{{ route('admin.check_market_status_for_continue') }}",
+                    url: "{{ route('home.check_market_status_for_continue') }}",
                     data: {
                         _token: "{{ csrf_token() }}",
                         market_id: market_id,

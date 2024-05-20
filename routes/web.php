@@ -71,6 +71,7 @@ Route::post('/seller_change_offer', [MarketHomeController::class, 'seller_change
 Route::post('/get_market_bit_result', [MarketHomeController::class, 'get_market_bit_result'])->name('home.get_market_bit_result');
 Route::post('/get_market_info', [MarketHomeController::class, 'get_market_info'])->name('home.get_market_info');
 Route::get('/menu/{menus}', [IndexController::class, 'menus'])->name('home.menus');
+Route::post('check_market_status_for_continue', [MarketHomeController::class, 'check_market_status_for_continue'])->name('home.check_market_status_for_continue');
 //
 Route::get('/create_countries', [IndexController::class, 'create_countries'])->name('home.create_countries');
 Route::get('/create_currencies', [IndexController::class, 'create_currencies'])->name('home.create_currencies');
@@ -209,7 +210,6 @@ Route::name('admin.')->middleware('admin')->prefix('/admin-panel/management/')->
     Route::post('market/sales_form/update_or_store/{item?}', [MarketController::class, 'sales_form_update_or_store'])->name('market.sale_form.update_or_store');
     Route::post('market/getMarket', [MarketController::class, 'getMarket'])->name('getMarket');
     Route::post('market/FolderMarketRemove/{date}', [MarketController::class, 'FolderMarketRemove'])->name('market.folder.remove');
-    Route::post('check_market_status_for_continue', [MarketController::class, 'check_market_status_for_continue'])->name('check_market_status_for_continue');
     Route::get('/sales_form/index/{status}', [FormController::class, 'sales_form_index'])->name('sales_form.index');
     Route::post('/sales_form/remove', [FormController::class, 'sales_form_remove'])->name('sales_form.remove');
     Route::post('/Final_Submit', [FormController::class, 'Final_Submit'])->name('Final_Submit');
