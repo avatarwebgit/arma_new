@@ -341,6 +341,7 @@ class MarketController extends Controller
             }
 
             if ($status == 6) {
+                dd('ok');
                 $bids_touch_price = $market->Bids()->where('price', '>=', $price)->get();
                 if (count($bids_touch_price)==0){
                     $market->update([
