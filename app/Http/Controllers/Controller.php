@@ -16,7 +16,6 @@ class Controller extends BaseController
 
     public function statusTimeMarket($market, $force_determine_status = 0)
     {
-
         $ready_to_duration = MarketSetting::where('key', 'ready_to_open')->pluck('value')->first();
         $open_duration = MarketSetting::where('key', 'opening')->pluck('value')->first();
         $q_1 = MarketSetting::where('key', 'q_1')->pluck('value')->first();

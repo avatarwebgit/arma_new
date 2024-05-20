@@ -30,27 +30,25 @@
 <script>
     var timerCountdown = 0;
 
-    function makeTimer(endTime, market_is_open,now) {
+    function makeTimer(endTime, market_is_open, now) {
         // به‌روزرسانی زمان endTime با زمان فعلی
-        endTime = moment(endTime).format("MMMM Do YYYY h:mm:ss A");
+        endTime = moment(endTime).tz('Europe/London').format("MMMM Do YYYY h:mm:ss A");
         // محاسبه زمان فعلی
-        let time_now = moment(now).format("MMMM Do YYYY h:mm:ss A");
+        let time_now = moment(now).tz('Europe/London').format("MMMM Do YYYY h:mm:ss A");
         // محاسبه اختلاف زمانی بین endTime و time_now بر حسب میلی‌ثانیه
         var diffMilliseconds = moment(endTime, "MMMM Do YYYY h:mm:ss A").diff(moment(time_now, "MMMM Do YYYY h:mm:ss A"));
         // تبدیل اختلاف زمانی به ثانیه
         var diffSeconds = Math.abs(diffMilliseconds) / 1000;
-        if (market_is_open == 0) {
+        console.log(market_is_open);
+
+        if (!timerCountdown == 0) {
             clearInterval(timerCountdown);
-            timerClose();
-        } else {
-            if (!timerCountdown == 0) {
-                clearInterval(timerCountdown);
-            }
-            timerCountdown = setInterval(function () {
-                Timer(diffSeconds);
-                diffSeconds = diffSeconds - 1;
-            }, 1000);
         }
+        timerCountdown = setInterval(function () {
+            Timer(diffSeconds);
+            diffSeconds = diffSeconds - 1;
+        }, 1000);
+
     }
 
     function timerClose() {
@@ -162,11 +160,16 @@
     //     });
     // }
 
-    function MarketOnline(id,now) {
+    function MarketOnline(id, now) {
+        now = new Date(now).getTime();
+
+
         var MarketSystem = {
             start: function () {
                 this.interval = setInterval(function () {
-                    refreshMarketTablewithJs(id,now);
+                    refreshMarketTablewithJs(id, now);
+                    now = now + 1000;
+                    now = new Date().setTime(now);
                 }, 1000);
             },
             stop: function () {
@@ -177,7 +180,7 @@
         }
         MarketSystem.start();
 
-        async function refreshMarketTablewithJs(id,now) {
+        async function refreshMarketTablewithJs(id, now) {
             let market = $('#market-' + id);
             let status = market.attr('data-status');
             let benchmark1 = market.attr('data-benchmark1');
@@ -189,8 +192,10 @@
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
 
-            now = moment(now).format('MMMM DD YYYY h:mm:ss A');
+
+            now = moment(now).tz('Europe/London').format('MMMM DD YYYY h:mm:ss A');
             now = moment(now, 'MMMM DD YYYY h:mm:ss A');
+
 
             benchmark1 = moment(benchmark1).format('MMMM DD YYYY h:mm:ss A');
             benchmark1 = moment(benchmark1, 'MMMM DD YYYY h:mm:ss A');
@@ -211,40 +216,38 @@
             benchmark6 = moment(benchmark6, 'MMMM DD YYYY h:mm:ss A');
 
             time_to_close_bid_deposit = moment(time_to_close_bid_deposit, 'MMMM Do YYYY h:mm:ss');
-            if (status == 7) {
-                MarketSystem.stop();
-            } else {
-                if (time_to_close_bid_deposit.isBefore(now)) {
-                    close_bid_deposit(id);
-                }
-                if (now.isBefore(benchmark1)) {
-                    level = 0;
-                    waiting_to_open(benchmark1, now, id);
-                }
-                if (now.isBetween(benchmark1, benchmark2)) {
-                    level = 1;
-                    ready_to_open(benchmark2, now, id)
-                }
-                if (now.isBetween(benchmark2, benchmark3)) {
-                    level = 2;
-                    opening(benchmark3, now, id);
-                }
-                if (now.isBetween(benchmark3, benchmark4)) {
-                    level = 3;
-                    Quotation_1_2(benchmark4, now, id);
-                }
-                if (now.isBetween(benchmark4, benchmark5)) {
-                    level = 4;
-                    Quotation_2_2(benchmark5, now, id);
-                }
-                if (now.isBetween(benchmark5, benchmark6)) {
-                    level = 5;
-                    Competition(benchmark6, now, id, step);
-                }
-                if (benchmark6.isBefore(now)) {
-                    MarketSystem.stop();
-                }
+
+            if (time_to_close_bid_deposit.isBefore(now)) {
+                close_bid_deposit(id);
             }
+            if (now.isBefore(benchmark1)) {
+                level = 0;
+                waiting_to_open(benchmark1, now, id);
+            }
+            if (now.isBetween(benchmark1, benchmark2)) {
+                level = 1;
+                ready_to_open(benchmark2, now, id)
+            }
+            if (now.isBetween(benchmark2, benchmark3)) {
+                level = 2;
+                opening(benchmark3, now, id);
+            }
+            if (now.isBetween(benchmark3, benchmark4)) {
+                level = 3;
+                Quotation_1_2(benchmark4, now, id);
+            }
+            if (now.isBetween(benchmark4, benchmark5)) {
+                level = 4;
+                Quotation_2_2(benchmark5, now, id);
+            }
+            if (now.isBetween(benchmark5, benchmark6)) {
+                level = 5;
+                Competition(benchmark6, now, id, step);
+            }
+            if (benchmark6.isBefore(now)) {
+                MarketSystem.stop();
+            }
+
 
         }
 
@@ -288,20 +291,10 @@
                         let endDate = msg[2];
                         let market_id_open = msg[3];
                         let now = msg[4];
-                        makeTimer(endDate, market_id_open,now);
+                        makeTimer(endDate, market_id_open, now);
                     }
                 }
             })
-        }
-
-        function makeTimer(difference, id) {
-            if (difference != 0) {
-                setInterval(function () {
-                    difference = parseInt(difference / 1000);
-                    $('#market-difference-' + id).html(secondsToHms(difference));
-                    difference = difference - 1;
-                }, 1000)
-            }
         }
 
         function waiting_to_open(benchmark1, now, id) {
