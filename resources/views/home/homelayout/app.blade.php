@@ -34,7 +34,7 @@
         // به‌روزرسانی زمان endTime با زمان فعلی
         endTime = moment(endTime).format("MMMM Do YYYY h:mm:ss A");
         // محاسبه زمان فعلی
-        time_now = moment(now).format("MMMM Do YYYY h:mm:ss A");
+        let time_now = moment(now).format("MMMM Do YYYY h:mm:ss A");
         // محاسبه اختلاف زمانی بین endTime و time_now بر حسب میلی‌ثانیه
         var diffMilliseconds = moment(endTime, "MMMM Do YYYY h:mm:ss A").diff(moment(time_now, "MMMM Do YYYY h:mm:ss A"));
         // تبدیل اختلاف زمانی به ثانیه
