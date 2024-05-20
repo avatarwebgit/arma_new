@@ -30,12 +30,15 @@
 <script>
     var timerCountdown = 0;
 
-    function makeTimer(endTime, market_is_open) {
+    function makeTimer(endTime, market_is_open,now) {
+        // به‌روزرسانی زمان endTime با زمان فعلی
         endTime = moment(endTime).format("MMMM Do YYYY h:mm:ss A");
-        var time_now = moment().tz("Europe/London").format("MMMM Do YYYY h:mm:ss A");
+        // محاسبه زمان فعلی
+        time_now = moment(now).format("MMMM Do YYYY h:mm:ss A");
+        // محاسبه اختلاف زمانی بین endTime و time_now بر حسب میلی‌ثانیه
         var diffMilliseconds = moment(endTime, "MMMM Do YYYY h:mm:ss A").diff(moment(time_now, "MMMM Do YYYY h:mm:ss A"));
+        // تبدیل اختلاف زمانی به ثانیه
         var diffSeconds = Math.abs(diffMilliseconds) / 1000;
-        console.log(diffMilliseconds);
         if (market_is_open == 0) {
             clearInterval(timerCountdown);
             timerClose();
@@ -45,7 +48,7 @@
             }
             timerCountdown = setInterval(function () {
                 Timer(diffSeconds);
-                diffSeconds=diffSeconds-1;
+                diffSeconds = diffSeconds - 1;
             }, 1000);
         }
     }
@@ -286,7 +289,8 @@
                         $('#Market_Status_Text').html(msg[1]);
                         let endDate = msg[2];
                         let market_id_open = msg[3];
-                        makeTimer(endDate, market_id_open);
+                        let now = msg[4];
+                        makeTimer(endDate, market_id_open,now);
                     }
                 }
             })
