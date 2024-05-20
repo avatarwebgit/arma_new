@@ -106,8 +106,8 @@ class IndexController extends Controller
         }
         $close_market = $this->close_market_today();
         $close_market=Carbon::parse($close_market);
-        $now=time();
-        $now=Carbon::parse($now);
+        $now=Carbon::now();
+
         return response()->json([1, $market_is_open_text, $close_market, $market_is_open,$now]);
     }
 
@@ -168,8 +168,8 @@ class IndexController extends Controller
             } else {
                 $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
             }
-            $now = time();
-            $now = Carbon::parse($now);
+
+            $now = Carbon::now();
             $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
             $close_market = $this->close_market_today();
             $close_market=Carbon::parse($close_market);
