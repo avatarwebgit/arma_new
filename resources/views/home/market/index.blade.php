@@ -3,7 +3,9 @@
 @section('script')
     <script type="module">
         $(document).ready(function () {
-            MarketOnline({{ $market->id }},'{{ $now }}');
+            let now = '{{ $now }}';
+            now = new Date(now).getTime();
+            MarketOnline({{ $market->id }}, now);
         });
         window.Echo.channel('change-sales-offer')
             .listen('ChangeSaleOffer', function (e) {
@@ -12,7 +14,7 @@
             });
         window.Echo.channel('market-setting-updated-channel')
             .listen('MarketTimeUpdated', function (e) {
-                GetMarket({{ $market->id }});
+                GetMarket({{ $market->id }},e.now);
             });
         window.Echo.channel('new_bid_created')
             .listen('NewBidCreated', function (e) {
@@ -20,7 +22,7 @@
                 refreshBidTable(market_id);
             });
 
-        function GetMarket(market_id) {
+        function GetMarket(market_id,now) {
             $.ajax({
                 url: "{{ route('home.GetMarket') }}",
                 data: {
@@ -33,11 +35,10 @@
                 success: function (msg) {
                     let table_view = msg[1];
                     $('#benchmark_info').html(table_view);
-                    MarketOnline(market_id,now);
+                    MarketOnline(market_id, now);
                 }
             })
         }
-
 
 
     </script>
@@ -152,7 +153,8 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 mb-3"><div class="bid_textarea">
+                    <div class="col-12 col-md-6 mb-3">
+                        <div class="bid_textarea">
                             <table class="table">
                                 <thead class="bg-success text-center text-white">
                                 <tr>
