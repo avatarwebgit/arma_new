@@ -130,7 +130,7 @@
                     $('#Market_Status_Text').html(Market_Status_Text);
                     $('#Market_Status_Text').html(msg[4]);
                     $.each(ids, function (i, val) {
-                        MarketOnline(val);
+                        MarketOnline(val,now);
                     });
                     makeTimer(endDate, market_id_open, now);
                 }

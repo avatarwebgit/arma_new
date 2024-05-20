@@ -59,8 +59,10 @@ class MarketHomeController extends Controller
         $market['benchmark4'] = $result[5];
         $market['benchmark5'] = $result[6];
         $market['benchmark6'] = $result[7];
+        $now=time();
+        $now=Carbon::parse($now);
         $view = view('home.market.benchmark_info', compact('market'))->render();
-        return response()->json([1, $view]);
+        return response()->json([1, $view,$now]);
     }
 
     public function refreshMarketTable()

@@ -162,11 +162,11 @@
     //     });
     // }
 
-    function MarketOnline(id) {
+    function MarketOnline(id,now) {
         var MarketSystem = {
             start: function () {
                 this.interval = setInterval(function () {
-                    refreshMarketTablewithJs(id);
+                    refreshMarketTablewithJs(id,now);
                 }, 1000);
             },
             stop: function () {
@@ -177,7 +177,7 @@
         }
         MarketSystem.start();
 
-        async function refreshMarketTablewithJs(id) {
+        async function refreshMarketTablewithJs(id,now) {
             let market = $('#market-' + id);
             let status = market.attr('data-status');
             let benchmark1 = market.attr('data-benchmark1');
@@ -189,8 +189,6 @@
             let time_to_close_bid_deposit = market.attr('data-time_to_close_bid_deposit');
             let step = market.attr('data-step');
 
-
-            let now = moment().tz("Europe/London");
             now = moment(now).format('MMMM DD YYYY h:mm:ss A');
             now = moment(now, 'MMMM DD YYYY h:mm:ss A');
 

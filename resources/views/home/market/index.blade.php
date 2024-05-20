@@ -3,7 +3,7 @@
 @section('script')
     <script type="module">
         $(document).ready(function () {
-            MarketOnline({{ $market->id }});
+            MarketOnline({{ $market->id }},'{{ $now }}');
         });
         window.Echo.channel('change-sales-offer')
             .listen('ChangeSaleOffer', function (e) {
@@ -33,7 +33,7 @@
                 success: function (msg) {
                     let table_view = msg[1];
                     $('#benchmark_info').html(table_view);
-                    MarketOnline(market_id);
+                    MarketOnline(market_id,now);
                 }
             })
         }
