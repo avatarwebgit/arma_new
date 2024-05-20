@@ -170,6 +170,7 @@
 
         async function refreshMarketTablewithJs(id) {
             let market = $('#market-' + id);
+            let status = market.attr('data-status');
             let benchmark1 = market.attr('data-benchmark1');
             let benchmark2 = market.attr('data-benchmark2');
             let benchmark3 = market.attr('data-benchmark3');
@@ -203,36 +204,41 @@
             benchmark6 = moment(benchmark6, 'MMMM DD YYYY h:mm:ss A');
 
             time_to_close_bid_deposit = moment(time_to_close_bid_deposit, 'MMMM Do YYYY h:mm:ss');
-            if (time_to_close_bid_deposit.isBefore(now)) {
-                close_bid_deposit(id);
-            }
-            if (now.isBefore(benchmark1)) {
-                level = 0;
-                waiting_to_open(benchmark1, now, id);
-            }
-            if (now.isBetween(benchmark1, benchmark2)) {
-                level = 1;
-                ready_to_open(benchmark2, now, id)
-            }
-            if (now.isBetween(benchmark2, benchmark3)) {
-                level = 2;
-                opening(benchmark3, now, id);
-            }
-            if (now.isBetween(benchmark3, benchmark4)) {
-                level = 3;
-                Quotation_1_2(benchmark4, now, id);
-            }
-            if (now.isBetween(benchmark4, benchmark5)) {
-                level = 4;
-                Quotation_2_2(benchmark5, now, id);
-            }
-            if (now.isBetween(benchmark5, benchmark6)) {
-                level = 5;
-                Competition(benchmark6, now, id, step);
-            }
-            if (benchmark6.isBefore(now)) {
+            if (status==7){
                 MarketSystem.stop();
+            }else {
+                if (time_to_close_bid_deposit.isBefore(now)) {
+                    close_bid_deposit(id);
+                }
+                if (now.isBefore(benchmark1)) {
+                    level = 0;
+                    waiting_to_open(benchmark1, now, id);
+                }
+                if (now.isBetween(benchmark1, benchmark2)) {
+                    level = 1;
+                    ready_to_open(benchmark2, now, id)
+                }
+                if (now.isBetween(benchmark2, benchmark3)) {
+                    level = 2;
+                    opening(benchmark3, now, id);
+                }
+                if (now.isBetween(benchmark3, benchmark4)) {
+                    level = 3;
+                    Quotation_1_2(benchmark4, now, id);
+                }
+                if (now.isBetween(benchmark4, benchmark5)) {
+                    level = 4;
+                    Quotation_2_2(benchmark5, now, id);
+                }
+                if (now.isBetween(benchmark5, benchmark6)) {
+                    level = 5;
+                    Competition(benchmark6, now, id, step);
+                }
+                if (benchmark6.isBefore(now)) {
+                    MarketSystem.stop();
+                }
             }
+
         }
 
         function check_continue_market(market_id, status) {
