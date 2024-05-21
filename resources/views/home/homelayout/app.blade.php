@@ -28,6 +28,7 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+
     var timerCountdown = 0;
 
     function makeTimer(endTime, market_is_open, now) {
@@ -200,7 +201,6 @@
             } else {
                 now = moment(now).tz('Europe/London').format('MMMM DD YYYY h:mm:ss A');
                 now = moment(now, 'MMMM DD YYYY h:mm:ss A');
-
 
                 benchmark1 = moment(benchmark1).format('MMMM DD YYYY h:mm:ss A');
                 benchmark1 = moment(benchmark1, 'MMMM DD YYYY h:mm:ss A');
