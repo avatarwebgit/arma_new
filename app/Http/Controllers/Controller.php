@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MarketStatusUpdated;
+use App\Events\MarketTimeUpdated;
 use App\Models\MarketSetting;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -44,22 +46,22 @@ class Controller extends BaseController
             }
         }
 
-        if ($now < $benchmark1) {
+        if ($now <= $benchmark1) {
             //normal show time
             $status = 1;
             $difference = $benchmark1->diffInSeconds($now);
 
-        } elseif ($benchmark1 < $now and $now < $benchmark2) {
+        } elseif ($benchmark1 < $now and $now <= $benchmark2) {
             //ready to open
             $status = 2;
             $difference = $benchmark2->diffInSeconds($now);
 
-        } elseif ($benchmark2 < $now and $now < $benchmark3) {
+        } elseif ($benchmark2 < $now and $now <= $benchmark3) {
             //open
             $status = 3;
             $difference = $benchmark3->diffInSeconds($now);
 
-        } elseif ($benchmark3 < $now and $now < $benchmark4) {
+        } elseif ($benchmark3 < $now and $now <= $benchmark4) {
             //open(1/3)
             $status = 4;
             $difference = $benchmark4->diffInSeconds($now);
@@ -76,31 +78,33 @@ class Controller extends BaseController
                 $difference = 0;
             }
 
-        } elseif ($benchmark4 < $now and $now < $benchmark5) {
+        } elseif ($benchmark4 < $now and $now <= $benchmark5) {
             //open(2/3)
             $status = 5;
             $difference = $benchmark5->diffInSeconds($now);
 
-        } elseif ($benchmark5 < $now and $now < $benchmark6) {
+        } elseif ($benchmark5 < $now and $now <= $benchmark6) {
             //open(3/3)
             $difference = $benchmark6->diffInSeconds($now);
             $status = 6;
             //check if total quality < $market->quantity
             $bids_quantity = $market->Bids()->sum('quantity');
             $market_quantity = $market->quantity;
-
             if ($bids_quantity <= $market_quantity) {
                 $status = 7;
                 $difference = 0;
             }
-
         } else {
             //close
             $difference = 0;
             $status = 7;
 
         }
-        $market->update(['status' => $status]);
+        $market->status=$status;
+        if ($market->isDirty()){
+            $market->save();
+        }
+        broadcast(new MarketStatusUpdated($market->id,$difference));
         return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time,$time_to_close_bid_deposit];
     }
 

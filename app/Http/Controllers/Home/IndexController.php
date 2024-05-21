@@ -69,8 +69,8 @@ class IndexController extends Controller
             $market_open_finished_modal = session()->get('market_open_finished');
         }
         $close_market = $this->close_market_today();
-        $close_market=Carbon::parse($close_market);
-        $now=Carbon::now();
+        $close_market = Carbon::parse($close_market);
+        $now = Carbon::now();
         session()->forget('market_open_finished');
         return view('home.index.index',
             compact('market_open_finished_modal_exists',
@@ -78,7 +78,7 @@ class IndexController extends Controller
                 'show_modal',
                 'modal_message',
                 'close_market',
-            'now'
+                'now'
             ));
     }
 
@@ -104,10 +104,10 @@ class IndexController extends Controller
             $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
         }
         $close_market = $this->close_market_today();
-        $close_market=Carbon::parse($close_market);
-        $now=Carbon::now();
+        $close_market = Carbon::parse($close_market);
+        $now = Carbon::now();
 
-        return response()->json([1, $market_is_open_text, $close_market, $market_is_open,$now]);
+        return response()->json([1, $market_is_open_text, $close_market, $market_is_open, $now]);
     }
 
     public function MarketTableIndex()
@@ -168,10 +168,10 @@ class IndexController extends Controller
                 $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
             }
             $close_market = $this->close_market_today();
-            $close_market=Carbon::parse($close_market);
+            $close_market = Carbon::parse($close_market);
             $now = Carbon::now();
             $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
-            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market, $market_is_open,$now]);
+            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market, $market_is_open, $now]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
@@ -367,11 +367,11 @@ class IndexController extends Controller
     public function tolerance_wight_by()
     {
 
-        $items=ToleranceWeightBy::all();
+        $items = ToleranceWeightBy::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items=['Seller','Buyer'];
+        $items = ['Seller', 'Buyer'];
         foreach ($items as $key => $item) {
             ToleranceWeightBy::create([
                 'id' => $key + 1,
@@ -381,13 +381,14 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function create_packing()
     {
-        $items=Packing::all();
+        $items = Packing::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items=['25 kg Bag','50 kg Bag','Bulk','Drum','Flexi Tank','Jumbo Bag','other'];
+        $items = ['25 kg Bag', '50 kg Bag', 'Bulk', 'Drum', 'Flexi Tank', 'Jumbo Bag', 'other'];
         foreach ($items as $key => $item) {
             Packing::create([
                 'id' => $key + 1,
@@ -397,13 +398,14 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function shipping_term()
     {
-        $items=ShippingTerm::all();
+        $items = ShippingTerm::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items=['FSHEX','SHEXFHEEX','SSHEX','FHINC','SSHINC','SHEX UU','SSHEX UU '];
+        $items = ['FSHEX', 'SHEXFHEEX', 'SSHEX', 'FHINC', 'SSHINC', 'SHEX UU', 'SSHEX UU '];
         foreach ($items as $key => $item) {
             ShippingTerm::create([
                 'id' => $key + 1,
@@ -413,13 +415,14 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function quality_quantity_inspector()
     {
-        $items=QualityQuantityInspector::all();
+        $items = QualityQuantityInspector::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items=['seller','buyer','jointly seller and buyer'];
+        $items = ['seller', 'buyer', 'jointly seller and buyer'];
         foreach ($items as $key => $item) {
             QualityQuantityInspector::create([
                 'id' => $key + 1,
@@ -429,13 +432,14 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function InspectionPlace()
     {
-        $items=InspectionPlace::all();
+        $items = InspectionPlace::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items=['discharge port','on board vessel','factory warehouse','load port'];
+        $items = ['discharge port', 'on board vessel', 'factory warehouse', 'load port'];
         foreach ($items as $key => $item) {
             InspectionPlace::create([
                 'id' => $key + 1,
@@ -445,13 +449,14 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function Platforms()
     {
-        $items=PlatFom::all();
+        $items = PlatFom::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items=['Skype','WatsApp','Telegram','X (Twitter)','LinkedIn'];
+        $items = ['Skype', 'WatsApp', 'Telegram', 'X (Twitter)', 'LinkedIn'];
         foreach ($items as $key => $item) {
             PlatFom::create([
                 'id' => $key + 1,
@@ -461,4 +466,53 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
+    public function StartCheck()
+    {
+        while (true){
+
+            $close_market = $this->close_market_today();
+            $yesterday = Carbon::yesterday();
+            $tomorrow = Carbon::tomorrow();
+            $future = $yesterday->copy()->addDay(4);
+            $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
+            $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
+            $ids = [];
+            foreach ($markets_groups as $markets) {
+                foreach ($markets as $market) {
+                    $result = $this->statusTimeMarket($market, 1);
+                    $market['difference'] = $result[0];
+                    $market['status'] = $result[1];
+                    $market['benchmark1'] = $result[2];
+                    $market['benchmark2'] = $result[3];
+                    $market['benchmark3'] = $result[4];
+                    $market['benchmark4'] = $result[5];
+                    $market['benchmark5'] = $result[6];
+                    $market['benchmark6'] = $result[7];
+                    $market['date_time'] = $result[8];
+                }
+            }
+
+            $market_values = 0;
+            $market_is_open = 0;
+            foreach ($today_markets_groups as $markets) {
+                foreach ($markets as $market) {
+                    $market_status_index = $this->market_status_index($market, $market_is_open);
+                    $market_is_open = $market_status_index[0];
+                    $market_values = $market_values + $market->market_value;
+                }
+            }
+            if ($market_is_open === 1) {
+                $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
+            } else {
+                $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
+            }
+            sleep(1);
+            return true;
+
+        }
+
+    }
+
+
 }

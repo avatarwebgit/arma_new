@@ -242,6 +242,7 @@ Route::post('ckeditor/image_upload', [CKEditorController::class, 'upload'])->nam
 Route::post('join/news', [IndexController::class, 'join_news'])->name('join.news');
 Route::get('blogs', [IndexController::class, 'blogs'])->name('home.blogs.index');
 Route::get('blog/show/{blog}', [IndexController::class, 'blog_show'])->name('home.blog.show');
+Route::get('StartCheck', [IndexController::class, 'StartCheck'])->name('home.StartCheck');
 Route::post('/form/send-request/contact', [FormController::class, 'form_contact'])->name('form.contact');
 Route::get('/logout', function () {
     \auth()->logout();

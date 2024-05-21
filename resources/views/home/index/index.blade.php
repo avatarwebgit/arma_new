@@ -3,7 +3,14 @@
 @section('script')
 
     <script type="module">
-        GetMarkets();
+        window.Echo.channel('market-status-updated')
+            .listen('MarketStatusUpdated', function (e) {
+                let market_id = e.market_id;
+                let difference = e.difference;
+                console.log(market_id,difference);
+                Timer(difference);
+            });
+        // GetMarkets();
         document.addEventListener('DOMContentLoaded', function() {
 
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
@@ -21,16 +28,47 @@
                 $('#market_open_finished_modal_exists').modal('hide');
             })
         })
-        window.Echo.channel('market-setting-updated-channel')
-            .listen('MarketTimeUpdated', function (e) {
-                GetMarkets();
-            });
-        window.Echo.channel('change-sales-offer')
-            .listen('ChangeSaleOffer', function (e) {
-                let market_id = e.market_id;
-                get_market_info(market_id)
-            });
+        // window.Echo.channel('market-setting-updated-channel')
+        //     .listen('MarketTimeUpdated', function (e) {
+        //         GetMarkets();
+        //     });
+        // window.Echo.channel('change-sales-offer')
+        //     .listen('ChangeSaleOffer', function (e) {
+        //         let market_id = e.market_id;
+        //         get_market_info(market_id)
+        //     });
 
+        function Timer(diffSeconds) {
+            var Hours = $('#Hours');
+            var Minutes = $('#Minutes');
+            var Seconds = $('#Seconds');
+            // به‌روزرسانی زمان endTime با زمان فعلی
+
+            // محاسبه زمان فعلی
+
+            // محاسبه اختلاف زمانی بین endTime و time_now بر حسب میلی‌ثانیه
+
+            // تبدیل اختلاف زمانی به ثانیه
+
+            // نمایش اختلاف زمانی بین endTime و time_now به صورت دقیقه
+            let timeLeft = diffSeconds;
+            var days = Math.floor(timeLeft / 86400);
+            var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+            var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
+            var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+            if (hours < "10") {
+                hours = "0" + hours;
+            }
+            if (minutes < "10") {
+                minutes = "0" + minutes;
+            }
+            if (seconds < "10") {
+                seconds = "0" + seconds;
+            }
+            Hours.text(hours);
+            Minutes.text(minutes);
+            Seconds.text(seconds);
+        }
 
         function get_market_info(market_id) {
             let target_div = $('#market-time-' + market_id);
