@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Events\TestEvent;
+use App\Events\MarketIndexResult;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Country;
@@ -469,9 +470,19 @@ class IndexController extends Controller
 
     public function StartCheck()
     {
-
-
+        $now = Carbon::now();
         $close_market = $this->close_market_today();
+        $close_market = Carbon::parse($close_market);
+        if ($now < $close_market) {
+            $difference = $now->diffInSeconds($close_market);
+            $status_text = 'Open';
+        } else {
+            $difference = 0;
+            $status_text = 'Close';
+        }
+        $timer=$this->Timer($difference);
+        broadcast(new MarketIndexResult($timer));
+
         $yesterday = Carbon::yesterday();
         $tomorrow = Carbon::tomorrow();
         $future = $yesterday->copy()->addDay(4);
@@ -507,5 +518,23 @@ class IndexController extends Controller
         } else {
             $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
         }
+    }
+
+    function Timer($diffSeconds)
+    {
+        $days = floor($diffSeconds / 86400);
+        $hours = floor(($diffSeconds - ($days * 86400)) / 3600);
+        $minutes = floor(($diffSeconds - ($days * 86400) - ($hours * 3600)) / 60);
+        $seconds = floor(($diffSeconds - ($days * 86400) - ($hours * 3600) - ($minutes * 60)));
+        if ($hours < "10") {
+            $hours = "0" . $hours;
+        }
+        if ($minutes < "10") {
+            $minutes = "0" . $minutes;
+        }
+        if ($seconds < "10") {
+            $seconds = "0" . $seconds;
+        }
+        return view('home.timer.index',compact('hours','minutes','seconds'))->render();
     }
 }

@@ -51,6 +51,11 @@ Broadcast::channel('market-setting-updated-channel', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
+Broadcast::channel('market-index-result-channel', function ($user, $id) {
+    return true;
+    return (int) $user->id === (int) $id;
+});
+
 //
 //
 //Broadcast::channel('test', function ($user) {
