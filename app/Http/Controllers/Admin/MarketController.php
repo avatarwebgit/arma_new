@@ -113,7 +113,7 @@ class MarketController extends Controller
         ]);
         $market->update($request->all());
         $this->statusTimeMarket($market, 1);
-        $now=Carbon::now();
+        $now = Carbon::now();
         broadcast(new MarketTimeUpdated($now));
         return redirect()->route('admin.markets.folder', ['date' => $market->date])->with('success', 'Market updated successfully');
     }
@@ -237,7 +237,8 @@ class MarketController extends Controller
         foreach ($markets as $market) {
             $this->statusTimeMarket($market, 1);
         }
-        broadcast(new MarketTimeUpdated());
+        $now = Carbon::now();
+        broadcast(new MarketTimeUpdated($now));
         return redirect()->back();
     }
 
@@ -320,7 +321,6 @@ class MarketController extends Controller
         }
 
     }
-
 
 
     public function Upload_files($env, $file)
