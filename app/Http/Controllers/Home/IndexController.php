@@ -70,8 +70,7 @@ class IndexController extends Controller
         }
         $close_market = $this->close_market_today();
         $close_market=Carbon::parse($close_market);
-        $now=time();
-        $now=Carbon::parse($now);
+        $now=Carbon::now();
         session()->forget('market_open_finished');
         return view('home.index.index',
             compact('market_open_finished_modal_exists',
