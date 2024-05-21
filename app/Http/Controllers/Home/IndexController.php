@@ -469,50 +469,43 @@ class IndexController extends Controller
 
     public function StartCheck()
     {
-        while (true){
 
-            $close_market = $this->close_market_today();
-            $yesterday = Carbon::yesterday();
-            $tomorrow = Carbon::tomorrow();
-            $future = $yesterday->copy()->addDay(4);
-            $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
-            $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
-            $ids = [];
-            foreach ($markets_groups as $markets) {
-                foreach ($markets as $market) {
-                    $result = $this->statusTimeMarket($market, 1);
-                    $market['difference'] = $result[0];
-                    $market['status'] = $result[1];
-                    $market['benchmark1'] = $result[2];
-                    $market['benchmark2'] = $result[3];
-                    $market['benchmark3'] = $result[4];
-                    $market['benchmark4'] = $result[5];
-                    $market['benchmark5'] = $result[6];
-                    $market['benchmark6'] = $result[7];
-                    $market['date_time'] = $result[8];
-                }
-            }
 
-            $market_values = 0;
-            $market_is_open = 0;
-            foreach ($today_markets_groups as $markets) {
-                foreach ($markets as $market) {
-                    $market_status_index = $this->market_status_index($market, $market_is_open);
-                    $market_is_open = $market_status_index[0];
-                    $market_values = $market_values + $market->market_value;
-                }
+        $close_market = $this->close_market_today();
+        $yesterday = Carbon::yesterday();
+        $tomorrow = Carbon::tomorrow();
+        $future = $yesterday->copy()->addDay(4);
+        $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
+        $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
+        $ids = [];
+        foreach ($markets_groups as $markets) {
+            foreach ($markets as $market) {
+                $result = $this->statusTimeMarket($market, 1);
+                $market['difference'] = $result[0];
+                $market['status'] = $result[1];
+                $market['benchmark1'] = $result[2];
+                $market['benchmark2'] = $result[3];
+                $market['benchmark3'] = $result[4];
+                $market['benchmark4'] = $result[5];
+                $market['benchmark5'] = $result[6];
+                $market['benchmark6'] = $result[7];
+                $market['date_time'] = $result[8];
             }
-            if ($market_is_open === 1) {
-                $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
-            } else {
-                $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
-            }
-            sleep(1);
-            return true;
-
         }
 
+        $market_values = 0;
+        $market_is_open = 0;
+        foreach ($today_markets_groups as $markets) {
+            foreach ($markets as $market) {
+                $market_status_index = $this->market_status_index($market, $market_is_open);
+                $market_is_open = $market_status_index[0];
+                $market_values = $market_values + $market->market_value;
+            }
+        }
+        if ($market_is_open === 1) {
+            $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
+        } else {
+            $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
+        }
     }
-
-
 }
