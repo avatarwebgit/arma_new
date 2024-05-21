@@ -7,11 +7,16 @@
             .listen('MarketStatusUpdated', function (e) {
                 let market_id = e.market_id;
                 let difference = e.difference;
-                console.log(market_id,difference);
-                Timer(difference);
+
+            });
+        window.Echo.channel('market-index-result-channel')
+            .listen('MarketIndexResult', function (e) {
+                console.log(e)
+                let timer = e.timer;
+                $('#timer_section').html(timer);
             });
         // GetMarkets();
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
 
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
             if (market_open_finished_modal_exists) {
@@ -32,6 +37,7 @@
         //     .listen('MarketTimeUpdated', function (e) {
         //         GetMarkets();
         //     });
+
         // window.Echo.channel('change-sales-offer')
         //     .listen('ChangeSaleOffer', function (e) {
         //         let market_id = e.market_id;
@@ -168,7 +174,7 @@
                     $('#Market_Status_Text').html(Market_Status_Text);
                     $('#Market_Status_Text').html(msg[4]);
                     $.each(ids, function (i, val) {
-                        MarketOnline(val,now);
+                        MarketOnline(val, now);
                     });
                     makeTimer(endDate, market_id_open, now);
                 }
@@ -219,10 +225,12 @@
             #Market_Status_Text {
                 text-align: center !important;
             }
-            #total_trade_value{
+
+            #total_trade_value {
                 text-align: center !important;
             }
-            #time_now{
+
+            #time_now {
                 text-align: center !important;
             }
         }
@@ -274,22 +282,7 @@
 
             </div>
             <div id="timer_section" class="col-12 col-xl-4 d-flex justify-content-center mb-3 p-0 ">
-                <div class="clock">
-                    <div class="column">
-                        <div class="timer" id="Hours"></div>
-                        <div class="text hour">Hour</div>
-                    </div>
-                    <div style="font-family:none !important" class="timer">:</div>
-                    <div class="column">
-                        <div class="timer" id="Minutes"></div>
-                        <div class="text">MIN</div>
-                    </div>
-                    <div style="font-family: normal !important" class="timer">:</div>
-                    <div class="column">
-                        <div class="timer" id="Seconds"></div>
-                        <div class="text">SEC</div>
-                    </div>
-                </div>
+
             </div>
             <div class="col-12 col-xl-4 p-0 text-right" id="time_now">
                 <h3>{{ Carbon\Carbon::now()->format('l') }}</h3>
