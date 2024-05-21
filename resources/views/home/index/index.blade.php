@@ -3,8 +3,9 @@
 @section('script')
 
     <script type="module">
+        GetMarkets();
         document.addEventListener('DOMContentLoaded', function() {
-            GetMarkets();
+
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
             if (market_open_finished_modal_exists) {
                 $('#market_open_finished_modal_exists').modal('show');
@@ -252,7 +253,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-12 col-xl-4 p-0 text-right" id="time_now">
                 <h3>{{ Carbon\Carbon::now()->format('l') }}</h3>
                 <span>{{ Carbon\Carbon::now()->format('d M Y g:i A') }}</span>
