@@ -55,6 +55,9 @@
                 <td>
                     {{ \Carbon\Carbon::parse($market->date_time)->format('Y-m-d') }}
                 </td>
+{{--                <td id="market-time-{{ $market->id }}">--}}
+{{--                    {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}--}}
+{{--                </td>--}}
                 <td>
                     {{ $market->status }}
                 </td>
@@ -226,8 +229,11 @@
                                 <!--logo or anything put here -->
                             </div>
                         </div>
-                        <span id="market-time-{{ $market->id }}" style="margin-top: 10px;margin-left: 10px">
-                            {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}
+{{--                        <span id="market-time-{{ $market->id }}" style="margin-top: 10px;margin-left: 10px">--}}
+{{--                            {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}--}}
+{{--                        </span>--}}
+                        <span style="margin-top: 10px;margin-left: 10px">
+                            {{ $market->status }}
                         </span>
                     </div>
 
