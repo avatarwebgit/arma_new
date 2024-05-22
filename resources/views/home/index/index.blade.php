@@ -11,9 +11,12 @@
             });
         window.Echo.channel('market-index-result-channel')
             .listen('MarketIndexResult', function (e) {
-                console.log(e)
                 let timer = e.timer;
+                let market_status = e.market_status;
+                let total_trade_value = e.total_trade_value;
                 $('#timer_section').html(timer);
+                $('#Market_Status_Text').html(market_status);
+                $('#total_trade_value').html(total_trade_value);
             });
         // GetMarkets();
         document.addEventListener('DOMContentLoaded', function () {
@@ -271,8 +274,7 @@
         <div class="row justify-content-between pt-5">
             <div class="col-12 col-xl-4 p-0 text-left" style="font-size: 13px;font-weight: bold">
                 <h3 id="Market_Status_Text">
-                    <span>Market: </span>
-                    <span class="text-success"></span>
+
                 </h3>
                 <div class="text-left" id="total_trade_value">
                     <span>Today Trade Value:</span>
