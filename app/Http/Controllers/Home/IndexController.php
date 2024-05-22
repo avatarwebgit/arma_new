@@ -481,7 +481,8 @@ class IndexController extends Controller
             $status_text = 'Close';
         }
         $timer=$this->Timer($difference);
-        broadcast(new MarketIndexResult($timer));
+        $market_status=view('home.timer.market_status',compact('status_text'))->render();
+
 
         $yesterday = Carbon::yesterday();
         $tomorrow = Carbon::tomorrow();
@@ -518,6 +519,8 @@ class IndexController extends Controller
         } else {
             $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
         }
+        $total_trade_value=view('home.timer.total_trade_value',compact('market_values'))->render();
+        broadcast(new MarketIndexResult($timer,$market_status,$total_trade_value));
     }
 
     function Timer($diffSeconds)
