@@ -55,8 +55,8 @@
                 <td>
                     {{ \Carbon\Carbon::parse($market->date_time)->format('Y-m-d') }}
                 </td>
-                <td id="market-time-{{ $market->id }}">
-                    {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}
+                <td>
+                    {{ $market->status }}
                 </td>
                 <td id="slide_more_angle_{{ $market->id }}" onclick="slidemore({{ $market->id }})"
                     class="slide_more_angle cursor-pointer">
