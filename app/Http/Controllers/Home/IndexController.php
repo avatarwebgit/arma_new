@@ -480,9 +480,8 @@ class IndexController extends Controller
             $difference = 0;
             $status_text = 'Close';
         }
-        $timer=$this->Timer($difference);
-        $market_status=view('home.timer.market_status',compact('status_text'))->render();
-
+        $timer = $this->Timer($difference);
+        $market_status = view('home.timer.market_status', compact('status_text'))->render();
 
 
         $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
@@ -541,9 +540,10 @@ class IndexController extends Controller
         }
 
 
-        $total_trade_value=view('home.timer.total_trade_value',compact('market_values'))->render();
-        $markets_index=view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
-        broadcast(new MarketIndexResult($timer,$market_status,$total_trade_value,$markets_index));
+        $total_trade_value = view('home.timer.total_trade_value', compact('market_values'))->render();
+//        $markets_index=view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
+        $markets_index = '';
+        broadcast(new MarketIndexResult($timer, $market_status, $total_trade_value, $markets_index));
     }
 
     function Timer($diffSeconds)
@@ -561,6 +561,6 @@ class IndexController extends Controller
         if ($seconds < "10") {
             $seconds = "0" . $seconds;
         }
-        return view('home.timer.index',compact('hours','minutes','seconds'))->render();
+        return view('home.timer.index', compact('hours', 'minutes', 'seconds'))->render();
     }
 }
