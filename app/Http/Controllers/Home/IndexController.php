@@ -540,7 +540,7 @@ class IndexController extends Controller
         }
 
 
-        $total_trade_value = view('home.timer.total_trade_value', compact('market_values'))->render();
+//        $total_trade_value = view('home.timer.total_trade_value', compact('market_values'))->render();
 //        $markets_index=view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
         $markets_index = '';
         broadcast(new MarketIndexResult($timer, $market_status, $total_trade_value, $markets_index));
