@@ -171,8 +171,8 @@ class IndexController extends Controller
             $close_market = $this->close_market_today();
             $close_market = Carbon::parse($close_market);
             $now = Carbon::now();
-            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
-            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market, $market_is_open, $now]);
+            return view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
+//            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market, $market_is_open, $now]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
@@ -484,15 +484,20 @@ class IndexController extends Controller
         $market_status=view('home.timer.market_status',compact('status_text'))->render();
 
 
+
+        $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
         $yesterday = Carbon::yesterday();
+        $pre_yesterday = Carbon::yesterday()->copy()->addDay(-1);
+        $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
         $future = $yesterday->copy()->addDay(4);
+        $yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time', '>', $change_time)->orderby('date', 'asc')->get()->groupby('date');
         $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
         $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
         $ids = [];
         foreach ($markets_groups as $markets) {
             foreach ($markets as $market) {
-                $result = $this->statusTimeMarket($market, 1);
+                $result = $this->statusTimeMarket($market);
                 $market['difference'] = $result[0];
                 $market['status'] = $result[1];
                 $market['benchmark1'] = $result[2];
@@ -502,9 +507,24 @@ class IndexController extends Controller
                 $market['benchmark5'] = $result[6];
                 $market['benchmark6'] = $result[7];
                 $market['date_time'] = $result[8];
+                $ids[] = $market->id;
             }
         }
-
+        foreach ($yesterday_markets_groups as $markets) {
+            foreach ($markets as $market) {
+                $result = $this->statusTimeMarket($market);
+                $market['difference'] = $result[0];
+                $market['status'] = $result[1];
+                $market['benchmark1'] = $result[2];
+                $market['benchmark2'] = $result[3];
+                $market['benchmark3'] = $result[4];
+                $market['benchmark4'] = $result[5];
+                $market['benchmark5'] = $result[6];
+                $market['benchmark6'] = $result[7];
+                $market['date_time'] = $result[8];
+                $ids[] = $market->id;
+            }
+        }
         $market_values = 0;
         $market_is_open = 0;
         foreach ($today_markets_groups as $markets) {
@@ -519,8 +539,11 @@ class IndexController extends Controller
         } else {
             $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
         }
+
+
         $total_trade_value=view('home.timer.total_trade_value',compact('market_values'))->render();
-        broadcast(new MarketIndexResult($timer,$market_status,$total_trade_value));
+        $markets_index=view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
+        broadcast(new MarketIndexResult($timer,$market_status,$total_trade_value,$markets_index));
     }
 
     function Timer($diffSeconds)

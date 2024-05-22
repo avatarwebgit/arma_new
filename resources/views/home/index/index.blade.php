@@ -14,9 +14,11 @@
                 let timer = e.timer;
                 let market_status = e.market_status;
                 let total_trade_value = e.total_trade_value;
+                let markets_index = e.markets_index;
                 $('#timer_section').html(timer);
                 $('#Market_Status_Text').html(market_status);
                 $('#total_trade_value').html(total_trade_value);
+                $('#market_table').html(markets_index);
             });
         // GetMarkets();
         document.addEventListener('DOMContentLoaded', function () {
