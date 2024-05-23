@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Events\MarketTableIndex;
 use App\Events\TestEvent;
 use App\Events\MarketIndexResult;
 use App\Http\Controllers\Controller;
@@ -28,6 +29,7 @@ use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
+use function Symfony\Component\String\b;
 
 class IndexController extends Controller
 {
@@ -171,8 +173,8 @@ class IndexController extends Controller
             $close_market = $this->close_market_today();
             $close_market = Carbon::parse($close_market);
             $now = Carbon::now();
-            return view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
-//            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market, $market_is_open, $now]);
+            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
+            return response()->json([1, $view_table, $ids, number_format($market_values), $market_is_open_text, $close_market, $market_is_open, $now]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
@@ -247,21 +249,6 @@ class IndexController extends Controller
 
     }
 
-    private function close_market_today()
-    {
-        $yesterday = Carbon::yesterday();
-        $tomorrow = Carbon::tomorrow();
-        $last_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'desc')->first();
-        $close_market = Carbon::yesterday();
-        if ($last_market) {
-            $statusTimeMarket_result = $this->statusTimeMarket($last_market);
-            $close_market = $statusTimeMarket_result[7];
-        }
-        $hours = Carbon::parse($close_market)->format('Y/m/d');
-        $minute = Carbon::parse($close_market)->format('H:i:s');
-        $close_market = $hours . ' ' . $minute;
-        return $close_market;
-    }
 
     public function create_countries()
     {
@@ -468,99 +455,74 @@ class IndexController extends Controller
         dd('Congratulations');
     }
 
-    public function StartCheck()
+
+
+    public function today_market_status()
     {
-        $now = Carbon::now();
-        $close_market = $this->close_market_today();
-        $close_market = Carbon::parse($close_market);
-        if ($now < $close_market) {
-            $difference = $now->diffInSeconds($close_market);
-            $status_text = 'Open';
-        } else {
-            $difference = 0;
-            $status_text = 'Close';
-        }
-        $timer = $this->Timer($difference);
-        $market_status = view('home.timer.market_status', compact('status_text'))->render();
-
-
-        $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
-        $yesterday = Carbon::yesterday();
-        $pre_yesterday = Carbon::yesterday()->copy()->addDay(-1);
-        $today = Carbon::today();
-        $tomorrow = Carbon::tomorrow();
-        $future = $yesterday->copy()->addDay(4);
-        $yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time', '>', $change_time)->orderby('date', 'asc')->get()->groupby('date');
-        $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
-        $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
-        $ids = [];
-        foreach ($markets_groups as $markets) {
-            foreach ($markets as $market) {
-                $result = $this->statusTimeMarket($market);
-                $market['difference'] = $result[0];
-                $market['status'] = $result[1];
-                $market['benchmark1'] = $result[2];
-                $market['benchmark2'] = $result[3];
-                $market['benchmark3'] = $result[4];
-                $market['benchmark4'] = $result[5];
-                $market['benchmark5'] = $result[6];
-                $market['benchmark6'] = $result[7];
-                $market['date_time'] = $result[8];
-                $ids[] = $market->id;
+        try {
+            $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
+            $yesterday = Carbon::yesterday();
+            $pre_yesterday = Carbon::yesterday()->copy()->addDay(-1);
+            $today = Carbon::today();
+            $tomorrow = Carbon::tomorrow();
+            $future = $yesterday->copy()->addDay(4);
+            $yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time', '>', $change_time)->orderby('date', 'asc')->get()->groupby('date');
+            $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
+            $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
+            $ids = [];
+            foreach ($markets_groups as $markets) {
+                foreach ($markets as $market) {
+                    $result = $this->statusTimeMarket($market);
+                    $market['difference'] = $result[0];
+                    $market['status'] = $result[1];
+                    $market['benchmark1'] = $result[2];
+                    $market['benchmark2'] = $result[3];
+                    $market['benchmark3'] = $result[4];
+                    $market['benchmark4'] = $result[5];
+                    $market['benchmark5'] = $result[6];
+                    $market['benchmark6'] = $result[7];
+                    $market['date_time'] = $result[8];
+                    $ids[] = $market->id;
+                }
             }
-        }
-        foreach ($yesterday_markets_groups as $markets) {
-            foreach ($markets as $market) {
-                $result = $this->statusTimeMarket($market);
-                $market['difference'] = $result[0];
-                $market['status'] = $result[1];
-                $market['benchmark1'] = $result[2];
-                $market['benchmark2'] = $result[3];
-                $market['benchmark3'] = $result[4];
-                $market['benchmark4'] = $result[5];
-                $market['benchmark5'] = $result[6];
-                $market['benchmark6'] = $result[7];
-                $market['date_time'] = $result[8];
-                $ids[] = $market->id;
+            foreach ($yesterday_markets_groups as $markets) {
+                foreach ($markets as $market) {
+                    $result = $this->statusTimeMarket($market);
+                    $market['difference'] = $result[0];
+                    $market['status'] = $result[1];
+                    $market['benchmark1'] = $result[2];
+                    $market['benchmark2'] = $result[3];
+                    $market['benchmark3'] = $result[4];
+                    $market['benchmark4'] = $result[5];
+                    $market['benchmark5'] = $result[6];
+                    $market['benchmark6'] = $result[7];
+                    $market['date_time'] = $result[8];
+                    $ids[] = $market->id;
+                }
             }
-        }
-        $market_values = 0;
-        $market_is_open = 0;
-        foreach ($today_markets_groups as $markets) {
-            foreach ($markets as $market) {
-                $market_status_index = $this->market_status_index($market, $market_is_open);
-                $market_is_open = $market_status_index[0];
-                $market_values = $market_values + $market->market_value;
+            $market_values = 0;
+            $market_is_open = 0;
+            foreach ($today_markets_groups as $markets) {
+                foreach ($markets as $market) {
+                    $market_status_index = $this->market_status_index($market, $market_is_open);
+                    $market_is_open = $market_status_index[0];
+                    $market_values = $market_values + $market->market_value;
+                }
             }
+            if ($market_is_open === 1) {
+                $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
+            } else {
+                $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
+            }
+            $close_market = $this->close_market_today();
+            $close_market = Carbon::parse($close_market);
+            $now = Carbon::now();
+            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
+            broadcast(new MarketTableIndex($view_table));
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
         }
-        if ($market_is_open === 1) {
-            $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
-        } else {
-            $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
-        }
-
-
-//        $total_trade_value = view('home.timer.total_trade_value', compact('market_values'))->render();
-//        $markets_index=view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
-        $markets_index = '';
-        broadcast(new MarketIndexResult($timer, $market_status, $total_trade_value, $markets_index));
     }
 
-    function Timer($diffSeconds)
-    {
-        $days = floor($diffSeconds / 86400);
-        $hours = floor(($diffSeconds - ($days * 86400)) / 3600);
-        $minutes = floor(($diffSeconds - ($days * 86400) - ($hours * 3600)) / 60);
-        $seconds = floor(($diffSeconds - ($days * 86400) - ($hours * 3600) - ($minutes * 60)));
-        if ($hours < "10") {
-            $hours = "0" . $hours;
-        }
-        if ($minutes < "10") {
-            $minutes = "0" . $minutes;
-        }
-        if ($seconds < "10") {
-            $seconds = "0" . $seconds;
-        }
-        return view('home.timer.index', compact('hours', 'minutes', 'seconds'))->render();
-    }
+
 }
