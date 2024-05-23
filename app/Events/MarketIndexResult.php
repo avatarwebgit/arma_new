@@ -19,14 +19,13 @@ class MarketIndexResult implements  ShouldBroadcast
      *
      * @return void
      */
-    public $timer,$market_status,$total_trade_value,$markets_index;
-    public function __construct($timer,$market_status,$total_trade_value,$markets_index)
+    public $timer,$market_status,$difference;
+    public function __construct($timer,$market_status,$difference)
     {
 
         $this->timer = $timer;
         $this->market_status = $market_status;
-        $this->total_trade_value = $total_trade_value;
-        $this->markets_index = $markets_index;
+        $this->difference = $difference;
     }
 
     /**

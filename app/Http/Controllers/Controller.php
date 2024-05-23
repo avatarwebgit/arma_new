@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MarketIndexResult;
 use App\Events\MarketStatusUpdated;
 use App\Events\MarketTimeUpdated;
+use App\Models\Market;
 use App\Models\MarketSetting;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -98,13 +100,12 @@ class Controller extends BaseController
             //close
             $difference = 0;
             $status = 7;
-
         }
         $market->status=$status;
         if ($market->isDirty()){
             $market->save();
         }
-        broadcast(new MarketStatusUpdated($market->id,$difference));
+//        broadcast(new MarketStatusUpdated($market->id,$difference));
         return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time,$time_to_close_bid_deposit];
     }
 
@@ -116,6 +117,82 @@ class Controller extends BaseController
             $remaining = '0' . $remaining;
         }
         return $minutes . ':' . $remaining;
+    }
+
+    public function StartCheck()
+    {
+        $create_index_timer=$this->create_index_timer();
+        $timer=$create_index_timer['timer'];
+        $market_status=$create_index_timer['market_status'];
+//        $total_trade_value=$create_index_timer['total_trade_value'];
+        $difference=$create_index_timer['difference'];
+        broadcast(new MarketIndexResult($timer, $market_status, $difference));
+    }
+
+    function create_index_timer(){
+        $now = Carbon::now();
+        $close_market = $this->close_market_today();
+        $close_market = Carbon::parse($close_market);
+        if ($now < $close_market) {
+            $difference = $now->diffInSeconds($close_market);
+            $status_text = 'Open';
+        } else {
+            $difference = 0;
+            $status_text = 'Close';
+        }
+
+        $timer=$this->Timer($difference);
+        $market_status=view('home.timer.market_status',compact('status_text'))->render();
+
+//        $yesterday = Carbon::yesterday();
+//        $tomorrow = Carbon::tomorrow();
+//        $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
+//        $market_values = 0;
+//        foreach ($today_markets_groups as $markets) {
+//            foreach ($markets as $market) {
+//                $market_values = $market_values + $market->market_value;
+//            }
+//        }
+//        $total_trade_value=view('home.timer.total_trade_value',compact('market_values'))->render();
+        return [
+            'timer'=>$timer,
+            'market_status'=>$market_status,
+            'difference'=>$difference,
+        ];
+    }
+
+    public function close_market_today()
+    {
+        $yesterday = Carbon::yesterday();
+        $tomorrow = Carbon::tomorrow();
+        $last_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'desc')->first();
+        $close_market = Carbon::yesterday();
+        if ($last_market) {
+            $statusTimeMarket_result = $this->statusTimeMarket($last_market);
+            $close_market = $statusTimeMarket_result[7];
+        }
+        $hours = Carbon::parse($close_market)->format('Y/m/d');
+        $minute = Carbon::parse($close_market)->format('H:i:s');
+        $close_market = $hours . ' ' . $minute;
+        return $close_market;
+    }
+
+    function Timer($diffSeconds)
+    {
+        $days = floor($diffSeconds / 86400);
+        $hours = floor(($diffSeconds - ($days * 86400)) / 3600);
+        $minutes = floor(($diffSeconds - ($days * 86400) - ($hours * 3600)) / 60);
+        $seconds = floor(($diffSeconds - ($days * 86400) - ($hours * 3600) - ($minutes * 60)));
+        if ($hours < "10") {
+            $hours = "0" . $hours;
+        }
+        if ($minutes < "10") {
+            $minutes = "0" . $minutes;
+        }
+        if ($seconds < "10") {
+            $seconds = "0" . $seconds;
+        }
+        return view('home.timer.index', compact('hours', 'minutes', 'seconds'))->render();
     }
 
 }

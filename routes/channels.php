@@ -55,6 +55,10 @@ Broadcast::channel('market-index-result-channel', function ($user, $id) {
     return true;
     return (int) $user->id === (int) $id;
 });
+Broadcast::channel('market-index-table', function ($user, $id) {
+    return true;
+    return (int) $user->id === (int) $id;
+});
 
 //
 //

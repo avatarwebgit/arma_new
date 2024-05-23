@@ -29,6 +29,20 @@
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
 
+    function StartCheck() {
+        $.ajax({
+            url: "{{ route('home.StartCheck') }}",
+            dataType: "json",
+            method: "get",
+            data: {
+                _token: "{{ csrf_token() }}",
+            },
+            success: function (msg) {
+
+            }
+        })
+    }
+
     var timerCountdown = 0;
 
     function makeTimer(endTime, market_is_open, now) {
@@ -99,6 +113,7 @@
 
 
     jQuery(document).ready(function ($) {
+        StartCheck();
         $('.counter').counterUp({
             delay: 10,
             time: 1000

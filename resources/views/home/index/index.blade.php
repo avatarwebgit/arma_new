@@ -3,24 +3,25 @@
 @section('script')
 
     <script type="module">
+        window.Echo.channel('market-index-table')
+            .listen('MarketTableIndex', function (e) {
+                let view_table = e.view_table;
+                $('#market_table').html(view_table);
+            });
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
                 let market_id = e.market_id;
                 let difference = e.difference;
-
             });
         window.Echo.channel('market-index-result-channel')
             .listen('MarketIndexResult', function (e) {
                 let timer = e.timer;
                 let market_status = e.market_status;
-                let total_trade_value = e.total_trade_value;
-                let markets_index = e.markets_index;
+                let difference = e.difference;
                 $('#timer_section').html(timer);
                 $('#Market_Status_Text').html(market_status);
-                $('#total_trade_value').html(total_trade_value);
-                $('#market_table').html(markets_index);
             });
-        // GetMarkets();
+        GetMarkets();
         document.addEventListener('DOMContentLoaded', function () {
 
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
@@ -38,10 +39,10 @@
                 $('#market_open_finished_modal_exists').modal('hide');
             })
         })
-        // window.Echo.channel('market-setting-updated-channel')
-        //     .listen('MarketTimeUpdated', function (e) {
-        //         GetMarkets();
-        //     });
+        window.Echo.channel('market-setting-updated-channel')
+            .listen('MarketTimeUpdated', function (e) {
+                GetMarkets();
+            });
 
         // window.Echo.channel('change-sales-offer')
         //     .listen('ChangeSaleOffer', function (e) {
@@ -171,17 +172,17 @@
                     let ids = msg[2];
                     let market_value = msg[3];
                     let Market_Status_Text = msg[4];
-                    let endDate = msg[5];
-                    let market_id_open = msg[6];
+                    // let endDate = msg[5];
+                    // let market_id_open = msg[6];
                     let now = msg[7];
                     $('#market_table').html(table_view);
                     $('#market_value').html(market_value);
-                    $('#Market_Status_Text').html(Market_Status_Text);
-                    $('#Market_Status_Text').html(msg[4]);
+                    // $('#Market_Status_Text').html(Market_Status_Text);
+                    // $('#Market_Status_Text').html(msg[4]);
                     $.each(ids, function (i, val) {
                         MarketOnline(val, now);
                     });
-                    makeTimer(endDate, market_id_open, now);
+                    // makeTimer(endDate, market_id_open, now);
                 }
             })
         }
