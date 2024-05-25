@@ -117,10 +117,9 @@
 
 
     jQuery(document).ready(function ($) {
-        setInterval(function () {
+        setTimeout(function () {
             StartCheck();
-        }, 5000);
-        StartCheck();
+        }, 3000);
         $('.counter').counterUp({
             delay: 10,
             time: 1000
