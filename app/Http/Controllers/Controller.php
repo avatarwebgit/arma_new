@@ -223,10 +223,11 @@ class Controller extends BaseController
                     $market['benchmark5'] = $result[6];
                     $market['benchmark6'] = $result[7];
                     $market['date_time'] = $result[8];
-                    $market_id=$market->id;
-                    $difference=$result[0];
+                    $market_id = $market->id;
+                    $difference = $result[0];
                     $timer = $this->MarketTimer($difference);
-                    broadcast(new MarketStatusUpdated($market_id,$difference,$timer));
+                    $status = $market['status'];
+                    broadcast(new MarketStatusUpdated($market_id, $difference, $timer,$status));
                 }
             }
 
