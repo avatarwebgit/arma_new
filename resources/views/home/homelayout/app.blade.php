@@ -112,15 +112,14 @@
         }
         let time = hours + ':' + minutes + ':' + seconds;
         $('#timer_section2').html('');
-        $('#timer_section2').text(time);
+        $('#timer_section2').html('<div class="clock">'+time+'</div>');
     }
 
 
     jQuery(document).ready(function ($) {
-        setInterval(function () {
+        setTimeout(function () {
             StartCheck();
-        }, 5000);
-        StartCheck();
+        }, 3000);
         $('.counter').counterUp({
             delay: 10,
             time: 1000
