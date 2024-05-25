@@ -116,6 +116,9 @@
 
 
     jQuery(document).ready(function ($) {
+        setInterval(function () {
+            StartCheck();
+        }, 5000);
         StartCheck();
         $('.counter').counterUp({
             delay: 10,
