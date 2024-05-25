@@ -289,10 +289,6 @@
             <div id="timer_section" class="col-12 col-xl-4 d-flex justify-content-center mb-3 p-0 ">
 
             </div>
-            <div id="timer_section2" class="col-12 col-xl-4 d-flex justify-content-center mb-3 p-0 ">
-
-            </div>
-
             <div class="col-12 col-xl-4 p-0 text-right" id="time_now">
                 <h3>{{ Carbon\Carbon::now()->format('l') }}</h3>
                 <span>{{ Carbon\Carbon::now()->format('d M Y g:i A') }}</span>
