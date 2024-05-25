@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Events\MarketStatusUpdated;
-use App\Events\MarketTableIndex;
-use App\Events\TestEvent;
-use App\Events\MarketIndexResult;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Country;
 use App\Models\Currency;
-use App\Models\FormStatus;
 use App\Models\InspectionPlace;
 use App\Models\Market;
 use App\Models\MarketSetting;
@@ -19,18 +14,12 @@ use App\Models\Message;
 use App\Models\Packing;
 use App\Models\PlatFom;
 use App\Models\QualityQuantityInspector;
-use App\Models\Setting;
 use App\Models\ShippingTerm;
 use App\Models\ToleranceWeightBy;
 use App\Models\Units;
-use App\Models\User;
 use App\Models\UserNews;
 use Carbon\Carbon;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Hash;
-use function Symfony\Component\String\b;
 
 class IndexController extends Controller
 {
@@ -181,13 +170,7 @@ class IndexController extends Controller
         }
     }
 
-    function market_status_index($market, $market_is_open)
-    {
-        if ($market->status != 7) {
-            $market_is_open = 1;
-        }
-        return [$market_is_open];
-    }
+
 
     public function redirectUser()
     {
@@ -455,11 +438,6 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
-
-
-
-
-
 
 
 }
