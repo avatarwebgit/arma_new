@@ -3,9 +3,10 @@
 @section('script')
     <script type="module">
         $(document).ready(function () {
-            let now = '{{ $now }}';
-            now = new Date(now).getTime();
-            MarketOnline({{ $market->id }}, now);
+            GetMarket({{ $market->id }});
+            {{--let now = '{{ $now }}';--}}
+            {{--now = new Date(now).getTime();--}}
+            {{--MarketOnline({{ $market->id }}, now);--}}
         });
         window.Echo.channel('change-sales-offer')
             .listen('ChangeSaleOffer', function (e) {
@@ -14,7 +15,7 @@
             });
         window.Echo.channel('market-setting-updated-channel')
             .listen('MarketTimeUpdated', function (e) {
-                GetMarket({{ $market->id }},e.now);
+                GetMarket({{ $market->id }}, e.now);
             });
         window.Echo.channel('new_bid_created')
             .listen('NewBidCreated', function (e) {
@@ -22,7 +23,7 @@
                 refreshBidTable(market_id);
             });
 
-        function GetMarket(market_id,now) {
+        function GetMarket(market_id, now) {
             $.ajax({
                 url: "{{ route('home.GetMarket') }}",
                 data: {
@@ -35,9 +36,38 @@
                 success: function (msg) {
                     let table_view = msg[1];
                     $('#benchmark_info').html(table_view);
-                    MarketOnline(market_id, now);
+                    let difference = msg[3];
+                    // console.log(difference);
+                    // MarketOnline(market_id, now);
+                    setInterval(function () {
+                        MarketTimer(difference, market_id);
+                        difference = difference - 1;
+                        if (difference == 0) {
+                            GetMarket();
+                        }
+                    }, 1000);
+
                 }
             })
+        }
+
+        function MarketTimer(diffSeconds, market_id) {
+            let timeLeft = diffSeconds;
+            var days = Math.floor(timeLeft / 86400);
+            var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+            var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
+            var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+            if (hours < "10") {
+                hours = "0" + hours;
+            }
+            if (minutes < "10") {
+                minutes = "0" + minutes;
+            }
+            if (seconds < "10") {
+                seconds = "0" + seconds;
+            }
+            let time = hours + ':' + minutes + ':' + seconds;
+            $('#market-difference-' + market_id).html(time);
         }
 
 
