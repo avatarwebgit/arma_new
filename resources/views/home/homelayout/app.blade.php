@@ -38,7 +38,11 @@
                 _token: "{{ csrf_token() }}",
             },
             success: function (msg) {
-
+                let difference = msg[1];
+                setInterval(function () {
+                    Timer(difference);
+                    difference = difference - 1;
+                }, 1000);
             }
         })
     }
@@ -106,9 +110,8 @@
         if (seconds < "10") {
             seconds = "0" + seconds;
         }
-        Hours.text(hours);
-        Minutes.text(minutes);
-        Seconds.text(seconds);
+        let time = hours + ':' + minutes + ':' + seconds;
+        $('#timer_section2').html(time);
     }
 
 
