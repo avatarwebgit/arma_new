@@ -283,6 +283,7 @@ class Controller extends BaseController
             }
             $market_values = 0;
             $market_is_open = 0;
+
             foreach ($today_markets_groups as $markets) {
                 foreach ($markets as $market) {
                     $market_status_index = $this->market_status_index($market, $market_is_open);
@@ -307,6 +308,7 @@ class Controller extends BaseController
                     broadcast(new MarketStatusUpdated($market_id, $difference, $timer,$status));
                 }
             }
+
             if ($market_is_open === 1) {
                 $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
             } else {
@@ -316,10 +318,20 @@ class Controller extends BaseController
             $close_market = Carbon::parse($close_market);
             $now = Carbon::now();
             $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
+
             broadcast(new MarketTableIndex($view_table));
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return response()->json([0, $e->getMessage()]);
         }
+    }
+
+    public function market_status_index($market, $market_is_open)
+    {
+        if ($market->status != 7) {
+            $market_is_open = 1;
+        }
+        return [$market_is_open];
     }
 
 }
