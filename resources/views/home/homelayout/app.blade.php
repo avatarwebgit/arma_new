@@ -28,21 +28,6 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
-
-    function StartCheck() {
-        $.ajax({
-            url: "{{ route('home.StartCheck') }}",
-            dataType: "json",
-            method: "get",
-            data: {
-                _token: "{{ csrf_token() }}",
-            },
-            success: function (msg) {
-
-            }
-        })
-    }
-
     var timerCountdown = 0;
 
     function makeTimer(endTime, market_is_open, now) {
@@ -111,15 +96,14 @@
         Seconds.text(seconds);
     }
 
-
     jQuery(document).ready(function ($) {
-        // StartCheck();
         $('.counter').counterUp({
             delay: 10,
             time: 1000
         });
 
     });
+
     $('.open_page_description').click(function () {
         let is_open = $(this).attr('data-open');
         let button_html = '';
@@ -149,36 +133,6 @@
         $('#scroll-container2').addClass('scroll-container');
     }
 
-
-    // function End_Market_Timer(endDate) {
-    //     var Hours = $('#Hours');
-    //     var Minutes = $('#Minutes');
-    //     var Seconds = $('#Seconds');
-    //
-    //
-    //     let myCountDown = new ysCountDown(endDate, function (remaining,finished) {
-    //         var message = "";
-    //         if (finished) {
-    //             message = "Expired";
-    //             Hours.text('00');
-    //             Minutes.text('00');
-    //             Seconds.text('00');
-    //         } else {
-    //             if (remaining.seconds < 10) {
-    //                 remaining.seconds = '0' + remaining.seconds;
-    //             }
-    //             if (remaining.minutes < 10) {
-    //                 remaining.minutes = '0' + remaining.minutes;
-    //             }
-    //             if (remaining.hours < 10) {
-    //                 remaining.hours = '0' + remaining.hours;
-    //             }
-    //             Hours.text(remaining.hours);
-    //             Minutes.text(remaining.minutes);
-    //             Seconds.text(remaining.seconds);
-    //         }
-    //     });
-    // }
 
     function MarketOnline(id, now) {
         now = new Date(now).getTime();

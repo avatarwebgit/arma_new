@@ -20,12 +20,6 @@
             @php
                 $row_color='black';
             @endphp
-            @if(\Carbon\Carbon::parse($market->date)<\Carbon\Carbon::tomorrow())
-                @php
-                    $row_color='blue';
-                @endphp
-
-            @endif
             <tr style="color: {{ $row_color }} !important;" id="market-{{ $market->id }}"
                 data-status="{{ $market->status }}"
                 data-difference="{{ $market->difference }}"
@@ -55,9 +49,9 @@
                 <td>
                     {{ \Carbon\Carbon::parse($market->date_time)->format('Y-m-d') }}
                 </td>
-{{--                <td id="market-time-{{ $market->id }}">--}}
-{{--                    {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}--}}
-{{--                </td>--}}
+                {{--                <td id="market-time-{{ $market->id }}">--}}
+                {{--                    {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}--}}
+                {{--                </td>--}}
                 <td>
                     {{ $market->status }}
                 </td>
@@ -77,16 +71,16 @@
                     <table class="table-striped table_in_table" style="width: 100%">
                         <tr>
                             <td class="text-center">
-                                <span class="text-bold" >Specification</span>
-                                <span >Available</span>
+                                <span class="text-bold">Specification</span>
+                                <span>Available</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Contract Type</span>
-                                <span > {{ $market->SalesForm->price_type }}</span>
+                                <span class="text-bold">Contract Type</span>
+                                <span> {{ $market->SalesForm->price_type }}</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Offer Price</span>
-                                <span >
+                                <span class="text-bold">Offer Price</span>
+                                <span>
                                     @auth
                                         Available
                                     @else
@@ -97,16 +91,16 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                <span class="text-bold" >Partial Shipment</span>
-                                <span >{{ $market->SalesForm->partial_shipment }}</span>
+                                <span class="text-bold">Partial Shipment</span>
+                                <span>{{ $market->SalesForm->partial_shipment }}</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Supplier</span>
-                                <span >{{ $market->SalesForm->company_type }}</span>
+                                <span class="text-bold">Supplier</span>
+                                <span>{{ $market->SalesForm->company_type }}</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Peyment Term</span>
-                                <span >
+                                <span class="text-bold">Peyment Term</span>
+                                <span>
                                     @auth
                                         Available
                                     @else
@@ -117,12 +111,12 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                <span class="text-bold" >Insurance</span>
-                                <span >Available</span>
+                                <span class="text-bold">Insurance</span>
+                                <span>Available</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Target Market</span>
-                                <span >
+                                <span class="text-bold">Target Market</span>
+                                <span>
                                     @auth
                                         {{ $market->SalesForm->target_market }}
                                     @else
@@ -132,8 +126,8 @@
                             </td>
 
                             <td class="text-center">
-                                <span class="text-bold" >Delivery Date</span>
-                                <span >
+                                <span class="text-bold">Delivery Date</span>
+                                <span>
                                     @auth
                                         Available
                                     @else
@@ -144,14 +138,14 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                <span class="text-bold" >Min Order</span>
-                                <span >
+                                <span class="text-bold">Min Order</span>
+                                <span>
                                    {{ $market->SalesForm->min_order }}
                                 </span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Inspection</span>
-                                <span >
+                                <span class="text-bold">Inspection</span>
+                                <span>
                                     @auth
                                         {{ $market->SalesForm->quality_quantity_inspection }}
                                     @else
@@ -160,8 +154,8 @@
                                 </span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Documents</span>
-                                <span >
+                                <span class="text-bold">Documents</span>
+                                <span>
                                    @auth
                                         Available
                                     @else
@@ -178,17 +172,40 @@
     @foreach($markets_groups as $markets)
 
         @foreach($markets->sortby('time') as $key=>$market)
-            <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
             @php
-                $row_color='black';
+                if ($market->status == 1){
+                    $statusText = '<span>Waiting To Open</span>';
+                   $color = '#cbcb18';
+                }
+                if ($market->status == 2){
+                     $statusText = '<span>Ready to open</span>';
+                     $color = '#8a8a00';
+                }
+                if ($market->status == 3){
+                     $color = '#1f9402';
+                  $statusText = '<span>Opening</span>';
+                }
+                if ($market->status == 4){
+                     $color = '#135e00';
+                     $statusText = '<span>Quotation 1/2</span>';
+                }
+                if ($market->status == 5){
+                     $color = '#104800';
+                     $statusText = '<span>Quotation 2/2</span>';
+                }
+                if ($market->status == 6){
+                     $color = '#0a2a00';
+                     $statusText = '<span>Competition</span>';
+                }
+                if ($market->status == 7){
+                     $color = '#ff0707';
+                     $statusText = '<span>Close</span>';
+                }
             @endphp
-            @if(\Carbon\Carbon::parse($market->date)<\Carbon\Carbon::tomorrow())
-                @php
-                    $row_color='blue';
-                @endphp
+            <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
 
-            @endif
-            <tr style="color: {{ $row_color }} !important;" id="market-{{ $market->id }}"
+
+            <tr style="color: {{ $color }} !important;" id="market-{{ $market->id }}"
                 data-status="{{ $market->status }}"
                 data-difference="{{ $market->difference }}"
                 data-now="{{ $now }}"
@@ -229,11 +246,11 @@
                                 <!--logo or anything put here -->
                             </div>
                         </div>
-{{--                        <span id="market-time-{{ $market->id }}" style="margin-top: 10px;margin-left: 10px">--}}
-{{--                            {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}--}}
-{{--                        </span>--}}
+                        {{--                        <span id="market-time-{{ $market->id }}" style="margin-top: 10px;margin-left: 10px">--}}
+                        {{--                            {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}--}}
+                        {{--                        </span>--}}
                         <span style="margin-top: 10px;margin-left: 10px">
-                            {{ $market->status }}
+                            {!! $statusText !!}
                         </span>
                     </div>
 
@@ -255,16 +272,16 @@
                     <table class="table_in_table" style="width: 100%">
                         <tr>
                             <td class="text-center">
-                                <span class="text-bold" >Specification</span>
-                                <span >Available</span>
+                                <span class="text-bold">Specification</span>
+                                <span>Available</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Contract Type</span>
-                                <span > {{ $market->SalesForm->price_type }}</span>
+                                <span class="text-bold">Contract Type</span>
+                                <span> {{ $market->SalesForm->price_type }}</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Offer Price</span>
-                                <span >
+                                <span class="text-bold">Offer Price</span>
+                                <span>
                                     @auth
                                         Available
                                     @else
@@ -275,16 +292,16 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                <span class="text-bold" >Partial Shipment</span>
-                                <span >{{ $market->SalesForm->partial_shipment }}</span>
+                                <span class="text-bold">Partial Shipment</span>
+                                <span>{{ $market->SalesForm->partial_shipment }}</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Supplier</span>
-                                <span >{{ $market->SalesForm->company_type }}</span>
+                                <span class="text-bold">Supplier</span>
+                                <span>{{ $market->SalesForm->company_type }}</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Peyment Term</span>
-                                <span >
+                                <span class="text-bold">Peyment Term</span>
+                                <span>
                                     @auth
                                         Available
                                     @else
@@ -295,12 +312,12 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                <span class="text-bold" >Insurance</span>
-                                <span >Available</span>
+                                <span class="text-bold">Insurance</span>
+                                <span>Available</span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Target Market</span>
-                                <span >
+                                <span class="text-bold">Target Market</span>
+                                <span>
                                     @auth
                                         {{ $market->SalesForm->target_market }}
                                     @else
@@ -310,8 +327,8 @@
                             </td>
 
                             <td class="text-center">
-                                <span class="text-bold" >Delivery Date</span>
-                                <span >
+                                <span class="text-bold">Delivery Date</span>
+                                <span>
                                     @auth
                                         Available
                                     @else
@@ -322,14 +339,14 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                <span class="text-bold" >Min Order</span>
-                                <span >
+                                <span class="text-bold">Min Order</span>
+                                <span>
                                    {{ $market->SalesForm->min_order }}
                                 </span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Inspection</span>
-                                <span >
+                                <span class="text-bold">Inspection</span>
+                                <span>
                                     @auth
                                         {{ $market->SalesForm->quality_quantity_inspection }}
                                     @else
@@ -338,8 +355,8 @@
                                 </span>
                             </td>
                             <td class="text-center">
-                                <span class="text-bold" >Documents</span>
-                                <span >
+                                <span class="text-bold">Documents</span>
+                                <span>
                                    @auth
                                         Available
                                     @else
