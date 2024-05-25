@@ -13,6 +13,7 @@
                 let market_id = e.market_id;
                 let difference = e.difference;
                 let timer = e.timer;
+                console.log('pppppppppppppppppp');
                 $('#market-difference-' + market_id).html(timer);
             });
         window.Echo.channel('change-sales-offer')
