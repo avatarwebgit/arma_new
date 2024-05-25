@@ -3,11 +3,18 @@
 @section('script')
     <script type="module">
         $(document).ready(function () {
-            GetMarket({{ $market->id }});
+            {{--GetMarket({{ $market->id }});--}}
             {{--let now = '{{ $now }}';--}}
             {{--now = new Date(now).getTime();--}}
             {{--MarketOnline({{ $market->id }}, now);--}}
         });
+        window.Echo.channel('market-status-updated')
+            .listen('MarketStatusUpdated', function (e) {
+                let market_id = e.market_id;
+                let difference = e.difference;
+                let timer = e.timer;
+                $('#market-difference-' + market_id).html(timer);
+            });
         window.Echo.channel('change-sales-offer')
             .listen('ChangeSaleOffer', function (e) {
                 let market_id = e.market_id;
@@ -15,7 +22,7 @@
             });
         window.Echo.channel('market-setting-updated-channel')
             .listen('MarketTimeUpdated', function (e) {
-                GetMarket({{ $market->id }}, e.now);
+                {{--GetMarket({{ $market->id }}, e.now);--}}
             });
         window.Echo.channel('new_bid_created')
             .listen('NewBidCreated', function (e) {

@@ -8,11 +8,7 @@
                 let view_table = e.view_table;
                 $('#market_table').html(view_table);
             });
-        window.Echo.channel('market-status-updated')
-            .listen('MarketStatusUpdated', function (e) {
-                let market_id = e.market_id;
-                let difference = e.difference;
-            });
+
         window.Echo.channel('market-index-result-channel')
             .listen('MarketIndexResult', function (e) {
                 let timer = e.timer;
