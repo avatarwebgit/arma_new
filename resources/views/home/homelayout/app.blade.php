@@ -112,7 +112,7 @@
         }
         let time = hours + ':' + minutes + ':' + seconds;
         $('#timer_section2').html('');
-        $('#timer_section2').text(time);
+        $('#timer_section2').html('<div class="clock">'+time+'</div>');
     }
 
 
