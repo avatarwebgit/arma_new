@@ -38,11 +38,7 @@
                 _token: "{{ csrf_token() }}",
             },
             success: function (msg) {
-                let difference = msg[1];
-                setInterval(function () {
-                    Timer(difference);
-                    difference = difference - 1;
-                }, 1000);
+
             }
         })
     }
@@ -110,16 +106,14 @@
         if (seconds < "10") {
             seconds = "0" + seconds;
         }
-        let time = hours + ':' + minutes + ':' + seconds;
-        $('#timer_section2').html('');
-        $('#timer_section2').html('<div class="clock">'+time+'</div>');
+        Hours.text(hours);
+        Minutes.text(minutes);
+        Seconds.text(seconds);
     }
 
 
     jQuery(document).ready(function ($) {
-        setTimeout(function () {
-            StartCheck();
-        }, 3000);
+        // StartCheck();
         $('.counter').counterUp({
             delay: 10,
             time: 1000
