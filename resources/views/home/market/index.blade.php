@@ -44,26 +44,23 @@
         function waiting_to_open(status, id) {
             deactive_bid();
             let statusText = '<span>Waiting To Open</span>';
-            let change_color = 0;
             let color = '#cbcb18';
-            change_market_status(status, change_color, color, statusText, id)
+            change_market_status(status, color, statusText, id)
         }
 
         function ready_to_open(status, id) {
             deactive_bid();
             let statusText = '<span>Ready to open</span>';
-            let change_color = 1;
             let color = '#8a8a00';
-            change_market_status(status, change_color, color, statusText, id)
+            change_market_status(status, color, statusText, id)
         }
 
         function opening(status, id) {
             close_bid_deposit(id);
             active_bid();
             let color = '#1f9402';
-            let change_color = 1;
             let statusText = '<span>Opening</span>';
-            change_market_status(status, change_color, color, statusText, id)
+            change_market_status(status, color, statusText, id)
         }
 
         function Quotation_1_2(status, id) {
@@ -71,9 +68,8 @@
             close_bid_deposit(id);
             active_bid();
             let color = '#135e00';
-            let change_color = 1;
             let statusText = '<span>Quotation 1/2</span>';
-            change_market_status(status, change_color, color, statusText, id)
+            change_market_status(status, color, statusText, id)
         }
 
         function Quotation_2_2(status, id) {
@@ -81,9 +77,8 @@
             close_bid_deposit(id);
             active_bid();
             let color = '#104800';
-            let change_color = 1;
             let statusText = '<span>Quotation 2/2</span>';
-            change_market_status(status, change_color, color, statusText, id)
+            change_market_status(status, color, statusText, id)
         }
 
         function Competition(status, id, step) {
@@ -93,9 +88,8 @@
             remove_function();
             Competition_Bid_buttons();
             let color = '#0a2a00';
-            let change_color = 1;
             let statusText = '<span>Competition</span>';
-            change_market_status(status, change_color, color, statusText, id)
+            change_market_status(status, color, statusText, id)
         }
 
         function Stop(status, id) {
@@ -103,9 +97,8 @@
             remove_function();
             deactive_bid();
             let color = '#ff0707';
-            let change_color = 1;
             let statusText = '<span>Close</span>';
-            change_market_status(status, change_color, color, statusText, id);
+            change_market_status(status, color, statusText, id);
         }
 
         function close_bid_deposit(id) {
@@ -118,12 +111,9 @@
             animation_main_div.removeClass('d-none');
             animation_main_div.addClass('d-none');
             $('#previous_status-' + id).val(status);
-
-            if (change_color) {
-                $('#market-' + id).css('color', color);
-                $('.status-box').css('color', color);
-                $('.circle_timer').css('background', color);
-            }
+            $('#market-' + id).css('color', color);
+            $('.status-box').css('color', color);
+            $('.circle_timer').css('background', color);
             $('#market-status-' + id).html(statusText);
             if (status != 1) {
                 $('#market-time-' + id).html(statusText);
