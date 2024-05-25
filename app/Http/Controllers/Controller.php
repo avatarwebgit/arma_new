@@ -33,7 +33,7 @@ class Controller extends BaseController
         $startTime = Carbon::parse($date_time);
         $now = Carbon::now();
 
-        $time_to_close_bid_deposit=$startTime->copy()->addMinutes(-120);
+        $time_to_close_bid_deposit = $startTime->copy()->addMinutes(-120);
 
         $benchmark1 = $startTime->copy()->addMinutes(-$ready_to_duration);
         $benchmark2 = $startTime;
@@ -44,7 +44,7 @@ class Controller extends BaseController
         $bids = $market->Bids;
         if ($force_determine_status == 0) {
             if ($market->status == 7) {
-                return [0, $market->status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time,$time_to_close_bid_deposit];
+                return [0, $market->status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time, $time_to_close_bid_deposit];
             }
         }
 
@@ -101,12 +101,12 @@ class Controller extends BaseController
             $difference = 0;
             $status = 7;
         }
-        $market->status=$status;
-        if ($market->isDirty()){
+        $market->status = $status;
+        if ($market->isDirty()) {
             $market->save();
         }
 //        broadcast(new MarketStatusUpdated($market->id,$difference));
-        return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time,$time_to_close_bid_deposit];
+        return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time, $time_to_close_bid_deposit];
     }
 
     public function convertTime($seconds)
@@ -121,15 +121,17 @@ class Controller extends BaseController
 
     public function StartCheck()
     {
-        $create_index_timer=$this->create_index_timer();
-        $timer=$create_index_timer['timer'];
-        $market_status=$create_index_timer['market_status'];
+        $create_index_timer = $this->create_index_timer();
+        $timer = $create_index_timer['timer'];
+        $market_status = $create_index_timer['market_status'];
 //        $total_trade_value=$create_index_timer['total_trade_value'];
-        $difference=$create_index_timer['difference'];
-        broadcast(new MarketIndexResult($timer, $market_status, $difference));
+        $difference = $create_index_timer['difference'];
+        return response()->json([1, $difference]);
+//        broadcast(new MarketIndexResult($timer, $market_status, $difference));
     }
 
-    function create_index_timer(){
+    function create_index_timer()
+    {
         $now = Carbon::now();
         $close_market = $this->close_market_today();
         $close_market = Carbon::parse($close_market);
@@ -141,8 +143,8 @@ class Controller extends BaseController
             $status_text = 'Close';
         }
 
-        $timer=$this->Timer($difference);
-        $market_status=view('home.timer.market_status',compact('status_text'))->render();
+        $timer = $this->Timer($difference);
+        $market_status = view('home.timer.market_status', compact('status_text'))->render();
 
 //        $yesterday = Carbon::yesterday();
 //        $tomorrow = Carbon::tomorrow();
@@ -155,9 +157,9 @@ class Controller extends BaseController
 //        }
 //        $total_trade_value=view('home.timer.total_trade_value',compact('market_values'))->render();
         return [
-            'timer'=>$timer,
-            'market_status'=>$market_status,
-            'difference'=>$difference,
+            'timer' => $timer,
+            'market_status' => $market_status,
+            'difference' => $difference,
         ];
     }
 
