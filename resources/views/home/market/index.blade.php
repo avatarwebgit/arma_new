@@ -14,10 +14,126 @@
                 let difference = e.difference;
                 let timer = e.timer;
                 let status = e.status;
+                console.log(status);
+                let price_step = 10;
                 $('#market-difference-' + market_id).html(timer);
-                $('#market-status-' + market_id).html(status);
-                console.log('ooooooooooo');
+                if (status == 1) {
+                    waiting_to_open(status, market_id);
+                }
+                if (status == 2) {
+                    ready_to_open(status, market_id);
+                }
+                if (status == 3) {
+                    opening(status, market_id);
+                }
+                if (status == 4) {
+                    Quotation_1_2(status, market_id);
+                }
+                if (status == 5) {
+                    Quotation_2_2(status, market_id);
+                }
+                if (status == 6) {
+                    Competition(status, market_id, price_step);
+                }
+                if (status == 7) {
+                    Stop(status, market_id);
+                }
+
             });
+
+        function waiting_to_open(status, id) {
+            deactive_bid();
+            let statusText = '<span>Waiting To Open</span>';
+            let change_color = 0;
+            let color = '#cbcb18';
+            change_market_status(status, change_color, color, statusText, id)
+        }
+
+        function ready_to_open(status, id) {
+            deactive_bid();
+            let statusText = '<span>Ready to open</span>';
+            let change_color = 1;
+            let color = '#8a8a00';
+            change_market_status(status, change_color, color, statusText, id)
+        }
+
+        function opening(status, id) {
+            close_bid_deposit(id);
+            active_bid();
+            let color = '#1f9402';
+            let change_color = 1;
+            let statusText = '<span>Opening</span>';
+            change_market_status(status, change_color, color, statusText, id)
+        }
+
+        function Quotation_1_2(status, id) {
+            remove_function();
+            close_bid_deposit(id);
+            active_bid();
+            let color = '#135e00';
+            let change_color = 1;
+            let statusText = '<span>Quotation 1/2</span>';
+            change_market_status(status, change_color, color, statusText, id)
+        }
+
+        function Quotation_2_2(status, id) {
+            remove_function();
+            close_bid_deposit(id);
+            active_bid();
+            let color = '#104800';
+            let change_color = 1;
+            let statusText = '<span>Quotation 2/2</span>';
+            change_market_status(status, change_color, color, statusText, id)
+        }
+
+        function Competition(status, id, step) {
+            close_bid_deposit(id);
+            $('#bid_price').attr('onkeyup', 'step_price_competition(this,event)');
+            $('#bid_price').attr('step', step);
+            remove_function();
+            Competition_Bid_buttons();
+            let color = '#0a2a00';
+            let change_color = 1;
+            let statusText = '<span>Competition</span>';
+            change_market_status(status, change_color, color, statusText, id)
+        }
+
+        function Stop(status, id) {
+            close_bid_deposit(id);
+            remove_function();
+            deactive_bid();
+            let color = '#ff0707';
+            let change_color = 1;
+            let statusText = '<span>Close</span>';
+            change_market_status(status, change_color, color, statusText, id);
+        }
+
+        function close_bid_deposit(id) {
+            $('#bid_deposit_section-' + id).addClass('bg-inactive');
+            $('#bid_deposit_section-' + id).find('input').prop('disabled', true);
+        }
+
+        function change_market_status(status, change_color, color, statusText, id) {
+            let animation_main_div = $('#market-time-parent-' + id).find('.animation_main_div');
+            animation_main_div.removeClass('d-none');
+            animation_main_div.addClass('d-none');
+            $('#previous_status-' + id).val(status);
+
+            if (change_color) {
+                $('#market-' + id).css('color', color);
+                $('.status-box').css('color', color);
+                $('.circle_timer').css('background', color);
+            }
+            $('#market-status-' + id).html(statusText);
+            if (status != 1) {
+                $('#market-time-' + id).html(statusText);
+            }
+            if (status == 2 || status == 3 || status == 4 || status == 5) {
+                animation_main_div.removeClass('d-none');
+            }
+            sales_offer_buttons(status);
+        }
+
         window.Echo.channel('change-sales-offer')
             .listen('ChangeSaleOffer', function (e) {
                 let market_id = e.market_id;
