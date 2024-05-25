@@ -76,7 +76,7 @@ class MarketController extends Controller
         ]);
         $market = Market::create($request->all());
         $this->statusTimeMarket($market, 1);
-        $now=Carbon::now();
+        $now = Carbon::now();
         $this->StartCheck();
         $this->broadcastMarket($market);
         session()->flash('success', 'New Market Created Successfully');
@@ -545,20 +545,21 @@ class MarketController extends Controller
 
     private function broadcastMarket($market)
     {
-        $result = $this->statusTimeMarket($market);
-        $market['difference'] = $result[0];
-        $market['status'] = $result[1];
-        $market['benchmark1'] = $result[2];
-        $market['benchmark2'] = $result[3];
-        $market['benchmark3'] = $result[4];
-        $market['benchmark4'] = $result[5];
-        $market['benchmark5'] = $result[6];
-        $market['benchmark6'] = $result[7];
-        $market['date_time'] = $result[8];
-        $market_id = $market->id;
-        $difference = $result[0];
-        $timer = $this->MarketTimer($difference);
-        $status = $market['status'];
-        broadcast(new MarketStatusUpdated($market_id, $difference, $timer,$status));
+//        $result = $this->statusTimeMarket($market);
+//        $market['difference'] = $result[0];
+//        $market['status'] = $result[1];
+//        $market['benchmark1'] = $result[2];
+//        $market['benchmark2'] = $result[3];
+//        $market['benchmark3'] = $result[4];
+//        $market['benchmark4'] = $result[5];
+//        $market['benchmark5'] = $result[6];
+//        $market['benchmark6'] = $result[7];
+//        $market['date_time'] = $result[8];
+//        $market_id = $market->id;
+//        $difference = $result[0];
+//        $timer = $this->MarketTimer($difference);
+//        $status = $market['status'];
+//        broadcast(new MarketStatusUpdated($market_id, $difference, $timer,$status));
+        $this->today_market_status();
     }
 }
