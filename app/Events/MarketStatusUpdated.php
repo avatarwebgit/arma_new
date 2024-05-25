@@ -19,11 +19,12 @@ class MarketStatusUpdated implements  ShouldBroadcast
      *
      * @return void
      */
-    public $market_id,$difference;
-    public function __construct($market_id,$difference)
+    public $market_id,$difference,$timer;
+    public function __construct($market_id,$difference,$timer)
     {
         $this->market_id = $market_id;
         $this->difference = $difference;
+        $this->timer = $timer;
     }
 
     /**
