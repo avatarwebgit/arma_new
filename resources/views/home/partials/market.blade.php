@@ -175,7 +175,7 @@
             @php
                 if ($market->status == 1){
                     $statusText = '<span>Waiting To Open</span>';
-                   $color = '#cbcb18';
+                   $color = '#3b3b00';
                 }
                 if ($market->status == 2){
                      $statusText = '<span>Ready to open</span>';
