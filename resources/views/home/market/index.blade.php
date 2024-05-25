@@ -44,7 +44,7 @@
         function waiting_to_open(status, id) {
             deactive_bid();
             let statusText = '<span>Waiting To Open</span>';
-            let color = '#cbcb18';
+            let color = '#3b3b00';
             change_market_status(status, color, statusText, id)
         }
 
@@ -106,7 +106,7 @@
             $('#bid_deposit_section-' + id).find('input').prop('disabled', true);
         }
 
-        function change_market_status(status, change_color, color, statusText, id) {
+        function change_market_status(status, color, statusText, id) {
             let animation_main_div = $('#market-time-parent-' + id).find('.animation_main_div');
             animation_main_div.removeClass('d-none');
             animation_main_div.addClass('d-none');
@@ -115,9 +115,6 @@
             $('.status-box').css('color', color);
             $('.circle_timer').css('background', color);
             $('#market-status-' + id).html(statusText);
-            if (status != 1) {
-                $('#market-time-' + id).html(statusText);
-            }
             if (status == 2 || status == 3 || status == 4 || status == 5) {
                 animation_main_div.removeClass('d-none');
             }
