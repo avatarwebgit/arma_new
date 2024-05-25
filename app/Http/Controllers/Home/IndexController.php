@@ -536,61 +536,11 @@ class IndexController extends Controller
             $now = Carbon::now();
             $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
             broadcast(new MarketTableIndex($view_table));
-           //timer in market page
-            $yesterday = Carbon::yesterday();
-            $tomorrow = Carbon::tomorrow();
-            $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
-            foreach ($today_markets_groups as $markets) {
-                foreach ($markets as $market) {
-                    $result = $this->statusTimeMarket($market);
-                    $market['difference'] = $result[0];
-                    $market['status'] = $result[1];
-                    $market['benchmark1'] = $result[2];
-                    $market['benchmark2'] = $result[3];
-                    $market['benchmark3'] = $result[4];
-                    $market['benchmark4'] = $result[5];
-                    $market['benchmark5'] = $result[6];
-                    $market['benchmark6'] = $result[7];
-                    $market['date_time'] = $result[8];
-                    $market_id=$market->id;
-                    $difference=$result[0];
-                    $timer = $this->MarketTimer($difference);
-                    broadcast(new MarketStatusUpdated($market_id,$difference,$timer));
-                }
-            }
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
     }
-    public function today_market_difference()
-    {
-        try {
-            $yesterday = Carbon::yesterday();
-            $tomorrow = Carbon::tomorrow();
-            $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
-            foreach ($today_markets_groups as $markets) {
-                foreach ($markets as $market) {
-                    $result = $this->statusTimeMarket($market);
-                    $market['difference'] = $result[0];
-                    $market['status'] = $result[1];
-                    $market['benchmark1'] = $result[2];
-                    $market['benchmark2'] = $result[3];
-                    $market['benchmark3'] = $result[4];
-                    $market['benchmark4'] = $result[5];
-                    $market['benchmark5'] = $result[6];
-                    $market['benchmark6'] = $result[7];
-                    $market['date_time'] = $result[8];
-                    $market_id=$market->id;
-                    $difference=$result[0];
-                    $timer = $this->MarketTimer($difference);
-                    broadcast(new MarketStatusUpdated($market_id,$difference,$timer));
-                }
-            }
 
-        } catch (\Exception $e) {
-            return response()->json([0, $e->getMessage()]);
-        }
-    }
 
 
 }
