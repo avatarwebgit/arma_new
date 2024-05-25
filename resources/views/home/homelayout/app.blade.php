@@ -111,7 +111,8 @@
             seconds = "0" + seconds;
         }
         let time = hours + ':' + minutes + ':' + seconds;
-        $('#timer_section2').html(time);
+        $('#timer_section2').html('');
+        $('#timer_section2').text(time);
     }
 
 
