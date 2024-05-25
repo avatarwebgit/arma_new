@@ -16,6 +16,7 @@
                 let status = e.status;
                 $('#market-difference-' + market_id).html(timer);
                 $('#market-status-' + market_id).html(status);
+                console.log('ooooooooooo');
             });
         window.Echo.channel('change-sales-offer')
             .listen('ChangeSaleOffer', function (e) {
