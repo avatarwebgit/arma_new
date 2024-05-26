@@ -179,6 +179,7 @@
                 }
             })
         }
+
         function hide_result(market_id) {
             $('#final_status_section-' + market_id).hide();
             $('#Winner_Modal').modal('hide');
@@ -186,10 +187,7 @@
 
         function show_win_modal() {
             $('#Winner_Modal').modal('show');
-        }
-
-        function removeWinnerModal(){
-            $('#Winner_Modal').remove();
+            $('#Winner_Modal').removeAttr('id');
         }
     </script>
 @endsection
@@ -413,9 +411,9 @@
                                         )
                                     </th>
 
-                                        <th class="text-center text-white w-50">
-                                            user id
-                                        </th>
+                                    <th class="text-center text-white w-50">
+                                        user id
+                                    </th>
 
                                     <th class="text-center text-white w-50">
                                         Quantity_win
@@ -452,24 +450,6 @@
     <div id="benchmark_info">
         @include('home.market.benchmark_info',compact('now'))
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="Winner_Modal" tabindex="-1"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">You Win</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span onclick="removeWinnerModal()" aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Congratulations!
-                    <br>
-                    You Win
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('home.market.winner_modal')
 
 @endsection
