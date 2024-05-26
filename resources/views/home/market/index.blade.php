@@ -180,12 +180,16 @@
             })
         }
         function hide_result(market_id) {
-            $('#final_status_section_table-' + market_id).html('');
+            $('#final_status_section-' + market_id).hide();
             $('#Winner_Modal').modal('hide');
         }
 
         function show_win_modal() {
             $('#Winner_Modal').modal('show');
+        }
+
+        function removeWinnerModal(){
+            $('#Winner_Modal').remove();
         }
     </script>
 @endsection
