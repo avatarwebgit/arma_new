@@ -83,20 +83,20 @@ class Controller extends BaseController
             $difference = $benchmark6->diffInSeconds($now);
             $status = 6;
             //exists min-price
-//            $bid_touch_price = $market->Bids()->where('price', '=>', $market->min_price)->exists();
-//            if (!$bid_touch_price) {
-//                $status = 7;
-//                $difference = 0;
-//            }
+            $bid_touch_price = $market->Bids()->where('price', '=', $market->min_price)->orWhere('price', '>', $market->min_price)->exists();
+            if (!$bid_touch_price) {
+                $status = 7;
+                $difference = 0;
+            }
 
 
             //check if total quality < $market->quantity
             $bids_quantity = $market->Bids()->sum('quantity');
             $market_quantity = $market->quantity;
-//            if (!$bids_quantity > $market_quantity) {
-//                $status = 7;
-//                $difference = 0;
-//            }
+            if (!$bids_quantity > $market_quantity) {
+                $status = 7;
+                $difference = 0;
+            }
         } else {
             //close
             $difference = 0;
