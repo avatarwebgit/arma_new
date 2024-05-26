@@ -90,13 +90,12 @@ class Controller extends BaseController
                 $status = 7;
                 $difference = 0;
             }
-
-
             //check if total quality < $market->quantity
             $bids_quantity = $market->Bids()->sum('quantity');
             $market_quantity = $market->quantity;
             if (!$bids_quantity > $market_quantity) {
-                $status = 7;
+                //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
+                $status = 8;
                 $difference = 0;
             }
         } else {

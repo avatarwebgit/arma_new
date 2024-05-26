@@ -38,6 +38,9 @@
                 if (status == 7) {
                     Stop(status, market_id);
                 }
+                if (status == 8) {
+                    ّFinished(status, market_id);
+                }
 
             });
 
@@ -98,6 +101,15 @@
             deactive_bid();
             let color = '#ff0707';
             let statusText = '<span>Close</span>';
+            change_market_status(status, color, statusText, id);
+        }
+
+        function Finished(status, id){
+            close_bid_deposit(id);
+            remove_function();
+            deactive_bid();
+            let color = '#0a0a0a';
+            let statusText = '<span>Complete</span>';
             change_market_status(status, color, statusText, id);
         }
 

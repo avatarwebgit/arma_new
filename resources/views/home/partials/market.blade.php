@@ -197,7 +197,7 @@
                      $color = '#0a2a00';
                      $statusText = '<span>Competition</span>';
                 }
-                if ($market->status == 7){
+                if ($market->status == 7 or $market->status == 8){
                      $color = '#ff0707';
                      $statusText = '<span>Close</span>';
                 }
