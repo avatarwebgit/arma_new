@@ -14,10 +14,7 @@
                 let difference = e.difference;
                 let timer = e.timer;
                 let status = e.status;
-                console.log(status);
-                console.log('///////////////////');
-                console.log(status);
-                let price_step = 10;
+                let price_step = e.step;
                 $('#market-difference-' + market_id).html(timer);
                 if (status == 1) {
                     waiting_to_open(status, market_id);

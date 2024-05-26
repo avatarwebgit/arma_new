@@ -143,7 +143,7 @@ class MarketHomeController extends Controller
                 'status' => $status
             ]);
 
-            broadcast(new MarketStatusUpdated($market_id));
+
             return response()->json($status);
         } catch (\Exception $e) {
             dd($e->getMessage());

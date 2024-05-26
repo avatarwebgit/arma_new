@@ -235,7 +235,8 @@ class Controller extends BaseController
                     $difference = $result[0];
                     $timer = $this->MarketTimer($difference);
                     $status = $market['status'];
-                    broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status));
+                    $step=$market->step_price_competition;
+                    broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status,$step));
                 }
             }
 
