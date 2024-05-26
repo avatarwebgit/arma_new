@@ -176,6 +176,7 @@
                 if ($market->status == 1){
                     $statusText = '<span>Waiting To Open</span>';
                    $color = '#3b3b00';
+                   $statusText=$market->time;
                 }
                 if ($market->status == 2){
                      $statusText = '<span>Ready to open</span>';
