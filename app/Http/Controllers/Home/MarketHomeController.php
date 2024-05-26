@@ -25,10 +25,10 @@ class MarketHomeController extends Controller
             return redirect()->route('home.index');
         }
         $market_status = $market->status;
-        if ($market_status == 4 or $market_status == 5 or $market_status == 6 ) {
-            session()->flash('market_open_finished','You Just Enter The Market When Is Open');
-            return redirect()->route('home.index');
-        }
+//        if ($market_status == 4 or $market_status == 5 or $market_status == 6 ) {
+//            session()->flash('market_open_finished','You Just Enter The Market When Is Open');
+//            return redirect()->route('home.index');
+//        }
         $result = $this->statusTimeMarket($market);
         $market['difference'] = $result[0];
         $market['status'] = $result[1];
