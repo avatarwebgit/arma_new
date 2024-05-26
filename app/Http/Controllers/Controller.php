@@ -91,17 +91,17 @@ class Controller extends BaseController
                 $difference = 0;
             }
             //check if total quality < $market->quantity
-            $bids_quantity = $market->Bids()->sum('quantity');
-            $market_quantity = $market->quantity;
-            if (!$bids_quantity > $market_quantity) {
-                //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
-                $status = 8;
-                $difference = 0;
-            }
+            $finish_step=$this->finish_step($market,$status,$difference);
+            $status=$finish_step['status'];
+            $difference=$finish_step['difference'];
         } else {
             //close
             $difference = 0;
             $status = 7;
+            //check if total quality < $market->quantity
+            $finish_step=$this->finish_step($market,$status,$difference);
+            $status=$finish_step['status'];
+            $difference=$finish_step['difference'];
         }
         $market->status = $status;
         if ($market->isDirty()) {
@@ -109,6 +109,20 @@ class Controller extends BaseController
         }
 //        broadcast(new MarketStatusUpdated($market->id,$difference));
         return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time, $time_to_close_bid_deposit];
+    }
+
+    public function finish_step($market,$status,$difference){
+        $bids_quantity = $market->Bids()->sum('quantity');
+        $market_quantity = $market->SalesForm->max_quantity;
+        if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
+            //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
+            $status = 8;
+            $difference = 0;
+        }
+        return [
+            'status'=>$status,
+            'difference'=>$difference,
+        ];
     }
 
     public function convertTime($seconds)
