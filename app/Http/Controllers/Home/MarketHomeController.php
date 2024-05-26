@@ -25,10 +25,10 @@ class MarketHomeController extends Controller
             return redirect()->route('home.index');
         }
         $market_status = $market->status;
-//        if ($market_status == 4 or $market_status == 5 or $market_status == 6 ) {
-//            session()->flash('market_open_finished','You Just Enter The Market When Is Open');
-//            return redirect()->route('home.index');
-//        }
+        if ($market_status == 4 or $market_status == 5 or $market_status == 6 ) {
+            session()->flash('market_open_finished','You Just Enter The Market When Is Open');
+            return redirect()->route('home.index');
+        }
         $result = $this->statusTimeMarket($market);
         $market['difference'] = $result[0];
         $market['status'] = $result[1];
@@ -42,8 +42,7 @@ class MarketHomeController extends Controller
         $bids = $market->Bids()->orderBy('price', 'desc')->take(10)->get();
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        $now = Carbon::now()->timezone('ASia/Tehran');
-        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions', 'now'));
+        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions'));
     }
 
     public function GetMarket(Request $request)
