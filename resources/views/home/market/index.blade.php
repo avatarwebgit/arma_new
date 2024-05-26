@@ -39,8 +39,9 @@
                     Stop(status, market_id);
                 }
                 if (status == 8) {
-                    ّFinished(status, market_id);
+                    Finished(status, market_id);
                 }
+
 
             });
 
@@ -104,7 +105,7 @@
             change_market_status(status, color, statusText, id);
         }
 
-        function Finished(status, id){
+        function Finished(status, id) {
             close_bid_deposit(id);
             remove_function();
             deactive_bid();
