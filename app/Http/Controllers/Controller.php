@@ -83,7 +83,7 @@ class Controller extends BaseController
             $difference = $benchmark6->diffInSeconds($now);
             $status = 6;
             //exists min-price
-            $bid_touch_price = $market->Bids()->where('price', '>=', $market->min_price)->exists();
+            $bid_touch_price = $market->Bids()->where('price', '=>', $market->min_price)->exists();
             if (!$bid_touch_price) {
                 $status = 7;
                 $difference = 0;
