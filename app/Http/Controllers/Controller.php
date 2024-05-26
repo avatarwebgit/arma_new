@@ -106,7 +106,6 @@ class Controller extends BaseController
             $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
             if (!$bid_touch_price) {
                 $status = 7;
-
             } else {
                 $status = 8;
             }
