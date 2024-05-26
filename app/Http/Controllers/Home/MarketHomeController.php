@@ -505,6 +505,11 @@ class MarketHomeController extends Controller
                     $is_win = 0;
                 }
 
+                if ($request->failed == 1) {
+                    $is_win = 0;
+                    $quantity_win = 0;
+                }
+
 
                 $bid->update([
                     'quantity_win' => $quantity_win,
