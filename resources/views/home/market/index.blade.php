@@ -264,76 +264,7 @@
             })
         }
 
-        function Bid(market_id) {
-            $('#accept_term_alert').hide();
-            $('#bid_validate_error').hide();
-            let is_checked = $('#CheckTermCondition_' + market_id).is(':checked');
-            if (!is_checked) {
-                window.location.href = "#CheckTermCondition_" + market_id;
-                $('#accept_term_alert').show();
-                return;
-            }
-            $('.error_text').hide();
-            let price = $('#bid_price-'+market_id).val();
-            let quantity = $('#bid_quantity-'+market_id).val();
-            $.ajax({
-                url: "{{  route('home.bid_market') }}",
-                data: {
-                    price: price,
-                    quantity: quantity,
-                    market: market_id,
-                    _token: "{{ csrf_token() }}",
-                },
-                dataType: 'json',
-                method: "post",
 
-                beforeSend: function () {
-                    $('#bid_button-'+market_id).prop('disabled', true);
-                },
-
-                success: function (msg) {
-                    if (msg[0] === 'error') {
-                        alert(msg[1]);
-                    }
-                    if (msg[0] === 'price_quantity') {
-                        $('#bid_validate_error').text(msg[2]);
-                        $('#bid_validate_error').show();
-                        // $('#bid_' + msg[1] + '_error').text(msg[2]);
-                        // $('#bid_' + msg[1] + '_error').show();
-                    }
-                    if (msg[0] === 'alert') {
-                        alert(msg[2]);
-                    }
-
-                    if (msg[0] == 1) {
-                        $('#bid_price-'+market_id).val(' ');
-                        $('#bid_quantity-'+market_id).val(' ');
-                        refreshBidTable(market_id);
-                    }
-
-                    $('#bid_button').prop('disabled', false);
-                },
-                error: function (msg) {
-                    if (msg.responseJSON.errors) {
-                        let errors = msg.responseJSON.errors;
-                        let error_text = '';
-                        let j = 0;
-                        $.each(errors, function (i, val) {
-                            if (j == 0) {
-                                error_text = '<i class="fa-solid fa-triangle-exclamation mr-2"></i>' + val;
-                            } else {
-                                error_text = error_text + '<br>' + '<i class="fa-solid fa-triangle-exclamation mr-2"></i>' + val;
-                            }
-                            j++;
-                            $('#bid_validate_error').html(error_text);
-                            $('#bid_validate_error').show();
-                        })
-                    }
-                    active_bid(market_id);
-                }
-            })
-
-        }
     </script>
 @endsection
 
