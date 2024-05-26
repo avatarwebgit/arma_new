@@ -93,7 +93,7 @@ class Controller extends BaseController
             //check if total quality < $market->quantity
             $bids_quantity = $market->Bids()->sum('quantity');
             $market_quantity = $market->quantity;
-            if ($bids_quantity <= $market_quantity) {
+            if (!$bids_quantity > $market_quantity) {
                 $status = 7;
                 $difference = 0;
             }
