@@ -18,7 +18,6 @@
                 console.log('///////////////////');
                 console.log(status);
                 let price_step = 10;
-                hide_result(market_id);
                 $('#market-difference-' + market_id).html(timer);
                 if (status == 1) {
                     waiting_to_open(status, market_id);
@@ -49,6 +48,7 @@
             });
 
         function waiting_to_open(status, id) {
+            hide_result(id);
             deactive_bid();
             let statusText = '<span>Waiting To Open</span>';
             let color = '#3b3b00';
@@ -56,6 +56,7 @@
         }
 
         function ready_to_open(status, id) {
+            hide_result(id);
             deactive_bid();
             let statusText = '<span>Ready to open</span>';
             let color = '#8a8a00';
@@ -63,6 +64,7 @@
         }
 
         function opening(status, id) {
+            hide_result(id);
             close_bid_deposit(id);
             active_bid();
             let color = '#1f9402';
@@ -71,6 +73,7 @@
         }
 
         function Quotation_1_2(status, id) {
+            hide_result(id);
             remove_function();
             close_bid_deposit(id);
             active_bid();
@@ -80,6 +83,7 @@
         }
 
         function Quotation_2_2(status, id) {
+            hide_result(id);
             remove_function();
             close_bid_deposit(id);
             active_bid();
