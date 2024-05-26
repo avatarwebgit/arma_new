@@ -113,6 +113,7 @@
             deactive_bid();
             let color = '#0a0a0a';
             let statusText = '<span>Complete</span>';
+            show_market_result(id);
             change_market_status(status, color, statusText, id);
         }
 
@@ -151,54 +152,32 @@
                 refreshBidTable(market_id);
             });
 
-        {{--function GetMarket(market_id, now) {--}}
-        {{--    $.ajax({--}}
-        {{--        url: "{{ route('home.GetMarket') }}",--}}
-        {{--        data: {--}}
-        {{--            _token: "{{ csrf_token() }}",--}}
-        {{--            market_id: market_id,--}}
-        {{--        },--}}
-        {{--        method: 'post',--}}
-        {{--        dataType: 'json',--}}
+        function show_market_result(id) {
+            $.ajax({
+                url: "{{ route('home.get_market_bit_result') }}",
+                data: {
+                    id: id,
+                },
+                dataType: "json",
+                method: "POST",
+                success: function (msg) {
+                    if (msg[0] == 1) {
+                        let is_winner = msg[2];
+                        if (is_winner) {
+                            show_win_modal();
+                        }
+                        $('#final_status_section_table-' + id).html(msg[1]);
+                        $('#final_status_section-' + id).show();
+                    } else {
+                        console.log('error');
+                    }
+                }
+            })
+        }
 
-        {{--        success: function (msg) {--}}
-        {{--            let table_view = msg[1];--}}
-        {{--            $('#benchmark_info').html(table_view);--}}
-        {{--            let difference = msg[3];--}}
-        {{--            // console.log(difference);--}}
-        {{--            // MarketOnline(market_id, now);--}}
-        {{--            setInterval(function () {--}}
-        {{--                MarketTimer(difference, market_id);--}}
-        {{--                difference = difference - 1;--}}
-        {{--                if (difference == 0) {--}}
-        {{--                    GetMarket();--}}
-        {{--                }--}}
-        {{--            }, 1000);--}}
-
-        {{--        }--}}
-        {{--    })--}}
-        {{--}--}}
-
-        {{--function MarketTimer(diffSeconds, market_id) {--}}
-        {{--    let timeLeft = diffSeconds;--}}
-        {{--    var days = Math.floor(timeLeft / 86400);--}}
-        {{--    var hours = Math.floor((timeLeft - (days * 86400)) / 3600);--}}
-        {{--    var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);--}}
-        {{--    var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));--}}
-        {{--    if (hours < "10") {--}}
-        {{--        hours = "0" + hours;--}}
-        {{--    }--}}
-        {{--    if (minutes < "10") {--}}
-        {{--        minutes = "0" + minutes;--}}
-        {{--    }--}}
-        {{--    if (seconds < "10") {--}}
-        {{--        seconds = "0" + seconds;--}}
-        {{--    }--}}
-        {{--    let time = hours + ':' + minutes + ':' + seconds;--}}
-        {{--    $('#market-difference-' + market_id).html(time);--}}
-        {{--}--}}
-
-
+        function show_win_modal() {
+            $('#Winner_Modal').modal('show');
+        }
     </script>
 @endsection
 
