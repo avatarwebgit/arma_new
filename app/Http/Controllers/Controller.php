@@ -93,7 +93,7 @@ class Controller extends BaseController
             //check if total quality < $market->quantity
             $bids_quantity = $market->Bids()->sum('quantity');
             $market_quantity = $market->SalesForm->max_quantity;
-            if ($bids_quantity > $market_quantity or $bids_quantity == $market_quantity) {
+            if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
                 //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
                 $status = 8;
                 $difference = 0;
