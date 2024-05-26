@@ -142,7 +142,7 @@
         function sales_offer_buttons(status,id) {
             // let seller_quantity = $('#seller_quantity-'+id);
             let seller_price = $('#seller_price-'+id);
-            let seller_button = $('#seller_button'+id);
+            let seller_button = $('#seller_button-'+id);
             if (status == 1) {
                 // seller_quantity.prop('disabled', true);
                 seller_price.prop('disabled', true);
