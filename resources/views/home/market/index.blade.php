@@ -399,11 +399,11 @@
                                     <th class="text-center text-white w-50">Price ( {{ $market->SalesForm->currency }}
                                         )
                                     </th>
-                                    @if(auth()->user()->hasRole('admin'))
+
                                         <th class="text-center text-white w-50">
-                                            user
+                                            user id
                                         </th>
-                                    @endif
+
                                     <th class="text-center text-white w-50">
                                         Quantity_win
                                     </th>

@@ -45,6 +45,7 @@ class MarketHomeController extends Controller
         $now = Carbon::now()->timezone('ASia/Tehran');
         return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions', 'now'));
     }
+
     public function GetMarket(Request $request)
     {
         $market_id = $request->market_id;
@@ -59,12 +60,13 @@ class MarketHomeController extends Controller
         $market['benchmark5'] = $result[6];
         $market['benchmark6'] = $result[7];
 
-        $difference=$market['difference'];
-        $now=time();
-        $now=Carbon::parse($now);
+        $difference = $market['difference'];
+        $now = time();
+        $now = Carbon::parse($now);
         $view = view('home.market.benchmark_info', compact('market'))->render();
-        return response()->json([1, $view,$now,$difference]);
+        return response()->json([1, $view, $now, $difference]);
     }
+
     public function refreshMarketTable()
     {
         $ready_to_duration = MarketSetting::where('key', 'ready_to_duration')->pluck('value')->first();
@@ -84,6 +86,7 @@ class MarketHomeController extends Controller
             return response()->json([0, $e->getMessage()]);
         }
     }
+
     public function refreshMarket(Request $request)
     {
         $market = Market::where('id', $request->market)->first();
@@ -98,6 +101,7 @@ class MarketHomeController extends Controller
 
         return response()->json([1, $market->Status->title, $time, $market->Status->color, $market_is_open]);
     }
+
     public function refreshBidTable(Request $request)
     {
         $market = Market::where('id', $request->market)->first();
@@ -110,12 +114,14 @@ class MarketHomeController extends Controller
         $view = view('home.market.bidder_table', compact('bids'))->render();
         return response()->json([1, $view]);
     }
+
     public function refreshSellerTable(Request $request)
     {
         $market = Market::find($request->market);
         $view = view('home.market.seller_table', compact('market'))->render();
         return response()->json([1, $view]);
     }
+
     public function change_market_status(Request $request)
     {
         try {
@@ -144,6 +150,7 @@ class MarketHomeController extends Controller
             dd($e->getMessage());
         }
     }
+
     public function check_market_status_for_continue(Request $request)
     {
         try {
@@ -167,7 +174,7 @@ class MarketHomeController extends Controller
             if ($status == 6) {
 
                 $bids_touch_price = $market->Bids()->where('price', '>=', $price)->get();
-                if (count($bids_touch_price)==0){
+                if (count($bids_touch_price) == 0) {
                     $market->update([
                         'status' => 7
                     ]);
@@ -198,6 +205,7 @@ class MarketHomeController extends Controller
             dd($e->getMessage());
         }
     }
+
     public function seller_change_offer(Request $request)
     {
         try {
@@ -240,6 +248,7 @@ class MarketHomeController extends Controller
             dd($e->getMessage());
         }
     }
+
     public function bid_market(Request $request)
     {
 
@@ -308,6 +317,7 @@ class MarketHomeController extends Controller
             return response()->json([0, 'error']);
         }
     }
+
     public function remove_bid(Request $request)
     {
         try {
@@ -322,6 +332,7 @@ class MarketHomeController extends Controller
 
 
     }
+
     function Opening_roles($request, $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market)
     {
         if ($request['price'] < $base_price) {
@@ -416,6 +427,7 @@ class MarketHomeController extends Controller
 
         return [0 => true];
     }
+
     public function Bid_Permissions()
     {
         //            //user must login
@@ -436,6 +448,7 @@ class MarketHomeController extends Controller
         }
         return ['response' => true, 'message' => 'success'];
     }
+
     public function get_market_bit_result(Request $request)
     {
         try {
@@ -466,7 +479,7 @@ class MarketHomeController extends Controller
                 if ($market->pre_status == 5) {
                     $price = $market->offer_price;
                     $best_bid = $market->Bids()->max('price');
-
+                    $is_win = 0;
                     if ($best_bid == $price) {
                         if ($bid->price == $best_bid) {
                             $quantites = $market->Bids()->where('price', $best_bid)->get();
@@ -482,18 +495,17 @@ class MarketHomeController extends Controller
                             } else {
                                 $is_win = 1;
                             }
-                        } else {
-
-                            $is_win = 0;
                         }
-
-                    } else {
-                        $is_win = 0;
                     }
                 }
                 if ($is_win == 1) {
                     $win_user_ids[] = $bid->user_id;
                 }
+
+                if ($quantity_win < $market->SalesForm->min_order) {
+                    $is_win = 0;
+                }
+
 
                 $bid->update([
                     'quantity_win' => $quantity_win,
@@ -522,6 +534,7 @@ class MarketHomeController extends Controller
         }
 
     }
+
     public function get_market_info(Request $request)
     {
         try {
@@ -539,6 +552,7 @@ class MarketHomeController extends Controller
         }
 
     }
+
     public function BidWinner($market)
     {
         $sort_ids = [];
