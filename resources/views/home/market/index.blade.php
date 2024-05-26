@@ -130,13 +130,54 @@
             animation_main_div.addClass('d-none');
             $('#previous_status-' + id).val(status);
             $('#market-' + id).css('color', color);
-            $('.status-box').css('color', color);
-            $('.circle_timer').css('background', color);
+            $('#status-box-' + id).css('color', color);
+            $('market-difference-'+id).css('background', color);
             $('#market-status-' + id).html(statusText);
             if (status == 2 || status == 3 || status == 4 || status == 5) {
                 animation_main_div.removeClass('d-none');
             }
-            sales_offer_buttons(status);
+            sales_offer_buttons(status,id);
+        }
+
+        function sales_offer_buttons(status,id) {
+            // let seller_quantity = $('#seller_quantity-'+id);
+            let seller_price = $('#seller_price-'+id);
+            let seller_button = $('#seller_button'+id);
+            if (status == 1) {
+                // seller_quantity.prop('disabled', true);
+                seller_price.prop('disabled', true);
+                seller_button.prop('disabled', true);
+            }
+            if (status == 2) {
+                // seller_quantity.prop('disabled', true);
+                seller_price.prop('disabled', true);
+                seller_button.prop('disabled', true);
+            }
+            if (status == 3) {
+                // seller_quantity.prop('disabled', true);
+                seller_price.prop('disabled', true);
+                seller_button.prop('disabled', true);
+            }
+            if (status == 4) {
+                // seller_quantity.prop('disabled', false);
+                seller_price.prop('disabled', true);
+                seller_button.prop('disabled', false);
+            }
+            if (status == 5) {
+                // seller_quantity.prop('disabled', true);
+                seller_price.prop('disabled', false);
+                seller_button.prop('disabled', false);
+            }
+            if (status == 6) {
+                // seller_quantity.prop('disabled', true);
+                seller_price.prop('disabled', true);
+                seller_button.prop('disabled', true);
+            }
+            if (status == 7) {
+                // seller_quantity.prop('disabled', true);
+                seller_price.prop('disabled', true);
+                seller_button.prop('disabled', true);
+            }
         }
 
         window.Echo.channel('change-sales-offer')
@@ -185,6 +226,113 @@
         function show_win_modal() {
             $('#Winner_Modal').modal('show');
             $('#Winner_Modal').removeAttr('id');
+        }
+
+        function Offer(market_id) {
+            $('.error_text').hide();
+            let status = $('#previous_status-'+market_id).val();
+            let price_is_disable = $('#seller_price-'+market_id).attr('disabled');
+            let price = $('#seller_price-'+market_id).val();
+            if (price_is_disable) {
+                price = 'disabled';
+            }
+            // let quantity = $('#seller_quantity-'+market_id).val();
+            // let quantity_is_disable = $('#seller_quantity-'+market_id).attr('disabled');
+            // if (quantity_is_disable) {
+            //     quantity = 'disabled';
+            // }
+            $.ajax({
+                url: "{{  route('home.seller_change_offer') }}",
+                data: {
+                    price: price,
+                    // quantity: quantity,
+                    market_id: market_id,
+                    status: status,
+                    _token: "{{ csrf_token() }}",
+                },
+                dataType: 'json',
+                method: "post",
+                success: function (msg) {
+                    if (msg) {
+                        if (msg[1] == 'error') {
+                            alert(msg[2]);
+                        }else {
+                            $('#seller_price-'+market_id).val('');
+                        }
+                    }
+                },
+            })
+        }
+
+        function Bid(market_id) {
+            $('#accept_term_alert').hide();
+            $('#bid_validate_error').hide();
+            let is_checked = $('#CheckTermCondition_' + market_id).is(':checked');
+            if (!is_checked) {
+                window.location.href = "#CheckTermCondition_" + market_id;
+                $('#accept_term_alert').show();
+                return;
+            }
+            $('.error_text').hide();
+            let price = $('#bid_price-'+market_id).val();
+            let quantity = $('#bid_quantity-'+market_id).val();
+            $.ajax({
+                url: "{{  route('home.bid_market') }}",
+                data: {
+                    price: price,
+                    quantity: quantity,
+                    market: market_id,
+                    _token: "{{ csrf_token() }}",
+                },
+                dataType: 'json',
+                method: "post",
+
+                beforeSend: function () {
+                    $('#bid_button-'+market_id).prop('disabled', true);
+                },
+
+                success: function (msg) {
+                    if (msg[0] === 'error') {
+                        alert(msg[1]);
+                    }
+                    if (msg[0] === 'price_quantity') {
+                        $('#bid_validate_error').text(msg[2]);
+                        $('#bid_validate_error').show();
+                        // $('#bid_' + msg[1] + '_error').text(msg[2]);
+                        // $('#bid_' + msg[1] + '_error').show();
+                    }
+                    if (msg[0] === 'alert') {
+                        alert(msg[2]);
+                    }
+
+                    if (msg[0] == 1) {
+                        $('#bid_price-'+market_id).val(' ');
+                        $('#bid_quantity-'+market_id).val(' ');
+                        refreshBidTable(market_id);
+                    }
+
+                    $('#bid_button').prop('disabled', false);
+                },
+                error: function (msg) {
+                    if (msg.responseJSON.errors) {
+                        let errors = msg.responseJSON.errors;
+                        let error_text = '';
+                        let j = 0;
+                        $.each(errors, function (i, val) {
+                            if (j == 0) {
+                                error_text = '<i class="fa-solid fa-triangle-exclamation mr-2"></i>' + val;
+                            } else {
+                                error_text = error_text + '<br>' + '<i class="fa-solid fa-triangle-exclamation mr-2"></i>' + val;
+                            }
+                            j++;
+                            $('#bid_validate_error').html(error_text);
+                            $('#bid_validate_error').show();
+                        })
+                    }
+                    active_bid();
+                }
+            })
+
         }
     </script>
 @endsection
@@ -260,7 +408,7 @@
                 </h5>
             </div>
             <div class="col-12 col-md-12 col-xl-8 mb-1">
-                <h5 class="text-center status-box">
+                <h5 id="status-box-{{ $market->id }}" class="text-center">
                     Step : <span id="market-status-{{ $market->id }}"></span>
                 </h5>
                 <span id="market-difference-{{ $market->id }}" class="circle_timer">
@@ -330,26 +478,17 @@
                         @auth
                             @if(auth()->user()->hasRole('seller') or auth()->user()->hasRole('admin'))
                                 <div class="row mb-4">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12">
                                         <div class="mt-3 text-center">
-                                            <label for="seller_quantity">Quantity( {{ $market->SalesForm->unit }}
+                                            <label for="seller_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }}
                                                 )</label>
-                                            <input disabled id="seller_quantity" type="text" class="form-control"
-                                                   name="seller_quantity">
-                                            <p id="seller_quantity_error" class="error_text">please enter quantity</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="mt-3 text-center">
-                                            <label for="seller_price">Price( {{ $market->SalesForm->currency }}
-                                                )</label>
-                                            <input disabled id="seller_price" type="text" class="form-control"
-                                                   name="seller_quantity">
+                                            <input disabled id="seller_price-{{ $market->id }}" type="text" class="form-control"
+                                                   name="seller_quantity-{{ $market->id }}">
                                             <p id="seller_price_error" class="error_text">please enter price</p>
                                         </div>
                                     </div>
                                     <div class="col-12 text-center mt-3">
-                                        <button disabled id="seller_button" onclick="Offer({{ $market->id }})"
+                                        <button disabled id="seller_button-{{ $market->id }}" onclick="Offer({{ $market->id }})"
                                                 class="btn btn-secondary pt-1 pb-1 pr-5 pl-5">Offer
                                         </button>
                                     </div>
@@ -367,20 +506,20 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3 text-center">
-                                        <label for="bid_quantity">Quantity( {{ $market->SalesForm->unit }} )</label>
-                                        <input disabled id="bid_quantity" type="text" class="form-control">
+                                        <label for="bid_quantity-{{ $market->id }}">Quantity( {{ $market->SalesForm->unit }} )</label>
+                                        <input disabled id="bid_quantity-{{ $market->id }}" type="text" class="form-control">
                                         <p id="bid_quantity_error" class="error_text">please enter quantity</p>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3 text-center">
-                                        <label for="bid_price">Price( {{ $market->SalesForm->currency }} )</label>
-                                        <input disabled id="bid_price" class="form-control">
+                                        <label for="bid_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }} )</label>
+                                        <input disabled id="bid_price-{{ $market->id }}" class="form-control">
                                         <p id="bid_price_error" class="error_text">please enter price</p>
                                     </div>
                                 </div>
                                 <div class="col-12 text-center mt-3">
-                                    <button id="bid_button" disabled onclick="Bid({{ $market->id }})"
+                                    <button id="bid_button-{{ $market->id }}" disabled onclick="Bid({{ $market->id }})"
                                             class="btn btn-secondary pt-1 pb-1 pr-5 pl-5">Bid
                                     </button>
                                 </div>
