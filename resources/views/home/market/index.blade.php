@@ -46,7 +46,7 @@
 
         function waiting_to_open(status, id) {
             hide_result(id);
-            deactive_bid();
+            deactive_bid(id);
             let statusText = '<span>Waiting To Open</span>';
             let color = '#3b3b00';
             change_market_status(status, color, statusText, id)
@@ -54,7 +54,7 @@
 
         function ready_to_open(status, id) {
             hide_result(id);
-            deactive_bid();
+            deactive_bid(id);
             let statusText = '<span>Ready to open</span>';
             let color = '#8a8a00';
             change_market_status(status, color, statusText, id)
@@ -63,7 +63,7 @@
         function opening(status, id) {
             hide_result(id);
             close_bid_deposit(id);
-            active_bid();
+            active_bid(id);
             let color = '#1f9402';
             let statusText = '<span>Opening</span>';
             change_market_status(status, color, statusText, id)
@@ -73,7 +73,7 @@
             hide_result(id);
             remove_function();
             close_bid_deposit(id);
-            active_bid();
+            active_bid(id);
             let color = '#135e00';
             let statusText = '<span>Quotation 1/2</span>';
             change_market_status(status, color, statusText, id)
@@ -83,7 +83,7 @@
             hide_result(id);
             remove_function();
             close_bid_deposit(id);
-            active_bid();
+            active_bid(id);
             let color = '#104800';
             let statusText = '<span>Quotation 2/2</span>';
             change_market_status(status, color, statusText, id)
@@ -94,7 +94,7 @@
             $('#bid_price').attr('onkeyup', 'step_price_competition(this,event)');
             $('#bid_price').attr('step', step);
             remove_function();
-            Competition_Bid_buttons();
+            Competition_Bid_buttons(id);
             let color = '#0a2a00';
             let statusText = '<span>Competition</span>';
             change_market_status(status, color, statusText, id)
@@ -103,7 +103,7 @@
         function Stop(status, id) {
             close_bid_deposit(id);
             remove_function();
-            deactive_bid();
+            deactive_bid(id);
             let color = '#ff0707';
             let statusText = '<span>Close</span>';
             change_market_status(status, color, statusText, id);
@@ -112,7 +112,7 @@
         function Finished(status, id) {
             close_bid_deposit(id);
             remove_function();
-            deactive_bid();
+            deactive_bid(id);
             let color = '#0a0a0a';
             let statusText = '<span>Complete</span>';
             show_market_result(id);
@@ -329,7 +329,7 @@
                             $('#bid_validate_error').show();
                         })
                     }
-                    active_bid();
+                    active_bid(market_id);
                 }
             })
 

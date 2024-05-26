@@ -436,50 +436,50 @@
     {{--    }--}}
     {{--}--}}
 
-    function active_bid() {
-        $('#bid_quantity').prop('disabled', false);
-        $('#bid_quantity').addClass('btn-success');
+    function active_bid(id) {
+        $('#bid_quantity-'+id).prop('disabled', false);
+        $('#bid_quantity-'+id).addClass('btn-success');
 
-        $('#bid_price').prop('disabled', false);
-        $('#bid_price').addClass('btn-success');
+        $('#bid_price-'+id).prop('disabled', false);
+        $('#bid_price-'+id).addClass('btn-success');
 
-        $('#bid_button').prop('disabled', false);
-        $('#bid_button').addClass('btn-success');
-
-
-    }
-
-    function Competition_Bid_buttons() {
-        $('#bid_quantity').prop('disabled', true);
-        $('#bid_quantity').removeClass('btn-success');
-
-        $('#bid_price').prop('disabled', false);
-        $('#bid_price').addClass('btn-success');
-
-        $('#bid_button').prop('disabled', false);
-        $('#bid_button').addClass('btn-success');
+        $('#bid_button-'+id).prop('disabled', false);
+        $('#bid_button-'+id).addClass('btn-success');
 
 
     }
 
-    function deactive_bid() {
-        $('#bid_quantity').val(' ');
-        $('#bid_price').val(' ');
+    function Competition_Bid_buttons(id) {
+        $('#bid_quantity-'+id).prop('disabled', true);
+        $('#bid_quantity-'+id).removeClass('btn-success');
 
-        $('#bid_quantity').prop('disabled', true);
-        $('#bid_quantity').removeClass('btn-success');
+        $('#bid_price-'+id).prop('disabled', false);
+        $('#bid_price-'+id).addClass('btn-success');
 
-        $('#bid_price').prop('disabled', true);
-        $('#bid_price').removeClass('btn-success');
+        $('#bid_button-'+id).prop('disabled', false);
+        $('#bid_button-'+id).addClass('btn-success');
 
-        $('#bid_button').prop('disabled', true);
-        $('#bid_button').removeClass('btn-success');
+
+    }
+
+    function deactive_bid(id) {
+        $('#bid_quantity-'+id).val(' ');
+        $('#bid_price-'+id).val(' ');
+
+        $('#bid_quantity-'+id).prop('disabled', true);
+        $('#bid_quantity-'+id).removeClass('btn-success');
+
+        $('#bid_price-'+id).prop('disabled', true);
+        $('#bid_price-'+id).removeClass('btn-success');
+
+        $('#bid_button-'+id).prop('disabled', true);
+        $('#bid_button-'+id).removeClass('btn-success');
     }
 
 
 
-    function competition_bid_buttons() {
-        $('#bid_quantity').prop('disabled', true);
+    function competition_bid_buttons(id) {
+        $('#bid_quantity-'+id).prop('disabled', true);
     }
 
     function removeBid(bid_id) {
