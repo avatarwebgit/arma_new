@@ -18,6 +18,7 @@
                 console.log('///////////////////');
                 console.log(status);
                 let price_step = 10;
+                hide_result(market_id);
                 $('#market-difference-' + market_id).html(timer);
                 if (status == 1) {
                     waiting_to_open(status, market_id);
@@ -173,6 +174,10 @@
                     }
                 }
             })
+        }
+        function hide_result(market_id) {
+            $('#final_status_section_table-' + market_id).html('');
+            $('#Winner_Modal').modal('hide');
         }
 
         function show_win_modal() {
