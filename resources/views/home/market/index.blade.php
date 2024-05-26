@@ -445,7 +445,7 @@
     <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
 
     <div id="benchmark_info">
-        @include('home.market.benchmark_info',compact('now'))
+        @include('home.market.benchmark_info')
     </div>
     @include('home.market.winner_modal')
 
