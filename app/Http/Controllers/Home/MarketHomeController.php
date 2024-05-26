@@ -210,7 +210,7 @@ class MarketHomeController extends Controller
         try {
             $user_id = auth()->id();
             $price = $request->price;
-            $quantity = $request->quantity;
+//            $quantity = $request->quantity;
             $market_id = $request->market_id;
             $market = Market::where('id', $market_id)->first();
             $status = $market->status;
@@ -218,14 +218,14 @@ class MarketHomeController extends Controller
 //            if ($user_id != $market->user_id) {
 //                return response()->json([1, 'error','You Do Not Have Permission To Change Offer']);
 //            }
-            if ($status == '4') {
-                //quotation 1/2
-                $pre_max_quantity = $market->SalesForm->max_quantity;
-                if ($quantity <= $pre_max_quantity) {
-                    return response()->json([1, 'error', 'Just You Can Increase Quantity']);
-                }
-                $market->SalesForm()->update(['max_quantity' => $quantity]);
-            }
+//            if ($status == '4') {
+//                //quotation 1/2
+//                $pre_max_quantity = $market->SalesForm->max_quantity;
+//                if ($quantity <= $pre_max_quantity) {
+//                    return response()->json([1, 'error', 'Just You Can Increase Quantity']);
+//                }
+//                $market->SalesForm()->update(['max_quantity' => $quantity]);
+//            }
             if ($status == '5') {
                 //quotation 2/2
                 $pre_price = $market->offer_price;

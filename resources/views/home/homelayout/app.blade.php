@@ -476,74 +476,7 @@
         $('#bid_button').removeClass('btn-success');
     }
 
-    function Bid(market_id) {
-        $('#accept_term_alert').hide();
-        $('#bid_validate_error').hide();
-        let is_checked = $('#CheckTermCondition_' + market_id).is(':checked');
-        if (!is_checked) {
-            window.location.href = "#CheckTermCondition_" + market_id;
-            $('#accept_term_alert').show();
-            return;
-        }
-        $('.error_text').hide();
-        let price = $('#bid_price').val();
-        let quantity = $('#bid_quantity').val();
-        $.ajax({
-            url: "{{  route('home.bid_market') }}",
-            data: {
-                price: price,
-                quantity: quantity,
-                market: market_id,
-                _token: "{{ csrf_token() }}",
-            },
-            dataType: 'json',
-            method: "post",
 
-            beforeSend: function () {
-                $('#bid_button').prop('disabled', true);
-            },
-
-            success: function (msg) {
-                if (msg[0] === 'error') {
-                    alert(msg[1]);
-                }
-                if (msg[0] === 'price_quantity') {
-                    $('#bid_validate_error').text(msg[2]);
-                    $('#bid_validate_error').show();
-                    // $('#bid_' + msg[1] + '_error').text(msg[2]);
-                    // $('#bid_' + msg[1] + '_error').show();
-                }
-                if (msg[0] === 'alert') {
-                    alert(msg[2]);
-                }
-
-                if (msg[0] == 1) {
-                    refreshBidTable(market_id);
-                }
-
-                $('#bid_button').prop('disabled', false);
-            },
-            error: function (msg) {
-                if (msg.responseJSON.errors) {
-                    let errors = msg.responseJSON.errors;
-                    let error_text = '';
-                    let j = 0;
-                    $.each(errors, function (i, val) {
-                        if (j == 0) {
-                            error_text = '<i class="fa-solid fa-triangle-exclamation mr-2"></i>' + val;
-                        } else {
-                            error_text = error_text + '<br>' + '<i class="fa-solid fa-triangle-exclamation mr-2"></i>' + val;
-                        }
-                        j++;
-                        $('#bid_validate_error').html(error_text);
-                        $('#bid_validate_error').show();
-                    })
-                }
-                active_bid();
-            }
-        })
-
-    }
 
     function competition_bid_buttons() {
         $('#bid_quantity').prop('disabled', true);
@@ -565,39 +498,7 @@
         $('.remove_function').remove();
     }
 
-    function Offer(market_id) {
-        $('.error_text').hide();
-        let status = $('#previous_status').val();
-        let price_is_disable = $('#seller_price').attr('disabled');
-        let price = $('#seller_price').val()
-        if (price_is_disable) {
-            price = 'disabled';
-        }
-        let quantity = $('#seller_quantity').val();
-        let quantity_is_disable = $('#seller_quantity').attr('disabled');
-        if (quantity_is_disable) {
-            quantity = 'disabled';
-        }
-        $.ajax({
-            url: "{{  route('home.seller_change_offer') }}",
-            data: {
-                price: price,
-                quantity: quantity,
-                market_id: market_id,
-                status: status,
-                _token: "{{ csrf_token() }}",
-            },
-            dataType: 'json',
-            method: "post",
-            success: function (msg) {
-                if (msg) {
-                    if (msg[1] == 'error') {
-                        alert(msg[2]);
-                    }
-                }
-            },
-        })
-    }
+
 
     function countdownTimmer(timer2, color) {
         var interval = setInterval(function () {
@@ -622,46 +523,7 @@
         }, 1000);
     }
 
-    function sales_offer_buttons(status) {
-        let seller_quantity = $('#seller_quantity');
-        let seller_price = $('#seller_price');
-        let seller_button = $('#seller_button');
-        if (status == 1) {
-            seller_quantity.prop('disabled', true);
-            seller_price.prop('disabled', true);
-            seller_button.prop('disabled', true);
-        }
-        if (status == 2) {
-            seller_quantity.prop('disabled', true);
-            seller_price.prop('disabled', true);
-            seller_button.prop('disabled', true);
-        }
-        if (status == 3) {
-            seller_quantity.prop('disabled', true);
-            seller_price.prop('disabled', true);
-            seller_button.prop('disabled', true);
-        }
-        if (status == 4) {
-            seller_quantity.prop('disabled', false);
-            seller_price.prop('disabled', true);
-            seller_button.prop('disabled', false);
-        }
-        if (status == 5) {
-            seller_quantity.prop('disabled', true);
-            seller_price.prop('disabled', false);
-            seller_button.prop('disabled', false);
-        }
-        if (status == 6) {
-            seller_quantity.prop('disabled', true);
-            seller_price.prop('disabled', true);
-            seller_button.prop('disabled', true);
-        }
-        if (status == 7) {
-            seller_quantity.prop('disabled', true);
-            seller_price.prop('disabled', true);
-            seller_button.prop('disabled', true);
-        }
-    }
+
 
     function secondsToHms(d) {
         d = Number(d);
