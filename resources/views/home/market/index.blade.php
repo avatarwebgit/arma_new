@@ -40,6 +40,9 @@
                 if (status == 8) {
                     Finished(status, market_id);
                 }
+                if (status == 9) {
+                    No_Winner(status, market_id);
+                }
 
 
             });
@@ -116,7 +119,16 @@
             deactive_bid(id);
             let color = '#0a0a0a';
             let statusText = '<span>Complete</span>';
-            show_market_result(id);
+            show_market_result(id,0);
+            change_market_status(status, color, statusText, id);
+        }
+        function No_Winner(status, id) {
+            close_bid_deposit(id);
+            remove_function();
+            deactive_bid(id);
+            let color = '#c7aa14';
+            let statusText = '<span>FAILED</span>';
+            show_market_result(id,1);
             change_market_status(status, color, statusText, id);
         }
 
@@ -196,20 +208,18 @@
                 refreshBidTable(market_id);
             });
 
-        function show_market_result(id) {
+        function show_market_result(id,failed) {
             $.ajax({
                 url: "{{ route('home.get_market_bit_result') }}",
                 data: {
                     id: id,
+                    failed:failed,
                 },
                 dataType: "json",
                 method: "POST",
                 success: function (msg) {
                     if (msg[0] == 1) {
                         let is_winner = msg[2];
-                        if (is_winner) {
-                            show_win_modal();
-                        }
                         $('#final_status_section_table-' + id).html(msg[1]);
                         $('#final_status_section-' + id).show();
                     } else {

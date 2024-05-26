@@ -96,7 +96,7 @@ class Controller extends BaseController
             $market_min_price = intval($market_min_price);
             $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
             if (!$bid_touch_price) {
-                $status = 8;
+                $status = 9;
                 $difference = 0;
             }
 
@@ -107,7 +107,7 @@ class Controller extends BaseController
             $difference = 0;
             $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
             if (!$bid_touch_price) {
-                $status = 7;
+                $status = 9;
             } else {
                 $status = 8;
             }
