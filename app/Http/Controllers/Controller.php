@@ -65,7 +65,7 @@ class Controller extends BaseController
             $difference = $benchmark3->diffInSeconds($now);
 
         } elseif ($benchmark3 < $now and $now <= $benchmark4) {
-            //open(1/3)
+            //Q 1/2
             $status = 4;
             $difference = $benchmark4->diffInSeconds($now);
             //if no bid received market must be closed!
@@ -73,23 +73,23 @@ class Controller extends BaseController
                 $status = 7;
                 $difference = 0;
             }
+
+        } elseif ($benchmark4 < $now and $now <= $benchmark5) {
+            //Q 2/2
+            $status = 5;
+            $difference = $benchmark5->diffInSeconds($now);
+        } elseif ($benchmark5 < $now and $now <= $benchmark6) {
+            //Competition
+            $difference = $benchmark6->diffInSeconds($now);
+            $status = 6;
             //exists min-price
-//            $bid_touch_price = $market->Bids()->where('price', '>=', $market->min_price)->exists();
-            $bid_touch_price = true;
+            $bid_touch_price = $market->Bids()->where('price', '>=', $market->min_price)->exists();
             if (!$bid_touch_price) {
                 $status = 7;
                 $difference = 0;
             }
 
-        } elseif ($benchmark4 < $now and $now <= $benchmark5) {
-            //open(2/3)
-            $status = 5;
-            $difference = $benchmark5->diffInSeconds($now);
 
-        } elseif ($benchmark5 < $now and $now <= $benchmark6) {
-            //open(3/3)
-            $difference = $benchmark6->diffInSeconds($now);
-            $status = 6;
             //check if total quality < $market->quantity
             $bids_quantity = $market->Bids()->sum('quantity');
             $market_quantity = $market->quantity;
