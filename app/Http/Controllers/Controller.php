@@ -82,6 +82,14 @@ class Controller extends BaseController
             //Competition
             $difference = $benchmark6->diffInSeconds($now);
             $status = 6;
+            //exists min-price
+            $market_min_price = $market->offer_price;
+            $market_min_price = intval($market_min_price);
+            $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
+            if (!$bid_touch_price) {
+                $status = 7;
+                $difference = 0;
+            }
             //check if total quality < $market->quantity
             $bids_quantity = $market->Bids()->sum('quantity');
             $market_quantity = $market->SalesForm->max_quantity;
@@ -90,16 +98,6 @@ class Controller extends BaseController
                 $status = 8;
                 $difference = 0;
             }
-
-            //exists min-price
-            $market_min_price = $market->offer_price;
-            $market_min_price = intval($market_min_price);
-            $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
-            if (!$bid_touch_price) {
-                $status = 9;
-                $difference = 0;
-            }
-
         } else {
             //close
             $market_min_price = $market->offer_price;
@@ -107,7 +105,7 @@ class Controller extends BaseController
             $difference = 0;
             $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
             if (!$bid_touch_price) {
-                $status = 9;
+                $status = 7;
             } else {
                 $status = 8;
             }
