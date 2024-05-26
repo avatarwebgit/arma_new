@@ -228,41 +228,7 @@
             $('#Winner_Modal').removeAttr('id');
         }
 
-        function Offer(market_id) {
-            $('.error_text').hide();
-            let status = $('#previous_status-'+market_id).val();
-            let price_is_disable = $('#seller_price-'+market_id).attr('disabled');
-            let price = $('#seller_price-'+market_id).val();
-            if (price_is_disable) {
-                price = 'disabled';
-            }
-            // let quantity = $('#seller_quantity-'+market_id).val();
-            // let quantity_is_disable = $('#seller_quantity-'+market_id).attr('disabled');
-            // if (quantity_is_disable) {
-            //     quantity = 'disabled';
-            // }
-            $.ajax({
-                url: "{{  route('home.seller_change_offer') }}",
-                data: {
-                    price: price,
-                    // quantity: quantity,
-                    market_id: market_id,
-                    status: status,
-                    _token: "{{ csrf_token() }}",
-                },
-                dataType: 'json',
-                method: "post",
-                success: function (msg) {
-                    if (msg) {
-                        if (msg[1] == 'error') {
-                            alert(msg[2]);
-                        }else {
-                            $('#seller_price-'+market_id).val('');
-                        }
-                    }
-                },
-            })
-        }
+
 
 
     </script>
