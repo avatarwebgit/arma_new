@@ -53,6 +53,7 @@
         }
 
         function ready_to_open(status, id) {
+            close_bid_deposit(id);
             hide_result(id);
             deactive_bid(id);
             let statusText = '<span>Ready to open</span>';
