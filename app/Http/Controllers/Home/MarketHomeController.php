@@ -475,40 +475,41 @@ class MarketHomeController extends Controller
                         $remain_quantity = 0;
                     }
                 }
-                if ($market->pre_status == 5) {
-                    $price = $market->offer_price;
-                    $best_bid = $market->Bids()->max('price');
-                    $is_win = 0;
-                    if ($best_bid == $price) {
-                        if ($bid->price == $best_bid) {
-                            $quantites = $market->Bids()->where('price', $best_bid)->get();
-                            $quantites = $quantites->sum('quantity');
-                            $count_price = $market->Bids()->where('price', $best_bid)->count();
 
-                            if ($count_price > 1) {
-                                if ($max_quantity == $quantites) {
-                                    $is_win = 1;
-                                } else {
-                                    $is_win = 0;
-                                }
-                            } else {
+                $price = $market->offer_price;
+                $best_bid = $market->Bids()->max('price');
+                $is_win = 0;
+                if ($best_bid == $price) {
+                    if ($bid->price == $best_bid) {
+                        $quantites = $market->Bids()->where('price', $best_bid)->get();
+                        $quantites = $quantites->sum('quantity');
+                        $count_price = $market->Bids()->where('price', $best_bid)->count();
+
+                        if ($count_price > 1) {
+                            if ($max_quantity == $quantites) {
                                 $is_win = 1;
+                            } else {
+                                $is_win = 0;
                             }
+                        } else {
+                            $is_win = 1;
                         }
                     }
                 }
+
                 if ($is_win == 1) {
                     $win_user_ids[] = $bid->user_id;
                 }
-
+                //اگر تعداد کالا کمتر از مینیموم باشد بید بازنده است
                 if ($quantity_win < $market->SalesForm->min_order) {
                     $is_win = 0;
                 }
-
-                if ($request->failed == 1) {
+                //در هر صورتی اگر قیمت را تاچ نکرد بازنده است
+                if ($bid->price< $price){
                     $is_win = 0;
-                    $quantity_win = 0;
                 }
+
+
 
 
                 $bid->update([
