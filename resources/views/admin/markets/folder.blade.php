@@ -62,10 +62,18 @@
                                                     <td>
                                                         {{ $item->time }}
                                                     </td>
-                                                    <td id="market_status_{{ $item->id }}"
-                                                        style="color: {{ $item->Status->color }}">
-                                                        {{ $item->Status->title }}
-                                                    </td>
+                                                    @if($item->status==8 or $item->status==9)
+                                                        <td id="market_status_{{ $item->id }}"
+                                                            style="color: red">
+                                                            close
+                                                        </td>
+                                                    @else
+                                                        <td id="market_status_{{ $item->id }}"
+                                                            style="color: {{ $item->Status->color }}">
+
+                                                            {{ $item->Status->title }}
+                                                        </td>
+                                                    @endif
                                                     <td>
                                                         {{ $item->market_value }}
                                                     </td>
