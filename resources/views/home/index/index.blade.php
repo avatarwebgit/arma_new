@@ -196,8 +196,8 @@
         function startTime() {
             var dayOfWeek = moment().tz("Europe/London").format("dddd");
             let clock = moment().tz("Europe/London").format("ll");
-            let a = moment().tz("Europe/London").format("h:mm A");
-            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 12pt !important">' + clock + '</span><span class="ml-3">' + a + '</span>'
+            let a = moment().tz("Europe/London").format("h:mm a");
+            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 12pt !important">' + clock + '</span><span class="ml-3 timer-bold">' + a + ' GMT</span>'
             $('#time_now').html(time_now);
             t = setTimeout(function () {
                 startTime()
@@ -223,6 +223,10 @@
 
 @section('style')
     <style>
+        .timer-bold{
+            font-size: 14pt;;
+            font-weight: bold;
+        }
         @media screen and (max-width: 1200px) {
             #Market_Status_Text {
                 text-align: center !important;
