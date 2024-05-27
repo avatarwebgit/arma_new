@@ -302,7 +302,17 @@ class MarketHomeController extends Controller
             } else {
                 $tries = 1;
             }
-            $market_step = $market->step;
+
+            if ($market->status==6){
+                $market_step = $market->step;
+                $best_bid_price = $market->Bids()->orderBy('price', 'desc')->first()->price;
+                $min_price_acceptable=$best_bid_price+$market_step;
+                if ($request->price < $min_price_acceptable){
+                    $msg='min price you can enter is: '.$min_price_acceptable;
+                    return response()->json(['error', $msg]);
+                }
+            }
+
             BidHistory::create([
                 'user_id' => auth()->id(),
                 'market_id' => $request->market,
@@ -456,7 +466,7 @@ class MarketHomeController extends Controller
             $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
             $ids = $this->BidWinner($market);
             $bids = [];
-            $max_quantity = str_replace(',','',$market->SalesForm->max_quantity);
+            $max_quantity = str_replace(',', '', $market->SalesForm->max_quantity);
             $remain_quantity = $max_quantity;
             $win_user_ids = [];
             foreach ($ids as $key => $id) {
