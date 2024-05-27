@@ -435,13 +435,13 @@
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
-                                <tr>
-                                    <th class="text-center text-white w-50">Quantity( {{ $market->SalesForm->unit }})
+                                <tr class="d-flex justify-content-around">
+                                    <th class="text-center text-white">Quantity( {{ $market->SalesForm->unit }})
                                     </th>
-                                    <th class="text-center text-white w-50">Price ( {{ $market->SalesForm->currency }}
+                                    <th class="text-center text-white">Price ( {{ $market->SalesForm->currency }}
                                         )
                                     </th>
-                                    <th class="text-center text-white w-50">
+                                    <th class="text-center text-white">
                                         status
                                     </th>
                                 </tr>
