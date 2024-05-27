@@ -490,26 +490,26 @@ class MarketHomeController extends Controller
                     }
                 }
 
-                $price = $market->offer_price;
-                $best_bid = $market->Bids()->max('price');
-                $is_win = 1;
-                if ($best_bid == $price) {
-                    if ($bid->price == $best_bid) {
-                        $quantites = $market->Bids()->where('price', $best_bid)->get();
-                        $quantites = $quantites->sum('quantity');
-                        $count_price = $market->Bids()->where('price', $best_bid)->count();
-
-                        if ($count_price > 1) {
-                            if ($max_quantity == $quantites) {
-                                $is_win = 1;
-                            } else {
-                                $is_win = 0;
-                            }
-                        } else {
-                            $is_win = 1;
-                        }
-                    }
-                }
+//                $price = $market->offer_price;
+//                $best_bid = $market->Bids()->max('price');
+//                $is_win = 1;
+//                if ($best_bid == $price) {
+//                    if ($bid->price == $best_bid) {
+//                        $quantites = $market->Bids()->where('price', $best_bid)->get();
+//                        $quantites = $quantites->sum('quantity');
+//                        $count_price = $market->Bids()->where('price', $best_bid)->count();
+//
+//                        if ($count_price > 1) {
+//                            if ($max_quantity == $quantites) {
+//                                $is_win = 1;
+//                            } else {
+//                                $is_win = 0;
+//                            }
+//                        } else {
+//                            $is_win = 1;
+//                        }
+//                    }
+//                }
 
 
                 //اگر تعداد کالا کمتر از مینیموم باشد بید بازنده است
