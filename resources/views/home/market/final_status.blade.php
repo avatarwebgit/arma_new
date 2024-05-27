@@ -1,6 +1,6 @@
 @if(count($bids)>0)
     @foreach($bids as $item)
-        <tr class="d-flex justify-content-around">
+        <tr>
             {{--        <td class="text-center">{{ $item->quantity }}</td>--}}
             <td class="text-center">{{ $item->quantity_win }}</td>
             <td class="text-center">{{ $item->price }}</td>
