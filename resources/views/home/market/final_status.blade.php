@@ -10,7 +10,9 @@
                     <i class="fa fa-check-circle"></i>
                 </span>
             @else
-                -
+                <span class="text-danger">
+                    <i class="fa fa-times-circle"></i>
+                </span>
             @endif
     </tr>
 @endforeach
