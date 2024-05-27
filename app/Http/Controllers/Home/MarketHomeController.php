@@ -456,7 +456,7 @@ class MarketHomeController extends Controller
             $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
             $ids = $this->BidWinner($market);
             $bids = [];
-            $max_quantity = $market->SalesForm->max_quantity;
+            $max_quantity = str_replace(',','',$market->SalesForm->max_quantity);
             $remain_quantity = $max_quantity;
             $win_user_ids = [];
             foreach ($ids as $key => $id) {
