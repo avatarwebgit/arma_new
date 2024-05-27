@@ -303,15 +303,7 @@ class MarketHomeController extends Controller
                 $tries = 1;
             }
 
-            if ($market->status==6){
-                $market_step = $market->step;
-                $best_bid_price = $market->Bids()->orderBy('price', 'desc')->first()->price;
-                $min_price_acceptable=$best_bid_price+$market_step;
-                if ($request->price < $min_price_acceptable){
-                    $msg='min price you can enter is: '.$min_price_acceptable;
-                    return response()->json(['error', $msg]);
-                }
-            }
+
 
             BidHistory::create([
                 'user_id' => auth()->id(),
@@ -398,6 +390,17 @@ class MarketHomeController extends Controller
             $key = 'bid_exists';
             $message = 'Please enter different Bid';
             return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+        }
+
+        if ($market->status==6){
+            $market_step = $market->step;
+            $best_bid_price = $market->Bids()->orderBy('price', 'desc')->first()->price;
+            $min_price_acceptable=$best_bid_price+$market_step;
+            if ($request->price < $min_price_acceptable){
+                $key='price_step';
+                $message='min price you can enter is: '.$min_price_acceptable;
+                return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
+            }
         }
 
         //اگر کاربر در مرحله ی opening هیچ بیدی نذاشته بود نمیتواند در مراحل بعدی بید بزند
