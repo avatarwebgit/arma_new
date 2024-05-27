@@ -393,10 +393,10 @@ class MarketHomeController extends Controller
         }
 
         if ($market->status==6){
-            $market_step = $market->step;
+            $market_step = $market->step_price_competition;
             $best_bid_price = $market->Bids()->orderBy('price', 'desc')->first()->price;
             $min_price_acceptable=$best_bid_price+$market_step;
-            if ($request->price < $min_price_acceptable){
+            if (intval($request['price']) < $min_price_acceptable){
                 $key='price_step';
                 $message='min price you can enter is: '.$min_price_acceptable;
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
