@@ -497,9 +497,7 @@ class MarketHomeController extends Controller
                     }
                 }
 
-                if ($is_win == 1) {
-                    $win_user_ids[] = $bid->user_id;
-                }
+
                 //اگر تعداد کالا کمتر از مینیموم باشد بید بازنده است
                 if ($quantity_win < $market->SalesForm->min_order) {
                     $is_win = 0;
@@ -509,7 +507,9 @@ class MarketHomeController extends Controller
                     $is_win = 0;
                 }
 
-
+                if ($is_win == 1) {
+                    $win_user_ids[] = $bid->user_id;
+                }
 
 
                 $bid->update([
