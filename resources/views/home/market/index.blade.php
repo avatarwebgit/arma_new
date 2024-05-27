@@ -118,7 +118,7 @@
             deactive_bid(id);
             let color = '#ff0707';
             let statusText = '<span>Close</span>';
-            show_market_result(id,0);
+            show_market_result(id);
             change_market_status(status, color, statusText, id);
         }
 
@@ -198,12 +198,11 @@
                 refreshBidTable(market_id);
             });
 
-        function show_market_result(id,failed) {
+        function show_market_result(id) {
             $.ajax({
                 url: "{{ route('home.get_market_bit_result') }}",
                 data: {
                     id: id,
-                    failed:failed,
                 },
                 dataType: "json",
                 method: "POST",
