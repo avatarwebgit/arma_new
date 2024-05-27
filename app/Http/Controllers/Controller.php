@@ -84,10 +84,11 @@ class Controller extends BaseController
             $status = 6;
             //exists min-price
             $market_min_price = $market->offer_price;
-            $market_min_price = intval($market_min_price);
-            $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
+            $market_min_price = intval($market_min_price)-1;
+            $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->exists();
             if (!$bid_touch_price) {
                 $status = 9;
+                $difference = 0;
             }
 
             if($status!=9){
@@ -103,13 +104,14 @@ class Controller extends BaseController
 
         } else {
             //close
-            $market_min_price = $market->offer_price;
-            $market_min_price = intval($market_min_price);
+
             $difference = 0;
             $status = 7;
             if (count($market->Bids)>0){
                 //exists min-price
-                $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
+                $market_min_price = $market->offer_price;
+                $market_min_price = intval($market_min_price)-1;
+                $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->exists();
                 if (!$bid_touch_price) {
                     $status = 9;
                 }
@@ -120,7 +122,6 @@ class Controller extends BaseController
                     if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
                         //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
                         $status = 8;
-                        $difference = 0;
                     }
                 }
             }
@@ -263,7 +264,6 @@ class Controller extends BaseController
     public function check_market($id){
         $market=Market::find($id);
         $result = $this->statusTimeMarket($market);
-        dd($result);
     }
 
     public function today_market_status()
