@@ -87,17 +87,17 @@ class Controller extends BaseController
             $market_min_price = intval($market_min_price)-1;
             $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->exists();
             if (!$bid_touch_price) {
-                $status = 9;
+                $status = 7;
                 $difference = 0;
             }
 
-            if($status!=9){
+            if($status!=7){
                 //check if total quality < $market->quantity
                 $bids_quantity = $market->Bids()->sum('quantity');
                 $market_quantity = $market->SalesForm->max_quantity;
                 if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
                     //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
-                    $status = 8;
+                    $status = 7;
                     $difference = 0;
                 }
             }
@@ -107,24 +107,24 @@ class Controller extends BaseController
 
             $difference = 0;
             $status = 7;
-            if (count($market->Bids)>0){
-                //exists min-price
-                $market_min_price = $market->offer_price;
-                $market_min_price = intval($market_min_price)-1;
-                $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->exists();
-                if (!$bid_touch_price) {
-                    $status = 9;
-                }
-                if($status!=9){
-                    //check if total quality < $market->quantity
-                    $bids_quantity = $market->Bids()->sum('quantity');
-                    $market_quantity = $market->SalesForm->max_quantity;
-                    if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
-                        //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
-                        $status = 8;
-                    }
-                }
-            }
+//            if (count($market->Bids)>0){
+//                //exists min-price
+//                $market_min_price = $market->offer_price;
+//                $market_min_price = intval($market_min_price)-1;
+//                $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->exists();
+//                if (!$bid_touch_price) {
+//                    $status = 9;
+//                }
+//                if($status!=9){
+//                    //check if total quality < $market->quantity
+//                    $bids_quantity = $market->Bids()->sum('quantity');
+//                    $market_quantity = $market->SalesForm->max_quantity;
+//                    if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
+//                        //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
+//                        $status = 8;
+//                    }
+//                }
+//            }
         }
         $market->status = $status;
         if ($market->isDirty()) {

@@ -42,7 +42,7 @@
             color: #FFB100;
         }
         .timer-bold{
-            font-size: 14pt;;
+            font-size: 10pt;;
             font-weight: bold;
         }
     </style>
