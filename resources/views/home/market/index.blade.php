@@ -39,11 +39,8 @@
                 if (status == 7) {
                     Stop(status, market_id);
                 }
-                if (status == 8) {
-                    Finished(status, market_id);
-                }
-                if (status == 9) {
-                    No_Winner(status, market_id);
+                if (status == 8 || status == 9) {
+                    Close_and_show_result(status, market_id);
                 }
 
 
@@ -115,22 +112,13 @@
             change_market_status(status, color, statusText, id);
         }
 
-        function Finished(status, id) {
+        function Close_and_show_result(status, id) {
             close_bid_deposit(id);
             remove_function();
             deactive_bid(id);
-            let color = '#0a0a0a';
-            let statusText = '<span>Complete</span>';
+            let color = '#ff0707';
+            let statusText = '<span>Close</span>';
             show_market_result(id,0);
-            change_market_status(status, color, statusText, id);
-        }
-        function No_Winner(status, id) {
-            close_bid_deposit(id);
-            remove_function();
-            deactive_bid(id);
-            let color = '#c7aa14';
-            let statusText = '<span>FAILED</span>';
-            show_market_result(id,1);
             change_market_status(status, color, statusText, id);
         }
 
