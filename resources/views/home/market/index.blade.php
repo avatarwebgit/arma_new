@@ -441,14 +441,6 @@
                                     <th class="text-center text-white w-50">Price ( {{ $market->SalesForm->currency }}
                                         )
                                     </th>
-
-                                    <th class="text-center text-white w-50">
-                                        user id
-                                    </th>
-
-                                    <th class="text-center text-white w-50">
-                                        Quantity_win
-                                    </th>
                                     <th class="text-center text-white w-50">
                                         status
                                     </th>
