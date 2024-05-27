@@ -87,17 +87,21 @@ class Controller extends BaseController
             $market_min_price = intval($market_min_price);
             $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
             if (!$bid_touch_price) {
-                $status = 7;
+                $status = 9;
                 $difference = 0;
             }
-            //check if total quality < $market->quantity
-            $bids_quantity = $market->Bids()->sum('quantity');
-            $market_quantity = $market->SalesForm->max_quantity;
-            if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
-                //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
-                $status = 8;
-                $difference = 0;
+
+            if($status!=9){
+                //check if total quality < $market->quantity
+                $bids_quantity = $market->Bids()->sum('quantity');
+                $market_quantity = $market->SalesForm->max_quantity;
+                if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
+                    //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
+                    $status = 8;
+                    $difference = 0;
+                }
             }
+
         } else {
             //close
             $market_min_price = $market->offer_price;
