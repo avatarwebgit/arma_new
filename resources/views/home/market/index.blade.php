@@ -35,11 +35,11 @@
                     Competition(status, market_id);
                 }
                 if (status == 7) {
-                    Stop(status, market_id);
-                }
-                if (status == 8 || status == 9) {
                     Close_and_show_result(status, market_id);
                 }
+                // if (status == 8 || status == 9) {
+                //     Close_and_show_result(status, market_id);
+                // }
 
 
             });
