@@ -251,3 +251,6 @@ Route::get('/logout', function () {
     return redirect()->route('home.index');
 });
 
+
+Route::get('check_market/{id}', [IndexController::class, 'check_market'])->name('home.check_market');
+

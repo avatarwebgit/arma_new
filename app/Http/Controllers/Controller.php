@@ -88,7 +88,6 @@ class Controller extends BaseController
             $bid_touch_price = $market->Bids()->where('price', $market_min_price)->orWhere('price', '>', $market_min_price)->exists();
             if (!$bid_touch_price) {
                 $status = 9;
-                $difference = 0;
             }
 
             if($status!=9){
@@ -259,6 +258,12 @@ class Controller extends BaseController
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
+    }
+
+    public function check_market($id){
+        $market=Market::find($id);
+        $result = $this->statusTimeMarket($market);
+        dd($result);
     }
 
     public function today_market_status()

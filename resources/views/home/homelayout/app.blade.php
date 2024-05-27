@@ -723,25 +723,7 @@
         });
     }
 
-    $('#bid_price').blur(function () {
-        let has_on_key_up = $(this).attr('onkeyup');
-        if (has_on_key_up == 'step_price_competition(this,event)') {
-            let value = $(this).val();
-            value = parseInt(value);
-            let step = $(this).attr('step');
-            step = parseInt(step);
-            let remain = value % step;
-            remain = parseInt(remain);
-            let new_value;
-            if (remain == 0) {
-                new_value = value;
-            } else {
-                new_value = value - remain + step;
-            }
-            $(this).val(new_value);
-        }
 
-    });
 
     function step_price_competition(tag, event) {
 

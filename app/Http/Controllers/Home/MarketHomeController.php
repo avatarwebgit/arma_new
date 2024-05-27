@@ -302,7 +302,7 @@ class MarketHomeController extends Controller
             } else {
                 $tries = 1;
             }
-
+            $market_step = $market->step;
             BidHistory::create([
                 'user_id' => auth()->id(),
                 'market_id' => $request->market,
@@ -503,7 +503,7 @@ class MarketHomeController extends Controller
                     $is_win = 0;
                 }
                 //در هر صورتی اگر قیمت را تاچ نکرد بازنده است
-                if ($bid->price< $price){
+                if ($bid->price < $price) {
                     $is_win = 0;
                 }
 
