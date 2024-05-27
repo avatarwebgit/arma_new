@@ -16,7 +16,7 @@
                 let status = e.status;
                 console.log(status);
                 console.log('////////////');
-                let price_step = e.step;
+                // let price_step = e.step;
                 $('#market-difference-' + market_id).html(timer);
                 if (status == 1) {
                     waiting_to_open(status, market_id);
@@ -34,7 +34,7 @@
                     Quotation_2_2(status, market_id);
                 }
                 if (status == 6) {
-                    Competition(status, market_id, price_step);
+                    Competition(status, market_id);
                 }
                 if (status == 7) {
                     Stop(status, market_id);
@@ -92,10 +92,10 @@
             change_market_status(status, color, statusText, id)
         }
 
-        function Competition(status, id, step) {
+        function Competition(status, id) {
             close_bid_deposit(id);
-            $('#bid_price').attr('onkeyup', 'step_price_competition(this,event)');
-            $('#bid_price').attr('step', step);
+            // $('#bid_price-'+id).attr('onkeyup', 'step_price_competition(this,event)');
+            // $('#bid_price-'+id).attr('step', step);
             remove_function();
             Competition_Bid_buttons(id);
             let color = '#0a2a00';
