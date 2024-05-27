@@ -465,6 +465,10 @@
         if (value == 'Formulla') {
             PriceType($('#price_type'));
             old_value = "{{ old('formulla') }}";
+            let Operator="{{ old('Operator') }}";
+            let alpha="{{ old('alpha') }}";
+            let formulla_more_details="{{ old('formulla_more_details') }}";
+            let base_price_notes="{{ old('base_price_notes') }}";
             if (old_value !== '') {
                 other_value = old_value;
             } else {
@@ -721,26 +725,26 @@
             field_name = 'price';
             field_type = 'text';
         }
-        $('#' + id).parent().remove();
-        let formulla = '<div class="col-12 col-md-6 mb-3"><label for="' + id + `" class="mb-2">${field_label}<span class="text-danger">*</span></label>` +
+        $('.price_type_remove').remove();
+        let formulla = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="' + id + `" class="mb-2">${field_label}<span class="text-danger">*</span></label>` +
             '<input required id="' + id + `" type="${field_type}" name="` + field_name + '" class="form-control" >' +
             '</div>';
-        // let formulla_operator = '<div class="col-12 col-md-6 mb-3"><label for="Operator" class="mb-2">Operator<span class="text-danger">*</span></label>' +
-        //     '<select required id="Operator" type="text" name="Operator" class="form-control" ><option>+</option><option>-</option><option>-/+</option></select>' +
-        //     '</div>';
-        // let alpha = '<div class="col-12 col-md-6 mb-3"><label for="alpha" class="mb-2">alpha<span class="text-danger">*</span></label>' +
-        //     '<input required id="alpha" name="alpha" class="form-control" >' +
-        //     '</div>';
-        // let more_details = '<div class="col-12 col-md-6 mb-3"><label for="formulla_more_details" class="mb-2">More Details<span class="text-danger">*</span></label>' +
-        //     '<input required id="formulla_more_details" name="formulla_more_details" class="form-control" >' +
-        //     '</div>';
-        // let base_price_notes = '<div class="col-12 col-md-6 mb-3"><label for="base_price_notes" class="mb-2">Base Price Notes<span class="text-danger">*</span></label>' +
-        //     '<input required id="base_price_notes" name="base_price_notes" class="form-control" >' +
-        //     '</div>';
+        let formulla_operator = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="Operator" class="mb-2">Operator<span class="text-danger">*</span></label>' +
+            '<select required id="Operator" type="text" name="Operator" class="form-control" ><option>+</option><option>-</option><option>-/+</option></select>' +
+            '</div>';
+        let alpha = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="alpha" class="mb-2">alpha<span class="text-danger">*</span></label>' +
+            '<input required id="alpha" name="alpha" class="form-control" >' +
+            '</div>';
+        let more_details = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="formulla_more_details" class="mb-2">More Details<span class="text-danger">*</span></label>' +
+            '<input required id="formulla_more_details" name="formulla_more_details" class="form-control" >' +
+            '</div>';
+        let base_price_notes = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="base_price_notes" class="mb-2">Base Price Notes<span class="text-danger">*</span></label>' +
+            '<input required id="base_price_notes" name="base_price_notes" class="form-control" >' +
+            '</div>';
         let element = formulla;
-        // if (value === 'Formulla') {
-        //     element = formulla + formulla_operator + alpha + more_details + base_price_notes;
-        // }
+        if (value === 'Formulla') {
+            element = formulla + formulla_operator + alpha + more_details + base_price_notes;
+        }
 
         $(element).insertAfter($(tag).parent().parent());
     }

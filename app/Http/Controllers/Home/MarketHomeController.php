@@ -473,12 +473,13 @@ class MarketHomeController extends Controller
             $remain_quantity = $max_quantity;
             $win_user_ids = [];
             foreach ($ids as $key => $id) {
-                $is_win = 1;
+
+                //calculate remain quantity
+
                 $bid = BidHistory::where('id', $id)->first();
                 $bid_quantity = $bid->quantity;
                 if ($remain_quantity == 0) {
                     $quantity_win = 0;
-                    $is_win = 0;
                 } else {
                     if ($remain_quantity > $bid_quantity) {
                         $quantity_win = $bid_quantity;
@@ -491,7 +492,7 @@ class MarketHomeController extends Controller
 
                 $price = $market->offer_price;
                 $best_bid = $market->Bids()->max('price');
-                $is_win = 0;
+                $is_win = 1;
                 if ($best_bid == $price) {
                     if ($bid->price == $best_bid) {
                         $quantites = $market->Bids()->where('price', $best_bid)->get();
