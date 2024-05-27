@@ -14,10 +14,6 @@
                 let difference = e.difference;
                 let timer = e.timer;
                 let status = e.status;
-                console.log(market_id);
-                console.log(status);
-                console.log('////////////');
-                console.log('okkkkkkkkkk');
                 // let price_step = e.step;
                 $('#market-difference-' + market_id).html(timer);
                 if (status == 1) {
