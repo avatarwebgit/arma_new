@@ -223,10 +223,7 @@
 
 @section('style')
     <style>
-        .timer-bold{
-            font-size: 14pt;;
-            font-weight: bold;
-        }
+
         @media screen and (max-width: 1200px) {
             #Market_Status_Text {
                 text-align: center !important;

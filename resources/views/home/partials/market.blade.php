@@ -206,7 +206,7 @@
             <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
 
 
-            <tr style="color: {{ $color }} !important;" id="market-{{ $market->id }}"
+            <tr style="color: {{ $color }} !important;" id="market-{{ $market->id }}" class="{{ $market->status == 1 ? 'timer-bold' : '' }}"
                 data-status="{{ $market->status }}"
                 data-difference="{{ $market->difference }}"
                 data-now="{{ $now }}"

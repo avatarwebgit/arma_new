@@ -41,6 +41,10 @@
             cursor: pointer;
             color: #FFB100;
         }
+        .timer-bold{
+            font-size: 14pt;;
+            font-weight: bold;
+        }
     </style>
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
