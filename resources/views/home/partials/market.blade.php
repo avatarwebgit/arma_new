@@ -206,7 +206,7 @@
             <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
 
 
-            <tr style="color: {{ $color }} !important;" id="market-{{ $market->id }}" class="{{ $market->status == 1 ? 'timer-bold' : '' }}"
+            <tr style="color: {{ $color }} !important;" id="market-{{ $market->id }}"
                 data-status="{{ $market->status }}"
                 data-difference="{{ $market->difference }}"
                 data-now="{{ $now }}"
@@ -250,7 +250,7 @@
                         {{--                        <span id="market-time-{{ $market->id }}" style="margin-top: 10px;margin-left: 10px">--}}
                         {{--                            {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}--}}
                         {{--                        </span>--}}
-                        <span style="margin-top: 10px;margin-left: 10px">
+                        <span style="margin-top: 10px;margin-left: 10px" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
                     </div>
