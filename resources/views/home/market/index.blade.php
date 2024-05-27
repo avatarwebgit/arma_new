@@ -174,7 +174,7 @@
                 seller_price.prop('disabled', true);
                 seller_button.prop('disabled', true);
             }
-            if (status == 7) {
+            if (status == 7 || status == 8 || status == 9) {
                 // seller_quantity.prop('disabled', true);
                 seller_price.prop('disabled', true);
                 seller_button.prop('disabled', true);
