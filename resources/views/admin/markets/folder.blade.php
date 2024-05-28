@@ -60,7 +60,7 @@
                                                         {{ $item->date }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->time }}
+                                                        {{ Carbon\Carbon::parse($item->time)->format('g:i A') }}
                                                     </td>
                                                     @if($item->status==8 or $item->status==9)
                                                         <td id="market_status_{{ $item->id }}"
