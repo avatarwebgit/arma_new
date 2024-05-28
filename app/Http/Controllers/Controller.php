@@ -85,8 +85,8 @@ class Controller extends BaseController
             //exists min-price
             $market_min_price = $market->offer_price;
             $market_min_price = intval($market_min_price)-1;
-            $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->exists();
-            if (!$bid_touch_price) {
+            $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->count();
+            if (count($bid_touch_price)<2) {
                 $status = 7;
                 $difference = 0;
             }
