@@ -448,7 +448,6 @@
         } else {
             if (sale_form_exist === 1) {
                 value = "{{ isset($form['price_type'])?$form['price_type']:'' }}";
-
             }
         }
         if (value == 'Fix') {
@@ -461,23 +460,33 @@
                     other_value = "{{ isset($form['price'])?$form['price']:'' }}";
                 }
             }
+            $('#price_type_select').val(other_value);
         }
         if (value == 'Formulla') {
             PriceType($('#price_type'));
             old_value = "{{ old('formulla') }}";
-            let Operator="{{ old('Operator') }}";
-            let alpha="{{ old('alpha') }}";
-            let formulla_more_details="{{ old('formulla_more_details') }}";
-            let base_price_notes="{{ old('base_price_notes') }}";
+            let Operator = "{{ old('Operator') }}";
+            let alpha = "{{ old('alpha') }}";
+            let formulla_more_details = "{{ old('formulla_more_details') }}";
+            let base_price_notes = "{{ old('base_price_notes') }}";
             if (old_value !== '') {
                 other_value = old_value;
             } else {
                 if (sale_form_exist === 1) {
                     other_value = "{{ isset($form['formulla'])?$form['formulla']:'' }}";
+                    Operator = "{{ isset($form['Operator'])?$form['Operator']:'' }}";
+                    alpha = "{{ isset($form['alpha'])?$form['alpha']:'' }}";
+                    formulla_more_details = "{{ isset($form['formulla_more_details'])?$form['formulla_more_details']:'' }}";
+                    base_price_notes = "{{ isset($form['base_price_notes'])?$form['base_price_notes']:'' }}";
                 }
             }
+            $('#price_type_select').val(other_value);
+            $('#alpha').val(alpha);
+            $('#formulla_more_details').val(formulla_more_details);
+            $('#base_price_notes').val(base_price_notes);
+            $('#Operator').find('option[value="' + Operator + '"]').attr('selected', true);
         }
-        $('#price_type_select').val(other_value);
+
 
     }
 

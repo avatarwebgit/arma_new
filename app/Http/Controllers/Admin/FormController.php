@@ -430,9 +430,15 @@ class FormController extends Controller
             'country' => 'required',
             'port_city' => 'required',
             'incoterms_more_detail' => 'nullable',
+            //price
             'price_type' => 'required',
             'formulla' => ['required_if:price_type,Formulla'],
+            'Operator' => ['required_if:price_type,Formulla'],
+            'alpha' => ['required_if:price_type,Formulla'],
+            'formulla_more_details' => ['required_if:price_type,Formulla'],
+            'base_price_notes' => ['required_if:price_type,Formulla'],
             'price' => ['required_if:price_type,Fix'],
+
             'payment_term' => 'required',
             'payment_term_description' => 'required',
             'packing' => 'required',
