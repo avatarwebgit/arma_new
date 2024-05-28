@@ -24,7 +24,7 @@
                                               action="{{ route('admin.market.store') }}">
                                             @csrf
                                             <div class="row mt-4">
-                                                <div class="col-12 col-md-3 mb-3">
+                                                <div class="col-12 col-md-4 mb-3">
                                                     <label for="date">start(Date)</label>
                                                     <input onchange="getDate(this)" id="date" type="date" name="date" class="form-control"
                                                            value="{{ old('date') }}">
@@ -37,10 +37,11 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-3 mb-3">
+                                                <div class="col-12 col-md-4 mb-3">
                                                     <label for="start">start(Time)</label>
-                                                    <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-                                                        <input type="text" class="form-control" value="{{ old('time') }}" name="time">
+{{--                                                    ///clockpicker--}}
+                                                    <div class="input-group " data-placement="left" data-align="top" data-autoclose="true">
+                                                        <input type="time" class="form-control" value="{{ old('time') }}" name="time">
                                                         <span class="input-group-addon">
         <span class="glyphicon glyphicon-time"></span>
     </span>
@@ -51,17 +52,8 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-md-3 mb-3">
-                                                    <label for="bid_deposit">Bid Deposit</label>
-                                                    <input id="bid_deposit"  name="bid_deposit" class="form-control"
-                                                           value="{{ old('bid_deposit') }}">
-                                                    @error('bid_deposit')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-12 col-md-3 mb-3">
+
+                                                <div class="col-12 col-md-4 mb-3">
                                                     <label for="min_wallet">Commodity</label>
                                                     <select class="form-control" name="commodity_id">
                                                         <option value="">select</option>
@@ -75,7 +67,17 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-3 mb-3">
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="bid_deposit">Bid Deposit</label>
+                                                    <input id="bid_deposit"  name="bid_deposit" class="form-control"
+                                                           value="{{ old('bid_deposit') }}">
+                                                    @error('bid_deposit')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
                                                     <label for="step_price_competition">Step Price In Competition</label>
                                                     <input id="step_price_competition" name="step_price_competition" min="1" class="form-control"
                                                            value="{{ old('step_price_competition') }}">
@@ -85,17 +87,17 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-3 mb-3">
-                                                    <label for="offer_price">Offer Price</label>
-                                                    <input id="offer_price"  name="offer_price" class="form-control"
-                                                           value="{{ old('offer_price') }}" type="number">
-                                                    @error('offer_price')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-12 col-md-3 mb-3">
+{{--                                                <div class="col-12 col-md-3 mb-3">--}}
+{{--                                                    <label for="offer_price">Offer Price</label>--}}
+{{--                                                    <input id="offer_price"  name="offer_price" class="form-control"--}}
+{{--                                                           value="{{ old('offer_price') }}" type="number">--}}
+{{--                                                    @error('offer_price')--}}
+{{--                                                    <p class="input-error-validate">--}}
+{{--                                                        {{ $message }}--}}
+{{--                                                    </p>--}}
+{{--                                                    @enderror--}}
+{{--                                                </div>--}}
+                                                <div class="col-12 col-md-4 mb-3">
                                                     <label for="market_value">Market Value ($)</label>
                                                     <input id="market_value"  name="market_value" class="form-control"
                                                            value="{{ old('market_value') }}" type="number">
