@@ -215,9 +215,9 @@ class MarketHomeController extends Controller
             $market = Market::where('id', $market_id)->first();
             $status = $market->status;
             $currency = $market->SalesForm->currency;
-            if ($user_id != $market->user_id) {
-                return response()->json([1, 'error', 'You Do Not Have Permission To Change Offer']);
-            }
+//            if ($user_id != $market->user_id) {
+//                return response()->json([1, 'error', 'You Do Not Have Permission To Change Offer']);
+//            }
 //            if ($status == '4') {
 //                //quotation 1/2
 //                $pre_max_quantity = $market->SalesForm->max_quantity;
@@ -336,6 +336,10 @@ class MarketHomeController extends Controller
 
     function Opening_roles($request, $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market)
     {
+        $max_bid=$market->Bids()->order('price','desc')->first();
+        if ($max_bid){
+            $base_price=$max_bid->price;
+        }
         if ($request['price'] < $base_price) {
             $key = 'price';
             $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
@@ -348,7 +352,7 @@ class MarketHomeController extends Controller
                 return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
             }
         }
-        if ($request['quantity'] > $max_quantity) {
+        if (intval($request['quantity']) > intval($max_quantity)) {
             $key = 'quantity';
             $message = 'Max quantity you can enter is: ' . $max_quantity . ' ' . $unit;
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
