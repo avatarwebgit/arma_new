@@ -215,9 +215,9 @@ class MarketHomeController extends Controller
             $market = Market::where('id', $market_id)->first();
             $status = $market->status;
             $currency = $market->SalesForm->currency;
-//            if ($user_id != $market->user_id) {
-//                return response()->json([1, 'error','You Do Not Have Permission To Change Offer']);
-//            }
+            if ($user_id != $market->user_id) {
+                return response()->json([1, 'error','You Do Not Have Permission To Change Offer']);
+            }
 //            if ($status == '4') {
 //                //quotation 1/2
 //                $pre_max_quantity = $market->SalesForm->max_quantity;
@@ -239,7 +239,8 @@ class MarketHomeController extends Controller
                     if ($price > $pre_price) {
                         return response()->json([1, 'error', 'Maximum Price You Can Enter is: ' . $pre_price . ' ' . $currency]);
                     }
-                    $market->update(['offer_price' => $price]);
+//                    $market->update(['offer_price' => $price]);
+                    $market->SalesForm()->update(['price' => $price]);
                 }
             }
             broadcast(new ChangeSaleOffer($market->id));
@@ -250,7 +251,6 @@ class MarketHomeController extends Controller
 
     public function bid_market(Request $request)
     {
-
         $market = Market::find($request->market);
         if ($market->status == 6) {
             $validator = $request->validate([
@@ -271,7 +271,8 @@ class MarketHomeController extends Controller
             ]);
 
         }
-        $price = $market->offer_price;
+//        $price = $market->offer_price;
+        $price = $market->SalesForm->price;
         $min_order = $market->SalesForm->min_order;
         $max_quantity = $market->SalesForm->max_quantity;
         $unit = $market->SalesForm->unit;
