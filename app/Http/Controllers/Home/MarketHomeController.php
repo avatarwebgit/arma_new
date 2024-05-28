@@ -337,6 +337,7 @@ class MarketHomeController extends Controller
     function Opening_roles($request, $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market)
     {
         $max_bid=$market->Bids()->order('price','desc')->first();
+        dd($max_bid);
         if ($max_bid){
             $base_price=$max_bid->price;
         }
