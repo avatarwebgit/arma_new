@@ -70,7 +70,7 @@ class MarketController extends Controller
             'commodity_id' => 'required',
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
-            'offer_price' => 'required',
+//            'offer_price' => 'required',
             'market_value' => 'required',
             'description' => 'nullable',
         ]);
@@ -110,7 +110,7 @@ class MarketController extends Controller
             'commodity_id' => 'required',
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
-            'offer_price' => 'required',
+//            'offer_price' => 'required',
             'market_value' => 'required',
             'description' => 'nullable',
         ]);
