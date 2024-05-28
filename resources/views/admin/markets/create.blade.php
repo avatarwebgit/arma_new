@@ -66,7 +66,7 @@
                                                     <select class="form-control" name="commodity_id">
                                                         <option value="">select</option>
                                                         @foreach($sales_offer_form_copy as $item)
-                                                            <option {{ old('commodity_id')==$item->id?'selected':'' }} value="{{ $item->id }}">Commodity:{{ $item->commodity }}/User:{{ $item->User->name }}</option>
+                                                            <option {{ old('commodity_id')==$item->id?'selected':'' }} value="{{ $item->id }}">Commodity:{{ $item->commodity }}/User:{{ $item->User->email }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('commodity_id')
