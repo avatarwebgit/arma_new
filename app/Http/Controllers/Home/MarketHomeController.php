@@ -216,7 +216,7 @@ class MarketHomeController extends Controller
             $status = $market->status;
             $currency = $market->SalesForm->currency;
             if ($user_id != $market->user_id) {
-                return response()->json([1, 'error','You Do Not Have Permission To Change Offer']);
+                return response()->json([1, 'error', 'You Do Not Have Permission To Change Offer']);
             }
 //            if ($status == '4') {
 //                //quotation 1/2
@@ -303,7 +303,6 @@ class MarketHomeController extends Controller
             } else {
                 $tries = 1;
             }
-
 
 
             BidHistory::create([
@@ -393,13 +392,13 @@ class MarketHomeController extends Controller
             return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
         }
 
-        if ($market->status==6){
+        if ($market->status == 6) {
             $market_step = $market->step_price_competition;
             $best_bid_price = $market->Bids()->orderBy('price', 'desc')->first()->price;
-            $min_price_acceptable=$best_bid_price+$market_step;
-            if (intval($request['price']) < $min_price_acceptable){
-                $key='price_step';
-                $message='min price you can enter is: '.$min_price_acceptable;
+            $min_price_acceptable = $best_bid_price + $market_step;
+            if (intval($request['price']) < $min_price_acceptable) {
+                $key = 'price_step';
+                $message = 'min price you can enter is: ' . $min_price_acceptable;
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
             }
         }
@@ -474,7 +473,7 @@ class MarketHomeController extends Controller
             $remain_quantity = $max_quantity;
             $win_user_ids = [];
             foreach ($ids as $key => $id) {
-                $is_win=1;
+                $is_win = 1;
                 //calculate remain quantity
 
                 $bid = BidHistory::where('id', $id)->first();
@@ -491,7 +490,8 @@ class MarketHomeController extends Controller
                     }
                 }
 
-                $price = $market->offer_price;
+//                $price = $market->offer_price;
+                $price = $market->SalesForm->price;
 //                $best_bid = $market->Bids()->max('price');
 //                $is_win = 1;
 //                if ($best_bid == $price) {
