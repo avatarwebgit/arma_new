@@ -83,14 +83,14 @@ class Controller extends BaseController
             $difference = $benchmark6->diffInSeconds($now);
             $status = 6;
             //exists min-price
-            $market_min_price = $market->offer_price;
+//            $market_min_price = $market->offer_price;
+            $market_min_price = $market->SalesForm->price;
             $market_min_price = intval($market_min_price)-1;
             $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->get();
             if (count($bid_touch_price)<2) {
                 $status = 7;
                 $difference = 0;
             }
-
             if($status!=7){
                 //check if total quality < $market->quantity
                 $bids_quantity = $market->Bids()->sum('quantity');
@@ -101,36 +101,15 @@ class Controller extends BaseController
                     $difference = 0;
                 }
             }
-
         } else {
             //close
-
             $difference = 0;
             $status = 7;
-//            if (count($market->Bids)>0){
-//                //exists min-price
-//                $market_min_price = $market->offer_price;
-//                $market_min_price = intval($market_min_price)-1;
-//                $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->exists();
-//                if (!$bid_touch_price) {
-//                    $status = 9;
-//                }
-//                if($status!=9){
-//                    //check if total quality < $market->quantity
-//                    $bids_quantity = $market->Bids()->sum('quantity');
-//                    $market_quantity = $market->SalesForm->max_quantity;
-//                    if ($bids_quantity < $market_quantity or $bids_quantity == $market_quantity) {
-//                        //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
-//                        $status = 8;
-//                    }
-//                }
-//            }
         }
         $market->status = $status;
         if ($market->isDirty()) {
             $market->save();
         }
-//        broadcast(new MarketStatusUpdated($market->id,$difference));
         return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time, $time_to_close_bid_deposit];
     }
     public function convertTime($seconds)
