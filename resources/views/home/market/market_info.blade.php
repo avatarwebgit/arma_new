@@ -48,7 +48,8 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Offer Price</span>
         <span class="text-bold text-light-blue ">
-                           {{ $market->offer_price }}
+{{--                           {{ $market->offer_price }}--}}
+            {{ $market->SalesForm->price }}
                         </span>
     </div>
     <div class="d-flex justify-content-between">
