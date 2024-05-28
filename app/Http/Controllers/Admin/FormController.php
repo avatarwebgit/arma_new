@@ -164,6 +164,7 @@ class FormController extends Controller
 
     public function sales_form_update_or_store(Request $request, $item = null)
     {
+
         $is_complete = 0;
         $rules = $this->rules($item);
         $validator = Validator::make($request->all(), $rules);
@@ -247,6 +248,10 @@ class FormController extends Controller
                 return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
             }
         }
+
+        session()->flash('success', 'Your Information has been saved successfully');
+        return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
+
     }
 
     public function Upload_files($env, $file)
@@ -325,6 +330,7 @@ class FormController extends Controller
         $contract_types = ContainerType::all();
         $item = null;
         $is_show = 1;
+        $platforms = PlatFom::all();
         return view('admin.sales_form.create', compact(
             'sale_form_exist',
             'form',
@@ -351,7 +357,8 @@ class FormController extends Controller
             'contract_types',
             'item',
             'is_show',
-            'role'
+            'role',
+            'platforms'
         ));
     }
 

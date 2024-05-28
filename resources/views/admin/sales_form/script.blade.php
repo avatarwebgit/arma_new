@@ -450,8 +450,9 @@
                 value = "{{ isset($form['price_type'])?$form['price_type']:'' }}";
             }
         }
+        PriceType($('#price_type'));
+
         if (value == 'Fix') {
-            PriceType($('#price_type'));
             old_value = "{{ old('price') }}";
             if (old_value !== '') {
                 other_value = old_value;
@@ -460,10 +461,8 @@
                     other_value = "{{ isset($form['price'])?$form['price']:'' }}";
                 }
             }
-            $('#price_type_select').val(other_value);
         }
         if (value == 'Formulla') {
-            PriceType($('#price_type'));
             old_value = "{{ old('formulla') }}";
             let Operator = "{{ old('Operator') }}";
             let alpha = "{{ old('alpha') }}";
@@ -480,14 +479,43 @@
                     base_price_notes = "{{ isset($form['base_price_notes'])?$form['base_price_notes']:'' }}";
                 }
             }
-            $('#price_type_select').val(other_value);
+
             $('#alpha').val(alpha);
             $('#formulla_more_details').val(formulla_more_details);
             $('#base_price_notes').val(base_price_notes);
             $('#Operator').find('option[value="' + Operator + '"]').attr('selected', true);
+
+            //errors
+            let Operator_error = "{{ $errors->has('Operator') }}";
+            if (Operator_error) {
+                let Operator_error = "{{ $errors->first('Operator') }}";
+                let error_message = `<p class="input-error-validate">${Operator_error}</p>`;
+                $(error_message).insertAfter($('#Operator'));
+            }
+            //errors
+            let alpha_error = "{{ $errors->has('alpha') }}";
+            if (alpha_error) {
+                let alpha_error = "{{ $errors->first('alpha') }}";
+                let error_message = `<p class="input-error-validate">${alpha_error}</p>`;
+                $(error_message).insertAfter($('#alpha'));
+            }
+            //errors
+            let formulla_more_details_error = "{{ $errors->has('formulla_more_details') }}";
+            if (formulla_more_details_error) {
+                let formulla_more_details_error = "{{ $errors->first('formulla_more_details') }}";
+                let error_message = `<p class="input-error-validate">${formulla_more_details_error}</p>`;
+                $(error_message).insertAfter($('#formulla_more_details'));
+            }
+            //errors
+            let base_price_notes_error = "{{ $errors->has('base_price_notes') }}";
+            if (base_price_notes_error) {
+                let base_price_notes_error = "{{ $errors->first('base_price_notes') }}";
+                let error_message = `<p class="input-error-validate">${base_price_notes_error}</p>`;
+                $(error_message).insertAfter($('#base_price_notes'));
+            }
         }
 
-
+        $('#price_type_select').val(other_value);
     }
 
     function check_safety_file() {
@@ -686,7 +714,6 @@
         let name = $(tag).attr('name');
         let value = $(tag).val();
         removeOtherElement(name);
-        console.log(name, value);
         if (value === 'other' || value === 'Contract') {
             let label = '';
             if (value === 'other') {
@@ -721,6 +748,7 @@
     function PriceType(tag) {
         let name = $(tag).attr('name');
         let value = $(tag).val();
+
         let id = 'price_type_select';
         let field_label = '';
         let field_name = '';
@@ -728,7 +756,7 @@
         if (value === 'Formulla') {
             field_label = 'Formulla (Magazine & Index & Discount & Pricing Period)';
             field_name = 'formulla';
-            field_type = 'number';
+            field_type = 'text';
         } else {
             field_label = 'Price';
             field_name = 'price';
@@ -739,7 +767,7 @@
             '<input required id="' + id + `" type="${field_type}" name="` + field_name + '" class="form-control" >' +
             '</div>';
         let formulla_operator = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="Operator" class="mb-2">Operator<span class="text-danger">*</span></label>' +
-            '<select required id="Operator" type="text" name="Operator" class="form-control" ><option>+</option><option>-</option><option>-/+</option></select>' +
+            '<select required id="Operator" type="text" name="Operator" class="form-control" ><option value="+">+</option><option value="-">-</option><option value="-/+">-/+</option></select>' +
             '</div>';
         let alpha = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="alpha" class="mb-2">alpha<span class="text-danger">*</span></label>' +
             '<input required id="alpha" name="alpha" class="form-control" >' +
@@ -754,7 +782,6 @@
         if (value === 'Formulla') {
             element = formulla + formulla_operator + alpha + more_details + base_price_notes;
         }
-
         $(element).insertAfter($(tag).parent().parent());
     }
 
@@ -769,6 +796,7 @@
         let element = '<div class="col-12 col-md-6 mb-3"><label for="' + id + `" class="mb-2">${field_label}<span class="text-danger">*</span></label>` +
             '<input required id="' + id + `" type="${field_type}" name="` + field_name + '" class="form-control" ' +
             '</div>';
+
         $(element).insertAfter($(tag).parent().parent());
     }
 
