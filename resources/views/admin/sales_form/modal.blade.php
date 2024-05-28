@@ -14,7 +14,7 @@
             </div>
             <div class="modal-footer">
                 <input id="modal_form_id" type="hidden" value="">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">I Need To More Edit</button>
+                <button onclick="CloseModal()" type="button" class="btn btn-primary" data-dismiss="modal">I Need To More Edit</button>
                 <button onclick="Final_Submit()" type="button" class="btn btn-success">Final Submit</button>
             </div>
         </div>

@@ -25,6 +25,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Commodity</th>
+                                            <th>Type</th>
                                             <th>User</th>
                                             <th>Status</th>
                                             <th>Date & Time</th>
@@ -41,7 +42,10 @@
                                                     {{ $form->commodity }}
                                                 </td>
                                                 <td>
-                                                    {{ $form->User->name }}
+                                                    {{ $form->price_type }}
+                                                </td>
+                                                <td>
+                                                    {{ $form->User->email }}
                                                 </td>
                                                 <td>
                                                     {{ $form->Status->title }}

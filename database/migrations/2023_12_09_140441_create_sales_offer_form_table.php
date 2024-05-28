@@ -56,10 +56,6 @@ return new class extends Migration
             $table->text('price_type')->nullable();
             $table->text('formulla')->nullable();
             $table->text('price')->nullable();
-            $table->text('alpha')->nullable();
-            $table->text('formulla_more_details')->nullable();
-            $table->text('base_price_notes')->nullable();
-            $table->text('Operator')->nullable();
             //payment term
             $table->text('payment_term')->nullable();
             $table->text('payment_term_description')->nullable();
