@@ -66,7 +66,7 @@
                                                             <option
                                                                 {{ $market->commodity_id==$item->id?'selected':'' }} value="{{ $item->id }}">
                                                                 Commodity:{{ $item->commodity }}
-                                                                /User:{{ $item->User->name }}</option>
+                                                                /User:{{ $item->User->email }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('commodity_id')
