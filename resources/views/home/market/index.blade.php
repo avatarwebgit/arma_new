@@ -132,18 +132,18 @@
             $('#previous_status-' + id).val(status);
             $('#market-' + id).css('color', color);
             $('#status-box-' + id).css('color', color);
-            $('#market-difference-'+id).css('background', color);
+            $('#market-difference-' + id).css('background', color);
             $('#market-status-' + id).html(statusText);
             if (status == 2 || status == 3 || status == 4 || status == 5) {
                 animation_main_div.removeClass('d-none');
             }
-            sales_offer_buttons(status,id);
+            sales_offer_buttons(status, id);
         }
 
-        function sales_offer_buttons(status,id) {
+        function sales_offer_buttons(status, id) {
             // let seller_quantity = $('#seller_quantity-'+id);
-            let seller_price = $('#seller_price-'+id);
-            let seller_button = $('#seller_button-'+id);
+            let seller_price = $('#seller_price-' + id);
+            let seller_button = $('#seller_button-' + id);
             if (status == 1) {
                 // seller_quantity.prop('disabled', true);
                 seller_price.prop('disabled', true);
@@ -207,8 +207,9 @@
                 success: function (msg) {
                     if (msg[0] == 1) {
                         let is_winner = msg[2];
-                        console.log(is_winner);
-                        console.log('/////////////////////');
+                        if (is_winner == 1) {
+                            show_win_modal();
+                        }
                         $('#final_status_section_table-' + id).html(msg[1]);
                         $('#final_status_section-' + id).show();
                     } else {
@@ -227,8 +228,6 @@
             $('#Winner_Modal').modal('show');
             $('#Winner_Modal').removeAttr('id');
         }
-
-
 
 
     </script>
@@ -377,15 +376,18 @@
                                 <div class="row mb-4">
                                     <div class="col-12">
                                         <div class="mt-3 text-center">
-                                            <label for="seller_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }}
+                                            <label
+                                                for="seller_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }}
                                                 )</label>
-                                            <input disabled id="seller_price-{{ $market->id }}" type="text" class="form-control"
+                                            <input disabled id="seller_price-{{ $market->id }}" type="text"
+                                                   class="form-control"
                                                    name="seller_quantity-{{ $market->id }}">
                                             <p id="seller_price_error" class="error_text">please enter price</p>
                                         </div>
                                     </div>
                                     <div class="col-12 text-center mt-3">
-                                        <button disabled id="seller_button-{{ $market->id }}" onclick="Offer({{ $market->id }})"
+                                        <button disabled id="seller_button-{{ $market->id }}"
+                                                onclick="Offer({{ $market->id }})"
                                                 class="btn btn-secondary pt-1 pb-1 pr-5 pl-5">Offer
                                         </button>
                                     </div>
@@ -403,14 +405,19 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3 text-center">
-                                        <label for="bid_quantity-{{ $market->id }}">Quantity( {{ $market->SalesForm->unit }} )</label>
-                                        <input disabled id="bid_quantity-{{ $market->id }}" type="text" class="form-control">
+                                        <label
+                                            for="bid_quantity-{{ $market->id }}">Quantity( {{ $market->SalesForm->unit }}
+                                            )</label>
+                                        <input disabled id="bid_quantity-{{ $market->id }}" type="text"
+                                               class="form-control">
                                         <p id="bid_quantity_error" class="error_text">please enter quantity</p>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3 text-center">
-                                        <label for="bid_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }} )</label>
+                                        <label
+                                            for="bid_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }}
+                                            )</label>
                                         <input disabled id="bid_price-{{ $market->id }}" class="form-control">
                                         <p id="bid_price_error" class="error_text">please enter price</p>
                                     </div>
