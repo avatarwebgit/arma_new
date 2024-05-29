@@ -263,7 +263,7 @@ class FormController extends Controller
 
     public function sales_form_index($status)
     {
-        $items = SalesOfferForm::where('status', $status)->where('is_complete', 1)->paginate(100);
+        $items = SalesOfferForm::where('status', $status)->paginate(100);
         return view('admin.sales_form.list', compact('items'));
     }
 
