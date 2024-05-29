@@ -58,8 +58,8 @@ class MarketController extends Controller
 
     public function create()
     {
-        $sales_offer_form_copy = SalesOfferForm::where('status', 5)->get();
-        return view('admin.markets.create', compact('sales_offer_form_copy'));
+        $sales_offer_form = SalesOfferForm::where('status', 5)->get();
+        return view('admin.markets.create', compact('sales_offer_form'));
     }
 
     public function store(Request $request)
@@ -70,9 +70,16 @@ class MarketController extends Controller
             'commodity_id' => 'required',
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
-//            'offer_price' => 'required',
             'market_value' => 'required',
             'description' => 'nullable',
+            'ready_to_open' => 'required',
+            'opening' => 'required',
+            'q_1' => 'required',
+            'q_2' => 'required',
+            'q_3' => 'required',
+            'alpha' => $request->show_alpha==1 ?'required' : '',
+            'term_conditions' => 'nullable',
+            'show_alpha' => 'required',
         ]);
         $market = Market::create($request->all());
         $this->statusTimeMarket($market, 1);
@@ -85,8 +92,8 @@ class MarketController extends Controller
 
     public function edit(Market $market)
     {
-        $sales_offer_form_copy = SalesOfferForm::where('status', 5)->get();
-        return view('admin.markets.edit', compact('market', 'sales_offer_form_copy'));
+        $sales_offer_form  = SalesOfferForm::where('status', 5)->get();
+        return view('admin.markets.edit', compact('market', 'sales_offer_form'));
     }
 
     public function remove(Request $request)
@@ -110,9 +117,16 @@ class MarketController extends Controller
             'commodity_id' => 'required',
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
-//            'offer_price' => 'required',
             'market_value' => 'required',
             'description' => 'nullable',
+            'ready_to_open' => 'required',
+            'opening' => 'required',
+            'q_1' => 'required',
+            'q_2' => 'required',
+            'q_3' => 'required',
+            'alpha' => $request->show_alpha==1 ?'required' : '',
+            'term_conditions' => 'nullable',
+            'show_alpha' => 'required',
         ]);
         $market->update($request->all());
         $this->statusTimeMarket($market, 1);
