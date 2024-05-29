@@ -228,8 +228,12 @@ class MarketHomeController extends Controller
 //            }
             if ($status == '5') {
                 //quotation 2/2
-                $pre_price = $market->offer_price;
+                $pre_price = $market->SalesForm->price;
                 $highest_price_exists = $market->Bids()->Orderby('price', 'desc')->exists();
+                if (!$market->SalesForm->price_type == 'Fix') {
+                    $alpha = $market->SalesForm->alpha;
+                    $pre_price = $alpha;
+                }
                 if ($highest_price_exists) {
                     $highest = $market->Bids()->Orderby('price', 'desc')->first();
                     $highest_price = $highest->price;
@@ -337,15 +341,22 @@ class MarketHomeController extends Controller
 
     function Opening_roles($request, $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market)
     {
-        $max_bid=$market->Bids()->orderby('price','desc')->first();
-        if ($max_bid){
-            $base_price=$max_bid->price;
+        $market_type = $market->$market->SalesForm->price_type;
+        $max_bid = $market->Bids()->orderby('price', 'desc')->first();
+        if ($max_bid) {
+            $base_price = $max_bid->price;
+        }
+        if (!$market->SalesForm->price_type == 'Fix') {
+            $alpha = $market->SalesForm->alpha;
+            $base_price = intval($alpha) - 100;
+            $price = $alpha;
         }
         if ($request['price'] < $base_price) {
             $key = 'price';
             $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
+
         if ($market->status !== 6) {
             if ($request['price'] > $price) {
                 $key = 'price';
@@ -359,11 +370,6 @@ class MarketHomeController extends Controller
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
 
-//        if ($request['quantity'] < $min_order) {
-//            $key = 'quantity';
-//            $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
-//            return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
-//        }
 
         if ($market->status === 3) {
             $user_bids = $market->Bids()->where('user_id', auth()->id())->where('tries', 3)->get();
