@@ -11,6 +11,8 @@
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
                 let market_id = e.market_id;
+                console.log(market_id);
+                console.log('/////////////');
                 let difference = e.difference;
                 let timer = e.timer;
                 let status = e.status;
@@ -208,7 +210,7 @@
                     if (msg[0] == 1) {
                         let is_winner = msg[2];
                         if (is_winner == 1) {
-                            show_win_modal();
+                            show_win_modal(id);
                         }
                         $('#final_status_section_table-' + id).html(msg[1]);
                         $('#final_status_section-' + id).show();
@@ -224,9 +226,9 @@
             $('#Winner_Modal').modal('hide');
         }
 
-        function show_win_modal() {
-            $('#Winner_Modal').modal('show');
-            $('#Winner_Modal').removeAttr('id');
+        function show_win_modal(id) {
+            $('#Winner_Modal-'+id).modal('show');
+            $('#Winner_Modal-'+id).removeAttr('id');
         }
 
 
