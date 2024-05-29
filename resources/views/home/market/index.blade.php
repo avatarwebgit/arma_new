@@ -11,8 +11,6 @@
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
                 let market_id = e.market_id;
-                console.log(market_id);
-                console.log('/////////////');
                 let difference = e.difference;
                 let timer = e.timer;
                 let status = e.status;
