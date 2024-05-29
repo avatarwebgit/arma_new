@@ -207,6 +207,8 @@
                 success: function (msg) {
                     if (msg[0] == 1) {
                         let is_winner = msg[2];
+                        console.log(is_winner);
+                        console.log('/////////////////////');
                         $('#final_status_section_table-' + id).html(msg[1]);
                         $('#final_status_section-' + id).show();
                     } else {
