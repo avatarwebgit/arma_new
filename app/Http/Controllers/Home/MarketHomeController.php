@@ -506,6 +506,13 @@ class MarketHomeController extends Controller
 
 //                $price = $market->offer_price;
                 $price = $market->SalesForm->price;
+                $market_type = $market->SalesForm->price_type;
+
+                if ($market_type == 'Formulla') {
+                    $alpha = $market->SalesForm->alpha;
+                    $price = $alpha;
+                }
+
 //                $best_bid = $market->Bids()->max('price');
 //                $is_win = 1;
 //                if ($best_bid == $price) {
@@ -539,7 +546,6 @@ class MarketHomeController extends Controller
                 if ($is_win == 1) {
                     $win_user_ids[] = $bid->user_id;
                 }
-
 
                 $bid->update([
                     'quantity_win' => $quantity_win,
