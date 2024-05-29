@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="Winner_Modal" tabindex="-1"
+<div class="modal fade" id="Winner_Modal-{{ $market->id }}" tabindex="-1"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
