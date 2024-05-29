@@ -230,9 +230,11 @@ class MarketHomeController extends Controller
                 //quotation 2/2
                 $pre_price = $market->SalesForm->price;
                 $highest_price_exists = $market->Bids()->Orderby('price', 'desc')->exists();
-                if (!$market->SalesForm->price_type == 'Fix') {
+                $market_type = $market->SalesForm->price_type;
+                if ($market_type == 'Formulla') {
                     $alpha = $market->SalesForm->alpha;
                     $pre_price = $alpha;
+                    $currency = '';
                 }
                 if ($highest_price_exists) {
                     $highest = $market->Bids()->Orderby('price', 'desc')->first();
@@ -341,15 +343,16 @@ class MarketHomeController extends Controller
 
     function Opening_roles($request, $min_order, $max_quantity, $unit, $currency, $base_price, $price, $market)
     {
-        $market_type = $market->$market->SalesForm->price_type;
+        $market_type = $market->SalesForm->price_type;
         $max_bid = $market->Bids()->orderby('price', 'desc')->first();
         if ($max_bid) {
             $base_price = $max_bid->price;
         }
-        if (!$market->SalesForm->price_type == 'Fix') {
+        if ($market_type == 'Formulla') {
             $alpha = $market->SalesForm->alpha;
             $base_price = intval($alpha) - 100;
             $price = $alpha;
+            $currency = '';
         }
         if ($request['price'] < $base_price) {
             $key = 'price';
