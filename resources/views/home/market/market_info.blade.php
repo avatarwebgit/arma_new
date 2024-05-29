@@ -1,9 +1,11 @@
-
-
 <div id="commodity_information" style="width: 100%">
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">commodity</span>
         <span class="text-bold text-light-blue ">{{ $market->SalesForm->commodity }}</span>
+    </div>
+    <div class="d-flex justify-content-between">
+        <span class="text-bold text-gray-100">Type</span>
+        <span class="text-bold text-light-blue ">{{ $market->SalesForm->price_type }}</span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Type/Grade</span>
@@ -49,7 +51,11 @@
         <span class="text-bold text-gray-100">Offer Price</span>
         <span class="text-bold text-light-blue ">
 {{--                           {{ $market->offer_price }}--}}
-            {{ $market->SalesForm->price }}
+            @if($market->SalesForm->price_type=='Fix')
+                <td class="text-center">{{ $market->SalesForm->price }}</td>
+            @else
+                <td class="text-center">{{ $market->SalesForm->alpha  }}</td>
+            @endif
                         </span>
     </div>
     <div class="d-flex justify-content-between">
