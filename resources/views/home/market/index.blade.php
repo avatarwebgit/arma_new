@@ -11,6 +11,7 @@
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
                 let market_id = e.market_id;
+                console.log(market_id);
                 let difference = e.difference;
                 let timer = e.timer;
                 let status = e.status;
@@ -197,6 +198,7 @@
             });
 
         function show_market_result(id) {
+            console.log(id);
             $.ajax({
                 url: "{{ route('home.get_market_bit_result') }}",
                 data: {
