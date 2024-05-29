@@ -162,7 +162,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-12 col-md-4 mb-3 d-none" id="alpha_parent">
-                                                    <label for="step_price_competition">Alpha</label>
+                                                    <label for="step_price_competition">Tolerance For Alpha</label>
                                                     <input id="alpha" name="alpha" class="form-control"
                                                            value="{{ $market->alpha }}">
                                                     @error('alpha')
