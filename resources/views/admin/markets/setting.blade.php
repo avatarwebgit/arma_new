@@ -16,59 +16,6 @@
                                             @csrf
                                             <div class="row mt-4">
                                                 <div class="col-12 col-md-4 mb-3">
-                                                    <label for="ready_to_open">Ready to Open(min)</label>
-                                                    <input id="ready_to_open" type="number" name="ready_to_open"
-                                                           class="form-control"
-                                                           value="{{ $ready_to_open }}">
-                                                    @error('ready_to_open')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="date">Opening(min)</label>
-                                                    <input id="opening" type="number" name="opening"
-                                                           class="form-control"
-                                                           value="{{ $opening }}">
-                                                    @error('opening')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="date">Quotation 1/2 (min)</label>
-                                                    <input id="q_1" type="number" name="q_1" class="form-control"
-                                                           value="{{ $q_1 }}">
-                                                    @error('q_1')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="date">Quotation 2/2 (min)</label>
-                                                    <input id="q_2" type="number" name="q_2" class="form-control"
-                                                           value="{{ $q_2 }}">
-                                                    @error('q_2')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="q_3">Competition(min)</label>
-                                                    <input id="q_3" type="number" name="q_3" class="form-control"
-                                                           value="{{ $q_3 }}">
-                                                    @error('q_3')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-12 col-md-4 mb-3">
                                                     <label for="change_time">Change Market Table At(Time)</label>
                                                     <input id="change_time" type="time" name="change_time"
                                                            class="form-control"
@@ -89,17 +36,6 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 mb-3">
-                                                    <label for="term_conditions">Term & Conditions</label>
-                                                    <textarea id="term_conditions" name="term_conditions"
-                                                              class="form-control text_area">{{ $term_conditions }}</textarea>
-                                                    @error('term_conditions')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-
                                                 <div class="col-md-12 mt-3">
                                                     <button type="submit" class="btn btn-primary btn-block btn-sm">
                                                         Edit
@@ -129,10 +65,7 @@
             filebrowserUploadUrl: "{{ route('admin.ckeditor.upload', ['_token' => csrf_token()]) }}",
             filebrowserUploadMethod: 'form'
         });
-        CKEDITOR.replace('term_conditions', {
-            filebrowserUploadUrl: "{{ route('admin.ckeditor.upload', ['_token' => csrf_token()]) }}",
-            filebrowserUploadMethod: 'form'
-        });
+
     </script>
 @endpush
 

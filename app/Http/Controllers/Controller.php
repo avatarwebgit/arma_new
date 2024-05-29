@@ -21,19 +21,17 @@ class Controller extends BaseController
 
     public function statusTimeMarket($market, $force_determine_status = 0)
     {
-        $ready_to_duration = MarketSetting::where('key', 'ready_to_open')->pluck('value')->first();
-        $open_duration = MarketSetting::where('key', 'opening')->pluck('value')->first();
-        $q_1 = MarketSetting::where('key', 'q_1')->pluck('value')->first();
-        $q_2 = MarketSetting::where('key', 'q_2')->pluck('value')->first();
-        $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
-        $endMinutes = $open_duration + $q_1 + $q_2 + $q_3 + 3;
+        $ready_to_duration = $market->ready_to_duration;
+        $open_duration = $market->opening;
+        $q_1 = $market->q_1;
+        $q_2 = $market->q_2;
+        $q_3 = $market->q_3;
+//        $endMinutes = $open_duration + $q_1 + $q_2 + $q_3 + 3;
         $date = $market->date;
         $time = $market->time;
         $date_time = $date . ' ' . $time;
-
         $startTime = Carbon::parse($date_time);
         $now = Carbon::now();
-
         $time_to_close_bid_deposit = $startTime->copy()->addMinutes(-120);
 
         $benchmark1 = $startTime->copy()->addMinutes(-$ready_to_duration);
