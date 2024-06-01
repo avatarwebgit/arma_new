@@ -1,6 +1,5 @@
 @if(count($bids)>0)
     @foreach($bids as $item)
-        @if($item->is_win==1)
             <tr>
                 {{--        <td class="text-center">{{ $item->quantity }}</td>--}}
                 <td class="text-center">{{ $item->quantity }}</td>
@@ -17,7 +16,6 @@
                 </span>
                 @endif
             </tr>
-        @endif
     @endforeach
 @else
     <tr>

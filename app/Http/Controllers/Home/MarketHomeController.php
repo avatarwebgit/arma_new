@@ -551,9 +551,9 @@ class MarketHomeController extends Controller
                     'quantity_win' => $quantity_win,
                     'is_win' => $is_win,
                 ]);
-
-
-                $bids[] = $bid;
+                if ($is_win == 1) {
+                    $bids[] = $bid;
+                }
 
             }
 
