@@ -281,6 +281,7 @@ class MarketHomeController extends Controller
         $price = $market->SalesForm->price;
         $min_order = $market->SalesForm->min_order;
         $max_quantity = $market->SalesForm->max_quantity;
+        $max_quantity=str_replace(',', '', $max_quantity);
         $unit = $market->SalesForm->unit;
 
         $currency = $market->SalesForm->currency;
