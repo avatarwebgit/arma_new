@@ -385,7 +385,7 @@ class MarketHomeController extends Controller
             }
         }
 
-        if ($request['quantity'] < $min_order) {
+        if (intval($request['quantity']) < intval($min_order)) {
             $key = 'quantity';
             $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
