@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\Home\MarketHomeController;
 use App\Http\Controllers\Home\ProfileController;
+use App\Http\Controllers\Payment;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Auth;
@@ -256,7 +257,8 @@ Route::get('/logout', function () {
 Route::get('check_market/{id}', [IndexController::class, 'check_market'])->name('home.check_market');
 
 //PayPal
-Route::post('/paypal-payment/{user}',[PaypalController::class,'payment'])->name('payment.paypal');
+Route::post('/pay_bid_deposit',[Payment::class,'pay_bid_deposit'])->name('pay_bid_deposit');
+Route::post('/paypal-payment',[PaypalController::class,'payment'])->name('payment.paypal');
 Route::get('/paypal/verify/{user}/{amount}',[PaypalController::class,'verify'])->name('paypal.verify');
 Route::get('/paypal/cancel',[PaypalController::class,'cancel'])->name('paypal.cancel');
 
