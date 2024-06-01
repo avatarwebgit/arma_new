@@ -235,22 +235,19 @@
     </script>
     <script>
         function PayBidDeposit(market_id) {
-            let payment_type = $('input[name="payment_type"]:checked').val();
-            if (typeof payment_type == 'undefined') {
-                alert('Please select');
-                return;
-            }
-            let url="{{ route('pay_bid_deposit') }}";
+            let url = "{{ route('payment.paypal') }}";
+
             $.ajax({
                 url: url,
                 data: {
                     market_id: market_id,
-                    payment_type: payment_type,
-                    _token  : "{{ csrf_token() }}",
+                    _token: "{{ csrf_token() }}",
                 },
                 method: 'post',
-                success: function(data){
-                    console.log(data);
+                success: function (data) {
+                    if (data[0] == 1) {
+                        window.location.href = data[1];
+                    }
                 }
 
             })

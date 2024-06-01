@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Market;
 use App\Models\Notification;
 use App\Models\Settings;
 use App\Models\Transaction;
@@ -21,11 +22,11 @@ class PaypalController extends Controller
     {
         $this->clientId = env('PAYPAL_CLIENT_ID', '');  // Get PayPal client ID from .env
         $this->appSecret = env('PAYPAL_APP_SECRET', '');  // Get PayPal app secret from .env
-//        $this->baseURL = env('PAYPAL_MODE') === 'sandbox'
-//            ? 'https://api-m.sandbox.paypal.com'
-//            : 'https://api-m.paypal.com';  // Determine if we are using PayPal sandbox or production
+        $this->baseURL = env('PAYPAL_MODE') === 'sandbox'
+            ? 'https://api-m.sandbox.paypal.com'
+            : 'https://api-m.paypal.com';  // Determine if we are using PayPal sandbox or production
 
-        $this->baseURL ='https://api-m.paypal.com';
+//        $this->baseURL = 'https://api-m.paypal.com';
     }
 
     // Function to display the PayPal payment form (Blade view)
@@ -218,21 +219,21 @@ class PaypalController extends Controller
         // Decode the JSON response
         $data = json_decode($response, true);
 
-
         // Return the access token
         return $data['access_token'];
     }
 
 
-
     public function payment(Request $request)
     {
-        dd($request->all());
+        $market = Market::where('id', $request->market_id)->first();
+        $price = $market->bid_deposit;
+        $user = auth()->user();
         $src = null;
         if (session()->has('url_next')) {
             $src = session()->get('url_next');
         }
-        $price = getPriceFromCredit(Settings::first()->amount,$request->credit) ;
+
 
         $accessToken = $this->generateAccessToken();  // Get access token for PayPal API authentication
 
@@ -248,8 +249,8 @@ class PaypalController extends Controller
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
             'intent' => 'sale',
-            "payer"=> [
-                "payment_method"=>"paypal"
+            "payer" => [
+                "payment_method" => "paypal"
             ],
 
             'transactions' => [
@@ -260,9 +261,9 @@ class PaypalController extends Controller
                     ]
                 ]
             ],
-            'redirect_urls'=>[
-                "return_url"=> route('student.paypal.verify',['user'=>$user->id,'amount'=>$price]),
-                "cancel_url"=> route('student.paypal.cancel')
+            'redirect_urls' => [
+                "return_url" => route('paypal.verify', ['user' => $user->id, 'amount' => $price]),
+                "cancel_url" => route('paypal.cancel')
             ]
         ]));
 
@@ -273,20 +274,17 @@ class PaypalController extends Controller
         $response = json_decode($response, true);
 
 
-
-
-
         // Loop through the order links to find the "approve" link
 
         foreach ($response['links'] as $link) {
 
             if ($link['rel'] == 'approval_url') {
-
-                // Return the approve link
-                return response()->json(['url' => $link['href']]);
+                // Return the approval link
+                return response()->json([1,$link['href']]);
             }
         }
     }
+
     public function cancel(Request $request)
     {
 
@@ -295,7 +293,7 @@ class PaypalController extends Controller
     }
 
 
-    public function verify(Request $request,User $user,$amount)
+    public function verify(Request $request, User $user, $amount)
     {
         $accessToken = $this->generateAccessToken();  // Get access token for PayPal API authentication
 
@@ -322,20 +320,20 @@ class PaypalController extends Controller
         $response = json_decode($response, true);
 
 
-        if($response['state'] =='approved'){
+        if ($response['state'] == 'approved') {
             try {
-                $transaction =[
+                $transaction = [
                     'user_id' => $user->id,
-                    'amount'=>$amount,
-                    'type_id'=>1,
+                    'amount' => $amount,
+                    'type_id' => 1,
                     'token' => $request->token,
                     'PayerID' => $request->PayerID,
-                    'increase'=>1,
+                    'increase' => 1,
 
                 ];
-                $credit = convertPriceToCredit(Settings::first()->amount,$amount);
+                $credit = convertPriceToCredit(Settings::first()->amount, $amount);
 
-                $user->increase($credit,$transaction);
+                $user->increase($credit, $transaction);
 
                 alert()->success('Your account has been charged successfully');
 
@@ -343,10 +341,8 @@ class PaypalController extends Controller
                 return redirect()->to(session('url_previous'));
 
 
-
-
-            }catch (\Exception $e) {
-                Log::error($e->getMessage().'Line:'.$e->getLine());
+            } catch (\Exception $e) {
+                Log::error($e->getMessage() . 'Line:' . $e->getLine());
                 alert()->error('Error For Verifying');
                 return redirect()->back();
             }
