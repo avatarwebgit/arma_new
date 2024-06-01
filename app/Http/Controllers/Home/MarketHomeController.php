@@ -215,9 +215,9 @@ class MarketHomeController extends Controller
             $market = Market::where('id', $market_id)->first();
             $status = $market->status;
             $currency = $market->SalesForm->currency;
-//            if ($user_id != $market->user_id) {
-//                return response()->json([1, 'error', 'You Do Not Have Permission To Change Offer']);
-//            }
+            if (!($user_id == $market->user_id or auth()->user()->hasRole('admin'))) {
+                return response()->json([1, 'error', 'You Do Not Have Permission To Change Offer']);
+            }
 //            if ($status == '4') {
 //                //quotation 1/2
 //                $pre_max_quantity = $market->SalesForm->max_quantity;
@@ -350,7 +350,7 @@ class MarketHomeController extends Controller
         }
         if ($market_type == 'Formulla') {
             $alpha = $market->SalesForm->alpha;
-            $base_price = intval($alpha) - ($market->alpha);
+            $base_price = intval($alpha) + ($market->alpha);
             $price = $alpha;
             $currency = '';
         }
