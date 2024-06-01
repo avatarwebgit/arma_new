@@ -225,9 +225,9 @@ class PaypalController extends Controller
 
 
 
-    public function payment(User $user, Request $request)
+    public function payment(Request $request)
     {
-
+        dd($request->all());
         $src = null;
         if (session()->has('url_next')) {
             $src = session()->get('url_next');
