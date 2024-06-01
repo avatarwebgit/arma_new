@@ -218,6 +218,7 @@ class MarketHomeController extends Controller
             if (!($user_id == $market->user_id or auth()->user()->hasRole('admin'))) {
                 return response()->json([1, 'error', 'You Do Not Have Permission To Change Offer']);
             }
+
 //            if ($status == '4') {
 //                //quotation 1/2
 //                $pre_max_quantity = $market->SalesForm->max_quantity;
@@ -246,7 +247,12 @@ class MarketHomeController extends Controller
                         return response()->json([1, 'error', 'Maximum Price You Can Enter is: ' . $pre_price . ' ' . $currency]);
                     }
 //                    $market->update(['offer_price' => $price]);
-                    $market->SalesForm()->update(['price' => $price]);
+                    if ($market_type == 'Formulla') {
+                        $market->SalesForm()->update(['alpha' => $price]);
+                    }else{
+                        $market->SalesForm()->update(['price' => $price]);
+                    }
+
                 }
             }
             broadcast(new ChangeSaleOffer($market->id));
