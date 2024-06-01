@@ -329,7 +329,6 @@ class PaypalController extends Controller
                     'token' => $request->token,
                     'PayerID' => $request->PayerID,
                     'increase' => 1,
-
                 ];
                 $credit = convertPriceToCredit(Settings::first()->amount, $amount);
 
