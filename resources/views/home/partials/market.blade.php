@@ -221,7 +221,7 @@
                 data-today-last="{{ $market->is_today_last }}"
             >
                 <td class="position-relative">
-                    @if(1 <$market->status and  $market->status< 7){
+                    @if(1 <$market->status and  $market->status< 7)
                     <div class="animation_main_div">
                         <div class="circle " style="background-color: {{ $color }} !important;"></div>
                         <div class="circle2" style="background-color: {{ $color }} !important;"></div>
@@ -232,8 +232,6 @@
                         </div>
                     </div>
                     @endif
-
-
                     <span>
                         {{ $market->SalesForm->commodity }}
                     </span>

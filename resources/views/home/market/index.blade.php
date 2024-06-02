@@ -297,10 +297,6 @@
             border-radius: 0;
             color: white;
         }
-        .animation_main_div{
-            position: absolute;
-            left: 10px;
-        }
 
         .display-none {
             display: none;
