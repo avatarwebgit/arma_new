@@ -244,10 +244,10 @@
             let alertBox=$('#marketAlertBox-' + market_id);
             alertBox.text(msg);
             alertBox.css('background',bg);
-            alertBox.slideUp();
+            alertBox.fadeIn();
             setTimeout(function (){
-                alertBox.slideDown();
-            },3000)
+                alertBox.fadeOut();
+            },2000)
         }
         function PayBidDeposit(market_id) {
             let url = "{{ route('payment.paypal') }}";
@@ -278,7 +278,7 @@
 @section('style')
     <style>
         .alert-box{
-            position: absolute;
+            position: fixed;
             left: 40px;
             bottom: 40px;
             background-color: red;
