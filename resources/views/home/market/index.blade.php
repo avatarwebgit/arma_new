@@ -187,6 +187,9 @@
             .listen('ChangeSaleOffer', function (e) {
                 let market_id = e.market_id;
                 refreshSellerTable(market_id);
+                let msg='Seller decreased offer Price';
+                let bg='blue';
+                ShowAlert(market_id,msg,bg);
             });
         window.Echo.channel('market-setting-updated-channel')
             .listen('MarketTimeUpdated', function (e) {
@@ -196,6 +199,9 @@
             .listen('NewBidCreated', function (e) {
                 let market_id = e.market_id;
                 refreshBidTable(market_id);
+                let msg='New Bid Created';
+                let bg='green';
+                ShowAlert(market_id,msg,bg);
             });
 
         function show_market_result(id) {
@@ -234,6 +240,15 @@
 
     </script>
     <script>
+        function ShowAlert(market_id,msg,bg){
+            let alertBox=$('#marketAlertBox-' + market_id);
+            alertBox.text(msg);
+            alertBox.css('background',bg);
+            alertBox.slideUp();
+            setTimeout(function (){
+                alertBox.slideDown();
+            },3000)
+        }
         function PayBidDeposit(market_id) {
             let url = "{{ route('payment.paypal') }}";
             let user_id = {{ auth()->id() }};
@@ -262,7 +277,26 @@
 
 @section('style')
     <style>
-
+        .alert-box{
+            position: absolute;
+            left: 40px;
+            bottom: 40px;
+            background-color: red;
+            width: 300px;
+            height: auto;
+            display: none;
+            text-align: left;
+            vertical-align: middle;
+            padding: 12px;
+            color: white;
+            border-radius: 10px;
+        }
+        .pay-btn{
+            padding: 4px 33px;
+            background-color: #dbc932;
+            border-radius: 0;
+            color: white;
+        }
         .animation_main_div{
             position: absolute;
             left: 10px;
@@ -515,5 +549,10 @@
         @include('home.market.benchmark_info')
     </div>
     @include('home.market.winner_modal')
-
+    <div id="marketAlertBox-{{ $market->id }}" class="alert-box">
+        lorem ipsum
+        lorem ipsum
+        lorem ipsum
+        lorem ipsum
+    </div>
 @endsection

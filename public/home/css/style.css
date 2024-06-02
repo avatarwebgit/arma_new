@@ -2649,14 +2649,12 @@ tbody.ob-heading {
 /*# sourceMappingURL=style.css.map */
 
 .animation_main_div {
-    position: absolute;
-    left: 20px;
-    top: -3px;
     display: block;
     width: 5px;
     margin: 20px 10px;
 }
-.position-relative{
+
+.position-relative {
     position: relative !important;
 }
 
@@ -2952,7 +2950,7 @@ img.logo {
 
     .navbar-nav > .header-custom-icon {
         width: 65%;
-        min-width: 300px;
+        /*min-width: 300px;*/
     }
 
     .search_and_btns {
