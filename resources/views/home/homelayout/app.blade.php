@@ -474,6 +474,8 @@
 
         $('#bid_button-'+id).prop('disabled', true);
         $('#bid_button-'+id).removeClass('btn-success');
+
+        $('#PayBidDepositBTN-'+id).prop('disabled', true);
     }
 
 

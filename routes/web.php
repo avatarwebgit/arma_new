@@ -228,6 +228,7 @@ Route::name('seller.')->prefix('/seller/')->middleware('seller')->group(function
     Route::put('update/profile/{user}', [SellerController::class, 'updateProfile'])->name('update.profile');
     Route::put('update/password', [SellerController::class, 'updatePassword'])->name('update.password');
     Route::get('profile', [SellerController::class, 'profile'])->name('profile');
+    Route::get('wallet', [SellerController::class, 'wallet'])->name('wallet');
     Route::get('requests', [SellerController::class, 'requests'])->name('requests');
 });
 Route::name('bidder.')->prefix('/bidder/')->middleware('bidder')->group(function () {
@@ -235,6 +236,7 @@ Route::name('bidder.')->prefix('/bidder/')->middleware('bidder')->group(function
     Route::put('update/profile/{user}', [BidderController::class, 'updateProfile'])->name('update.profile');
     Route::put('update/password', [BidderController::class, 'updatePassword'])->name('update.password');
     Route::get('profile', [BidderController::class, 'profile'])->name('profile');
+    Route::get('wallet', [BidderController::class, 'wallet'])->name('wallet');
     Route::get('requests', [BidderController::class, 'requests'])->name('requests');
 });
 Route::name('profile.')->prefix('/profile/')->group(function () {

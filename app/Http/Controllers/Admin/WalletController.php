@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
@@ -11,17 +12,9 @@ class WalletController extends Controller
 {
     public function index(User $user)
     {
-        $wallets = $user->wallets()->paginate(100);
-        $total_amount = 0;
-        foreach ($wallets as $wallet) {
-            $amount = $wallet->amount;
-            if ($wallet->type == 'positive') {
-                $total_amount = $total_amount + $amount;
-            } else {
-                $total_amount = $total_amount - $amount;
-            }
-        }
-        return view('admin.wallets.index', compact('wallets', 'user', 'total_amount'));
+        $wallet = $this->calculate_user_wallet($user);
+        $transactions = Transaction::where('user_id',$user->id)->latest()->get();
+        return view('admin.wallets.index', compact('wallet', 'user', 'transactions'));
     }
 
     public function wallet_change(Request $request)
@@ -30,13 +23,12 @@ class WalletController extends Controller
             $user_id = $request->user_id;
             $type = $request->type;
             $amount = $request->amount;
-            $description =$request->description;
-            $status = 'change by admin';
-            wallet::create([
+            $description = $request->description;
+            Transaction::create([
                 'user_id' => $user_id,
                 'type' => $type,
                 'amount' => $amount,
-                'status' => $status,
+                'status' => 1,
                 'description' => $description,
             ]);
             session()->flash('success', 'wallet change successfully');

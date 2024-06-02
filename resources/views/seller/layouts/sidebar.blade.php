@@ -31,6 +31,17 @@
                         </a>
                     </li>
                     <li class="">
+                        <a href="{{ route('seller.wallet') }}"
+                           class="dash-link">
+                            <span class="dash-micon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <span class="dash-mtext custom-weight">
+                                {{ __('Wallet') }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="">
                         <a href="{{ route('sale_form',['page_type'=>'Create']) }}" class="dash-link">
                             <span class="dash-micon">
                                 <i class="fa fa-pen"></i>

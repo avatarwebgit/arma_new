@@ -26,26 +26,30 @@
                             <div class="col-12 mb-3">
                                 <h5>
                                     <span>wallet: </span>
-                                    <span>{{ $total_amount }}</span>
+                                    <span>{{ number_format($wallet).'$' }}</span>
                                 </h5>
                                 <div>
                                     <label for="wallet">
                                         amount ($)
                                         <input id="wallet" class="form-control" name="wallet" value="0">
                                     </label>
-                                    <button type="button" onclick="changeUserWallet({{ $user->id }},'incremental')"
+
+                                </div>
+
+                                <div class="mt-3">
+                                    <label for="wallet_description">Description *</label>
+                                    <textarea id="wallet_description" class="form-control form-control-sm"
+                                              name="wallet_description"></textarea>
+                                </div>
+                                <div class="mt-3">
+                                    <button type="button" onclick="changeUserWallet({{ $user->id }},1)"
                                             class="btn btn-success">
                                         incremental
                                     </button>
-                                    <button type="button" onclick="changeUserWallet({{ $user->id }},'decremental')"
+                                    <button type="button" onclick="changeUserWallet({{ $user->id }},0)"
                                             class="btn btn-danger">
                                         decremental
                                     </button>
-                                </div>
-
-                                <div>
-                                    <label for="wallet_description">Description *</label>
-                                    <textarea id="wallet_description" class="form-control form-control-sm" name="wallet_description"></textarea>
                                 </div>
 
                             </div>
@@ -64,19 +68,37 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($wallets as $key=>$item)
+                                        @foreach($transactions as $key=>$item)
                                             <tr>
                                                 <td>
                                                     {{ $key }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->amount }}
+                                                    {{ number_format($item->amount).' $' }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->status }}
+                                                    @if($item->status==0)
+                                                        <span class="text-danger">
+                                                            <i class="fa fa-times-circle"></i>
+                                                        </span>
+                                                    @else
+                                                        <span class="text-success">
+                                                             <i class="fa fa-check"></i>
+                                                        </span>
+                                                    @endif
                                                 </td>
+
                                                 <td>
-                                                    {{ $item->type }}
+                                                    @if($item->type==0)
+                                                        <span class="text-danger">
+                                                            <i class="fa fa-arrow-down"></i>
+                                                        </span>
+
+                                                    @else
+                                                        <span class="text-success">
+                                                        <i class="fa fa-arrow-up"></i>
+                                                        </span>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     {{ $item->description }}
@@ -88,11 +110,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="text-center">
-                                        <div class="d-flex justify-content-center mt-4">
-                                            {{ $wallets->links() }}
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -111,11 +129,11 @@
         function changeUserWallet(user_id, type) {
             let amount = $('#wallet').val();
             let wallet_description = $('#wallet_description').val();
-            if (amount<10){
+            if (amount < 10) {
                 alert('minimum amount is 10$');
                 return false;
             }
-            if (wallet_description.length==0){
+            if (wallet_description.length == 0) {
                 alert('wallet description is required');
                 return false;
             }
@@ -126,12 +144,12 @@
                     user_id: user_id,
                     type: type,
                     amount: amount,
-                    wallet_description: wallet_description,
+                    description: wallet_description,
                 },
                 dataType: 'json',
                 method: 'post',
                 success: function (response) {
-                    if (response[0]===1){
+                    if (response[0] === 1) {
                         window.location.reload();
                     }
                 },

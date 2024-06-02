@@ -2654,6 +2654,9 @@ tbody.ob-heading {
     margin: 20px 10px;
 }
 
+.position-relative {
+    position: relative !important;
+}
 
 .circle {
     width: 5px;
@@ -2947,7 +2950,7 @@ img.logo {
 
     .navbar-nav > .header-custom-icon {
         width: 65%;
-        min-width: 300px;
+        /*min-width: 300px;*/
     }
 
     .search_and_btns {

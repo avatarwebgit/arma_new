@@ -226,13 +226,25 @@ class PaypalController extends Controller
 
     public function payment(Request $request)
     {
-        $market = Market::where('id', $request->market_id)->first();
-        $price = $market->bid_deposit;
-        $user = auth()->user();
-        $src = null;
-        if (session()->has('url_next')) {
-            $src = session()->get('url_next');
+        $market=null;
+        if ($request->has('market_id')) {
+            $market = Market::where('id', $request->market_id)->first();
+            $price = $market->bid_deposit;
+        }else{
+            $price = $request->price;
         }
+
+        $redirectUrl = $request->redirect_route;
+        session()->put('redirect', $redirectUrl);
+        if ($request->has('description')) {
+            session()->put('description', $request->description);
+        } else {
+            $description = 'Transaction Bid Deposit For Market ID:' . $market;
+            session()->put('description', $description);
+        }
+
+
+        $user_id = $request->user_id;
 
 
         $accessToken = $this->generateAccessToken();  // Get access token for PayPal API authentication
@@ -262,7 +274,7 @@ class PaypalController extends Controller
                 ]
             ],
             'redirect_urls' => [
-                "return_url" => route('paypal.verify', ['user' => $user->id, 'amount' => $price]),
+                "return_url" => route('paypal.verify', ['user' => $user_id, 'amount' => $price]),
                 "cancel_url" => route('paypal.cancel')
             ]
         ]));
@@ -280,14 +292,13 @@ class PaypalController extends Controller
 
             if ($link['rel'] == 'approval_url') {
                 // Return the approval link
-                return response()->json([1,$link['href']]);
+                return response()->json([1, $link['href']]);
             }
         }
     }
 
     public function cancel(Request $request)
     {
-
         alert()->error('Cancelled');
         return redirect()->back();
     }
@@ -296,12 +307,8 @@ class PaypalController extends Controller
     public function verify(Request $request, User $user, $amount)
     {
         $accessToken = $this->generateAccessToken();  // Get access token for PayPal API authentication
-
         $url = "{$this->baseURL}/v1/payments/payment/{$request->paymentId}/execute";  // Endpoint URL for creating an order
-
-
         $ch = curl_init($url);
-
         // Set cURL options
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -312,38 +319,30 @@ class PaypalController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
             'payer_id' => $request->PayerID
         ]));
-
         // Execute cURL session and close it
         $response = curl_exec($ch);
         curl_close($ch);
         // Decode the JSON response
         $response = json_decode($response, true);
-
-
         if ($response['state'] == 'approved') {
             try {
+                $description=session('description');
                 $transaction = [
                     'user_id' => $user->id,
                     'amount' => $amount,
-                    'type_id' => 1,
+                    'status' => 1,
                     'token' => $request->token,
                     'PayerID' => $request->PayerID,
-                    'increase' => 1,
+                    'type' => 1,
+                    'description' => $description,
                 ];
-                $credit = convertPriceToCredit(Settings::first()->amount, $amount);
 
-                $user->increase($credit, $transaction);
-
-                alert()->success('Your account has been charged successfully');
-
-
-                return redirect()->to(session('url_previous'));
-
+                Transaction::create($transaction);
+                $redirectUrl = session('redirect');
+                return redirect()->to($redirectUrl);
 
             } catch (\Exception $e) {
-                Log::error($e->getMessage() . 'Line:' . $e->getLine());
-                alert()->error('Error For Verifying');
-                return redirect()->back();
+                dd($e->getMessage());
             }
         }
     }

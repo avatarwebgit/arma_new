@@ -83,20 +83,20 @@ class Controller extends BaseController
             //exists min-price
 //            $market_min_price = $market->offer_price;
             $market_min_price = $market->SalesForm->price;
-            $market_min_price = intval($market_min_price)-1;
+            $market_min_price = intval($market_min_price) - 1;
             $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->get();
-            if (count($bid_touch_price)<2) {
+            if (count($bid_touch_price) < 2) {
                 $status = 7;
                 $difference = 0;
             }
-            if($status!=7){
+            if ($status != 7) {
                 //check if total quality < $market->quantity
                 $bids_quantity = $market->Bids()->sum('quantity');
                 $market_quantity = $market->SalesForm->max_quantity;
-                $market_quantity=str_replace(',','',$market_quantity);
+                $market_quantity = str_replace(',', '', $market_quantity);
                 if ($bids_quantity > $market_quantity) {
 
-                }else{
+                } else {
                     //اگر مجموع کالاهای درخواستی از کالاهای موجود کمتر بود مارکت با موفقیت به پایان میرسد
                     $status = 7;
                     $difference = 0;
@@ -113,6 +113,7 @@ class Controller extends BaseController
         }
         return [$difference, $status, $benchmark1, $benchmark2, $benchmark3, $benchmark4, $benchmark5, $benchmark6, $date_time, $time_to_close_bid_deposit];
     }
+
     public function convertTime($seconds)
     {
         $remaining = $seconds % 60;
@@ -231,8 +232,8 @@ class Controller extends BaseController
                     $difference = $result[0];
                     $timer = $this->MarketTimer($difference);
                     $status = $market['status'];
-                    $step=$market->step_price_competition;
-                    broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status,$step));
+                    $step = $market->step_price_competition;
+                    broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status, $step));
                 }
             }
 
@@ -241,8 +242,9 @@ class Controller extends BaseController
         }
     }
 
-    public function check_market($id){
-        $market=Market::find($id);
+    public function check_market($id)
+    {
+        $market = Market::find($id);
         $result = $this->statusTimeMarket($market);
     }
 
@@ -314,8 +316,8 @@ class Controller extends BaseController
                     $difference = $result[0];
                     $timer = $this->MarketTimer($difference);
                     $status = $market['status'];
-                    $step=$market->step_price_competition;
-                    broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status,$step));
+                    $step = $market->step_price_competition;
+                    broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status, $step));
                 }
             }
 
@@ -342,6 +344,18 @@ class Controller extends BaseController
             $market_is_open = 1;
         }
         return [$market_is_open];
+    }
+
+    public function calculate_user_wallet($user)
+    {
+        $transactions = $user->Transactions;
+        $wallet = 0;
+        foreach ($transactions as $transaction) {
+            $type = $transaction->type;
+            $i = $type == 1 ? 1 : -1;
+            $wallet = $wallet + ($i * $transaction->amount);
+        }
+        return $wallet;
     }
 
 }
