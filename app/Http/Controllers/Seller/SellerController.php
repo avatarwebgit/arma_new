@@ -22,6 +22,7 @@ use App\Models\ShippingTerm;
 use App\Models\TargetMarket;
 use App\Models\THCIncluded;
 use App\Models\ToleranceWeightBy;
+use App\Models\Transaction;
 use App\Models\Units;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,6 +41,14 @@ class SellerController extends Controller
     {
         $user = auth()->user();
         return view('seller.profile', compact('user'));
+    }
+
+    public function wallet()
+    {
+        $user = auth()->user();
+        $wallet = $this->calculate_user_wallet($user);
+        $transactions = Transaction::where('user_id',$user->id)->latest()->get();
+        return view('seller.wallets.index', compact('wallet', 'user', 'transactions'));
     }
 
     public function updateProfile(User $user, Request $request)

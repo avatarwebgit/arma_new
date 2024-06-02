@@ -266,6 +266,6 @@
 </script>
 
 @include('admin.layouts.includes.alerts')
-@stack('script')
+@yield('script')
 </body>
 </html>

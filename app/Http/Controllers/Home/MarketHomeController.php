@@ -11,6 +11,8 @@ use App\Models\BidHistory;
 use App\Models\Market;
 use App\Models\MarketSetting;
 use App\Models\MarketStatus;
+use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,10 +22,13 @@ class MarketHomeController extends Controller
 {
     public function bid(Market $market)
     {
+
         if (!auth()->check()) {
             session()->flash('Login', 'Please login');
             return redirect()->route('home.index');
         }
+        $user = auth()->user();
+        $wallet = $this->calculate_user_wallet($user);
         $market_status = $market->status;
 //        if ($market_status == 4 or $market_status == 5 or $market_status == 6 ) {
 //            session()->flash('market_open_finished','You Just Enter The Market When Is Open');
@@ -42,7 +47,7 @@ class MarketHomeController extends Controller
         $bids = $market->Bids()->orderBy('price', 'desc')->take(10)->get();
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions'));
+        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions', 'wallet'));
     }
 
     public function GetMarket(Request $request)
@@ -249,7 +254,7 @@ class MarketHomeController extends Controller
 //                    $market->update(['offer_price' => $price]);
                     if ($market_type == 'Formulla') {
                         $market->SalesForm()->update(['alpha' => $price]);
-                    }else{
+                    } else {
                         $market->SalesForm()->update(['price' => $price]);
                     }
 
@@ -286,17 +291,18 @@ class MarketHomeController extends Controller
 //        $price = $market->offer_price;
         $price = $market->SalesForm->price;
         $min_order = $market->SalesForm->min_order;
-        $min_order=str_replace(',', '', $min_order);
+        $min_order = str_replace(',', '', $min_order);
         $max_quantity = $market->SalesForm->max_quantity;
-        $max_quantity=str_replace(',', '', $max_quantity);
+        $max_quantity = str_replace(',', '', $max_quantity);
         $unit = $market->SalesForm->unit;
+        $bid_deposit = $market->bid_deposit;
 
         $currency = $market->SalesForm->currency;
         $base_price = $price / 2;
 
 
         try {
-            $bid_permission = $this->Bid_Permissions();
+            $bid_permission = $this->Bid_Permissions($bid_deposit);
 
             if ($bid_permission['response'] === 'error') {
                 return response()->json([$bid_permission['response'], $bid_permission['message']]);
@@ -462,7 +468,7 @@ class MarketHomeController extends Controller
         return [0 => true];
     }
 
-    public function Bid_Permissions()
+    public function Bid_Permissions($bid_deposit)
     {
         //            //user must login
         if (!auth()->check()) {
@@ -480,6 +486,11 @@ class MarketHomeController extends Controller
             $msg = 'You Do not have permission to Bid!';
             return ['response' => 'error', 'message' => $msg];
         }
+        $wallet = $this->calculate_user_wallet($user);
+        if ($wallet < $bid_deposit) {
+            $msg = 'Bid Deposit Error!';
+            return ['response' => 'error', 'message' => $msg];
+        }
         return ['response' => true, 'message' => 'success'];
     }
 
@@ -489,7 +500,7 @@ class MarketHomeController extends Controller
             $market_id = $request->id;
             $market = Market::where('id', $market_id)->first();
             $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
-            $ids = $this->BidWinner($market);
+            $ids = $this->BidWinner($market_id);
             $bids = [];
             $max_quantity = str_replace(',', '', $market->SalesForm->max_quantity);
             $remain_quantity = $max_quantity;
@@ -520,27 +531,6 @@ class MarketHomeController extends Controller
                     $alpha = $market->SalesForm->alpha;
                     $price = $alpha;
                 }
-
-//                $best_bid = $market->Bids()->max('price');
-//                $is_win = 1;
-//                if ($best_bid == $price) {
-//                    if ($bid->price == $best_bid) {
-//                        $quantites = $market->Bids()->where('price', $best_bid)->get();
-//                        $quantites = $quantites->sum('quantity');
-//                        $count_price = $market->Bids()->where('price', $best_bid)->count();
-//
-//                        if ($count_price > 1) {
-//                            if ($max_quantity == $quantites) {
-//                                $is_win = 1;
-//                            } else {
-//                                $is_win = 0;
-//                            }
-//                        } else {
-//                            $is_win = 1;
-//                        }
-//                    }
-//                }
-
 
                 //اگر تعداد کالا کمتر از مینیموم باشد بید بازنده است
                 if ($quantity_win < $market->SalesForm->min_order) {
@@ -576,6 +566,19 @@ class MarketHomeController extends Controller
             if ($id_exists_in_array == 1) {
                 $show_win_modal = 1;
             }
+            //user winner
+            foreach ($win_user_ids as $user_id) {
+                $description = 'Decrease Wallet For Bid Deposit Market ID:' . $market;
+                $transaction = [
+                    'user_id' => $user_id,
+                    'amount' => $market->bid_deposit,
+                    'status' => 1,
+                    'type' => 0,
+                    'description' => $description,
+                ];
+                Transaction::create($transaction);
+            }
+
             return response()->json([1, $view, $show_win_modal]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SalesOfferForm;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,14 @@ class BidderController extends Controller
     {
         $user = auth()->user();
         return view('bidder.profile', compact('user'));
+    }
+
+    public function wallet()
+    {
+        $user = auth()->user();
+        $wallet = $this->calculate_user_wallet($user);
+        $transactions = Transaction::where('user_id',$user->id)->latest()->get();
+        return view('bidder.wallets.index', compact('wallet', 'user', 'transactions'));
     }
 
     public function updateProfile(User $user, Request $request)

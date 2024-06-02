@@ -236,10 +236,15 @@
     <script>
         function PayBidDeposit(market_id) {
             let url = "{{ route('payment.paypal') }}";
+            let user_id = {{ auth()->id() }};
+            let redirect_route = "{{ route('home.bid', ['market' => ':market']) }}";
+            redirect_route = redirect_route.replace(':market', market_id);
 
             $.ajax({
                 url: url,
                 data: {
+                    user_id: user_id,
+                    redirect_route: redirect_route,
                     market_id: market_id,
                     _token: "{{ csrf_token() }}",
                 },
@@ -257,6 +262,11 @@
 
 @section('style')
     <style>
+
+        .animation_main_div{
+            position: absolute;
+            left: 10px;
+        }
 
         .display-none {
             display: none;

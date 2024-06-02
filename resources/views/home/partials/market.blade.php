@@ -32,6 +32,8 @@
                 data-today-last="{{ $market->is_today_last }}"
             >
                 <td>
+
+
                     {{ $market->SalesForm->commodity }}
                 </td>
                 <td>
@@ -218,8 +220,23 @@
                 data-benchmark6="{{ $market->benchmark6 }}"
                 data-today-last="{{ $market->is_today_last }}"
             >
-                <td>
-                    {{ $market->SalesForm->commodity }}
+                <td class="position-relative">
+                    @if(1 <$market->status and  $market->status< 7){
+                    <div class="animation_main_div">
+                        <div class="circle " style="background-color: {{ $color }} !important;"></div>
+                        <div class="circle2" style="background-color: {{ $color }} !important;"></div>
+                        <div class="circle3" style="background-color: {{ $color }} !important;"></div>
+                        <div class="circle4" style="background-color: {{ $color }} !important;"></div>
+                        <div class="logo-div-send">
+                            <!--logo or anything put here -->
+                        </div>
+                    </div>
+                    @endif
+
+
+                    <span>
+                        {{ $market->SalesForm->commodity }}
+                    </span>
                 </td>
                 <td>
                     {{ $market->SalesForm->max_quantity.'('.$market->SalesForm->unit.')' }}

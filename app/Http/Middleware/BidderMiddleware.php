@@ -16,6 +16,7 @@ class BidderMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+
         if (auth()->user()->hasRole('buyer')){
             return $next($request);
         }
