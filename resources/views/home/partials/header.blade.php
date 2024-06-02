@@ -17,7 +17,7 @@
                 @endphp
                 @foreach($menus as $menu)
                     @if($menu->id==2)
-                        <li class="nav-item d-flex align-items-center mr-3">
+                        <li class="nav-item d-flex align-items-center">
                             <a class="nav-link" href="{{ route('home.menus',['menus'=>$menu->id]) }}"
                                aria-haspopup="true"
                                aria-expanded="false">
@@ -25,7 +25,7 @@
                             </a>
                         </li>
                     @else
-                        <li class="nav-item dropdown d-flex align-items-center mr-3">
+                        <li class="nav-item dropdown d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" href="{{ route('home.menus',['menus'=>$menu->id]) }}"
                                data-toggle="dropdown"
                                aria-haspopup="true"
