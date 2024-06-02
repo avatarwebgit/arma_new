@@ -247,7 +247,7 @@
             alertBox.fadeIn();
             setTimeout(function (){
                 alertBox.fadeOut();
-            },2000)
+            },4000)
         }
         function PayBidDeposit(market_id) {
             let url = "{{ route('payment.paypal') }}";

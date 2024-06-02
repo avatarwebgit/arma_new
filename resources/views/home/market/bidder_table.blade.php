@@ -1,6 +1,6 @@
 @foreach($bids as $key=>$bid)
     <tr>
-        <td class="text-center">
+        <td class="text-center @if(auth()->id()===$bid->user_id) bg-info @endif">
             <span>
                 @auth
                     @if(auth()->id()===$bid->user_id)
