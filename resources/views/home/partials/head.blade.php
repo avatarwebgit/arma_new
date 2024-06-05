@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('home/css/font-awsome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset("vendor/cookie-consent/css/cookie-consent.css")}}">
 {{--    <meta name="viewport" content="width=1024">--}}
+
+    @yield('style')
+    @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
         html{
             overflow-x: hidden !important;
@@ -44,8 +47,26 @@
         .timer-bold{
             font-size: 10pt;;
             font-weight: bold;
+
+        }
+        @media screen and (min-width:992px ){
+            #headerMenu .navbar-nav{
+                align-items: center !important;
+                margin-top: 25px;
+            }
+            .menu-mobile{
+                display: none !important;
+            }
+        }
+
+        @media screen and (max-width:992px ){
+            .search_and_btns {
+                flex-direction: row-reverse !important;
+                padding: 28px 28px 28px 15px !important;
+            }
+            .menu-des{
+                display: none !important;
+            }
         }
     </style>
-    @yield('style')
-    @vite(['resources/sass/app.scss','resources/js/app.js'])
 </head>

@@ -3107,7 +3107,7 @@ footer input::placeholder {
 }
 
 .validate_modal .modal-content {
-    background-color: #c65b5b;
+    background-color: #ff4e2c;
     border-radius: 20px !important;
 }
 
@@ -3132,6 +3132,7 @@ footer input::placeholder {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0;
 }
 
 .validate_modal .modal-header span {
