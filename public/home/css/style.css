@@ -3097,14 +3097,13 @@ footer input::placeholder {
 @media (min-width: 576px) {
     .validate_modal {
         max-width: 500px !important;
-        margin: 1.75rem auto;
-        color: black !important;
     }
 
 }
 
 .validate_modal {
     color: black !important;
+    margin: 120px auto;
 }
 
 .validate_modal .modal-content {
