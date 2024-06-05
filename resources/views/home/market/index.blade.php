@@ -564,8 +564,8 @@
                     ...
                 </div>
                 <div class="modal-footer" style="justify-content: space-between;border: 0">
-                    <button style="width: 48%;background-color: white;color:black;border-radius: 8px" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button style="width: 48%;background-color: white;color:black;border-radius: 8px" type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
                 </div>
             </div>
         </div>
