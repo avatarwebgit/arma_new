@@ -49,7 +49,7 @@
             font-weight: bold;
 
         }
-        @media screen and (min-width:992px ){
+        @media screen and (min-width:796px ){
             #headerMenu .navbar-nav{
                 align-items: center !important;
                 margin-top: 25px;
@@ -59,7 +59,7 @@
             }
         }
 
-        @media screen and (max-width:992px ){
+        @media screen and (max-width:796px ){
             .search_and_btns {
                 flex-direction: row-reverse !important;
                 padding: 28px 28px 28px 15px !important;
