@@ -3080,19 +3080,20 @@ footer input::placeholder {
 }
 
 
-@media screen and (min-width:991px ){
-    #headerMenu .navbar-nav{
+@media screen and (min-width: 991px ) {
+    #headerMenu .navbar-nav {
         align-items: center !important;
         margin-top: 25px;
     }
 }
 
-@media screen and (max-width:991px ){
+@media screen and (max-width: 991px ) {
     .search_and_btns {
         flex-direction: row-reverse !important;
         padding: 50px !important;
     }
 }
+
 @media (min-width: 576px) {
     .validate_modal {
         max-width: 500px !important;
@@ -3101,16 +3102,27 @@ footer input::placeholder {
     }
 
 }
+
 .validate_modal {
     color: black !important;
 }
-.validate_modal .modal-content{
+
+.validate_modal .modal-content {
     background-color: #c65b5b;
     border-radius: 20px !important;
 }
-.validate_modal .modal-body{
+
+.validate_modal .modal-body {
     padding: 20px 50px !important;
 }
-.validate_modal .modal-footer{
+
+.validate_modal .modal-footer {
     padding: 0;
+}
+
+.validate_modal .modal-footer > button {
+    width: 48%;
+    background-color: white;
+    color: black;
+    border-radius: 20px;
 }
