@@ -222,7 +222,7 @@
             >
                 <td class="position-relative">
                     @if(1 <$market->status and  $market->status< 7)
-                    <div class="animation_main_div">
+                    <div class="animation_main_div" style="position: absolute;left: 5px;top: -5px">
                         <div class="circle " style="background-color: {{ $color }} !important;"></div>
                         <div class="circle2" style="background-color: {{ $color }} !important;"></div>
                         <div class="circle3" style="background-color: {{ $color }} !important;"></div>
@@ -265,7 +265,7 @@
                         {{--                        <span id="market-time-{{ $market->id }}" style="margin-top: 10px;margin-left: 10px">--}}
                         {{--                            {{ \Carbon\Carbon::parse($market->date_time)->format('H:i') }}--}}
                         {{--                        </span>--}}
-                        <span style="margin-top: 10px;margin-left: 10px" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
+                        <span class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
                     </div>
