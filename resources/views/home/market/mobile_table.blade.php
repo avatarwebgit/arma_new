@@ -87,7 +87,7 @@
                     @if(auth()->user()->hasRole('buyer') or auth()->user()->hasRole('admin'))
                         <div class="row">
                             <div class="col-12">
-                                <div id="bid_validate_error" class="alert alert-danger text-left p-2">
+                                <div id="bid_validate_mobile_error" class="alert alert-danger text-left p-2">
 
                                 </div>
                             </div>

@@ -565,6 +565,9 @@
                 if (msg[0] === 'price_quantity') {
                     $('#bid_validate_error').text(msg[2]);
                     $('#bid_validate_error').show();
+
+                    $('#bid_validate_mobile_error').text(msg[2]);
+                    $('#bid_validate_mobile_error').show();
                     // $('#bid_' + msg[1] + '_error').text(msg[2]);
                     // $('#bid_' + msg[1] + '_error').show();
                 }
@@ -580,6 +583,7 @@
                 }
 
                 $('#bid_button').prop('disabled', false);
+                $('#bid_button_mobile').prop('disabled', false);
             },
             error: function (msg) {
                 if (msg.responseJSON.errors) {
