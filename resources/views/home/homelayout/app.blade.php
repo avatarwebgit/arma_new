@@ -612,7 +612,8 @@
     function ValidateError(market_id, message) {
         let validate_modal = $('#validate_modal_' + market_id);
         let validate_modal_body = $('#validate_modal_body_' + market_id);
-        validate_modal_body.text(message);
+        console.log(message);
+        $('#validate_modal_body_' + market_id).text(message);
         validate_modal.modal('show');
     }
 
