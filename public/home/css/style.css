@@ -3126,3 +3126,21 @@ footer input::placeholder {
     color: black;
     border-radius: 20px !important;
 }
+
+.validate_modal .modal-header {
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.validate_modal .modal-header span {
+    display: block;
+    width: auto;
+    padding: 10px;
+    border: 1px solid #575757;
+    background-color: white;
+    border-radius: 5px;
+    transform: translateY(-50px);
+}
