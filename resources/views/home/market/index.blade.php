@@ -559,7 +559,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span>
-                        <i class="fa fa-times-circle fa-3x"></i>
+                        <i class="fa fa-times-circle fa-3x text-danger"></i>
                     </span>
                     <h5 style="width: 100%" class="modal-title text-center" id="exampleModalLabel">ERROR</h5>
                 </div>
