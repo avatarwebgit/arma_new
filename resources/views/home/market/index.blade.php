@@ -557,8 +557,8 @@
     <div class="modal fade " id="validate_modal_{{ $market->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog validate_modal" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="border:0">
-                    <span style="display: block;width: auto;padding: 10px;border: 1px solid black;border-radius: 5px">
+                <div class="modal-header">
+                    <span>
                         <i class="fa fa-times-circle fa-3x"></i>
                     </span>
                     <h5 style="width: 100%" class="modal-title text-center" id="exampleModalLabel">ERROR</h5>
