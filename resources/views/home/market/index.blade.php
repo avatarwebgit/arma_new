@@ -554,8 +554,8 @@
 
 
     <!-- Modal -->
-    <div class="modal fade validate_modal" id="validate_modal_{{ $market->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade " id="validate_modal_{{ $market->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog validate_modal" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="border:0">
                     <h5 style="width: 100%" class="modal-title text-center" id="exampleModalLabel">ERROR</h5>
