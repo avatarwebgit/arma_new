@@ -378,7 +378,7 @@
             <div class="col-12 col-md-12 col-xl-3 mb-5">
                 @include('home.market.market_info')
             </div>
-            <div class="col-12 col-md-12 col-xl-8 mb-5 menu-mobile">
+            <div class="col-12 col-md-12 col-xl-8 mb-5 menu-des">
                 <div class="row mb-4">
                     <div class="col-12 col-md-6 mb-3">
                         <div class="bid_textarea">
@@ -530,7 +530,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-12 col-xl-8 mb-5 menu-des">
+            <div class="col-12 col-md-12 col-xl-8 mb-5 menu-mobile">
                 <div class="row mb-4">
                     <div class="col-12 col-md-6 mb-3">
                         <div class="row">
