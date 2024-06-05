@@ -529,7 +529,7 @@
             success: function (msg) {
                 if (msg[0] === 'error') {
                     // alert(msg[1]);
-                    ValidateError(market_id, msg[21]);
+                    ValidateError(market_id, msg[1]);
                 }
                 if (msg[0] === 'price_quantity') {
                     $('#bid_validate_error').text(msg[2]);
@@ -612,8 +612,7 @@
     function ValidateError(market_id, message) {
         let validate_modal = $('#validate_modal_' + market_id);
         let validate_modal_body = $('#validate_modal_body_' + market_id);
-        console.log(message);
-        $('#validate_modal_body_' + market_id).text(message);
+        validate_modal_body.text(message);
         validate_modal.modal('show');
     }
 
