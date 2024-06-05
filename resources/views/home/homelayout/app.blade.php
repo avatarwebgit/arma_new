@@ -445,6 +445,15 @@
 
         $('#bid_button-' + id).prop('disabled', false);
         $('#bid_button-' + id).addClass('btn-success');
+//for mobile devices
+        $('#bid_quantity_mobile-' + id).prop('disabled', false);
+        $('#bid_quantity_mobile-' + id).addClass('btn-success');
+
+        $('#bid_price_mobile-' + id).prop('disabled', false);
+        $('#bid_price_mobile-' + id).addClass('btn-success');
+
+        $('#bid_button_mobile-' + id).prop('disabled', false);
+        $('#bid_button_mobile-' + id).addClass('btn-success');
 
 
     }
