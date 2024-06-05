@@ -3097,8 +3097,20 @@ footer input::placeholder {
     .validate_modal {
         max-width: 500px !important;
         margin: 1.75rem auto;
+        color: black !important;
     }
-    .validate_modal .modal-body{
-        padding: 20px 50px !important;
-    }
+
+}
+.validate_modal {
+    color: black !important;
+}
+.validate_modal .modal-content{
+    background-color: #c65b5b;
+    border-radius: 20px !important;
+}
+.validate_modal .modal-body{
+    padding: 20px 50px !important;
+}
+.validate_modal .modal-footer{
+    padding: 0;
 }
