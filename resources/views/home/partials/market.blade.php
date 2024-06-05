@@ -61,7 +61,7 @@
                     class="slide_more_angle cursor-pointer">
                     <div class="d-flex">
                         <span>more</span>
-                        <i class="fa fa-angle-down"></i>
+                        <i class="fa fa-angle-down ml-2 mt-1"></i>
                     </div>
                 </td>
                 <td>
@@ -278,7 +278,7 @@
                     class="slide_more_angle cursor-pointer">
                     <div class="d-flex">
                         <span>more</span>
-                        <i class="fa fa-angle-down"></i>
+                        <i class="fa fa-angle-down ml-2 mt-1"></i>
                     </div>
                 </td>
                 <td>
