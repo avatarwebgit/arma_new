@@ -563,7 +563,7 @@
                 <div id="validate_modal_body_{{ $market->id }}" class="modal-body">
                     ...
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="justify-content: space-between;border: 0">
                     <button style="width: 48%;background-color: white;color:black;border-radius: 8px" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button style="width: 48%;background-color: white;color:black;border-radius: 8px" type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
                 </div>
