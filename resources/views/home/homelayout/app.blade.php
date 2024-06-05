@@ -506,6 +506,7 @@
         if (!is_checked) {
             window.location.href = "#CheckTermCondition_" + market_id;
             $('#accept_term_alert').show();
+            ValidateError(market_id, 'Accept term condition');
             return;
         }
         $('.error_text').hide();
