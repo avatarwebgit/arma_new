@@ -558,6 +558,9 @@
         <div class="modal-dialog validate_modal" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="border:0">
+                    <span style="display: block;width: auto;padding: 10px;border: 1px solid black;border-radius: 5px">
+                        <i class="fa fa-times-circle fa-3x"></i>
+                    </span>
                     <h5 style="width: 100%" class="modal-title text-center" id="exampleModalLabel">ERROR</h5>
                 </div>
                 <div id="validate_modal_body_{{ $market->id }}" class="modal-body">
