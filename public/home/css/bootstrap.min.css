@@ -4514,8 +4514,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     }
 
     .navbar-expand-lg .navbar-collapse {
-        display: -ms-flexbox !important;
-        display: flex !important;
+        display: -ms-flexbox ;
+        display: flex ;
         -ms-flex-preferred-size: auto;
         flex-basis: auto
     }
