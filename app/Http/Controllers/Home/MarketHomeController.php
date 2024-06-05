@@ -278,7 +278,7 @@ class MarketHomeController extends Controller
                 $best_bid = $market->Bids()->where('user_id', auth()->id())->orderBy('price', 'asc')->first();
                 $request['quantity'] = $best_bid->quantity;
             } else {
-                $message = 'You Cannot Permission To Bid Because You Didnot Enter Any Bid In Previous Level';
+                $message = 'you cannot enter the transaction as you missed the opening step';
                 return ['alert', 'error', $message];
             }
         } else {
@@ -370,14 +370,16 @@ class MarketHomeController extends Controller
         }
         if ($request['price'] < $base_price) {
             $key = 'price';
-            $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
+//            $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
+            $message = 'You can not place a bid less than'. $base_price . ' ' . $currency;
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
 
         if ($market->status !== 6) {
             if ($request['price'] > $price) {
                 $key = 'price';
-                $message = 'Max price you can enter is: ' . $price . ' ' . $currency;
+//                $message = 'Max price you can enter is: ' . $price . ' ' . $currency;
+                $message = 'you cannot place a bid higher than offer price';
                 return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
             }
         }
@@ -392,14 +394,15 @@ class MarketHomeController extends Controller
             $user_bids = $market->Bids()->where('user_id', auth()->id())->where('tries', 3)->get();
             if (count($user_bids) > 0) {
                 $key = 'bid number';
-                $message = 'Maximum number You Can Bid is: 3';
+                $message = 'you can`t place a bid more than three times';
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
             }
         }
 
         if (intval($request['quantity']) < intval($min_order)) {
             $key = 'quantity';
-            $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
+//            $message = 'Min quantity you can enter is: ' . $min_order . ' ' . $unit;
+            $message = 'you cannot place a bid lower than minimum order';
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
 
@@ -408,7 +411,7 @@ class MarketHomeController extends Controller
             $best_bid = $market->Bids()->max('price');
             if ($request['price'] < $best_bid) {
                 $key = 'bid number';
-                $message = 'قیمتت کمه';
+                $message = 'You can not place a bid less than '.$best_bid.' '.$currency;
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
             }
         }
@@ -416,7 +419,7 @@ class MarketHomeController extends Controller
         $this_my_bid_exists = $market->Bids()->where('price', $request['price'])->where('quantity', $request['quantity'])->where('user_id', auth()->id())->exists();
         if ($this_my_bid_exists) {
             $key = 'bid_exists';
-            $message = 'Please enter different Bid';
+            $message = 'Please place a different bid';
             return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
         }
 
@@ -436,7 +439,7 @@ class MarketHomeController extends Controller
         if ($market->status != 3 and $market->status != 2 and $market->status != 1 and $market->status != 0) {
             if (!$user_has_bid_exists) {
                 $key = 'error';
-                $message = 'چون شما در مرحله ی opening هیچ بیدی نذاشته اید نمیتوانید وارد رقابت شوید';
+                $message = 'you cannot enter the transaction as you missed the opening step';
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
             }
         }
@@ -488,7 +491,7 @@ class MarketHomeController extends Controller
         }
         $wallet = $this->calculate_user_wallet($user);
         if ($wallet < $bid_deposit) {
-            $msg = 'Bid Deposit Error!';
+            $msg = 'you cannot place bids due to a history of unpaid deposit';
             return ['response' => 'error', 'message' => $msg];
         }
         return ['response' => true, 'message' => 'success'];
