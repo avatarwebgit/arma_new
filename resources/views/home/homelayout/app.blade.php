@@ -458,6 +458,15 @@
 
         $('#bid_button-' + id).prop('disabled', false);
         $('#bid_button-' + id).addClass('btn-success');
+        //for mobile devices
+        $('#bid_quantity_mobile-' + id).prop('disabled', true);
+        $('#bid_quantity_mobile-' + id).removeClass('btn-success');
+
+        $('#bid_price_mobile-' + id).prop('disabled', false);
+        $('#bid_price_mobile-' + id).addClass('btn-success');
+
+        $('#bid_button_mobile-' + id).prop('disabled', false);
+        $('#bid_button_mobile-' + id).addClass('btn-success');
 
 
     }
@@ -474,6 +483,18 @@
 
         $('#bid_button-' + id).prop('disabled', true);
         $('#bid_button-' + id).removeClass('btn-success');
+        //for mobile devices
+        $('#bid_quantity_mobile-' + id).val(' ');
+        $('#bid_price_mobile-' + id).val(' ');
+
+        $('#bid_quantity_mobile-' + id).prop('disabled', true);
+        $('#bid_quantity_mobile-' + id).removeClass('btn-success');
+
+        $('#bid_price_mobile-' + id).prop('disabled', true);
+        $('#bid_price_mobile-' + id).removeClass('btn-success');
+
+        $('#bid_button_mobile-' + id).prop('disabled', true);
+        $('#bid_button_mobile-' + id).removeClass('btn-success');
 
         $('#PayBidDepositBTN-' + id).prop('disabled', true);
     }
