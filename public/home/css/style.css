@@ -3080,3 +3080,16 @@ footer input::placeholder {
 }
 
 
+@media screen and (min-width:991px ){
+    #headerMenu .navbar-nav{
+        align-items: center !important;
+        margin-top: 25px;
+    }
+}
+
+@media screen and (max-width:991px ){
+    .search_and_btns {
+        flex-direction: row-reverse !important;
+        padding: 50px !important;
+    }
+}
