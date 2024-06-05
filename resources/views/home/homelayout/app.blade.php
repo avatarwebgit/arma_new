@@ -437,51 +437,50 @@
     {{--}--}}
 
     function active_bid(id) {
-        $('#bid_quantity-'+id).prop('disabled', false);
-        $('#bid_quantity-'+id).addClass('btn-success');
+        $('#bid_quantity-' + id).prop('disabled', false);
+        $('#bid_quantity-' + id).addClass('btn-success');
 
-        $('#bid_price-'+id).prop('disabled', false);
-        $('#bid_price-'+id).addClass('btn-success');
+        $('#bid_price-' + id).prop('disabled', false);
+        $('#bid_price-' + id).addClass('btn-success');
 
-        $('#bid_button-'+id).prop('disabled', false);
-        $('#bid_button-'+id).addClass('btn-success');
+        $('#bid_button-' + id).prop('disabled', false);
+        $('#bid_button-' + id).addClass('btn-success');
 
 
     }
 
     function Competition_Bid_buttons(id) {
-        $('#bid_quantity-'+id).prop('disabled', true);
-        $('#bid_quantity-'+id).removeClass('btn-success');
+        $('#bid_quantity-' + id).prop('disabled', true);
+        $('#bid_quantity-' + id).removeClass('btn-success');
 
-        $('#bid_price-'+id).prop('disabled', false);
-        $('#bid_price-'+id).addClass('btn-success');
+        $('#bid_price-' + id).prop('disabled', false);
+        $('#bid_price-' + id).addClass('btn-success');
 
-        $('#bid_button-'+id).prop('disabled', false);
-        $('#bid_button-'+id).addClass('btn-success');
+        $('#bid_button-' + id).prop('disabled', false);
+        $('#bid_button-' + id).addClass('btn-success');
 
 
     }
 
     function deactive_bid(id) {
-        $('#bid_quantity-'+id).val(' ');
-        $('#bid_price-'+id).val(' ');
+        $('#bid_quantity-' + id).val(' ');
+        $('#bid_price-' + id).val(' ');
 
-        $('#bid_quantity-'+id).prop('disabled', true);
-        $('#bid_quantity-'+id).removeClass('btn-success');
+        $('#bid_quantity-' + id).prop('disabled', true);
+        $('#bid_quantity-' + id).removeClass('btn-success');
 
-        $('#bid_price-'+id).prop('disabled', true);
-        $('#bid_price-'+id).removeClass('btn-success');
+        $('#bid_price-' + id).prop('disabled', true);
+        $('#bid_price-' + id).removeClass('btn-success');
 
-        $('#bid_button-'+id).prop('disabled', true);
-        $('#bid_button-'+id).removeClass('btn-success');
+        $('#bid_button-' + id).prop('disabled', true);
+        $('#bid_button-' + id).removeClass('btn-success');
 
-        $('#PayBidDepositBTN-'+id).prop('disabled', true);
+        $('#PayBidDepositBTN-' + id).prop('disabled', true);
     }
 
 
-
     function competition_bid_buttons(id) {
-        $('#bid_quantity-'+id).prop('disabled', true);
+        $('#bid_quantity-' + id).prop('disabled', true);
     }
 
     function removeBid(bid_id) {
@@ -510,8 +509,8 @@
             return;
         }
         $('.error_text').hide();
-        let price = $('#bid_price-'+market_id).val();
-        let quantity = $('#bid_quantity-'+market_id).val();
+        let price = $('#bid_price-' + market_id).val();
+        let quantity = $('#bid_quantity-' + market_id).val();
         $.ajax({
             url: "{{  route('home.bid_market') }}",
             data: {
@@ -524,12 +523,13 @@
             method: "post",
 
             beforeSend: function () {
-                $('#bid_button-'+market_id).prop('disabled', true);
+                $('#bid_button-' + market_id).prop('disabled', true);
             },
 
             success: function (msg) {
                 if (msg[0] === 'error') {
-                    alert(msg[1]);
+                    // alert(msg[1]);
+                    ValidateError(market_id, msg[21]);
                 }
                 if (msg[0] === 'price_quantity') {
                     $('#bid_validate_error').text(msg[2]);
@@ -538,12 +538,13 @@
                     // $('#bid_' + msg[1] + '_error').show();
                 }
                 if (msg[0] === 'alert') {
-                    alert(msg[2]);
+                    // alert(msg[2]);
+                    ValidateError(market_id, msg[2]);
                 }
 
                 if (msg[0] == 1) {
-                    $('#bid_price-'+market_id).val(' ');
-                    $('#bid_quantity-'+market_id).val(' ');
+                    $('#bid_price-' + market_id).val(' ');
+                    $('#bid_quantity-' + market_id).val(' ');
                     refreshBidTable(market_id);
                 }
 
@@ -573,9 +574,9 @@
 
     function Offer(market_id) {
         $('.error_text').hide();
-        let status = $('#previous_status-'+market_id).val();
-        let price_is_disable = $('#seller_price-'+market_id).attr('disabled');
-        let price = $('#seller_price-'+market_id).val();
+        let status = $('#previous_status-' + market_id).val();
+        let price_is_disable = $('#seller_price-' + market_id).attr('disabled');
+        let price = $('#seller_price-' + market_id).val();
         if (price_is_disable) {
             price = 'disabled';
         }
@@ -598,13 +599,21 @@
             success: function (msg) {
                 if (msg) {
                     if (msg[1] == 'error') {
-                        alert(msg[2]);
-                    }else {
-                        $('#seller_price-'+market_id).val('');
+                        ValidateError(market_id, msg[2]);
+                        // alert(msg[2]);
+                    } else {
+                        $('#seller_price-' + market_id).val('');
                     }
                 }
             },
         })
+    }
+
+    function ValidateError(market_id, message) {
+        let validate_modal = $('#validate_modal_' + market_id);
+        let validate_modal_body = $('#validate_modal_body_' + market_id);
+        validate_modal_body.text(message);
+        validate_modal.modal('show');
     }
 
 
@@ -630,7 +639,6 @@
             timer2 = minutes + ':' + seconds;
         }, 1000);
     }
-
 
 
     function secondsToHms(d) {
@@ -724,7 +732,6 @@
             $('#scroll-container-first-div2').removeClass('animate_paused');
         });
     }
-
 
 
     function step_price_competition(tag, event) {
