@@ -532,7 +532,7 @@
                 </div>
             </div>
             {{--            //menu_mobile--}}
-            @include('home.market.mobile.table')
+            @include('home.market.mobile_table')
         </div>
         <div class="row">
             <div class="col-12 mt-3">
