@@ -59,8 +59,10 @@
                 </td>
                 <td id="slide_more_angle_{{ $market->id }}" onclick="slidemore({{ $market->id }})"
                     class="slide_more_angle cursor-pointer">
-                    <span>more</span>
-                    <i class="fa fa-angle-down ml-2 mt-1"></i>
+                    <div class="d-flex">
+                        <span>more</span>
+                        <i class="fa fa-angle-down"></i>
+                    </div>
                 </td>
                 <td>
                     <a href="{{ route('home.bid',['market'=>$market->id]) }}" class="btn btn-primary bid-bottom btn-sm">
@@ -222,7 +224,7 @@
             >
                 <td class="position-relative">
                     @if(1 <$market->status and  $market->status< 7)
-                    <div class="animation_main_div" style="position: absolute;left: 5px;top: -5px">
+                    <div class="animation_main_div" style="position: absolute;left: 5px;top: -3px">
                         <div class="circle " style="background-color: {{ $color }} !important;"></div>
                         <div class="circle2" style="background-color: {{ $color }} !important;"></div>
                         <div class="circle3" style="background-color: {{ $color }} !important;"></div>
@@ -274,8 +276,10 @@
                 </td>
                 <td id="slide_more_angle_{{ $market->id }}" onclick="slidemore({{ $market->id }})"
                     class="slide_more_angle cursor-pointer">
-                    <span>more</span>
-                    <i class="fa fa-angle-down ml-2 mt-1"></i>
+                    <div class="d-flex">
+                        <span>more</span>
+                        <i class="fa fa-angle-down"></i>
+                    </div>
                 </td>
                 <td>
                     <a href="{{ route('home.bid',['market'=>$market->id]) }}" class="btn btn-primary bid-bottom btn-sm">
