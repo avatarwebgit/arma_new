@@ -3093,9 +3093,3 @@ footer input::placeholder {
         padding: 50px !important;
     }
 }
-@media (min-width: 576px) {
-    .validate_modal {
-        max-width: 500px !important;
-        margin: 1.75rem auto;
-    }
-}
