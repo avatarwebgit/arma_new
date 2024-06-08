@@ -193,6 +193,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 
     /*
@@ -250,7 +251,8 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Paytm' => Paytm\JsCheckout\Facades\Paytm::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
     ])->toArray(),
 
