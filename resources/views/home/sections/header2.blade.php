@@ -9,36 +9,23 @@
                         </strong>
                     </div>
                     @foreach($header2->Headers as $key=>$item)
-                        @if($item->number_1>0)
+                        @if($item->number_3>0)
                             @php
                                 $class='text-success';
                                 $color='green';
+                                $number_3='+'.$item->number_3;
                             @endphp
-                        @elseif($item->number_1<0)
+                        @elseif($item->number_3<0)
                             @php
                                 $class='text-danger';
                                 $color='red';
+                                $number_3=$item->number_3;
                             @endphp
                         @else
                             @php
                                 $class='text-muted';
-                                $color='gray'
-                            @endphp
-                        @endif
-                        @if($item->number_3>0)
-                            @php
-                                $class3='text-success';
-                                $color3='green';
-                            @endphp
-                        @elseif($item->number_3<0)
-                            @php
-                                $class3='text-danger';
-                                $color3='red';
-                            @endphp
-                        @else
-                            @php
-                                $class3='text-muted';
-                                $color3='gray'
+                                $color='gray';
+                                $number_3=$item->number_3;
                             @endphp
                         @endif
                         <div class="d-flex">
@@ -62,7 +49,7 @@
                             <div>
                                 <span
                                     class="d-block  text-center {{ $class }}">{{ $item->number_1.' - '.$item->number_2 }}</span>
-                                <span class="d-block  text-center {{ $class3 }}">{{ $item->number_3 }}</span>
+                                <span class="d-block  text-center {{ $class }}">{{ $number_3 }}</span>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
                                 @if($loop->last)

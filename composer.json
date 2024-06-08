@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "akaunting/laravel-setting": "^1.2",
-        "anhskohbo/no-captcha": "^3.4",
+        "anhskohbo/no-captcha": "^3.6",
         "avatar/setting-module": "dev-main",
         "bacon/bacon-qr-code": "^2.0",
         "beyondcode/laravel-websockets": "^1.14",
