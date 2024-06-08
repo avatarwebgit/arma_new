@@ -3075,7 +3075,7 @@ footer input::placeholder {
     display: none;
 }
 
-#bid_validate_error {
+.bid_validate_error {
     display: none;
 }
 
