@@ -19,11 +19,11 @@
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Max Quantity</span>
-        <span class="text-bold text-light-blue ">{{ $market->SalesForm->max_quantity }}</span>
+        <span class="text-bold text-light-blue ">{{ number_format($market->SalesForm->max_quantity) }}</span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Min Order</span>
-        <span class="text-bold text-light-blue ">{{ $market->SalesForm->min_order }}</span>
+        <span class="text-bold text-light-blue ">{{ number_format($market->SalesForm->min_order) }}</span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Term</span>
@@ -52,9 +52,9 @@
         <span class="text-bold text-light-blue ">
 {{--                           {{ $market->offer_price }}--}}
             @if($market->SalesForm->price_type=='Fix')
-                <td class="text-center">{{ $market->SalesForm->price }}</td>
+                <td class="text-center">{{ number_format($market->SalesForm->price) }}</td>
             @else
-                <td class="text-center">{{ $market->SalesForm->alpha  }}</td>
+                <td class="text-center">{{ number_format($market->SalesForm->alpha)  }}</td>
             @endif
                         </span>
     </div>
