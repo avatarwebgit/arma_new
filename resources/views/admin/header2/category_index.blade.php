@@ -147,20 +147,18 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive py-5 pb-4">
+                        <div style="padding: 5px 26px;" class="btn-group">
+                            <a href="{{ route('admin.header2.create') }}" class="btn btn-default btn-primary btn-sm no-corner"
+                               tabindex="0"
+                               aria-controls="users-table"><span><i class="ti ti-plus"></i> Create</span></a>
+                        </div>
                         <div class="container-fluid">
 
                             <table class="table table-striped">
                                 <thead>
                                 <tr class="bg-dark">
                                     <th>priority</th>
-                                    <th>Title</th>
-                                    <th>Title 2</th>
                                     <th>Category</th>
-                                    <th>Number 1(min)</th>
-                                    <th>Number 2(max)</th>
-                                    <th>Number 3</th>
-                                    <th>Currency</th>
-                                    <th>created at</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -168,50 +166,13 @@
                                 @foreach($items as $key=>$item)
                                     <tr>
                                         <td>
-                                            {{ $item->priority }}
+                                            {{ $key }}
                                         </td>
                                         <td>
                                             {{ $item->title }}
                                         </td>
                                         <td>
-                                            {{ $item->title_2 }}
-                                        </td>
-                                        <td>
-                                            @if(count($item->Categories)>0)
-                                                @foreach($item->Categories as $category)
-                                                    {{ $category->title }}
-                                                @endforeach
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                        <td class="{{ $item->number_1>0 ? 'text-success' : ($item->number_1<0 ? 'text-danger' : 'text-muted') }}">
-                                            {{ $item->number_1 }}
-                                        </td>
-                                        <td class="{{ $item->number_2>0 ? 'text-success' : ($item->number_2<0 ? 'text-danger' : 'text-muted') }}">
-                                            {{ $item->number_2 }}
-                                        </td>
-                                        <td class="{{ $item->number_3>0 ? 'text-success' : ($item->number_3<0 ? 'text-danger' : 'text-muted') }}">
-                                            {{ $item->number_3 }}
-                                        </td>
-                                        <td>
-                                            {{ $item->currency }}
-                                        </td>
-                                        <td>
-                                            {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
-                                        </td>
-                                        <td class="d-flex justify-content-center">
-                                            {!! Form::open([
-'method' => 'POST',
-'route' => ['admin.header2.remove', $item->id],
-'id' => 'delete-form-' . $item->id,
-'class' => 'd-inline',
-]) !!}
-                                            <a href="#" class="btn btn-sm small btn-danger show_confirm" id="delete-form-{{ $item->id }}"
-                                               data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                               data-bs-original-title="{{ __('Delete') }}"><i class="ti ti-trash mr-1"></i></a>
-                                            {!! Form::close() !!}
-                                            <a style="margin-left: 10px !important;" href="{{ route('admin.header2.edit',['id'=>$item->id]) }}"
+                                            <a style="margin-left: 10px !important;" href="{{ route('admin.header2.category.headers',['id'=>$item->id]) }}"
                                                class="btn btn-icon btn-primary btn-sm edit-header2">
                                                 <i class="ti ti-edit"></i>
                                             </a>

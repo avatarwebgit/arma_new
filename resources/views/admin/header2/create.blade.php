@@ -19,6 +19,20 @@
     ]) !!}
     <div class="row">
         <div class="form-group col-md-4">
+            <label class="col-form-label" for="category">Category</label>
+            <select id="category" name="category" class="form-control">
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
+            </select>
+            @error('category')
+            <p class="input-error-validate">
+                {{ $message }}
+            </p>
+            @enderror
+        </div>
+        <div class="form-group col-md-4">
             <label class="col-form-label" for="title">Title 1 </label>
             <input id="title" type="text" name="title" class="form-control"
                    placeholder="title" value="{{ old('title') }}">
@@ -38,20 +52,7 @@
             </p>
             @enderror
         </div>
-        <div class="form-group col-md-4">
-            <label class="col-form-label" for="category">Category</label>
-            <select id="category" name="category" class="form-control">
-                <option value="">Select Category</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->title }}</option>
-                @endforeach
-            </select>
-            @error('category')
-            <p class="input-error-validate">
-                {{ $message }}
-            </p>
-            @enderror
-        </div>
+
         <div class="form-group col-md-4">
             <label class="col-form-label" for="number_1">Number 1(min)</label>
             <input id="number_1" type="text" name="number_1" class="form-control"
