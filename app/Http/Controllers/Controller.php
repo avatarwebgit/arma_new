@@ -78,12 +78,17 @@ class Controller extends BaseController
             $status = 5;
             $difference = $benchmark5->diffInSeconds($now);
         } elseif ($benchmark5 < $now and $now <= $benchmark6) {
+
             //Competition
             $difference = $benchmark6->diffInSeconds($now);
             $status = 6;
             //exists min-price
 //            $market_min_price = $market->offer_price;
-            $market_min_price = $market->SalesForm->price;
+            if($market->SalesForm->price_type=='Fix'){
+                $market_min_price=$market->SalesForm->price;
+            }else{
+                $market_min_price=$market->SalesForm->alpha;
+            }
             $market_min_price = intval($market_min_price) - 1;
             $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->get();
             if (count($bid_touch_price) < 2) {
@@ -95,6 +100,7 @@ class Controller extends BaseController
                 $bids_quantity = $market->Bids()->sum('quantity');
                 $market_quantity = $market->SalesForm->max_quantity;
                 $market_quantity = str_replace(',', '', $market_quantity);
+
                 if ($bids_quantity > $market_quantity) {
 
                 } else {
