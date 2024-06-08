@@ -164,6 +164,7 @@
                                     <th>Number 1(min)</th>
                                     <th>Number 2(max)</th>
                                     <th>Number 3</th>
+                                    <th>Currency</th>
                                     <th>created at</th>
                                     <th></th>
                                 </tr>
@@ -197,6 +198,9 @@
                                         </td>
                                         <td class="{{ $item->number_3>0 ? 'text-success' : ($item->number_3<0 ? 'text-danger' : 'text-muted') }}">
                                             {{ $item->number_3. ' % ' }}
+                                        </td>
+                                        <td>
+                                            {{ $item->currency }}
                                         </td>
                                         <td>
                                             {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}

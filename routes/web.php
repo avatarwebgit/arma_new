@@ -85,6 +85,8 @@ Route::get('/shipping_term', [IndexController::class, 'shipping_term'])->name('h
 Route::get('/quality_quantity_inspector', [IndexController::class, 'quality_quantity_inspector'])->name('home.quality_quantity_inspector');
 Route::get('/InspectionPlace', [IndexController::class, 'InspectionPlace'])->name('home.InspectionPlace');
 Route::get('/Platforms', [IndexController::class, 'Platforms'])->name('home.Platforms');
+Route::get('/header_category', [IndexController::class, 'header_category'])->name('home.header_category');
+Route::get('/header_currency', [IndexController::class, 'header_currency'])->name('home.header_currency');
 
 Route::name('admin.')->middleware('admin')->prefix('/admin-panel/management/')->group(function () {
     //dashboard

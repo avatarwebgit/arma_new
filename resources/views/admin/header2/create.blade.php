@@ -52,7 +52,7 @@
             </p>
             @enderror
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label class="col-form-label" for="number_1">Number 1(min)</label>
             <input id="number_1" type="text" name="number_1" class="form-control"
                    placeholder="Number 1(min)" value="{{ old('number_1') }}">
@@ -62,7 +62,7 @@
             </p>
             @enderror
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label class="col-form-label" for="number_2">Number 2(max)</label>
             <input id="number_2" type="text" name="number_2" class="form-control"
                    placeholder="Number 2(max)" value="{{ old('number_2') }}">
@@ -72,11 +72,25 @@
             </p>
             @enderror
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label class="col-form-label" for="number_3">Number 3(percent)</label>
             <input id="number_3" type="text" name="number_3" class="form-control"
                    placeholder="Number 3(percent)" value="{{ old('number_3') }}">
             @error('number_3')
+            <p class="input-error-validate">
+                {{ $message }}
+            </p>
+            @enderror
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-form-label" for="currency">changes</label>
+            <select id="currency" name="currency" class="form-control">
+                <option value="">Select Category</option>
+                @foreach($currencies as $currency)
+                    <option value="{{ $currency->title }}">{{ $currency->title }}</option>
+                @endforeach
+            </select>
+            @error('currency')
             <p class="input-error-validate">
                 {{ $message }}
             </p>

@@ -75,8 +75,8 @@
                         </div>
 
                         <div>
-                            <span class="d-block  text-center {{ $class }}">{{ $item->number_2.' - '.$item->number_3 }}</span>
-                            <span class="d-block  text-center {{ $class }}">{{ $item->number_1 }}</span>
+                            <span class="d-block  text-center {{ $class }}">{{ $item->number_2.' - '.$item->number_1 }}</span>
+                            <span class="d-block  text-center {{ $class }}">{{ $item->number_3 }}</span>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
                             @if($loop->last)
