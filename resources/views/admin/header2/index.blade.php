@@ -222,6 +222,9 @@
                             </table>
                         </div>
                     </div>
+                    <div class="col-12">
+                        <a href="{{ route('admin.header2.index') }}" type="button" class="btn btn-secondary">{{ __('Back') }}</a>
+                    </div>
                 </div>
             </div>
         </div>
