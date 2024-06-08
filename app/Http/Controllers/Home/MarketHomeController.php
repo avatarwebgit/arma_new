@@ -22,7 +22,6 @@ class MarketHomeController extends Controller
 {
     public function bid(Market $market)
     {
-
         if (!auth()->check()) {
             session()->flash('Login', 'Please login');
             return redirect()->route('home.index');
@@ -30,6 +29,7 @@ class MarketHomeController extends Controller
         $user = auth()->user();
         $wallet = $this->calculate_user_wallet($user);
         $market_status = $market->status;
+
 //        if ($market_status == 4 or $market_status == 5 or $market_status == 6 ) {
 //            session()->flash('market_open_finished','You Just Enter The Market When Is Open');
 //            return redirect()->route('home.index');

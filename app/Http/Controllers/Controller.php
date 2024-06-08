@@ -8,6 +8,7 @@ use App\Events\MarketTableIndex;
 use App\Events\MarketTimeUpdated;
 use App\Models\Market;
 use App\Models\MarketSetting;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -348,7 +349,7 @@ class Controller extends BaseController
 
     public function calculate_user_wallet($user)
     {
-        $transactions = $user->Transactions;
+        $transactions = $user->Transactions();
         $wallet = 0;
         foreach ($transactions as $transaction) {
             $type = $transaction->type;

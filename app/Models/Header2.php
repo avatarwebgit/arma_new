@@ -12,6 +12,6 @@ class Header2 extends Model
     protected $guarded=[''];
 
     public function Categories(){
-        return $this->belongsToMany(HeaderCategory::class,'category_header2','category_id','header2_id');
+        return $this->belongsToMany(HeaderCategory::class,'category_header2','header2_id','category_id');
     }
 }

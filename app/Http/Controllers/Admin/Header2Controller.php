@@ -27,6 +27,16 @@ class Header2Controller extends Controller
 
     public function store(\Illuminate\Http\Request $request)
     {
+        $request->validate([
+           'title'=>'required',
+           'title_2'=>'required',
+           'category'=>'required',
+           'number_1'=>'required',
+           'number_2'=>'required',
+           'number_3'=>'required',
+           'currency'=>'required',
+           'priority'=>'required',
+        ]);
         try {
             $header = Header2::create($request->all());
             if ($request->category != null) {
