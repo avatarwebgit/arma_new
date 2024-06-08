@@ -28,6 +28,14 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+    $(document).ready(function () {
+        let width = window.innerWidth;
+        if (width<796){
+            $('.menu-des').remove();
+        }else {
+            $('.menu-mobile').remove();
+        }
+    });
     var timerCountdown = 0;
 
     function makeTimer(endTime, market_is_open, now) {
@@ -445,17 +453,6 @@
 
         $('#bid_button-' + id).prop('disabled', false);
         $('#bid_button-' + id).addClass('btn-success');
-//for mobile devices
-        $('#bid_quantity_mobile-' + id).prop('disabled', false);
-        $('#bid_quantity_mobile-' + id).addClass('btn-success');
-
-        $('#bid_price_mobile-' + id).prop('disabled', false);
-        $('#bid_price_mobile-' + id).addClass('btn-success');
-
-        $('#bid_button_mobile-' + id).prop('disabled', false);
-        $('#bid_button_mobile-' + id).addClass('btn-success');
-
-
     }
 
     function Competition_Bid_buttons(id) {
@@ -467,17 +464,6 @@
 
         $('#bid_button-' + id).prop('disabled', false);
         $('#bid_button-' + id).addClass('btn-success');
-        //for mobile devices
-        $('#bid_quantity_mobile-' + id).prop('disabled', true);
-        $('#bid_quantity_mobile-' + id).removeClass('btn-success');
-
-        $('#bid_price_mobile-' + id).prop('disabled', false);
-        $('#bid_price_mobile-' + id).addClass('btn-success');
-
-        $('#bid_button_mobile-' + id).prop('disabled', false);
-        $('#bid_button_mobile-' + id).addClass('btn-success');
-
-
     }
 
     function deactive_bid(id) {
@@ -492,18 +478,6 @@
 
         $('#bid_button-' + id).prop('disabled', true);
         $('#bid_button-' + id).removeClass('btn-success');
-        //for mobile devices
-        $('#bid_quantity_mobile-' + id).val(' ');
-        $('#bid_price_mobile-' + id).val(' ');
-
-        $('#bid_quantity_mobile-' + id).prop('disabled', true);
-        $('#bid_quantity_mobile-' + id).removeClass('btn-success');
-
-        $('#bid_price_mobile-' + id).prop('disabled', true);
-        $('#bid_price_mobile-' + id).removeClass('btn-success');
-
-        $('#bid_button_mobile-' + id).prop('disabled', true);
-        $('#bid_button_mobile-' + id).removeClass('btn-success');
 
         $('#PayBidDepositBTN-' + id).prop('disabled', true);
     }
@@ -565,9 +539,6 @@
                 if (msg[0] === 'price_quantity') {
                     $('#bid_validate_error').text(msg[2]);
                     $('#bid_validate_error').show();
-
-                    $('#bid_validate_mobile_error').text(msg[2]);
-                    $('#bid_validate_mobile_error').show();
                     // $('#bid_' + msg[1] + '_error').text(msg[2]);
                     // $('#bid_' + msg[1] + '_error').show();
                 }
@@ -583,7 +554,7 @@
                 }
 
                 $('#bid_button').prop('disabled', false);
-                $('#bid_button_mobile').prop('disabled', false);
+                $('#bid_button').prop('disabled', false);
             },
             error: function (msg) {
                 if (msg.responseJSON.errors) {

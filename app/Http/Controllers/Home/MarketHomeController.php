@@ -371,7 +371,7 @@ class MarketHomeController extends Controller
         if ($request['price'] < $base_price) {
             $key = 'price';
 //            $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
-            $message = 'You can not place a bid less than'. $base_price . ' ' . $currency;
+            $message = 'You can not place a bid less than '. $base_price . ' ' . $currency;
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
 

@@ -187,9 +187,9 @@
             .listen('ChangeSaleOffer', function (e) {
                 let market_id = e.market_id;
                 refreshSellerTable(market_id);
-                let msg='Seller decreased offer Price';
-                let bg='blue';
-                ShowAlert(market_id,msg,bg);
+                let msg = 'Seller decreased offer Price';
+                let bg = 'blue';
+                ShowAlert(market_id, msg, bg);
             });
         window.Echo.channel('market-setting-updated-channel')
             .listen('MarketTimeUpdated', function (e) {
@@ -199,9 +199,9 @@
             .listen('NewBidCreated', function (e) {
                 let market_id = e.market_id;
                 refreshBidTable(market_id);
-                let msg='New Bid Created';
-                let bg='green';
-                ShowAlert(market_id,msg,bg);
+                let msg = 'New Bid Created';
+                let bg = 'green';
+                ShowAlert(market_id, msg, bg);
             });
 
         function show_market_result(id) {
@@ -240,15 +240,25 @@
 
     </script>
     <script>
-        function ShowAlert(market_id,msg,bg){
-            let alertBox=$('#marketAlertBox-' + market_id);
+        $(document).ready(function () {
+            let width = window.innerWidth;
+            if (width<796){
+                $('.menu-des').remove();
+            }else {
+                $('.menu-mobile').remove();
+            }
+        });
+
+        function ShowAlert(market_id, msg, bg) {
+            let alertBox = $('#marketAlertBox-' + market_id);
             alertBox.text(msg);
-            alertBox.css('background',bg);
+            alertBox.css('background', bg);
             alertBox.fadeIn();
-            setTimeout(function (){
+            setTimeout(function () {
                 alertBox.fadeOut();
-            },4000)
+            }, 4000)
         }
+
         function PayBidDeposit(market_id) {
             let url = "{{ route('payment.paypal') }}";
             let user_id = {{ auth()->id() }};
@@ -277,7 +287,7 @@
 
 @section('style')
     <style>
-        .alert-box{
+        .alert-box {
             position: fixed;
             left: 40px;
             bottom: 40px;
@@ -291,7 +301,8 @@
             color: white;
             border-radius: 10px;
         }
-        .pay-btn{
+
+        .pay-btn {
             padding: 4px 33px;
             background-color: #dbc932;
             border-radius: 0;
@@ -378,7 +389,7 @@
             <div class="col-12 col-md-12 col-xl-3 mb-5">
                 @include('home.market.market_info')
             </div>
-{{--            //menu_desktop--}}
+            {{--            //menu_desktop--}}
             <div class="col-12 col-md-12 col-xl-8 mb-5 menu-des">
                 <div class="row mb-4">
                     <div class="col-12 col-md-6 mb-3">
@@ -462,7 +473,7 @@
                         @if(auth()->user()->hasRole('buyer') or auth()->user()->hasRole('admin'))
                             <div class="row">
                                 <div class="col-12">
-                                    <div id="bid_validate_error" class="alert alert-danger text-left p-2">
+                                    <div class="alert alert-danger text-left p-2 bid_validate_error">
 
                                     </div>
                                 </div>
@@ -557,7 +568,8 @@
 
 
     <!-- Modal -->
-    <div class="modal fade " id="validate_modal_{{ $market->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="validate_modal_{{ $market->id }}" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog validate_modal" role="document">
             <div class="modal-content">
                 <div class="modal-header">

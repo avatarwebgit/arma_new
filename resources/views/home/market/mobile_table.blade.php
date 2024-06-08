@@ -87,31 +87,31 @@
                     @if(auth()->user()->hasRole('buyer') or auth()->user()->hasRole('admin'))
                         <div class="row">
                             <div class="col-12">
-                                <div id="bid_validate_mobile_error" class="alert alert-danger text-left p-2">
+                                <div id="bid_validate_error" class="alert alert-danger text-left p-2">
 
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mt-3 text-center">
                                     <label
-                                        for="bid_quantity_mobile-{{ $market->id }}">Quantity( {{ $market->SalesForm->unit }}
+                                        for="bid_quantity-{{ $market->id }}">Quantity( {{ $market->SalesForm->unit }}
                                         )</label>
-                                    <input disabled id="bid_quantity_mobile-{{ $market->id }}" type="text"
+                                    <input disabled id="bid_quantity-{{ $market->id }}" type="text"
                                            class="form-control">
-                                    <p id="bid_quantity_mobile_error" class="error_text">please enter quantity</p>
+                                    <p id="bid_quantity_error" class="error_text">please enter quantity</p>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mt-3 text-center">
                                     <label
-                                        for="bid_price_mobile-{{ $market->id }}">Price( {{ $market->SalesForm->currency }}
+                                        for="bid_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }}
                                         )</label>
-                                    <input disabled id="bid_price_mobile-{{ $market->id }}" class="form-control">
-                                    <p id="bid_price_mobile_error" class="error_text">please enter price</p>
+                                    <input disabled id="bid_price-{{ $market->id }}" class="form-control">
+                                    <p id="bid_price_error" class="error_text">please enter price</p>
                                 </div>
                             </div>
                             <div class="col-12 text-center mt-3">
-                                <button id="bid_button_mobile-{{ $market->id }}" disabled onclick="Bid({{ $market->id }})"
+                                <button id="bid_button-{{ $market->id }}" disabled onclick="Bid({{ $market->id }})"
                                         class="btn btn-secondary pt-1 pb-1 pr-5 pl-5">Bid
                                 </button>
                             </div>
