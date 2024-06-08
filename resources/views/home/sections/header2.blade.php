@@ -70,7 +70,7 @@
                                 {{ $item->title }}
                             </div>
                             <div style="font-size: 12px">
-                                {{ $item->title_2 }}
+                                {{ $item->title_2.' ('.$item->currency.')' }}
                             </div>
                         </div>
 
