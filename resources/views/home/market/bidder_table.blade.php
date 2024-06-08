@@ -9,10 +9,10 @@
                 @endauth
             </span>
            <span>
-                {{ $bid->quantity }}
+                {{ number_format($bid->quantity) }}
            </span>
         </td>
-        <td class="text-center">{{ $bid->price }}</td>
+        <td class="text-center">{{ number_format($bid->price) }}</td>
         <td class="text-center">
             @if($key!=0 and $bid->user_id==auth()->id() and $bid->Market->status==3 )
                 <span class="remove_function" onclick="removeBid({{ $bid->id }})">
