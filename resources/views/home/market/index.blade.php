@@ -473,7 +473,7 @@
                         @if(auth()->user()->hasRole('buyer') or auth()->user()->hasRole('admin'))
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="alert alert-danger text-left p-2 bid_validate_error">
+                                    <div id="bid_validate_error" class="alert alert-danger text-left p-2 ">
 
                                     </div>
                                 </div>
