@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Country;
 use App\Models\Currency;
+use App\Models\HeaderCategory;
+use App\Models\HeaderCurencies;
 use App\Models\InspectionPlace;
 use App\Models\Market;
 use App\Models\MarketSetting;
@@ -408,6 +410,38 @@ class IndexController extends Controller
         $items = ['Skype', 'WatsApp', 'Telegram', 'X (Twitter)', 'LinkedIn'];
         foreach ($items as $key => $item) {
             PlatFom::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+    public function header_category()
+    {
+        $items = HeaderCategory::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['Urea', 'Sulphur', 'NPK', 'Phosphate'];
+        foreach ($items as $key => $item) {
+            HeaderCategory::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+    public function header_currency()
+    {
+        $items = HeaderCurencies::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['USD/St', 'USD/Mt'];
+        foreach ($items as $key => $item) {
+            HeaderCurencies::create([
                 'id' => $key + 1,
                 'title' => $item
             ]);

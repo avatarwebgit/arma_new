@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Header2Request;
 use App\Models\Header2;
 use App\Models\HeaderCategory;
+use App\Models\HeaderCurencies;
 use http\Env\Request;
 
 class Header2Controller extends Controller
@@ -19,7 +20,8 @@ class Header2Controller extends Controller
     public function create()
     {
         $categories = HeaderCategory::all();
-        return view('admin.header2.create', compact('categories'));
+        $currencies = HeaderCurencies::all();
+        return view('admin.header2.create', compact('categories','currencies'));
     }
 
 
@@ -27,7 +29,7 @@ class Header2Controller extends Controller
     {
         try {
             $header = Header2::create($request->all());
-            if ($request->category!=null){
+            if ($request->category != null) {
                 $header->Categories()->detach();
                 $header->Categories()->attach($request->category);
             }
@@ -46,8 +48,9 @@ class Header2Controller extends Controller
     public function edit($id)
     {
         $categories = HeaderCategory::all();
+        $currencies = HeaderCurencies::all();
         $item = Header2::where('id', $id)->first();
-        return view('admin.header2.edit', compact('item','categories'));
+        return view('admin.header2.edit', compact('item', 'categories','currencies'));
     }
 
     public function update(Header2Request $request, $id)
@@ -55,7 +58,7 @@ class Header2Controller extends Controller
         $item = Header2::where('id', $id)->first();
         $item->update($request->all());
         $item->Categories()->detach();
-        if ($request->category!=null){
+        if ($request->category != null) {
             $item->Categories()->attach($request->category);
         }
         return redirect()->route('admin.header2.index')
