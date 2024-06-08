@@ -13,29 +13,30 @@ class Header2Controller extends Controller
 {
     public function index()
     {
-        $items = Header2::latest()->paginate(20);
-        return view('admin.header2.index', compact('items'));
+//        $items = Header2::latest()->paginate(20);
+        $items = HeaderCategory::all();
+        return view('admin.header2.category_index', compact('items'));
     }
 
     public function create()
     {
         $categories = HeaderCategory::all();
         $currencies = HeaderCurencies::all();
-        return view('admin.header2.create', compact('categories','currencies'));
+        return view('admin.header2.create', compact('categories', 'currencies'));
     }
 
 
     public function store(\Illuminate\Http\Request $request)
     {
         $request->validate([
-           'title'=>'required',
-           'title_2'=>'required',
-           'category'=>'required',
-           'number_1'=>'required',
-           'number_2'=>'required',
-           'number_3'=>'required',
-           'currency'=>'required',
-           'priority'=>'required',
+            'title' => 'required',
+            'title_2' => 'required',
+            'category' => 'required',
+            'number_1' => 'required',
+            'number_2' => 'required',
+            'number_3' => 'required',
+            'currency' => 'required',
+            'priority' => 'required',
         ]);
         try {
             $header = Header2::create($request->all());
@@ -60,7 +61,7 @@ class Header2Controller extends Controller
         $categories = HeaderCategory::all();
         $currencies = HeaderCurencies::all();
         $item = Header2::where('id', $id)->first();
-        return view('admin.header2.edit', compact('item', 'categories','currencies'));
+        return view('admin.header2.edit', compact('item', 'categories', 'currencies'));
     }
 
     public function update(Header2Request $request, $id)
@@ -71,7 +72,8 @@ class Header2Controller extends Controller
         if ($request->category != null) {
             $item->Categories()->attach($request->category);
         }
-        return redirect()->route('admin.header2.index')
+        $cat=$item->Categories[0]->id;
+        return redirect()->route('admin.header2.category.headers',['id'=>$cat])
             ->with('success', __('Header 2 updated successfully.'));
     }
 
@@ -90,5 +92,11 @@ class Header2Controller extends Controller
         }
 
 
+    }
+
+    public function headers(HeaderCategory $id)
+    {
+        $items = $id->Headers()->orderBy('priority','asc')->get();
+        return view('admin.header2.index', compact('items'));
     }
 }
