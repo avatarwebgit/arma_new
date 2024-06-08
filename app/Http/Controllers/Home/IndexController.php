@@ -18,6 +18,7 @@ use App\Models\PlatFom;
 use App\Models\QualityQuantityInspector;
 use App\Models\ShippingTerm;
 use App\Models\ToleranceWeightBy;
+use App\Models\Transaction;
 use App\Models\Units;
 use App\Models\UserNews;
 use Carbon\Carbon;

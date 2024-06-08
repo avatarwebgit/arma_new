@@ -12,6 +12,6 @@ class HeaderCategory extends Model
     protected $fillable=['title'];
 
     public function Headers(){
-        return $this->belongsToMany(Header2::class,'category_header2','header2_id','category_id');
+        return $this->belongsToMany(Header2::class,'category_header2','category_id','header2_id');
     }
 }
