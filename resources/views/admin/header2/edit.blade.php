@@ -18,6 +18,20 @@
         @csrf
         <div class="row">
             <div class="form-group col-md-4">
+                <label class="col-form-label" for="category">Category</label>
+                <select id="category" name="category" class="form-control">
+                    <option value="">Select Category</option>
+                    @foreach($categories as $category)
+                        <option {{ in_array($category->id,$item->Categories()->pluck('id')->toArray()) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->title }}</option>
+                    @endforeach
+                </select>
+                @error('category')
+                <p class="input-error-validate">
+                    {{ $message }}
+                </p>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
                 <label class="col-form-label" for="title">Title 1 </label>
                 <input id="title" type="text" name="title" class="form-control"
                        placeholder="title" value="{{ $item->title }}">
@@ -37,20 +51,7 @@
                 </p>
                 @enderror
             </div>
-            <div class="form-group col-md-4">
-                <label class="col-form-label" for="category">Category</label>
-                <select id="category" name="category" class="form-control">
-                    <option value="">Select Category</option>
-                    @foreach($categories as $category)
-                        <option {{ in_array($category->id,$item->Categories()->pluck('id')->toArray()) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->title }}</option>
-                    @endforeach
-                </select>
-                @error('category')
-                <p class="input-error-validate">
-                    {{ $message }}
-                </p>
-                @enderror
-            </div>
+
             <div class="form-group col-md-4">
                 <label class="col-form-label" for="number_1">Number 1(min)</label>
                 <input id="number_1" type="text" name="number_1" class="form-control"
@@ -109,7 +110,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a href="{{ route('admin.header2.index') }}" type="button" class="btn btn-secondary">{{ __('Back') }}</a>
+                <a href="{{ route('admin.header2.category.headers',['id'=>$item->Categories[0]->id]) }}" type="button" class="btn btn-secondary">{{ __('Back') }}</a>
                 <button type="submit" class="btn btn-primary">
                     Update
                 </button>
