@@ -74,7 +74,7 @@
             @enderror
         </div>
         <div class="form-group col-md-4">
-            <label class="col-form-label" for="number_3">Number 3(percent)</label>
+            <label class="col-form-label" for="number_3">Changes</label>
             <input id="number_3" type="text" name="number_3" class="form-control"
                    placeholder="Number 3(percent)" value="{{ old('number_3') }}">
             @error('number_3')
@@ -84,7 +84,7 @@
             @enderror
         </div>
         <div class="form-group col-md-6">
-            <label class="col-form-label" for="currency">changes</label>
+            <label class="col-form-label" for="currency">Currency</label>
             <select id="currency" name="currency" class="form-control">
                 <option value="">Select Category</option>
                 @foreach($currencies as $currency)
