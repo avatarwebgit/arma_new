@@ -570,17 +570,17 @@ class MarketHomeController extends Controller
                 $show_win_modal = 1;
             }
             //user winner
-            foreach ($win_user_ids as $user_id) {
-                $description = 'Decrease Wallet For Bid Deposit Market ID:' . $market;
-                $transaction = [
-                    'user_id' => $user_id,
-                    'amount' => $market->bid_deposit,
-                    'status' => 1,
-                    'type' => 0,
-                    'description' => $description,
-                ];
-                Transaction::create($transaction);
-            }
+//            foreach ($win_user_ids as $user_id) {
+//                $description = 'Decrease Wallet For Bid Deposit Market ID:' . $market;
+//                $transaction = [
+//                    'user_id' => $user_id,
+//                    'amount' => $market->bid_deposit,
+//                    'status' => 1,
+//                    'type' => 0,
+//                    'description' => $description,
+//                ];
+//                Transaction::create($transaction);
+//            }
 
             return response()->json([1, $view, $show_win_modal]);
         } catch (\Exception $exception) {

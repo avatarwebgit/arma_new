@@ -152,13 +152,14 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr class="bg-dark">
+                                    <th>Category</th>
                                     <th>priority</th>
                                     <th>Title</th>
                                     <th>Title 2</th>
-                                    <th>Category</th>
-                                    <th>Number 1(min)</th>
-                                    <th>Number 2(max)</th>
-                                    <th>Number 3</th>
+
+                                    <th>minimum price</th>
+                                    <th>maximum price</th>
+                                    <th>changes</th>
                                     <th>Currency</th>
                                     <th>created at</th>
                                     <th></th>
@@ -168,15 +169,6 @@
                                 @foreach($items as $key=>$item)
                                     <tr>
                                         <td>
-                                            {{ $item->priority }}
-                                        </td>
-                                        <td>
-                                            {{ $item->title }}
-                                        </td>
-                                        <td>
-                                            {{ $item->title_2 }}
-                                        </td>
-                                        <td>
                                             @if(count($item->Categories)>0)
                                                 @foreach($item->Categories as $category)
                                                     {{ $category->title }}
@@ -185,6 +177,16 @@
                                                 -
                                             @endif
                                         </td>
+                                        <td>
+                                            {{ $item->priority }}
+                                        </td>
+                                        <td>
+                                            {{ $item->title }}
+                                        </td>
+                                        <td>
+                                            {{ $item->title_2 }}
+                                        </td>
+
                                         <td class="{{ $item->number_1>0 ? 'text-success' : ($item->number_1<0 ? 'text-danger' : 'text-muted') }}">
                                             {{ $item->number_1 }}
                                         </td>

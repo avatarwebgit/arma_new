@@ -440,16 +440,14 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['USD/St', 'USD/Mt'];
+        $items = ['USD/St', 'USD/Mt','Euro/Mp'];
         foreach ($items as $key => $item) {
             HeaderCurencies::create([
                 'id' => $key + 1,
                 'title' => $item
             ]);
         }
-
         dd('Congratulations');
     }
-
 
 }
