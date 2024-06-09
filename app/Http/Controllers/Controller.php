@@ -97,7 +97,7 @@ class Controller extends BaseController
             }
             if ($status != 7) {
                 //check if total quality < $market->quantity
-                $bids_quantity = $market->Bids()->sum('quantity');
+                $bids_quantity = $market->Bids()->Where('price', '>', $market_min_price)->sum('quantity');
                 $market_quantity = $market->SalesForm->max_quantity;
                 $market_quantity = str_replace(',', '', $market_quantity);
 
