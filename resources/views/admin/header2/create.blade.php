@@ -54,7 +54,7 @@
         </div>
 
         <div class="form-group col-md-4">
-            <label class="col-form-label" for="number_1">Number 1(min)</label>
+            <label class="col-form-label" for="number_1">Minimum price</label>
             <input id="number_1" type="text" name="number_1" class="form-control"
                    placeholder="Number 1(min)" value="{{ old('number_1') }}">
             @error('number_1')
@@ -64,7 +64,7 @@
             @enderror
         </div>
         <div class="form-group col-md-4">
-            <label class="col-form-label" for="number_2">Number 2(max)</label>
+            <label class="col-form-label" for="number_2">Maximum price</label>
             <input id="number_2" type="text" name="number_2" class="form-control"
                    placeholder="Number 2(max)" value="{{ old('number_2') }}">
             @error('number_2')
@@ -110,8 +110,8 @@
 
     </div>
     <div class="row">
-        <div class="col-12">
-            <a href="{{ route('admin.header2.index') }}" type="button" class="btn btn-secondary"
+        <div class="col-12 d-flex justify-content-center">
+            <a href="{{ route('admin.header2.index') }}" type="button" class="btn btn-secondary" style="margin-right: 5px"
                data-bs-dismiss="modal">{{ __('Back') }}</a>
             {{ Form::button(__('Save'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
         </div>

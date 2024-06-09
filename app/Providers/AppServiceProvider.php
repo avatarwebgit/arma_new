@@ -34,23 +34,23 @@ class AppServiceProvider extends ServiceProvider
         $admin_avatar = Setting::where('key', 'admin_avatar')->pluck('value')->first();
         $side_bar_color = Setting::where('key', 'side_bar_color')->pluck('value')->first();
         $top_bar_color = Setting::where('key', 'top_bar_color')->pluck('value')->first();
-        $alert_description =Setting::where('key', 'alert_description')->pluck('value')->first();
+        $alert_description = Setting::where('key', 'alert_description')->pluck('value')->first();
         $alert_bg_color = Setting::where('key', 'alert_bg_color')->pluck('value')->first();
-        $alert_text_color =Setting::where('key', 'alert_text_color')->pluck('value')->first();
-        $alert_font_size =Setting::where('key', 'alert_font_size')->pluck('value')->first();
+        $alert_text_color = Setting::where('key', 'alert_text_color')->pluck('value')->first();
+        $alert_font_size = Setting::where('key', 'alert_font_size')->pluck('value')->first();
         $alert_height = Setting::where('key', 'alert_height')->pluck('value')->first();
-        $alert_active=Setting::where('key', 'alert_active')->pluck('value')->first();
-        $about_arma=Setting::where('key', 'about_arma')->pluck('value')->first();
-        $facebook=Setting::where('key', 'facebook')->pluck('value')->first();
-        $twitter=Setting::where('key', 'twitter')->pluck('value')->first();
-        $linkedin=Setting::where('key', 'linkedin')->pluck('value')->first();
-        $ready_to_duration=MarketSetting::where('key','ready_to_duration')->pluck('value')->first();
-        $open_duration=MarketSetting::where('key','open_duration')->pluck('value')->first();
-        $q_1=MarketSetting::where('key','q_1')->pluck('value')->first();
-        $q_2=MarketSetting::where('key','q_2')->pluck('value')->first();
-        $q_3=MarketSetting::where('key','q_3')->pluck('value')->first();
-        $copy_right=Setting::where('key','copy_right')->pluck('value')->first();
-        $header2_categories=HeaderCategory::all();
+        $alert_active = Setting::where('key', 'alert_active')->pluck('value')->first();
+        $about_arma = Setting::where('key', 'about_arma')->pluck('value')->first();
+        $facebook = Setting::where('key', 'facebook')->pluck('value')->first();
+        $twitter = Setting::where('key', 'twitter')->pluck('value')->first();
+        $linkedin = Setting::where('key', 'linkedin')->pluck('value')->first();
+        $ready_to_duration = MarketSetting::where('key', 'ready_to_duration')->pluck('value')->first();
+        $open_duration = MarketSetting::where('key', 'open_duration')->pluck('value')->first();
+        $q_1 = MarketSetting::where('key', 'q_1')->pluck('value')->first();
+        $q_2 = MarketSetting::where('key', 'q_2')->pluck('value')->first();
+        $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
+        $copy_right = Setting::where('key', 'copy_right')->pluck('value')->first();
+        $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
         view()->share(
             compact(
                 'header1',

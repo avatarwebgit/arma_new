@@ -7,14 +7,14 @@ use App\Http\Requests\Header2Request;
 use App\Models\Header2;
 use App\Models\HeaderCategory;
 use App\Models\HeaderCurencies;
-use http\Env\Request;
+use Illuminate\Http\Request;
 
 class Header2Controller extends Controller
 {
     public function index()
     {
 //        $items = Header2::latest()->paginate(20);
-        $items = HeaderCategory::all();
+        $items = HeaderCategory::orderBy('priority','asc')->get();
         return view('admin.header2.category_index', compact('items'));
     }
 
@@ -26,7 +26,7 @@ class Header2Controller extends Controller
     }
 
 
-    public function store(\Illuminate\Http\Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
@@ -72,8 +72,8 @@ class Header2Controller extends Controller
         if ($request->category != null) {
             $item->Categories()->attach($request->category);
         }
-        $cat=$item->Categories[0]->id;
-        return redirect()->route('admin.header2.category.headers',['id'=>$cat])
+        $cat = $item->Categories[0]->id;
+        return redirect()->route('admin.header2.category.headers.list', ['id' => $cat])
             ->with('success', __('Header 2 updated successfully.'));
     }
 
@@ -94,9 +94,67 @@ class Header2Controller extends Controller
 
     }
 
+
     public function headers(HeaderCategory $id)
     {
-        $items = $id->Headers()->orderBy('priority','asc')->get();
+        $items = $id->Headers()->orderBy('priority', 'asc')->get()->groupBy('priority');
         return view('admin.header2.index', compact('items'));
+    }
+
+    public function headers_create()
+    {
+        return view('admin.header2.category_create');
+    }
+
+    public function headers_edit(HeaderCategory $id)
+    {
+        return view('admin.header2.category_edit', compact('id'));
+    }
+
+    public function headers_update(Request $request, HeaderCategory $id)
+    {
+        $request->validate([
+            'title' => 'required|unique:header_category,title,' . $id->id,
+            'priority'=>'required'
+        ]);
+        $id->update([
+            'title' => $request->title,
+            'priority' => $request->priority,
+        ]);
+        $message = 'The Item Has Been Updated Successfully';
+        return redirect()->back()->with('success', __($message));
+    }
+
+    public function headers_store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|unique:header_category,title',
+            'priority'=>'required'
+        ]);
+        HeaderCategory::create([
+            'title' => $request->title,
+            'priority' => $request->priority,
+        ]);
+        $message = 'The Item Has Been Created Successfully';
+        return redirect()->back()->with('success', __($message));
+    }
+
+    public function headers_remove($id)
+    {
+        try {
+            $item = HeaderCategory::findOrFail($id);
+            $headers = $item->Headers;
+            foreach ($headers as $header) {
+                $header->delete();
+            }
+            $item->delete();
+            $message = 'The Item Has Been Deleted Successfully';
+            return redirect()->back()->with('success', __($message));
+        } catch (\Exception $exception) {
+
+            return redirect()->back()->with('failed', __($exception->getMessage()));
+        }
+
+
     }
 }
