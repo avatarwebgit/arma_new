@@ -1,6 +1,7 @@
 <div id="scroll-container2" class="p-2 header2 d-flex scroll-container">
     <div id="scroll-container-first-div2">
         <div class="d-flex">
+            @for($i=0;$i<15;$i++)
             @foreach($header2_categories as $header2)
                 @if(count($header2->Headers)>0)
                     <div class="d-flex justify-content-center align-items-center">
@@ -23,7 +24,7 @@
                             @endphp
                         @else
                             @php
-                                $class='text-muted';
+                                $class='white';
                                 $color='gray';
                                 $number_3=$item->number_3;
                             @endphp
@@ -47,9 +48,8 @@
                                 </div>
                             </div>
                             <div>
-                                <span
-                                    class="d-block  text-center {{ $class }}">{{ $item->number_1.' - '.$item->number_2 }}</span>
-                                <span class="d-block  text-center {{ $class }}">{{ $number_3 }}</span>
+                                <span style="font-weight: bold" class="d-block  text-center {{ $class }}">{{ $item->number_1.' - '.$item->number_2 }}</span>
+                                <span style="font-weight: bold" class="d-block  text-center bold {{ $class }}">{{ $number_3 }}</span>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
                                 @if($loop->last)
@@ -63,6 +63,7 @@
                     @endforeach
                 @endif
             @endforeach
+            @endfor
         </div>
     </div>
 

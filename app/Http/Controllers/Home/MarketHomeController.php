@@ -570,9 +570,10 @@ class MarketHomeController extends Controller
                 $show_win_modal = 1;
             }
             if ($market->has_winner == 0) {
+                $market->update(['has_winner'=>1]);
                 //user winner
                 foreach ($win_user_ids as $user_id) {
-                    $description = 'Decrease Wallet For Bid Deposit Market ID:' . $market;
+                    $description = 'Decrease Wallet For Bid Deposit Market ID:' . $market->id;
                     $transaction = [
                         'user_id' => $user_id,
                         'amount' => $market->bid_deposit,
@@ -583,7 +584,7 @@ class MarketHomeController extends Controller
                     Transaction::create($transaction);
                 }
             }
-            $market->update(['has_winner', 1]);
+
 
             return response()->json([1, $view, $show_win_modal]);
         } catch (\Exception $exception) {
