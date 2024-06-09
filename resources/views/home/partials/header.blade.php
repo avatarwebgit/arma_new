@@ -1,6 +1,6 @@
 <header >
     @include('home.sections.header1')
-    @include('home.sections.header2')
+{{--    @include('home.sections.header2')--}}
     <nav class="navbar navbar-expand-lg">
         <a class='navbar-brand' href='{{ route('home.index') }}'><img class="logo"
                                                                       src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
