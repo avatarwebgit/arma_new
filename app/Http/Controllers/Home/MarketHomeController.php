@@ -371,7 +371,7 @@ class MarketHomeController extends Controller
         if ($request['price'] < $base_price) {
             $key = 'price';
 //            $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
-            $message = 'You can not place a bid less than '. $base_price . ' ' . $currency;
+            $message = 'You can not place a bid less than ' . $base_price . ' ' . $currency;
             return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
         }
 
@@ -411,7 +411,7 @@ class MarketHomeController extends Controller
             $best_bid = $market->Bids()->max('price');
             if ($request['price'] < $best_bid) {
                 $key = 'bid number';
-                $message = 'You can not place a bid less than '.$best_bid.' '.$currency;
+                $message = 'You can not place a bid less than ' . $best_bid . ' ' . $currency;
                 return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
             }
         }
@@ -569,18 +569,21 @@ class MarketHomeController extends Controller
             if ($id_exists_in_array == 1) {
                 $show_win_modal = 1;
             }
-            //user winner
-//            foreach ($win_user_ids as $user_id) {
-//                $description = 'Decrease Wallet For Bid Deposit Market ID:' . $market;
-//                $transaction = [
-//                    'user_id' => $user_id,
-//                    'amount' => $market->bid_deposit,
-//                    'status' => 1,
-//                    'type' => 0,
-//                    'description' => $description,
-//                ];
-//                Transaction::create($transaction);
-//            }
+            if ($market->has_winner == 0) {
+                //user winner
+                foreach ($win_user_ids as $user_id) {
+                    $description = 'Decrease Wallet For Bid Deposit Market ID:' . $market;
+                    $transaction = [
+                        'user_id' => $user_id,
+                        'amount' => $market->bid_deposit,
+                        'status' => 1,
+                        'type' => 0,
+                        'description' => $description,
+                    ];
+                    Transaction::create($transaction);
+                }
+            }
+            $market->update(['has_winner', 1]);
 
             return response()->json([1, $view, $show_win_modal]);
         } catch (\Exception $exception) {
