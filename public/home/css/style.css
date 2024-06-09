@@ -132,6 +132,10 @@ tbody tr:hover {
     color: #26de81;
 }
 
+.white {
+    color: #ffffff;
+}
+
 .red {
     color: #ff231f;
 }
@@ -2510,9 +2514,9 @@ tbody.ob-heading {
 
 @keyframes my-animation {
     from {
-        -moz-transform: translateX(20%);
-        -webkit-transform: translateX(20%);
-        transform: translateX(20%);
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(0%);
 
     }
     to {
@@ -2541,9 +2545,10 @@ tbody.ob-heading {
     -moz-transform: translateX(100%);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
-    -moz-animation: my-animation 100s linear 1s infinite;
-    -webkit-animation: my-animation 100s linear 1s infinite;
-    animation: my-animation 100s linear 1s infinite;
+
+    -moz-animation: my-animation 750s linear 1s infinite;
+    -webkit-animation: my-animation 750s linear 1s infinite;
+    animation: my-animation 750s linear 1s infinite;
 }
 
 .animate_paused {
