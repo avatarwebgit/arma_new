@@ -159,9 +159,9 @@
                                 class="dash-mtext">{{ __('Header Setting') }}</span><span class="dash-arrow"><i
                                     data-feather="chevron-right"></i></span></a>
                         <ul class="dash-submenu">
-                            <li class="dash-item">
-                                <a class="dash-link" href="{{ route('admin.header_categories.index') }}">{{ __('Header Categories') }}</a>
-                            </li>
+{{--                            <li class="dash-item">--}}
+{{--                                <a class="dash-link" href="{{ route('admin.header_categories.index') }}">{{ __('Header Categories') }}</a>--}}
+{{--                            </li>--}}
                             <li class="dash-item">
                                 <a class="dash-link" href="{{ route('admin.header1.index') }}">{{ __('Line 1') }}</a>
                             </li>

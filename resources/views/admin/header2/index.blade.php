@@ -147,6 +147,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive py-5 pb-4">
+                        <div style="padding: 5px 26px;" class="btn-group">
+                            <a href="{{ route('admin.header2.create') }}" class="btn btn-default btn-primary btn-sm no-corner"
+                               tabindex="0"
+                               aria-controls="users-table"><span><i class="ti ti-plus"></i> Create</span></a>
+                        </div>
                         <div class="container-fluid">
 
                             <table class="table table-striped">
@@ -166,7 +171,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($items as $key=>$item)
+                                @foreach($items as $rows)
+
+                                    @foreach($rows->sortByDesc('updated_at') as $key=>$item)
                                     <tr>
                                         <td>
                                             @if(count($item->Categories)>0)
@@ -219,6 +226,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                @endforeach
                                 @endforeach
                                 </tbody>
                             </table>

@@ -9,7 +9,7 @@
                             {{ $header2->title }}
                         </strong>
                     </div>
-                    @foreach($header2->Headers as $key=>$item)
+                    @foreach($header2->Headers()->orderBy('priority','asc')->get() as $key=>$item)
                         @if($item->number_3>0)
                             @php
                                 $class='text-success';

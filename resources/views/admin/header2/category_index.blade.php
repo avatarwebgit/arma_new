@@ -148,7 +148,7 @@
                 <div class="card-body">
                     <div class="table-responsive py-5 pb-4">
                         <div style="padding: 5px 26px;" class="btn-group">
-                            <a href="{{ route('admin.header2.create') }}" class="btn btn-default btn-primary btn-sm no-corner"
+                            <a href="{{ route('admin.header2.category.headers.create') }}" class="btn btn-default btn-primary btn-sm no-corner"
                                tabindex="0"
                                aria-controls="users-table"><span><i class="ti ti-plus"></i> Create</span></a>
                         </div>
@@ -166,16 +166,30 @@
                                 @foreach($items as $key=>$item)
                                     <tr>
                                         <td>
-                                            {{ $key }}
+                                            {{ $item->priority }}
                                         </td>
                                         <td>
                                             {{ $item->title }}
                                         </td>
                                         <td>
-                                            <a style="margin-left: 10px !important;" href="{{ route('admin.header2.category.headers',['id'=>$item->id]) }}"
-                                               class="btn btn-icon btn-primary btn-sm edit-header2">
-                                                <i class="ti ti-edit"></i>
+                                            <a href="{{ route('admin.header2.category.headers.list',['id'=>$item->id]) }}"
+                                               class="btn btn-icon btn-dark btn-sm edit-header2">
+                                                <i class="fa fa-list"></i>
                                             </a>
+                                            <a  href="{{ route('admin.header2.category.headers.edit',['id'=>$item->id]) }}"
+                                               class="btn btn-icon btn-primary btn-sm edit-header2">
+                                                Edit
+                                            </a>
+                                            {!! Form::open([
+'method' => 'POST',
+'route' => ['admin.header2.category.headers.remove', $item->id],
+'id' => 'delete-form-' . $item->id,
+'class' => 'd-inline',
+]) !!}
+                                            <a href="#" class="btn btn-sm small btn-danger show_confirm" id="delete-form-{{ $item->id }}"
+                                               data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
+                                               data-bs-original-title="{{ __('Delete') }}"><i class="ti ti-trash mr-1"></i></a>
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach
