@@ -2590,7 +2590,7 @@ tbody.ob-heading {
     content: "";
     width: 2px !important;
     height: 100% !important;
-    background-color: #ffffff;
+    background-color: #000000;
     right: -10px;
 }
 
