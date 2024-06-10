@@ -56,7 +56,7 @@
                                 {{ $item->title }}
                             </div>
                             <div style="font-size: 12px">
-                                {{ $item->title_1 }}
+                                {{ $item->title_2.' ('.$item->currency.')' }}
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
