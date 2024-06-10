@@ -93,11 +93,18 @@ Route::name('admin.')->middleware('admin')->prefix('/admin-panel/management/')->
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::middleware('permission:header-setting')->group(function () {
         Route::get('setting/header1', [Header1Controller::class, 'index'])->name('header1.index');
-        Route::get('setting/header1/create', [Header1Controller::class, 'create'])->name('header1.create');
+        Route::get('setting/header1/create/{cat}', [Header1Controller::class, 'create'])->name('header1.create');
         Route::post('setting/header1/store', [Header1Controller::class, 'store'])->name('header1.store');
         Route::get('setting/header1/edit/{id}', [Header1Controller::class, 'edit'])->name('header1.edit');
         Route::put('setting/header1/update/{item}', [Header1Controller::class, 'update'])->name('header1.update');
         Route::post('setting/header1/remove/{id}', [Header1Controller::class, 'remove'])->name('header1.remove');
+
+        Route::get('setting/header1/headers/{id}', [Header1Controller::class, 'headers'])->name('header1.category.headers.list');
+        Route::get('setting/header1/cat/create', [Header1Controller::class, 'headers_create'])->name('header1.category.headers.create');
+        Route::post('setting/header1/cat/store', [Header1Controller::class, 'headers_store'])->name('header1.category.headers.store');
+        Route::get('setting/header1/cat/{id}', [Header1Controller::class, 'headers_edit'])->name('header1.category.headers.edit');
+        Route::put('setting/header1/cat/{id}', [Header1Controller::class, 'headers_update'])->name('header1.category.headers.update');
+        Route::post('setting/header1/cat/remove/{id}', [Header1Controller::class, 'headers_remove'])->name('header1.category.headers.remove');
         //header2
         Route::get('setting/header2', [Header2Controller::class, 'index'])->name('header2.index');
         Route::get('setting/header2/create', [Header2Controller::class, 'create'])->name('header2.create');

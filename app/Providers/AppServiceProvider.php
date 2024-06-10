@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Header1;
 use App\Models\Header2;
 use App\Models\HeaderCategory;
+use App\Models\HeaderCategoryLine1;
 use App\Models\MarketSetting;
 use App\Models\Setting;
 use Illuminate\Pagination\Paginator;
@@ -51,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
         $copy_right = Setting::where('key', 'copy_right')->pluck('value')->first();
         $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
+        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
         view()->share(
             compact(
                 'header1',
@@ -83,7 +85,8 @@ class AppServiceProvider extends ServiceProvider
                 'twitter',
                 'linkedin',
                 'copy_right',
-                'header2_categories'
+                'header2_categories',
+                'header1_categories',
             ));
     }
 }

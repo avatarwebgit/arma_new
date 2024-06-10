@@ -1,36 +1,17 @@
 <div ontouchstart="" id="scroll-container" class="bg-white header1 d-flex scroll-container">
     <div id="scroll-container-first-div">
         <div class="d-flex">
-            @for($i=0;$i<6;$i++)
-                @if($i==0)
-                    @php
-                        $title='Energy';
-                    @endphp
-
-                @elseif($i==1)
-                    @php
-                        $title='Metal';
-                    @endphp
-
-                @elseif($i==2)
-                    @php
-                        $title='Industrial';
-                    @endphp
-                @elseif($i==3)
-                    @php
-                        $title='Agriculture';
-                    @endphp
-                @elseif($i==4)
-                    @php
-                        $title='Currency';
-                    @endphp
-                @else($i==5)
-                    @php
-                        $title='Crypto';
-                    @endphp
-                @endif
-
-                @foreach($header1 as $key=>$item)
+            @for($i=0;$i<10;$i++)
+                @foreach($header1_categories as $header1)
+                    @if(count($header1->Headers)>0)
+                        <div class="d-flex justify-content-center align-items-center">
+                            <strong class="header_title2 mr-4" style="margin-left: 80px !important;">
+                                {{ $header1->title }}
+                            </strong>
+                        </div>
+                    @endif
+                @endforeach
+                @foreach($header1->Headers()->orderBy('priority','asc')->get() as $key=>$item)
 
                     @if($item->number_1>0)
                         @php
@@ -67,13 +48,7 @@
                     @endif
 
                     <div class="d-flex">
-                        @if($key==0)
-                            <div class="d-flex justify-content-center align-items-center">
-                                <strong class="header_title mr-4" style="margin-left: 80px !important;">
-                                    {{ $title }}
-                                </strong>
-                            </div>
-                        @endif
+
                         <div>
                             <div style="font-size: 15px">
                                 {{ $item->title }}
