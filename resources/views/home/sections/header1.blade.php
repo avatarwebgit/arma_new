@@ -34,15 +34,17 @@
                     @endif
                     @if($item->number_3>0)
                         @php
+                            $number3='+'.$item->number_3;
                             $color='#137713';
                         @endphp
                     @elseif($item->number_3<0)
                         @php
-
+                            $number3=$item->number_3;
                             $color='#dc3545';
                         @endphp
                     @else
                         @php
+                            $number3=$item->number_3;
                             $color='#6c757d';
                         @endphp
                     @endif
@@ -54,7 +56,7 @@
                                 {{ $item->title }}
                             </div>
                             <div style="font-size: 12px">
-                                {{ $item->title }}
+                                {{ $item->title_1 }}
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
@@ -64,10 +66,10 @@
                         </div>
                         <div>
                         <span class="d-block text-center {{ $class }}">
-                            {{ $item->number_2.' - '.$item->number_3 }}
+                            {{ $item->number_1.' - '.$item->number_2 }}
                         </span>
                             <span class="d-block text-center {{ $class }}">
-                            {{ $item->number_1 }}
+                            {{ $number3 }}
                         </span>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
