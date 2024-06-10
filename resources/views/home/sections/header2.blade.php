@@ -1,7 +1,7 @@
 <div id="scroll-container2" class="p-2 header2 d-flex scroll-container">
     <div id="scroll-container-first-div2">
         <div class="d-flex">
-            @for($i=0;$i<15;$i++)
+            @for($i=0;$i<10;$i++)
             @foreach($header2_categories as $header2)
                 @if(count($header2->Headers)>0)
                     <div class="d-flex justify-content-center align-items-center">
