@@ -13,41 +13,43 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($markets_groups as $markets)
-        @foreach($markets->sortby('time') as $key=>$market)
+    @foreach($markets_groups as $key=>$markets)
+        @foreach($markets->sortby('time') as $market)
             @php
                 if ($market->status == 1){
                     $statusText = '<span>Waiting To Open</span>';
-                   $color = '#3b3b00';
+                   $color = '#006';
                    $statusText=Carbon\Carbon::parse($market->time)->format('g:i a');
                 }
                 if ($market->status == 2){
                      $statusText = '<span>Ready to open</span>';
-                     $color = '#8a8a00';
+                     $color = '#1f9402';
                 }
                 if ($market->status == 3){
                      $color = '#1f9402';
                   $statusText = '<span>Opening</span>';
                 }
                 if ($market->status == 4){
-                     $color = '#135e00';
+                     $color = '#1f9402';
                      $statusText = '<span>Quotation 1/2</span>';
                 }
                 if ($market->status == 5){
-                     $color = '#104800';
+                     $color = '#1f9402';
                      $statusText = '<span>Quotation 2/2</span>';
                 }
                 if ($market->status == 6){
-                     $color = '#0a2a00';
+                     $color = '#1f9402';
                      $statusText = '<span>Competition</span>';
                 }
                 if ($market->status == 7 or $market->status == 8 or $market->status == 9){
-                     $color = '#ff0707';
+                     $color = '#1f9402';
                      $statusText = '<span>Close</span>';
+                }
+                if ($key!=0){
+                    $color = '#000';
                 }
             @endphp
             <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
-
 
             <tr onclick="window.location.href='{{ route('home.bid',['market'=>$market->id]) }}'"
                 style="color: {{ $color }} !important;cursor: pointer" id="market-{{ $market->id }}"
