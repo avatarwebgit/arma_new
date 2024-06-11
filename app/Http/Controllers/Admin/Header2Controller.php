@@ -35,7 +35,7 @@ class Header2Controller extends Controller
             'number_1' => 'nullable|numeric',
             'number_2' => 'required|numeric',
             'number_3' => 'required|numeric',
-            'currency' => 'required',
+            'currency' => 'nullable',
             'priority' => 'required',
         ]);
         try {
@@ -73,7 +73,7 @@ class Header2Controller extends Controller
             'number_1' => 'nullable|numeric',
             'number_2' => 'required|numeric',
             'number_3' => 'required|numeric',
-            'currency' => 'required',
+            'currency' => 'nullable',
             'priority' => 'required',
         ]);
         $item = Header2::where('id', $id)->first();

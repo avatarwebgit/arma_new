@@ -3150,3 +3150,7 @@ footer input::placeholder {
     border-radius: 5px;
     transform: translateY(-30px);
 }
+
+#market_value{
+    font-size: 14px;
+}
