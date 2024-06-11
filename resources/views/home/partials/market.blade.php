@@ -46,7 +46,7 @@
                      $color = 'red';
                      $statusText = '<span>Close</span>';
                 }
-                if (\Carbon\Carbon::now()->format('Y-m-d')==$key){
+                if (\Carbon\Carbon::now()->format('Y-m-d')!=$key){
                      $color = 'black';
                 }
             @endphp
