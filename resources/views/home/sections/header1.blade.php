@@ -9,88 +9,90 @@
                                 {{ $header1->title }}
                             </strong>
                         </div>
-                    @endif
-                @endforeach
-                @foreach($header1->Headers()->orderBy('priority','asc')->get() as $key=>$item)
+                        @foreach($header1->Headers()->orderBy('priority','asc')->get() as $key=>$item)
 
-                    @if($item->number_3>0)
-                        @php
-                            $class='text-success';
-                            $src='home/img/green.png';
-                            $img_display=1;
-                        @endphp
-                    @elseif($item->number_3<0)
-                        @php
-                            $class='text-danger';
-                            $src='home/img/Red_triangle.svg.png';
-                            $img_display=1;
-                        @endphp
-                    @else
-                        @php
-                            $class='text-muted';
-                            $icon='';
-                            $img_display=0;
-                        @endphp
-                    @endif
-                    @if($item->number_3>0)
-                        @php
-                            $number3='+'.$item->number_3;
-                            $color='#137713';
-                        @endphp
-                    @elseif($item->number_3<0)
-                        @php
-                            $number3=$item->number_3;
-                            $color='#dc3545';
-                        @endphp
-                    @else
-                        @php
-                            $number3=$item->number_3;
-                            $color='#6c757d';
-                        @endphp
-                    @endif
-
-                    <div class="d-flex">
-
-                        <div>
-                            <div style="font-size: 15px">
-                                {{ $item->title }}
-                            </div>
-                            <div style="font-size: 12px">
-                                {{ $item->title_2.' ('.$item->currency.')' }}
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
-                            @if($img_display)
-                                <img width="15" src="{{ asset($src) }}">
+                            @if($item->number_3>0)
+                                @php
+                                    $class='text-success';
+                                    $src='home/img/green.png';
+                                    $img_display=1;
+                                @endphp
+                            @elseif($item->number_3<0)
+                                @php
+                                    $class='text-danger';
+                                    $src='home/img/Red_triangle.svg.png';
+                                    $img_display=1;
+                                @endphp
+                            @else
+                                @php
+                                    $class='text-muted';
+                                    $icon='';
+                                    $img_display=0;
+                                @endphp
                             @endif
-                        </div>
-                        <div>
-                            @if($item->number_1==null or $item->number_1=='')
-                                <span class="d-block text-center {{ $class }}">
+                            @if($item->number_3>0)
+                                @php
+                                    $number3='+'.$item->number_3;
+                                    $color='#137713';
+                                @endphp
+                            @elseif($item->number_3<0)
+                                @php
+                                    $number3=$item->number_3;
+                                    $color='#dc3545';
+                                @endphp
+                            @else
+                                @php
+                                    $number3=$item->number_3;
+                                    $color='#6c757d';
+                                @endphp
+                            @endif
+
+                            <div class="d-flex">
+
+                                <div>
+                                    <div style="font-size: 15px">
+                                        {{ $item->title }}
+                                    </div>
+                                    <div style="font-size: 12px">
+                                        {{ $item->title_2.' ('.$item->currency.')' }}
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
+                                    @if($img_display)
+                                        <img width="15" src="{{ asset($src) }}">
+                                    @endif
+                                </div>
+                                <div>
+                                    @if($item->number_1==null or $item->number_1=='')
+                                        <span class="d-block text-center {{ $class }}">
                             {{ $item->number_2 }}
                         </span>
-                            @else
-                                <span class="d-block text-center {{ $class }}">
+                                    @else
+                                        <span class="d-block text-center {{ $class }}">
                             {{ $item->number_1.' - '.$item->number_2 }}
                         </span>
-                            @endif
+                                    @endif
 
-                            <span class="d-block text-center {{ $class }}">
+                                    <span class="d-block text-center {{ $class }}">
                             {{ $number3 }}
                         </span>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center">
-                            @if($loop->last)
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    @if($loop->last)
 
-                            @else
-                                <span class="d-block"
-                                      style="width: 1px;height: 50%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
-                            @endif
+                                    @else
+                                        <span class="d-block"
+                                              style="width: 1px;height: 50%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
+                                    @endif
 
-                        </div>
-                    </div>
+                                </div>
+                            </div>
 
+                        @endforeach
+                    @endif
                 @endforeach
+
+
             @endfor
         </div>
     </div>

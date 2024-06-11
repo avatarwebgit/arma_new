@@ -2540,9 +2540,9 @@ tbody.ob-heading {
     -moz-transform: translateX(100%);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
-    -moz-animation: my-animation 200s linear 0s infinite;
-    -webkit-animation: my-animation 200s linear 0s infinite;
-    animation: my-animation 200s linear 0s infinite;
+    -moz-animation: my-animation 350s linear 0s infinite;
+    -webkit-animation: my-animation 350s linear 0s infinite;
+    animation: my-animation 350s linear 0s infinite;
 }
 
 #scroll-container2 {
@@ -2556,9 +2556,9 @@ tbody.ob-heading {
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
 
-    -moz-animation: my-animation 2000s linear 0s infinite;
-    -webkit-animation: my-animation 2000s linear 0s infinite;
-    animation: my-animation 2000s linear 0s infinite;
+    -moz-animation: my-animation 3200s linear 0s infinite;
+    -webkit-animation: my-animation 3200s linear 0s infinite;
+    animation: my-animation 3200s linear 0s infinite;
 }
 
 .animate_paused {
