@@ -150,11 +150,11 @@ class Controller extends BaseController
         if ($now < $close_market) {
             $difference = $now->diffInSeconds($close_market);
             $status_text = 'Open';
-            $color='red';
+            $color='green';
         } else {
             $difference = 0;
             $status_text = 'Close';
-            $color='green;';
+            $color='red';
         }
 
         $timer = $this->Timer($difference);
