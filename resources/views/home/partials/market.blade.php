@@ -14,6 +14,7 @@
     </thead>
     <tbody>
     @foreach($markets_groups as $key=>$markets)
+
         @foreach($markets->sortby('time') as $market)
             @php
                 if ($market->status == 1){
@@ -44,6 +45,9 @@
                 if ($market->status == 7 or $market->status == 8 or $market->status == 9){
                      $color = 'red';
                      $statusText = '<span>Close</span>';
+                }
+                if (\Carbon\Carbon::now()->format('Y-m-d')!=$key){
+                     $color = 'black';
                 }
             @endphp
             <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
