@@ -29,11 +29,11 @@ class Header1Controller extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'title_2' => 'required',
+            'title_2' => 'nullable',
             'cat_id' => 'required',
-            'number_1' => 'required',
-            'number_2' => 'required',
-            'number_3' => 'required',
+            'number_1' => 'numeric',
+            'number_2' => 'numeric',
+            'number_3' => 'numeric',
             'currency' => 'required',
             'priority' => 'required',
         ]);
@@ -64,11 +64,11 @@ class Header1Controller extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'title_2' => 'required',
+            'title_2' => 'nullable',
             'cat_id' => 'required',
-            'number_1' => 'required',
-            'number_2' => 'required',
-            'number_3' => 'required',
+            'number_1' => 'numeric',
+            'number_2' => 'numeric',
+            'number_3' => 'numeric',
             'currency' => 'required',
             'priority' => 'required',
         ]);
