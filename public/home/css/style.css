@@ -277,14 +277,14 @@ header .navbar-brand {
 header .navbar-brand img {
     height: 80px;
 }
-@media screen and (min-width: 1281px){
+@media screen and (min-width: 1921px){
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 1rem;
         padding-left: 1rem;
         font-weight: bolder;
     }
 }
-@media screen and (max-width: 1280px){
+@media screen and (max-width: 1920px){
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 0;
         padding-left: 1rem;
