@@ -95,15 +95,6 @@ thead tr th {
     padding: 8px 1px !important;
 }
 
-@media screen and (max-width: 767px) {
-    thead tr th {
-        font-size: 9px !important;
-    }
-    tbody tr td {
-        font-size: 9px !important;
-    }
-}
-
 thead th {
     color: #758696;
     font-size: 13px;
@@ -837,7 +828,7 @@ footer.landing-footer-two ul li a:hover {
 }
 
 .table td {
-    font-size: 13px;
+    font-size: 14px;
     padding: 3px 18px;
     vertical-align: middle;
 }

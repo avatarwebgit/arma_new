@@ -260,14 +260,24 @@ class Controller extends BaseController
     public function today_market_status()
     {
         try {
-            $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
+//            $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
             $yesterday = Carbon::yesterday();
-            $pre_yesterday = Carbon::yesterday()->copy()->addDay(-1);
+//            $pre_yesterday = Carbon::yesterday()->copy()->addDay(-1);
             $today = Carbon::today();
             $tomorrow = Carbon::tomorrow();
-            $future = $yesterday->copy()->addDay(4);
-            $yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time', '>', $change_time)->orderby('date', 'asc')->get()->groupby('date');
-            $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
+
+            //$yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time', '>', $change_time)->orderby('date', 'asc')->get()->groupby('date');
+
+            $change_time= MarketSetting::where('key', 'change_time')->pluck('value')->first();
+            $change_time=Carbon::parse($change_time);
+            $now = Carbon::now();
+            if ($now->hour >= $change_time->hour){
+                $future = $today->copy()->addDay(4);
+                $markets_groups = Market::where('date', '>', $today)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
+            }else{
+                $future = $yesterday->copy()->addDay(4);
+                $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
+            }
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
             foreach ($markets_groups as $markets) {
@@ -286,21 +296,21 @@ class Controller extends BaseController
 
                 }
             }
-            foreach ($yesterday_markets_groups as $markets) {
-                foreach ($markets as $market) {
-                    $result = $this->statusTimeMarket($market);
-                    $market['difference'] = $result[0];
-                    $market['status'] = $result[1];
-                    $market['benchmark1'] = $result[2];
-                    $market['benchmark2'] = $result[3];
-                    $market['benchmark3'] = $result[4];
-                    $market['benchmark4'] = $result[5];
-                    $market['benchmark5'] = $result[6];
-                    $market['benchmark6'] = $result[7];
-                    $market['date_time'] = $result[8];
-                    $ids[] = $market->id;
-                }
-            }
+//            foreach ($yesterday_markets_groups as $markets) {
+//                foreach ($markets as $market) {
+//                    $result = $this->statusTimeMarket($market);
+//                    $market['difference'] = $result[0];
+//                    $market['status'] = $result[1];
+//                    $market['benchmark1'] = $result[2];
+//                    $market['benchmark2'] = $result[3];
+//                    $market['benchmark3'] = $result[4];
+//                    $market['benchmark4'] = $result[5];
+//                    $market['benchmark5'] = $result[6];
+//                    $market['benchmark6'] = $result[7];
+//                    $market['date_time'] = $result[8];
+//                    $ids[] = $market->id;
+//                }
+//            }
             $market_values = 0;
             $market_is_open = 0;
 
@@ -331,7 +341,7 @@ class Controller extends BaseController
             }
             $market_values_html='$'.number_format($market_values);
             $now = Carbon::now();
-            $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
+            $view_table = view('home.partials.market', compact('markets_groups', 'now'))->render();
 
             broadcast(new MarketTableIndex($view_table,$market_values_html));
         } catch (\Exception $e) {

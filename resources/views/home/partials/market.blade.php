@@ -1,15 +1,44 @@
-<table class="table table-responsive-sm">
+<table id="market_index_table" class="table table-responsive">
     <thead class="thead-dark">
     <tr>
-        <th style="width: 10%">Commodity</th>
-        <th style="width: 10%">Quantity</th>
-        <th style="width: 10%">Packaging</th>
-        <th style="width: 10%">Delivery Term</th>
-        <th style="width: 10%">Region</th>
-        <th style="width: 10%">Date</th>
-        <th style="width: 10%">Time</th>
-        <th style="width: 10%"></th>
-        <th style="width: 10%"></th>
+        <th>
+            <span style="margin-left: 20px">
+            Commodity
+            </span>
+        </th>
+        <th>
+             <span style="margin-left: 35px">
+            Quantity
+            </span>
+        </th>
+        <th>
+            <span style="margin-left: 35px">
+              Packaging
+            </span>
+        </th>
+        <th>
+             <span style="margin-left: 20px">
+            Delivery Term
+            </span>
+        </th>
+        <th>
+            <span style="margin-left: 46px">
+            Region
+            </span>
+        </th>
+        <th>
+             <span style="margin-left: 52px">
+            Date
+            </span>
+        </th>
+        <th>
+                        <span style="margin-left: 42px">
+
+            Time
+            </span>
+        </th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -18,33 +47,33 @@
         @foreach($markets->sortby('time') as $market)
             @php
                 if ($market->status == 1){
-                    $statusText = '<span>Waiting To Open</span>';
+                    $statusText = 'Waiting To Open';
                    $color = '#006';
                    $statusText=Carbon\Carbon::parse($market->time)->format('g:i a');
                 }
                 if ($market->status == 2){
-                     $statusText = '<span>Ready to open</span>';
+                     $statusText = 'Ready to open';
                      $color = '#1f9402';
                 }
                 if ($market->status == 3){
                      $color = '#1f9402';
-                  $statusText = '<span>Opening</span>';
+                  $statusText = 'Opening';
                 }
                 if ($market->status == 4){
                      $color = '#1f9402';
-                     $statusText = '<span>Quotation 1/2</span>';
+                     $statusText = 'Quotation 1/2';
                 }
                 if ($market->status == 5){
                      $color = '#1f9402';
-                     $statusText = '<span>Quotation 2/2</span>';
+                     $statusText = 'Quotation 2/2';
                 }
                 if ($market->status == 6){
                      $color = '#1f9402';
-                     $statusText = '<span>Competition</span>';
+                     $statusText = 'Competition';
                 }
                 if ($market->status == 7 or $market->status == 8 or $market->status == 9){
                      $color = 'red';
-                     $statusText = '<span>Close</span>';
+                     $statusText = 'Close';
                 }
                 if (\Carbon\Carbon::now()->format('Y-m-d')!=$key){
                      $color = 'black';
@@ -65,7 +94,7 @@
                 data-benchmark6="{{ $market->benchmark6 }}"
                 data-today-last="{{ $market->is_today_last }}"
             >
-                <td style="width: 10%" class="position-relative">
+                <td class="position-relative">
                     @if(1 <$market->status and  $market->status< 7)
                         <div class="animation_main_div" style="position: absolute;left: 5px;top: -3px">
                             <div class="circle " style="background-color: {{ $color }} !important;"></div>
@@ -77,56 +106,52 @@
                             </div>
                         </div>
                     @endif
-                    <span style="display: block;width: 30%;text-align: left;margin:0 auto">
+                    <span>
                         {{ $market->SalesForm->commodity }}
                     </span>
                 </td>
-                <td style="width: 10%">
+                <td>
                     @php
                         $quantity=$market->SalesForm->max_quantity;
                         $quantity=str_replace(',','',$quantity);
                     @endphp
-                    <span style="display: block;width: 30%;text-align: left;margin:0 auto">
+                    <span>
                         {{ number_format($quantity) }}
                     </span>
                 </td>
-                <td style="width: 10%">
-                                        <span style="display: block;width: 70%;text-align: left;margin-left:35px">
+                <td>
+                                        <span>
                     {{ $market->SalesForm->packing }}
                     </span>
                 </td>
-                <td style="width: 10%">
-                    <span style="display: block;width: 30%;text-align: left;margin:0 auto">
+                <td>
+                    <span>
                     {{ $market->SalesForm->incoterms }}
                     </span>
                 </td>
-                <td style="width: 10%">
-                    <span style="display: block;width: 70%;text-align: left;margin-left:35px">
+                <td>
+                    <span>
                     {{ $market->SalesForm->country }}
                     </span>
                 </td>
-                <td style="width: 10%">
-                    <span style="display: block;width: 70%;text-align: left;margin-left:35px">
+                <td>
+                    <span>
                     {{ \Carbon\Carbon::parse($market->date_time)->format('Y-m-d') }}
                     </span>
                 </td>
-                <td style="width: 10%" id="market-time-parent-{{ $market->id }}">
-                    <div class="d-flex align-items-center justify-content-center">
+                <td id="market-time-parent-{{ $market->id }}">
                         <span class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
-                    </div>
-
-
                 </td>
-                <td style="width: 10%" class="slide_more_angle cursor-pointer">
+                <td class="slide_more_angle cursor-pointer">
                     <div class="d-flex justify-content-center" id="slide_more_angle_{{ $market->id }}"
                          onclick="slidemore({{ $market->id }},event)">
                         <span>more</span>
                         <i class="fa fa-angle-down ml-2 mt-1"></i>
                     </div>
                 </td>
-                <td style="width: 10%">
+                <td>
                     <a class="btn btn-primary bid-bottom btn-sm text-white">
                         Bid
                     </a>
