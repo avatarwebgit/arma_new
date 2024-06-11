@@ -66,7 +66,7 @@
                         </div>
                         <div>
                         <span class="d-block text-center {{ $class }}">
-                            {{ $item->number_1.' - '.$item->number_2 }}
+                            {{ number_format($item->number_1,2).' - '.number_format($item->number_2,2) }}
                         </span>
                             <span class="d-block text-center {{ $class }}">
                             {{ $number3 }}

@@ -30,11 +30,11 @@ class Header2Controller extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'title_2' => 'required',
+            'title_2' => 'nullable',
             'category' => 'required',
-            'number_1' => 'required',
-            'number_2' => 'required',
-            'number_3' => 'required',
+            'number_1' => 'required|numeric',
+            'number_2' => 'required|numeric',
+            'number_3' => 'required|numeric',
             'currency' => 'required',
             'priority' => 'required',
         ]);
@@ -66,6 +66,16 @@ class Header2Controller extends Controller
 
     public function update(Header2Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required',
+            'title_2' => 'nullable',
+            'category' => 'required',
+            'number_1' => 'required|numeric',
+            'number_2' => 'required|numeric',
+            'number_3' => 'required|numeric',
+            'currency' => 'required',
+            'priority' => 'required',
+        ]);
         $item = Header2::where('id', $id)->first();
         $item->update($request->all());
         $item->Categories()->detach();
