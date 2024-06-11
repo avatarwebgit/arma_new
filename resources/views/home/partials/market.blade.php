@@ -3,7 +3,7 @@
     <tr>
         <th style="width: 10%">Commodity</th>
         <th style="width: 10%">Quantity</th>
-        <th style="width: 12%">Packaging</th>
+        <th style="width: 10%">Packaging</th>
         <th style="width: 10%">Delivery Term</th>
         <th style="width: 10%">Region</th>
         <th style="width: 10%">Date</th>
@@ -87,8 +87,8 @@
                         {{ number_format($quantity) }}
                     </span>
                 </td>
-                <td style="width: 12%">
-                    <span style="display: block;width: 70%;text-align: left;margin-left:30px">
+                <td style="width: 10%">
+                                        <span style="display: block;width: 70%;text-align: left;margin-left:35px">
                     {{ $market->SalesForm->packing }}
                     </span>
                 </td>
@@ -201,16 +201,16 @@
 
                         </tr>
                         <tr>
-                                                        <td class="text-center">
-                                                            <span class="text-bold">Offer Price</span>
-                                                            <span>
+                            <td class="text-center">
+                                <span class="text-bold">Offer Price</span>
+                                <span>
                                                                 @auth
-                                                                    Available
-                                                                @else
-                                                                    Log in/Register
-                                                                @endauth
+                                        Available
+                                    @else
+                                        Log in/Register
+                                    @endauth
                                                             </span>
-                                                        </td>
+                            </td>
 
                             <td class="text-center">
                                 <span class="text-bold">Unit</span>
