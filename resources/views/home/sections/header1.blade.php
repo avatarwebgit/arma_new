@@ -53,9 +53,16 @@
                                     <div style="font-size: 15px">
                                         {{ $item->title }}
                                     </div>
-                                    <div style="font-size: 12px">
-                                        {{ $item->title_2.' ('.$item->currency.')' }}
-                                    </div>
+                                    @if($item->currency=='' or $item->currency==null)
+                                        <div style="font-size: 12px">
+                                            {{ $item->title_2 }}
+                                        </div>
+                                    @else
+                                        <div style="font-size: 12px">
+                                            {{ $item->title_2.' ('.$item->currency.')' }}
+                                        </div>
+                                    @endif
+
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
                                     @if($img_display)

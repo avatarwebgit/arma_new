@@ -198,8 +198,8 @@
         function startTime() {
             var dayOfWeek = moment().tz("Europe/London").format("dddd");
             let clock = moment().tz("Europe/London").format("ll");
-            let a = moment().tz("Europe/London").format("h:mm a");
-            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 12pt !important">' + clock + '</span><span class="ml-3 timer-bold">' + a + ' GMT</span>'
+            let a = moment().tz("Europe/London").format("h:mm A");
+            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 12pt !important">' + clock + '</span><span class="ml-3 timer-bold" style="font-size: 14px">' + a + ' GMT</span>'
             $('#time_now').html(time_now);
             t = setTimeout(function () {
                 startTime()
@@ -208,7 +208,8 @@
 
         startTime();
 
-        function slidemore(market_id) {
+        function slidemore(market_id,event) {
+            event.stopPropagation();
             $('#more_table_' + market_id).slideToggle();
             let svg = $('#slide_more_angle_' + market_id).find('svg');
             let hasClass = svg.hasClass('fa-angle-down');
@@ -281,7 +282,6 @@
                 <div class="text-left" id="total_trade_value">
                     <span>Today Trade Value:</span>
                     <span id="market_value">0</span>
-                    <span>$</span>
                 </div>
 
             </div>
