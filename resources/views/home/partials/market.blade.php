@@ -45,9 +45,6 @@
                      $color = '#1f9402';
                      $statusText = '<span>Close</span>';
                 }
-                if ($key!=0){
-                    $color = '#000';
-                }
             @endphp
             <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
 
