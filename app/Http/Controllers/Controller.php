@@ -329,18 +329,11 @@ class Controller extends BaseController
                     broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status, $step));
                 }
             }
-
-            if ($market_is_open === 1) {
-                $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
-            } else {
-                $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
-            }
-            $close_market = $this->close_market_today();
-            $close_market = Carbon::parse($close_market);
+            $market_values_html='$'.number_format($market_values);
             $now = Carbon::now();
             $view_table = view('home.partials.market', compact('markets_groups', 'yesterday_markets_groups', 'now'))->render();
 
-            broadcast(new MarketTableIndex($view_table));
+            broadcast(new MarketTableIndex($view_table,$market_values_html));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return response()->json([0, $e->getMessage()]);
