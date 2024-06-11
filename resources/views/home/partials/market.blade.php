@@ -42,7 +42,7 @@
                      $statusText = '<span>Competition</span>';
                 }
                 if ($market->status == 7 or $market->status == 8 or $market->status == 9){
-                     $color = '#1f9402';
+                     $color = 'red';
                      $statusText = '<span>Close</span>';
                 }
             @endphp
