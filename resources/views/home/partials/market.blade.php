@@ -109,8 +109,7 @@
                 </td>
                 <td style="width: 10%" id="market-time-parent-{{ $market->id }}">
                     <div class="d-flex align-items-center justify-content-center">
-                        <span style="display: block;width: 50%;text-align: left;margin-left:40px"
-                              class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
+                        <span class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
                     </div>
@@ -193,7 +192,7 @@
                                 <span class="text-bold">Payment</span>
                                 <span>
                                     @auth
-                                       ????
+                                        {{ $market->SalesForm->payment }}
                                     @else
                                         Log in/Register
                                     @endauth
