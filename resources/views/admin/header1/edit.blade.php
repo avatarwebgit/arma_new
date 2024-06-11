@@ -83,12 +83,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label class="col-form-label" for="currency">Currency</label>
-                <select id="currency" name="currency" class="form-control">
-                    <option value="">Select Category</option>
-                    @foreach($currencies as $currency)
-                        <option {{ $currency->title==$item->currency ? 'selected' : '' }} value="{{ $currency->title }}">{{ $currency->title }}</option>
-                    @endforeach
-                </select>
+                <input id="currency" name="currency" class="form-control" value="{{ $item->currency }}">
                 @error('currency')
                 <p class="input-error-validate">
                     {{ $message }}

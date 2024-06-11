@@ -32,7 +32,7 @@ class Header2Controller extends Controller
             'title' => 'required',
             'title_2' => 'nullable',
             'category' => 'required',
-            'number_1' => 'required|numeric',
+            'number_1' => 'nullable|numeric',
             'number_2' => 'required|numeric',
             'number_3' => 'required|numeric',
             'currency' => 'required',
@@ -64,13 +64,13 @@ class Header2Controller extends Controller
         return view('admin.header2.edit', compact('item', 'categories', 'currencies'));
     }
 
-    public function update(Header2Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
             'title_2' => 'nullable',
             'category' => 'required',
-            'number_1' => 'required|numeric',
+            'number_1' => 'nullable|numeric',
             'number_2' => 'required|numeric',
             'number_3' => 'required|numeric',
             'currency' => 'required',

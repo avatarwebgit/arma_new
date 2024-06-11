@@ -65,9 +65,16 @@
                             @endif
                         </div>
                         <div>
-                        <span class="d-block text-center {{ $class }}">
-                            {{ number_format($item->number_1,2).' - '.number_format($item->number_2,2) }}
+                            @if($item->number_1==null or $item->number_1=='')
+                                <span class="d-block text-center {{ $class }}">
+                            {{ $item->number_2 }}
                         </span>
+                            @else
+                                <span class="d-block text-center {{ $class }}">
+                            {{ $item->number_1.' - '.$item->number_2 }}
+                        </span>
+                            @endif
+
                             <span class="d-block text-center {{ $class }}">
                             {{ $number3 }}
                         </span>

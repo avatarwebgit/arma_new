@@ -48,7 +48,12 @@
                                 </div>
                             </div>
                             <div>
-                                <span style="font-weight: bold" class="d-block  text-center {{ $class }}">{{ number_format($item->number_1,2).' - '.number_format($item->number_2,2) }}</span>
+                                @if($item->number_1==null or $item->number_1=='')
+                                    <span style="font-weight: bold" class="d-block  text-center {{ $class }}">{{ $item->number_2 }}</span>
+                                @else
+                                    <span style="font-weight: bold" class="d-block  text-center {{ $class }}">{{ $item->number_1.' - '.$item->number_2 }}</span>
+                                @endif
+
                                 <span style="font-weight: bold" class="d-block  text-center bold {{ $class }}">{{ $number_3 }}</span>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">

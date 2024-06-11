@@ -31,7 +31,7 @@ class Header1Controller extends Controller
             'title' => 'required',
             'title_2' => 'nullable',
             'cat_id' => 'required',
-            'number_1' => 'numeric',
+            'number_1' => 'nullable|numeric',
             'number_2' => 'numeric',
             'number_3' => 'numeric',
             'currency' => 'required',
@@ -60,13 +60,13 @@ class Header1Controller extends Controller
         return view('admin.header1.edit', compact('item', 'categories', 'currencies'));
     }
 
-    public function update(Header1Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
             'title_2' => 'nullable',
             'cat_id' => 'required',
-            'number_1' => 'numeric',
+            'number_1' => 'nullable|numeric',
             'number_2' => 'numeric',
             'number_3' => 'numeric',
             'currency' => 'required',
