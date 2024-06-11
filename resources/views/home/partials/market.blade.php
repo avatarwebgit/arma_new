@@ -3,7 +3,7 @@
     <tr>
         <th style="width: 10%">Commodity</th>
         <th style="width: 10%">Quantity</th>
-        <th style="width: 10%">Packaging</th>
+        <th style="width: 12%">Packaging</th>
         <th style="width: 10%">Delivery Term</th>
         <th style="width: 10%">Region</th>
         <th style="width: 10%">Date</th>
@@ -87,8 +87,8 @@
                         {{ number_format($quantity) }}
                     </span>
                 </td>
-                <td style="width: 10%">
-                    <span style="display: block;width: 70%;text-align: left;margin-left:35px">
+                <td style="width: 12%">
+                    <span style="display: block;width: 70%;text-align: left;margin-left:30px">
                     {{ $market->SalesForm->packing }}
                     </span>
                 </td>
