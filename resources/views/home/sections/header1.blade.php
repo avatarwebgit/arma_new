@@ -13,13 +13,13 @@
                 @endforeach
                 @foreach($header1->Headers()->orderBy('priority','asc')->get() as $key=>$item)
 
-                    @if($item->number_1>0)
+                    @if($item->number_3>0)
                         @php
                             $class='text-success';
                             $src='home/img/green.png';
                             $img_display=1;
                         @endphp
-                    @elseif($item->number_1<0)
+                    @elseif($item->number_3<0)
                         @php
                             $class='text-danger';
                             $src='home/img/Red_triangle.svg.png';
