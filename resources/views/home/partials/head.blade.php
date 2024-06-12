@@ -21,9 +21,6 @@
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
-        #market_index_table th span{
-
-        }
         #market_index_table span {
             display: block;
             width: 90px;
