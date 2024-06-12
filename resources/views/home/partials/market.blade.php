@@ -163,7 +163,7 @@
                         <tr>
                             <td class="text-center">
                                 <span class="text-bold">Contract Type</span>
-                                <span>
+                                <span >
                                     @auth
                                         {{ $market->SalesForm->contract_type }}
                                     @else
