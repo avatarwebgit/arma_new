@@ -59,9 +59,10 @@
         }
         #market_index_table span {
             display: block;
-            width: 90px;
+            width: 30px;
             text-align: left;
             margin: 0 auto;
+            font-size: 9pt;
         }
         #market_index_table tbody span {
             margin-left: 24px;

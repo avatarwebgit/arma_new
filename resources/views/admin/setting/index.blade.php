@@ -202,7 +202,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-md-6 mb20">
-                                                    <label for="start_market">Line 1 Speed (ms)</label>
+                                                    <label for="start_market">Time To Show Line 1 (ms)</label>
                                                     <input id="start_market" name="start_market"
                                                            class="form-control"
                                                            placeholder="title" value="{{ $start_market }}">
@@ -213,7 +213,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-md-6 mb20">
-                                                    <label for="end_market">Line 2 Speed (ms)</label>
+                                                    <label for="end_market">Time to show Line 2 (ms)</label>
                                                     <input id="end_market" name="end_market"
                                                            class="form-control"
                                                            value="{{ $end_market }}">

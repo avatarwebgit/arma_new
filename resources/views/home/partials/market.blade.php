@@ -2,37 +2,37 @@
     <thead class="thead-dark">
     <tr>
         <th>
-            <span style="margin-left: 20px">
+            <span>
             Commodity
             </span>
         </th>
         <th>
-             <span style="margin-left: 35px">
+             <span>
             Quantity
             </span>
         </th>
         <th>
-            <span style="margin-left: 35px">
+            <span style="margin-left: 44px">
               Packaging
             </span>
         </th>
         <th>
-             <span style="margin-left: 20px">
+             <span style="width: 90px;margin-left: 10px">
             Delivery Term
             </span>
         </th>
         <th>
-            <span style="margin-left: 46px">
+            <span>
             Region
             </span>
         </th>
         <th>
-             <span style="margin-left: 52px">
+             <span style="width: 30px;margin-left: 65px">
             Date
             </span>
         </th>
         <th>
-                        <span style="margin-left: 52px">
+                        <span>
 
             Time
             </span>
@@ -120,7 +120,7 @@
                     </span>
                 </td>
                 <td>
-                                        <span>
+                                        <span style="width: 90px;margin-left: 40px">
                     {{ $market->SalesForm->packing }}
                     </span>
                 </td>
@@ -135,19 +135,21 @@
                     </span>
                 </td>
                 <td>
-                    <span>
+                    <span style="width: 90px;text-align: center;margin-left: 20px">
                     {{ \Carbon\Carbon::parse($market->date_time)->format('Y-m-d') }}
                     </span>
                 </td>
                 <td id="market-time-parent-{{ $market->id }}">
-                        <span style="width: 100px" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
+                        <span style="margin: 0" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
                 </td>
                 <td class="slide_more_angle cursor-pointer">
                     <div class="d-flex justify-content-center" id="slide_more_angle_{{ $market->id }}"
                          onclick="slidemore({{ $market->id }},event)">
-                        <span>more</span>
+                        <span style="margin: 0">
+                            more
+                        </span>
                         <i class="fa fa-angle-down ml-2 mt-1"></i>
                     </div>
                 </td>
