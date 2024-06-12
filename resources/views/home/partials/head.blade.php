@@ -57,7 +57,7 @@
             margin: 0 !important;
             width: 120px !important;
         }
-        @media screen and (max-width:1400px) {
+        @media screen and (max-width:1201px) {
             #market_index_table span {
                 display: block;
                 width: 30px;
@@ -67,15 +67,7 @@
             }
         }
 
-        @media screen and (min-width:1400px) {
-            #market_index_table span {
-                display: block;
-                width: 130px;
-                text-align: left;
-                margin: 0 auto;
-                font-size: 9pt;
-            }
-        }
+
 
 
         #market_index_table tbody span {
