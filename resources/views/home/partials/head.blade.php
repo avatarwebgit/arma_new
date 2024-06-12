@@ -57,7 +57,7 @@
             margin: 0 !important;
             width: 120px !important;
         }
-        @media screen and (max-width:1201px) {
+
             #market_index_table span {
                 display: block;
                 width: 30px;
@@ -65,7 +65,7 @@
                 margin: 0 auto;
                 font-size: 9pt;
             }
-        }
+
 
 
 
