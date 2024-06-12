@@ -1,5 +1,8 @@
 <tr>
-    <td class="text-center">{{ number_format($market->SalesForm->max_quantity) }}</td>
+    @php
+        $maxQuantity=str_replace(',','',$market->SalesForm->max_quantity);
+    @endphp
+    <td class="text-center">{{ number_format($maxQuantity) }}</td>
     @if($market->SalesForm->price_type=='Fix')
         <td class="text-center">{{ number_format($market->SalesForm->price) }}</td>
     @else
