@@ -21,6 +21,15 @@
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
+        #market_index_table span {
+            display: block;
+            width: 90px;
+            text-align: left;
+            margin: 0 auto;
+        }
+        #market_index_table tbody span {
+            margin-left: 24px;
+        }
         html{
             overflow-x: hidden !important;
         }

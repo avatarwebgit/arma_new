@@ -273,10 +273,17 @@ class Controller extends BaseController
             $now = Carbon::now();
             if ($now->hour >= $change_time->hour){
                 $future = $today->copy()->addDay(4);
+<<<<<<< HEAD
+                $markets_groups = Market::where('date', '>', $today)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
+            }else{
+                $future = $yesterday->copy()->addDay(4);
+                $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
+=======
                 $markets_groups = Market::where('date', '>', $today)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
             }else{
                 $future = $yesterday->copy()->addDay(4);
                 $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
+>>>>>>> 587efd6f316c783fc88121fc351571762ecca08a
             }
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
