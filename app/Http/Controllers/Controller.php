@@ -265,10 +265,10 @@ class Controller extends BaseController
             $tomorrow = Carbon::tomorrow();
 
             $change_time= MarketSetting::where('key', 'change_time')->pluck('value')->first();
-            $change_time=Carbon::parse($change_time);
-            $now = Carbon::now();
+            $change_time=Carbon::parse($change_time)->format("H:i:s");
+            $now = Carbon::now()->format("H:i:s");
 
-            if ($now->hour >= $change_time->hour){
+            if ($now >= $change_time){
                 $future = $today->copy()->addDay(4);
                 $markets_groups = Market::where('date', '>', $today)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
             }else{
