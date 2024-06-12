@@ -202,8 +202,8 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-md-6 mb20">
-                                                    <label for="start_market">Start Market</label>
-                                                    <input id="start_market" type="time" name="start_market"
+                                                    <label for="start_market">Line 1 Speed (ms)</label>
+                                                    <input id="start_market" name="start_market"
                                                            class="form-control"
                                                            placeholder="title" value="{{ $start_market }}">
                                                     @error('start_market')
@@ -213,8 +213,8 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-md-6 mb20">
-                                                    <label for="end_market">End Market</label>
-                                                    <input id="end_market" type="time" name="end_market"
+                                                    <label for="end_market">Line 2 Speed (ms)</label>
+                                                    <input id="end_market" name="end_market"
                                                            class="form-control"
                                                            value="{{ $end_market }}">
                                                     @error('end_market')

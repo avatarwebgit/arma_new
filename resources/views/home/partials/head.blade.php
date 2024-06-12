@@ -21,6 +21,30 @@
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
+        #scroll-container > div {
+            -moz-transform: translateX(100%);
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+            -moz-animation: my-animation {{ $start_market.'s' }} linear 0s infinite;
+            -webkit-animation: my-animation {{ $start_market.'s' }} linear 0s infinite;
+            animation: my-animation {{ $start_market.'s' }} linear 0s infinite;
+        }
+
+        #scroll-container2 {
+            background-color: #006;
+        }
+
+        #scroll-container2 > div {
+            background-color: #006;
+            color: white;
+            -moz-transform: translateX(100%);
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+
+            -moz-animation: my-animation 3200s linear {{ $end_market.'s' }} infinite;
+            -webkit-animation: my-animation 3200s linear {{ $end_market.'s' }} infinite;
+            animation: my-animation {{ $end_market.'s' }} linear 0s infinite;
+        }
         .table_in_table td {
             display: flex;
             justify-content: center;
