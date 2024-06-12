@@ -156,11 +156,11 @@
         function GetMarkets() {
 
             $.ajax({
-                url: "{{ route('home.MarketTableIndex') }}",
+                url: "{{ route('home.today_market_status') }}",
                 data: {
                     _token: "{{ csrf_token() }}",
                 },
-                method: 'post',
+                method: 'get',
                 dataType: 'json',
                 beforeSend: function () {
                     let loader = '<div class="loader"></div>'
