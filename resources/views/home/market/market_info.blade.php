@@ -19,7 +19,10 @@
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Max Quantity</span>
-        <span class="text-bold text-light-blue ">{{ number_format($market->SalesForm->max_quantity) }}</span>
+        @php
+        $maxQuantity=str_replace(',','',$market->SalesForm->max_quantity);
+        @endphp
+        <span class="text-bold text-light-blue ">{{ number_format($maxQuantity) }}</span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Min Order</span>
