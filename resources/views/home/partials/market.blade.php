@@ -140,7 +140,7 @@
                     </span>
                 </td>
                 <td id="market-time-parent-{{ $market->id }}">
-                        <span style="margin: 0" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
+                        <span style="margin: 0;width: 50px" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
                 </td>
