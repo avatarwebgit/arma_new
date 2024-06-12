@@ -8,12 +8,12 @@
             </span>
             </th>
             <th>
-             <span>
+              <span style="text-align: center;margin-left: 35px">
             Quantity
             </span>
             </th>
             <th>
-            <span style="margin-left: 44px">
+            <span style="text-align: center;margin-left: 50px">
               Packaging
             </span>
             </th>
@@ -33,7 +33,7 @@
             </span>
             </th>
             <th>
-                        <span style="margin-left: 20px">
+                        <span style="margin-left: 45px">
 
             Time
             </span>
@@ -121,7 +121,7 @@
                     </span>
                     </td>
                     <td>
-                                        <span style="width: 90px;margin-left: 40px">
+                                        <span style="width: 90px;text-align: center">
                     {{ $market->SalesForm->packing }}
                     </span>
                     </td>
@@ -141,7 +141,7 @@
                     </span>
                     </td>
                     <td id="market-time-parent-{{ $market->id }}">
-                        <span style="margin: 0;width: 90px" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
+                        <span style="margin: 0;width: 90px;text-align: center" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
                     </td>
