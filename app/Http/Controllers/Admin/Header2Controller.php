@@ -33,8 +33,8 @@ class Header2Controller extends Controller
             'title_2' => 'nullable',
             'category' => 'required',
             'number_1' => 'nullable|numeric',
-            'number_2' => 'required|numeric',
-            'number_3' => 'required|numeric',
+            'number_2' => 'nullable|numeric',
+            'number_3' => 'nullable|numeric',
             'currency' => 'nullable',
             'priority' => 'required',
         ]);
@@ -71,8 +71,8 @@ class Header2Controller extends Controller
             'title_2' => 'nullable',
             'category' => 'required',
             'number_1' => 'nullable|numeric',
-            'number_2' => 'required|numeric',
-            'number_3' => 'required|numeric',
+            'number_2' => 'nullable|numeric',
+            'number_3' => 'nullable|numeric',
             'currency' => 'nullable',
             'priority' => 'required',
         ]);
