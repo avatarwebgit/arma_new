@@ -2,7 +2,7 @@
     <thead class="thead-dark">
     <tr>
         <th>
-            <span>
+            <span style="margin-left: 15px">
             Commodity
             </span>
         </th>
@@ -17,7 +17,7 @@
             </span>
         </th>
         <th>
-             <span style="width: 90px;margin-left: 10px">
+             <span style="width: 90px;margin-left: 0">
             Delivery Term
             </span>
         </th>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                     @endif
-                    <span>
+                        <span style="margin-left: 15px">
                         {{ $market->SalesForm->commodity }}
                     </span>
                 </td>
@@ -125,12 +125,12 @@
                     </span>
                 </td>
                 <td>
-                    <span>
+                    <span style="margin-left: 2px">
                     {{ $market->SalesForm->incoterms }}
                     </span>
                 </td>
                 <td>
-                    <span>
+                    <span style="margin-left: 10px">
                     {{ $market->SalesForm->country }}
                     </span>
                 </td>
