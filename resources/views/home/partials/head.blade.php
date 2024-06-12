@@ -21,6 +21,18 @@
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
+        .table_in_table td {
+            display: flex;
+            justify-content: center;
+        }
+        .table_in_table tr {
+            display: flex;
+            justify-content: space-around;
+        }
+        .table_in_table span{
+            margin: 0 !important;
+            width: 120px !important;
+        }
         #market_index_table span {
             display: block;
             width: 90px;
