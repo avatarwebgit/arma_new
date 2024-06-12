@@ -32,7 +32,7 @@
             </span>
         </th>
         <th>
-                        <span style="margin-left: 42px">
+                        <span style="margin-left: 52px">
 
             Time
             </span>
@@ -140,7 +140,7 @@
                     </span>
                 </td>
                 <td id="market-time-parent-{{ $market->id }}">
-                        <span class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
+                        <span style="width: 100px" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
                 </td>
