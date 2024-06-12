@@ -167,7 +167,21 @@
                     $('#market_table').html(loader);
                 },
                 success: function (msg) {
-                    console.log('okkk');
+                    let table_view = msg[1];
+                    let ids = msg[2];
+                    let market_value = msg[3];
+                    let Market_Status_Text = msg[4];
+                    // let endDate = msg[5];
+                    // let market_id_open = msg[6];
+                    let now = msg[7];
+                    $('#market_table').html(table_view);
+                    $('#market_value').html(market_value);
+                    // $('#Market_Status_Text').html(Market_Status_Text);
+                    // $('#Market_Status_Text').html(msg[4]);
+                    // $.each(ids, function (i, val) {
+                    //     MarketOnline(val, now);
+                    // });
+                    // makeTimer(endDate, market_id_open, now);
                 }
             })
         }
