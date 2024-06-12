@@ -57,13 +57,27 @@
             margin: 0 !important;
             width: 120px !important;
         }
-        #market_index_table span {
-            display: block;
-            width: 30px;
-            text-align: left;
-            margin: 0 auto;
-            font-size: 9pt;
+        @media screen and (max-width:1400px) {
+            #market_index_table span {
+                display: block;
+                width: 30px;
+                text-align: left;
+                margin: 0 auto;
+                font-size: 9pt;
+            }
         }
+
+        @media screen and (min-width:1400px) {
+            #market_index_table span {
+                display: block;
+                width: 130px;
+                text-align: left;
+                margin: 0 auto;
+                font-size: 9pt;
+            }
+        }
+
+
         #market_index_table tbody span {
             margin-left: 24px;
         }

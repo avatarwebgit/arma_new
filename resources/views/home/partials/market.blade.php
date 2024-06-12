@@ -147,7 +147,7 @@
                 <td class="slide_more_angle cursor-pointer">
                     <div class="d-flex justify-content-center" id="slide_more_angle_{{ $market->id }}"
                          onclick="slidemore({{ $market->id }},event)">
-                        <span style="margin: 0">
+                        <span style="margin: 0;width: fit-content">
                             more
                         </span>
                         <i class="fa fa-angle-down ml-2 mt-1"></i>
