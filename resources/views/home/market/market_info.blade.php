@@ -26,7 +26,10 @@
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Min Order</span>
-        <span class="text-bold text-light-blue ">{{ number_format($market->SalesForm->min_order) }}</span>
+        @php
+            $minQuantity=str_replace(',','',$market->SalesForm->min_order);
+        @endphp
+        <span class="text-bold text-light-blue ">{{ number_format($minQuantity) }}</span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Term</span>
