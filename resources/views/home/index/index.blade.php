@@ -264,6 +264,7 @@
 @endsection
 
 @section('content')
+    <div id="bg-mute"></div>
     <div id="clockNow" style="text-align: center;font-size:25px"></div>
     <div id="time"></div>
     @if($alert_active==1)
@@ -274,7 +275,7 @@
     @endif
     <div class="container">
         <div class="row justify-content-between pt-5">
-            <div class="col-12 col-xl-4 p-0 text-left" style="font-size: 13px;font-weight: bold">
+            <div class="col-12 col-sm-4 p-0 text-left" style="font-size: 13px;font-weight: bold">
                 <h3 id="Market_Status_Text">
 
                 </h3>
@@ -284,10 +285,10 @@
                 </div>
 
             </div>
-            <div id="timer_section" class="col-12 col-xl-4 d-flex justify-content-center mb-3 p-0 ">
+            <div id="timer_section" class="col-12 col-sm-4 d-flex justify-content-center mb-3 p-0 ">
 
             </div>
-            <div class="col-12 col-xl-4 p-0 text-right" id="time_now">
+            <div class="col-12 col-sm-4 p-0 text-right" id="time_now">
                 <h3>{{ Carbon\Carbon::now()->format('l') }}</h3>
                 <span>{{ Carbon\Carbon::now()->format('d M Y g:i A') }}</span>
             </div>
