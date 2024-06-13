@@ -15,10 +15,9 @@
         <div class="row">
 
             @php
-                $menus=\App\Models\Menus::where('parent',0)->get();
+                $menus=\App\Models\Menus::where('parent',0)->where('show_on_footer',1)->get();
             @endphp
             @foreach($menus as $menu)
-                @if($menu->id!=4)
                     <div class="col-6 col-md-2">
                         <h3 class="mb-3 fw-bold">
                             <a class="text-white" href="{{ route('home.menus',['menus'=>$menu->id]) }}">
@@ -33,7 +32,6 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
             @endforeach
             <div class="col-md-2">
                 <h3 class="text-white mb-5">
