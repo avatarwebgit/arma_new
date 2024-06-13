@@ -11,6 +11,14 @@
                 $('#market_value').html(market_values_html);
             });
 
+        window.Echo.channel('line_header_updated')
+            .listen('LIneHeaderUpdated', function (e) {
+                let id = e.id;
+                let line = e.line;
+                let html = e.html;
+                $('#header'+line+'-'+id).html(html);
+            });
+
         window.Echo.channel('market-index-result-channel')
             .listen('MarketIndexResult', function (e) {
                 let timer = e.timer;
