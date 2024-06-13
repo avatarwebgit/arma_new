@@ -28,11 +28,21 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+    function ShowMenu() {
+        $('.mobile-nav').addClass('mobile-nav-open');
+        $('#bg-mute').show();
+    }
+
+    function CloseMenu() {
+        $('.mobile-nav').removeClass('mobile-nav-open');
+        $('#bg-mute').hide();
+    }
+
     $(document).ready(function () {
         let width = window.innerWidth;
-        if (width<796){
+        if (width < 796) {
             $('.menu-des').remove();
-        }else {
+        } else {
             $('.menu-mobile').remove();
         }
     });
