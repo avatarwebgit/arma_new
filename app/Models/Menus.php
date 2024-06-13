@@ -10,7 +10,7 @@ class Menus extends Model
     use HasFactory;
 
     protected $table = 'menus';
-    protected $fillable = ['title', 'parent'];
+    protected $fillable = ['title', 'parent','show_on_footer','show_on_header','priority'];
 
     public function Pages()
     {

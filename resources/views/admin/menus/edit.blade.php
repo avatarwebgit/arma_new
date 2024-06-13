@@ -60,6 +60,24 @@
                                                     </p>
                                                     @enderror
                                                 </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <input {{ $menu->show_on_header==1 ? 'checked' : '' }} id="show_on_header" type="checkbox"  name="show_on_header" value="{{ $menu->show_on_header }}">
+                                                    @error('show_on_header')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                    <label for="show_on_header">Show On Header</label>
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <input {{ $menu->show_on_footer==1 ? 'checked' : '' }} id="show_on_footer" type="checkbox"  name="show_on_footer" value="{{ $menu->show_on_footer }}">
+                                                    @error('show_on_footer')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                    <label for="show_on_footer">Show On Footer</label>
+                                                </div>
                                                 <div class="col-md-12 mt-3">
                                                     <button type="submit" class="btn btn-primary btn-block btn-sm">
                                                         Edit
