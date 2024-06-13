@@ -13,7 +13,7 @@
 
             <ul class="navbar-nav d-flex ">
                 @php
-                    $menus=\App\Models\Menus::where('parent',0)->get();
+                    $menus=\App\Models\Menus::where('parent',0)->where('show_on_header',1)->get();
                 @endphp
                 @foreach($menus as $menu)
                     @if($menu->id==2)
