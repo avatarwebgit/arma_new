@@ -174,7 +174,7 @@
         $(document).ready(function() {
             let is_logged_in={{ $is_logged_in }};
             if (is_logged_in===1){
-                alert('This Account is already logged in')
+                $('#Login_two_device').modal('show');
             }
         });
         function GetMarkets() {
@@ -480,5 +480,23 @@
             </div>
         </div>
     @endif
+
+        <!-- Modal -->
+        <div class="modal fade" id="Login_two_device" tabindex="-1"
+             aria-labelledby="market_open_finished_modal_exists_Label"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="market_open_finished_modal_exists_Label">Login Error</h5>
+                    </div>
+                    <div class="modal-body">
+                        this user is already logged in By another Device
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 @endsection
