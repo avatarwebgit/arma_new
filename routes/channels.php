@@ -60,6 +60,10 @@ Broadcast::channel('market-index-table', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
+Broadcast::channel('line_header_updated', function () {
+    return true;
+});
+
 //
 //
 //Broadcast::channel('test', function ($user) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\LIneHeaderUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Header2Request;
 use App\Models\Header2;
@@ -14,7 +15,7 @@ class Header2Controller extends Controller
     public function index()
     {
 //        $items = Header2::latest()->paginate(20);
-        $items = HeaderCategory::orderBy('priority','asc')->get();
+        $items = HeaderCategory::orderBy('priority', 'asc')->get();
         return view('admin.header2.category_index', compact('items'));
     }
 
@@ -53,6 +54,9 @@ class Header2Controller extends Controller
             $msg = $exception->getMessage();
         }
         session()->flash($type, $msg);
+        $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
+        $html=view('home.sections.header1',compact('header2_categories'))->render();
+        broadcast(new LIneHeaderUpdated($html,1,null));
         return redirect()->route('admin.header2.index');
     }
 
@@ -83,6 +87,8 @@ class Header2Controller extends Controller
             $item->Categories()->attach($request->category);
         }
         $cat = $item->Categories[0]->id;
+        $html=view('home.sections.header2_row',compact('item'))->render();
+        broadcast(new LIneHeaderUpdated($html,2,$item->id));
         return redirect()->route('admin.header2.category.headers.list', ['id' => $cat])
             ->with('success', __('Header 2 updated successfully.'));
     }
@@ -125,7 +131,7 @@ class Header2Controller extends Controller
     {
         $request->validate([
             'title' => 'required|unique:header_category,title,' . $id->id,
-            'priority'=>'required'
+            'priority' => 'required'
         ]);
         $id->update([
             'title' => $request->title,
@@ -139,7 +145,7 @@ class Header2Controller extends Controller
     {
         $request->validate([
             'title' => 'required|unique:header_category,title',
-            'priority'=>'required'
+            'priority' => 'required'
         ]);
         HeaderCategory::create([
             'title' => $request->title,

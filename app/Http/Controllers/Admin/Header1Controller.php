@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\LIneHeaderUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Header1Request;
 use App\Models\Header1;
@@ -48,6 +49,9 @@ class Header1Controller extends Controller
             $type = 'failed';
             $msg = $exception->getMessage();
         }
+        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
+        $html=view('home.sections.header1',compact('header1_categories'))->render();
+        broadcast(new LIneHeaderUpdated($html,1,null));
         session()->flash($type, $msg);
         return redirect()->route('admin.header1.category.headers.list',['id'=>$item->cat_id]);
     }
@@ -74,6 +78,8 @@ class Header1Controller extends Controller
         ]);
         $item = Header1::where('id', $id)->first();
         $item->update($request->all());
+        $html=view('home.sections.header1_row',compact('item'))->render();
+        broadcast(new LIneHeaderUpdated($html,1,$item->id));
         return redirect()->route('admin.header1.category.headers.list',['id'=>$item->cat_id])
             ->with('success', __('Header 1 updated successfully.'));
     }
