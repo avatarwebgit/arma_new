@@ -49,6 +49,9 @@ class Header1Controller extends Controller
             $type = 'failed';
             $msg = $exception->getMessage();
         }
+        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
+        $html=view('home.sections.header1',compact('header1_categories'))->render();
+        broadcast(new LIneHeaderUpdated($html,1,null));
         session()->flash($type, $msg);
         return redirect()->route('admin.header1.category.headers.list',['id'=>$item->cat_id]);
     }

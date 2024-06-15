@@ -54,6 +54,9 @@ class Header2Controller extends Controller
             $msg = $exception->getMessage();
         }
         session()->flash($type, $msg);
+        $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
+        $html=view('home.sections.header1',compact('header2_categories'))->render();
+        broadcast(new LIneHeaderUpdated($html,1,null));
         return redirect()->route('admin.header2.index');
     }
 

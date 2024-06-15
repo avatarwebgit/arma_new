@@ -16,7 +16,20 @@
                 let id = e.id;
                 let line = e.line;
                 let html = e.html;
-                $('#header'+line+'-'+id).html(html);
+                if (id ==null) {
+                    if (line==1){
+                        $('#scroll-container-first-div').html(html);
+                    }else {
+                        $('#scroll-container-first-div2').html(html);
+                    }
+
+                }else {
+                    for (let i = 0; i < 10; i++) {
+                        $('#header' + line + '-' + id + '-'+i).html(html);
+                    }
+                }
+
+
             });
 
         window.Echo.channel('market-index-result-channel')
