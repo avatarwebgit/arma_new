@@ -16,8 +16,6 @@
                 let id = e.id;
                 let line = e.line;
                 let html = e.html;
-                console.log(id,line,html);
-                console.log('ooooooooooooooooooooooooooooooooooooooooooooo');
                 if (id ==null) {
                     if (line==1){
                         $('#scroll-container-first-div').html(html);
@@ -173,6 +171,12 @@
 
     </script>
     <script>
+        $(document).ready(function() {
+            let is_logged_in={{ $is_logged_in }};
+            if (is_logged_in===1){
+                alert('This Account is already logged in')
+            }
+        });
         function GetMarkets() {
 
             $.ajax({

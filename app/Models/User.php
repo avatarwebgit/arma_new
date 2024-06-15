@@ -44,7 +44,8 @@ class User extends Authenticatable
         'note',
         'active_status',
         'can_bid',
-        'password'
+        'password',
+        'is_logged_in'
         ];
 
     protected $hidden = [
