@@ -1,5 +1,5 @@
 <header>
-    <div  id="scroll-container" class="bg-white header1 d-flex scroll-container">
+    <div id="scroll-container" class="bg-white header1 d-flex scroll-container">
         <div id="scroll-container-first-div">
             @include('home.sections.header1')
         </div>
@@ -60,10 +60,13 @@
         <div style="width: 25%;">
             <ul class="navbar-nav ml-auto d-flex align-items-center search_and_btns">
                 <li class="nav-item header-custom-icon position-relative mr-2" style="width: 100%">
-                    <input class="form-control form-control-sm" placeholder="search...">
+                    <form action="{{ route('home.search') }}" method="get">
+                        @csrf
+                        <input name="search" class="form-control form-control-sm" placeholder="search...">
+                    </form>
+
                     <i class="icon ion-md-search position-absolute" style="top: 4px;right: 10px"></i>
                 </li>
-
             </ul>
         </div>
         {{--        //menu--}}
@@ -168,18 +171,19 @@
     {{--    //mobile Menu--}}
     <nav class="navbar mobile-menu">
         <button onclick="ShowMenu()" class="navbar-toggler" type="button" aria-label="Toggle navigation">
+            <img class="logo"
+                 src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
+                 alt="logo">
             <i class="icon ion-md-menu"></i>
         </button>
         <div class="mobile-nav">
             <div class="d-flex align-items-center">
-                <img class="logo"
-                     src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
-                     alt="logo">
+
                 <i onclick="CloseMenu()" class="fa fa-times-circle fa-2x cursor-pointer"
                    style="position: absolute;top: 20px;right: 20px"></i>
 
             </div>
-            <div class="mt-2 mb-2">
+            <div class="mt-5 mb-2">
                 <ul style="margin-left: auto" class="d-flex justify-content-center">
                     <li style="width: 50%" title="login" class="login_btn">
                         <a class="nav-link text-center" href="{{ route('login') }}">
@@ -194,14 +198,18 @@
                 </ul>
             </div>
             <div class="mt-2 mb-2 position-relative">
-                <input class="form-control form-control-sm" placeholder="search...">
+                <form action="{{ route('home.search') }}" method="get">
+                    @csrf
+                    <input name="search" class="form-control form-control-sm"
+                           placeholder="search...">
+                </form>
                 <i class="icon ion-md-search position-absolute" style="top: 4px;right: 10px"></i>
             </div>
             <div>
 
                 <ul class="navbar-nav d-flex ">
                     @php
-                        $menus=\App\Models\Menus::where('parent',0)->get();
+                        $menus=\App\Models\Menus::where('parent',0)->where('show_on_header',1)->get();
                     @endphp
                     @foreach($menus as $menu)
                         @if($menu->id==2)

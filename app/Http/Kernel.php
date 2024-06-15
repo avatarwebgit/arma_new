@@ -72,7 +72,8 @@ class Kernel extends HttpKernel
         'cookie-consent' => \Statikbe\CookieConsent\CookieConsentMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'seller' => \App\Http\Middleware\SellerMiddleware::class,
-        'bidder' => \App\Http\Middleware\BidderMiddleware::class
+        'bidder' => \App\Http\Middleware\BidderMiddleware::class,
+        'prevent.concurrent.login' => \App\Http\Middleware\PreventConcurrentLogin::class
     ];
 
     /**

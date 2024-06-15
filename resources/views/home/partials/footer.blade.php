@@ -26,7 +26,7 @@
                         </h3>
                         <ul>
                             @foreach($menu->children as $child)
-                                <li><a href="{{ route('home.menus',['menus'=>$child->id]) }}">
+                                <li class="mb-2"><a href="{{ route('home.menus',['menus'=>$child->id]) }}">
                                         {{ $child->title }}
                                     </a></li>
                             @endforeach

@@ -28,6 +28,23 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+    function header_search(tag, event) {
+        if (event.keyCode == 13) {
+            let val=$(tag).val();
+            let url = "{{ route('home.search') }}"
+            $.ajax({
+                url:url,
+                data:{
+                  _token : "{{ csrf_token() }}"  ,
+                    value : val,
+                },
+                dataType: 'json',
+                method:'post',
+
+            })
+        }
+    }
+
     function ShowMenu() {
         $('.mobile-nav').addClass('mobile-nav-open');
         $('#bg-mute').show();

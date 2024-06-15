@@ -14,6 +14,7 @@ use App\Models\MarketSetting;
 use App\Models\Menus;
 use App\Models\Message;
 use App\Models\Packing;
+use App\Models\Page;
 use App\Models\PlatFom;
 use App\Models\QualityQuantityInspector;
 use App\Models\ShippingTerm;
@@ -23,11 +24,15 @@ use App\Models\Units;
 use App\Models\UserNews;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use MongoDB\Driver\Session;
 
 class IndexController extends Controller
 {
     public function index()
     {
+        $is_logged_in = session()->exists('is_logged_in');
+        session()->forget('is_logged_in');
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
         if (!$get_change_time_exists) {
             MarketSetting::create([
@@ -74,13 +79,24 @@ class IndexController extends Controller
                 'show_modal',
                 'modal_message',
                 'close_market',
-                'now'
+                'now',
+                'is_logged_in'
             ));
     }
+
+    public function search(Request $request)
+    {
+        $value = $request->search;
+        $blogs = Blog::where('title', 'LIKE', '%' . $value . '%')->orWhere('short_description', 'LIKE', '%' . $value . '%')->orWhere('description', 'LIKE', '%' . $value . '%')->get();
+        $pages = Page::where('title', 'LIKE', '%' . $value . '%')->orWhere('description', 'LIKE', '%' . $value . '%')->get();
+        return view('home.search', compact('value', 'pages', 'blogs'));
+    }
+
     public function home()
     {
         dd('okkk');
     }
+
     public function Market_Table_Index_Status()
     {
         $yesterday = Carbon::yesterday();
@@ -102,6 +118,7 @@ class IndexController extends Controller
 
         return response()->json([1, $market_is_open_text, $close_market, $market_is_open, $now]);
     }
+
     public function MarketTableIndex()
     {
         try {
@@ -168,6 +185,7 @@ class IndexController extends Controller
             return response()->json([0, $e->getMessage()]);
         }
     }
+
     public function redirectUser()
     {
         $user_check = auth()->check();
@@ -191,27 +209,32 @@ class IndexController extends Controller
             return redirect()->route('home.index');
         }
     }
+
     public function startBroadCast()
     {
         $message = ['name' => 'reza', 'family' => 'Arabi'];
         broadcast(new \App\Events\TestEvent($message));
 
     }
+
     public function menus(Menus $menus)
     {
         $page = $menus->Pages()->first();
         return view('home.page', compact('page', 'menus'));
     }
+
     public function blogs()
     {
         $blogs = Blog::all();
         return view('home.blog.index', compact('blogs'));
     }
+
     public function blog_show(Blog $blog)
     {
 
         return view('home.blog.show', compact('blog'));
     }
+
     public function join_news(Request $request)
     {
 
@@ -222,6 +245,7 @@ class IndexController extends Controller
         return redirect()->route('home.index');
 
     }
+
     public function create_countries()
     {
         $countries = [
@@ -267,6 +291,7 @@ class IndexController extends Controller
         dd('Congratulations');
 
     }
+
     public function create_currencies()
     {
         $currencies = [
@@ -297,6 +322,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function create_units()
     {
         $units = [
@@ -321,6 +347,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function tolerance_wight_by()
     {
 
@@ -338,6 +365,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function create_packing()
     {
         $items = Packing::all();
@@ -354,6 +382,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function shipping_term()
     {
         $items = ShippingTerm::all();
@@ -370,6 +399,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function quality_quantity_inspector()
     {
         $items = QualityQuantityInspector::all();
@@ -386,6 +416,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function InspectionPlace()
     {
         $items = InspectionPlace::all();
@@ -402,6 +433,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function Platforms()
     {
         $items = PlatFom::all();
@@ -418,6 +450,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function header_category()
     {
         $items = HeaderCategory::all();
@@ -434,13 +467,14 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function header_currency()
     {
         $items = HeaderCurencies::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['USD/St', 'USD/Mt','Euro/Mt'];
+        $items = ['USD/St', 'USD/Mt', 'Euro/Mt'];
         foreach ($items as $key => $item) {
             HeaderCurencies::create([
                 'id' => $key + 1,

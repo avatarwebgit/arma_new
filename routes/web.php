@@ -55,6 +55,7 @@ Route::post('/role-permission/{id}', [
 
 /////////////////////////////////web
 Route::get('/', [IndexController::class, 'index'])->name('home.index');
+Route::get('/search', [IndexController::class, 'search'])->name('home.search');
 Route::post('/Market_Table_Index_Status', [IndexController::class, 'Market_Table_Index_Status'])->name('home.Market_Table_Index_Status');
 Route::get('/home', [IndexController::class, 'home'])->name('home');
 Route::get('/redirect-user', [IndexController::class, 'redirectUser'])->name('profile');
@@ -88,7 +89,7 @@ Route::get('/Platforms', [IndexController::class, 'Platforms'])->name('home.Plat
 Route::get('/header_category', [IndexController::class, 'header_category'])->name('home.header_category');
 Route::get('/header_currency', [IndexController::class, 'header_currency'])->name('home.header_currency');
 
-Route::name('admin.')->middleware('admin')->prefix('/admin-panel/management/')->group(function () {
+Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix('/admin-panel/management/')->group(function () {
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::middleware('permission:header-setting')->group(function () {
@@ -239,7 +240,7 @@ Route::post('/sales_form/update_or_store/{item?}', [FormController::class, 'sale
 Route::post('/sales_form_change_status/', [FormController::class, 'change_status'])->name('sale_form.change_status');
 Route::get('sales_offer/show/{id}', [FormController::class, 'sales_form_show'])->name('sale_form.show');
 //seller
-Route::name('seller.')->prefix('/seller/')->middleware('seller')->group(function () {
+Route::name('seller.')->prefix('/seller/')->middleware(['seller', 'prevent.concurrent.login'])->group(function () {
     Route::get('dashboard', [SellerController::class, 'dashboard'])->name('dashboard');
     Route::put('update/profile/{user}', [SellerController::class, 'updateProfile'])->name('update.profile');
     Route::put('update/password', [SellerController::class, 'updatePassword'])->name('update.password');
@@ -247,7 +248,7 @@ Route::name('seller.')->prefix('/seller/')->middleware('seller')->group(function
     Route::get('wallet', [SellerController::class, 'wallet'])->name('wallet');
     Route::get('requests', [SellerController::class, 'requests'])->name('requests');
 });
-Route::name('bidder.')->prefix('/bidder/')->middleware('bidder')->group(function () {
+Route::name('bidder.')->prefix('/bidder/')->middleware(['bidder', 'prevent.concurrent.login'])->group(function () {
     Route::get('dashboard', [BidderController::class, 'dashboard'])->name('dashboard');
     Route::put('update/profile/{user}', [BidderController::class, 'updateProfile'])->name('update.profile');
     Route::put('update/password', [BidderController::class, 'updatePassword'])->name('update.password');
@@ -275,8 +276,8 @@ Route::get('/logout', function () {
 Route::get('check_market/{id}', [IndexController::class, 'check_market'])->name('home.check_market');
 
 //PayPal
-Route::post('/pay_bid_deposit',[Payment::class,'pay_bid_deposit'])->name('pay_bid_deposit');
-Route::post('/paypal-payment',[PaypalController::class,'payment'])->name('payment.paypal');
-Route::get('/paypal/verify/{user}/{amount}',[PaypalController::class,'verify'])->name('paypal.verify');
-Route::get('/paypal/cancel',[PaypalController::class,'cancel'])->name('paypal.cancel');
+Route::post('/pay_bid_deposit', [Payment::class, 'pay_bid_deposit'])->name('pay_bid_deposit');
+Route::post('/paypal-payment', [PaypalController::class, 'payment'])->name('payment.paypal');
+Route::get('/paypal/verify/{user}/{amount}', [PaypalController::class, 'verify'])->name('paypal.verify');
+Route::get('/paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,21 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+        $user = \App\Models\User::where('email', $request->get('email'))->first();
+        if ($user){
+            $sessions = DB::table('sessions')->where('user_id',$user->id)->exists();
+            if ($sessions){
+                session()->put('is_logged_in','this user is already logged in with another Device');
+                return redirect()->route('home.index');
+            }
+        }
+
+        return $this->guard()->attempt(
+            $this->credentials($request), $request->boolean('remember')
+        );
     }
 }
