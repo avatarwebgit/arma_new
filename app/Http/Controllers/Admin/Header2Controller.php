@@ -100,7 +100,9 @@ class Header2Controller extends Controller
 
             $item->delete();
             $message = 'The Item Has Been Deleted Successfully';
-
+            $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
+            $html=view('home.sections.header1',compact('header2_categories'))->render();
+            broadcast(new LIneHeaderUpdated($html,1,null));
             return redirect()->back()->with('success', __($message));
         } catch (\Exception $exception) {
 
@@ -165,6 +167,9 @@ class Header2Controller extends Controller
             }
             $item->delete();
             $message = 'The Item Has Been Deleted Successfully';
+            $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
+            $html=view('home.sections.header1',compact('header2_categories'))->render();
+            broadcast(new LIneHeaderUpdated($html,1,null));
             return redirect()->back()->with('success', __($message));
         } catch (\Exception $exception) {
 
