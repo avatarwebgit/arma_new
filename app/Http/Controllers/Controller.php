@@ -301,7 +301,8 @@ class Controller extends BaseController
                 foreach ($markets as $market) {
                     $market_status_index = $this->market_status_index($market, $market_is_open);
                     $market_is_open = $market_status_index[0];
-                    $market_values = $market_values + $market->market_value;
+                    $market_value=str_replace(',','',$market->market_value);
+                    $market_values = $market_values + intval($market_value);
 
                     //
                     $result = $this->statusTimeMarket($market);
