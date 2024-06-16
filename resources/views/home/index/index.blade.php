@@ -174,7 +174,7 @@
         $(document).ready(function() {
             GetMarkets();
             let is_logged_in="{{ $is_logged_in }}";
-            if (is_logged_in===1){
+            if (is_logged_in==1){
                 $('#Login_two_device').modal('show');
             }
         });

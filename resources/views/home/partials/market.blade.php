@@ -82,8 +82,8 @@
                 @endphp
                 <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
 
-                <tr onclick="window.location.href='{{ route('home.bid',['market'=>$market->id]) }}'"
-                    style="color: {{ $color }} !important;cursor: pointer" id="market-{{ $market->id }}"
+                <tr  onclick="window.location.href='{{ route('home.bid',['market'=>$market->id]) }}'"
+                    style="color: {{ $color }} !important;cursor: pointer;border-bottom: 2px solid #d9d9d9" id="market-{{ $market->id }};"
                     data-status="{{ $market->status }}"
                     data-difference="{{ $market->difference }}"
                     data-now="{{ $now }}"
