@@ -43,6 +43,9 @@
         </tr>
         </thead>
         <tbody>
+        @php
+            $i==0;
+        @endphp
         @foreach($markets_groups as $key=>$markets)
 
             @foreach($markets->sortby('time') as $market)
@@ -94,6 +97,7 @@
                     data-benchmark5="{{ $market->benchmark5 }}"
                     data-benchmark6="{{ $market->benchmark6 }}"
                     data-today-last="{{ $market->is_today_last }}"
+                     class="{{ $i%2==0 ? 'bg-white' : 'bg-gray' }}"
                 >
                     <td class="position-relative">
                         @if(1 <$market->status and  $market->status< 7)
@@ -268,6 +272,9 @@
                         </table>
                     </td>
                 </tr>
+                @php
+                    $i++;
+                @endphp
             @endforeach
         @endforeach
         </tbody>
