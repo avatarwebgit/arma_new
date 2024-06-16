@@ -8,7 +8,7 @@
                     @endif
                 @endauth
             </span>
-           <span>
+            <span>
                 {{ number_format($bid->quantity) }}
            </span>
         </td>
@@ -20,5 +20,6 @@
                 </span>
             @endif
         </td>
+
     </tr>
 @endforeach

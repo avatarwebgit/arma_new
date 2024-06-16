@@ -348,7 +348,7 @@
 
         .text-light-blue {
             color: #162fa2;
-            width: 140px;
+            width: 55%;
             text-align: left !important;
         }
 
@@ -386,7 +386,7 @@
             </div>
         </div>
         <div class="row justify-content-between">
-            <div class="col-12 col-md-12 col-xl-3 mb-5">
+            <div class="col-12 col-md-12 col-xl-4 mb-5">
                 @include('home.market.market_info')
             </div>
             {{--            //menu_desktop--}}
@@ -426,14 +426,15 @@
                                 </thead>
                                 <thead class="bg-secondary">
                                 <tr>
+                                    <th class="text-center text-white">
+                                        Bidder
+                                    </th>
                                     <th class="text-center text-white">Quantity( {{ $market->SalesForm->unit }})
                                     </th>
                                     <th class="text-center text-white">Price ( {{ $market->SalesForm->currency }}
                                         )
                                     </th>
-                                    <th class="text-center text-white">
-                                        Bidder
-                                    </th>
+
                                 </tr>
                                 </thead>
                                 <tbody id="bidder_offer_{{ $market->id }}">
