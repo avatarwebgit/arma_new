@@ -242,9 +242,9 @@
     <script>
         $(document).ready(function () {
             let width = window.innerWidth;
-            if (width<796){
+            if (width < 796) {
                 $('.menu-des').remove();
-            }else {
+            } else {
                 $('.menu-mobile').remove();
             }
         });
@@ -287,6 +287,16 @@
 
 @section('style')
     <style>
+        .commodity-title {
+            margin-bottom: 0 !important;
+            border: 1px solid black;
+            padding: 10px 82px !important;
+            border-radius: 7px;
+            background: #f8f8f8;
+            color: black !important;
+            margin-bottom: 20px !important;
+        }
+
         .alert-box {
             position: fixed;
             left: 40px;
@@ -371,8 +381,8 @@
 @section('content')
     <div class="container mt-5 mb-5">
         <div class="row">
-            <div class="col-12 col-md-12 col-xl-4 mb-1 d-flex justify-content-center align-center">
-                <h5 class="text-center text-info text-center p-3" style="margin-bottom: 0 !important;">
+            <div class="col-12 col-md-12 col-xl-4 mb-1 d-flex justify-content-center align-items-end">
+                <h5 class="text-center text-info text-center p-3 commodity-title">
                     {{ $market->SalesForm->commodity }}
                 </h5>
             </div>
