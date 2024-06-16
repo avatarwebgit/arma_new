@@ -288,13 +288,12 @@
 @section('style')
     <style>
         .commodity-title {
-            margin-bottom: 0 !important;
             border: 1px solid black;
             padding: 10px 82px !important;
-            border-radius: 7px;
             background: #f8f8f8;
             color: black !important;
             margin-bottom: 20px !important;
+            width: 100%;
         }
 
         .alert-box {

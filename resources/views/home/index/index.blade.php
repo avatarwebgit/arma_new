@@ -252,6 +252,9 @@
 
 @section('style')
     <style>
+        html{
+           -webkit-overflow-scrolling: auto !important;
+        }
         .login-padding{
             padding: 5px 20px 8px
         }
@@ -299,7 +302,7 @@
 @endsection
 
 @section('content')
-    <div id="bg-mute"></div>
+    <div  onclick="CloseMenu()" id="bg-mute"></div>
     <div id="clockNow" style="text-align: center;font-size:25px"></div>
     <div id="time"></div>
     @if($alert_active==1)
