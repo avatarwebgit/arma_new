@@ -40,19 +40,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-//    protected function attemptLogin(Request $request)
-//    {
-//        $user = \App\Models\User::where('email', $request->get('email'))->first();
-//        if ($user){
-//            $sessions = DB::table('sessions')->where('user_id',$user->id)->exists();
-//            if ($sessions){
-//                session()->put('is_logged_in','this user is already logged in with another Device');
-//                return redirect()->route('home.index');
-//            }
-//        }
-//
-//        return $this->guard()->attempt(
-//            $this->credentials($request), $request->boolean('remember')
-//        );
-//    }
+    protected function attemptLogin(Request $request)
+    {
+        $user = \App\Models\User::where('email', $request->get('email'))->first();
+        if ($user){
+            $sessions = DB::table('sessions')->where('user_id',$user->id)->exists();
+            if ($sessions){
+                session()->put('is_logged_in','this user is already logged in with another Device');
+                return redirect()->route('home.index');
+            }
+        }
+
+        return $this->guard()->attempt(
+            $this->credentials($request), $request->boolean('remember')
+        );
+    }
 }
