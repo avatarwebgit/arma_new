@@ -242,7 +242,7 @@
     <script>
         $(document).ready(function () {
             let width = window.innerWidth;
-            if (width < 796) {
+            if (width < 992) {
                 $('.menu-des').remove();
             } else {
                 $('.menu-mobile').remove();
@@ -395,10 +395,9 @@
             </div>
         </div>
         <div class="row justify-content-between">
+
             <div class="col-12 col-md-12 col-xl-4 mb-5">
-                <h5 class="text-center text-info text-center p-3 commodity-title menu-mobile">
-                    {{ $market->SalesForm->commodity }}
-                </h5>
+
                 @include('home.market.market_info')
             </div>
             {{--            //menu_desktop--}}
