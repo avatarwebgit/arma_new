@@ -380,7 +380,7 @@
 @section('content')
     <div class="container mt-5 mb-5">
         <div class="row">
-            <div class="col-12 col-md-12 col-xl-4 mb-1 d-flex justify-content-center align-items-end">
+            <div class="col-12 col-md-12 col-xl-4 mb-1 d-flex justify-content-center align-items-end menu-des">
                 <h5 class="text-center text-info text-center p-3 commodity-title">
                     {{ $market->SalesForm->commodity }}
                 </h5>
@@ -396,6 +396,9 @@
         </div>
         <div class="row justify-content-between">
             <div class="col-12 col-md-12 col-xl-4 mb-5">
+                <h5 class="text-center text-info text-center p-3 commodity-title menu-mobile">
+                    {{ $market->SalesForm->commodity }}
+                </h5>
                 @include('home.market.market_info')
             </div>
             {{--            //menu_desktop--}}
