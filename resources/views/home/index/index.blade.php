@@ -260,7 +260,6 @@
         }
         .slide_more_table tr {
             border-bottom: 1px solid #ededed;
-            padding: 5px 0;
         }
         @media screen and (max-width: 1200px) {
             #Market_Status_Text {

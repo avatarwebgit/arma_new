@@ -19,7 +19,6 @@
         </div>
         {{--        //menu--}}
         <div style="width: 55%;">
-
             <ul class="navbar-nav d-flex ">
                 @php
                     $menus=\App\Models\Menus::where('parent',0)->where('show_on_header',1)->get();
@@ -170,17 +169,24 @@
     </nav>
     {{--    //mobile Menu--}}
     <nav class="navbar mobile-menu">
-        <button onclick="ShowMenu()" class="navbar-toggler" type="button" aria-label="Toggle navigation">
-            <img style="width: 50px !important;height: auto" class="logo"
-                 src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
-                 alt="logo">
-            <i class="icon ion-md-menu"></i>
-        </button>
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <button  class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                <a href="{{ route('home.index') }}">
+                    <img style="width: 50px !important;height: auto" class="logo"
+                         src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
+                         alt="logo">
+                </a>
+
+            </button>
+            <i onclick="ShowMenu()" class="icon ion-md-menu fa-2x"></i>
+        </div>
         <div class="mobile-nav">
             <div class="d-flex align-items-center">
-                <img class="logo"
-                     src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
-                     alt="logo">
+                <a href="{{ route('home.index') }}">
+                    <img class="logo"
+                         src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
+                         alt="logo">
+                </a>
                 <i onclick="CloseMenu()" class="fa fa-times-circle fa-2x cursor-pointer"
                    style="position: absolute;top: 20px;right: 20px"></i>
 
