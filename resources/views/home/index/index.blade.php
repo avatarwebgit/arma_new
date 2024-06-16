@@ -252,7 +252,16 @@
 
 @section('style')
     <style>
-
+        .login-padding{
+            padding: 5px 20px 8px
+        }
+        .bg-gray{
+            background-color: #f8f8f8
+        }
+        .slide_more_table tr {
+            border-bottom: 1px solid #ededed;
+            padding: 5px 0;
+        }
         @media screen and (max-width: 1200px) {
             #Market_Status_Text {
                 text-align: center !important;

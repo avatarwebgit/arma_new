@@ -155,12 +155,12 @@
             @else
                 <ul style="margin-left: auto" class="d-flex justify-content-center">
                     <li title="login" class="login_btn">
-                        <a class="nav-link" href="{{ route('login') }}">
+                        <a  class="nav-link login-padding" href="{{ route('login') }}">
                             login
                         </a>
                     </li>
                     <li title="Register" class="login_btn ml-3">
-                        <a class="nav-link" href="{{ route('register') }}">
+                        <a  class="nav-link login-padding" href="{{ route('register') }}">
                             Register
                         </a>
                     </li>
@@ -171,7 +171,7 @@
     {{--    //mobile Menu--}}
     <nav class="navbar mobile-menu">
         <button onclick="ShowMenu()" class="navbar-toggler" type="button" aria-label="Toggle navigation">
-            <img style="width: 70px !important;height: auto" class="logo"
+            <img style="width: 50px !important;height: auto" class="logo"
                  src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
                  alt="logo">
             <i class="icon ion-md-menu"></i>

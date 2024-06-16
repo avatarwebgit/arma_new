@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table id="market_index_table" class="table table-striped">
+    <table id="market_index_table" class="table">
         <thead class="thead-dark">
         <tr>
             <th>
@@ -164,10 +164,10 @@
                         </a>
                     </td>
                 </tr>
-                <tr id="more_table_{{ $market->id }}" style="display: none" class="slide_more_table">
+                <tr  id="more_table_{{ $market->id }}" style="display: none" class="slide_more_table">
                     <td colspan="11">
                         <table class="table_in_table" style="width: 100%">
-                            <tr>
+                            <tr >
                                 <td class="text-center">
                                     <span class="text-bold">Contract Type</span>
                                     <span >
