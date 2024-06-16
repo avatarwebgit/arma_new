@@ -31,6 +31,7 @@ class IndexController extends Controller
 {
     public function index()
     {
+        $is_logged_in=0;
         $is_logged_in = session()->exists('is_logged_in');
         session()->forget('is_logged_in');
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();

@@ -37,7 +37,7 @@
                 $('#timer_section').html(timer);
                 $('#Market_Status_Text').html(market_status);
             });
-        GetMarkets();
+
         document.addEventListener('DOMContentLoaded', function () {
 
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
@@ -172,7 +172,8 @@
     </script>
     <script>
         $(document).ready(function() {
-            let is_logged_in={{ $is_logged_in }};
+            GetMarkets();
+            let is_logged_in="{{ $is_logged_in }}";
             if (is_logged_in===1){
                 $('#Login_two_device').modal('show');
             }
