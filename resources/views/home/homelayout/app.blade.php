@@ -57,7 +57,7 @@
 
     $(document).ready(function () {
         let width = window.innerWidth;
-        if (width < 796) {
+        if (width < 992) {
             $('.menu-des').remove();
         } else {
             $('.menu-mobile').remove();
