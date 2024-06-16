@@ -171,19 +171,21 @@
     {{--    //mobile Menu--}}
     <nav class="navbar mobile-menu">
         <button onclick="ShowMenu()" class="navbar-toggler" type="button" aria-label="Toggle navigation">
-            <img class="logo"
+            <img style="width: 70px !important;height: auto" class="logo"
                  src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
                  alt="logo">
             <i class="icon ion-md-menu"></i>
         </button>
         <div class="mobile-nav">
             <div class="d-flex align-items-center">
-
+                <img class="logo"
+                     src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
+                     alt="logo">
                 <i onclick="CloseMenu()" class="fa fa-times-circle fa-2x cursor-pointer"
                    style="position: absolute;top: 20px;right: 20px"></i>
 
             </div>
-            <div class="mt-5 mb-2">
+            <div class="mt-2 mb-2">
                 <ul style="margin-left: auto" class="d-flex justify-content-center">
                     <li style="width: 50%" title="login" class="login_btn">
                         <a class="nav-link text-center" href="{{ route('login') }}">

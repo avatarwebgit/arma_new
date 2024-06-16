@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table id="market_index_table" class="table">
+    <table id="market_index_table" class="table table-striped">
         <thead class="thead-dark">
         <tr>
             <th>
@@ -94,6 +94,7 @@
                     data-benchmark5="{{ $market->benchmark5 }}"
                     data-benchmark6="{{ $market->benchmark6 }}"
                     data-today-last="{{ $market->is_today_last }}"
+                    class="{{ $key%2==0 ? 'bg-gray' : 'bg-whit' }}"
                 >
                     <td class="position-relative">
                         @if(1 <$market->status and  $market->status< 7)
