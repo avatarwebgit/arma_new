@@ -78,7 +78,7 @@
                        aria-expanded="false">
                         <img src="{{ asset('home/img/avatar.svg') }}" alt="avatar">
                     </a>
-                    <p class="mt-1 pr-4">hi ,{{ auth()->user()->full_name }}</p>
+                    <p class="mt-1 pr-4">Hi {{ auth()->user()->full_name }}</p>
                     <div class="dropdown-menu profile" style="left: -130px !important;">
                         <div class="dropdown-header d-flex flex-column align-items-center">
                             <div class="figure mb-3">
