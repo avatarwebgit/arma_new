@@ -172,7 +172,9 @@
     </script>
     <script>
         $(document).ready(function() {
-            GetMarkets();
+            setTimeout(function() {
+                GetMarkets();
+            },3000);
             let is_logged_in="{{ $is_logged_in }}";
             if (is_logged_in==1){
                 $('#Login_two_device').modal('show');
