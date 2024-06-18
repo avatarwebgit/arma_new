@@ -229,7 +229,6 @@ class MarketController extends Controller
         $gtc_use = MarketSetting::where('key', 'gtc_use')->pluck('value')->first();
         $gtc_Link = MarketSetting::where('key', 'gtc_Link')->pluck('value')->first();
         $gtc_file = MarketSetting::where('key', 'gtc_file')->pluck('value')->first();
-
         return view('admin.markets.setting', compact(
             'q_1',
             'q_2',
