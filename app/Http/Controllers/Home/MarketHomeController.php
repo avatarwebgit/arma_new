@@ -47,7 +47,24 @@ class MarketHomeController extends Controller
         $bids = $market->Bids()->orderBy('price', 'desc')->take(10)->get();
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        return view('home.market.index', compact('market', 'bids', 'bid_deposit_text_area', 'term_conditions', 'wallet'));
+        $bid_use = MarketSetting::where('key', 'bid_use')->pluck('value')->first();
+        $Bid_Instructions_link = MarketSetting::where('key', 'Bid_Instructions_link')->pluck('value')->first();
+        $Bid_Instructions_file = MarketSetting::where('key', 'Bid_Instructions_file')->pluck('value')->first();
+        $gtc_use = MarketSetting::where('key', 'gtc_use')->pluck('value')->first();
+        $gtc_Link = MarketSetting::where('key', 'gtc_Link')->pluck('value')->first();
+        $gtc_file = MarketSetting::where('key', 'gtc_file')->pluck('value')->first();
+        return view('home.market.index', compact('market',
+            'bids',
+            'bid_deposit_text_area',
+            'term_conditions',
+            'wallet',
+            'bid_use',
+            'Bid_Instructions_link',
+            'Bid_Instructions_file',
+            'gtc_use',
+            'gtc_Link',
+            'gtc_file',
+        ));
     }
 
     public function GetMarket(Request $request)
