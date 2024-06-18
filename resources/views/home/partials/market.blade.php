@@ -76,7 +76,7 @@
                          $statusText = 'Competition';
                     }
                     if ($market->status == 7 or $market->status == 8 or $market->status == 9){
-                         $color = 'red';
+                         $color = '#200000';
                          $statusText = 'Close';
                     }
                     if (\Carbon\Carbon::now()->format('Y-m-d')!=$key){
