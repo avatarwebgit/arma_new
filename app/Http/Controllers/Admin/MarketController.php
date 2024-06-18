@@ -223,8 +223,61 @@ class MarketController extends Controller
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
         $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
+
+        $bid_use = MarketSetting::where('key', 'bid_use')->pluck('value')->first();
+        if (!$bid_use){
+            $bid_use=MarketSetting::create([
+                'key'=>'bid_use'
+            ]);
+        }
+
+        $Bid_Instructions_link = MarketSetting::where('key', 'Bid_Instructions_link')->pluck('value')->first();
+        if (!$Bid_Instructions_link){
+            $Bid_Instructions_link=MarketSetting::create([
+                'key'=>'Bid_Instructions_link'
+            ]);
+        }
+
+        $Bid_Instructions_file = MarketSetting::where('key', 'Bid_Instructions_file')->pluck('value')->first();
+        if (!$Bid_Instructions_file){
+            $Bid_Instructions_file=MarketSetting::create([
+                'key'=>'Bid_Instructions_file'
+            ]);
+        }
+        $gtc_use = MarketSetting::where('key', 'gtc_use')->pluck('value')->first();
+        if (!$gtc_use){
+            $gtc_use=MarketSetting::create([
+                'key'=>'gtc_use'
+            ]);
+        }
+        $gtc_Link = MarketSetting::where('key', 'gtc_Link')->pluck('value')->first();
+        if (!$gtc_Link){
+            $gtc_Link=MarketSetting::create([
+                'key'=>'gtc_Link'
+            ]);
+        }
+        $gtc_file = MarketSetting::where('key', 'gtc_file')->pluck('value')->first();
+        if (!$gtc_file){
+            $gtc_file=MarketSetting::create([
+                'key'=>'gtc_file'
+            ]);
+        }
         return view('admin.markets.setting', compact(
-            'q_1', 'q_2', 'q_3', 'ready_to_open', 'opening', 'bid_deposit_text_area', 'term_conditions', 'change_time'));
+            'q_1',
+            'q_2',
+            'q_3',
+            'ready_to_open',
+            'opening',
+            'bid_deposit_text_area',
+            'term_conditions',
+            'change_time',
+            'bid_use',
+            'Bid_Instructions_link',
+            'Bid_Instructions_file',
+            'gtc_use',
+            'gtc_Link',
+            'gtc_file',
+        ));
     }
 
     public function settings_update(Request $request)
@@ -237,6 +290,32 @@ class MarketController extends Controller
         $change_time = $request->change_time;
         $bid_deposit_text_area = $request->bid_deposit_text_area;
         $term_conditions = $request->term_conditions;
+        $bid_use=$request->bid_use;
+        $Bid_Instructions_link=$request->Bid_Instructions_link;
+        $gtc_use=$request->gtc_use;
+        $gtc_Link=$request->gtc_Link;
+
+
+        if ($request->has('Bid_Instructions_file')){
+            $file_name=$request->Bid_Instructions_file;
+            $env = env('UPLOAD_SETTING');
+            $fileNameImage = generateFileName($file_name->getClientOriginalName());
+            $file_name->move(public_path($env), $fileNameImage);
+            $Bid_Instructions_file=$fileNameImage;
+        }else{
+            $item=MarketSetting::where('key', 'Bid_Instructions_file')->first();
+            $Bid_Instructions_file=$item->value;
+        }
+        if ($request->has('gtc_file')){
+            $file_name=$request->gtc_file;
+            $env = env('UPLOAD_SETTING');
+            $fileNameImage = generateFileName($file_name->getClientOriginalName());
+            $file_name->move(public_path($env), $fileNameImage);
+            $gtc_file=$fileNameImage;
+        }else{
+            $item=MarketSetting::where('key', 'gtc_file')->first();
+            $gtc_file=$item->value;
+        }
         $array = [
             'ready_to_open' => $ready_to_open,
             'opening' => $opening,
@@ -246,9 +325,23 @@ class MarketController extends Controller
             'bid_deposit_text_area' => $bid_deposit_text_area,
             'term_conditions' => $term_conditions,
             'change_time' => $change_time,
+            'bid_use' => $bid_use,
+            'Bid_Instructions_link' => $Bid_Instructions_link,
+            'Bid_Instructions_file' => $Bid_Instructions_file,
+            'gtc_use' => $gtc_use,
+            'gtc_Link' => $gtc_Link,
+            'gtc_file' => $gtc_file,
         ];
         foreach ($array as $key => $val) {
-            MarketSetting::where('key', $key)->update(['value' => $val]);
+            $item=MarketSetting::where('key', $key)->first();
+            if ($item){
+                $item->update(['value' => $val]);
+            }else{
+                MarketSetting::create([
+                    'key' => $key,
+                    'value' => $val
+                ]);
+            }
         }
         session()->flash('success', 'Successfully updated');
         $yesterday = Carbon::yesterday();
