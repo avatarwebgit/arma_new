@@ -3126,10 +3126,6 @@ footer input::placeholder {
     transform: translateY(-30px);
 }
 
-#market_value {
-    font-size: 14px;
-}
-
 @media screen and (max-width: 1400px) {
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-left: 0 !important;
