@@ -288,10 +288,9 @@
 @section('style')
     <style>
         .commodity-title {
-            border: 1px solid black;
             padding: 10px 82px !important;
-            background: #f8f8f8;
-            color: black !important;
+            background: #6c757d ;
+            color: white !important;
             margin-bottom: 0 !important;
             width: 100%;
         }
@@ -380,7 +379,7 @@
 @section('content')
     <div class="container mt-5 mb-5">
         <div class="row">
-            <div class="col-12 col-md-12 col-xl-4 mb-1 d-flex justify-content-center align-items-end menu-des">
+            <div class="col-12 col-md-12 col-xl-4 d-flex justify-content-center align-items-end menu-des">
                 <h5 class="text-center text-info text-center p-3 commodity-title">
                     {{ $market->SalesForm->commodity }}
                 </h5>
