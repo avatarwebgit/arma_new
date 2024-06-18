@@ -292,7 +292,7 @@
             padding: 10px 82px !important;
             background: #f8f8f8;
             color: black !important;
-            margin-bottom: 20px !important;
+            margin-bottom: 0 !important;
             width: 100%;
         }
 
