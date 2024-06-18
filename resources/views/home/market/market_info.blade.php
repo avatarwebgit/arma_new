@@ -104,19 +104,34 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">GTC</span>
         <span class="text-bold text-light-blue ">
-                           <a target="_blank"
-                              href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$market->SalesForm->specification_file)) }}">
+            @if($gtc_use=='Link')
+                <a target="_blank"
+                   href="{{ $gtc_Link }}">
                             Download
                         </a>
+            @else
+                <a target="_blank"
+                   href="{{ imageExist(env('UPLOAD_SETTING'),$gtc_file) }}">
+                            Download
+                        </a>
+            @endif
+
                         </span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Bid Instruction</span>
         <span class="text-bold text-light-blue ">
-                           <a target="_blank"
-                              href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$market->SalesForm->specification_file)) }}">
+                           @if($bid_use=='Link')
+                <a target="_blank"
+                   href="{{ $Bid_Instructions_link }}">
                             Download
                         </a>
+            @else
+                <a target="_blank"
+                   href="{{ imageExist(env('UPLOAD_SETTING'),$Bid_Instructions_file) }}">
+                            Download
+                        </a>
+            @endif
                         </span>
     </div>
 </div>
