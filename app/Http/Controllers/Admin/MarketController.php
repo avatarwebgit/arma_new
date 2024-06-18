@@ -223,45 +223,13 @@ class MarketController extends Controller
         $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
         $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
         $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
-
         $bid_use = MarketSetting::where('key', 'bid_use')->pluck('value')->first();
-        if (!$bid_use){
-            $bid_use=MarketSetting::create([
-                'key'=>'bid_use'
-            ]);
-        }
-
         $Bid_Instructions_link = MarketSetting::where('key', 'Bid_Instructions_link')->pluck('value')->first();
-        if (!$Bid_Instructions_link){
-            $Bid_Instructions_link=MarketSetting::create([
-                'key'=>'Bid_Instructions_link'
-            ]);
-        }
-
         $Bid_Instructions_file = MarketSetting::where('key', 'Bid_Instructions_file')->pluck('value')->first();
-        if (!$Bid_Instructions_file){
-            $Bid_Instructions_file=MarketSetting::create([
-                'key'=>'Bid_Instructions_file'
-            ]);
-        }
         $gtc_use = MarketSetting::where('key', 'gtc_use')->pluck('value')->first();
-        if (!$gtc_use){
-            $gtc_use=MarketSetting::create([
-                'key'=>'gtc_use'
-            ]);
-        }
         $gtc_Link = MarketSetting::where('key', 'gtc_Link')->pluck('value')->first();
-        if (!$gtc_Link){
-            $gtc_Link=MarketSetting::create([
-                'key'=>'gtc_Link'
-            ]);
-        }
         $gtc_file = MarketSetting::where('key', 'gtc_file')->pluck('value')->first();
-        if (!$gtc_file){
-            $gtc_file=MarketSetting::create([
-                'key'=>'gtc_file'
-            ]);
-        }
+
         return view('admin.markets.setting', compact(
             'q_1',
             'q_2',
