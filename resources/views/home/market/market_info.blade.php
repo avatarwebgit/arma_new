@@ -97,10 +97,6 @@
             {{ $market->SalesForm->currency }}
         </span>
     </div>
-</div>
-
-{{--/////////////////////////////////////--}}
-<div id="commodity_information" style="width: 100%">
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">GTC</span>
         <span class="text-bold text-light-blue ">
@@ -135,3 +131,4 @@
                         </span>
     </div>
 </div>
+
