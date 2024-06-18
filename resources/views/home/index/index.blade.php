@@ -225,7 +225,7 @@
             var dayOfWeek = moment().tz("Europe/London").format("dddd");
             let clock = moment().tz("Europe/London").format("ll");
             let a = moment().tz("Europe/London").format("h:mm A");
-            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 18px !important;font-weight: bold">' + clock + '</span><span class="ml-3 timer-bold" style="font-size: 18px;font-weight: bold">' + a + ' GMT</span>'
+            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 18px !important;font-weight: bold">' + clock + '</span><span class="ml-3" style="font-size: 18px !important;font-weight: bold !important;">' + a + ' GMT</span>'
             $('#time_now').html(time_now);
             t = setTimeout(function () {
                 startTime()
