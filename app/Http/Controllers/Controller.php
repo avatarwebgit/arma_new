@@ -324,6 +324,9 @@ class Controller extends BaseController
                 }
             }
             $market_values_html='$'.number_format($market_values);
+            if ($market_is_open>0){
+                $market_values_html='<span class="text-success">'.$market_values_html.'</span>';
+            }
             $now = Carbon::now();
             $view_table = view('home.partials.market', compact('markets_groups', 'now'))->render();
 
