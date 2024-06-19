@@ -4,6 +4,10 @@
         <tr>
             <th>
             <span style="margin-left: 15px">
+            </span>
+            </th>
+            <th>
+            <span style="margin-left: 15px">
             Commodity
             </span>
             </th>
@@ -112,6 +116,8 @@
                                 </div>
                             </div>
                         @endif
+                    </td>
+                    <td class="position-relative">
                         <span style="margin-left: 15px">
                         {{ $market->SalesForm->commodity }}
                     </span>
