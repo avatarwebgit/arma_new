@@ -264,13 +264,7 @@ class Controller extends BaseController
         }
     }
 
-    public function market_more_info(Request $request)
-    {
-        $market_id = $request->market_id;
-        $market=Market::where('id', $market_id)->first();
-        $html=view('home.partials.market_more',compact('market'))->render();
-        return response()->json([1,$html]);
-    }
+
 
     public function check_market($id)
     {
