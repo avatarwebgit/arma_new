@@ -175,7 +175,7 @@
                                             {{ $market->SalesForm->contract_type }}
                                         @else
                                             Log in/Register
-                                        @endauth
+                                        @endif
                                 </span>
                                 </td>
                                 <td class="text-center">
@@ -261,7 +261,7 @@
                                 <td class="text-center">
                                     <span class="text-bold">Currency</span>
                                     <span>
-                                    @auth
+                                        @auth
                                             {{ $market->SalesForm->currency }}
                                         @else
                                             Log in/Register
