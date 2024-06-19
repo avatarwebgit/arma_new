@@ -16,15 +16,15 @@
                 let id = e.id;
                 let line = e.line;
                 let html = e.html;
-                if (id ==null) {
-                    if (line==1){
+                if (id == null) {
+                    if (line == 1) {
                         $('#scroll-container-first-div').html(html);
-                    }else {
+                    } else {
                         $('#scroll-container-first-div2').html(html);
                     }
-                }else {
+                } else {
                     for (let i = 0; i < 10; i++) {
-                        $('#header' + line + '-' + id + '-'+i).html(html);
+                        $('#header' + line + '-' + id + '-' + i).html(html);
                     }
                 }
             });
@@ -171,15 +171,16 @@
 
     </script>
     <script>
-        $(document).ready(function() {
-            setTimeout(function() {
+        $(document).ready(function () {
+            setTimeout(function () {
                 GetMarkets();
-            },3000);
-            let is_logged_in="{{ $is_logged_in }}";
-            if (is_logged_in==1){
+            }, 3000);
+            let is_logged_in = "{{ $is_logged_in }}";
+            if (is_logged_in == 1) {
                 $('#Login_two_device').modal('show');
             }
         });
+
         function GetMarkets() {
 
             $.ajax({
@@ -247,23 +248,47 @@
                 svg.addClass('fa-angle-down');
             }
         }
+
+        function ToggleShowMoreInformation(market_id) {
+            $.ajax({
+                url: "{{ route('home.market_more_info') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    market_id: market_id
+                },
+                method: 'post',
+                dataType: 'json',
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    if (data) {
+                        $('#more_table_' + market_id).html(data[1]);
+                    }
+                }
+            });
+        }
     </script>
 @endsection
 
 @section('style')
     <style>
-        html{
-           -webkit-overflow-scrolling: auto !important;
+        html {
+            -webkit-overflow-scrolling: auto !important;
         }
-        .login-padding{
+
+        .login-padding {
             padding: 5px 20px 8px
         }
-        .bg-gray{
+
+        .bg-gray {
             background-color: #f8f8f8
         }
+
         .slide_more_table tr {
             border-bottom: 1px solid #ededed;
         }
+
         @media screen and (max-width: 1200px) {
             #Market_Status_Text {
                 text-align: center !important;
@@ -298,14 +323,15 @@
         .table_in_table span {
             text-align: left !important;
         }
-        #total_trade_value{
+
+        #total_trade_value {
             font-size: 16px !important;
         }
     </style>
 @endsection
 
 @section('content')
-    <div  onclick="CloseMenu()" id="bg-mute"></div>
+    <div onclick="CloseMenu()" id="bg-mute"></div>
     <div id="clockNow" style="text-align: center;font-size:25px"></div>
     <div id="time"></div>
     @if($alert_active==1)
@@ -498,22 +524,21 @@
         </div>
     @endif
 
-        <!-- Modal -->
-        <div class="modal fade" id="Login_two_device" tabindex="-1"
-             aria-labelledby="market_open_finished_modal_exists_Label"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="market_open_finished_modal_exists_Label">Login Error</h5>
-                    </div>
-                    <div class="modal-body">
-                        this user is already logged in By another Device
-                        <br>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="Login_two_device" tabindex="-1"
+         aria-labelledby="market_open_finished_modal_exists_Label"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="market_open_finished_modal_exists_Label">Login Error</h5>
+                </div>
+                <div class="modal-body">
+                    this user is already logged in By another Device
+                    <br>
                 </div>
             </div>
         </div>
-
+    </div>
 
 @endsection

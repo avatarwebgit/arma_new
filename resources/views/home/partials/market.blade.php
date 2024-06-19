@@ -166,7 +166,7 @@
                         </a>
                     </td>
                 </tr>
-                <tr id="more_table_{{ $market->id }}" style="display: none" class="slide_more_table">
+                <tr id="more_table_{{ $market->id }}" style="display: none" class="slide_more_table" onclick="ToggleShowMoreInformation({{ $market->id }})">
                     <td colspan="11">
                         <table class="table_in_table" style="width: 100%">
                             <tr>
