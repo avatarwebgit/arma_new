@@ -9,11 +9,12 @@ use App\Events\MarketTimeUpdated;
 use App\Models\Market;
 use App\Models\MarketSetting;
 use App\Models\Transaction;
-use AWS\CRT\HTTP\Request;
+
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Client\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
