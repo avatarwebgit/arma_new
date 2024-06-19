@@ -147,7 +147,15 @@ class Controller extends BaseController
         $now = Carbon::now();
         $close_market = $this->close_market_today();
         $close_market = Carbon::parse($close_market);
-        if ($now < $close_market) {
+        $yesterday = Carbon::yesterday();
+        $tomorrow = Carbon::tomorrow();
+        $first_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'asc')->first();
+        $start_market_time = Carbon::parse('00:00');
+        if ($first_market){
+            $start_market_time = Carbon::parse($first_market->time)->addMinutes(-30);
+        }
+
+        if ($start_market_time < $now and $now < $close_market) {
             $difference = $now->diffInSeconds($close_market);
             $status_text = 'Open';
             $color='green';
