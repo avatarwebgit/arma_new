@@ -343,7 +343,8 @@ class Controller extends BaseController
                 $market_values_html = '<span>0</span>';
             }
             $now = Carbon::now();
-            $view_table = view('home.partials.market', compact('markets_groups', 'now'))->render();
+            $is_login=auth()->check();
+            $view_table = view('home.partials.market', compact('markets_groups', 'now','is_login'))->render();
 
             broadcast(new MarketTableIndex($view_table, $market_values_html));
         } catch (\Exception $e) {

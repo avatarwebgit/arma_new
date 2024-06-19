@@ -85,8 +85,9 @@
                 @endphp
                 <input type="hidden" id="previous_status-{{ $market->id }}" value="{{ $market->status }}">
 
-                <tr  onclick="window.location.href='{{ route('home.bid',['market'=>$market->id]) }}'"
-                    style="color: {{ $color }} !important;cursor: pointer;border-bottom: 2px solid #d9d9d9" id="market-{{ $market->id }};"
+                <tr onclick="window.location.href='{{ route('home.bid',['market'=>$market->id]) }}'"
+                    style="color: {{ $color }} !important;cursor: pointer;border-bottom: 2px solid #d9d9d9"
+                    id="market-{{ $market->id }};"
                     data-status="{{ $market->status }}"
                     data-difference="{{ $market->difference }}"
                     data-now="{{ $now }}"
@@ -97,7 +98,7 @@
                     data-benchmark5="{{ $market->benchmark5 }}"
                     data-benchmark6="{{ $market->benchmark6 }}"
                     data-today-last="{{ $market->is_today_last }}"
-                     class="{{ $i%2==0 ? 'bg-white' : 'bg-gray' }}"
+                    class="{{ $i%2==0 ? 'bg-white' : 'bg-gray' }}"
                 >
                     <td class="position-relative">
                         @if(1 <$market->status and  $market->status< 7)
@@ -145,7 +146,8 @@
                     </span>
                     </td>
                     <td id="market-time-parent-{{ $market->id }}">
-                        <span style="margin: 0;width: 90px;text-align: center" class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
+                        <span style="margin: 0;width: 90px;text-align: center"
+                              class="{{ $market->status == 1 ? 'timer-bold' : '' }}">
                             {!! $statusText !!}
                         </span>
                     </td>
@@ -164,14 +166,14 @@
                         </a>
                     </td>
                 </tr>
-                <tr  id="more_table_{{ $market->id }}" style="display: none" class="slide_more_table">
+                <tr id="more_table_{{ $market->id }}" style="display: none" class="slide_more_table">
                     <td colspan="11">
                         <table class="table_in_table" style="width: 100%">
-                            <tr >
+                            <tr>
                                 <td class="text-center">
                                     <span class="text-bold">Contract Type</span>
-                                    <span >
-                                    @auth
+                                    <span>
+                                    @if($is_login)
                                             {{ $market->SalesForm->contract_type }}
                                         @else
                                             Log in/Register
