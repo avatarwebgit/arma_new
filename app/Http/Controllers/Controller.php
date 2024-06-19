@@ -151,7 +151,6 @@ class Controller extends BaseController
         $tomorrow = Carbon::tomorrow();
         $first_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'asc')->first();
         $start_market_time = Carbon::parse('00:00');
-        dd($first_market);
         if ($first_market) {
             $start_market_time = Carbon::parse($first_market->time)->addMinutes(-30);
         }
