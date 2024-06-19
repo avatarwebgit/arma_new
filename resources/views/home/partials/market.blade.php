@@ -106,7 +106,7 @@
                 >
                     <td class="position-relative">
                         @if(1 <$market->status and  $market->status< 7)
-                            <div class="animation_main_div" style="position: absolute;left: 5px;top: -3px">
+                            <div class="animation_main_div" style="position: absolute;right: 5px;top: -3px">
                                 <div class="circle " style="background-color: {{ $color }} !important;"></div>
                                 <div class="circle2" style="background-color: {{ $color }} !important;"></div>
                                 <div class="circle3" style="background-color: {{ $color }} !important;"></div>
