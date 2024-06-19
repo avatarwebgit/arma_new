@@ -4,7 +4,7 @@
             <td class="text-center">
                 <span class="text-bold">Contract Type</span>
                 <span>
-                                    @if($is_login)
+                                    @auth
                         {{ $market->SalesForm->contract_type }}
                     @else
                         Log in/Register
