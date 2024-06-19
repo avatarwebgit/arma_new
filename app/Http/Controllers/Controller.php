@@ -9,6 +9,7 @@ use App\Events\MarketTimeUpdated;
 use App\Models\Market;
 use App\Models\MarketSetting;
 use App\Models\Transaction;
+use AWS\CRT\HTTP\Request;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -262,6 +263,14 @@ class Controller extends BaseController
         }
     }
 
+    public function market_more_info(Request $request)
+    {
+        $market_id = $request->market_id;
+        $market=Market::where('id', $market_id)->first();
+        $html=view('home.partials.market_more',compact('market'))->render();
+        return response()->json([1,$html]);
+    }
+
     public function check_market($id)
     {
         $market = Market::find($id);
@@ -336,15 +345,15 @@ class Controller extends BaseController
             }
             $market_values_html = '$' . number_format($market_values);
             $create_index_timer = $this->create_index_timer();
-            $market_is_open=$create_index_timer['market_is_open'];
-            if ($market_is_open==1) {
+            $market_is_open = $create_index_timer['market_is_open'];
+            if ($market_is_open == 1) {
                 $market_values_html = '<span class="text-success">' . $market_values_html . '</span>';
-            }else{
+            } else {
                 $market_values_html = '<span>0</span>';
             }
             $now = Carbon::now();
-            $is_login=auth()->check();
-            $view_table = view('home.partials.market', compact('markets_groups', 'now','is_login'))->render();
+            $is_login = auth()->check();
+            $view_table = view('home.partials.market', compact('markets_groups', 'now', 'is_login'))->render();
 
             broadcast(new MarketTableIndex($view_table, $market_values_html));
         } catch (\Exception $e) {
