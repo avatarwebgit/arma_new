@@ -7,7 +7,9 @@
                                     @auth
                         {{ $market->SalesForm->contract_type }}
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endif
                                 </span>
             </td>
@@ -17,7 +19,9 @@
                                     @auth
                         {{ $market->SalesForm->min_order }}
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endauth
                                 </span>
             </td>
@@ -28,7 +32,9 @@
                                     @auth
                         {{ $market->SalesForm->company_type }}
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endauth
                                 </span>
             </td>
@@ -42,7 +48,9 @@
                                                                 @auth
                         Available
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endauth
                                                             </span>
             </td>
@@ -52,7 +60,9 @@
                                     @auth
                         {{ $market->SalesForm->price_type }}
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endauth
                                 </span>
             </td>
@@ -62,7 +72,9 @@
                                     @auth
                         {{ $market->SalesForm->payment }}
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endauth
                                 </span>
             </td>
@@ -75,7 +87,9 @@
                                                                 @auth
                         Available
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endauth
                                                             </span>
             </td>
@@ -86,7 +100,9 @@
                                     @auth
                         {{ $market->SalesForm->unit }}
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endauth
                                 </span>
             </td>
@@ -97,7 +113,9 @@
                                         @auth
                         {{ $market->SalesForm->currency }}
                     @else
-                        Log in/Register
+                        <a href="{{ route('login') }}">
+                            Log in/Register
+                        </a>
                     @endauth
                                 </span>
             </td>
