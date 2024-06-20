@@ -353,7 +353,7 @@ class Controller extends BaseController
             if ($market_is_open == 1) {
                 $market_values_html = '<span class="text-success">' . $market_values_html . '</span>';
             } else {
-                $market_values_html = '<span style="color: #c20000">' . $market_values_html . '</span>';
+                $market_values_html = '<span class="text-danger">' . $market_values_html . '</span>';
             }
             $now = Carbon::now();
             $is_login = auth()->check();
