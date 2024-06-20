@@ -152,7 +152,7 @@ class Controller extends BaseController
         $yesterday = Carbon::yesterday();
         $tomorrow = Carbon::tomorrow();
         $first_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'asc')->first();
-        $market_open_exists = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('status', '<',6)->exists();
+        $market_open_exists = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->where('status', '<',6)->exists();
         $start_market_time = Carbon::parse('00:00');
         if ($first_market) {
             $start_market_time = Carbon::parse($first_market->time)->addMinutes(-30);
