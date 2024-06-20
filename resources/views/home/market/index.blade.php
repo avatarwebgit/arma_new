@@ -283,6 +283,92 @@
             })
         }
     </script>
+
+    {{--    //clockk--}}
+    <script>
+        $step = 1;
+        $loops = Math.round(100 / $step);
+        $increment = 360 / $loops;
+        $half = Math.round($loops / 2);
+        $barColor = '#ec366b';
+        $backColor = '#feeff4';
+
+        $(function () {
+            clockk.init();
+        });
+        clockk = {
+            interval: null,
+            init: function () {
+                clockk.start(1);
+                // $('.input-btn').click(function () {
+                //
+                //     switch ($(this).data('action')) {
+                //         case'start':
+                //             clockk.stop();
+                //             clockk.start($('.input-num').val());
+                //             break;
+                //         case'stop':
+                //             clockk.stop();
+                //             break;
+                //     }
+                // });
+            },
+            start: function (t) {
+                var pie = 0;
+                var num = 0;
+                var min = t ? t : 1;
+                var sec = min * 60;
+                var lop = sec;
+                $('.count').text(min);
+                if (min > 0) {
+                    $('.count').addClass('min')
+                } else {
+                    $('.count').addClass('sec')
+                }
+                clockk.interval = setInterval(function () {
+                    sec = sec - 1;
+                    if (min > 1) {
+                        pie = pie + (100 / (lop / min));
+                    } else {
+                        pie = pie + (100 / (lop));
+                    }
+                    if (pie >= 101) {
+                        pie = 1;
+                    }
+                    num = (sec / 60).toFixed(2).slice(0, -3);
+                    if (num == 0) {
+                        $('.count').removeClass('min').addClass('sec').text(sec);
+                    } else {
+                        $('.count').removeClass('sec').addClass('min').text(num);
+                    }
+                    //$('.clockk').attr('class','clockk pro-'+pie.toFixed(2).slice(0,-3));
+                    //console.log(pie+'__'+sec);
+                    $i = (pie.toFixed(2).slice(0, -3)) - 1;
+                    if ($i < $half) {
+                        $nextdeg = (90 + ($increment * $i)) + 'deg';
+                        $('.clockk').css({'background-image': 'linear-gradient(90deg,' + $backColor + ' 50%,transparent 50%,transparent),linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+                    } else {
+                        $nextdeg = (-90 + ($increment * ($i - $half))) + 'deg';
+                        $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+                    }
+                    if (sec == 0) {
+                        clearInterval(clockk.interval);
+                        $('.count').text(0);
+                        //$('.clockk').removeAttr('class','clockk pro-100');
+                        $('.clockk').removeAttr('style');
+                    }
+                }, 1000);
+            },
+            stop: function () {
+                clearInterval(clockk.interval);
+                $('.count').text(0);
+                $('.clockk').removeAttr('style');
+            }
+        }
+    </script>
+    {{--    //clock--}}
+
+
 @endsection
 
 @section('style')
@@ -372,12 +458,177 @@
             align-items: center !important;
         }
 
-
     </style>
+
+{{--    /*//clockk*/--}}
+    <style>
+
+
+        body {
+            margin: 0;
+            color: #444;
+            background: #ecf0f1;
+            font: 300 18px/18px Roboto, sans-serif;
+        }
+
+        *, :after, :before {
+            box-sizing: border-box
+        }
+
+        .pull-left {
+            float: left
+        }
+
+        .pull-right {
+            float: right
+        }
+
+        .clearfix:after, .clearfix:before {
+            content: '';
+            display: table
+        }
+
+        .clearfix:after {
+            clear: both;
+            display: block
+        }
+
+        .clockk:before,
+        .count:after {
+            content: '';
+            position: absolute;
+        }
+
+        .clockk-wrap {
+            margin: auto;
+            width: 240px;
+            height: 240px;
+            margin-top: 100px;
+            position: relative;
+            border-radius: 50px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, .15);
+        }
+
+        .clockk {
+            top: 50%;
+            left: 50%;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            position: absolute;
+            margin-top: -90px;
+            margin-left: -90px;
+            background-color: #feeff4;
+        }
+
+        .clockk:before {
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            margin-top: -60px;
+            margin-left: -60px;
+            border-radius: inherit;
+            background-color: #ec366b;
+            box-shadow: 0 0 15px rgba(0, 0, 0, .15), 0 0 3px rgba(255, 255, 255, .75) inset;
+            /*border:1px solid rgba(255,255,255,.1);*/
+        }
+
+        .count {
+            width: 100%;
+            color: #fff;
+            height: 100%;
+            padding: 50px;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 50px;
+            position: absolute;
+            text-align: center;
+        }
+
+        .count:after {
+            width: 100%;
+            display: block;
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        .count.sec:after {
+            content: 'sec'
+        }
+
+        .count.min:after {
+            content: 'min'
+        }
+
+        .action {
+            margin: auto;
+            max-width: 200px;
+        }
+
+        .action .input {
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .action .input-num {
+            width: 100%;
+            border: none;
+            padding: 12px;
+            border-radius: 60px;
+        }
+
+        .action .input-btn {
+            top: 0;
+            right: 0;
+            color: #fff;
+            border: none;
+            border: none;
+            padding: 12px;
+            position: absolute;
+            border-radius: 60px;
+            background-color: #ec366b;
+            text-transform: uppercase;
+        }
+
+        .tbl {
+            display: table;
+            width: 100%
+        }
+
+        .tbl .col {
+            display: table-cell
+        }
+
+        #timer_section{
+            margin-bottom: 100px;
+        }
+    </style>
+{{--    /*//clockk*/--}}
 @endsection
 
 @section('content')
     <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="clockk-wrap">
+                    <div class="clockk pro-0">
+                        <span class="count">0</span>
+                    </div>
+                </div>
+                <div class="action">
+                    <div class="input">
+                        <input class="input-num" type="number" min="1" placeholder="Enter Minute"><input
+                            data-action="start" class="input-btn" type="button" value="Start">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12 col-md-12 col-xl-4 d-flex justify-content-center align-items-end menu-des">
                 <h5 class="text-center text-info text-center p-3 commodity-title">

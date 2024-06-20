@@ -2,6 +2,7 @@
 
 @section('script')
 
+
     <script type="module">
         window.Echo.channel('market-index-table')
             .listen('MarketTableIndex', function (e) {
@@ -224,9 +225,9 @@
 
         function startTime() {
             var dayOfWeek = moment().tz("Europe/London").format("dddd");
-            let clock = moment().tz("Europe/London").format("ll");
+            let clockk = moment().tz("Europe/London").format("ll");
             let a = moment().tz("Europe/London").format("h:mm A");
-            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 16px !important;font-weight: bold">' + clock + '</span><span class="ml-3" style="font-size: 16px !important;font-weight: bold !important;">' + a + ' GMT</span>'
+            let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 16px !important;font-weight: bold">' + clockk + '</span><span class="ml-3" style="font-size: 16px !important;font-weight: bold !important;">' + a + ' GMT</span>'
             $('#time_now').html(time_now);
             t = setTimeout(function () {
                 startTime()
@@ -267,10 +268,12 @@
         }
 
     </script>
+
 @endsection
 
 @section('style')
     <style>
+
         html {
             -webkit-overflow-scrolling: auto !important;
         }
@@ -325,6 +328,7 @@
         #total_trade_value {
             font-size: 16px !important;
         }
+
         #market_index_table th {
             padding: 12px 0 !important;
         }
@@ -333,7 +337,7 @@
 
 @section('content')
     <div onclick="CloseMenu()" id="bg-mute"></div>
-    <div id="clockNow" style="text-align: center;font-size:25px"></div>
+    <div id="clockkNow" style="text-align: center;font-size:25px"></div>
     <div id="time"></div>
     @if($alert_active==1)
         <div style="background-color: {{ $alert_bg_color }} !important;height: {{ $alert_height.'px' }} !important;"
