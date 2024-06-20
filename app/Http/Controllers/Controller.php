@@ -159,10 +159,8 @@ class Controller extends BaseController
         }
 
         if ($start_market_time < $now and $now < $close_market) {
-
             $market_is_open = 1;
         } else {
-
             $market_is_open = 0;
         }
 
@@ -355,7 +353,7 @@ class Controller extends BaseController
             if ($market_is_open == 1) {
                 $market_values_html = '<span class="text-success">' . $market_values_html . '</span>';
             } else {
-                $market_values_html = '<span>0</span>';
+                $market_values_html = '<span style="color: #c20000">' . $market_values_html . '</span>';
             }
             $now = Carbon::now();
             $is_login = auth()->check();
