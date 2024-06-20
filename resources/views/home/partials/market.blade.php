@@ -1,3 +1,4 @@
+@if(count($markets_groups)>0)
 <div class="table-responsive">
     <table id="market_index_table" class="table">
         <thead class="thead-dark">
@@ -177,4 +178,4 @@
         </tbody>
     </table>
 </div>
-
+@endif
