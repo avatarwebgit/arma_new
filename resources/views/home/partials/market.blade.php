@@ -3,11 +3,7 @@
         <thead class="thead-dark">
         <tr>
             <th>
-            <span style="margin-left: 15px">
-            </span>
-            </th>
-            <th>
-            <span style="margin-left: 15px">
+            <span style="margin-left: 15px;width: 50px !important;">
             Commodity
             </span>
             </th>
@@ -116,9 +112,7 @@
                                 </div>
                             </div>
                         @endif
-                    </td>
-                    <td class="position-relative">
-                        <span style="margin-left: 15px">
+                        <span style="margin-left: 15px;width: 50px !important;">
                         {{ $market->SalesForm->commodity }}
                     </span>
                     </td>
