@@ -325,6 +325,9 @@
         #total_trade_value {
             font-size: 16px !important;
         }
+        #market_index_table th {
+            padding: 12px 0 !important;
+        }
     </style>
 @endsection
 
