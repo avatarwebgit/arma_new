@@ -4,7 +4,7 @@
         <thead class="thead-dark">
         <tr>
             <th>
-            <span style="margin-left: 60px;width: 100% !important;">
+            <span style="margin-left: 45px;width: 100% !important;">
             Commodity
             </span>
             </th>
