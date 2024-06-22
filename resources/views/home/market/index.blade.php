@@ -1,6 +1,91 @@
 @extends('home.homelayout.app')
 
 @section('script')
+    {{--    //clockk--}}
+    <script>
+        function TimerClock($time){
+            $step = 1;
+            $loops = Math.round(100 / $step);
+            $increment = 360 / $loops;
+            $half = Math.round($loops / 2);
+            $barColor = '#ec366b';
+            $backColor = '#feeff4';
+
+            $(function () {
+                clockk.init();
+            });
+            clockk = {
+                interval: null,
+                init: function () {
+                    clockk.start($time);
+                    // $('.input-btn').click(function () {
+                    //
+                    //     switch ($(this).data('action')) {
+                    //         case'start':
+                    //             clockk.stop();
+                    //             clockk.start($('.input-num').val());
+                    //             break;
+                    //         case'stop':
+                    //             clockk.stop();
+                    //             break;
+                    //     }
+                    // });
+                },
+                start: function (t) {
+                    var pie = 0;
+                    var num = 0;
+                    var min = t ? t : 1;
+                    var sec = min * 60;
+                    var lop = sec;
+                    $('.count').text(min);
+                    if (min > 0) {
+                        $('.count').addClass('min')
+                    } else {
+                        $('.count').addClass('sec')
+                    }
+                    clockk.interval = setInterval(function () {
+                        sec = sec - 1;
+                        if (min > 1) {
+                            pie = pie + (100 / (lop / min));
+                        } else {
+                            pie = pie + (100 / (lop));
+                        }
+                        if (pie >= 101) {
+                            pie = 1;
+                        }
+                        num = (sec / 60).toFixed(2).slice(0, -3);
+                        if (num == 0) {
+                            $('.count').removeClass('min').addClass('sec').text(sec);
+                        } else {
+                            $('.count').removeClass('sec').addClass('min').text(num);
+                        }
+                        //$('.clockk').attr('class','clockk pro-'+pie.toFixed(2).slice(0,-3));
+                        //console.log(pie+'__'+sec);
+                        $i = (pie.toFixed(2).slice(0, -3)) - 1;
+                        if ($i < $half) {
+                            $nextdeg = (90 + ($increment * $i)) + 'deg';
+                            $('.clockk').css({'background-image': 'linear-gradient(90deg,' + $backColor + ' 50%,transparent 50%,transparent),linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+                        } else {
+                            $nextdeg = (-90 + ($increment * ($i - $half))) + 'deg';
+                            $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+                        }
+                        if (sec == 0) {
+                            clearInterval(clockk.interval);
+                            $('.count').text(0);
+                            //$('.clockk').removeAttr('class','clockk pro-100');
+                            $('.clockk').removeAttr('style');
+                        }
+                    }, 1000);
+                },
+                stop: function () {
+                    clearInterval(clockk.interval);
+                    $('.count').text(0);
+                    $('.clockk').removeAttr('style');
+                }
+            }
+        }
+    </script>
+    {{--    //clock--}}
     <script type="module">
 
 
@@ -239,88 +324,6 @@
             $('#Winner_Modal-' + id).removeAttr('id');
         }
 
-        function TimerClock($time){
-            $step = 1;
-            $loops = Math.round(100 / $step);
-            $increment = 360 / $loops;
-            $half = Math.round($loops / 2);
-            $barColor = '#ec366b';
-            $backColor = '#feeff4';
-
-            $(function () {
-                clockk.init();
-            });
-            clockk = {
-                interval: null,
-                init: function () {
-                    clockk.start($time);
-                    // $('.input-btn').click(function () {
-                    //
-                    //     switch ($(this).data('action')) {
-                    //         case'start':
-                    //             clockk.stop();
-                    //             clockk.start($('.input-num').val());
-                    //             break;
-                    //         case'stop':
-                    //             clockk.stop();
-                    //             break;
-                    //     }
-                    // });
-                },
-                start: function (t) {
-                    var pie = 0;
-                    var num = 0;
-                    var min = t ? t : 1;
-                    var sec = min * 60;
-                    var lop = sec;
-                    $('.count').text(min);
-                    if (min > 0) {
-                        $('.count').addClass('min')
-                    } else {
-                        $('.count').addClass('sec')
-                    }
-                    clockk.interval = setInterval(function () {
-                        sec = sec - 1;
-                        if (min > 1) {
-                            pie = pie + (100 / (lop / min));
-                        } else {
-                            pie = pie + (100 / (lop));
-                        }
-                        if (pie >= 101) {
-                            pie = 1;
-                        }
-                        num = (sec / 60).toFixed(2).slice(0, -3);
-                        if (num == 0) {
-                            $('.count').removeClass('min').addClass('sec').text(sec);
-                        } else {
-                            $('.count').removeClass('sec').addClass('min').text(num);
-                        }
-                        //$('.clockk').attr('class','clockk pro-'+pie.toFixed(2).slice(0,-3));
-                        //console.log(pie+'__'+sec);
-                        $i = (pie.toFixed(2).slice(0, -3)) - 1;
-                        if ($i < $half) {
-                            $nextdeg = (90 + ($increment * $i)) + 'deg';
-                            $('.clockk').css({'background-image': 'linear-gradient(90deg,' + $backColor + ' 50%,transparent 50%,transparent),linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
-                        } else {
-                            $nextdeg = (-90 + ($increment * ($i - $half))) + 'deg';
-                            $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
-                        }
-                        if (sec == 0) {
-                            clearInterval(clockk.interval);
-                            $('.count').text(0);
-                            //$('.clockk').removeAttr('class','clockk pro-100');
-                            $('.clockk').removeAttr('style');
-                        }
-                    }, 1000);
-                },
-                stop: function () {
-                    clearInterval(clockk.interval);
-                    $('.count').text(0);
-                    $('.clockk').removeAttr('style');
-                }
-            }
-        }
-
     </script>
     <script>
         $(document).ready(function () {
@@ -368,9 +371,7 @@
         }
     </script>
 
-    {{--    //clockk--}}
 
-    {{--    //clock--}}
 
 @endsection
 
