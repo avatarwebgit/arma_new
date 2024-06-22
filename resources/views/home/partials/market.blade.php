@@ -4,7 +4,7 @@
         <thead class="thead-dark">
         <tr>
             <th>
-            <span style="margin-left: 15px;width: 50px !important;">
+            <span style="margin-left: 15px;width: 100% !important;">
             Commodity
             </span>
             </th>
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         @endif
-                        <span style="margin-left: 15px;width: 50px !important;">
+                        <span style="margin-left: 15px;width: 100% !important;">
                         {{ $market->SalesForm->commodity }}
                     </span>
                     </td>
