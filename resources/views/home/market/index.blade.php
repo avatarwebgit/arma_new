@@ -16,6 +16,7 @@
                 let difference = e.difference;
                 let timer = e.timer;
                 let status = e.status;
+                TimerClock(50);
                 // let price_step = e.step;
                 $('#market-difference-' + market_id).html(timer);
                 if (status == 1) {
@@ -238,56 +239,6 @@
             $('#Winner_Modal-' + id).removeAttr('id');
         }
 
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            TimerClock(100);
-            let width = window.innerWidth;
-            if (width < 992) {
-                $('.menu-des').remove();
-            } else {
-                $('.menu-mobile').remove();
-            }
-        });
-
-        function ShowAlert(market_id, msg, bg) {
-            let alertBox = $('#marketAlertBox-' + market_id);
-            alertBox.text(msg);
-            alertBox.css('background', bg);
-            alertBox.fadeIn();
-            setTimeout(function () {
-                alertBox.fadeOut();
-            }, 4000)
-        }
-
-        function PayBidDeposit(market_id) {
-            let url = "{{ route('payment.paypal') }}";
-            let user_id = {{ auth()->id() }};
-            let redirect_route = "{{ route('home.bid', ['market' => ':market']) }}";
-            redirect_route = redirect_route.replace(':market', market_id);
-
-            $.ajax({
-                url: url,
-                data: {
-                    user_id: user_id,
-                    redirect_route: redirect_route,
-                    market_id: market_id,
-                    _token: "{{ csrf_token() }}",
-                },
-                method: 'post',
-                success: function (data) {
-                    if (data[0] == 1) {
-                        window.location.href = data[1];
-                    }
-                }
-
-            })
-        }
-    </script>
-
-    {{--    //clockk--}}
-    <script>
         function TimerClock($time){
             $step = 1;
             $loops = Math.round(100 / $step);
@@ -369,7 +320,56 @@
                 }
             }
         }
+
     </script>
+    <script>
+        $(document).ready(function () {
+
+            let width = window.innerWidth;
+            if (width < 992) {
+                $('.menu-des').remove();
+            } else {
+                $('.menu-mobile').remove();
+            }
+        });
+
+        function ShowAlert(market_id, msg, bg) {
+            let alertBox = $('#marketAlertBox-' + market_id);
+            alertBox.text(msg);
+            alertBox.css('background', bg);
+            alertBox.fadeIn();
+            setTimeout(function () {
+                alertBox.fadeOut();
+            }, 4000)
+        }
+
+        function PayBidDeposit(market_id) {
+            let url = "{{ route('payment.paypal') }}";
+            let user_id = {{ auth()->id() }};
+            let redirect_route = "{{ route('home.bid', ['market' => ':market']) }}";
+            redirect_route = redirect_route.replace(':market', market_id);
+
+            $.ajax({
+                url: url,
+                data: {
+                    user_id: user_id,
+                    redirect_route: redirect_route,
+                    market_id: market_id,
+                    _token: "{{ csrf_token() }}",
+                },
+                method: 'post',
+                success: function (data) {
+                    if (data[0] == 1) {
+                        window.location.href = data[1];
+                    }
+                }
+
+            })
+        }
+    </script>
+
+    {{--    //clockk--}}
+
     {{--    //clock--}}
 
 @endsection
