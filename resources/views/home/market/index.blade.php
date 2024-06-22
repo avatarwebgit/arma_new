@@ -43,7 +43,7 @@
                 //     Close_and_show_result(status, market_id);
                 // }
 
-                TimerClock(100);
+
 
             });
 
@@ -242,6 +242,7 @@
     </script>
     <script>
         $(document).ready(function () {
+            TimerClock(100);
             let width = window.innerWidth;
             if (width < 992) {
                 $('.menu-des').remove();
