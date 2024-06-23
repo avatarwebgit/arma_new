@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         @endif
-                        <span style="margin-left: 37px;width: 100% !important;">
+                        <span style="margin-left: 20px;width: 100% !important;">
                         {{ $market->SalesForm->commodity }}
                     </span>
                     </td>

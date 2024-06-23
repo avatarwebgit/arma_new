@@ -111,7 +111,7 @@ class IndexController extends Controller
         if ($market_is_open === 1) {
             $market_is_open_text = '<span>Market: </span><span class="text-success">Open</span>';
         } else {
-            $market_is_open_text = '<span>Market: </span><span class="text-danger">Close</span>';
+            $market_is_open_text = '<span>Market: </span><span style="color: #c20000">Close</span>';
         }
         $close_market = $this->close_market_today();
         $close_market = Carbon::parse($close_market);
