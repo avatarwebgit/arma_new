@@ -332,6 +332,9 @@
         #market_index_table th {
             padding: 12px 0 !important;
         }
+        #dayOfWeek{
+            font-size: 1.75rem !important;
+        }
     </style>
 @endsection
 

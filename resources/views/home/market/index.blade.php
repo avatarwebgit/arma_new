@@ -14,7 +14,7 @@
 
         });
         let i = 0;
-        let pie = 0;
+        let pie = 100;
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
                 let market_page_id = "{{ $market->id }}";
@@ -34,11 +34,9 @@
                 $('#market-difference-' + market_id).html(timer);
                 $('#market-difference1-' + market_id).html(timer);
                 if (market_page_id == market_id) {
-                    // let remain = difference % 60;
-                    // pie = 100 - ((100 * remain) / 60);
-                    let remain =60- difference % 60;
-                    pie = 100 + ((100 * remain) / 60);
-                    pie = TimerClock(difference, pie);
+                    let remain = difference % 60;
+                    pie = ((100 * remain) / 60);
+                    TimerClock(difference, pie, status);
                 }
 
 
@@ -310,55 +308,67 @@
         }
 
 
-        function TimerClock(seconds, pie) {
+        function TimerClock(seconds, pie, status) {
             $step = 1;
             $loops = Math.round(100 / $step);
             $increment = 360 / $loops;
             $half = Math.round($loops / 2);
-            $barColor = '#ec366b';
+            $barColor = '#000000';
             $backColor = '#feeff4';
-
-
             var num = 0;
-
             var sec = seconds;
             var lop = sec;
-            console.log('lop: ', lop);
             var min = parseInt(seconds / 60);
-            console.log('min: ', min);
             $('.count').text(min);
             if (min > 0) {
                 $('.count').addClass('min')
             } else {
                 $('.count').addClass('sec')
             }
-            console.log('sec: ', sec);
-            if (min > 1) {
-                pie = pie + (100 / (lop / min));
-            } else {
-                pie = pie + (100 / (lop));
+            if (1 < status && status < 7) {
+                $barColor = '#1f9402';
             }
-            if (pie >= 101) {
-                pie = 1;
+            if (seconds<10){
+                $barColor = '#ff0707';
             }
-            console.log('pie: ', lop / min);
+            // console.log('sec: ', sec);
+            // if (min > 1) {
+            //     pie = pie + (100 / (lop / min));
+            // } else {
+            //     pie = pie + (100 / (lop));
+            // }
+            // if (pie >= 101) {
+            //     pie = 1;
+            // }
             num = (sec / 60).toFixed(2).slice(0, -3);
             if (num == 0) {
                 $('.count').removeClass('min').addClass('sec').text(sec);
             } else {
                 $('.count').removeClass('sec').addClass('min').text(num);
             }
-            //$('.clockk').attr('class','clockk pro-'+pie.toFixed(2).slice(0,-3));
-            //console.log(pie+'__'+sec);
-            $i = (pie.toFixed(2).slice(0, -3)) - 1;
 
-            if ($i < $half) {
-                $nextdeg = (90 + ($increment * $i)) + 'deg';
-                $('.clockk').css({'background-image': 'linear-gradient(90deg,' + $backColor + ' 50%,transparent 50%,transparent),linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
-            } else {
-                $nextdeg = (-90 + ($increment * ($i - $half))) + 'deg';
-                $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+            $i = (pie.toFixed(2).slice(0, -3)) - 1;
+            if (1 < pie && pie < 3) {
+                pie = 3;
             }
+            console.log('pie', pie);
+            if (pie < 1) {
+
+                $nextdeg = 90 + 'deg';
+                $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+
+            } else {
+                if ($i < $half) {
+
+                    $nextdeg = (90 + ($increment * $i)) + 'deg';
+                    $('.clockk').css({'background-image': 'linear-gradient(90deg,' + $backColor + ' 50%,transparent 50%,transparent),linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+                } else {
+
+                    $nextdeg = (-90 + ($increment * ($i - $half))) + 'deg';
+                    $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+                }
+            }
+
             if (sec == 0) {
                 $('.count').text(0);
                 //$('.clockk').removeAttr('class','clockk pro-100');
@@ -523,9 +533,10 @@
             align-items: center;
             justify-content: center;
         }
-        .clockk span{
+
+        .clockk span {
             z-index: 999;
-            color: white;
+            color: #162fa2;
             font-size: 21px;
         }
 
@@ -537,7 +548,8 @@
             margin-top: -60px;
             margin-left: -60px;
             border-radius: inherit;
-            background-color: #ec366b;
+            background-color: #ffffff;
+
             box-shadow: 0 0 15px rgba(0, 0, 0, .15), 0 0 3px rgba(255, 255, 255, .75) inset;
             /*border:1px solid rgba(255,255,255,.1);*/
         }
@@ -637,9 +649,9 @@
                     </div>
                 </div>
 
-{{--                <span id="market-difference-{{ $market->id }}" class="circle_timer">--}}
+                {{--                <span id="market-difference-{{ $market->id }}" class="circle_timer">--}}
 
-{{--                        </span>--}}
+                {{--                        </span>--}}
             </div>
         </div>
         <div class="row justify-content-between">
