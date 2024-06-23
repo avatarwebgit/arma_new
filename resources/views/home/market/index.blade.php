@@ -36,7 +36,8 @@
                 $('#market-difference2-' + market_id).html(difference);
                 let difference2 = $('#market-difference2-' + market_id).html();
                 if (market_page_id == market_id) {
-                    pie=difference%60;
+                    let remain = difference % 60;
+                    pie = 100 - ((100 * remain) / 60);
                     pie = TimerClock(difference, pie);
                 }
 
@@ -367,88 +368,10 @@
         }
 
     </script>
-
-    {{--    //clockk--}}
-    <script>
-        function BlueTimer(difference) {
-            let timeLeft = difference;
-
-            let timer = document.getElementById('timeLeft');
-
-            function isTimeLeft() {
-                return timeLeft > -1;
-            }
-
-            function runTimer(timerElement) {
-                const timerCircle = timerElement.querySelector('svg > circle + circle');
-                timerElement.classList.add('animatable');
-                timerCircle.style.strokeDashoffset = 1;
-
-                let countdownTimer = setInterval(function () {
-                    if (isTimeLeft()) {
-                        const timeRemaining = timeLeft--;
-                        const normalizedTime = (difference - timeRemaining) / difference;
-                        // for clockwise animation
-                        // const normalizedTime = (timeRemaining - 60) / 60;
-                        timerCircle.style.strokeDashoffset = normalizedTime;
-                        timer.innerHTML = timeRemaining;
-                    } else {
-                        clearInterval(countdownTimer);
-                        timerElement.classList.remove('animatable');
-                    }
-                }, 1000);
-            }
-
-            runTimer(document.querySelector('.timer'));
-        }
-    </script>
-    {{--    //clock--}}
-
 @endsection
 
 @section('style')
     <style>
-        /*//timer*/
-
-
-        .timer {
-            margin-top: 10px;
-        }
-
-        .timer > svg {
-            width: 200px;
-            height: 200px;
-        }
-
-        .timer > svg > circle {
-            fill: none;
-            stroke-opacity: 0.3;
-            stroke: #0d6efd;
-            stroke-width: 10;
-            transform-origin: center center;
-            transform: rotate(-90deg);
-        }
-
-        .timer > svg > circle + circle {
-            stroke-dasharray: 1;
-            stroke-dashoffset: 1;
-            stroke-linecap: round;
-            stroke-opacity: 1;
-        }
-
-        .timer.animatable > svg > circle + circle {
-            transition: stroke-dashoffset 0.3s ease;
-        }
-
-        .timer > svg > text {
-            font-size: 2rem;
-        }
-
-        .timer > svg > text + text {
-            font-size: 1rem;
-        }
-
-        /*//timer*/
         .commodity-title {
             padding: 10px 82px !important;
             background: #6c757d;
@@ -699,22 +622,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <h2>Time Left</h2>
-                <div class="timer animatable">
-                    <svg>
-                        <circle cx="50%" cy="50%" r="90"/>
-                        <circle cx="50%" cy="50%" r="90" pathLength="1"/>
-                        <text x="100" y="100" text-anchor="middle">
-                            <tspan id="timeLeft"></tspan>
-                        </text>
-                        <text x="100" y="120" text-anchor="middle">seconds</text>
-                    </svg>
-                </div>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-12 col-md-12 col-xl-4 d-flex justify-content-center align-items-end menu-des">
                 <h5 class="text-center text-info text-center p-3 commodity-title">
