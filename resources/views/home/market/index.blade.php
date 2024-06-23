@@ -500,7 +500,7 @@
             margin: auto;
             width: 240px;
             height: 240px;
-            margin-top: 100px;
+            /*margin-top: 100px;*/
             position: relative;
             border-radius: 50px;
             /*background-color: #fff;*/
