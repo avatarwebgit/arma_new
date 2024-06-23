@@ -472,15 +472,6 @@
 
     {{--    /*//clockk*/--}}
     <style>
-
-
-        body {
-            margin: 0;
-            color: #444;
-            background: #ecf0f1;
-            font: 300 18px/18px Roboto, sans-serif;
-        }
-
         *, :after, :before {
             box-sizing: border-box
         }
