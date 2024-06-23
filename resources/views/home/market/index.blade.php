@@ -33,8 +33,6 @@
 
                 $('#market-difference-' + market_id).html(timer);
                 $('#market-difference1-' + market_id).html(timer);
-                $('#market-difference2-' + market_id).html(difference);
-                let difference2 = $('#market-difference2-' + market_id).html();
                 if (market_page_id == market_id) {
                     let remain = difference % 60;
                     pie = 100 - ((100 * remain) / 60);
@@ -617,7 +615,6 @@
                 <div class="clockk-wrap">
                     <div class="clockk pro-0">
                         <span id="market-difference1-{{ $market->id }}">0</span>
-                        <span id="market-difference2-{{ $market->id }}">0</span>
                     </div>
                 </div>
             </div>
