@@ -503,8 +503,8 @@
             margin-top: 100px;
             position: relative;
             border-radius: 50px;
-            background-color: #fff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, .15);
+            /*background-color: #fff;*/
+            /*box-shadow: 0 0 15px rgba(0, 0, 0, .15);*/
         }
 
         .clockk {
@@ -517,6 +517,14 @@
             margin-top: -90px;
             margin-left: -90px;
             background-color: #feeff4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .clockk span{
+            z-index: 999;
+            color: white;
+            font-size: 21px;
         }
 
         .clockk:before {
@@ -611,15 +619,6 @@
 @section('content')
     <div class="container mt-5 mb-5">
         <div class="row">
-            <div class="col-12">
-                <div class="clockk-wrap">
-                    <div class="clockk pro-0">
-                        <span id="market-difference1-{{ $market->id }}">0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-12 col-md-12 col-xl-4 d-flex justify-content-center align-items-end menu-des">
                 <h5 class="text-center text-info text-center p-3 commodity-title">
                     {{ $market->SalesForm->commodity }}
@@ -629,9 +628,16 @@
                 <h5 id="status-box-{{ $market->id }}" class="text-center">
                     Step : <span id="market-status-{{ $market->id }}"></span>
                 </h5>
-                <span id="market-difference-{{ $market->id }}" class="circle_timer">
 
-                        </span>
+                <div class="clockk-wrap">
+                    <div class="clockk pro-0">
+                        <span id="market-difference1-{{ $market->id }}">0</span>
+                    </div>
+                </div>
+
+{{--                <span id="market-difference-{{ $market->id }}" class="circle_timer">--}}
+
+{{--                        </span>--}}
             </div>
         </div>
         <div class="row justify-content-between">
