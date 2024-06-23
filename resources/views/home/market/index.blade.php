@@ -130,7 +130,7 @@
             close_bid_deposit(id);
             remove_function();
             deactive_bid(id);
-            let color = '#ff0707';
+            let color = '#c20000';
             let statusText = '<span>Close</span>';
             change_market_status(status, color, statusText, id);
         }
@@ -139,8 +139,9 @@
             close_bid_deposit(id);
             remove_function();
             deactive_bid(id);
-            let color = '#ff0707';
+            let color = '#c20000';
             let statusText = '<span>Close</span>';
+            $('#market-difference1-'+id).css({color: color})
             show_market_result(id);
             change_market_status(status, color, statusText, id);
         }
@@ -313,7 +314,7 @@
             $loops = Math.round(100 / $step);
             $increment = 360 / $loops;
             $half = Math.round($loops / 2);
-            $barColor = '#000000';
+            $barColor = '#162fa2';
             $backColor = '#feeff4';
             var num = 0;
             var sec = seconds;
@@ -329,7 +330,7 @@
                 $barColor = '#1f9402';
             }
             if (seconds<10){
-                $barColor = '#ff0707';
+                $barColor = '#c20000';
             }
             // console.log('sec: ', sec);
             // if (min > 1) {
