@@ -34,8 +34,10 @@
                 $('#market-difference-' + market_id).html(timer);
                 $('#market-difference1-' + market_id).html(timer);
                 if (market_page_id == market_id) {
-                    let remain = difference % 60;
-                    pie = 100 - ((100 * remain) / 60);
+                    // let remain = difference % 60;
+                    // pie = 100 - ((100 * remain) / 60);
+                    let remain =60- difference % 60;
+                    pie = 100 + ((100 * remain) / 60);
                     pie = TimerClock(difference, pie);
                 }
 
