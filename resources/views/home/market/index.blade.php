@@ -1,109 +1,46 @@
 @extends('home.homelayout.app')
 
 @section('script')
-    {{--    //clockk--}}
-    <script>
-        function TimerClock($time){
-            $step = 1;
-            $loops = Math.round(100 / $step);
-            $increment = 360 / $loops;
-            $half = Math.round($loops / 2);
-            $barColor = '#ec366b';
-            $backColor = '#feeff4';
-
-            $(function () {
-                clockk.init();
-            });
-            clockk = {
-                interval: null,
-                init: function () {
-                    clockk.start($time);
-                    // $('.input-btn').click(function () {
-                    //
-                    //     switch ($(this).data('action')) {
-                    //         case'start':
-                    //             clockk.stop();
-                    //             clockk.start($('.input-num').val());
-                    //             break;
-                    //         case'stop':
-                    //             clockk.stop();
-                    //             break;
-                    //     }
-                    // });
-                },
-                start: function (t) {
-                    var pie = 0;
-                    var num = 0;
-                    var min = t ? t : 1;
-                    var sec = min * 60;
-                    var lop = sec;
-                    $('.count').text(min);
-                    if (min > 0) {
-                        $('.count').addClass('min')
-                    } else {
-                        $('.count').addClass('sec')
-                    }
-                    clockk.interval = setInterval(function () {
-                        sec = sec - 1;
-                        if (min > 1) {
-                            pie = pie + (100 / (lop / min));
-                        } else {
-                            pie = pie + (100 / (lop));
-                        }
-                        if (pie >= 101) {
-                            pie = 1;
-                        }
-                        num = (sec / 60).toFixed(2).slice(0, -3);
-                        if (num == 0) {
-                            $('.count').removeClass('min').addClass('sec').text(sec);
-                        } else {
-                            $('.count').removeClass('sec').addClass('min').text(num);
-                        }
-                        //$('.clockk').attr('class','clockk pro-'+pie.toFixed(2).slice(0,-3));
-                        //console.log(pie+'__'+sec);
-                        $i = (pie.toFixed(2).slice(0, -3)) - 1;
-                        if ($i < $half) {
-                            $nextdeg = (90 + ($increment * $i)) + 'deg';
-                            $('.clockk').css({'background-image': 'linear-gradient(90deg,' + $backColor + ' 50%,transparent 50%,transparent),linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
-                        } else {
-                            $nextdeg = (-90 + ($increment * ($i - $half))) + 'deg';
-                            $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
-                        }
-                        if (sec == 0) {
-                            clearInterval(clockk.interval);
-                            $('.count').text(0);
-                            //$('.clockk').removeAttr('class','clockk pro-100');
-                            $('.clockk').removeAttr('style');
-                        }
-                    }, 1000);
-                },
-                stop: function () {
-                    clearInterval(clockk.interval);
-                    $('.count').text(0);
-                    $('.clockk').removeAttr('style');
-                }
-            }
-        }
-    </script>
-    {{--    //clock--}}
     <script type="module">
 
 
         $(document).ready(function () {
+
+            // TimerClock(60);
             {{--GetMarket({{ $market->id }});--}}
             {{--let now = '{{ $now }}';--}}
             {{--now = new Date(now).getTime();--}}
             {{--MarketOnline({{ $market->id }}, now);--}}
+
         });
+        let i = 0;
+        let pie = 0;
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
+                let market_page_id = "{{ $market->id }}";
                 let market_id = e.market_id;
                 let difference = e.difference;
                 let timer = e.timer;
                 let status = e.status;
-                TimerClock(50);
                 // let price_step = e.step;
+                let step = 1;
+                let loops = Math.round(100 / step);
+                let increment = 360 / loops;
+                let half = Math.round(loops / 2);
+                let barColor = '#ec366b';
+                let backColor = '#feeff4';
+                let nextdeg;
+
                 $('#market-difference-' + market_id).html(timer);
+                $('#market-difference1-' + market_id).html(timer);
+                $('#market-difference2-' + market_id).html(difference);
+                let difference2 = $('#market-difference2-' + market_id).html();
+                if (market_page_id == market_id) {
+                    pie=difference%60;
+                    pie = TimerClock(difference, pie);
+                }
+
+
                 if (status == 1) {
                     waiting_to_open(status, market_id);
                 }
@@ -130,8 +67,8 @@
                 // }
 
 
-
             });
+
 
         function waiting_to_open(status, id) {
             hide_result(id);
@@ -324,6 +261,7 @@
             $('#Winner_Modal-' + id).removeAttr('id');
         }
 
+
     </script>
     <script>
         $(document).ready(function () {
@@ -369,14 +307,148 @@
 
             })
         }
+
+
+        function TimerClock(seconds, pie) {
+            $step = 1;
+            $loops = Math.round(100 / $step);
+            $increment = 360 / $loops;
+            $half = Math.round($loops / 2);
+            $barColor = '#ec366b';
+            $backColor = '#feeff4';
+
+
+            var num = 0;
+
+            var sec = seconds;
+            var lop = sec;
+            console.log('lop: ', lop);
+            var min = parseInt(seconds / 60);
+            console.log('min: ', min);
+            $('.count').text(min);
+            if (min > 0) {
+                $('.count').addClass('min')
+            } else {
+                $('.count').addClass('sec')
+            }
+            console.log('sec: ', sec);
+            if (min > 1) {
+                pie = pie + (100 / (lop / min));
+            } else {
+                pie = pie + (100 / (lop));
+            }
+            if (pie >= 101) {
+                pie = 1;
+            }
+            console.log('pie: ', lop / min);
+            num = (sec / 60).toFixed(2).slice(0, -3);
+            if (num == 0) {
+                $('.count').removeClass('min').addClass('sec').text(sec);
+            } else {
+                $('.count').removeClass('sec').addClass('min').text(num);
+            }
+            //$('.clockk').attr('class','clockk pro-'+pie.toFixed(2).slice(0,-3));
+            //console.log(pie+'__'+sec);
+            $i = (pie.toFixed(2).slice(0, -3)) - 1;
+
+            if ($i < $half) {
+                $nextdeg = (90 + ($increment * $i)) + 'deg';
+                $('.clockk').css({'background-image': 'linear-gradient(90deg,' + $backColor + ' 50%,transparent 50%,transparent),linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+            } else {
+                $nextdeg = (-90 + ($increment * ($i - $half))) + 'deg';
+                $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+            }
+            if (sec == 0) {
+                $('.count').text(0);
+                //$('.clockk').removeAttr('class','clockk pro-100');
+                $('.clockk').removeAttr('style');
+            }
+            return pie;
+        }
+
     </script>
 
+    {{--    //clockk--}}
+    <script>
+        function BlueTimer(difference) {
+            let timeLeft = difference;
 
+            let timer = document.getElementById('timeLeft');
+
+            function isTimeLeft() {
+                return timeLeft > -1;
+            }
+
+            function runTimer(timerElement) {
+                const timerCircle = timerElement.querySelector('svg > circle + circle');
+                timerElement.classList.add('animatable');
+                timerCircle.style.strokeDashoffset = 1;
+
+                let countdownTimer = setInterval(function () {
+                    if (isTimeLeft()) {
+                        const timeRemaining = timeLeft--;
+                        const normalizedTime = (difference - timeRemaining) / difference;
+                        // for clockwise animation
+                        // const normalizedTime = (timeRemaining - 60) / 60;
+                        timerCircle.style.strokeDashoffset = normalizedTime;
+                        timer.innerHTML = timeRemaining;
+                    } else {
+                        clearInterval(countdownTimer);
+                        timerElement.classList.remove('animatable');
+                    }
+                }, 1000);
+            }
+
+            runTimer(document.querySelector('.timer'));
+        }
+    </script>
+    {{--    //clock--}}
 
 @endsection
 
 @section('style')
     <style>
+        /*//timer*/
+
+
+        .timer {
+            margin-top: 10px;
+        }
+
+        .timer > svg {
+            width: 200px;
+            height: 200px;
+        }
+
+        .timer > svg > circle {
+            fill: none;
+            stroke-opacity: 0.3;
+            stroke: #0d6efd;
+            stroke-width: 10;
+            transform-origin: center center;
+            transform: rotate(-90deg);
+        }
+
+        .timer > svg > circle + circle {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+            stroke-linecap: round;
+            stroke-opacity: 1;
+        }
+
+        .timer.animatable > svg > circle + circle {
+            transition: stroke-dashoffset 0.3s ease;
+        }
+
+        .timer > svg > text {
+            font-size: 2rem;
+        }
+
+        .timer > svg > text + text {
+            font-size: 1rem;
+        }
+
+        /*//timer*/
         .commodity-title {
             padding: 10px 82px !important;
             background: #6c757d;
@@ -621,8 +693,24 @@
             <div class="col-12">
                 <div class="clockk-wrap">
                     <div class="clockk pro-0">
-                        <span class="count">0</span>
+                        <span id="market-difference1-{{ $market->id }}">0</span>
+                        <span id="market-difference2-{{ $market->id }}">0</span>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>Time Left</h2>
+                <div class="timer animatable">
+                    <svg>
+                        <circle cx="50%" cy="50%" r="90"/>
+                        <circle cx="50%" cy="50%" r="90" pathLength="1"/>
+                        <text x="100" y="100" text-anchor="middle">
+                            <tspan id="timeLeft"></tspan>
+                        </text>
+                        <text x="100" y="120" text-anchor="middle">seconds</text>
+                    </svg>
                 </div>
             </div>
         </div>
