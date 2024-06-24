@@ -92,6 +92,7 @@ Route::get('/Container_Type', [IndexController::class, 'Container_Type'])->name(
 Route::get('/Flexi_tank', [IndexController::class, 'Flexi_tank'])->name('home.Flexi_tank');
 Route::get('/THC_Included', [IndexController::class, 'THC_Included'])->name('home.THC_Included');
 Route::get('/TargetMarket', [IndexController::class, 'TargetMarket'])->name('home.TargetMarket');
+Route::get('/Destination', [IndexController::class, 'Destination'])->name('home.Destination');
 
 Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix('/admin-panel/management/')->group(function () {
     //dashboard
