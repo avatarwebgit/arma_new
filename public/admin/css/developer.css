@@ -45,11 +45,13 @@
     /*border: 3px solid #b1b1b1;*/
     /*border-radius:14px;*/
     padding: 32px;
+    width: 100% !important;
 }
 
 .show_modal_form_exists_div_btn button{
     background-color: #b1b1b1 !important;
     color: white;
+    margin: 0 10px;
 }
 
 #show_modal_form_exists .modal-footer{
