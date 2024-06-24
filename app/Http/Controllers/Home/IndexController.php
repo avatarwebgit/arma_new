@@ -535,7 +535,7 @@ class IndexController extends Controller
         }
         $items = ['yes','no'];
         foreach ($items as $key => $item) {
-            FlexiTankType::create([
+            THCIncluded::create([
                 'id' => $key + 1,
                 'title' => $item
             ]);
