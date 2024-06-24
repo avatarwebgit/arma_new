@@ -455,7 +455,7 @@ class MarketController extends Controller
             'possible_buyers' => 'nullable',
             'cost_per_unit' => ['required_if:possible_buyers,Yes'],
             'origin_country' => 'required',
-            'origin_port_city' => 'required',
+            'origin_port_city' => 'nullable',
             'origin_more_details' => 'nullable',
             //loading
             'has_loading' => 'nullable',

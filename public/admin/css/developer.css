@@ -35,3 +35,27 @@
     100% {transform: rotate(1turn)}
 }
 
+.cargo-note{
+    font-size: 15px;
+    font-weight: bold;
+    color: #66f;
+}
+
+.show_modal_form_exists_div_btn {
+    /*border: 3px solid #b1b1b1;*/
+    /*border-radius:14px;*/
+    padding: 32px;
+}
+
+.show_modal_form_exists_div_btn button{
+    background-color: #b1b1b1 !important;
+    color: white;
+}
+
+#show_modal_form_exists .modal-footer{
+    padding-bottom: 35px !important;
+}
+
+#show_modal_form_exists .modal-header{
+    padding: 10px !important;
+}

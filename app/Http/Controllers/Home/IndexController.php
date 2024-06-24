@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\ContainerType;
 use App\Models\Country;
 use App\Models\Currency;
+use App\Models\FlexiTankType;
 use App\Models\HeaderCategory;
 use App\Models\HeaderCurencies;
 use App\Models\InspectionPlace;
@@ -18,6 +20,8 @@ use App\Models\Page;
 use App\Models\PlatFom;
 use App\Models\QualityQuantityInspector;
 use App\Models\ShippingTerm;
+use App\Models\TargetMarket;
+use App\Models\THCIncluded;
 use App\Models\ToleranceWeightBy;
 use App\Models\Transaction;
 use App\Models\Units;
@@ -329,11 +333,15 @@ class IndexController extends Controller
         $units = [
             'Mt',
             'St',
+            'L',
+            'Bbl',
+            'Gal',
+            'M',
+            'M3',
+            'Cm3',
             'Kg',
-            'Barrel',
-            'Gallon',
-            'Lb',
-            'other'
+            'Gr',
+            'Other'
         ];
         $items = Units::all();
         foreach ($items as $item) {
@@ -424,7 +432,7 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['discharge port', 'on board vessel', 'factory warehouse', 'load port'];
+        $items = ['Discharge port', 'On Board Vessel', 'Factory Warehouse', 'Load Port'];
         foreach ($items as $key => $item) {
             InspectionPlace::create([
                 'id' => $key + 1,
@@ -441,7 +449,7 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['Skype', 'WatsApp', 'Telegram', 'X (Twitter)', 'LinkedIn'];
+        $items = ['Skype', 'WatsApp', 'Telegram', 'X (Twitter)', 'LinkedIn','Meat','WeChat'];
         foreach ($items as $key => $item) {
             PlatFom::create([
                 'id' => $key + 1,
@@ -475,7 +483,12 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['USD/St', 'USD/Mt', 'Euro/Mt'];
+        $items = ['USD-US Dollar', 'EUR - Euro', 'GBP – British Pond','CAD-Canadian Dollar','AUD-Australian Dollar','JPY Japanese Yen','INR Indian Rupee',
+            'RUB Russian Ruble','SGD-Singapore Dollar','HKD-Hong king Dollar','CNY-Chinese Yuan','BRL-Brazilian Real','AED-Emirati Dirham','KRW South Korean Won',
+            'EGP-Egyptian Pound','TRY-Turkish Lira','SAR-Saudi Arabian Riyal','PKR-Pakistani Rupee','IQD-Iraqi Dinar','KWD- Kuwaiti Dinar','OMR-Omani Rial','QAR-Qatari Riyal',
+            'IRR-Iranian Rial','MZN-Mozambican Metical','LYD-Libyan Dinar','UZS-Uzbekistani Som','TMT-Turkmenistani Manat','AFN-Afghan Afghani','AZN-Azerbaijan Manat','GHS-Ghanaian Cedi',
+            'VES-Venezuelan Bolivar','BCH-Bitcoin Cash','ETH-Ethereum','T-Tether','Other'
+            ];
         foreach ($items as $key => $item) {
             HeaderCurencies::create([
                 'id' => $key + 1,
@@ -484,6 +497,67 @@ class IndexController extends Controller
         }
         dd('Congratulations');
     }
+    public function Container_Type()
+    {
+        $items = ContainerType::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['20 ft','40 ft'];
+        foreach ($items as $key => $item) {
+            ContainerType::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+        dd('Congratulations');
+    }
+    public function Flexi_tank()
+    {
+        $items = FlexiTankType::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['20 ft','40 ft'];
+        foreach ($items as $key => $item) {
+            FlexiTankType::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+        dd('Congratulations');
+    }
+    public function THC_Included()
+    {
+        $items = THCIncluded::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['yes','no'];
+        foreach ($items as $key => $item) {
+            FlexiTankType::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+        dd('Congratulations');
+    }
+    public function TargetMarket()
+    {
+        $items = TargetMarket::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['Open','Exclude Some Countries','Exclusively Countries'];
+        foreach ($items as $key => $item) {
+            TargetMarket::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+        dd('Congratulations');
+    }
+
 
     public function market_more_info(Request $request)
     {

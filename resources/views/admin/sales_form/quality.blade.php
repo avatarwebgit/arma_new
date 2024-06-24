@@ -28,7 +28,7 @@
            class="mb-2">{!! $name.' '.$required_span !!}</label>
     <textarea {{ $required }} id="{{ filed_name($name) }}" type="text"
               name="{{ filed_name($name) }}" class="form-control"
-              placeholder="Please Enter The Product Specification Or Attach As A File">{{ $value }}</textarea>
+              placeholder="Write the Product Specification Or Attach as a File">{{ $value }}</textarea>
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}

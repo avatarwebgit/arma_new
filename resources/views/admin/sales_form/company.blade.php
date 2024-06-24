@@ -3,9 +3,9 @@
     <hr>
 </div>
 <div class="col-12">
-    <strong>
-        Note: ONLY CARGO OWNER Submit
-    </strong>
+    <span class="cargo-note">
+        Note: Only Cargo Owner Can Submit the Sales Offer Form
+    </span>
 </div>
 <div class="col-12 col-md-6 mb-3">
 

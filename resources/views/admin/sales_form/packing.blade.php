@@ -64,12 +64,13 @@
         }
 
     @endphp
-    <input {{ $required }} style="margin-top: 28px"
+    <label for="{{ filed_name($name) }}"
+           class="mb-2">{!! $label.' '.$required_span !!}</label>
+    <input {{ $required }}
            id="{{ filed_name($name) }}"
               type="text"
               name="{{ filed_name($name) }}"
               class="form-control"
-           placeholder="{{ $label }}"
            value="{{ $value }}">
     @error(filed_name($name))
     <p class="input-error-validate">
@@ -105,7 +106,7 @@
     @endphp
     <div>
         <label for="{{ filed_name($name) }}"
-               class="mb-2">{!! 'Packing Picture Of '.$required_span !!}</label>
+               class="mb-2">{!! 'Picture of Packing'.$required_span !!}</label>
         @error(filed_name($name))
         <p class="input-error-validate">
             {{ $message }}

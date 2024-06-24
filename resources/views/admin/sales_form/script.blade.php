@@ -661,7 +661,7 @@
         let name = $(tag).attr('name');
         let value = $(tag).val();
         if (is_yes === 0) {
-            if (value === 'other') {
+            if (value === 'other' || value === 'Other') {
                 let element = createOtherElement(name);
                 $(element).insertAfter($(tag).parent().parent());
             } else {
@@ -717,7 +717,7 @@
         if (value === 'other' || value === 'Contract') {
             let label = '';
             if (value === 'other') {
-                label = 'Contract Details';
+                label = 'Contract Type';
             }
             if (value === 'Contract') {
                 label = 'Duration Months';
@@ -737,7 +737,7 @@
         let field_name = 'exclude_market';
         $('#' + field_name).parent().remove();
 
-        if (value !== 'open') {
+        if (value !== 'Open') {
             let element = '<div class="col-12 col-md-4 mb-3"><label for="' + field_name + `" class="mb-2">${label} Market<span class="text-danger ml-2">*</span></label>` +
                 '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
                 '</div>';
@@ -766,21 +766,25 @@
         let formulla = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="' + id + `" class="mb-2">${field_label}<span class="text-danger">*</span></label>` +
             '<input required id="' + id + `" type="${field_type}" name="` + field_name + '" class="form-control" >' +
             '</div>';
+        let formulla_text = '<div class="col-12 mb-3 price_type_remove">' +
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed lectus. Non nisi est sit amet facilisis magna. Dignissim diam quis enim lobortis scelerisque fermentum. Odio ut enim blandit volutpat maecenas volutpat. Ornare lectus sit amet est placerat in egestas erat. Nisi vitae suscipit tellus mauris a ' +
+            'diam maecenas sed. Placerat duis ultricies lacus sed turpis tincidunt id aliquet. </p>' +
+            '</div>';
         let formulla_operator = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="Operator" class="mb-2">Operator<span class="text-danger">*</span></label>' +
             '<select required id="Operator" type="text" name="Operator" class="form-control" ><option value="+">+</option><option value="-">-</option><option value="-/+">-/+</option></select>' +
             '</div>';
         let alpha = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="alpha" class="mb-2">alpha<span class="text-danger">*</span></label>' +
             '<input required id="alpha" name="alpha" class="form-control" >' +
             '</div>';
-        let more_details = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="formulla_more_details" class="mb-2">More Details<span class="text-danger">*</span></label>' +
+        let more_details = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="formulla_more_details" class="mb-2">More Details</label>' +
             '<input required id="formulla_more_details" name="formulla_more_details" class="form-control" >' +
             '</div>';
-        let base_price_notes = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="base_price_notes" class="mb-2">Base Price Notes<span class="text-danger">*</span></label>' +
+        let base_price_notes = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="base_price_notes" class="mb-2">Base Price</label>' +
             '<input required id="base_price_notes" name="base_price_notes" class="form-control" >' +
             '</div>';
         let element = formulla;
         if (value === 'Formulla') {
-            element = formulla + formulla_operator + alpha + more_details + base_price_notes;
+            element = formulla_text + formulla + formulla_operator + alpha + more_details + base_price_notes;
         }
         $(element).insertAfter($(tag).parent().parent());
     }
@@ -817,8 +821,7 @@
         let value = $(tag).val();
         let field_name = 'transshipment_other';
         if (value === 'Yes') {
-            let element = '<label>More Details</label>' +
-                '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2"><span class="text-danger">*</span></label>` +
+            let element = '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">More Details<span class="text-danger">*</span></label>` +
                 '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control">' +
                 '</div>';
             $(element).insertAfter($(tag).parent().parent().parent());
@@ -858,7 +861,7 @@
 
     function createOtherElement(name) {
         let field_name = name + '_other';
-        return '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">Write Your ${name} <span class="text-danger">*</span></label>` +
+        return '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">New ${name} <span class="text-danger">*</span></label>` +
             '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
             '</div>';
     }
@@ -1130,6 +1133,14 @@
 
         $('#documents_count').val(pass);
     }
+
+    $('#specification').click(function () {
+        $(this).removeAttr('placeholder');
+    });
+
+    $('#specification').blur(function () {
+        $(this).attr('placeholder','Write the Product Specification Or Attach as a File');
+    });
 
     $('select').selectpicker({
         'title': 'Select'

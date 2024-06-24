@@ -120,5 +120,8 @@
                 display: none !important;
             }
         }
+        .text-danger{
+            color: #c20000 !important;
+        }
     </style>
 </head>

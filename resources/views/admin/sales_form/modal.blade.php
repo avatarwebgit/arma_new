@@ -24,15 +24,17 @@
 <div class="modal fade" id="show_modal_form_exists" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="get" action="" class="modal-content">
-            <div class="modal-header">
-
+            <div class="modal-header justify-content-end">
+                    <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"></i>
             </div>
-            <div class="modal-body p-5">
-               Use Previous Sales Form?
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Previous sales Form</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">New sales Form</button>
+{{--            <div class="modal-body p-5">--}}
+{{--               Use Previous Sales Form?--}}
+{{--            </div>--}}
+            <div class="modal-footer justify-content-center">
+               <div class="show_modal_form_exists_div_btn">
+                   <button type="submit" class="btn ">Previous sales Form</button>
+                   <button type="button" class="btn" data-dismiss="modal">New sales Form</button>
+               </div>
             </div>
             <input type="hidden" name="previous_form" id="previous_form">
         </form>

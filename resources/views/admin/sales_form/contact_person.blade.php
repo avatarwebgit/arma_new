@@ -102,7 +102,7 @@
     </p>
     @enderror
 </div>
-<div class="col-12 col-md-1 mb-3">
+<div class="col-12 col-md-2 mb-3">
     @php
         $label='Country code';
         $name='pre code';
@@ -135,7 +135,7 @@
     </p>
     @enderror
 </div>
-<div class="col-12 col-md-3 mb-3">
+<div class="col-12 col-md-4 mb-3">
     @php
         $label='Mobile Phone';
         $name='Contact Person Mobile Phone';
