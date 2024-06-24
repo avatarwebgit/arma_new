@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\ContainerType;
 use App\Models\Country;
 use App\Models\Currency;
+use App\Models\Destination;
 use App\Models\FlexiTankType;
 use App\Models\HeaderCategory;
 use App\Models\HeaderCurencies;
@@ -472,12 +473,11 @@ class IndexController extends Controller
 
     public function header_currency()
     {
-        dd('check_items_in_db');
         $items = HeaderCurencies::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = [''];
+        $items = ['USD/St', 'USD/Mt', 'Euro/Mt'];
         foreach ($items as $key => $item) {
             HeaderCurencies::create([
                 'id' => $key + 1,
@@ -537,9 +537,25 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['Open','Exclude Some Countries','Exclusively Countries'];
+        $items = ['Export Market','Domestic Market Market','Export and Domestic Market'];
         foreach ($items as $key => $item) {
             TargetMarket::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+        dd('Congratulations');
+    }
+
+    public function Destination()
+    {
+        $items = Destination::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['Open','Exclude Some Countries','Exclusively Countries'];
+        foreach ($items as $key => $item) {
+            Destination::create([
                 'id' => $key + 1,
                 'title' => $item
             ]);
