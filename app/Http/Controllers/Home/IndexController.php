@@ -299,25 +299,18 @@ class IndexController extends Controller
 
     public function create_currencies()
     {
-        $currencies = [
-            'U.S.Dollar',
-            'Euro',
-            'Japanese Yen',
-            'British Pound',
-            'Swiss Franc',
-            'Canadian Dollar',
-            'Australian/N.Z. Dollar',
-            'South African Rand',
-            'Derham',
-            'Turkey Lir',
-            'Omani Rial',
-            'Kuwaiti Dinar',
-            'other'
-        ];
+
         $items = Currency::all();
         foreach ($items as $item) {
             $item->delete();
         }
+
+        $currencies = ['USD-US Dollar', 'EUR - Euro', 'GBP – British Pond','CAD-Canadian Dollar','AUD-Australian Dollar','JPY Japanese Yen','INR Indian Rupee',
+            'RUB Russian Ruble','SGD-Singapore Dollar','HKD-Hong king Dollar','CNY-Chinese Yuan','BRL-Brazilian Real','AED-Emirati Dirham','KRW South Korean Won',
+            'EGP-Egyptian Pound','TRY-Turkish Lira','SAR-Saudi Arabian Riyal','PKR-Pakistani Rupee','IQD-Iraqi Dinar','KWD- Kuwaiti Dinar','OMR-Omani Rial','QAR-Qatari Riyal',
+            'IRR-Iranian Rial','MZN-Mozambican Metical','LYD-Libyan Dinar','UZS-Uzbekistani Som','TMT-Turkmenistani Manat','AFN-Afghan Afghani','AZN-Azerbaijan Manat','GHS-Ghanaian Cedi',
+            'VES-Venezuelan Bolivar','BCH-Bitcoin Cash','ETH-Ethereum','T-Tether','Other'
+        ];
         foreach ($currencies as $key => $currency) {
             Currency::create([
                 'id' => $key + 1,
@@ -479,16 +472,12 @@ class IndexController extends Controller
 
     public function header_currency()
     {
+        dd('check_items_in_db');
         $items = HeaderCurencies::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['USD-US Dollar', 'EUR - Euro', 'GBP – British Pond','CAD-Canadian Dollar','AUD-Australian Dollar','JPY Japanese Yen','INR Indian Rupee',
-            'RUB Russian Ruble','SGD-Singapore Dollar','HKD-Hong king Dollar','CNY-Chinese Yuan','BRL-Brazilian Real','AED-Emirati Dirham','KRW South Korean Won',
-            'EGP-Egyptian Pound','TRY-Turkish Lira','SAR-Saudi Arabian Riyal','PKR-Pakistani Rupee','IQD-Iraqi Dinar','KWD- Kuwaiti Dinar','OMR-Omani Rial','QAR-Qatari Riyal',
-            'IRR-Iranian Rial','MZN-Mozambican Metical','LYD-Libyan Dinar','UZS-Uzbekistani Som','TMT-Turkmenistani Manat','AFN-Afghan Afghani','AZN-Azerbaijan Manat','GHS-Ghanaian Cedi',
-            'VES-Venezuelan Bolivar','BCH-Bitcoin Cash','ETH-Ethereum','T-Tether','Other'
-            ];
+        $items = [''];
         foreach ($items as $key => $item) {
             HeaderCurencies::create([
                 'id' => $key + 1,
