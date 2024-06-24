@@ -443,7 +443,8 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['Skype', 'WatsApp', 'Telegram', 'X (Twitter)', 'LinkedIn','Meet','WeChat'];
+        $items = ['Skype', 'WatsApp', 'Telegram', 'X (Twitter)', 'LinkedIn','Meet',
+            'WeChat'];
         foreach ($items as $key => $item) {
             PlatFom::create([
                 'id' => $key + 1,
