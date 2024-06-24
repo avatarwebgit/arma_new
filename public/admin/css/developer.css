@@ -46,6 +46,8 @@
     /*border-radius:14px;*/
     padding: 32px;
     width: 100% !important;
+    display: flex;
+    justify-content: center;
 }
 
 .show_modal_form_exists_div_btn button{
