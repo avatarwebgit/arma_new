@@ -442,8 +442,8 @@ class FormController extends Controller
             'formulla' => ['required_if:price_type,Formulla'],
             'Operator' => ['required_if:price_type,Formulla'],
             'alpha' => ['required_if:price_type,Formulla'],
-            'formulla_more_details' => ['required_if:price_type,Formulla'],
-            'base_price_notes' => ['required_if:price_type,Formulla'],
+            'formulla_more_details' => ['nullable'],
+            'base_price_notes' => ['nullable'],
             'price' => ['required_if:price_type,Fix'],
 
             'payment_term' => 'required',
@@ -457,7 +457,7 @@ class FormController extends Controller
             'possible_buyers' => 'nullable',
             'cost_per_unit' => ['required_if:possible_buyers,Yes'],
             'origin_country' => 'required',
-            'origin_port_city' => 'required',
+            'origin_port_city' => 'nullable',
             'origin_more_details' => 'nullable',
             //loading
             'has_loading' => 'nullable',

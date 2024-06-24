@@ -18,7 +18,7 @@
             </label>
         </div>
         @php
-            $name='Packing Lis';
+            $name='Packing List';
         @endphp
         <div class="form-check">
             <input onchange="documentOptions()" class="form-check-input" type="checkbox" value="{{ filed_name($name) }}" id="{{ filed_name($name) }}">
@@ -96,7 +96,7 @@
             </label>
         </div>
         @php
-            $name='Cargo Manifes';
+            $name='Cargo Manifest';
         @endphp
         <div class="form-check">
             <input onchange="documentOptions()" class="form-check-input" type="checkbox" value="{{ filed_name($name) }}" id="{{ filed_name($name) }}">
