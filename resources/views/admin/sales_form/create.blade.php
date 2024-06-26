@@ -123,6 +123,17 @@
                 margin: 1.75rem auto;
             }
         }
+        .disabled{
+            background: #c6c6c6;
+            color: black;
+        }
+        #NeedToSubmitModal .modal-footer > button{
+            background: white !important;
+            color: black !important;
+            border: 1px solid black;
+            margin: 5px 16px;
+            width: 140px;
+        }
     </style>
 @endpush
 

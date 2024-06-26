@@ -7,6 +7,7 @@
                    <h3>
                        Preview Sales Form Offer
                    </h3>
+                <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"></i>
 
             </div>
             <div id="modal_body" class="modal-body p-5 row">
@@ -14,8 +15,9 @@
             </div>
             <div class="modal-footer">
                 <input id="modal_form_id" type="hidden" value="">
-                <button onclick="CloseModal()" type="button" class="btn btn-primary" data-dismiss="modal">I Need To More Edit</button>
-                <button onclick="Final_Submit()" type="button" class="btn btn-success">Final Submit</button>
+                <button onclick="CloseModal()"   type="button"  data-dismiss="modal">Cancel</button>
+                <button onclick="CloseModal()"   type="button"  data-dismiss="modal">Edit</button>
+                <button onclick="Final_Submit()" type="button">Send</button>
             </div>
         </div>
     </div>
