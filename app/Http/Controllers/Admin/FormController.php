@@ -488,7 +488,7 @@ class FormController extends Controller
             'discharging_more_details' => 'nullable',
             //destination
             'destination' => 'nullable',
-            'exclude_market' => ['required_unless:destination,open'],
+            'exclude_market' => ['required_unless:destination,Open'],
             'target_market' => 'nullable',
             //inspection
             'quality_quantity_inspection' => 'required',
