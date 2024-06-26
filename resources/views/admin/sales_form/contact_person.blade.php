@@ -126,15 +126,20 @@
     @endphp
     <label for="{{ filed_name($name) }}"
            class="mb-2">{!! $label.$required_span !!}</label>
-    <input {{ $required }} id="{{ filed_name($name) }}"
-           name="{{ filed_name($name) }}" class="form-control" type="number"
-           value="{{ $value }}">
+    <select onchange="hasOther(this)"
+            {{ $required }} id="{{ filed_name($name) }}" type="text"
+            name="{{ filed_name($name) }}" class="form-control" data-live-search="true">
+        @foreach($countries as $key=>$item)
+            <option value="{{ $item->telephonePrefix }}"  {{ $value==$item->telephonePrefix ? 'selected' : '' }} >{{ $item->telephonePrefix }}</option>
+        @endforeach
+    </select>
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}
     </p>
     @enderror
 </div>
+
 <div class="col-12 col-md-4 mb-3">
     @php
         $label='Mobile Phone';

@@ -125,15 +125,19 @@
                     </ul>
                 </li>
 
-                    <li class="dash-item dash-hasmenu {{ request()->is('mailtemplate*') || request()->is('sms-template*') || request()->is('manage-language*') || request()->is('create-language*') || request()->is('settings*') ? 'active dash-trigger' : 'collapsed' }} || {{ request()->is('create-language*') || request()->is('settings*') ? 'active' : '' }}">
+                    <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/settings*') ? 'active' : '' }}">
                         <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-apps"></i></span><span
                                 class="dash-mtext">{{ __('Setting') }}</span><span class="dash-arrow"><i
                                     data-feather="chevron-right"></i></span></a>
                         <ul class="dash-submenu">
 
 
-                            <li class="dash-item {{ request()->is('settings*') ? 'active' : '' }}">
+                            <li class="dash-item {{ request()->is('admin-panel/management/settings*') ? 'active' : '' }}">
                                 <a class="dash-link" href="{{ route('admin.settings.index') }}">{{ __('Settings') }}</a>
+                            </li>
+
+                            <li class="dash-item {{ request()->is('admin-panel/management/settings/currenc*') ? 'active' : '' }}">
+                                <a class="dash-link" href="{{ route('admin.currencies.index') }}">{{ __('Currencies') }}</a>
                             </li>
 
                         </ul>

@@ -47,7 +47,7 @@ class RegisterController extends Controller
     {
         $types = Type::where('id', '!=', 1)->get();
         $commodities = Commodity::all();
-        $countries = Country::all();
+        $countries = Country::OrderBy('countryName','asc')->get();
         $companyFunction = CompanyFunction::all();
         $salutation= Salutation::all();
         return view('auth.register', compact('types', 'commodities','countries','companyFunction','salutation'));

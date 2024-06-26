@@ -168,13 +168,14 @@ class MarketController extends Controller
             $route = route('admin.market.sale_form.update_or_store', ['item' => $item]);
             $form = SalesOfferForm::where('id', $item)->first();
         }
+
         $company_types = CompanyType::all();
         $unites = Units::all();
         $currencies = Currency::all();
         $tolerance_weight_by = ToleranceWeightBy::all();
         $Incoterms = Incoterms::all();
         $incoterms_version = IncotermsVersion::all();
-        $countries = Country::all();
+        $countries = Country::OrderBy('countryName','asc')->get();
         $priceTypes = PriceType::all();
         $paymentTerms = PaymentTerm::all();
         $packing = Packing::all();

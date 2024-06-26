@@ -124,8 +124,8 @@
                 name="{{ filed_name($name) }}" class="form-control ">
             @foreach($countries as $item)
                 <option
-                    {{ $value==$item->title ? ' selected="selected"' : '' }}
-                    value="{{ $item->title }}">{{ $item->title }}</option>
+                    {{ $value==$item->countryName ? ' selected="selected"' : '' }}
+                    value="{{ $item->countryName }}">{{ $item->countryName }}</option>
             @endforeach
         </select>
         @error(filed_name($name))
