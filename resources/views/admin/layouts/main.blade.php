@@ -223,6 +223,7 @@
 <script src="{{ asset('assets/js/pages/form-validation.js') }}"></script>
 <script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('admin/js/bootstrap-clockpicker.min.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
 
 @if (!empty(setting('gtag')))
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('gtag') }}"></script>

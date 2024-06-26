@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Admin\CKEditorController;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FormController;
 use App\Http\Controllers\Admin\Header1Controller;
@@ -98,6 +99,14 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::middleware('permission:header-setting')->group(function () {
+        Route::get('settings/currencies/index', [CurrencyController::class, 'index'])->name('currencies.index');
+        Route::get('settings/currency/create', [CurrencyController::class, 'create'])->name('currency.create');
+        Route::post('settings/currency/store', [CurrencyController::class, 'store'])->name('currency.store');
+        Route::get('settings/currency/edit/{currency}', [CurrencyController::class, 'edit'])->name('currency.edit');
+        Route::put('settings/currency/update/{currency}', [CurrencyController::class, 'update'])->name('currency.update');
+        Route::post('settings/currency/remove/{id}', [CurrencyController::class, 'remove'])->name('currency.remove');
+
+
         Route::get('setting/header1', [Header1Controller::class, 'index'])->name('header1.index');
         Route::get('setting/header1/create/{cat}', [Header1Controller::class, 'create'])->name('header1.create');
         Route::post('setting/header1/store', [Header1Controller::class, 'store'])->name('header1.store');

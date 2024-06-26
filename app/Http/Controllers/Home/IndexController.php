@@ -254,6 +254,7 @@ class IndexController extends Controller
 
     public function create_countries()
     {
+        dd('nooooo');
         $countries = [
             'United States', 'Singapore', 'South Africa',
             'China', 'Austria', 'Slovenia', 'Tajikistan',

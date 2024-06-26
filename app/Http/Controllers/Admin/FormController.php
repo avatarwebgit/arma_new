@@ -77,8 +77,9 @@ class FormController extends Controller
     public function sales_form($page_type = 'Create', $item = 'null')
     {
         $role = \auth()->user()->Roles()->first()->name;
-        session()->forget('form_id_exists');
+//        session()->forget('form_id_exists');
         $sale_form_exist = 0;
+        $previous_form_id=false;
         $route = route('sale_form.update_or_store');
         $form = [];
         if ($page_type === 'Create') {
@@ -86,9 +87,7 @@ class FormController extends Controller
                 $sale_form_exist = 1;
                 $form = SalesOfferForm::where('id', $_GET['previous_form'])->first();
             } else {
-
                 $form_exist = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 1)->exists();
-
                 if ($form_exist) {
                     $sale_form_exist = 1;
                     $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 1)->latest()->first();
@@ -98,18 +97,17 @@ class FormController extends Controller
                     if ($form_exist) {
                         $sale_form_exist = 0;
                         $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 1)->latest()->first();
-                        session()->flash('form_id_exists', $form->id);
+                        $previous_form_id=$form->id;
                         $form = [];
                     }
                 }
             }
-
-
         }
         if ($page_type === 'Edit') {
             $sale_form_exist = 1;
             $route = route('sale_form.update_or_store', ['item' => $item]);
             $form = SalesOfferForm::where('id', $item)->first();
+
         }
         $company_types = CompanyType::all();
         $unites = Units::all();
@@ -117,7 +115,7 @@ class FormController extends Controller
         $tolerance_weight_by = ToleranceWeightBy::all();
         $Incoterms = Incoterms::all();
         $incoterms_version = IncotermsVersion::all();
-        $countries = Country::all();
+        $countries = Country::OrderBy('countryName','asc')->get();
         $priceTypes = PriceType::all();
         $paymentTerms = PaymentTerm::all();
         $packing = Packing::all();
@@ -158,7 +156,8 @@ class FormController extends Controller
             'contract_types',
             'platforms',
             'item',
-            'role'
+            'role',
+            'previous_form_id'
         ));
     }
 
@@ -314,7 +313,7 @@ class FormController extends Controller
         $tolerance_weight_by = ToleranceWeightBy::all();
         $Incoterms = Incoterms::all();
         $incoterms_version = IncotermsVersion::all();
-        $countries = Country::all();
+        $countries = Country::OrderBy('countryName','asc')->get();
         $priceTypes = PriceType::all();
         $paymentTerms = PaymentTerm::all();
         $packing = Packing::all();

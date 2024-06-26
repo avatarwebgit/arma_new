@@ -1,12 +1,13 @@
-<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
 <!-- MDB -->
 <script>
     $(document).ready(function () {
         @if(session()->exists('need_submit'))
         show_submit_modal();
         @endif
-        @if(session()->exists('form_id_exists'))
-        show_modal_form_exists();
+
+        @if(!$previous_form_id==false)
+        let previous_form_id = '{{ $previous_form_id }}';
+        show_modal_form_exists(previous_form_id);
         @endif
         check_unit();
         check_currency();
@@ -92,10 +93,9 @@
         })
     }
 
-    function show_modal_form_exists() {
+    function show_modal_form_exists(previous_form) {
         let show_modal_form_exists = $('#show_modal_form_exists');
         show_modal_form_exists.modal('show');
-        let previous_form = {{ session()->exists('form_id_exists')?session()->get('form_id_exists'):0 }};
         $('#previous_form').val(previous_form);
     }
 
@@ -1139,10 +1139,11 @@
     });
 
     $('#specification').blur(function () {
-        $(this).attr('placeholder','Write the Product Specification Or Attach as a File');
+        $(this).attr('placeholder', 'Write the Product Specification Or Attach as a File');
     });
 
     $('select').selectpicker({
         'title': 'Select'
     });
+
 </script>
