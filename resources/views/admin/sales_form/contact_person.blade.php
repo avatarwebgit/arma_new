@@ -130,7 +130,7 @@
             {{ $required }} id="{{ filed_name($name) }}" type="text"
             name="{{ filed_name($name) }}" class="form-control" data-live-search="true">
         @foreach($countries as $key=>$item)
-            <option value="{{ $item->telephonePrefix }}"  {{ $value==$item->telephonePrefix ? 'selected' : '' }} >{{ $item->telephonePrefix }}</option>
+            <option value="{{ $item->telephonePrefix }}" {{ $value==$item->telephonePrefix ? 'selected' : '' }} >{{ $item->telephonePrefix.' ('.$item->countryName.')' }}</option>
         @endforeach
     </select>
     @error(filed_name($name))

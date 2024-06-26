@@ -53,14 +53,18 @@
     function show_submit_modal() {
         let Sales_offer_form_html = $('#sales_offer_form_inputs').html();
         $('#modal_body').html(Sales_offer_form_html);
-        $('#modal_body').find('input').prop('disabled', true);
-        $('#modal_body').find('textarea').prop('disabled', true);
-        $('#modal_body').find('select').prop('disabled', true);
-        $('#modal_body').find('button').prop('disabled', true);
         let id = '{{ $item }}';
         $('#modal_form_id').val(id);
         let NeedToSubmitModal = $('#NeedToSubmitModal');
         NeedToSubmitModal.modal('show');
+        setTimeout(function () {
+            $('#modal_body').find('input').prop('disabled', true);
+            $('#modal_body').find('textarea').prop('disabled', true);
+            $('#modal_body').find('select').prop('disabled', true);
+            $('#modal_body').find('button').prop('disabled', true);
+            $('#modal_body').find('.bootstrap-select').addClass('disabled');
+            $('#NeedToSubmitModal #currency_other').addClass('disabled');
+        });
     }
 
     function show_page() {
