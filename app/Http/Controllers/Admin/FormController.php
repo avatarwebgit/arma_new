@@ -487,7 +487,7 @@ class FormController extends Controller
             'discharging_flexi_tank_thc_included' => 'nullable',
             'discharging_more_details' => 'nullable',
             //destination
-            'destination' => 'nullable',
+            'destination' => 'required',
             'exclude_market' => ['required_unless:destination,Open'],
             'target_market' => 'nullable',
             //inspection
