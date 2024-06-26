@@ -45,7 +45,7 @@
                                         </td>
                                         <td>
                                             <div class="text-left position-relative">
-                                                <img width="100" alt="banner"
+                                                <img alt="banner"
                                                      src="{{ imageExist(env('UPLOAD_IMAGE_CURRENCY'),$item->image) }}">
                                             </div>
                                         </td>

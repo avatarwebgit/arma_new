@@ -19,7 +19,7 @@
 
             <div class="form-group col-12">
                 <div class="text-center">
-                    <img width="100" alt="banner"
+                    <img alt="banner"
                          src="{{ imageExist(env('UPLOAD_IMAGE_CURRENCY'),$currency->image) }}">
                 </div>
                 <hr>
