@@ -6,7 +6,7 @@
     <th>Commodity</th>
     <th>User</th>
     <th>Status</th>
-    <th>Actions</th>
+    <th></th>
 </tr>
 </thead>
 <tbody>

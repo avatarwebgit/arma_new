@@ -43,7 +43,7 @@
                                         @endif
                                         {{--                                        //approved--}}
                                         @if($status==6)
-                                            @include('admin.sales_form.cash_pending_list')
+                                            @include('admin.sales_form.preparation_list')
                                         @endif
 
                                     </table>
