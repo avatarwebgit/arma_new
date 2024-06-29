@@ -58,8 +58,8 @@ class MarketController extends Controller
 
     public function create($market_data)
     {
-        $sales_offer_form = SalesOfferForm::where('status', 5)->get();
-        return view('admin.markets.create', compact('sales_offer_form','market_data'));
+        $sales_offer_form = SalesOfferForm::where('status', 5)->where('used_in_market', 0)->get();
+        return view('admin.markets.create', compact('sales_offer_form', 'market_data'));
     }
 
     public function store(Request $request)
@@ -77,10 +77,12 @@ class MarketController extends Controller
             'q_1' => 'required',
             'q_2' => 'required',
             'q_3' => 'required',
-            'alpha' => $request->show_alpha==1 ?'required' : '',
+            'alpha' => $request->show_alpha == 1 ? 'required' : '',
             'term_conditions' => 'nullable',
             'show_alpha' => 'required',
         ]);
+        $sales_form = SalesOfferForm::where('id', $request->commodity_id)->first();
+        $sales_form->update(['used_in_market' => 1]);
         $market = Market::create($request->all());
         $this->statusTimeMarket($market, 1);
         $now = Carbon::now();
@@ -92,7 +94,7 @@ class MarketController extends Controller
 
     public function edit(Market $market)
     {
-        $sales_offer_form  = SalesOfferForm::where('status', 5)->get();
+        $sales_offer_form = SalesOfferForm::where('status', 5)->get();
         return view('admin.markets.edit', compact('market', 'sales_offer_form'));
     }
 
@@ -112,9 +114,9 @@ class MarketController extends Controller
     public function update(Market $market, Request $request)
     {
         $request->validate([
-            'date' => 'required|date',
+//            'date' => 'required|date',
             'time' => 'required',
-            'commodity_id' => 'required',
+//            'commodity_id' => 'required',
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
             'market_value' => 'required',
@@ -124,7 +126,7 @@ class MarketController extends Controller
             'q_1' => 'required',
             'q_2' => 'required',
             'q_3' => 'required',
-            'alpha' => $request->show_alpha==1 ?'required' : '',
+            'alpha' => $request->show_alpha == 1 ? 'required' : '',
             'term_conditions' => 'nullable',
             'show_alpha' => 'required',
         ]);
@@ -175,7 +177,7 @@ class MarketController extends Controller
         $tolerance_weight_by = ToleranceWeightBy::all();
         $Incoterms = Incoterms::all();
         $incoterms_version = IncotermsVersion::all();
-        $countries = Country::OrderBy('countryName','asc')->get();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
         $priceTypes = PriceType::all();
         $paymentTerms = PaymentTerm::all();
         $packing = Packing::all();
@@ -258,31 +260,31 @@ class MarketController extends Controller
         $change_time = $request->change_time;
         $bid_deposit_text_area = $request->bid_deposit_text_area;
         $term_conditions = $request->term_conditions;
-        $bid_use=$request->bid_use;
-        $Bid_Instructions_link=$request->Bid_Instructions_link;
-        $gtc_use=$request->gtc_use;
-        $gtc_Link=$request->gtc_Link;
+        $bid_use = $request->bid_use;
+        $Bid_Instructions_link = $request->Bid_Instructions_link;
+        $gtc_use = $request->gtc_use;
+        $gtc_Link = $request->gtc_Link;
 
 
-        if ($request->has('Bid_Instructions_file')){
-            $file_name=$request->Bid_Instructions_file;
+        if ($request->has('Bid_Instructions_file')) {
+            $file_name = $request->Bid_Instructions_file;
             $env = env('UPLOAD_SETTING');
             $fileNameImage = generateFileName($file_name->getClientOriginalName());
             $file_name->move(public_path($env), $fileNameImage);
-            $Bid_Instructions_file=$fileNameImage;
-        }else{
-            $item=MarketSetting::where('key', 'Bid_Instructions_file')->first();
-            $Bid_Instructions_file=$item->value;
+            $Bid_Instructions_file = $fileNameImage;
+        } else {
+            $item = MarketSetting::where('key', 'Bid_Instructions_file')->first();
+            $Bid_Instructions_file = $item->value;
         }
-        if ($request->has('gtc_file')){
-            $file_name=$request->gtc_file;
+        if ($request->has('gtc_file')) {
+            $file_name = $request->gtc_file;
             $env = env('UPLOAD_SETTING');
             $fileNameImage = generateFileName($file_name->getClientOriginalName());
             $file_name->move(public_path($env), $fileNameImage);
-            $gtc_file=$fileNameImage;
-        }else{
-            $item=MarketSetting::where('key', 'gtc_file')->first();
-            $gtc_file=$item->value;
+            $gtc_file = $fileNameImage;
+        } else {
+            $item = MarketSetting::where('key', 'gtc_file')->first();
+            $gtc_file = $item->value;
         }
         $array = [
             'ready_to_open' => $ready_to_open,
@@ -301,10 +303,10 @@ class MarketController extends Controller
             'gtc_file' => $gtc_file,
         ];
         foreach ($array as $key => $val) {
-            $item=MarketSetting::where('key', $key)->first();
-            if ($item){
+            $item = MarketSetting::where('key', $key)->first();
+            if ($item) {
                 $item->update(['value' => $val]);
-            }else{
+            } else {
                 MarketSetting::create([
                     'key' => $key,
                     'value' => $val
