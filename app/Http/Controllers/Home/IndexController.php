@@ -539,7 +539,7 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['yes', 'no'];
+        $items = ['Yes', 'No'];
         foreach ($items as $key => $item) {
             THCIncluded::create([
                 'id' => $key + 1,

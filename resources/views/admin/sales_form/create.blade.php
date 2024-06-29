@@ -12,7 +12,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div>
+
                                         @if ($sale_form_exist==1)
+                                            @if($form->is_complete===1)
+                                                <a href="{{ route('admin.sales_form.index',['status'=>$form->Status->id]) }}" class="btn btn-dark mb-3">
+                                                    Back
+                                                </a>
+                                            @endif
+
                                             <div>
                                                 <p>No: {{ $form->unique_number }}</p>
                                                 <p>Date: {{ $form->created_at->format('Y-M-d') }}</p>
