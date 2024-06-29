@@ -56,10 +56,10 @@ class MarketController extends Controller
         return view('admin.markets.folder', compact('markets', 'date'));
     }
 
-    public function create()
+    public function create($market_data)
     {
         $sales_offer_form = SalesOfferForm::where('status', 5)->get();
-        return view('admin.markets.create', compact('sales_offer_form'));
+        return view('admin.markets.create', compact('sales_offer_form','market_data'));
     }
 
     public function store(Request $request)

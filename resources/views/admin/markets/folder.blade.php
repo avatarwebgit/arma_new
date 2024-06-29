@@ -21,8 +21,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-md-12 mb-3">
+
                                     <a href="{{ route('admin.markets.index') }}" class="btn btn-sm btn-dark">
                                         Back
+                                    </a>
+                                    <a href="{{ route('admin.market.create',['market_data'=>$date]) }}" class="btn btn-sm btn-success">
+                                        Create
                                     </a>
                                     {{--                                        <a href="{{ route('admin.market.create') }}" class="btn btn-primary btn-sm">--}}
                                     {{--                                            Create--}}
@@ -86,18 +90,18 @@
                                                         </a>
                                                         <a title="Edit Commodity"
                                                            href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
-                                                           class="btn btn-sm btn-primary">
+                                                           class="btn btn-sm btn-primary" style="margin-right: 20px">
                                                             <i class="fa fa-list"></i>
                                                             Commodity
                                                         </a>
-                                                        <button type="button" title="Copy Market"
-                                                                onclick="copyMarket({{ $item->id }},this)"
-                                                                class="btn btn-sm btn-secondary">
-                                                            <div class="loader d-none"></div>
-                                                            <span>
-                                                                Copy
-                                                            </span>
-                                                        </button>
+{{--                                                        <button type="button" title="Copy Market"--}}
+{{--                                                                onclick="copyMarket({{ $item->id }},this)"--}}
+{{--                                                                class="btn btn-sm btn-secondary">--}}
+{{--                                                            <div class="loader d-none"></div>--}}
+{{--                                                            <span>--}}
+{{--                                                                Copy--}}
+{{--                                                            </span>--}}
+{{--                                                        </button>--}}
 
                                                         {!! Form::open([
 'method' => 'POST',

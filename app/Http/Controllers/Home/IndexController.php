@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Models\Currency;
 use App\Models\Destination;
 use App\Models\FlexiTankType;
+use App\Models\FormStatus;
 use App\Models\HeaderCategory;
 use App\Models\HeaderCurencies;
 use App\Models\InspectionPlace;
@@ -36,7 +37,18 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $is_logged_in=0;
+        $form_status = FormStatus::where('id', 1)->first();
+        $form_status->update([
+            'title' => 'Waiting'
+        ]);
+        $form_status = FormStatus::where('title', 'preparation')->first();
+        if (!$form_status) {
+            FormStatus::create([
+                'id' => 6,
+                'title' => 'preparation',
+            ]);
+        }
+        $is_logged_in = 0;
         $is_logged_in = session()->exists('is_logged_in');
         session()->forget('is_logged_in');
         $get_change_time_exists = MarketSetting::where('key', 'change_time')->exists();
@@ -307,11 +319,11 @@ class IndexController extends Controller
             $item->delete();
         }
 
-        $currencies = ['USD-US Dollar', 'EUR - Euro', 'GBP – British Pond','CAD-Canadian Dollar','AUD-Australian Dollar','JPY Japanese Yen','INR Indian Rupee',
-            'RUB Russian Ruble','SGD-Singapore Dollar','HKD-Hong king Dollar','CNY-Chinese Yuan','BRL-Brazilian Real','AED-Emirati Dirham','KRW South Korean Won',
-            'EGP-Egyptian Pound','TRY-Turkish Lira','SAR-Saudi Arabian Riyal','PKR-Pakistani Rupee','IQD-Iraqi Dinar','KWD- Kuwaiti Dinar','OMR-Omani Rial','QAR-Qatari Riyal',
-            'IRR-Iranian Rial','MZN-Mozambican Metical','LYD-Libyan Dinar','UZS-Uzbekistani Som','TMT-Turkmenistani Manat','AFN-Afghan Afghani','AZN-Azerbaijan Manat','GHS-Ghanaian Cedi',
-            'VES-Venezuelan Bolivar','BCH-Bitcoin Cash','ETH-Ethereum','T-Tether','Other'
+        $currencies = ['USD-US Dollar', 'EUR - Euro', 'GBP – British Pond', 'CAD-Canadian Dollar', 'AUD-Australian Dollar', 'JPY Japanese Yen', 'INR Indian Rupee',
+            'RUB Russian Ruble', 'SGD-Singapore Dollar', 'HKD-Hong king Dollar', 'CNY-Chinese Yuan', 'BRL-Brazilian Real', 'AED-Emirati Dirham', 'KRW South Korean Won',
+            'EGP-Egyptian Pound', 'TRY-Turkish Lira', 'SAR-Saudi Arabian Riyal', 'PKR-Pakistani Rupee', 'IQD-Iraqi Dinar', 'KWD- Kuwaiti Dinar', 'OMR-Omani Rial', 'QAR-Qatari Riyal',
+            'IRR-Iranian Rial', 'MZN-Mozambican Metical', 'LYD-Libyan Dinar', 'UZS-Uzbekistani Som', 'TMT-Turkmenistani Manat', 'AFN-Afghan Afghani', 'AZN-Azerbaijan Manat', 'GHS-Ghanaian Cedi',
+            'VES-Venezuelan Bolivar', 'BCH-Bitcoin Cash', 'ETH-Ethereum', 'T-Tether', 'Other'
         ];
         foreach ($currencies as $key => $currency) {
             Currency::create([
@@ -444,7 +456,7 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['Skype', 'WatsApp', 'Telegram', 'X (Twitter)', 'LinkedIn','Meet',
+        $items = ['Skype', 'WatsApp', 'Telegram', 'X (Twitter)', 'LinkedIn', 'Meet',
             'WeChat'];
         foreach ($items as $key => $item) {
             PlatFom::create([
@@ -488,13 +500,14 @@ class IndexController extends Controller
         }
         dd('Congratulations');
     }
+
     public function Container_Type()
     {
         $items = ContainerType::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['20 ft','40 ft'];
+        $items = ['20 ft', '40 ft'];
         foreach ($items as $key => $item) {
             ContainerType::create([
                 'id' => $key + 1,
@@ -503,13 +516,14 @@ class IndexController extends Controller
         }
         dd('Congratulations');
     }
+
     public function Flexi_tank()
     {
         $items = FlexiTankType::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['20 ft','40 ft'];
+        $items = ['20 ft', '40 ft'];
         foreach ($items as $key => $item) {
             FlexiTankType::create([
                 'id' => $key + 1,
@@ -518,13 +532,14 @@ class IndexController extends Controller
         }
         dd('Congratulations');
     }
+
     public function THC_Included()
     {
         $items = THCIncluded::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['yes','no'];
+        $items = ['yes', 'no'];
         foreach ($items as $key => $item) {
             THCIncluded::create([
                 'id' => $key + 1,
@@ -533,13 +548,14 @@ class IndexController extends Controller
         }
         dd('Congratulations');
     }
+
     public function TargetMarket()
     {
         $items = TargetMarket::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['Export Market','Domestic Market Market','Export and Domestic Market'];
+        $items = ['Export Market', 'Domestic Market Market', 'Export and Domestic Market'];
         foreach ($items as $key => $item) {
             TargetMarket::create([
                 'id' => $key + 1,
@@ -555,7 +571,7 @@ class IndexController extends Controller
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['Open','Exclude Some Countries','Exclusively Countries'];
+        $items = ['Open', 'Exclude Some Countries', 'Exclusively Countries'];
         foreach ($items as $key => $item) {
             Destination::create([
                 'id' => $key + 1,
@@ -569,9 +585,9 @@ class IndexController extends Controller
     public function market_more_info(Request $request)
     {
         $market_id = $request->market_id;
-        $market=Market::where('id', $market_id)->first();
-        $html=view('home.partials.market_more',compact('market'))->render();
-        return response()->json([1,$html]);
+        $market = Market::where('id', $market_id)->first();
+        $html = view('home.partials.market_more', compact('market'))->render();
+        return response()->json([1, $html]);
     }
 
 }

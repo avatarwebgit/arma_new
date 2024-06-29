@@ -134,6 +134,18 @@
             margin: 5px 16px;
             width: 140px;
         }
+        .form-control:disabled,
+        .custom-select:disabled,
+        .dataTable-selector:disabled,
+        .dataTable-input:disabled,
+        .form-control[readonly],
+        .custom-select[readonly],
+        .dataTable-selector[readonly],
+        .dataTable-input[readonly] {
+            background-color: #ffffff !important;
+            opacity: 1;
+            color: #606060;
+        }
     </style>
 @endpush
 

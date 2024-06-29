@@ -1,11 +1,13 @@
 <!-- MDB -->
+<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
+
 <script>
-    $(document).ready(function () {
+    $(document).ready(function (){
         @if(session()->exists('need_submit'))
         show_submit_modal();
         @endif
 
-        @if(!$previous_form_id==false)
+        @if(isset($previous_form_id) && !$previous_form_id==false)
         let previous_form_id = '{{ $previous_form_id }}';
         show_modal_form_exists(previous_form_id);
         @endif
@@ -1145,6 +1147,7 @@
     $('#specification').blur(function () {
         $(this).attr('placeholder', 'Write the Product Specification Or Attach as a File');
     });
+
 
     $('select').selectpicker({
         'title': 'Select'

@@ -230,7 +230,7 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
     //Markets
     Route::get('markets', [MarketController::class, 'index'])->name('markets.index');
     Route::get('markets/folder/{date}', [MarketController::class, 'folder'])->name('markets.folder');
-    Route::get('market/create', [MarketController::class, 'create'])->name('market.create');
+    Route::get('market/create/{market_data}', [MarketController::class, 'create'])->name('market.create');
     Route::post('market/store', [MarketController::class, 'store'])->name('market.store');
     Route::get('market/{market}/edit', [MarketController::class, 'edit'])->name('market.edit');
     Route::post('market/remove', [MarketController::class, 'remove'])->name('market.remove');
@@ -245,14 +245,18 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
     Route::post('market/FolderMarketRemove/{date}', [MarketController::class, 'FolderMarketRemove'])->name('market.folder.remove');
     Route::get('/sales_form/index/{status}', [FormController::class, 'sales_form_index'])->name('sales_form.index');
     Route::post('/sales_form/remove', [FormController::class, 'sales_form_remove'])->name('sales_form.remove');
-    Route::post('/Final_Submit', [FormController::class, 'Final_Submit'])->name('Final_Submit');
+
 });
+
+Route::post('admin-panel/management/Final_Submit', [FormController::class, 'Final_Submit'])->name('admin.Final_Submit');
 
 //SaleForm
 Route::get('/sale_form/{page_type?}/{item?}', [FormController::class, 'sales_form'])->name('sale_form');
 Route::post('/sales_form/update_or_store/{item?}', [FormController::class, 'sales_form_update_or_store'])->name('sale_form.update_or_store');
 Route::post('/sales_form_change_status/', [FormController::class, 'change_status'])->name('sale_form.change_status');
+Route::post('/UpdateCashPending/', [FormController::class, 'UpdateCashPending'])->name('sale_form.UpdateCashPending');
 Route::get('sales_offer/show/{id}', [FormController::class, 'sales_form_show'])->name('sale_form.show');
+Route::get('sales_offer/edit/{id}', [FormController::class, 'sales_form_edit'])->name('sale_form.edit');
 //seller
 Route::name('seller.')->prefix('/seller/')->middleware(['seller', 'prevent.concurrent.login'])->group(function () {
     Route::get('dashboard', [SellerController::class, 'dashboard'])->name('dashboard');

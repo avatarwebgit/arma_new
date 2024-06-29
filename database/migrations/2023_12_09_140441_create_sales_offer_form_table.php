@@ -135,7 +135,7 @@ return new class extends Migration
             $table->integer('status')->default(0);
             $table->text('has_deposit')->nullable();
             $table->text('deposit_value')->nullable();
-            $table->text('data_pending_message')->nullable();
+            $table->text('message')->nullable();
             $table->timestamps();
         });
     }

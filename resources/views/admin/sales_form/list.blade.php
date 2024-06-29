@@ -21,60 +21,31 @@
                                 <div class="markets-pair-list table-responsive-sm">
                                     <div id="alert"></div>
                                     <table class="table table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Commodity</th>
-                                            <th>Type</th>
-                                            <th>User</th>
-                                            <th>Status</th>
-                                            <th>Date & Time</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($items as $key=>$form)
-                                            <tr>
-                                                <td>
-                                                    {{ $items->firstItem()+$key }}
-                                                </td>
-                                                <td>
-                                                    {{ $form->commodity }}
-                                                </td>
-                                                <td>
-                                                    {{ $form->price_type }}
-                                                </td>
-                                                <td>
-                                                    {{ $form->User->email }}
-                                                </td>
-                                                <td>
-                                                    {{ $form->Status->title }}
-                                                </td>
-                                                <td>
-                                                    {{ \Carbon\Carbon::parse($form->crated_at)->format('m/d/Y H:m') }}
-                                                </td>
-                                                <td>
-                                                    <a onclick="removeModal({{ $form->id }},event)"
-                                                       class="btn btn-sm btn-danger text-white mr-1">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                    <a href="{{ route('sale_form',['page_type'=>'Edit','item'=>$form->id]) }}"
-                                                       class="btn btn-sm btn-info text-white mr-1">
-                                                        <i class="fa fa-pen"></i>
-                                                    </a>
-                                                    <a href="{{ route('sale_form.show',['id'=>$form->id]) }}"
-                                                       class="btn btn-sm btn-primary text-white mr-1">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                    <button onclick="show_change_status_modal({{ $form->id }})"
-                                                            class="btn btn-sm btn-warning text-white mr-1">
-                                                        change status
-                                                    </button>
+                                        {{--                                        //index--}}
+                                        @if($status==1)
+                                            @include('admin.sales_form.index_list')
+                                        @endif
+                                        {{--                                        //cash pending--}}
+                                        @if($status==2)
+                                            @include('admin.sales_form.cash_pending_list')
+                                        @endif
+                                        {{--                                        //data pending--}}
+                                        @if($status==3)
+                                            @include('admin.sales_form.data_pending_list')
+                                        @endif
+                                        {{--                                        //reject--}}
+                                        @if($status==4)
+                                            @include('admin.sales_form.reject_list')
+                                        @endif
+                                        {{--                                        //approved--}}
+                                        @if($status==5)
+                                            @include('admin.sales_form.approved_list')
+                                        @endif
+                                        {{--                                        //approved--}}
+                                        @if($status==6)
+                                            @include('admin.sales_form.cash_pending_list')
+                                        @endif
 
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
                                     </table>
                                     <div class="text-center">
                                         <div class="d-flex justify-content-center mt-4">
@@ -149,12 +120,54 @@
             })
         }
 
-        function show_change_status_modal(form_id) {
+        function EditCurrency(id, deposit_value, cash_pending_currency) {
+            $('#Edit_Currency').modal('show');
+            $('#currency_cash_pending').val(cash_pending_currency);
+            $('#amount_cash_pending').val(deposit_value);
+            $('#id_cash_pending').val(id);
+        }
+
+        function UpdateCashPending() {
+            let url = "{{ route('sale_form.UpdateCashPending') }}";
+            let id = $('#id_cash_pending').val();
+            let amount = $('#amount_cash_pending').val();
+            let currency = $('#currency_cash_pending').val();
+            $.ajax({
+                url: url,
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id,
+                    amount: amount,
+                    currency: currency,
+                },
+                dataType: "json",
+                method: "post",
+                beforeSend: function () {
+                    // $('.save_btn').prop('disabled', true);
+                },
+                success: function (data) {
+                    if (data[0] == 1) {
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+
+        function show_change_status_modal(form_id, status = null) {
+
+
             $('#status_id').val(null);
             $('#approved_box').find('input').prop('checked', false);
             $('.status_options').addClass('d-none');
             $('.change_status_btn ').removeClass('active');
             $('#modal_form_id').val(form_id);
+            $('#form_change_status').val(status);
+            $('.change_status_btn').removeClass('d-none');
+            if (status == 6) {
+                $('#pending_button').addClass('d-none');
+            }
+
+
             let change_status_modal = $('#change_status_modal');
             $(change_status_modal).modal('show');
         }
@@ -170,12 +183,15 @@
         function SaveChangeStatus() {
             let has_deposit = null;
             let deposit_value = null;
-            let data_pending_message = null;
+            let message = null;
+            let currency = null;
 
             let change_status_modal = $('#change_status_modal');
             $(change_status_modal).modal('show');
             let form_id = $('#modal_form_id').val();
             let status_id = $('#status_id').val();
+            let form_change_status = $('#form_change_status').val();
+
             if (status_id.length == 0) {
                 alert('Please select a new status');
                 return;
@@ -184,23 +200,33 @@
             //status_id == 5 Approved
             if (status_id == 5) {
                 has_deposit = $('input[name="deposit"]:checked').val();
-                if (has_deposit) {
-                    if (has_deposit == 1) {
-                        deposit_value = $('#deposit').val();
-                        if (deposit_value.length == 0) {
-                            alert('please determine deposit');
-                            return;
+                if (form_change_status == 6) {
+                    has_deposit = 0;
+                }else{
+                    if (has_deposit) {
+                        if (has_deposit == 1) {
+                            deposit_value = $('#deposit').val();
+                            currency = $('#currency').val();
+                            if (deposit_value.length == 0) {
+                                alert('please determine Amount');
+                                return;
+                            }
+                            if (currency.length == 0) {
+                                alert('please determine currency');
+                                return;
+                            }
                         }
+                    } else {
+                        alert('please determine deposit');
+                        return;
                     }
-                } else {
-                    alert('please determine deposit');
-                    return;
                 }
+
             }
             //status_id =3 Data Pending
-            if (status_id == 3) {
-                data_pending_message = $('#data_pending_message').val();
-                if (data_pending_message.length === 0) {
+            if (status_id == 3 || status_id == 4) {
+                message = $('#message').val();
+                if (message.length === 0) {
                     alert('please determine Message');
                     return;
                 }
@@ -214,7 +240,8 @@
                     status_id: status_id,
                     has_deposit: has_deposit,
                     deposit_value: deposit_value,
-                    data_pending_message: data_pending_message,
+                    currency: currency,
+                    message: message,
                 },
                 dataType: "json",
                 method: "post",
@@ -240,6 +267,7 @@
             $('#status_id').val(status_id);
             if (status_id == 4) {
                 //Reject
+                $('#message_box').removeClass('d-none');
             }
             if (status_id == 5) {
                 //Approved
@@ -247,7 +275,11 @@
             }
             if (status_id == 3) {
                 //Data Pending
-                $('#data_pending').removeClass('d-none');
+                $('#message_box').removeClass('d-none');
+            }
+            let form_change_status = $('#form_change_status').val();
+            if (form_change_status == 6) {
+                $('#approved_box').addClass('d-none')
             }
         });
 

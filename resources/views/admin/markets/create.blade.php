@@ -11,7 +11,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div>
-                                        <a href="{{ route('admin.markets.index') }}"
+                                        <a href="{{ route('admin.markets.folder',['date'=>$market_data]) }}"
                                            class="btn btn-secondary btn-sm mb-2">
                                             <i class="icon ion-md-arrow-back mr-1"></i>
                                             <span>
@@ -24,37 +24,6 @@
                                               action="{{ route('admin.market.store') }}">
                                             @csrf
                                             <div class="row mt-4">
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="date">start(Date)</label>
-                                                    <input onchange="getDate(this)" id="date" type="date" name="date"
-                                                           class="form-control"
-                                                           value="{{ old('date') }}">
-                                                    <p id="DayName" class="mt-2">
-
-                                                    </p>
-                                                    @error('date')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="start">start(Time)</label>
-                                                    {{--                                                    ///clockpicker--}}
-                                                    <div class="input-group " data-placement="left" data-align="top"
-                                                         data-autoclose="true">
-                                                        <input type="time" class="form-control"
-                                                               value="{{ old('time') }}" name="time">
-                                                        <span class="input-group-addon">
-        <span class="glyphicon glyphicon-time"></span>
-    </span>
-                                                    </div>
-                                                    @error('bid_deposit')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="min_wallet">Commodity</label>
                                                     <select onchange="CheckHasAlpha(this)"
@@ -73,6 +42,41 @@
                                                     </p>
                                                     @enderror
                                                 </div>
+
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="start">start(Time)</label>
+                                                    {{--                                                    ///clockpicker--}}
+                                                    <div class="input-group " data-placement="left" data-align="top"
+                                                         data-autoclose="true">
+                                                        <input type="time" class="form-control"
+                                                               value="{{ old('time') }}" name="time">
+                                                        <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+                                                    </div>
+                                                    @error('bid_deposit')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <input onchange="getDate(this)" id="date" type="hidden" name="date"
+                                                           class="form-control"
+                                                           value="{{ $market_data }}">
+{{--                                                    <label for="date">start(Date)</label>--}}
+{{--                                                    --}}
+{{--                                                    <p id="DayName" class="mt-2">--}}
+
+{{--                                                    </p>--}}
+{{--                                                    @error('date')--}}
+{{--                                                    <p class="input-error-validate">--}}
+{{--                                                        {{ $message }}--}}
+{{--                                                    </p>--}}
+{{--                                                    @enderror--}}
+                                                </div>
+
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="bid_deposit">Bid Deposit</label>
                                                     <input id="bid_deposit" name="bid_deposit" class="form-control"
@@ -83,18 +87,7 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="step_price_competition">Step Price In
-                                                        Competition</label>
-                                                    <input id="step_price_competition" name="step_price_competition"
-                                                           min="1" class="form-control"
-                                                           value="{{ old('step_price_competition') }}">
-                                                    @error('step_price_competition')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
+
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="market_value">Market Value ($)</label>
                                                     <input id="market_value" name="market_value" class="form-control"
@@ -112,7 +105,7 @@
                                                     <label for="ready_to_open">Ready to Open(min)</label>
                                                     <input id="ready_to_open" type="number" name="ready_to_open"
                                                            class="form-control"
-                                                           value="{{ old('ready_to_open') }}">
+                                                           value="1">
                                                     @error('ready_to_open')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -123,7 +116,7 @@
                                                     <label for="opening">Opening(min)</label>
                                                     <input id="opening" type="number" name="opening"
                                                            class="form-control"
-                                                           value="{{ old('opening') }}">
+                                                           value="5">
                                                     @error('opening')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -133,7 +126,7 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="q_1">Quotation 1/2 (min)</label>
                                                     <input id="q_1" type="number" name="q_1" class="form-control"
-                                                           value="{{ old('q_1') }}">
+                                                           value="3">
                                                     @error('q_1')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -143,7 +136,7 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="q_2">Quotation 2/2 (min)</label>
                                                     <input id="q_2" type="number" name="q_2" class="form-control"
-                                                           value="{{ old('q_2') }}">
+                                                           value="5">
                                                     @error('q_2')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -153,8 +146,20 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="q_3">Competition(min)</label>
                                                     <input id="q_3" type="number" name="q_3" class="form-control"
-                                                           value="{{ old('q_3') }}">
+                                                           value="3">
                                                     @error('q_3')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="step_price_competition">Step Price In
+                                                        Competition</label>
+                                                    <input id="step_price_competition" name="step_price_competition"
+                                                           min="1" class="form-control"
+                                                           value="2">
+                                                    @error('step_price_competition')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
                                                     </p>
