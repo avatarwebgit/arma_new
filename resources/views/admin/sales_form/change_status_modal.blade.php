@@ -45,7 +45,7 @@
                     <div id="deposit_input" class="mb-3 mt-3 status_options d-none row">
                         <div class="mt-3 mb-3 col-6">
                             <label for="deposit" class="form-label">Amount</label>
-                            <input class="form-control" type="number" id="deposit">
+                            <input class="form-control" id="deposit">
                         </div>
                         <div class="mt-3 mb-3 col-6">
                             <label for="currency" class="form-label">

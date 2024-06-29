@@ -141,7 +141,7 @@
             deactive_bid(id);
             let color = '#c20000';
             let statusText = '<span>Close</span>';
-            $('#market-difference1-'+id).css({color: color})
+            $('#market-difference1-' + id).css({color: color})
             show_market_result(id);
             change_market_status(status, color, statusText, id);
         }
@@ -329,7 +329,7 @@
             if (1 < status && status < 7) {
                 $barColor = '#1f9402';
             }
-            if (seconds<10){
+            if (seconds < 10) {
                 $barColor = '#c20000';
             }
             // console.log('sec: ', sec);
@@ -509,6 +509,9 @@
             border-radius: 50px;
             /*background-color: #fff;*/
             /*box-shadow: 0 0 15px rgba(0, 0, 0, .15);*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .clockk {
@@ -535,10 +538,10 @@
         .clockk:before {
             top: 50%;
             left: 50%;
-            width: 120px;
-            height: 120px;
-            margin-top: -60px;
-            margin-left: -60px;
+            width: 100px;
+            height: 100px;
+            /*margin-top: -60px;*/
+            /*margin-left: -60px;*/
             border-radius: inherit;
             background-color: #ffffff;
 
