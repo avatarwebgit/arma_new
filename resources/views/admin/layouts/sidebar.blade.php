@@ -76,6 +76,7 @@
                     $data_pending_count=\App\Models\SalesOfferForm::where('status',3)->count();
                     $reject_count=\App\Models\SalesOfferForm::where('status',4)->count();
                     $approved_count=\App\Models\SalesOfferForm::where('status',5)->count();
+                    $preparation_count=\App\Models\SalesOfferForm::where('status',6)->count();
                 @endphp
 
                 <li class="dash-item">
@@ -115,6 +116,11 @@
                         <li class="dash-item d-flex align-items-center">
                             <a href="{{ route('admin.sales_form.index',['status'=>4]) }}" class="dash-link"><span
                                     class="dash-mtext custom-weight">{{ __('Rejected').'('.$reject_count.')' }}
+                            </a>
+                        </li>
+                        <li class="dash-item d-flex align-items-center">
+                            <a href="{{ route('admin.sales_form.index',['status'=>6]) }}" class="dash-link"><span
+                                    class="dash-mtext custom-weight">{{ __('preparation').'('.$preparation_count.')' }}
                             </a>
                         </li>
                         <li class="dash-item d-flex align-items-center">

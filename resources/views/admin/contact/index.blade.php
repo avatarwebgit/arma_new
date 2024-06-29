@@ -150,7 +150,7 @@
         function SaveChangeStatus() {
             let has_deposit = null;
             let deposit_value = null;
-            let data_pending_message = null;
+            let message = null;
 
             let change_status_modal = $('#change_status_modal');
             $(change_status_modal).modal('show');
@@ -179,8 +179,8 @@
             }
             //status_id =3 Data Pending
             if (status_id == 3) {
-                data_pending_message = $('#data_pending_message').val();
-                if (data_pending_message.length === 0) {
+                message = $('#message').val();
+                if (message.length === 0) {
                     alert('please determine Message');
                     return;
                 }
@@ -194,7 +194,7 @@
                     status_id: status_id,
                     has_deposit: has_deposit,
                     deposit_value: deposit_value,
-                    data_pending_message: data_pending_message,
+                    message: message,
                 },
                 dataType: "json",
                 method: "post",

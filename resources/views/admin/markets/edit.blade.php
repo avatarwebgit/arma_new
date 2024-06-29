@@ -25,15 +25,34 @@
                                             @csrf
                                             @method('put')
                                             <div class="row mt-4">
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="date">start(Date)</label>
-                                                    <input onchange="getDate(this)" id="date" type="date" name="date"
-                                                           class="form-control"
-                                                           value="{{ $market->date }}">
-                                                    <p id="DayName" class="mt-2">
+{{--                                                <div class="col-12 col-md-4 mb-3">--}}
+{{--                                                    <label for="date">start(Date)</label>--}}
+{{--                                                    <input onchange="getDate(this)" id="date" type="date" name="date"--}}
+{{--                                                           class="form-control"--}}
+{{--                                                           value="{{ $market->date }}">--}}
+{{--                                                    <p id="DayName" class="mt-2">--}}
 
-                                                    </p>
-                                                    @error('date')
+{{--                                                    </p>--}}
+{{--                                                    @error('date')--}}
+{{--                                                    <p class="input-error-validate">--}}
+{{--                                                        {{ $message }}--}}
+{{--                                                    </p>--}}
+{{--                                                    @enderror--}}
+{{--                                                </div>--}}
+
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="min_wallet">Commodity</label>
+                                                    <select onchange="CheckHasAlpha(this)"
+                                                            class="form-control" id="commodity_id" name="commodity_id">
+                                                        <option value="">select</option>
+                                                        @foreach($sales_offer_form as $item)
+                                                            <option data-type="{{ $item->price_type }}"
+                                                                    {{ $market->commodity_id==$item->id?'selected':'' }} value="{{ $item->id }}">
+                                                                Commodity:{{ $item->commodity }}
+                                                                /User:{{ $item->User->email }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('commodity_id')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
                                                     </p>
@@ -57,22 +76,6 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-12 col-md-4 mb-3">
-                                                    <label for="min_wallet">Commodity</label>
-                                                    <select onchange="CheckHasAlpha(this)"
-                                                            class="form-control" id="commodity_id" name="commodity_id">
-                                                        <option value="">select</option>
-                                                        @foreach($sales_offer_form as $item)
-                                                            <option data-type="{{ $item->price_type }}"
-                                                                    {{ $market->commodity_id==$item->id?'selected':'' }} value="{{ $item->id }}">
-                                                                Commodity:{{ $item->commodity }}
-                                                                /User:{{ $item->User->email }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('commodity_id')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
                                                 </div>
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="bid_deposit">Bid Deposit</label>
@@ -84,18 +87,7 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="step_price_competition">Step Price In
-                                                        Competition</label>
-                                                    <input id="step_price_competition" name="step_price_competition"
-                                                           min="1" class="form-control"
-                                                           value="{{ $market->step_price_competition }}">
-                                                    @error('step_price_competition')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
+
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="market_value">Market Value ($)</label>
                                                     <input id="market_value" name="market_value" class="form-control"
@@ -156,6 +148,18 @@
                                                     <input id="q_3" type="number" name="q_3" class="form-control"
                                                            value="{{ $market->q_3 }}">
                                                     @error('q_3')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="step_price_competition">Step Price In
+                                                        Competition</label>
+                                                    <input id="step_price_competition" name="step_price_competition"
+                                                           min="1" class="form-control"
+                                                           value="{{ $market->step_price_competition }}">
+                                                    @error('step_price_competition')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
                                                     </p>

@@ -20,9 +20,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-md-12 mb-3">
-                                    <a href="{{ route('admin.market.create') }}" class="btn btn-primary btn-sm">
+                                    <button onclick="createMarketModal()" class="btn btn-primary btn-sm">
                                         Create
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="row">
                                     @foreach($group_markets as $key=>$m)
@@ -53,9 +53,48 @@
         </div>
     </div>
     @include('admin.sections.remove_modal')
+
+    <!-- Modal -->
+    <div class="modal fade" id="CreateMarketModal" tabindex="-1" role="dialog" aria-labelledby="Edit_Currency"
+         aria-hidden="true">
+        <div style="max-width: 768px" class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center position-relative">
+                    <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"
+                       style="position: absolute;right: 10px;top: 10px"></i>
+                    <h3>
+                        Enter Date
+                    </h3>
+                </div>
+                <div id="modal_body" class="modal-body p-5 row">
+                    <div id="deposit_input" class="mb-3 mt-3  row">
+                        <div class="mt-3 mb-3 col-12">
+                            <input class="form-control" type="date" id="Market_Date">
+                        </div>
+                    </div>
+                    <input id="id_cash_pending" type="hidden">
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="button" data-dismiss="modal" aria-label="Close" type="button">Cancel</button>
+                    <button class="button" onclick="CreateMarketModal()" type="button">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('style')
     @include('admin.layouts.includes.datatable_css')
+    <style>
+        .button {
+            border: 1px solid black;
+            background: white;
+            color: black;
+            width: 100px;
+            padding: 3px 10px;
+            text-align: center;
+            margin: 5px 10px;
+        }
+    </style>
 @endpush
 @push('script')
     <script type="module">
@@ -120,6 +159,22 @@
                     }
                 }
             })
+        }
+    </script>
+    <script>
+        function createMarketModal() {
+            $('#CreateMarketModal').modal('show');
+        }
+
+        function CreateMarketModal() {
+            let Market_Date = $('#Market_Date').val();
+            if (Market_Date.length > 0) {
+                let url="{{ route('admin.market.create',['market_data'=>':market_data']) }}";
+                url=url.replace(':market_data',Market_Date);
+                window.location.href = url;
+            }else {
+                alert('Please select Date');
+            }
         }
     </script>
 @endpush

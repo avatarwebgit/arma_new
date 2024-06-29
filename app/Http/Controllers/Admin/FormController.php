@@ -79,7 +79,7 @@ class FormController extends Controller
         $role = \auth()->user()->Roles()->first()->name;
 //        session()->forget('form_id_exists');
         $sale_form_exist = 0;
-        $previous_form_id=false;
+        $previous_form_id = false;
         $route = route('sale_form.update_or_store');
         $form = [];
         if ($page_type === 'Create') {
@@ -97,7 +97,7 @@ class FormController extends Controller
                     if ($form_exist) {
                         $sale_form_exist = 0;
                         $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 1)->latest()->first();
-                        $previous_form_id=$form->id;
+                        $previous_form_id = $form->id;
                         $form = [];
                     }
                 }
@@ -115,7 +115,7 @@ class FormController extends Controller
         $tolerance_weight_by = ToleranceWeightBy::all();
         $Incoterms = Incoterms::all();
         $incoterms_version = IncotermsVersion::all();
-        $countries = Country::OrderBy('countryName','asc')->get();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
         $priceTypes = PriceType::all();
         $paymentTerms = PaymentTerm::all();
         $packing = Packing::all();
@@ -163,7 +163,6 @@ class FormController extends Controller
 
     public function sales_form_update_or_store(Request $request, $item = null)
     {
-
         $is_complete = 0;
         $rules = $this->rules($item);
         $validator = Validator::make($request->all(), $rules);
@@ -200,9 +199,13 @@ class FormController extends Controller
         $validate_items['has_loading'] = $has_loading;
         $validate_items['accept_terms'] = $accept_terms;
         $validate_items['is_complete'] = $is_complete;
+        $validate_items['status'] = 1;
+
 
         if ($item != null) {
+
             $sale_form = SalesOfferForm::where('id', $item)->first();
+            $validate_items['user_id'] = $sale_form->user_id;
             if ($sale_form->unique_number == null) {
                 $unique_number = 'Arma-' . $sale_form->id;
                 $validate_items['unique_number'] = $unique_number;
@@ -263,7 +266,7 @@ class FormController extends Controller
     public function sales_form_index($status)
     {
         $items = SalesOfferForm::where('status', $status)->paginate(100);
-        return view('admin.sales_form.list', compact('items'));
+        return view('admin.sales_form.list', compact('items', 'status'));
     }
 
     public function sales_form_remove(Request $request)
@@ -313,7 +316,7 @@ class FormController extends Controller
         $tolerance_weight_by = ToleranceWeightBy::all();
         $Incoterms = Incoterms::all();
         $incoterms_version = IncotermsVersion::all();
-        $countries = Country::OrderBy('countryName','asc')->get();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
         $priceTypes = PriceType::all();
         $paymentTerms = PaymentTerm::all();
         $packing = Packing::all();
@@ -361,18 +364,80 @@ class FormController extends Controller
         ));
     }
 
+    public function sales_form_edit(SalesOfferForm $id)
+    {
+        $role = \auth()->user()->Roles()->first()->name;
+        $sale_form_exist = 1;
+        $form = $id;
+        $route = route('sale_form.update_or_store', ['item' => $form]);
+        $company_types = CompanyType::all();
+        $unites = Units::all();
+        $currencies = Currency::all();
+        $tolerance_weight_by = ToleranceWeightBy::all();
+        $Incoterms = Incoterms::all();
+        $incoterms_version = IncotermsVersion::all();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
+        $priceTypes = PriceType::all();
+        $paymentTerms = PaymentTerm::all();
+        $packing = Packing::all();
+        $shipping_terms = ShippingTerm::all();
+        $container_types = ContainerType::all();
+        $thcincluded = THCIncluded::all();
+        $flexi_type_tank = FlexiTankType::all();
+        $destination = Destination::all();
+        $targetMarket = TargetMarket::all();
+        $qualityQuantityInspector = QualityQuantityInspector::all();
+        $InspectionPlace = InspectionPlace::all();
+        $cargoInsurance = CargoInsurance::all();
+        $contract_types = ContainerType::all();
+        $item = null;
+        $is_show = 0;
+        $platforms = PlatFom::all();
+        return view('admin.sales_form.create', compact(
+            'sale_form_exist',
+            'form',
+            'route',
+            'company_types',
+            'unites',
+            'currencies',
+            'tolerance_weight_by',
+            'Incoterms',
+            'incoterms_version',
+            'countries',
+            'priceTypes',
+            'paymentTerms',
+            'packing',
+            'container_types',
+            'shipping_terms',
+            'thcincluded',
+            'flexi_type_tank',
+            'destination',
+            'targetMarket',
+            'qualityQuantityInspector',
+            'InspectionPlace',
+            'cargoInsurance',
+            'contract_types',
+            'item',
+            'is_show',
+            'role',
+            'platforms'
+        ));
+    }
+
     public function change_status(Request $request)
     {
         try {
             $new_status = $request->status_id;
             $has_deposit = $request->has_deposit;
             $deposit_value = $request->deposit_value;
-            $data_pending_message = $request->data_pending_message;
+            $currency = $request->currency;
+            $message = $request->message;
             if ($new_status == 5) {
                 if ($has_deposit == 0) {
-                    $new_status = 5;
+                    $new_status = 6;
                 } else {
                     $new_status = 2;
+                    $message='You Need To Charge Your Wallet Up To :'.$deposit_value.'( '.$currency.' )';
                 }
             }
             $form_id = $request->form_id;
@@ -381,7 +446,31 @@ class FormController extends Controller
                 'status' => $new_status,
                 'has_deposit' => $has_deposit,
                 'deposit_value' => $deposit_value,
-                'data_pending_message' => $data_pending_message,
+                'data_pending_message' => $message,
+                'cash_pending_currency' => $currency,
+            ]);
+//            if ($new_status == 5) {
+//                SalesOfferFormCopy::create($sale_form->toArray());
+//            }
+            session()->flash('success', 'Successfully Updated');
+            return response()->json([1, 'success'], 200);
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
+        }
+    }
+
+    public function UpdateCashPending(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $amount = $request->amount;
+            $currency = $request->currency;
+            $sale_form = SalesOfferForm::where('id', $id)->first();
+            $message='You Need To Charge Your Wallet Up To :'.$amount.'( '.$currency.' )';
+            $sale_form->update([
+                'deposit_value' => $amount,
+                'cash_pending_currency' => $currency,
+                'data_pending_message' => $message,
             ]);
 //            if ($new_status == 5) {
 //                SalesOfferFormCopy::create($sale_form->toArray());
