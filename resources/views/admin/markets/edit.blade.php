@@ -42,7 +42,7 @@
 
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="min_wallet">Commodity</label>
-                                                    <select onchange="CheckHasAlpha(this)"
+                                                    <select disabled onchange="CheckHasAlpha(this)"
                                                             class="form-control" id="commodity_id" name="commodity_id">
                                                         <option value="">select</option>
                                                         @foreach($sales_offer_form as $item)
