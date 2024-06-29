@@ -79,7 +79,7 @@
                                                         </td>
                                                     @endif
                                                     <td>
-                                                        {{ $item->market_value }}
+                                                        {{ number_format($item->market_value) }}
                                                     </td>
                                                     <td>
                                                         <a title="Edit Market"
