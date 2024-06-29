@@ -536,8 +536,8 @@
         }
 
         .clockk:before {
-            top: 50%;
-            left: 50%;
+            /*top: 50%;*/
+            /*left: 50%;*/
             width: 100px;
             height: 100px;
             /*margin-top: -60px;*/
