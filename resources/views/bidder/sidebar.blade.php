@@ -11,5 +11,16 @@
         <i class="icon ion-md-person"></i>
         Wallet
     </a>
+    <a class="nav-link {{ request()->is('bidder/refund_request') ? 'active' : '' }} position-relative" href="{{ route('bidder.refund_request') }}">
+        @php
+            $refund=\App\Models\Refund::where('user_id',auth()->id())->where('status','<',3)->get();
+        @endphp
+        <i class="icon ion-md-person"></i>
+        <span class="dash-mtext custom-weight ">
+                                My Refund Request @if(count($refund)>0)
+                <span class="circle_alert">{{ count($refund) }}</span>
+            @endif
+                            </span>
+    </a>
 </div>
 

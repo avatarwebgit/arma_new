@@ -9,8 +9,11 @@ use App\Models\CompanyFunction;
 use App\Models\Country;
 use App\Models\MailMessages;
 use App\Models\Permission;
+use App\Models\Refund;
+use App\Models\RefundStatus;
 use App\Models\Role;
 use App\Models\Salutation;
+use App\Models\Transaction;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\UserStatus;
@@ -52,9 +55,9 @@ class UserController extends Controller
         $permissions = Permission::all();
         $types = Type::where('id', '!=', 1)->get();
         $commodities = Commodity::all();
-        $countries = Country::OrderBy('countryName','asc')->get();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
         $companyFunction = CompanyFunction::all();
-        $salutation= Salutation::all();
+        $salutation = Salutation::all();
         return view('admin.users.edit', compact(
             'user',
             'type',
@@ -76,14 +79,14 @@ class UserController extends Controller
     {
         try {
             $user->syncRoles($request->role);
-            $permissions = $request->except(['_token', 'role','can_bid']);
+            $permissions = $request->except(['_token', 'role', 'can_bid']);
             $user->syncPermissions($permissions);
-            if ($request->has('can_bid')){
-                $can_bid=1;
-            }else{
-                $can_bid=0;
+            if ($request->has('can_bid')) {
+                $can_bid = 1;
+            } else {
+                $can_bid = 0;
             }
-            $user->update(['can_bid'=>$can_bid]);
+            $user->update(['can_bid' => $can_bid]);
             $message = 'The Item Has Been Updated Successfully';
             session()->flash('success', $message);
         } catch (\Exception $exception) {
@@ -168,6 +171,44 @@ class UserController extends Controller
             session()->flash('failed', $exception->getMessage());
         }
         return redirect()->back();
+    }
+
+    public function refund_request()
+    {
+        $items = Refund::latest()->get();
+        $status = RefundStatus::all();
+        return view('admin.refund_request', compact('items', 'status'));
+    }
+
+    public function UpdateRefundStatus(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $refund = Refund::where('id', $id)->first();
+
+            $newStatus = $request->newStatus;
+            $refund->update([
+                'status' => $newStatus,
+            ]);
+            $create_wallet = $request->create_wallet;
+            if ($create_wallet == 1) {
+                $amount = $refund->amount;
+                $user_id = $refund->user_id;
+                $type = 0;
+                $description = 'Decreased wallet for Refund ID:' . $id;
+                Transaction::create([
+                    'user_id' => $user_id,
+                    'type' => $type,
+                    'amount' => $amount,
+                    'status' => 1,
+                    'description' => $description,
+                ]);
+            }
+            return response()->json([1, 'ok']);
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
+        }
+
     }
 
 }

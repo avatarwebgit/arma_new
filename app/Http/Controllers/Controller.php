@@ -8,13 +8,14 @@ use App\Events\MarketTableIndex;
 use App\Events\MarketTimeUpdated;
 use App\Models\Market;
 use App\Models\MarketSetting;
+use App\Models\Refund;
 use App\Models\Transaction;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -152,7 +153,7 @@ class Controller extends BaseController
         $yesterday = Carbon::yesterday();
         $tomorrow = Carbon::tomorrow();
         $first_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'asc')->first();
-        $market_open_exists = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->where('status', '<',6)->exists();
+        $market_open_exists = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->where('status', '<', 6)->exists();
         $start_market_time = Carbon::parse('00:00');
         if ($first_market) {
             $start_market_time = Carbon::parse($first_market->time)->addMinutes(-30);
@@ -164,7 +165,7 @@ class Controller extends BaseController
             $market_is_open = 0;
         }
 
-        if (!$market_open_exists){
+        if (!$market_open_exists) {
             $market_is_open = 0;
         }
 
@@ -172,7 +173,7 @@ class Controller extends BaseController
             $difference = $now->diffInSeconds($close_market);
             $status_text = 'Open';
             $color = 'green';
-        }else{
+        } else {
             $difference = 0;
             $status_text = 'Close';
             $color = 'red';
@@ -272,8 +273,6 @@ class Controller extends BaseController
             return response()->json([0, $e->getMessage()]);
         }
     }
-
-
 
     public function check_market($id)
     {
@@ -384,6 +383,22 @@ class Controller extends BaseController
             $wallet = $wallet + ($i * $transaction->amount);
         }
         return $wallet;
+    }
+
+    public function refund(Request $request )
+    {
+        $user_id=$request->user_id;
+        $amount=$request->amount;
+        try {
+            Refund::create([
+                'user_id' => $user_id,
+                'amount' => $amount
+            ]);
+            return response()->json([1,'ok']);
+        }catch (\Exception $e) {
+            return response()->json([0,$e->getMessage()]);
+        }
+
     }
 
 }

@@ -17,6 +17,7 @@ use App\Models\Packing;
 use App\Models\PaymentTerm;
 use App\Models\PriceType;
 use App\Models\QualityQuantityInspector;
+use App\Models\Refund;
 use App\Models\SalesOfferForm;
 use App\Models\ShippingTerm;
 use App\Models\TargetMarket;
@@ -75,6 +76,12 @@ class SellerController extends Controller
         $id = auth()->id();
         $items = SalesOfferForm::where('user_id', $id)->where('is_complete', 1)->paginate();
         return view('seller.sales_form.list', compact('items'));
+    }
+    public function refund_request()
+    {
+        $id = auth()->id();
+        $items = Refund::where('user_id', $id)->paginate();
+        return view('seller.refund_request', compact('items'));
     }
 
 }

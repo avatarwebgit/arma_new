@@ -517,8 +517,8 @@
         .clockk {
             top: 50%;
             left: 50%;
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             position: absolute;
             margin-top: -90px;
