@@ -310,7 +310,7 @@ class Controller extends BaseController
                 $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
             }
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
-            $tomorrow_markets_groups = Market::where('date', '>', $today)->where('date', '<', $the_day_after_tomorrow)->orderby('date', 'asc');
+            $tomorrow_markets_groups = Market::where('date', '>', $today)->where('date', '<', $the_day_after_tomorrow)->orderby('date', 'asc')->get();
             $ids = [];
             foreach ($markets_groups as $markets) {
                 foreach ($markets as $market) {
