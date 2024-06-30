@@ -73,7 +73,7 @@
             hide_result(id);
             deactive_bid(id);
             let statusText = '<span>Waiting To Open</span>';
-            let color = '#000000';
+            let color = '#162fa2';
             change_market_status(status, color, statusText, id)
         }
 
@@ -82,7 +82,7 @@
             hide_result(id);
             deactive_bid(id);
             let statusText = '<span>Ready to open</span>';
-            let color = '#1f9402';
+            let color = '#162fa2';
             change_market_status(status, color, statusText, id)
         }
 
