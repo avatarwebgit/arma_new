@@ -158,6 +158,7 @@
             $('#previous_status-' + id).val(status);
             $('#market-' + id).css('color', color);
             $('#status-box-' + id).css('color', color);
+            $('#market-difference1-' + id).css('color', color);
             $('#market-difference-' + id).css('background', color);
             $('#market-status-' + id).html(statusText);
             if (status == 2 || status == 3 || status == 4 || status == 5) {
@@ -531,7 +532,6 @@
 
         .clockk span {
             z-index: 999;
-            color: #162fa2;
             font-size: 21px;
         }
 
