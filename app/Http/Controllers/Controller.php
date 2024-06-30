@@ -368,7 +368,12 @@ class Controller extends BaseController
             $is_login = auth()->check();
             $view_table = view('home.partials.market', compact('markets_groups', 'now', 'is_login'))->render();
 
-            broadcast(new MarketTableIndex($view_table, $market_values_html, $market_is_open));
+            $show_market_value=0;
+            if ($market_values>0){
+                $show_market_value=1;
+            }
+
+            broadcast(new MarketTableIndex($view_table, $market_values_html, $show_market_value));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return response()->json([0, $e->getMessage()]);
