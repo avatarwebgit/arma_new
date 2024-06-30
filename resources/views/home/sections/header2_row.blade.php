@@ -60,7 +60,7 @@
             @if(isset($loop) and  $loop->last)
 
             @else
-                <span class="d-block" style="width: 1px;height: 50%;background-color: white;margin-left: 5px;margin-right: 5px"></span>
+                <span class="d-block" style="width: 1px;height: 80%;background-color: white;margin-left: 5px;margin-right: 5px"></span>
             @endif
         </div>
     </div>
