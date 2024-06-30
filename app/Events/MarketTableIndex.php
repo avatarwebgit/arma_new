@@ -21,10 +21,11 @@ class MarketTableIndex implements  ShouldBroadcast
      */
     public $view_table;
     public $market_values_html;
-    public function __construct($view_table,$market_values_html)
+    public function __construct($view_table,$market_values_html,$market_values)
     {
         $this->view_table = $view_table;
         $this->market_values_html = $market_values_html;
+        $this->market_values = $market_values;
     }
 
     /**
