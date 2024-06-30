@@ -3176,4 +3176,15 @@ footer input::placeholder {
     display: none;
 }
 
-
+.circle_alert {
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    background: red;
+    display: block;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    left: 0;
+    top: 0
+}

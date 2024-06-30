@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BidderController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Home\UserController as UserHomeController;
 use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\Home\IndexController;
@@ -94,6 +95,7 @@ Route::get('/Flexi_tank', [IndexController::class, 'Flexi_tank'])->name('home.Fl
 Route::get('/THC_Included', [IndexController::class, 'THC_Included'])->name('home.THC_Included');
 Route::get('/TargetMarket', [IndexController::class, 'TargetMarket'])->name('home.TargetMarket');
 Route::get('/Destination', [IndexController::class, 'Destination'])->name('home.Destination');
+Route::get('/market_status_update', [IndexController::class, 'market_status_update'])->name('home.market_status_update');
 
 Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix('/admin-panel/management/')->group(function () {
     //dashboard
@@ -180,6 +182,9 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
     Route::get('header_category/edit/{category}', [HeaderCategoryController::class, 'edit'])->name('header_category.edit');
     Route::put('header_category/update/{category}', [HeaderCategoryController::class, 'update'])->name('header_category.update');
     Route::post('header_category/remove', [HeaderCategoryController::class, 'remove'])->name('header_category.remove');
+    //Refund
+    Route::get('refund_request', [UserController::class, 'refund_request'])->name('refund_request');
+    Route::post('UpdateRefundStatus', [UserController::class, 'UpdateRefundStatus'])->name('UpdateRefundStatus');
 
 
     //Config
@@ -265,6 +270,7 @@ Route::name('seller.')->prefix('/seller/')->middleware(['seller', 'prevent.concu
     Route::get('profile', [SellerController::class, 'profile'])->name('profile');
     Route::get('wallet', [SellerController::class, 'wallet'])->name('wallet');
     Route::get('requests', [SellerController::class, 'requests'])->name('requests');
+    Route::get('refund_request', [SellerController::class, 'refund_request'])->name('refund_request');
 });
 Route::name('bidder.')->prefix('/bidder/')->middleware(['bidder', 'prevent.concurrent.login'])->group(function () {
     Route::get('dashboard', [BidderController::class, 'dashboard'])->name('dashboard');
@@ -273,6 +279,7 @@ Route::name('bidder.')->prefix('/bidder/')->middleware(['bidder', 'prevent.concu
     Route::get('profile', [BidderController::class, 'profile'])->name('profile');
     Route::get('wallet', [BidderController::class, 'wallet'])->name('wallet');
     Route::get('requests', [BidderController::class, 'requests'])->name('requests');
+    Route::get('refund_request', [BidderController::class, 'refund_request'])->name('refund_request');
 });
 Route::name('profile.')->prefix('/profile/')->group(function () {
     Route::get('index', [ProfileController::class, 'index'])->name('index');
@@ -299,4 +306,5 @@ Route::post('/pay_bid_deposit', [Payment::class, 'pay_bid_deposit'])->name('pay_
 Route::post('/paypal-payment', [PaypalController::class, 'payment'])->name('payment.paypal');
 Route::get('/paypal/verify/{user}/{amount}', [PaypalController::class, 'verify'])->name('paypal.verify');
 Route::get('/paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
+Route::post('/refund', [Controller::class, 'refund'])->name('refund');
 

@@ -21,6 +21,7 @@ use App\Models\Packing;
 use App\Models\Page;
 use App\Models\PlatFom;
 use App\Models\QualityQuantityInspector;
+use App\Models\RefundStatus;
 use App\Models\ShippingTerm;
 use App\Models\TargetMarket;
 use App\Models\THCIncluded;
@@ -588,6 +589,22 @@ class IndexController extends Controller
         $market = Market::where('id', $market_id)->first();
         $html = view('home.partials.market_more', compact('market'))->render();
         return response()->json([1, $html]);
+    }
+
+    public function market_status_update()
+    {
+        $items = RefundStatus::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['Requested', 'Pending', 'Done'];
+        foreach ($items as $key => $item) {
+            RefundStatus::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+        dd('Congratulations');
     }
 
 }

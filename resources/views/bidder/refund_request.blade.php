@@ -126,39 +126,6 @@
                         <div>
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="col-12 mb-3">
-                                        <h5>
-                                            <span>wallet: </span>
-                                            <span>{{ number_format($wallet).'$' }}</span>
-                                        </h5>
-                                        <div>
-                                            <label for="wallet">
-                                                amount ($)
-                                                <input id="wallet" class="form-control" name="wallet" value="0">
-                                            </label>
-
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <label for="wallet_description">Description *</label>
-                                            <textarea id="wallet_description" class="form-control form-control-sm"
-                                                      name="wallet_description"></textarea>
-                                        </div>
-                                        <div class="mt-3">
-                                            <button type="button" onclick="changeUserWallet({{ $user->id }},1)"
-                                                    class="btn btn-success">
-                                                PayPal
-                                            </button>
-                                            @if($wallet>0)
-                                            <button  type="button"
-                                                    onclick="Refund({{ $user->id }},'{{ $wallet }}')"
-                                                    class="btn btn-warning">
-                                                Refund
-                                            </button>
-                                            @endif
-                                        </div>
-
-                                    </div>
                                     <div class="col-md-12">
                                         <div class="markets-pair-list">
                                             <div id="alert"></div>
@@ -166,57 +133,31 @@
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>amount</th>
+                                                    <th>amount($)</th>
                                                     <th>status</th>
-                                                    <th>type</th>
-                                                    <th>description</th>
-                                                    <th>created at</th>
+                                                    <th>Update</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($transactions as $key=>$item)
+                                                @foreach($items as $key=>$item)
                                                     <tr>
                                                         <td>
                                                             {{ $key }}
                                                         </td>
                                                         <td>
-                                                            {{ number_format($item->amount).' $' }}
+                                                            {{ number_format($item->amount) }}
                                                         </td>
                                                         <td>
-                                                            @if($item->status==0)
-                                                                <span class="text-danger">
-                                                            <i class="fa fa-times-circle"></i>
-                                                        </span>
-                                                            @else
-                                                                <span class="text-success">
-                                                             <i class="fa fa-check"></i>
-                                                        </span>
-                                                            @endif
+                                                            {{ $item->Status->title }}
                                                         </td>
 
                                                         <td>
-                                                            @if($item->type==0)
-                                                                <span class="text-danger">
-                                                            <i class="fa fa-arrow-down"></i>
-                                                        </span>
-
-                                                            @else
-                                                                <span class="text-success">
-                                                        <i class="fa fa-arrow-up"></i>
-                                                        </span>
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->description }}
-                                                        </td>
-                                                        <td>
-                                                            {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
+                                                            {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d H:i:s') }}
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
                                             </table>
-
                                         </div>
                                     </div>
                                 </div>
@@ -228,31 +169,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="RefundModal" tabindex="-1" role="dialog" aria-labelledby="RefundModal"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document" style="max-width: 768px">
-            <div class="modal-content">
-                <div class="modal-header">
 
-                    <h3>
-                        Refund Request
-                    </h3>
-                    <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"></i>
-
-                </div>
-                <div class="modal-body p-5 row" id="modal_Body">
-                    Refund To Your Account
-                    <br>
-                    Are you sure ?
-                </div>
-                <input type="hidden" name="user_id" id="user_id">
-                <input type="hidden" name="amount" id="amount">
-                <div class="modal-footer">
-                    <button data-dismiss="modal" type="button" class="btn btn-danger">Cancel</button>
-                    <button onclick="RefundRequest()" type="button" class="btn btn-success">Refund</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
