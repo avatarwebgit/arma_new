@@ -296,6 +296,7 @@ class Controller extends BaseController
             $yesterday = Carbon::yesterday();
             $today = Carbon::today();
             $tomorrow = Carbon::tomorrow();
+            $the_day_after_tomorrow=Carbon::tomorrow()->copy()->addDay(1);
 
             $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
             $change_time = Carbon::parse($change_time)->format("H:i:s");
@@ -309,6 +310,7 @@ class Controller extends BaseController
                 $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
             }
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
+            $tomorrow_markets_groups = Market::where('date', '>', $today)->where('date', '<', $the_day_after_tomorrow)->orderby('date', 'asc');
             $ids = [];
             foreach ($markets_groups as $markets) {
                 foreach ($markets as $market) {
@@ -337,6 +339,28 @@ class Controller extends BaseController
                     $market_value = str_replace(',', '', $market->market_value);
                     $market_values = $market_values + intval($market_value);
 
+                    //
+                    $result = $this->statusTimeMarket($market);
+                    $market['difference'] = $result[0];
+                    $market['status'] = $result[1];
+                    $market['benchmark1'] = $result[2];
+                    $market['benchmark2'] = $result[3];
+                    $market['benchmark3'] = $result[4];
+                    $market['benchmark4'] = $result[5];
+                    $market['benchmark5'] = $result[6];
+                    $market['benchmark6'] = $result[7];
+                    $market['date_time'] = $result[8];
+                    $market_id = $market->id;
+                    $difference = $result[0];
+                    $timer = $this->MarketTimer($difference);
+                    $status = $market['status'];
+                    $step = $market->step_price_competition;
+                    broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status, $step));
+                }
+            }
+
+            foreach ($tomorrow_markets_groups as $markets) {
+                foreach ($markets as $market) {
                     //
                     $result = $this->statusTimeMarket($market);
                     $market['difference'] = $result[0];
