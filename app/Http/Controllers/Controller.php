@@ -176,7 +176,7 @@ class Controller extends BaseController
         } else {
             $difference = 0;
             $status_text = 'Close';
-            $color = 'red';
+            $color = '#c20000';
         }
 
         $timer = $this->Timer($difference);
