@@ -182,6 +182,8 @@ class Controller extends BaseController
         $timer = $this->Timer($difference);
         $market_status = view('home.timer.market_status', compact('status_text', 'color'))->render();
 
+
+
         return [
             'timer' => $timer,
             'market_status' => $market_status,
@@ -221,7 +223,15 @@ class Controller extends BaseController
         if ($seconds < "10") {
             $seconds = "0" . $seconds;
         }
-        return view('home.timer.index', compact('hours', 'minutes', 'seconds'))->render();
+        $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
+        $change_time = Carbon::parse($change_time)->format("H:i:s");
+        $now2 = Carbon::now()->format("H:i:s");
+
+        $timer_is_red = 1;
+        if ($diffSeconds == 0 and $now2 < $change_time) {
+            $timer_is_red = 0;
+        }
+        return view('home.timer.index', compact('hours', 'minutes', 'seconds','timer_is_red'))->render();
     }
 
     function MarketTimer($diffSeconds)
@@ -358,7 +368,7 @@ class Controller extends BaseController
             $is_login = auth()->check();
             $view_table = view('home.partials.market', compact('markets_groups', 'now', 'is_login'))->render();
 
-            broadcast(new MarketTableIndex($view_table, $market_values_html,$market_is_open));
+            broadcast(new MarketTableIndex($view_table, $market_values_html, $market_is_open));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return response()->json([0, $e->getMessage()]);
@@ -385,18 +395,18 @@ class Controller extends BaseController
         return $wallet;
     }
 
-    public function refund(Request $request )
+    public function refund(Request $request)
     {
-        $user_id=$request->user_id;
-        $amount=$request->amount;
+        $user_id = $request->user_id;
+        $amount = $request->amount;
         try {
             Refund::create([
                 'user_id' => $user_id,
                 'amount' => $amount
             ]);
-            return response()->json([1,'ok']);
-        }catch (\Exception $e) {
-            return response()->json([0,$e->getMessage()]);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
         }
 
     }
