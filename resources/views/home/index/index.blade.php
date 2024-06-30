@@ -8,10 +8,10 @@
             .listen('MarketTableIndex', function (e) {
                 let view_table = e.view_table;
                 let market_values_html = e.market_values_html;
-                let market_is_open = e.market_is_open;
+                let show_market_value = e.show_market_value;
                 $('#market_table').html(view_table);
                 $('#market_value').html(market_values_html);
-                if (market_is_open==0){
+                if (show_market_value==0){
                     $('#total_trade_value').addClass('d-none');
                 }else {
                     $('#total_trade_value').removeClass('d-none');
@@ -394,7 +394,7 @@
                         <img src="{{ asset('home/img/1.png') }}" alt="">
                         <h3>Secure Transactions</h3>
                         <p>
-                            With hard work and supervision, we present safe and secure transactions.
+                            With great supervision, we present safe and secure transactions.
                         </p>
                     </div>
                 </div>
@@ -402,16 +402,18 @@
                     <div class="landing-feature-item">
                         <img src="{{ asset('home/img/2.jpg') }}" alt="">
                         <h3>Verified Buyers and Sellers </h3>
-                        <p>verifying the identities of both buyers and sellers, ensuring that they are who they claim to
-                            be.</p>
+                        <p>
+                            Verifying the identities of buyers and sellers, ensuring that they are who they claim to be.
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="landing-feature-item">
                         <img src="{{ asset('home/img/3.png') }}" alt="">
                         <h3>Competitive and Transparent Business</h3>
-                        <p>parties have access to details of transactions and they have competition to discover the best
-                            price.</p>
+                        <p>
+                            Parties have access to details of transactions and they have competition to discover the best price.
+                        </p>
                     </div>
                 </div>
             </div>
