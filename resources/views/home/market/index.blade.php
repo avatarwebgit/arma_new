@@ -326,7 +326,7 @@
             } else {
                 $('.count').addClass('sec')
             }
-            if (1 < status && status < 7) {
+            if (2 < status && status < 7) {
                 $barColor = '#1f9402';
             }
             if (seconds < 10) {
