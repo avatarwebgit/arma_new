@@ -8,10 +8,10 @@
             .listen('MarketTableIndex', function (e) {
                 let view_table = e.view_table;
                 let market_values_html = e.market_values_html;
-                let market_values = e.market_values;
+                let market_is_open = e.market_is_open;
                 $('#market_table').html(view_table);
                 $('#market_value').html(market_values_html);
-                if (market_values==0){
+                if (market_is_open==0){
                     $('#total_trade_value').addClass('d-none');
                 }else {
                     $('#total_trade_value').removeClass('d-none');
