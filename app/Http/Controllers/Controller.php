@@ -227,9 +227,9 @@ class Controller extends BaseController
         $change_time = Carbon::parse($change_time)->format("H:i:s");
         $now2 = Carbon::now()->format("H:i:s");
 
-        $timer_is_red = 1;
+        $timer_is_red = 0;
         if ($diffSeconds == 0 and $now2 < $change_time) {
-            $timer_is_red = 0;
+            $timer_is_red = 1;
         }
         return view('home.timer.index', compact('hours', 'minutes', 'seconds','timer_is_red'))->render();
     }
