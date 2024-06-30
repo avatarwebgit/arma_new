@@ -337,6 +337,9 @@
             if (seconds < 10) {
                 $barColor = '#c20000';
             }
+            if (seconds > 1800) {
+                $barColor = '#727272';
+            }
             // console.log('sec: ', sec);
             // if (min > 1) {
             //     pie = pie + (100 / (lop / min));
