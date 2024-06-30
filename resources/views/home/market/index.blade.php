@@ -41,7 +41,7 @@
 
 
                 if (status == 1) {
-                    waiting_to_open(status, market_id);
+                    waiting_to_open(status, market_id,difference);
                 }
                 if (status == 2) {
                     ready_to_open(status, market_id);
@@ -69,11 +69,15 @@
             });
 
 
-        function waiting_to_open(status, id) {
+        function waiting_to_open(status, id,difference) {
             hide_result(id);
-            deactive_bid(id);
-            let statusText = '<span>Waiting To Open</span>';
+            deactive_bid(id)
             let color = '#162fa2';
+            if (difference>1800){
+                color = '#727272';
+            }
+            let statusText = '<span>Waiting To Open</span>';
+
             change_market_status(status, color, statusText, id)
         }
 
