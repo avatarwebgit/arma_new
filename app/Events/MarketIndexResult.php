@@ -22,7 +22,6 @@ class MarketIndexResult implements  ShouldBroadcast
     public $timer,$market_status,$difference;
     public function __construct($timer,$market_status,$difference)
     {
-
         $this->timer = $timer;
         $this->market_status = $market_status;
         $this->difference = $difference;
