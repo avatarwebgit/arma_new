@@ -179,7 +179,7 @@ class Controller extends BaseController
             $color = '#c20000';
         }
 
-        $timer = $this->Timer($difference);
+        $timer = $this->Timer($difference, $start_market_time);
         $market_status = view('home.timer.market_status', compact('status_text', 'color'))->render();
 
 
@@ -207,7 +207,7 @@ class Controller extends BaseController
         return $close_market;
     }
 
-    function Timer($diffSeconds)
+    function Timer($diffSeconds, $start_market_time)
     {
         $days = floor($diffSeconds / 86400);
         $hours = floor(($diffSeconds - ($days * 86400)) / 3600);
@@ -225,13 +225,17 @@ class Controller extends BaseController
         $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
         $change_time = Carbon::parse($change_time)->format("H:i:s");
         $now2 = Carbon::now()->format("H:i:s");
+        $start_market_time=Carbon::parse($start_market_time)->format("H:i:s");
 
         $timer_is_red = 0;
         if ($diffSeconds == 0 and $now2 < $change_time) {
             $timer_is_red = 1;
+            if ($now2 < $start_market_time) {
+                $timer_is_red = 0;
+            }
         }
 
-        $midnight = Carbon::tomorrow()->format("H:i:s");
+        $midnight = Carbon::today()->format("H:i:s");
         if ($change_time < $now2 and $now2 < $midnight) {
             $timer_is_red = 0;
         }
@@ -384,31 +388,30 @@ class Controller extends BaseController
                 }
             }
 
+            $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
+            $change_time = Carbon::parse($change_time)->format("H:i:s");
+            $now2 = Carbon::now()->format("H:i:s");
+            $midnight = Carbon::tomorrow()->format("H:i:s");
+
             $market_values_html = '$' . number_format($market_values);
             $create_index_timer = $this->create_index_timer();
             $market_is_open = $create_index_timer['market_is_open'];
-            if ($market_is_open == 1) {
-                $market_values_html = '<span>' . $market_values_html . '</span>';
-            } else {
-                $market_values_html = '<span style="color: #c20000">' . $market_values_html . '</span>';
-            }
+
+            $timer_and_value_color = $this->timer_and_value_color($market_is_open, $market_values);
+            $color = $timer_and_value_color['color'];
+            $show_market_value = $timer_and_value_color['show_market_value'];
+
+
+            $market_values_html = '<span style="color: ' . $color . '">' . $market_values_html . '</span>';
+
             $now = Carbon::now();
             $is_login = auth()->check();
             $view_table = view('home.partials.market', compact('markets_groups', 'now', 'is_login'))->render();
-
-            $show_market_value = 0;
-            if ($market_values > 0) {
-                $show_market_value = 1;
-                $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
-                $change_time = Carbon::parse($change_time)->format("H:i:s");
-                $now2 = Carbon::now()->format("H:i:s");
-                $midnight = Carbon::tomorrow()->format("H:i:s");
-                if ($change_time < $now2 and $now2 < $midnight) {
-                    $show_market_value = 0;
-                }
+            $timer=null;
+            if ($show_market_value==0){
+                $timer=$this->Timer(0,0);
             }
-
-            broadcast(new MarketTableIndex($view_table, $market_values_html, $show_market_value));
+            broadcast(new MarketTableIndex($view_table, $market_values_html, $show_market_value,$timer));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return response()->json([0, $e->getMessage()]);
@@ -448,6 +451,51 @@ class Controller extends BaseController
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
+
+    }
+
+    public function timer_and_value_color($market_is_open, $market_values)
+    {
+        $show_market_value=1;
+        $yesterday = Carbon::yesterday();
+        $tomorrow = Carbon::tomorrow();
+        $first_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'asc')->first();
+        $start_market_time = Carbon::parse('00:00:00')->format("H:i:s");
+        $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
+        $change_time = Carbon::parse($change_time)->format("H:i:s");
+        $now = Carbon::now()->format("H:i:s");
+        //
+
+
+        //
+        //
+        if ($first_market) {
+            $start_market_time = Carbon::parse($first_market->time)->addMinutes(-30)->format("H:i:s");
+        }
+
+        if ($now < $start_market_time) {
+            $color = '#006';
+
+        } else {
+            if ($now < $change_time) {
+                if ($market_is_open == 1) {
+                    $color = '#006';
+                } else {
+                    $color = '#c20000';
+                }
+            } else {
+                $show_market_value=0;
+                $color = '#006';
+            }
+        }
+
+        if ($market_values < 0) {
+            $show_market_value = 0;
+        }
+        return [
+            'color' => $color,
+            'show_market_value' => $show_market_value,
+        ];
 
     }
 

@@ -2,19 +2,24 @@
 
 @section('script')
 
-
     <script type="module">
         window.Echo.channel('market-index-table')
             .listen('MarketTableIndex', function (e) {
                 let view_table = e.view_table;
                 let market_values_html = e.market_values_html;
                 let show_market_value = e.show_market_value;
+                let timer = e.timer;
                 $('#market_table').html(view_table);
                 $('#market_value').html(market_values_html);
-                if (show_market_value==0){
+                if (show_market_value == 0) {
                     $('#total_trade_value').addClass('d-none');
-                }else {
+                } else {
                     $('#total_trade_value').removeClass('d-none');
+                }
+                if (timer == null) {
+
+                } else {
+                    $('#timer_section').html(timer);
                 }
             });
 
@@ -338,7 +343,8 @@
         #market_index_table th {
             padding: 12px 0 !important;
         }
-        #dayOfWeek{
+
+        #dayOfWeek {
             font-size: 1.75rem !important;
         }
     </style>
@@ -412,7 +418,8 @@
                         <img src="{{ asset('home/img/3.png') }}" alt="">
                         <h3>Competitive and Transparent Business</h3>
                         <p>
-                            Parties have access to details of transactions and they have competition to discover the best price.
+                            Parties have access to details of transactions and they have competition to discover the
+                            best price.
                         </p>
                     </div>
                 </div>
