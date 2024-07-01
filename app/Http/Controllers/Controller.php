@@ -230,6 +230,11 @@ class Controller extends BaseController
         if ($diffSeconds == 0 and $now2 < $change_time) {
             $timer_is_red = 1;
         }
+
+        $midnight = Carbon::tomorrow()->format("H:i:s");
+        if ($change_time < $now2 and $now2 < $midnight) {
+            $timer_is_red = 0;
+        }
         return view('home.timer.index', compact('hours', 'minutes', 'seconds', 'timer_is_red'))->render();
     }
 
@@ -256,8 +261,8 @@ class Controller extends BaseController
         try {
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
-            $today=Carbon::today();
-            $the_day_after_tomorrow=Carbon::today()->copy()->addDay(2);
+            $today = Carbon::today();
+            $the_day_after_tomorrow = Carbon::today()->copy()->addDay(2);
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $tomorrow_markets_groups = Market::where('date', '>', $today)->where('date', '<', $the_day_after_tomorrow)->orderby('date', 'asc')->get()->groupby('date');
 
@@ -394,6 +399,13 @@ class Controller extends BaseController
             $show_market_value = 0;
             if ($market_values > 0) {
                 $show_market_value = 1;
+                $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
+                $change_time = Carbon::parse($change_time)->format("H:i:s");
+                $now2 = Carbon::now()->format("H:i:s");
+                $midnight = Carbon::tomorrow()->format("H:i:s");
+                if ($change_time < $now2 and $now2 < $midnight) {
+                    $show_market_value = 0;
+                }
             }
 
             broadcast(new MarketTableIndex($view_table, $market_values_html, $show_market_value));
