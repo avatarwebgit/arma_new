@@ -225,7 +225,7 @@ class Controller extends BaseController
         $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
         $change_time = Carbon::parse($change_time)->format("H:i:s");
         $now2 = Carbon::now()->format("H:i:s");
-        $start_market_time=Carbon::parse($start_market_time)->format("H:i:s");
+        $start_market_time = Carbon::parse($start_market_time)->format("H:i:s");
 
         $timer_is_red = 0;
         if ($diffSeconds == 0 and $now2 < $change_time) {
@@ -239,6 +239,13 @@ class Controller extends BaseController
         if ($change_time < $now2 and $now2 < $midnight) {
             $timer_is_red = 0;
         }
+        $yesterday = Carbon::yesterday();
+        $tomorrow = Carbon::yesterday();
+        $today_market_exists = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->exists();
+        if (!$today_market_exists) {
+            $timer_is_red = 1;
+        }
+
         return view('home.timer.index', compact('hours', 'minutes', 'seconds', 'timer_is_red'))->render();
     }
 
@@ -407,11 +414,8 @@ class Controller extends BaseController
             $now = Carbon::now();
             $is_login = auth()->check();
             $view_table = view('home.partials.market', compact('markets_groups', 'now', 'is_login'))->render();
-            $timer=null;
-            if ($show_market_value==0){
-                $timer=$this->Timer(0,0);
-            }
-            broadcast(new MarketTableIndex($view_table, $market_values_html, $show_market_value,$timer));
+
+            broadcast(new MarketTableIndex($view_table, $market_values_html, $show_market_value));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return response()->json([0, $e->getMessage()]);
@@ -456,7 +460,7 @@ class Controller extends BaseController
 
     public function timer_and_value_color($market_is_open, $market_values)
     {
-        $show_market_value=1;
+        $show_market_value = 1;
         $yesterday = Carbon::yesterday();
         $tomorrow = Carbon::tomorrow();
         $first_market = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('time', 'asc')->first();
@@ -484,7 +488,7 @@ class Controller extends BaseController
                     $color = '#c20000';
                 }
             } else {
-                $show_market_value=0;
+                $show_market_value = 0;
                 $color = '#006';
             }
         }
