@@ -3,11 +3,11 @@
 @section('breadcrumb')
     <div class="col-md-12">
         <div class="page-header-title">
-            <h4 class="m-b-10">{{ __('Header 1') }}</h4>
+            <h4 class="m-b-10">{{ __('Line 1') }}</h4>
         </div>
         <ul class="breadcrumb">
             <li class="breadcrumb-item">{!! Html::link(route('home'), __('Dashboard'), []) !!}</li>
-            <li class="breadcrumb-item active">{{ __('Header 1') }}</li>
+            <li class="breadcrumb-item active">{{ __('Line 1') }}</li>
         </ul>
     </div>
 @endsection

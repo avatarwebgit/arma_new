@@ -115,6 +115,7 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
         Route::get('setting/header1/edit/{id}', [Header1Controller::class, 'edit'])->name('header1.edit');
         Route::put('setting/header1/update/{item}', [Header1Controller::class, 'update'])->name('header1.update');
         Route::post('setting/header1/remove/{id}', [Header1Controller::class, 'remove'])->name('header1.remove');
+        Route::post('setting/header1/change_status', [Header1Controller::class, 'change_status'])->name('header1.change_status');
 
         Route::get('setting/header1/headers/{id}', [Header1Controller::class, 'headers'])->name('header1.category.headers.list');
         Route::get('setting/header1/cat/create', [Header1Controller::class, 'headers_create'])->name('header1.category.headers.create');
@@ -122,6 +123,7 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
         Route::get('setting/header1/cat/{id}', [Header1Controller::class, 'headers_edit'])->name('header1.category.headers.edit');
         Route::put('setting/header1/cat/{id}', [Header1Controller::class, 'headers_update'])->name('header1.category.headers.update');
         Route::post('setting/header1/cat/remove/{id}', [Header1Controller::class, 'headers_remove'])->name('header1.category.headers.remove');
+        Route::post('setting/header1/category/change_status', [Header1Controller::class, 'category_change_status'])->name('header1.category.change_status');
         //header2
         Route::get('setting/header2', [Header2Controller::class, 'index'])->name('header2.index');
         Route::get('setting/header2/create', [Header2Controller::class, 'create'])->name('header2.create');

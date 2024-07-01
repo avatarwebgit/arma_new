@@ -9,7 +9,7 @@ class Header1 extends Model
 {
     use HasFactory;
     protected $table="header1";
-    protected $guarded=[''];
+    protected $guarded=[];
 
     public function Category(){
         return $this->belongsTo(HeaderCategoryLine1::class,'cat_id','id');

@@ -23,7 +23,7 @@ class Header1Controller extends Controller
     {
         $categories = HeaderCategoryLine1::all();
         $currencies = HeaderCurencies::all();
-        return view('admin.header1.create', compact('categories', 'currencies','cat'));
+        return view('admin.header1.create', compact('categories', 'currencies', 'cat'));
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class Header1Controller extends Controller
         ]);
         try {
 
-            $item=Header1::create($request->all());
+            $item = Header1::create($request->all());
 
             $type = 'success';
             $msg = 'The Item Has Been Created Successfully';
@@ -50,10 +50,10 @@ class Header1Controller extends Controller
             $msg = $exception->getMessage();
         }
         $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
-        $html=view('home.sections.header1',compact('header1_categories'))->render();
-        broadcast(new LIneHeaderUpdated($html,1,null));
+        $html = view('home.sections.header1', compact('header1_categories'))->render();
+        broadcast(new LIneHeaderUpdated($html, 1, null));
         session()->flash($type, $msg);
-        return redirect()->route('admin.header1.category.headers.list',['id'=>$item->cat_id]);
+        return redirect()->route('admin.header1.category.headers.list', ['id' => $item->cat_id]);
     }
 
     public function edit($id)
@@ -78,9 +78,9 @@ class Header1Controller extends Controller
         ]);
         $item = Header1::where('id', $id)->first();
         $item->update($request->all());
-        $html=view('home.sections.header1_row',compact('item'))->render();
-        broadcast(new LIneHeaderUpdated($html,1,$item->id));
-        return redirect()->route('admin.header1.category.headers.list',['id'=>$item->cat_id])
+        $html = view('home.sections.header1_row', compact('item'))->render();
+        broadcast(new LIneHeaderUpdated($html, 1, $item->id));
+        return redirect()->route('admin.header1.category.headers.list', ['id' => $item->cat_id])
             ->with('success', __('Header 1 updated successfully.'));
     }
 
@@ -92,8 +92,8 @@ class Header1Controller extends Controller
             $item->delete();
             $message = 'The Item Has Been Deleted Successfully';
             $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
-            $html=view('home.sections.header1',compact('header1_categories'))->render();
-            broadcast(new LIneHeaderUpdated($html,1,null));
+            $html = view('home.sections.header1', compact('header1_categories'))->render();
+            broadcast(new LIneHeaderUpdated($html, 1, null));
 
             return redirect()->back()->with('success', __($message));
         } catch (\Exception $exception) {
@@ -104,10 +104,25 @@ class Header1Controller extends Controller
 
     }
 
+    public function change_status(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $status = $request->value == 'true' ? 1 : 0;
+            $item = Header1::findOrFail($id);
+            $item->update([
+                'status' => $status
+            ]);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $exception) {
+            return response()->json([0, $exception->getMessage()]);
+        }
+    }
+
     public function headers(HeaderCategoryLine1 $id)
     {
         $items = $id->Headers()->orderBy('priority', 'asc')->get()->groupBy('priority');
-        return view('admin.header1.index', compact('items','id'));
+        return view('admin.header1.index', compact('items', 'id'));
     }
 
     public function headers_create()
@@ -159,8 +174,8 @@ class Header1Controller extends Controller
             $item->delete();
             $message = 'The Item Has Been Deleted Successfully';
             $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
-            $html=view('home.sections.header1',compact('header1_categories'))->render();
-            broadcast(new LIneHeaderUpdated($html,1,null));
+            $html = view('home.sections.header1', compact('header1_categories'))->render();
+            broadcast(new LIneHeaderUpdated($html, 1, null));
             return redirect()->back()->with('success', __($message));
         } catch (\Exception $exception) {
 
@@ -168,5 +183,20 @@ class Header1Controller extends Controller
         }
 
 
+    }
+
+    public function category_change_status(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $status = $request->value == 'true' ? 1 : 0;
+            $item = HeaderCategoryLine1::findOrFail($id);
+            $item->update([
+                'status' => $status
+            ]);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $exception) {
+            return response()->json([0, $exception->getMessage()]);
+        }
     }
 }
