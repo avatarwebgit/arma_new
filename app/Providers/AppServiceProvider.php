@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
         $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
         $copy_right = Setting::where('key', 'copy_right')->pluck('value')->first();
         $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status',1)->get();
-        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status',1)->get();
+        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
         view()->share(
             compact(
                 'header1',
