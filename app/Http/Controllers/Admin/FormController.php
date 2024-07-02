@@ -76,6 +76,7 @@ class FormController extends Controller
 
     public function sales_form($page_type = 'Create', $item = 'null')
     {
+
         $role = \auth()->user()->Roles()->first()->name;
 //        session()->forget('form_id_exists');
         $sale_form_exist = 0;
@@ -130,6 +131,7 @@ class FormController extends Controller
         $cargoInsurance = CargoInsurance::all();
         $contract_types = ContractType::all();
         $platforms = PlatFom::all();
+
         return view('admin.sales_form.create', compact(
             'sale_form_exist',
             'form',
@@ -161,7 +163,123 @@ class FormController extends Controller
         ));
     }
 
-    public function sales_form_update_or_store(Request $request, $item = null)
+    public function sales_form_preparation($item)
+    {
+        $role = \auth()->user()->Roles()->first()->name;
+        $previous_form_id = false;
+        $sale_form_exist = 1;
+        $route = route('sale_form.update_or_store', ['item' => $item, 'is_preparation' => 1]);
+        $form = SalesOfferForm::where('id', $item)->first();
+        $company_types = CompanyType::all();
+        $unites = Units::all();
+        $currencies = Currency::all();
+        $tolerance_weight_by = ToleranceWeightBy::all();
+        $Incoterms = Incoterms::all();
+        $incoterms_version = IncotermsVersion::all();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
+        $priceTypes = PriceType::all();
+        $paymentTerms = PaymentTerm::all();
+        $packing = Packing::all();
+        $shipping_terms = ShippingTerm::all();
+        $container_types = ContainerType::all();
+        $thcincluded = THCIncluded::all();
+        $flexi_type_tank = FlexiTankType::all();
+        $destination = Destination::all();
+        $targetMarket = TargetMarket::all();
+        $qualityQuantityInspector = QualityQuantityInspector::all();
+        $InspectionPlace = InspectionPlace::all();
+        $cargoInsurance = CargoInsurance::all();
+        $contract_types = ContractType::all();
+        $platforms = PlatFom::all();
+
+        return view('admin.sales_form_preparation', compact(
+            'sale_form_exist',
+            'form',
+            'route',
+            'company_types',
+            'unites',
+            'currencies',
+            'tolerance_weight_by',
+            'Incoterms',
+            'incoterms_version',
+            'countries',
+            'priceTypes',
+            'paymentTerms',
+            'packing',
+            'container_types',
+            'shipping_terms',
+            'thcincluded',
+            'flexi_type_tank',
+            'destination',
+            'targetMarket',
+            'qualityQuantityInspector',
+            'InspectionPlace',
+            'cargoInsurance',
+            'contract_types',
+            'platforms',
+            'item',
+            'role',
+            'previous_form_id'
+        ));
+    }
+
+    public function sales_form_preparation_store(Request $request, $form_id)
+    {
+        try {
+            $term_conditions = $request->term_conditions;
+            $files = ['specification_file', 'picture_packing_file', 'quality_inspection_report_file', 'safety_product_file', 'reach_certificate_file'];
+            $env = env('SALE_OFFER_FORM');
+            $sale_form = SalesOfferForm::where('id', $form_id)->first();
+            $array = [];
+            foreach ($files as $file) {
+                if ($request->has($file)) {
+                    $path = \public_path($env . '/' . $sale_form[$file]);
+                    if (isset($path) and !is_dir($path)) {
+                        unlink($path);
+                    }
+                    $file_name = $this->Upload_files($env, $request[$file]);
+                } else {
+                    $file_name = $sale_form[$file];
+                }
+                $array[$file] = $file_name;
+            }
+            $array['term_conditions'] = $term_conditions;
+            $sale_form->update($array);
+            session()->flash('success', 'Your Information has been saved successfully');
+            session()->flash('contact-tab','ok');
+
+            return redirect()->route('sale_form.preparation', ['item' => $sale_form->id]);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+
+    }
+
+    public function sales_form_preparation_remove_file(Request $request)
+    {
+        try {
+            $env = env('SALE_OFFER_FORM');
+            $form_id = $request->id;
+            $file = $request->file_name;
+            $sale_form = SalesOfferForm::where('id', $form_id)->first();
+            $path = \public_path($env . '/' . $sale_form[$file]);
+            if (isset($path) and !is_dir($path) and file_exists($path)) {
+                unlink($path);
+            }
+            $sale_form->update([
+                $file => null
+            ]);
+            session()->flash('contact-tab','ok');
+            return response()->json([1, 'ok']);
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+    }
+
+    public function sales_form_update_or_store(Request $request, $item = null, $is_preparation = null)
     {
         $is_complete = 0;
         $rules = $this->rules($item);
@@ -200,8 +318,6 @@ class FormController extends Controller
         $validate_items['accept_terms'] = $accept_terms;
         $validate_items['is_complete'] = $is_complete;
         $validate_items['status'] = 1;
-
-
         if ($item != null) {
 
             $sale_form = SalesOfferForm::where('id', $item)->first();
@@ -252,7 +368,10 @@ class FormController extends Controller
         }
 
         session()->flash('success', 'Your Information has been saved successfully');
-        return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
+        if ($is_preparation == null) {
+            return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
+        }
+        return redirect()->route('sale_form.preparation', ['item' => $sale_form->id]);
 
     }
 
@@ -437,7 +556,7 @@ class FormController extends Controller
                     $new_status = 6;
                 } else {
                     $new_status = 2;
-                    $message='You Need To Charge Your Wallet Up To :'.$deposit_value.'( '.$currency.' )';
+                    $message = 'You Need To Charge Your Wallet Up To :' . $deposit_value . '( ' . $currency . ' )';
                 }
             }
             $form_id = $request->form_id;
@@ -466,7 +585,7 @@ class FormController extends Controller
             $amount = $request->amount;
             $currency = $request->currency;
             $sale_form = SalesOfferForm::where('id', $id)->first();
-            $message='You Need To Charge Your Wallet Up To :'.$amount.'( '.$currency.' )';
+            $message = 'You Need To Charge Your Wallet Up To :' . $amount . '( ' . $currency . ' )';
             $sale_form->update([
                 'deposit_value' => $amount,
                 'cash_pending_currency' => $currency,
