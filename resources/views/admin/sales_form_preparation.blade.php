@@ -7,18 +7,21 @@
             <div class="row">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link {{ session()->exists('contact-tab') ? '' : 'active' }}" id="home-tab" data-toggle="tab" data-target="#home"
+                        <button class="nav-link {{ session()->exists('contact-tab') ? '' : 'active' }}" id="home-tab"
+                                data-toggle="tab" data-target="#home"
                                 type="button" role="tab" aria-controls="home" aria-selected="true">Sale Form
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link {{ session()->exists('contact-tab') ? 'active' : '' }}"  id="contact-tab" data-toggle="tab" data-target="#contact" type="button"
+                        <button class="nav-link {{ session()->exists('contact-tab') ? 'active' : '' }}" id="contact-tab"
+                                data-toggle="tab" data-target="#contact" type="button"
                                 role="tab" aria-controls="contact" aria-selected="false">Term & Conditions
                         </button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade {{ session()->exists('contact-tab') ? '' : 'show active' }} " id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tab-pane fade {{ session()->exists('contact-tab') ? '' : 'show active' }} " id="home"
+                         role="tabpanel" aria-labelledby="home-tab">
                         <div class="row mt-4">
                             <div class="col-12">
                                 <div class="tab-content" id="v-pills-tabContent">
@@ -26,7 +29,12 @@
                                          aria-labelledby="settings-profile-tab">
                                         <div class="card">
                                             <div class="card-body">
+                                                <a href="{{ route('admin.sales_form.index',['status'=>6]) }}"
+                                                   class="btn btn-dark bt-sm mb-3">
+                                                    Back
+                                                </a>
                                                 <div class="settings-profile">
+
                                                     <form id="sales_form" method="POST" action="{{ $route }}"
                                                           enctype="multipart/form-data">
                                                         @csrf
@@ -199,17 +207,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade {{ session()->exists('contact-tab') ? 'show active' : '' }}" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="tab-pane fade {{ session()->exists('contact-tab') ? 'show active' : '' }}" id="contact"
+                         role="tabpanel" aria-labelledby="contact-tab">
                         <div class="row mt-4">
                             <div class="col-12">
                                 <div class="card">
-                                    <form action="{{ route('sale_form.preparation_store',['form_id'=>$form->id]) }}"
+                                    <form id="term_form"
+                                          action="{{ route('sale_form.preparation_store',['form_id'=>$form->id]) }}"
                                           method="post" class="card-body" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
-                                            <h5 class="text-center text-info text-center p-3 commodity-title menu-mobile">
-                                                {{ $form->commodity }}
-                                            </h5>
                                             <div class="col-12 col-md-3">
                                                 <div id="commodity_information" style="width: 100%">
                                                     <div class="d-flex justify-content-between">
@@ -316,7 +323,7 @@
                                                         <span class="text-bold text-light-blue ">
             @if($form->gtc_use=='Link')
                                                                 <a target="_blank"
-                                                                   href="{{ $gtc_Link }}">
+                                                                   href="{{ $form->gtc_Link }}">
                             Download
                         </a>
                                                             @else
@@ -360,16 +367,16 @@
                                                                     No File
                                                                 </button>
                                                             @else
-                                                            <a target="_blank" class="btn btn-primary ml5"
-                                                               href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->specification_file)) }}">
-                                                                <i class="fa fa-file fa-2x"></i>
-                                                            </a>
+                                                                <a target="_blank" class="btn btn-primary ml5"
+                                                                   href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->specification_file)) }}">
+                                                                    <i class="fa fa-file fa-2x"></i>
+                                                                </a>
 
-                                                            <button type="button"
-                                                                    onclick="RemoveFile('specification_file')"
-                                                                    class="btn btn-danger ml5">
-                                                                <i class="fa fa-times-circle fa-2x"></i>
-                                                            </button>
+                                                                <button type="button"
+                                                                        onclick="RemoveFile('specification_file')"
+                                                                        class="btn btn-danger ml5">
+                                                                    <i class="fa fa-times-circle fa-2x"></i>
+                                                                </button>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -385,16 +392,16 @@
                                                                     No File
                                                                 </button>
                                                             @else
-                                                            <a target="_blank" class="btn btn-primary ml5"
-                                                               href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->quality_inspection_report_file)) }}">
-                                                                <i class="fa fa-file fa-2x"></i>
-                                                            </a>
+                                                                <a target="_blank" class="btn btn-primary ml5"
+                                                                   href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->quality_inspection_report_file)) }}">
+                                                                    <i class="fa fa-file fa-2x"></i>
+                                                                </a>
 
-                                                            <button type="button"
-                                                                    onclick="RemoveFile('quality_inspection_report_file')"
-                                                                    class="btn btn-danger ml5">
-                                                                <i class="fa fa-times-circle fa-2x"></i>
-                                                            </button>
+                                                                <button type="button"
+                                                                        onclick="RemoveFile('quality_inspection_report_file')"
+                                                                        class="btn btn-danger ml5">
+                                                                    <i class="fa fa-times-circle fa-2x"></i>
+                                                                </button>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -410,16 +417,16 @@
                                                                     No File
                                                                 </button>
                                                             @else
-                                                            <a target="_blank" class="btn btn-primary ml5"
-                                                               href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->picture_packing_file)) }}">
-                                                                <i class="fa fa-file fa-2x"></i>
-                                                            </a>
+                                                                <a target="_blank" class="btn btn-primary ml5"
+                                                                   href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->picture_packing_file)) }}">
+                                                                    <i class="fa fa-file fa-2x"></i>
+                                                                </a>
 
-                                                            <button type="button"
-                                                                    onclick="RemoveFile('picture_packing_file')"
-                                                                    class="btn btn-danger ml5">
-                                                                <i class="fa fa-times-circle fa-2x"></i>
-                                                            </button>
+                                                                <button type="button"
+                                                                        onclick="RemoveFile('picture_packing_file')"
+                                                                        class="btn btn-danger ml5">
+                                                                    <i class="fa fa-times-circle fa-2x"></i>
+                                                                </button>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -435,16 +442,16 @@
                                                                     No File
                                                                 </button>
                                                             @else
-                                                            <a target="_blank" class="btn btn-primary ml5"
-                                                               href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->safety_product_file)) }}">
-                                                                <i class="fa fa-file fa-2x"></i>
-                                                            </a>
+                                                                <a target="_blank" class="btn btn-primary ml5"
+                                                                   href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->safety_product_file)) }}">
+                                                                    <i class="fa fa-file fa-2x"></i>
+                                                                </a>
 
-                                                            <button type="button"
-                                                                    onclick="RemoveFile('safety_product_file')"
-                                                                    class="btn btn-danger ml5">
-                                                                <i class="fa fa-times-circle fa-2x"></i>
-                                                            </button>
+                                                                <button type="button"
+                                                                        onclick="RemoveFile('safety_product_file')"
+                                                                        class="btn btn-danger ml5">
+                                                                    <i class="fa fa-times-circle fa-2x"></i>
+                                                                </button>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -486,10 +493,21 @@
                                                           id="term_conditions">{{ old('term_conditions') !== null ? old('term_conditions') : $form->term_conditions }}</textarea>
                                             </div>
                                         </div>
-
-                                        <button class="btn btn-primary mt-3">
-                                            Save
-                                        </button>
+                                        <input type="hidden" name="form_type" id="form_type">
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('admin.sales_form.index',['status'=>6]) }}"
+                                               class="button-theme mt-3">
+                                                Cancel
+                                            </a>
+                                            <button onclick="submitForm('save')" type="button"
+                                                    class="button-theme mt-3">
+                                                Save
+                                            </button>
+                                            <button onclick="submitForm('confirm')" type="button"
+                                                    class="button-theme mt-3">
+                                                Confirm
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -520,7 +538,7 @@
                 <div class="modal-footer">
                     <input id="form_id" type="hidden" value="">
                     <input id="field" type="hidden" value="">
-                    <button type="button" class="btn btn-info" data-dismiss="modal" >
+                    <button type="button" class="btn btn-info" data-dismiss="modal">
                         Cancel
                     </button>
                     <button onclick="RemoveFileModal()" type="button" class="btn btn-danger">
@@ -592,8 +610,20 @@
             opacity: 1;
             color: #606060;
         }
-        #cke_1_contents{
+
+        #cke_1_contents {
             height: 800px !important;
+        }
+
+        .button-theme {
+            padding: 5px;
+            width: 130px;
+            margin: 5px;
+            background: white;
+            border: 1px solid;
+            display: block;
+            text-align: center;
+            color: black;
         }
     </style>
 @endpush
@@ -602,6 +632,11 @@
     @include('admin.sales_form.script')
 
     <script>
+        function submitForm(type) {
+            $('#form_type').val(type);
+            $('#term_form').submit();
+        }
+
         function RemoveFile(file_name) {
             let id = "{{ $form->id }}";
             $('#remove_modal').modal('show');
@@ -609,19 +644,19 @@
             $('#field').val(file_name);
         }
 
-        function RemoveFileModal(){
-            let id=$('#form_id').val();
-            let file_name=$('#field').val();
+        function RemoveFileModal() {
+            let id = $('#form_id').val();
+            let file_name = $('#field').val();
             $.ajax({
-                url:"{{ route('sale_form.preparation.remove_file') }}",
-                dataType:"json",
-                method:"post",
-                data:{
-                    id:id,
-                    file_name:file_name,
-                    _token : "{{ csrf_token() }}"
+                url: "{{ route('sale_form.preparation.remove_file') }}",
+                dataType: "json",
+                method: "post",
+                data: {
+                    id: id,
+                    file_name: file_name,
+                    _token: "{{ csrf_token() }}"
                 },
-                success: function(msg){
+                success: function (msg) {
                     window.location.reload();
                 }
             })
@@ -630,7 +665,7 @@
 
     <script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
     <script>
-        CKEDITOR.replace( 'term_conditions' ,{
+        CKEDITOR.replace('term_conditions', {
             language: 'en',
             filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
