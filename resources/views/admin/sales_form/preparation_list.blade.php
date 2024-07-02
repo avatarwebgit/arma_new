@@ -35,7 +35,7 @@
         </td>
 
         <td>
-            <a href="{{ route('sale_form.preparation',['item'=>$form->id]) }}"
+            <a href="{{ route('sale_form',['page_type'=>'Edit','item'=>$form->id]) }}"
                class="btn btn-sm btn-info text-white mr-1">
                 <i class="fa fa-pen"></i>
             </a>
