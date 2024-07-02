@@ -108,8 +108,21 @@ class Header2Controller extends Controller
 
             return redirect()->back()->with('failed', __($exception->getMessage()));
         }
+    }
 
-
+    public function change_status(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $status = $request->value == 'true' ? 1 : 0;
+            $item = Header2::findOrFail($id);
+            $item->update([
+                'status' => $status
+            ]);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $exception) {
+            return response()->json([0, $exception->getMessage()]);
+        }
     }
 
 
@@ -175,7 +188,20 @@ class Header2Controller extends Controller
 
             return redirect()->back()->with('failed', __($exception->getMessage()));
         }
+    }
 
-
+    public function category_change_status(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $status = $request->value == 'true' ? 1 : 0;
+            $item = HeaderCategory::findOrFail($id);
+            $item->update([
+                'status' => $status
+            ]);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $exception) {
+            return response()->json([0, $exception->getMessage()]);
+        }
     }
 }

@@ -7,7 +7,7 @@
                         {{ $header2->title }}
                     </strong>
                 </div>
-                @foreach($header2->Headers()->orderBy('priority','asc')->get() as $key=>$item)
+                @foreach($header2->Headers()->orderBy('priority','asc')->where('status',1)->get() as $key=>$item)
                     <div id="header2-{{ $item->id }}-{{ $i }}">
                         @include('home.sections.header2_row')
                     </div>
@@ -16,5 +16,6 @@
         @endforeach
     @endfor
 </div>
+
 
 
