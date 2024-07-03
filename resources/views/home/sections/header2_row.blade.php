@@ -18,7 +18,7 @@
     @endphp
 @endif
 
-@if($itme->status==1)
+@if($item->status==1)
     <div class="d-flex">
         <div class="animation_main_div">
             <div class="circle " style="background-color: {{ $color }} !important;"></div>
