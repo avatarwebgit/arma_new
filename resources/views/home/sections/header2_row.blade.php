@@ -1,24 +1,25 @@
+@if($item->number_3>0)
+    @php
+        $class='text-success';
+        $color='green';
+        $number_3='+'.$item->number_3;
+    @endphp
+@elseif($item->number_3<0)
+    @php
+        $class='text-danger';
+        $color='red';
+        $number_3=$item->number_3;
+    @endphp
+@else
+    @php
+        $class='white';
+        $color='gray';
+        $number_3=$item->number_3;
+    @endphp
+@endif
 
-    @if($item->number_3>0)
-        @php
-            $class='text-success';
-            $color='green';
-            $number_3='+'.$item->number_3;
-        @endphp
-    @elseif($item->number_3<0)
-        @php
-            $class='text-danger';
-            $color='red';
-            $number_3=$item->number_3;
-        @endphp
-    @else
-        @php
-            $class='white';
-            $color='gray';
-            $number_3=$item->number_3;
-        @endphp
-    @endif
-    <div class="d-flex" >
+@if($itme->status==1)
+    <div class="d-flex">
         <div class="animation_main_div">
             <div class="circle " style="background-color: {{ $color }} !important;"></div>
             <div class="circle2" style="background-color: {{ $color }} !important;"></div>
@@ -60,11 +61,11 @@
             @if(isset($loop) and  $loop->last)
 
             @else
-                <span class="d-block" style="width: 1px;height: 80%;background-color: white;margin-left: 5px;margin-right: 5px"></span>
+                <span class="d-block"
+                      style="width: 1px;height: 80%;background-color: white;margin-left: 5px;margin-right: 5px"></span>
             @endif
         </div>
     </div>
-
-
+@endif
 
 
