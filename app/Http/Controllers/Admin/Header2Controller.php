@@ -54,7 +54,7 @@ class Header2Controller extends Controller
             $msg = $exception->getMessage();
         }
         session()->flash($type, $msg);
-        $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
+        $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status',1)->get();
         $html=view('home.sections.header1',compact('header2_categories'))->render();
         broadcast(new LIneHeaderUpdated($html,1,null));
         return redirect()->route('admin.header2.index');
@@ -100,7 +100,7 @@ class Header2Controller extends Controller
 
             $item->delete();
             $message = 'The Item Has Been Deleted Successfully';
-            $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
+            $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status',1)->get();
             $html=view('home.sections.header1',compact('header2_categories'))->render();
             broadcast(new LIneHeaderUpdated($html,1,null));
             return redirect()->back()->with('success', __($message));
@@ -119,6 +119,8 @@ class Header2Controller extends Controller
             $item->update([
                 'status' => $status
             ]);
+            $html=view('home.sections.header2_row',compact('item'))->render();
+            broadcast(new LIneHeaderUpdated($html,2,$item->id));
             return response()->json([1, 'ok']);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
@@ -180,7 +182,7 @@ class Header2Controller extends Controller
             }
             $item->delete();
             $message = 'The Item Has Been Deleted Successfully';
-            $header2_categories = HeaderCategory::orderBy('priority', 'asc')->get();
+            $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status',1)->get();
             $html=view('home.sections.header1',compact('header2_categories'))->render();
             broadcast(new LIneHeaderUpdated($html,1,null));
             return redirect()->back()->with('success', __($message));
@@ -199,6 +201,9 @@ class Header2Controller extends Controller
             $item->update([
                 'status' => $status
             ]);
+            $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status',1)->get();
+            $html=view('home.sections.header1',compact('header2_categories'))->render();
+            broadcast(new LIneHeaderUpdated($html,1,null));
             return response()->json([1, 'ok']);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);

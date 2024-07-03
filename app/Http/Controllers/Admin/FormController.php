@@ -225,12 +225,19 @@ class FormController extends Controller
 
     public function sales_form_preparation_store(Request $request, $form_id)
     {
+        $form_type = $request->form_type;
+        $status = 5;
+        if ($form_type == 'save') {
+            $status = 6;
+        }
         try {
             $term_conditions = $request->term_conditions;
             $files = ['specification_file', 'picture_packing_file', 'quality_inspection_report_file', 'safety_product_file', 'reach_certificate_file'];
             $env = env('SALE_OFFER_FORM');
             $sale_form = SalesOfferForm::where('id', $form_id)->first();
-            $array = [];
+            $array = [
+                'status' => $status
+            ];
             foreach ($files as $file) {
                 if ($request->has($file)) {
                     $path = \public_path($env . '/' . $sale_form[$file]);
@@ -246,7 +253,7 @@ class FormController extends Controller
             $array['term_conditions'] = $term_conditions;
             $sale_form->update($array);
             session()->flash('success', 'Your Information has been saved successfully');
-            session()->flash('contact-tab','ok');
+            session()->flash('contact-tab', 'ok');
 
             return redirect()->route('sale_form.preparation', ['item' => $sale_form->id]);
         } catch (\Exception $e) {
@@ -270,7 +277,7 @@ class FormController extends Controller
             $sale_form->update([
                 $file => null
             ]);
-            session()->flash('contact-tab','ok');
+            session()->flash('contact-tab', 'ok');
             return response()->json([1, 'ok']);
 
         } catch (\Exception $e) {

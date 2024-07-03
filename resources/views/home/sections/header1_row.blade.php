@@ -33,28 +33,29 @@
         $color='#6c757d';
     @endphp
 @endif
-<div class="d-flex" >
-    <div>
-        <div style="font-size: 15px">
-            {{ $item->title }}
-        </div>
-        @if($item->currency=='' or $item->currency==null)
-            <div style="font-size: 12px">
-                {{ $item->title_2 }}
+@if($item->status==1)
+    <div class="d-flex" >
+        <div>
+            <div style="font-size: 15px">
+                {{ $item->title }}
             </div>
-        @else
-            <div style="font-size: 12px">
-                {{ $item->title_2.' ('.$item->currency.')' }}
-            </div>
-        @endif
+            @if($item->currency=='' or $item->currency==null)
+                <div style="font-size: 12px">
+                    {{ $item->title_2 }}
+                </div>
+            @else
+                <div style="font-size: 12px">
+                    {{ $item->title_2.' ('.$item->currency.')' }}
+                </div>
+            @endif
 
-    </div>
-    <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
-        @if($img_display)
-            <img width="15" src="{{ asset($src) }}">
-        @endif
-    </div>
-    <div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center ml-3 mr-3">
+            @if($img_display)
+                <img width="15" src="{{ asset($src) }}">
+            @endif
+        </div>
+        <div>
 
                                         <span class="d-block text-center {{ $class }}">
                             {{ $item->number_1 }}
@@ -67,20 +68,22 @@
                         </span>
 
 
-        <span class="d-block text-center {{ $class }}">
+            <span class="d-block text-center {{ $class }}">
                             {{ $number3 }}
                         </span>
-    </div>
-    <div class="d-flex justify-content-center align-items-center">
-        @if(isset($loop) and $loop->last)
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            @if(isset($loop) and $loop->last)
 
-        @else
-            <span class="d-block"
-                  style="width: 1px;height: 50%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
-        @endif
+            @else
+                <span class="d-block"
+                      style="width: 1px;height: 50%;background-color: black;margin-left: 5px;margin-right: 5px"></span>
+            @endif
 
+        </div>
     </div>
-</div>
+@endif
+
 
 
 
