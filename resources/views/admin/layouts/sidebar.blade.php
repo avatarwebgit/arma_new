@@ -18,6 +18,9 @@
                 </li>
                 @php
                     $pending_count=\App\Models\User::where('active_status',0)->count();
+                    $index_count=\App\Models\User::all()->count();
+                    $confirmed_count=\App\Models\User::where('active_status',1)->count();
+                    $rejected_count=\App\Models\User::where('active_status',2)->count();
                 @endphp
 
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/users*') ? 'active dash-trigger' : 'collapsed' }}">
@@ -35,20 +38,57 @@
                     <ul class="dash-submenu">
                         <li class="dash-item {{ request()->is('users/1*') ? 'active' : '' }}">
                             <a class="dash-link"
-                               href="{{ route('admin.users.index',['type'=>1]) }}">{{ __('Registered Users') }}</a>
+                               href="{{ route('admin.users.index',['type'=>'all']) }}">
+                                Index ({{ $index_count }})
+                            </a>
                         </li>
                         <li class="dash-item d-flex align-items-center {{ request()->is('users*') ? 'active' : '' }}">
                             <a class="dash-link"
-                               href="{{ route('admin.users.index',['type'=>0]) }}">{{ __('Pending Users') }}</a>
-                            @if($pending_count>0)
-                                <span class="circle-notification">{{ $pending_count }}</span>
-                            @endif
+                               href="{{ route('admin.users.index',['type'=>0]) }}">Registering ({{ $pending_count }}
+                                )</a>
                         </li>
                         <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
                             <a class="dash-link"
-                               href="{{ route('admin.users.index',['type'=>2]) }}">{{ __('Denied Users') }}</a>
+                               href="{{ route('admin.users.index',['type'=>2]) }}">
+                                Rejected Users ({{ $rejected_count }})
+                            </a>
+                        </li>
+                        <li class="dash-item">
+                            <a class="dash-link"
+                               href="{{ route('admin.users.index',['type'=>1]) }}">
+                                Confirmed ({{ $confirmed_count }})
+                            </a>
+                        </li>
+                        <li class="dash-item">
+                            <a class="dash-link"
+                               href="">
+                                Sellers (0)
+                            </a>
+                        </li>
+                        <li class="dash-item">
+                            <a class="dash-link"
+                               href="">
+                                Buyers (0)
+                            </a>
+                        </li>
+                        <li class="dash-item">
+                            <a class="dash-link"
+                               href="">
+                                Members (0)
+                            </a>
                         </li>
 
+                        <li class="dash-item">
+                            <a class="dash-link"
+                               href="">
+                                Representatives (0)
+                            </a>
+                        </li>
+                        <li class="dash-item">
+                            <a class="dash-link" href="">
+                                Brokers (0)
+                            </a>
+                        </li>
 
                         <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">
                             <a class="dash-link" href="{{ route('admin.roles.index') }}">{{ __('Roles') }}</a>
@@ -59,31 +99,6 @@
                         </li>
                     </ul>
 
-                </li>
-                <li class="">
-                    @php
-                        $refund=\App\Models\Refund::where('status','<',3)->get();
-                    @endphp
-                    <a href="{{ route('admin.refund_request') }}" class="dash-link">
-                            <span class="dash-micon">
-                                <i class="fa fa-pen"></i>
-                            </span>
-                        <span class="dash-mtext custom-weight">
-                                Refund Request @if(count($refund)>0)
-                                <span class="circle_alert">{{ count($refund) }}</span>
-                            @endif
-                            </span>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{ route('sale_form',['page_type'=>'Create']) }}" class="dash-link">
-                            <span class="dash-micon">
-                                <i class="fa fa-pen"></i>
-                            </span>
-                        <span class="dash-mtext custom-weight">
-                                Sales Order
-                            </span>
-                    </a>
                 </li>
                 @php
                     $inbox_count=\App\Models\SalesOfferForm::where('status',1)->count();
@@ -130,12 +145,12 @@
                         </li>
                         <li class="dash-item d-flex align-items-center">
                             <a href="{{ route('admin.sales_form.index',['status'=>4]) }}" class="dash-link"><span
-                                    class="dash-mtext custom-weight">{{ __('Rejected').'('.$reject_count.')' }}
+                                    class="dash-mtext custom-weight">{{ __('Rejected Inquiries').'('.$reject_count.')' }}
                             </a>
                         </li>
                         <li class="dash-item d-flex align-items-center">
                             <a href="{{ route('admin.sales_form.index',['status'=>6]) }}" class="dash-link"><span
-                                    class="dash-mtext custom-weight">{{ __('preparation').'('.$preparation_count.')' }}
+                                    class="dash-mtext custom-weight">{{ __('Preparation').'('.$preparation_count.')' }}
                             </a>
                         </li>
                         <li class="dash-item d-flex align-items-center">
@@ -146,19 +161,92 @@
                     </ul>
                 </li>
 
+                @php
+                    $market_count=\App\Models\Market::all()->count();
+                @endphp
+
+                <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/markets*') ? 'active dash-trigger' : 'collapsed' }}">
+                    <a href="#!" class="dash-link">
+                            <span class="dash-micon">
+                <i class="ti ti-table"></i></span><span
+                            class="dash-mtext">{{ __('Markets') }}</span><span class="dash-arrow"><i
+                                data-feather="chevron-right"></i></span></a>
+                    <ul class="dash-submenu">
+                        <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
+                            <a class="dash-link"
+                               onclick="createMarketModal()" >Create Market</a>
+                        </li>
+                        <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
+                            <a class="dash-link"
+                               href="{{ route('admin.markets.index') }}">Markets ({{ $market_count }})</a>
+                        </li>
+                        <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
+                            <a class="dash-link"
+                               href="{{ route('admin.markets.settings') }}">{{ __('Market Setting') }}</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/markets*') ? 'active dash-trigger' : 'collapsed' }}">
+                    <a href="#!" class="dash-link">
+                            <span class="dash-micon">
+                <i class="ti ti-table"></i></span><span
+                            class="dash-mtext">{{ __('Sales Order') }}</span><span class="dash-arrow"><i
+                                data-feather="chevron-right"></i></span></a>
+                    <ul class="dash-submenu">
+                        <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
+                            <a class="dash-link" href="{{ route('sale_form',['page_type'=>'Create']) }}">Sales Offer Form</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/markets*') ? 'active dash-trigger' : 'collapsed' }}">
+                    <a href="#!" class="dash-link">
+                            <span class="dash-micon">
+                <i class="ti ti-table"></i></span><span
+                            class="dash-mtext">{{ __('Bid Deposit') }}</span><span class="dash-arrow"><i
+                                data-feather="chevron-right"></i></span></a>
+                    <ul class="dash-submenu">
+                        @php
+                            $refund=\App\Models\Refund::where('status','<',3)->get();
+                        @endphp
+                        <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
+                            <a class="dash-link" href="{{ route('admin.refund_request') }}">
+                                Refund Request @if(count($refund)>0)
+                                    <span class="circle_alert">{{ count($refund) }}</span>
+                                @endif
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dash-item dash-hasmenu">
+                    <a href="{{ route('admin.header1.index') }}" class="dash-link"><span class="dash-micon"><i
+                                class="ti ti-home"></i></span>
+                        <span class="dash-mtext custom-weight">
+                            Line 1
+                        </span></a>
+                </li>
+                <li class="dash-item dash-hasmenu {{ request()->is('/') ? 'active' : '' }}">
+                    <a href="{{ route('admin.header2.index') }}" class="dash-link"><span class="dash-micon"><i
+                                class="ti ti-home"></i></span>
+                        <span class="dash-mtext custom-weight">
+                            Line 2
+                        </span></a>
+                </li>
+
+
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/settings*') ? 'active' : '' }}">
                     <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-apps"></i></span><span
-                            class="dash-mtext">{{ __('Setting') }}</span><span class="dash-arrow"><i
+                            class="dash-mtext">{{ __('Settings') }}</span><span class="dash-arrow"><i
                                 data-feather="chevron-right"></i></span></a>
                     <ul class="dash-submenu">
 
 
                         <li class="dash-item {{ request()->is('admin-panel/management/settings*') ? 'active' : '' }}">
-                            <a class="dash-link" href="{{ route('admin.settings.index') }}">{{ __('Settings') }}</a>
+                            <a class="dash-link" href="{{ route('admin.settings.index') }}">{{ __('Setting') }}</a>
                         </li>
 
                         <li class="dash-item {{ request()->is('admin-panel/management/settings/currenc*') ? 'active' : '' }}">
-                            <a class="dash-link" href="{{ route('admin.currencies.index') }}">{{ __('Currencies') }}</a>
+                            <a class="dash-link" href="{{ route('admin.currencies.index') }}">{{ __('Currency') }}</a>
                         </li>
 
                     </ul>
@@ -177,24 +265,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/setting*') ? 'active dash-trigger' : 'collapsed' }}">
-                    <a href="#!" class="dash-link"><span class="dash-micon"><i
-                                class="ti ti-table"></i></span><span
-                            class="dash-mtext">{{ __('Header Setting') }}</span><span class="dash-arrow"><i
-                                data-feather="chevron-right"></i></span></a>
-                    <ul class="dash-submenu">
-                        {{--                            <li class="dash-item">--}}
-                        {{--                                <a class="dash-link" href="{{ route('admin.header_categories.index') }}">{{ __('Header Categories') }}</a>--}}
-                        {{--                            </li>--}}
-                        <li class="dash-item">
-                            <a class="dash-link" href="{{ route('admin.header1.index') }}">{{ __('Line 1') }}</a>
-                        </li>
-                        <li class="dash-item">
-                            <a class="dash-link" href="{{ route('admin.header2.index') }}">{{ __('Line 2') }}</a>
-                        </li>
 
-                    </ul>
-                </li>
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/messages*') ? 'active dash-trigger' : 'collapsed' }}">
                     <a href="#!" class="dash-link"><span class="dash-micon"><i
                                 class="ti ti-table"></i></span><span
@@ -208,23 +279,6 @@
                             <a class="dash-link" href="{{ route('admin.alerts.index') }}">{{ __('Alert') }}</a>
                         </li>
 
-                    </ul>
-                </li>
-                <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/markets*') ? 'active dash-trigger' : 'collapsed' }}">
-                    <a href="#!" class="dash-link">
-                            <span class="dash-micon">
-                <i class="ti ti-table"></i></span><span
-                            class="dash-mtext">{{ __('Markets') }}</span><span class="dash-arrow"><i
-                                data-feather="chevron-right"></i></span></a>
-                    <ul class="dash-submenu">
-                        <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
-                            <a class="dash-link"
-                               href="{{ route('admin.markets.index') }}">{{ __('Markets') }}</a>
-                        </li>
-                        <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
-                            <a class="dash-link"
-                               href="{{ route('admin.markets.settings') }}">{{ __('Market Setting') }}</a>
-                        </li>
                     </ul>
                 </li>
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/form-contact*') ? 'active dash-trigger' : 'collapsed' }}">
@@ -260,3 +314,4 @@
         </div>
     </div>
 </nav>
+

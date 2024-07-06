@@ -30,6 +30,17 @@
     <link rel="stylesheet" href="{{ asset('vendor/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/developer.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/bootstrap-clockpicker.min.css') }}">
+    <style>
+        .button_create_modal {
+            border: 1px solid black;
+            background: white;
+            color: black;
+            width: 100px;
+            padding: 3px 10px;
+            text-align: center;
+            margin: 5px 10px;
+        }
+    </style>
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     @stack('style')
 </head>
@@ -39,6 +50,8 @@
     <div class="loader-track">
         <div class="loader-fill"></div>
     </div>
+
+
 </div>
 <!-- [ Pre-loader ] End -->
 <!-- [ Mobile header ] start -->
@@ -203,6 +216,34 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="CreateMarketModal" tabindex="-1" role="dialog" aria-labelledby="Edit_Currency"
+     aria-hidden="true">
+    <div style="max-width: 768px" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center position-relative">
+                <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"
+                   style="position: absolute;right: 10px;top: 10px"></i>
+                <h3>
+                    Enter Date
+                </h3>
+            </div>
+            <div id="modal_body" class="modal-body p-5 row">
+                <div id="deposit_input" class="mb-3 mt-3  row">
+                    <div class="mt-3 mb-3 col-12">
+                        <input class="form-control" type="date" id="Market_Date">
+                    </div>
+                </div>
+                <input id="id_cash_pending" type="hidden">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="button_create_modal" data-dismiss="modal" aria-label="Close" type="button">Cancel</button>
+                <button class="button_create_modal" onclick="CreateMarketModal()" type="button">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{ asset('vendor/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -267,6 +308,22 @@
         $('#profile-dropdown').slideToggle();
     })
     $('.clockpicker').clockpicker();
+
+
+    function createMarketModal() {
+        $('#CreateMarketModal').modal('show');
+    }
+
+    function CreateMarketModal() {
+        let Market_Date = $('#Market_Date').val();
+        if (Market_Date.length > 0) {
+            let url="{{ route('admin.market.create',['market_data'=>':market_data']) }}";
+            url=url.replace(':market_data',Market_Date);
+            window.location.href = url;
+        }else {
+            alert('Please select Date');
+        }
+    }
 </script>
 @yield('script')
 @include('admin.layouts.includes.alerts')

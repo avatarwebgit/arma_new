@@ -246,6 +246,8 @@
         </div>
     </div>
 </div>
+
+
 <script src="{{ asset('vendor/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/notifier.js') }}"></script>
 @if (setting('rtl') == '1')
