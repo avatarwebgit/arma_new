@@ -178,8 +178,7 @@ class Controller extends BaseController
             $status_text = 'Close';
             $color = '#c20000';
         }
-
-        $timer = $this->Timer($difference, $start_market_time);
+        $timer = $this->Timer($difference, $start_market_time, $market_is_open);
         $market_status = view('home.timer.market_status', compact('status_text', 'color'))->render();
 
 
@@ -207,7 +206,7 @@ class Controller extends BaseController
         return $close_market;
     }
 
-    function Timer($diffSeconds, $start_market_time)
+    function Timer($diffSeconds, $start_market_time, $market_is_open=1)
     {
         $days = floor($diffSeconds / 86400);
         $hours = floor(($diffSeconds - ($days * 86400)) / 3600);
@@ -244,6 +243,9 @@ class Controller extends BaseController
         $today_market_exists = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->exists();
         if (!$today_market_exists) {
             $timer_is_red = 1;
+        }
+        if ($market_is_open == 1) {
+            $timer_is_red = 0;
         }
 
         return view('home.timer.index', compact('hours', 'minutes', 'seconds', 'timer_is_red'))->render();
@@ -414,7 +416,6 @@ class Controller extends BaseController
             $now = Carbon::now();
             $is_login = auth()->check();
             $view_table = view('home.partials.market', compact('markets_groups', 'now', 'is_login'))->render();
-
             broadcast(new MarketTableIndex($view_table, $market_values_html, $show_market_value));
         } catch (\Exception $e) {
             dd($e->getMessage());
