@@ -10,4 +10,5 @@ class UserStatus extends Model
     use HasFactory;
 
     protected $table = 'user_status';
+    protected $guarded=[];
 }
