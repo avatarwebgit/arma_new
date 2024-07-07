@@ -408,7 +408,7 @@ class IndexController extends Controller
         }
         $items = ['Index', 'Registering', 'Confirmed', 'Reject'];
         foreach ($items as $key => $item) {
-            Packing::create([
+            UserStatus::create([
                 'id' => $key,
                 'title' => $item
             ]);
