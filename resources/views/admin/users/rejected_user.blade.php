@@ -32,11 +32,11 @@
                 {{ isset($item->Roles()->first()->name) ? $item->Roles()->first()->name : '-' }}
             </td>
             <td>
-                <a onclick="showUserPreview({{ $item->id }})"
+                <a onclick="RejectedUser({{ $item->id }},'{{ $item->reject_reason }}')"
                    style="margin-right: 10px"
                    class="btn btn-sm btn-info text-white">
                     <i class="icon ion-md-close text-white"></i>
-                    Preview
+                    Reason
                 </a>
                 <a style="margin-right: 10px"
                    onclick="ChangeStatus({{ $item->id }},1)"
@@ -44,20 +44,20 @@
                     <i class="icon ion-md-close text-white"></i>
                     Registering
                 </a>
-                <a style="margin-right: 10px"
-                   onclick="RejectedUser({{ $item->id }},null)"
-                   class="btn btn-sm btn-danger text-white">
-                    <i class="icon ion-md-close text-white"></i>
-                    Reject
-                </a>
-                {{--                                                    <a style="margin-right: 10px" onclick="removeModal({{ $item->id }},event)"--}}
-                {{--                                                       class="btn btn-sm btn-danger text-white">--}}
-                {{--                                                        <i class="icon ion-md-close text-white"></i>--}}
-                {{--                                                        Delete--}}
-                {{--                                                    </a>--}}
+{{--                <a style="margin-right: 10px"--}}
+{{--                   onclick="RejectedUser({{ $item->id }})"--}}
+{{--                   class="btn btn-sm btn-danger text-white">--}}
+{{--                    <i class="icon ion-md-close text-white"></i>--}}
+{{--                    Reject--}}
+{{--                </a>--}}
+                                                                    <a style="margin-right: 10px" onclick="removeModal({{ $item->id }},event)"
+                                                                       class="btn btn-sm btn-danger text-white">
+                                                                        <i class="icon ion-md-close text-white"></i>
+                                                                        Delete
+                                                                    </a>
                 {{--                                                    <a href="{{ route('admin.user.edit',['type'=>$type,'user'=>$item->id]) }}"--}}
                 {{--                                                       class="btn btn-sm btn-warning mr-1">--}}
-                {{--                                                        <i class=FV"icon ion-md-eye text-white"></i>--}}
+                {{--                                                        <i class="icon ion-md-eye text-white"></i>--}}
                 {{--                                                        Edit--}}
                 {{--                                                    </a>--}}
                 {{--                                                    <a href="{{ route('admin.user.wallet',['user'=>$item->id]) }}"--}}

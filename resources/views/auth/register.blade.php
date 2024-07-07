@@ -5,6 +5,7 @@
         <div class="col-12 col-md-6 border-1 m-auto pt-5 pb-5">
             <form method="POST" action="{{ route('register') }}" class="auth-form">
                 @csrf
+
                 <div class="row">
                     <div class="col-12">
                         <h3 class="text-center">Registery</h3>
@@ -208,8 +209,8 @@
                     <div class="form-group col-12 col-md-6">
                         <label for="salutation" class="mb-1">Salutation *</label>
                         <select id="salutation"
-                            type="text"
-                            class="form-control @error('salutation') is-invalid @enderror"
+                                type="text"
+                                class="form-control @error('salutation') is-invalid @enderror"
                                 name="salutation">
                             <option value="">Select</option>
                             @foreach($salutation as $item)
@@ -229,7 +230,7 @@
                             type="text"
                             class="form-control @error('full_name') is-invalid @enderror"
                             name="full_name"
-                        value="{{ old('full_name') }}"
+                            value="{{ old('full_name') }}"
                             required
                         >
                         @error('full_name')
@@ -291,9 +292,9 @@
                     <div class="form-group col-12 col-md-6">
                         <label for="skype" class="mb-1">Skype</label>
                         <input id="skype"
-                            type="text"
-                            class="form-control @error('skype') is-invalid @enderror"
-                            name="skype" value="{{ old('skype') }}">
+                               type="text"
+                               class="form-control @error('skype') is-invalid @enderror"
+                               name="skype" value="{{ old('skype') }}">
                         @error('skype')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -331,6 +332,8 @@
                         </div>
                     </div>
                 </div>
+
+
 
                 {!! NoCaptcha::renderJs() !!}
                 {!! NoCaptcha::display() !!}

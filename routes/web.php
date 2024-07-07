@@ -83,6 +83,7 @@ Route::get('/create_currencies', [IndexController::class, 'create_currencies'])-
 Route::get('/create_units', [IndexController::class, 'create_units'])->name('home.create_units');
 Route::get('/tolerance_wight_by', [IndexController::class, 'tolerance_wight_by'])->name('home.tolerance_wight_by');
 Route::get('/create_packing', [IndexController::class, 'create_packing'])->name('home.create_packing');
+Route::get('/create_user_status', [IndexController::class, 'create_user_status'])->name('home.create_user_status');
 Route::get('/shipping_term', [IndexController::class, 'shipping_term'])->name('home.shipping_term');
 
 Route::get('/quality_quantity_inspector', [IndexController::class, 'quality_quantity_inspector'])->name('home.quality_quantity_inspector');
@@ -190,6 +191,8 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
     //Refund
     Route::get('refund_request', [UserController::class, 'refund_request'])->name('refund_request');
     Route::post('UpdateRefundStatus', [UserController::class, 'UpdateRefundStatus'])->name('UpdateRefundStatus');
+    Route::post('get_user_information', [UserController::class, 'get_user_information'])->name('get_user_information');
+    Route::post('change_status', [UserController::class, 'change_status'])->name('change_status');
 
 
     //Config
