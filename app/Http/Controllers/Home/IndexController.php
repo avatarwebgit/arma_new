@@ -29,6 +29,7 @@ use App\Models\ToleranceWeightBy;
 use App\Models\Transaction;
 use App\Models\Units;
 use App\Models\UserNews;
+use App\Models\UserStatus;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -393,6 +394,22 @@ class IndexController extends Controller
         foreach ($items as $key => $item) {
             Packing::create([
                 'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+
+        dd('Congratulations');
+    }
+    public function create_user_status()
+    {
+        $items = UserStatus::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['Index', 'Registering', 'Confirmed', 'Reject'];
+        foreach ($items as $key => $item) {
+            Packing::create([
+                'id' => $key,
                 'title' => $item
             ]);
         }

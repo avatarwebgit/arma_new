@@ -24,14 +24,14 @@ class UserController extends Controller
 {
     public function index($type)
     {
-        $user_status = UserStatus::where('id', [0, 1, 2])->pluck('title')->first();
-        if ($type=='all'){
+
+        if ($type == 'all') {
             $users = User::latest()->paginate(100);
-        }else{
+        } else {
             $users = User::where('active_status', $type)->paginate(100);
         }
-
-        return view('admin.users.index', compact('users', 'type', 'user_status'));
+        $user_status = UserStatus::where('id', $type)->pluck('title')->first();
+        return view('admin.users.list', compact('users', 'type', 'user_status'));
     }
 
     public function remove(Request $request)
@@ -214,6 +214,36 @@ class UserController extends Controller
             return response()->json([0, $e->getMessage()]);
         }
 
+    }
+
+    public function get_user_information(Request $request)
+    {
+        $user_id = $request->user_id;
+        $user = User::where('id', $user_id)->first();
+        $types = Type::where('id', '!=', 1)->get();
+        $commodities = Commodity::all();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
+        $companyFunction = CompanyFunction::all();
+        $salutation = Salutation::all();
+        $html = view('admin.sections.registration_field', compact('user', 'types', 'commodities', 'countries', 'companyFunction', 'salutation'))->render();
+        return response()->json([1, $html]);
+    }
+
+    public function change_status(Request $request)
+    {
+        $user_id = $request->user_id;
+        $new_status = $request->new_status;
+        $user = User::where('id', $user_id)->first();
+        $reject_reason = $user->reject_reason;
+        if ($new_status == 3) {
+            $reject_reason = $request->reason;
+        }
+
+        $user->update([
+            'active_status' => $new_status,
+            'reject_reason' => $reject_reason,
+        ]);
+        return response()->json([1, 'ok']);
     }
 
 }

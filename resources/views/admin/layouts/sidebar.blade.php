@@ -17,10 +17,10 @@
                         <span class="dash-mtext custom-weight">{{ __('Dashboard') }}</span></a>
                 </li>
                 @php
-                    $pending_count=\App\Models\User::where('active_status',0)->count();
-                    $index_count=\App\Models\User::all()->count();
-                    $confirmed_count=\App\Models\User::where('active_status',1)->count();
-                    $rejected_count=\App\Models\User::where('active_status',2)->count();
+                    $pending_count=\App\Models\User::where('active_status',1)->count();
+                    $index_count=\App\Models\User::where('active_status',0)->count();
+                    $confirmed_count=\App\Models\User::where('active_status',2)->count();
+                    $rejected_count=\App\Models\User::where('active_status',3)->count();
                 @endphp
 
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/users*') ? 'active dash-trigger' : 'collapsed' }}">
@@ -38,24 +38,24 @@
                     <ul class="dash-submenu">
                         <li class="dash-item {{ request()->is('users/1*') ? 'active' : '' }}">
                             <a class="dash-link"
-                               href="{{ route('admin.users.index',['type'=>'all']) }}">
+                               href="{{ route('admin.users.index',['type'=>0]) }}">
                                 Index ({{ $index_count }})
                             </a>
                         </li>
                         <li class="dash-item d-flex align-items-center {{ request()->is('users*') ? 'active' : '' }}">
                             <a class="dash-link"
-                               href="{{ route('admin.users.index',['type'=>0]) }}">Registering ({{ $pending_count }}
+                               href="{{ route('admin.users.index',['type'=>1]) }}">Registering ({{ $pending_count }}
                                 )</a>
                         </li>
                         <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
                             <a class="dash-link"
-                               href="{{ route('admin.users.index',['type'=>2]) }}">
+                               href="{{ route('admin.users.index',['type'=>3]) }}">
                                 Rejected Users ({{ $rejected_count }})
                             </a>
                         </li>
                         <li class="dash-item">
                             <a class="dash-link"
-                               href="{{ route('admin.users.index',['type'=>1]) }}">
+                               href="{{ route('admin.users.index',['type'=>2]) }}">
                                 Confirmed ({{ $confirmed_count }})
                             </a>
                         </li>
@@ -174,7 +174,7 @@
                     <ul class="dash-submenu">
                         <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
                             <a class="dash-link"
-                               onclick="createMarketModal()" >Create Market</a>
+                               onclick="createMarketModal()">Create Market</a>
                         </li>
                         <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
                             <a class="dash-link"
@@ -195,7 +195,8 @@
                                 data-feather="chevron-right"></i></span></a>
                     <ul class="dash-submenu">
                         <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
-                            <a class="dash-link" href="{{ route('sale_form',['page_type'=>'Create']) }}">Sales Offer Form</a>
+                            <a class="dash-link" href="{{ route('sale_form',['page_type'=>'Create']) }}">Sales Offer
+                                Form</a>
                         </li>
                     </ul>
                 </li>

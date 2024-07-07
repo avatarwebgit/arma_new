@@ -236,7 +236,7 @@ class Controller extends BaseController
 
         $midnight = Carbon::today()->format("H:i:s");
         if ($change_time < $now2 and $now2 < $midnight) {
-            $timer_is_red = 0;
+            $timer_is_red = 1;
         }
         $yesterday = Carbon::yesterday();
         $tomorrow = Carbon::yesterday();
