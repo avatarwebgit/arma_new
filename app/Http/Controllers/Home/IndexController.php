@@ -28,6 +28,7 @@ use App\Models\THCIncluded;
 use App\Models\ToleranceWeightBy;
 use App\Models\Transaction;
 use App\Models\Units;
+use App\Models\User;
 use App\Models\UserNews;
 use App\Models\UserStatus;
 use Carbon\Carbon;

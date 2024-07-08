@@ -32,6 +32,10 @@
                                     <div id="alert"></div>
                                     @if($type==0)
                                         @include('admin.users.index')
+                                    @elseif($type==1)
+                                        @include('admin.users.registering_user')
+                                    @elseif($type==2)
+                                        @include('admin.users.confirmed_users')
                                     @elseif($type==3)
                                         @include('admin.users.rejected_user')
                                     @endif
@@ -185,6 +189,15 @@
                     }
                 }
             })
+        }
+
+        function ChangeRegisterStatus(tag, user_id) {
+            let status = $(tag).val();
+            if (status != 2) {
+                return;
+            }
+            let new_status =2;
+            ChangeStatus(user_id,new_status);
         }
     </script>
 @endpush
