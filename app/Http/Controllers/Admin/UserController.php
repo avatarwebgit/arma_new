@@ -25,11 +25,7 @@ class UserController extends Controller
     public function index($type)
     {
 
-        if ($type == 'all') {
-            $users = User::latest()->paginate(100);
-        } else {
-            $users = User::where('active_status', $type)->paginate(100);
-        }
+        $users = User::where('active_status', $type)->paginate(100);
         $user_status = UserStatus::where('id', $type)->pluck('title')->first();
         return view('admin.users.list', compact('users', 'type', 'user_status'));
     }

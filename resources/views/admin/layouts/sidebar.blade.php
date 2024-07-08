@@ -17,7 +17,7 @@
                         <span class="dash-mtext custom-weight">{{ __('Dashboard') }}</span></a>
                 </li>
                 @php
-                    $pending_count=\App\Models\User::where('active_status',1)->count();
+                    $registering_count=\App\Models\User::where('active_status',1)->count();
                     $index_count=\App\Models\User::where('active_status',0)->count();
                     $confirmed_count=\App\Models\User::where('active_status',2)->count();
                     $rejected_count=\App\Models\User::where('active_status',3)->count();
@@ -29,10 +29,10 @@
                                 class="ti ti-layout-2"></i></span><span
                             class="dash-mtext">{{ __('Users') }}</span><span class="dash-arrow"><i
                                 data-feather="chevron-right"></i></span>
-                        @if($pending_count>0)
-                            <span
-                                class="circle-notification circle-notification-absolute">{{ $pending_count }}</span>
-                        @endif
+{{--                        @if($pending_count>0)--}}
+{{--                            <span--}}
+{{--                                class="circle-notification circle-notification-absolute">{{ $pending_count }}</span>--}}
+{{--                        @endif--}}
                     </a>
 
                     <ul class="dash-submenu">
@@ -44,7 +44,7 @@
                         </li>
                         <li class="dash-item d-flex align-items-center {{ request()->is('users*') ? 'active' : '' }}">
                             <a class="dash-link"
-                               href="{{ route('admin.users.index',['type'=>1]) }}">Registering ({{ $pending_count }}
+                               href="{{ route('admin.users.index',['type'=>1]) }}">Registering ({{ $registering_count }}
                                 )</a>
                         </li>
                         <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">

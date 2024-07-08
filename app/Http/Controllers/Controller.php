@@ -239,7 +239,7 @@ class Controller extends BaseController
             $timer_is_red = 1;
         }
         $yesterday = Carbon::yesterday();
-        $tomorrow = Carbon::yesterday();
+        $tomorrow = Carbon::tomorrow();
         $today_market_exists = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->exists();
         if (!$today_market_exists) {
             $timer_is_red = 1;
@@ -247,7 +247,6 @@ class Controller extends BaseController
         if ($market_is_open == 1) {
             $timer_is_red = 0;
         }
-
         return view('home.timer.index', compact('hours', 'minutes', 'seconds', 'timer_is_red'))->render();
     }
 
