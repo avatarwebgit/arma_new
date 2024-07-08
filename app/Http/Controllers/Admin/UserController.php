@@ -24,9 +24,36 @@ class UserController extends Controller
 {
     public function index($type)
     {
-
-        $users = User::where('active_status', $type)->paginate(100);
         $user_status = UserStatus::where('id', $type)->pluck('title')->first();
+        if ($type == 'seller') {
+            $users = User::all();
+            $ids = [];
+            foreach ($users as $user) {
+                if ($user->hasRole($type)) {
+                    $ids[] = $user->id;
+                }
+            }
+            $users=User::whereIn('id',$ids)->paginate(100);
+        }else{
+            $users = User::where('active_status', $type)->paginate(100);
+            $user_ids = [];
+
+            if ($type == 2) {
+                $users = User::where('active_status', $type)->get();
+                foreach ($users as $key => $user) {
+                    $role_count = $user->Roles()->count();
+                    if ($role_count > 0) {
+                        $users->forget($key);
+                        continue;
+                    }
+                    $user_ids[] = $user->id;
+                }
+                $users = User::WhereIn('id', $user_ids)->paginate(100);
+            }
+        }
+
+
+
         return view('admin.users.list', compact('users', 'type', 'user_status'));
     }
 
@@ -76,24 +103,37 @@ class UserController extends Controller
         ));
     }
 
-    public function update_role(User $user, Request $request)
+    public function update_role(Request $request)
     {
         try {
-            $user->syncRoles($request->role);
-            $permissions = $request->except(['_token', 'role', 'can_bid']);
-            $user->syncPermissions($permissions);
-            if ($request->has('can_bid')) {
-                $can_bid = 1;
-            } else {
-                $can_bid = 0;
+            $user = User::where('id', $request->user_id)->first();
+            if ($request->role == 1) {
+                $role = 'admin';
             }
-            $user->update(['can_bid' => $can_bid]);
-            $message = 'The Item Has Been Updated Successfully';
+            if ($request->role == 2) {
+                $role = 'seller';
+            }
+            if ($request->role == 3) {
+                $role = 'buyer';
+            }
+            $user->syncRoles($role);
+//            $permissions = $request->except(['_token', 'role']);
+//            $user->syncPermissions($permissions);
+//            if ($request->has('can_bid')) {
+//                $can_bid = 1;
+//            } else {
+//                $can_bid = 0;
+//            }
+            $password = Hash::make($request->password);
+            $user->update(['password' => $password]);
+            $message = 'The Item Updated Successfully';
             session()->flash('success', $message);
+            return response()->json([1, 'ok']);
         } catch (\Exception $exception) {
             session()->flash('failed', $exception->getMessage());
+            return response()->json([0, 'ok']);
         }
-        return redirect()->back();
+
     }
 
 

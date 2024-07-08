@@ -1,6 +1,33 @@
 @extends('admin.layouts.main')
 
 @section('title')
+    @if($type==0)
+        @php
+            $user_status='Index';
+        @endphp
+    @elseif($type==1)
+        @php
+            $user_status='Registering';
+        @endphp
+    @elseif($type==3)
+        @php
+            $user_status='Confirmed';
+        @endphp
+    @elseif($type==2)
+        @php
+            $user_status='Rejected';
+        @endphp
+    @elseif($type=='seller')
+        @php
+            $user_status='Seller';
+        @endphp
+
+    @elseif($type=='buyer')
+        @php
+            $user_status='Buyer';
+        @endphp
+    @endif
+
     {{ $user_status }} Users
 @endsection
 
@@ -38,6 +65,10 @@
                                         @include('admin.users.confirmed_users')
                                     @elseif($type==3)
                                         @include('admin.users.rejected_user')
+                                    @elseif($type=='seller')
+                                        @include('admin.users.seller')
+                                    @elseif($type=='buyer')
+                                        @include('admin.users.buyer')
                                     @endif
                                     <div class="text-center">
                                         <div class="d-flex justify-content-center mt-4">
@@ -55,6 +86,7 @@
     @include('admin.sections.remove_modal')
     @include('admin.sections.ShowPreviewSections')
     @include('admin.sections.RejectedUser')
+    @include('admin.sections.create_account_modal')
 @endsection
 @push('style')
 
@@ -196,8 +228,85 @@
             if (status != 2) {
                 return;
             }
-            let new_status =2;
-            ChangeStatus(user_id,new_status);
+            let new_status = 2;
+            ChangeStatus(user_id, new_status);
+        }
+
+        function showCreateAccountModal(user_id, email, user_type) {
+            if (user_type == 1) {
+                //seller
+                $('#Admin').prop('checked', true);
+            }
+            if (user_type == 2) {
+                //seller
+                $('#Seller').prop('checked', true);
+            }
+            if (user_type == 3) {
+                //seller
+                $('#Buyer').prop('checked', true);
+            }
+            $('#create_account_modal').modal('show');
+            $('#new_password').val('');
+            $('#new_password_copied').addClass('d-none');
+            $('#user_id').val(user_id);
+            $('#user_name').text(email);
+            $('#user_type').val(user_type);
+        }
+
+        function randString() {
+            var dataSet = $('#new_password').attr('data-character-set').split(',');
+            var possible = '';
+            if ($.inArray('a-z', dataSet) >= 0) {
+                possible += 'abcdefghijklmnopqrstuvwxyz';
+            }
+            if ($.inArray('A-Z', dataSet) >= 0) {
+                possible += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            }
+            if ($.inArray('0-9', dataSet) >= 0) {
+                possible += '0123456789';
+            }
+            if ($.inArray('#', dataSet) >= 0) {
+                possible += '![]{}()%&*$#^<>~@|';
+            }
+
+            var text = '';
+            for (var i = 0; i < 20; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            $('#new_password').val(text);
+        }
+
+        function CopyUserName() {
+            let password = $('#new_password').val();
+            let user_type = $('#user_type').val();
+            let user_id = $('#user_id').val();
+            if (password.length == 0) {
+                alert('Please enter Password');
+                return;
+            }
+            $('#new_password').select();
+            document.execCommand('copy');
+            $('#new_password_copied').removeClass('d-none');
+            setTimeout(function () {
+                save_role(user_id, password, user_type);
+            }, 2000);
+        }
+
+        function save_role(user_id, password, user_type) {
+            $.ajax({
+                url: '{{ route('admin.user.update_role') }}',
+                dataType: 'json',
+                method: 'POST',
+                data: {
+                    user_id: user_id,
+                    password: password,
+                    role: user_type,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (data) {
+                    window.location.reload();
+                },
+            })
         }
     </script>
 @endpush

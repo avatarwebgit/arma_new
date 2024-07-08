@@ -34,23 +34,13 @@ use App\Models\UserStatus;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use MongoDB\Driver\Session;
 
 class IndexController extends Controller
 {
     public function index()
     {
-//        $form_status = FormStatus::where('id', 1)->first();
-//        $form_status->update([
-//            'title' => 'Waiting'
-//        ]);
-//        $form_status = FormStatus::where('title', 'preparation')->first();
-//        if (!$form_status) {
-//            FormStatus::create([
-//                'id' => 6,
-//                'title' => 'preparation',
-//            ]);
-//        }
         $is_logged_in = 0;
         $is_logged_in = session()->exists('is_logged_in');
         session()->forget('is_logged_in');
@@ -401,6 +391,7 @@ class IndexController extends Controller
 
         dd('Congratulations');
     }
+
     public function create_user_status()
     {
         $items = UserStatus::all();

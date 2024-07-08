@@ -19,8 +19,19 @@
                 @php
                     $registering_count=\App\Models\User::where('active_status',1)->count();
                     $index_count=\App\Models\User::where('active_status',0)->count();
-                    $confirmed_count=\App\Models\User::where('active_status',2)->count();
                     $rejected_count=\App\Models\User::where('active_status',3)->count();
+                    $users_confirmed=\App\Models\User::where('active_status',2)->get();
+                    $user_ids=[];
+                    $confirmed_count=0;
+            foreach ($users_confirmed as $key => $user) {
+                $role_count = $user->Roles()->count();
+                if ($role_count > 0) {
+                    $users_confirmed->forget($key);
+                    continue;
+                }
+                $user_ids[] = $user->id;
+                $confirmed_count = \App\Models\User::WhereIn('id', $user_ids)->count();
+            }
                 @endphp
 
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/users*') ? 'active dash-trigger' : 'collapsed' }}">
@@ -61,13 +72,13 @@
                         </li>
                         <li class="dash-item">
                             <a class="dash-link"
-                               href="">
+                               href="{{ route('admin.users.index',['type'=>'seller']) }}">
                                 Sellers (0)
                             </a>
                         </li>
                         <li class="dash-item">
                             <a class="dash-link"
-                               href="">
+                               href="{{ route('admin.users.index',['type'=>'buyer']) }}">
                                 Buyers (0)
                             </a>
                         </li>

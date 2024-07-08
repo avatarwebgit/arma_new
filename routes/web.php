@@ -203,7 +203,7 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
         Route::get('users/{type}/{user}/mails', [UserController::class, 'mails'])->name('user.mails');
         Route::get('users/{type}/{user}/mail/{mail}', [UserController::class, 'mail'])->name('user.mail');
         Route::post('users/sendMessage/mail/{user}', [UserController::class, 'sendMessage'])->name('user.sendMessage');
-        Route::post('users/update_role/{user}', [UserController::class, 'update_role'])->name('user.update_role');
+        Route::post('users/update_role', [UserController::class, 'update_role'])->name('user.update_role');
         //permission
         Route::resource('permission', '\App\Http\Controllers\Admin\PermissionController');
         Route::delete('permission', [PermissionController::class, 'delete'])->name('permission.delete');
