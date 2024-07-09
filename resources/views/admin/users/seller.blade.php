@@ -14,7 +14,7 @@
     @foreach($users as $key=>$item)
         <tr>
             <td>
-                {{ $users->firstItem()+$key }}
+                {{ $item->user_id }}
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
@@ -32,10 +32,10 @@
                 {{ isset($item->Roles()->first()->name) ? $item->Roles()->first()->name : '-' }}
             </td>
             <td>
-                <select onchange="ChangeRegisterStatus(this,{{ $item->id }})" class="form-control">
-                    <option value="0">Step 1</option>
-                    <option value="1">Step 2</option>
-                    <option value="2">Create Account</option>
+                <select onchange="ChangeActivationStatus(this,{{ $item->id }})" class="form-control">
+                    @foreach($activation_status as   $activation)
+                        <option {{ $item->active==$activation->id ? 'selected' : '' }} value="{{ $activation->id}}">{{ $activation->title }}</option>
+                    @endforeach
                 </select>
             </td>
         </tr>

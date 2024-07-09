@@ -232,11 +232,28 @@
             ChangeStatus(user_id, new_status);
         }
 
+        function ChangeActivationStatus(tag, user_id) {
+            let active = $(tag).val();
+            $.ajax({
+                url: "{{ route('admin.user.change_active_status') }}",
+                method: "post",
+                dataType: "json",
+                data: {
+                    user_id: user_id,
+                    active: active,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (msg) {
+                    window.location.reload();
+                }
+            });
+        }
+
         function showCreateAccountModal(user_id, email, user_type) {
-            if (user_type == 1) {
-                //seller
-                $('#Admin').prop('checked', true);
-            }
+            // if (user_type == 1) {
+            //     //seller
+            //     $('#Admin').prop('checked', true);
+            // }
             if (user_type == 2) {
                 //seller
                 $('#Seller').prop('checked', true);
@@ -250,7 +267,6 @@
             $('#new_password_copied').addClass('d-none');
             $('#user_id').val(user_id);
             $('#user_name').text(email);
-            $('#user_type').val(user_type);
         }
 
         function randString() {
@@ -278,7 +294,7 @@
 
         function CopyUserName() {
             let password = $('#new_password').val();
-            let user_type = $('#user_type').val();
+            let user_type = $('input[name="role"]:checked').val();
             let user_id = $('#user_id').val();
             if (password.length == 0) {
                 alert('Please enter Password');

@@ -12,10 +12,10 @@
             </div>
             <div class="modal-body p-5 row text-center">
                 <div class="d-flex mb-3 justify-content-center">
-                    <div>
-                        <input type="radio" name="role" id="Admin" value="1">
-                        <label for="Admin">Admin</label>
-                    </div>
+{{--                    <div>--}}
+{{--                        <input type="radio" name="role" id="Admin" value="1">--}}
+{{--                        <label for="Admin">Admin</label>--}}
+{{--                    </div>--}}
                     <div class="ml5">
                         <input type="radio" name="role" id="Seller" value="2">
                         <label for="Seller">Seller</label>
@@ -44,7 +44,6 @@
                 </div>
 
                 <input type="hidden" id="user_id">
-                <input type="hidden" id="user_type">
             </div>
         </div>
     </div>
