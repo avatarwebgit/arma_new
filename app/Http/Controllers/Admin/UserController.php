@@ -16,6 +16,7 @@ use App\Models\Salutation;
 use App\Models\Transaction;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\UserActivationStatus;
 use App\Models\UserStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,10 +25,38 @@ class UserController extends Controller
 {
     public function index($type)
     {
-
-        $users = User::where('active_status', $type)->paginate(100);
         $user_status = UserStatus::where('id', $type)->pluck('title')->first();
-        return view('admin.users.list', compact('users', 'type', 'user_status'));
+        $activation_status = UserActivationStatus::all();
+        if ($type == 'seller' or $type == 'buyer' or $type == 'Members' or $type == 'Representatives' or $type == 'Brokers') {
+            $users = User::where('active_status', 2)->get();
+            $ids = [];
+            foreach ($users as $user) {
+                if ($user->hasRole($type)) {
+                    $ids[] = $user->id;
+                }
+            }
+            $users = User::whereIn('id', $ids)->paginate(100);
+        } else {
+            $users = User::where('active_status', $type)->paginate(100);
+            $user_ids = [];
+
+            if ($type == 2) {
+                $users = User::where('active_status', $type)->get();
+
+                foreach ($users as $key => $user) {
+                    $role_count = $user->Roles()->count();
+                    if ($role_count > 0) {
+                        $users->forget($key);
+                        continue;
+                    }
+                    $user_ids[] = $user->id;
+                }
+                $users = User::WhereIn('id', $user_ids)->paginate(100);
+            }
+        }
+
+
+        return view('admin.users.list', compact('users', 'type', 'user_status', 'activation_status'));
     }
 
     public function remove(Request $request)
@@ -76,24 +105,43 @@ class UserController extends Controller
         ));
     }
 
-    public function update_role(User $user, Request $request)
+    public function update_role(Request $request)
     {
         try {
-            $user->syncRoles($request->role);
-            $permissions = $request->except(['_token', 'role', 'can_bid']);
-            $user->syncPermissions($permissions);
-            if ($request->has('can_bid')) {
-                $can_bid = 1;
-            } else {
-                $can_bid = 0;
+            $user = User::where('id', $request->user_id)->first();
+            if ($request->role == 1) {
+                $role = 'admin';
             }
-            $user->update(['can_bid' => $can_bid]);
-            $message = 'The Item Has Been Updated Successfully';
+            if ($request->role == 2) {
+                $role = 'seller';
+                $initial = 'S';
+            }
+            if ($request->role == 3) {
+                $role = 'buyer';
+                $initial = 'B';
+            }
+            $USER_ID = $this->User_ID_Creator($initial, $user->id);
+            $user->syncRoles($role);
+//            $permissions = $request->except(['_token', 'role']);
+//            $user->syncPermissions($permissions);
+//            if ($request->has('can_bid')) {
+//                $can_bid = 1;
+//            } else {
+//                $can_bid = 0;
+//            }
+            $password = Hash::make($request->password);
+            $user->update([
+                'user_id' => $USER_ID,
+                'password' => $password
+            ]);
+            $message = 'The Item Updated Successfully';
             session()->flash('success', $message);
+            return response()->json([1, 'ok']);
         } catch (\Exception $exception) {
             session()->flash('failed', $exception->getMessage());
+            return response()->json([0, 'ok']);
         }
-        return redirect()->back();
+
     }
 
 
@@ -240,6 +288,24 @@ class UserController extends Controller
             'reject_reason' => $reject_reason,
         ]);
         return response()->json([1, 'ok']);
+    }
+
+    function change_active_status(Request $request)
+    {
+        $user_id = $request->user_id;
+        $active = $request->active;
+        $user = User::where('id', $user_id)->first();
+        $user->update([
+            'active' => $active,
+        ]);
+        return response()->json([1, 'ok']);
+    }
+
+    public function User_ID_Creator($initial, $user_id)
+    {
+        $number = 1000 + $user_id;
+        $ID = 'Armx-' . $initial . ' ' . $number;
+        return $ID;
     }
 
 }

@@ -19,8 +19,36 @@
                 @php
                     $registering_count=\App\Models\User::where('active_status',1)->count();
                     $index_count=\App\Models\User::where('active_status',0)->count();
-                    $confirmed_count=\App\Models\User::where('active_status',2)->count();
                     $rejected_count=\App\Models\User::where('active_status',3)->count();
+                    $users_confirmed=\App\Models\User::where('active_status',2)->get();
+                    $user_ids=[];
+                    $confirmed_count=0;
+            foreach ($users_confirmed as $key => $user) {
+                $role_count = $user->Roles()->count();
+                if ($role_count > 0) {
+                    $users_confirmed->forget($key);
+                    continue;
+                }
+                $user_ids[] = $user->id;
+                $confirmed_count = \App\Models\User::WhereIn('id', $user_ids)->count();
+            }
+                    $users_seller = \App\Models\User::where('active_status', 2)->get();
+                    $seller_ids = [];
+                    foreach ($users_seller as $user_seller) {
+                        if ($user_seller->hasRole('seller')) {
+                            $seller_ids[] = $user_seller->id;
+                        }
+                    }
+                    $users_seller_count = \App\Models\User::whereIn('id', $seller_ids)->count();
+
+                    $users_buyer = \App\Models\User::where('active_status', 2)->get();
+                    $buyer_ids = [];
+                    foreach ($users_buyer as $user_buyer) {
+                        if ($user_buyer->hasRole('buyer')) {
+                            $buyer_ids[] = $user_buyer->id;
+                        }
+                    }
+                    $users_buyer_count = \App\Models\User::whereIn('id', $buyer_ids)->get();
                 @endphp
 
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/users*') ? 'active dash-trigger' : 'collapsed' }}">
@@ -29,10 +57,10 @@
                                 class="ti ti-layout-2"></i></span><span
                             class="dash-mtext">{{ __('Users') }}</span><span class="dash-arrow"><i
                                 data-feather="chevron-right"></i></span>
-{{--                        @if($pending_count>0)--}}
-{{--                            <span--}}
-{{--                                class="circle-notification circle-notification-absolute">{{ $pending_count }}</span>--}}
-{{--                        @endif--}}
+                        {{--                        @if($pending_count>0)--}}
+                        {{--                            <span--}}
+                        {{--                                class="circle-notification circle-notification-absolute">{{ $pending_count }}</span>--}}
+                        {{--                        @endif--}}
                     </a>
 
                     <ul class="dash-submenu">
@@ -61,31 +89,32 @@
                         </li>
                         <li class="dash-item">
                             <a class="dash-link"
-                               href="">
-                                Sellers (0)
+                               href="{{ route('admin.users.index',['type'=>'seller']) }}">
+                                Sellers ({{ $users_seller_count }})
                             </a>
                         </li>
                         <li class="dash-item">
                             <a class="dash-link"
-                               href="">
-                                Buyers (0)
+                               href="{{ route('admin.users.index',['type'=>'buyer']) }}">
+                                Buyers ({{ count($users_buyer_count) }})
                             </a>
                         </li>
                         <li class="dash-item">
                             <a class="dash-link"
-                               href="">
+                               href="{{ route('admin.users.index',['type'=>'Members']) }}">
                                 Members (0)
                             </a>
                         </li>
 
                         <li class="dash-item">
                             <a class="dash-link"
-                               href="">
+                               href="{{ route('admin.users.index',['type'=>'Representatives']) }}">
                                 Representatives (0)
                             </a>
                         </li>
                         <li class="dash-item">
-                            <a class="dash-link" href="">
+                            <a class="dash-link"
+                               href="{{ route('admin.users.index',['type'=>'Brokers']) }}">
                                 Brokers (0)
                             </a>
                         </li>

@@ -97,6 +97,7 @@ Route::get('/THC_Included', [IndexController::class, 'THC_Included'])->name('hom
 Route::get('/TargetMarket', [IndexController::class, 'TargetMarket'])->name('home.TargetMarket');
 Route::get('/Destination', [IndexController::class, 'Destination'])->name('home.Destination');
 Route::get('/market_status_update', [IndexController::class, 'market_status_update'])->name('home.market_status_update');
+Route::get('/Create_User_Activation_Status', [IndexController::class, 'Create_User_Activation_Status'])->name('home.Create_User_Activation_Status');
 
 Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix('/admin-panel/management/')->group(function () {
     //dashboard
@@ -193,6 +194,7 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
     Route::post('UpdateRefundStatus', [UserController::class, 'UpdateRefundStatus'])->name('UpdateRefundStatus');
     Route::post('get_user_information', [UserController::class, 'get_user_information'])->name('get_user_information');
     Route::post('change_status', [UserController::class, 'change_status'])->name('change_status');
+    Route::post('change_active_status', [UserController::class, 'change_active_status'])->name('user.change_active_status');
 
 
     //Config
@@ -203,7 +205,7 @@ Route::name('admin.')->middleware(['admin', 'prevent.concurrent.login'])->prefix
         Route::get('users/{type}/{user}/mails', [UserController::class, 'mails'])->name('user.mails');
         Route::get('users/{type}/{user}/mail/{mail}', [UserController::class, 'mail'])->name('user.mail');
         Route::post('users/sendMessage/mail/{user}', [UserController::class, 'sendMessage'])->name('user.sendMessage');
-        Route::post('users/update_role/{user}', [UserController::class, 'update_role'])->name('user.update_role');
+        Route::post('users/update_role', [UserController::class, 'update_role'])->name('user.update_role');
         //permission
         Route::resource('permission', '\App\Http\Controllers\Admin\PermissionController');
         Route::delete('permission', [PermissionController::class, 'delete'])->name('permission.delete');
