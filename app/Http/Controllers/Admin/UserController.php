@@ -19,15 +19,19 @@ use App\Models\User;
 use App\Models\UserActivationStatus;
 use App\Models\UserStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class UserController extends Controller
 {
     public function index($type)
     {
+        $permission_groups = Permission::where('group','!=','0')->get()->groupby('group');
         $user_status = UserStatus::where('id', $type)->pluck('title')->first();
         $activation_status = UserActivationStatus::all();
         if ($type == 'seller' or $type == 'buyer' or $type == 'Members' or $type == 'Representatives' or $type == 'Brokers') {
+
             $users = User::where('active_status', 2)->get();
             $ids = [];
             foreach ($users as $user) {
@@ -55,8 +59,7 @@ class UserController extends Controller
             }
         }
 
-
-        return view('admin.users.list', compact('users', 'type', 'user_status', 'activation_status'));
+        return view('admin.users.list', compact('users', 'type', 'user_status', 'activation_status', 'permission_groups'));
     }
 
     public function remove(Request $request)
@@ -142,6 +145,44 @@ class UserController extends Controller
             return response()->json([0, 'ok']);
         }
 
+    }
+
+    public function member_save(Request $request)
+    {
+        $email = $request->email;
+        $email = $email . '@armaitimex.com';
+        $password = Hash::make($request->new_password);
+        $role = $request->role;
+        $initial=mb_substr($role,0,1);
+        $initial=strtoupper($initial);
+
+        $user = User::create([
+            'email' => $email,
+            'password' => $password,
+            'active_status'=>2,
+        ]);
+        $user_id=$this->User_ID_Creator($initial,$user->id);
+        $user->update([
+           'user_id' => $user_id,
+        ]);
+        $user->syncRoles($role);
+        $permissions = $request->except(['_token', 'role','email','new_password']);
+        $user->syncPermissions($permissions);
+        $message=$role.' Created successfully';
+        session()->flash('success',$message);
+        return redirect()->back();
+    }
+
+    public function check_email_exist(Request $request)
+    {
+        $email = $request->email;
+        $email = $email . '@armaitimex.com';
+        $user_exists = User::where('email', $email)->exists();
+        if ($user_exists) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 

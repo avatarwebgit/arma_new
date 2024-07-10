@@ -26,6 +26,10 @@
         @php
             $user_status='Buyer';
         @endphp
+    @elseif($type=='Members' or $type=='Representatives' or $type=='Brokers')
+        @php
+            $user_status=$type;
+        @endphp
     @endif
 
     {{ $user_status }} Users
@@ -69,6 +73,8 @@
                                         @include('admin.users.seller')
                                     @elseif($type=='buyer')
                                         @include('admin.users.buyer')
+                                    @elseif($type=='Members' or $type=='Representatives' or $type=='Brokers')
+                                        @include('admin.users.members')
                                     @endif
                                     <div class="text-center">
                                         <div class="d-flex justify-content-center mt-4">
@@ -87,12 +93,17 @@
     @include('admin.sections.ShowPreviewSections')
     @include('admin.sections.RejectedUser')
     @include('admin.sections.create_account_modal')
+    @include('admin.sections.add_member_modal')
 @endsection
 @push('style')
 
 @endpush
 @push('script')
     <script>
+        $('#Full-Access').click(function (){
+            let is_checked=$(this).is(':checked');
+            $('input[type=checkbox]').prop('checked', is_checked);
+        })
         function showUserPreview(user_id) {
             let UserPreview = $('#UserPreview');
             UserPreview.modal('show');
@@ -292,6 +303,29 @@
             $('#new_password').val(text);
         }
 
+        function randString2() {
+            var dataSet = $('#new_password2').attr('data-character-set').split(',');
+            var possible = '';
+            if ($.inArray('a-z', dataSet) >= 0) {
+                possible += 'abcdefghijklmnopqrstuvwxyz';
+            }
+            if ($.inArray('A-Z', dataSet) >= 0) {
+                possible += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            }
+            if ($.inArray('0-9', dataSet) >= 0) {
+                possible += '0123456789';
+            }
+            if ($.inArray('#', dataSet) >= 0) {
+                possible += '![]{}()%&*$#^<>~@|';
+            }
+
+            var text = '';
+            for (var i = 0; i < 20; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            $('#new_password2').val(text);
+        }
+
         function CopyUserName() {
             let password = $('#new_password').val();
             let user_type = $('input[name="role"]:checked').val();
@@ -324,5 +358,48 @@
                 },
             })
         }
+
+        function CreateMember(type) {
+            $('#' + type).prop('checked', true);
+            $('#add_member_modal').modal('show');
+            $('#email_error').add('d-none');
+            $('#new_password_copied2').add('d-none');
+        }
+
+        function SaveMember() {
+            $('#email_error').add('d-none');
+            let password = $('#new_password2').val();
+            let email = $('#email').val();
+
+            if (email.length == 0) {
+                alert('Please enter Email');
+                return;
+            }
+            if (password.length == 0) {
+                alert('Please enter Password');
+                return;
+            }
+            $('#new_password2').select();
+            document.execCommand('copy');
+            $('#new_password_copied2').removeClass('d-none');
+            $.ajax({
+                url: "{{ route('admin.user.check_email_exist') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    email: email,
+                },
+                method: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == 1) {
+                        $('#email_error').removeClass('d-none');
+                    } else {
+                        $('#member_form').submit();
+                    }
+                }
+            })
+
+        }
+
     </script>
 @endpush

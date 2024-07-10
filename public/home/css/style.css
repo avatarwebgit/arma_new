@@ -3192,3 +3192,9 @@ footer input::placeholder {
 .text-right{
     text-align: right;
 }
+
+.btn-login{
+    background-color:#006 !important;
+    padding: 10px !important;
+    color: white !important;
+}
