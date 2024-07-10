@@ -85,17 +85,21 @@
                                 <img src="{{ asset('home/img/avatar.svg') }}" alt="">
                             </div>
                             <div class="info text-center">
-                                <p class="name font-weight-bold mb-0">{{ auth()->user()->name }}</p>
-                                <p class="email text-muted mb-3">{{ auth()->user()->email }}</p>
+                                <p class="email font-weight-bold mb-3">{{ auth()->user()->email }}</p>
+                                <p class="name font-weight-bold mb-0">{{ auth()->user()->user_id }}</p>
+                                <p class="name font-weight-bold mb-0">{{ auth()->user()->Roles()->first()->name }}</p>
                                 @if(auth()->user()->hasRole('admin'))
-                                    <p class="email text-muted mb-3">Admin</p>
-                                    <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                    <a href="{{ route('admin.dashboard') }}">
+                                        <p class="name font-weight-bold mb-0">My Profile</p>
+                                    </a>
                                 @elseif(auth()->user()->hasRole('seller'))
-                                    <p class="email text-muted mb-3">Seller</p>
-                                    <a href="{{ route('seller.dashboard') }}">Dashboard</a>
+                                    <a href="{{ route('seller.dashboard') }}">
+                                        <p class="name font-weight-bold mb-0">My Profile</p>
+                                    </a>
                                 @elseif(auth()->user()->hasRole('buyer'))
-                                    <p class="email text-muted mb-3">Buyer</p>
-                                    <a href="{{ route('bidder.dashboard') }}">Dashboard</a>
+                                    <a href="{{ route('bidder.dashboard') }}">
+                                        <p class="name font-weight-bold mb-0">My Profile</p>
+                                    </a>
                                 @endif
                             </div>
                         </div>
@@ -135,7 +139,7 @@
                                 {{--                                </li>--}}
                                 <li class="nav-item">
                                     <a onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                       class='nav-link red' href='{{ route('logout') }}'>
+                                       class='nav-link red btn btn-login text-center' href='{{ route('logout') }}'>
                                         <i class="icon ion-md-power"></i>
                                         <span>Log Out</span>
                                     </a>
@@ -206,17 +210,22 @@
                                 <img src="{{ asset('home/img/avatar.svg') }}" alt="">
                             </div>
                             <div class="info text-center">
-                                <p class="name font-weight-bold mb-0">{{ auth()->user()->name }}</p>
-                                <p class="email text-muted mb-3">{{ auth()->user()->email }}</p>
+
+                                <p class="email font-weight-bold mb-3">{{ auth()->user()->email }}</p>
+                                <p class="name font-weight-bold mb-0">{{ auth()->user()->user_id }}</p>
+                                <p class="name font-weight-bold mb-0">{{ auth()->user()->Roles()->first()->name }}</p>
                                 @if(auth()->user()->hasRole('admin'))
-                                    <p class="email text-muted mb-3">Admin</p>
-                                    <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                    <a href="{{ route('admin.dashboard') }}">
+                                        <p class="name font-weight-bold mb-0">My Profile</p>
+                                    </a>
                                 @elseif(auth()->user()->hasRole('seller'))
-                                    <p class="email text-muted mb-3">Seller</p>
-                                    <a href="{{ route('seller.dashboard') }}">Dashboard</a>
+                                    <a href="{{ route('seller.dashboard') }}">
+                                        <p class="name font-weight-bold mb-0">My Profile</p>
+                                    </a>
                                 @elseif(auth()->user()->hasRole('buyer'))
-                                    <p class="email text-muted mb-3">Buyer</p>
-                                    <a href="{{ route('bidder.dashboard') }}">Dashboard</a>
+                                    <a href="{{ route('bidder.dashboard') }}">
+                                        <p class="name font-weight-bold mb-0">My Profile</p>
+                                    </a>
                                 @endif
                             </div>
                         </div>
@@ -256,7 +265,7 @@
                                 {{--                                </li>--}}
                                 <li class="nav-item">
                                     <a onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                       class='nav-link red' href='{{ route('logout') }}'>
+                                       class='nav-link red btn btn-login text-center' href='{{ route('logout') }}'>
                                         <i class="icon ion-md-power"></i>
                                         <span>Log Out</span>
                                     </a>

@@ -14,11 +14,10 @@
 
                 <div class="row">
                     <div class="form-group col-12">
-                        <label for="email">Email</label>
+                        <label for="email">Username (Email)</label>
                         <input id="email" type="email"
                                class="form-control @error('email') is-invalid @enderror"
                                name="email" value="{{ old('email') }}"
-                               placeholder="{{ __('Email Address') }}"
                                required autocomplete="email" autofocus>
 
                         @error('email')
@@ -32,7 +31,6 @@
                         <input
                             id="password"
                             type="password"
-                            placeholder="{{ __('Password') }}"
                             class="form-control @error('password') is-invalid @enderror" name="password"
                             required
                             autocomplete="current-password">
@@ -44,11 +42,11 @@
                     </div>
                     @if (Route::has('password.request'))
                         <div class="col-12 d-flex justify-content-between align-items-center">
-                            <button type="submit" class="btn btn-primary">{{ __('Log In') }}</button>
+                            <button type="submit" class="btn btn-primary" style="padding: 5px 20px">{{ __('Log In') }}</button>
 
-                            <div class="text-right">
-                                <a href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
+                            <div class="text-right text-white">
+                                <a href="{{ route('password.request') }}" style="color: white !important;">
+                                    {{ __('Forgot Password?') }}
                                 </a>
                             </div>
                         </div>
@@ -58,7 +56,7 @@
                         <div class="text-left">
 
                             <a class="text-white" href="{{ route('register') }}">
-                                You do not have an account ? <span>Register</span>
+                                Don`t have an account ? <span>Register now</span>
                             </a>
                         </div>
                     </div>

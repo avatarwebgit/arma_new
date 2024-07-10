@@ -203,11 +203,12 @@ class IndexController extends Controller
         $user_check = auth()->check();
         if ($user_check) {
             $user = auth()->user();
-            if ($user->active_status == 0) {
+            if ($user->active != 1 or $user->active_status!=2 ){
                 auth()->logout();
                 session()->put('user_inactive', 1);
                 return redirect()->route('home.index');
             }
+
             if ($user->hasRole(['admin'])) {
                 return redirect()->route('admin.dashboard');
             }
