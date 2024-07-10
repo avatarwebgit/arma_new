@@ -227,8 +227,8 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::resource('permission', '\App\Http\Controllers\Admin\PermissionController');
     Route::delete('permission', [PermissionController::class, 'delete'])->name('permission.delete');
     //roles
-    Route::resource('roles', '\App\Http\Controllers\Admin\RoleController')->middleware('permission:roles');
-    Route::delete('role', [RoleController::class, 'delete'])->name('role.delete')->middleware('permission:permissions');
+    Route::resource('roles', '\App\Http\Controllers\Admin\RoleController');
+    Route::delete('role', [RoleController::class, 'delete'])->name('role.delete');
     //wallet
     Route::get('/wallet/{user}/index', [WalletController::class, 'index'])->name('user.wallet');
     Route::post('/wallet_change', [WalletController::class, 'wallet_change'])->name('user.wallet.change');
