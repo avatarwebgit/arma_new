@@ -32,6 +32,28 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="group">Group</label>
+                                    <input id="group" class="form-control" name="group" value="{{ $permission->group }}">
+                                    @error('group')
+                                    <p class="text-danger">
+                                        {{ $message }}
+                                    </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="display_name">Display Name</label>
+                                    <input id="display_name" class="form-control" name="display_name" value="{{ $permission->display_name }}">
+                                    @error('display_name')
+                                    <p class="text-danger">
+                                        {{ $message }}
+                                    </p>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="card-footer">
                                 <div class="float-end">
