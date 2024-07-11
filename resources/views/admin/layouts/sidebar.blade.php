@@ -171,17 +171,17 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('roles')
-                            <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">
-                                <a class="dash-link" href="{{ route('admin.roles.index') }}">{{ __('Roles') }}</a>
-                            </li>
-                        @endcan
-                        @can('permissions')
-                            <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">
-                                <a class="dash-link"
-                                   href="{{ route('admin.permission.index') }}">{{ __('Permissions') }}</a>
-                            </li>
-                        @endcan
+{{--                        @can('roles')--}}
+{{--                            <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">--}}
+{{--                                <a class="dash-link" href="{{ route('admin.roles.index') }}">{{ __('Roles') }}</a>--}}
+{{--                            </li>--}}
+{{--                        @endcan--}}
+{{--                        @can('permissions')--}}
+{{--                            <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">--}}
+{{--                                <a class="dash-link"--}}
+{{--                                   href="{{ route('admin.permission.index') }}">{{ __('Permissions') }}</a>--}}
+{{--                            </li>--}}
+{{--                        @endcan--}}
                     </ul>
 
                 </li>
