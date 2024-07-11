@@ -27,7 +27,7 @@ class UserController extends Controller
 {
     public function index($type)
     {
-        $permission_groups = Permission::where('group','!=','0')->get()->groupby('group');
+        $permission_groups = Permission::where('group','!=','0')->orderBy('id','asc')->get()->groupby('group');
         $user_status = UserStatus::where('id', $type)->pluck('title')->first();
         $activation_status = UserActivationStatus::all();
         if ($type == 'seller' or $type == 'buyer' or $type == 'Members' or $type == 'Representatives' or $type == 'Brokers') {
