@@ -121,6 +121,7 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::get('/sales_form/forth/index/{status}', [FormController::class, 'sales_form_index'])->middleware('permission:Inquires-Rejected-Inquiries')->name('sales_form.forth.index');
     Route::get('/sales_form/sixth/index/{status}', [FormController::class, 'sales_form_index'])->middleware('permission:Inquires-Preparation')->name('sales_form.sixth.index');
     Route::get('/sales_form/fifth/index/{status}', [FormController::class, 'sales_form_index'])->middleware('permission:Inquires-Approved')->name('sales_form.fifth.index');
+    Route::get('/sales_form/index/{status}', [FormController::class, 'sales_form_index'])->name('sales_form.index');
 
 
 

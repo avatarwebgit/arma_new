@@ -29,7 +29,7 @@
                                          aria-labelledby="settings-profile-tab">
                                         <div class="card">
                                             <div class="card-body">
-                                                <a href="{{ route('admin.sales_form.index',['status'=>6]) }}"
+                                                <a href="{{ route('admin.sales_form.sixth.index',['status'=>6]) }}"
                                                    class="btn btn-dark bt-sm mb-3">
                                                     Back
                                                 </a>
@@ -495,7 +495,7 @@
                                         </div>
                                         <input type="hidden" name="form_type" id="form_type">
                                         <div class="d-flex justify-content-center">
-                                            <a href="{{ route('admin.sales_form.index',['status'=>6]) }}"
+                                            <a href="{{ route('admin.sales_form.sixth.index',['status'=>6]) }}"
                                                class="button-theme mt-3">
                                                 Cancel
                                             </a>
