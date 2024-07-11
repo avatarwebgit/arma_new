@@ -42,7 +42,7 @@
                                 <strong class="text-info">
                                     + {{ $permission_group[0]->group }}
                                 </strong>
-                                @foreach($permission_group as $permission)
+                                @foreach($permission_group->sortBy('id','asc') as $permission)
                                     <div class="ml5">
                                         <input style="cursor: pointer" type="checkbox" name="{{ $permission->name }}"
                                                id="{{ $permission->name }}"

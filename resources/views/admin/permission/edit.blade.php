@@ -54,6 +54,17 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="priority">Priority</label>
+                                    <input id="priority" class="form-control" name="priority" value="{{ $permission->priority }}">
+                                    @error('priority')
+                                    <p class="text-danger">
+                                        {{ $message }}
+                                    </p>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="card-footer">
                                 <div class="float-end">
