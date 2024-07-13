@@ -285,12 +285,12 @@
                 <div class="mt-2 mb-2">
                     <ul style="margin-left: auto" class="d-flex justify-content-center">
                         <li style="width: 50%" title="login" class="login_btn">
-                            <a class="nav-link text-center" href="{{ route('login') }}">
+                            <a class="nav-link text-center" href="#" onclick="ShowLoginModal()">
                                 login
                             </a>
                         </li>
                         <li style="width: 50%" title="Register" class="login_btn ml-3">
-                            <a class="nav-link text-center" href="{{ route('register') }}">
+                            <a class="nav-link text-center" href="#" onclick="ShowRegisterModal()">
                                 Register
                             </a>
                         </li>
