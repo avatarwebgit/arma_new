@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-5">
         <div class="col-12 col-md-4 border-1 m-auto pt-5 pb-5">
-            <form method="POST" action="{{ route('login') }}" class="auth-form">
+            <div class="auth-form">
                 @csrf
                 <div class="row">
                     <div class="col-12">
@@ -62,7 +62,7 @@
                     </div>
 
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 @endsection

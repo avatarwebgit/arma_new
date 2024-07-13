@@ -278,6 +278,159 @@
             }
         }
 
+        function ShowLoginModal() {
+            $('.error-message').addClass('d-none');
+            $('#login_modal').modal('show');
+        }
+
+        function LoginFormSubmit(tag) {
+            $(tag).prop('disabled', true);
+            $('.error-message').addClass('d-none');
+            let email = $('#email').val();
+            let password = $('#password').val();
+            $.ajax({
+                url: "{{ route('login') }}",
+                data: {
+                    email: email,
+                    password: password,
+                    _token: "{{ csrf_token() }}",
+                },
+                dataType: 'JSON',
+                method: 'post',
+                success: function (msg) {
+                    if (msg[0] === 1) {
+                        window.location.href = "{{ route('profile') }}";
+                    }
+                },
+                error: function (error) {
+                    $(tag).prop('disabled', false);
+                    let errors = error.responseJSON.errors;
+                    $.each(errors, function (i, val) {
+                        $('#' + i + '_error').removeClass('d-none');
+                        $('#' + i + '_error').text(val);
+                    })
+                }
+            });
+        }
+
+        function ShowRegisterModal() {
+            $('.error-message').add('d-none');
+            $('#register_modal').modal('show');
+        }
+
+        function SubmitRegisterModal(tag) {
+            $(tag).prop('disabled', true);
+            $('.error-message').addClass('d-none');
+            let commodity = $('#commodity').val();
+            let company_name = $('#company_name').val();
+            let company_address = $('#company_address').val();
+            let company_post_zip_code = $('#company_post_zip_code').val();
+            let company_city = $('#company_city').val();
+            let company_state = $('#company_state').val();
+            let company_country = $('#company_country').val();
+            let company_phone = $('#company_phone').val();
+            let company_website = $('#company_website').val();
+            let company_email = $('#company_email').val();
+            let user_type = $('#user_type').val();
+            let salutation = $('#salutation').val();
+            let full_name = $('#full_name').val();
+            let company_title = $('#company_title').val();
+            let function_in_company = $('#function_in_company').val();
+            let email = $('#email_register').val();
+            let skype = $('#skype').val();
+            let whatsapp = $('#whatsapp').val();
+            let accept_term = $('input[name="accept_term"]:checked').val();
+            $.ajax({
+                url: "{{ route('register') }}",
+                data: {
+                    commodity: commodity,
+                    company_name: company_name,
+                    company_address: company_address,
+                    company_post_zip_code: company_post_zip_code,
+                    company_city: company_city,
+                    company_state: company_state,
+                    company_country: company_country,
+                    company_phone: company_phone,
+                    company_website: company_website,
+                    company_email: company_email,
+                    user_type: user_type,
+                    salutation: salutation,
+                    full_name: full_name,
+                    company_title: company_title,
+                    function_in_company: function_in_company,
+                    email: email,
+                    skype: skype,
+                    whatsapp: whatsapp,
+                    accept_term: accept_term,
+                    _token: "{{ csrf_token() }}"
+                },
+                dataType: 'json',
+                method: 'POST',
+                success: function (msg) {
+                    if (msg[0] === 1) {
+                        window.location.href = "{{ route('profile') }}";
+                    }
+                },
+                error: function (error) {
+                    $(tag).prop('disabled', false);
+                    let errors = error.responseJSON.errors;
+                    $.each(errors, function (i, val) {
+                        $('#' + i + '_error').removeClass('d-none');
+                        $('#' + i + '_error').text(val);
+                        if (i == 'email') {
+                            $('#email_register_error').removeClass('d-none');
+                            $('#email_register_error').text(val);
+                        }
+
+                    })
+                }
+            })
+        }
+
+        function ResetPassword() {
+            $('.alert_reset_password').addClass('d-none');
+            $('.alert_reset_password2').addClass('d-none');
+            $('.error-message').addClass('d-none');
+            console.log('reset password');
+            $('#reset_password_modal').modal('show');
+            $('#login_modal').modal('hide');
+        }
+
+        function SubmitResetPasswordModal() {
+            $('#SubmitResetPasswordModalBtn').prop('disabled', true);
+            $('.alert_reset_password').addClass('d-none');
+            $('.alert_reset_password2').addClass('d-none');
+            $('.error-message').addClass('d-none');
+            let email_reset_password = $('#email_reset_password').val();
+            $.ajax({
+                url: "{{ route('password.email') }}",
+                dataType: 'json',
+                method: "POST",
+                data: {
+                    email: email_reset_password,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (data) {
+                    if (data[0] == 1) {
+                        $('.alert_reset_password').removeClass('d-none');
+                    }
+                    if (data[0] == 0) {
+                        $('#SubmitResetPasswordModalBtn').prop('disabled', false);
+                        $('.alert_reset_password2').removeClass('d-none');
+                    }
+                },
+                error: function (error) {
+                    $('#SubmitResetPasswordModalBtn').prop('disabled', false);
+                    let errors = error.responseJSON.errors;
+                    $.each(errors, function (i, val) {
+                        $('#email_reset_password_error').removeClass('d-none');
+                        $('#email_reset_password_error').text(val);
+                    })
+
+                }
+            })
+        }
+
     </script>
 
 @endsection
@@ -346,6 +499,10 @@
 
         #dayOfWeek {
             font-size: 1.75rem !important;
+        }
+
+        .error-message {
+            color: red;
         }
     </style>
 @endsection
@@ -563,5 +720,9 @@
             </div>
         </div>
     </div>
+
+    @include('home.index.login_modal')
+    @include('home.index.register_modal')
+    @include('home.index.reset_password_modal')
 
 @endsection

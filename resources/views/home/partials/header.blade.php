@@ -158,12 +158,12 @@
             @else
                 <ul style="margin-left: auto" class="d-flex justify-content-center">
                     <li title="login" class="login_btn">
-                        <a  class="nav-link login-padding" href="{{ route('login') }}">
+                        <a onclick="ShowLoginModal()"  class="nav-link login-padding" href="#">
                             login
                         </a>
                     </li>
                     <li title="Register" class="login_btn ml-3">
-                        <a  class="nav-link login-padding" href="{{ route('register') }}">
+                        <a onclick="ShowRegisterModal()" class="nav-link login-padding" href="#">
                             Register
                         </a>
                     </li>

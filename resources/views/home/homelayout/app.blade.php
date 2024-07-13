@@ -30,16 +30,16 @@
 <script>
     function header_search(tag, event) {
         if (event.keyCode == 13) {
-            let val=$(tag).val();
+            let val = $(tag).val();
             let url = "{{ route('home.search') }}"
             $.ajax({
-                url:url,
-                data:{
-                  _token : "{{ csrf_token() }}"  ,
-                    value : val,
+                url: url,
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    value: val,
                 },
                 dataType: 'json',
-                method:'post',
+                method: 'post',
 
             })
         }
@@ -456,6 +456,7 @@
     function step_price_competition(tag, event) {
 
     }
+
 
 </script>
 
