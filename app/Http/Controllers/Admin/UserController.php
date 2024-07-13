@@ -27,29 +27,7 @@ class UserController extends Controller
 {
     public function index($type)
     {
-        $permission_groups = Permission::where('group', '!=', '0')->orderBy('updated_at','asc')->get()->groupby('group');
-        $Users=$permission_groups['Users'];
-        $Inquires=$permission_groups['Inquires'];
-        $Market=$permission_groups['Market'];
-        $Sales_Order=$permission_groups['Sales Order'];
-        $Bid_Deposit=$permission_groups['Bid Deposit'];
-        $Settings=$permission_groups['Settings'];
-        $other=$permission_groups['other'];
-        $Header=$permission_groups['Header'];
-        $Footer=$permission_groups['Footer'];
-        $Full_Access=$permission_groups['Full Access'];
-        $permission_groups=[];
-        $permission_groups['Users']=$Users;
-        $permission_groups['Inquires']=$Inquires;
-        $permission_groups['Market']=$Market;
-        $permission_groups['Sales Order']=$Sales_Order;
-        $permission_groups['Bid Deposit']=$Bid_Deposit;
-        $permission_groups['Settings']=$Settings;
-        $permission_groups['other']=$other;
-        $permission_groups['Header']=$Header;
-        $permission_groups['Footer']=$Footer;
-        $permission_groups['Full Access']=$Full_Access;
-
+        $permission_groups = Permission::where('group', '!=', '0')->orderBy('priority','asc')->get()->groupby('group');
         $user_status = UserStatus::where('id', $type)->pluck('title')->first();
         $activation_status = UserActivationStatus::all();
         if ($type == 'seller' or $type == 'buyer' or $type == 'Members' or $type == 'Representatives' or $type == 'Brokers') {

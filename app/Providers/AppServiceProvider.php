@@ -2,12 +2,17 @@
 
 namespace App\Providers;
 
+use App\Models\Commodity;
+use App\Models\CompanyFunction;
+use App\Models\Country;
 use App\Models\Header1;
 use App\Models\Header2;
 use App\Models\HeaderCategory;
 use App\Models\HeaderCategoryLine1;
 use App\Models\MarketSetting;
+use App\Models\Salutation;
 use App\Models\Setting;
+use App\Models\Type;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -53,6 +58,12 @@ class AppServiceProvider extends ServiceProvider
         $copy_right = Setting::where('key', 'copy_right')->pluck('value')->first();
         $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status',1)->get();
         $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status',1)->get();
+
+        $types = Type::where('id', '!=', 1)->get();
+        $commodities = Commodity::all();
+        $countries = Country::OrderBy('countryName','asc')->get();
+        $companyFunction = CompanyFunction::all();
+        $salutation= Salutation::all();
         view()->share(
             compact(
                 'header1',
@@ -87,6 +98,11 @@ class AppServiceProvider extends ServiceProvider
                 'copy_right',
                 'header2_categories',
                 'header1_categories',
+                'types',
+                'commodities',
+                'countries',
+                'companyFunction',
+                'salutation'
             ));
     }
 }

@@ -47,10 +47,10 @@ class RegisterController extends Controller
     {
         $types = Type::where('id', '!=', 1)->get();
         $commodities = Commodity::all();
-        $countries = Country::OrderBy('countryName','asc')->get();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
         $companyFunction = CompanyFunction::all();
-        $salutation= Salutation::all();
-        return view('auth.register', compact('types', 'commodities','countries','companyFunction','salutation'));
+        $salutation = Salutation::all();
+        return view('auth.register', compact('types', 'commodities', 'countries', 'companyFunction', 'salutation'));
 
     }
 
@@ -59,6 +59,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
         session()->put('UserRegistered', true);
+        return response()->json([1, 'ok']);
         //email
         //send email with job
 //        $admin = Setting::where('key', 'email')->pluck('value')->first();
