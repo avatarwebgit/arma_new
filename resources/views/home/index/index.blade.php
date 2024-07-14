@@ -534,7 +534,7 @@
             </div>
             <div class="col-12 col-sm-4 p-0 text-right" id="time_now">
                 <h3>{{ Carbon\Carbon::now()->format('l') }}</h3>
-                <span>{{ Carbon\Carbon::now()->format('d M Y g:i A') }}</span>
+                <span>{{ Carbon\Carbon::now()->format('d M Y H:i A') }}</span>
             </div>
         </div>
     </div>

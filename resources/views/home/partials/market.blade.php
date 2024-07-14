@@ -54,7 +54,7 @@
                     if ($market->status == 1){
                         $statusText = 'Waiting To Open';
                        $color = '#006';
-                       $statusText=Carbon\Carbon::parse($market->time)->format('g:i a');
+                       $statusText=Carbon\Carbon::parse($market->time)->format('H:i a');
                     }
                     if ($market->status == 2){
                          $statusText = 'Ready to open';
