@@ -57,9 +57,6 @@ class AppServiceProvider extends ServiceProvider
         $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
         $copy_right = Setting::where('key', 'copy_right')->pluck('value')->first();
         $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status',1)->get();
-<<<<<<< HEAD
-        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
-=======
         $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status',1)->get();
 
         $types = Type::where('id', '!=', 1)->get();
@@ -67,7 +64,6 @@ class AppServiceProvider extends ServiceProvider
         $countries = Country::OrderBy('countryName','asc')->get();
         $companyFunction = CompanyFunction::all();
         $salutation= Salutation::all();
->>>>>>> 9beb35a09b7da1751c6c9085eef4a59f6d008e57
         view()->share(
             compact(
                 'header1',
