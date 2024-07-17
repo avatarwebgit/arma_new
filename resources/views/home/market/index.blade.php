@@ -516,7 +516,7 @@
         .clockk-wrap {
             margin: auto;
             width: 240px;
-            height: 240px;
+            height: 150px;
             /*margin-top: 100px;*/
             position: relative;
             border-radius: 50px;
@@ -530,6 +530,7 @@
         .clockk {
             left: 0;
             right: 0;
+            top: 5px;
             margin: auto !important;
             width: 125px;
             height: 125px;
