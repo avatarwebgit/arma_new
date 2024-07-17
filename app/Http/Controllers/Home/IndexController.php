@@ -205,7 +205,7 @@ class IndexController extends Controller
             if (session()->exists('bid_page')) {
                 $route = session('bid_page');
                 session()->forget('bid_page');
-                return redirect()->route($route);
+                return redirect()->to($route);
             }
             $user = auth()->user();
             if ($user->active != 1 or $user->active_status != 2) {
