@@ -202,8 +202,13 @@ class IndexController extends Controller
     {
         $user_check = auth()->check();
         if ($user_check) {
+            if (session()->exists('bid_page')) {
+                \session()->forget('bid_page');
+                $route = \session()->get('bid_page');
+                return redirect()->route($route);
+            }
             $user = auth()->user();
-            if ($user->active != 1 or $user->active_status!=2 ){
+            if ($user->active != 1 or $user->active_status != 2) {
                 auth()->logout();
                 session()->put('user_inactive', 1);
                 return redirect()->route('home.index');

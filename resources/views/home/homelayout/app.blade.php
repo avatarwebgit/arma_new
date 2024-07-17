@@ -44,7 +44,13 @@
                 market_id: market_id,
             },
             success: function (data) {
-                console.log(data);
+               if (data[0]=='auth'){
+                   ShowLoginModal();
+               }
+               if (data[0]=='ok'){
+                   let route=data[1];
+                   window.location.href=route;
+               }
             }
 
         })
