@@ -11,6 +11,11 @@
 @include('home.partials.header')
 @yield('content')
 @include('home.partials.footer')
+
+
+@include('home.index.login_modal')
+@include('home.index.register_modal')
+@include('home.index.reset_password_modal')
 {{--<script src="{{ asset('home/js/jquery-3.4.1.min.js') }}"></script>--}}
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
         crossorigin="anonymous"></script>
