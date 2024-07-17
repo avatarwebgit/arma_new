@@ -9,6 +9,7 @@
         <div class="timer">{{ $minutes }}</div>
         <div class="text">MIN</div>
     </div>
+
     <div style="font-family: normal !important" class="timer">:</div>
     <div class="column">
         <div class="timer">{{ $seconds }}</div>
