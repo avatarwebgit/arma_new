@@ -153,6 +153,7 @@
         }
 
         function close_bid_deposit(id) {
+            $('#bid_deposit_section-' + id).addClass('d-none');
             $('#bid_deposit_section-' + id).addClass('bg-inactive');
             $('#bid_deposit_section-' + id).find('input').prop('disabled', true);
         }
