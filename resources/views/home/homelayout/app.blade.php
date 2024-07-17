@@ -34,6 +34,10 @@
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
 
+    function ShowBidPage(market_id) {
+        console.log(market_id);
+    }
+
     function ShowLoginModal() {
         $('.error-message').addClass('d-none');
         $('#login_modal').modal('show');
@@ -186,6 +190,7 @@
             }
         })
     }
+
     function header_search(tag, event) {
         if (event.keyCode == 13) {
             let val = $(tag).val();
