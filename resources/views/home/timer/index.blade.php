@@ -3,6 +3,7 @@
         <div class="timer">{{ $hours }}</div>
         <div class="text hour" style="margin-right: 5px !important;">HR</div>
     </div>
+
     <div style="font-family:none !important" class="timer">:</div>
     <div class="column">
         <div class="timer">{{ $minutes }}</div>
