@@ -35,7 +35,19 @@
 <script>
 
     function ShowBidPage(market_id) {
-        console.log(market_id);
+        $.ajax({
+            url: "{{ route('home.ShowBidPage') }}",
+            dataType: 'json',
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                market_id: market_id,
+            },
+            success: function (data) {
+                console.log(data);
+            }
+
+        })
     }
 
     function ShowLoginModal() {

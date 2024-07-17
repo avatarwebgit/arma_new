@@ -67,6 +67,11 @@ class MarketHomeController extends Controller
         ));
     }
 
+    public function ShowBidPage(Request $request)
+    {
+        dd($request->all());
+    }
+
     public function GetMarket(Request $request)
     {
         $market_id = $request->market_id;
@@ -587,7 +592,7 @@ class MarketHomeController extends Controller
                 $show_win_modal = 1;
             }
             if ($market->has_winner == 0) {
-                $market->update(['has_winner'=>1]);
+                $market->update(['has_winner' => 1]);
                 //user winner
                 foreach ($win_user_ids as $user_id) {
                     $description = 'Decrease Wallet For Bid Deposit Market ID:' . $market->id;
