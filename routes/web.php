@@ -65,7 +65,7 @@ Route::post('/startBroadCast', [IndexController::class, 'startBroadCast'])->name
 Route::post('/MarketTableIndex', [IndexController::class, 'MarketTableIndex'])->name('home.MarketTableIndex');
 Route::post('/GetMarket', [MarketHomeController::class, 'GetMarket'])->name('home.GetMarket');
 Route::get('/bid/{market}', [MarketHomeController::class, 'bid'])->name('home.bid')->middleware('auth');
-Route::post('/ShowBidPage/{market}', [MarketHomeController::class, 'ShowBidPage'])->name('home.ShowBidPage');
+Route::post('/ShowBidPage', [MarketHomeController::class, 'ShowBidPage'])->name('home.ShowBidPage');
 Route::post('/bid_market/', [MarketHomeController::class, 'bid_market'])->name('home.bid_market');
 Route::post('/remove_bid/', [MarketHomeController::class, 'remove_bid'])->name('home.remove_bid');
 Route::post('/refreshMarketTable', [MarketHomeController::class, 'refreshMarketTable'])->name('home.refreshMarketTable');
