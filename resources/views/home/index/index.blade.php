@@ -357,6 +357,9 @@
         .error-message {
             color: red;
         }
+        .timer_index > .column > div {
+            width: 30px !important;
+        }
     </style>
 @endsection
 
