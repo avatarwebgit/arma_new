@@ -650,14 +650,14 @@
     <div class="container mt-5 mb-5">
 
         <div class="row justify-content-between">
-            <div class="col-12 col-md-12 col-xl-4 mb-5">
+            <div class="col-12 col-md-12 col-xl-4 mb-1">
                 <h5 class="text-center text-info text-center p-3 commodity-title">
                     {{ $market->SalesForm->commodity }}
                 </h5>
                 @include('home.market.market_info')
             </div>
             {{--            //menu_desktop--}}
-            <div class="col-12 col-md-12 col-xl-8 mb-5 menu-des">
+            <div class="col-12 col-md-12 col-xl-8 mb-1 menu-des">
                 <div class="row mb-4">
                     <div class="col-12">
                         <h5 id="status-box-{{ $market->id }}" class="text-center">
