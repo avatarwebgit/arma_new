@@ -204,7 +204,7 @@ class IndexController extends Controller
         if ($user_check) {
             if (session()->exists('bid_page')) {
                 \session()->forget('bid_page');
-                $route = \session()->get('bid_page');
+                $route = session('bid_page');
                 return redirect()->route($route);
             }
             $user = auth()->user();
