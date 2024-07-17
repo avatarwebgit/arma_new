@@ -530,13 +530,11 @@
         .clockk {
             left: 0;
             right: 0;
-            margin: auto;
+            margin: auto !important;
             width: 125px;
             height: 125px;
             border-radius: 50%;
             position: absolute;
-            margin-top: -90px;
-            margin-left: -90px;
             background-color: #feeff4;
             display: flex;
             align-items: center;
