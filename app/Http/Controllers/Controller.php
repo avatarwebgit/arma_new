@@ -206,7 +206,7 @@ class Controller extends BaseController
         return $close_market;
     }
 
-    function Timer($diffSeconds, $start_market_time, $market_is_open=1)
+    function Timer($diffSeconds, $start_market_time, $market_is_open = 1)
     {
         $days = floor($diffSeconds / 86400);
         $hours = floor(($diffSeconds - ($days * 86400)) / 3600);
@@ -265,7 +265,33 @@ class Controller extends BaseController
         if ($seconds < "10") {
             $seconds = "0" . $seconds;
         }
-        return $hours . ':' . $minutes . ':' . $seconds;
+        if ($hours == 0) {
+            $timer='<div class="column">
+        <div class="timer">' . $minutes . '</div>
+        <div class="text">MIN</div>
+    </div>
+    <div style="font-family: normal !important" class="seprator">:</div>
+    <div class="column">
+        <div class="timer">' . $seconds . '</div>
+        <div class="text">SEC</div>
+    </div>';
+        } else {
+            $timer='<div class="column">
+        <div class="timer">' . $hours . '</div>
+        <div class="text">HR</div>
+    </div>
+    <div style="font-family:none !important" class="seprator">:</div>
+    <div class="column">
+        <div class="timer">' . $minutes . '</div>
+        <div class="text" >MIN</div>
+    </div>
+    <div style="font-family: normal !important" class="seprator">:</div>
+    <div class="column">
+        <div class="timer">' . $seconds . '</div>
+        <div class="text" >SEC</div>
+    </div>';
+        }
+        return $timer;
     }
 
     public function today_market_difference()

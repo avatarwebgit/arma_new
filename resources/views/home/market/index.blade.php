@@ -322,7 +322,7 @@
             $increment = 360 / $loops;
             $half = Math.round($loops / 2);
             $barColor = '#162fa2';
-            $backColor = '#feeff4';
+            $backColor = '#748dff';
             var num = 0;
             var sec = seconds;
             var lop = sec;
@@ -335,12 +335,15 @@
             }
             if (2 < status && status < 7) {
                 $barColor = '#1f9402';
+                $backColor = '#afff98';
             }
             if (seconds < 10) {
                 $barColor = '#c20000';
+                $backColor = '#ff9595';
             }
             if (seconds > 1800) {
                 $barColor = '#727272';
+                $backColor = '#d7d6d6';
             }
             // console.log('sec: ', sec);
             // if (min > 1) {
@@ -541,7 +544,7 @@
 
         .clockk span {
             z-index: 999;
-            font-size: 21px;
+            font-size: 20px;
         }
 
         .clockk:before {
@@ -630,6 +633,12 @@
         #timer_section {
             margin-bottom: 100px;
         }
+        .timer-clock .timer{
+            font-size: 26px !important;
+        }
+        .timer-clock .text{
+            font-size: 13px !important;
+        }
     </style>
     {{--    /*//clockk*/--}}
 @endsection
@@ -649,7 +658,9 @@
 
                 <div class="clockk-wrap">
                     <div class="clockk pro-0">
-                        <span id="market-difference1-{{ $market->id }}">0</span>
+                        <span id="market-difference1-{{ $market->id }}" class="d-flex timer-clock">
+
+                        </span>
                     </div>
                 </div>
 
