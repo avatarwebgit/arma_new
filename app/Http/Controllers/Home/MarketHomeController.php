@@ -69,13 +69,14 @@ class MarketHomeController extends Controller
 
     public function ShowBidPage(Request $request)
     {
+        $market_id = $request->market_id;
         $rout = route('home.bid', ['market' => $market_id]);
         if (!auth()->check()) {
             session()->put('bid_page',$rout);
             return response()->json(['auth']);
         }
 
-        $market_id = $request->market_id;
+
 
         return response()->json(['ok',$rout]);
 
