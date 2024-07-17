@@ -3,6 +3,19 @@
     <div class="row mb-4">
         <div class="col-12 col-md-6 mb-3">
             <div class="row">
+                <div class="col-12">
+                    <h5 id="status-box-{{ $market->id }}" class="text-center">
+                        Step : <span id="market-status-{{ $market->id }}"></span>
+                    </h5>
+
+                    <div class="clockk-wrap">
+                        <div class="clockk pro-0">
+                        <span id="market-difference1-{{ $market->id }}" class="d-flex timer-clock">
+
+                        </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-12 col-md-12">
                     <div class="bid_textarea">
                         <table class="table">
