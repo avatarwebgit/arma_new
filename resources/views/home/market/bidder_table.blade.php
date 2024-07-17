@@ -8,12 +8,14 @@
                     @endif
                 @endauth
             </span>
-            <span>
+        </td>
+        <td class="text-center">
+                        <span>
                 {{ number_format($bid->quantity) }}
            </span>
         </td>
-        <td class="text-center">{{ number_format($bid->price) }}</td>
         <td class="text-center">
+            {{ number_format($bid->price) }}
             @if($key!=0 and $bid->user_id==auth()->id() and $bid->Market->status==3 )
                 <span class="remove_function" onclick="removeBid({{ $bid->id }})">
                      <i  class="fa fa-times-circle text-danger"></i>
