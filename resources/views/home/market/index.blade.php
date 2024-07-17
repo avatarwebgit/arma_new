@@ -35,7 +35,7 @@
                 $('#market-difference1-' + market_id).html(timer);
 
                 if (market_page_id == market_id) {
-                    console.log(market_page_id,market_id);
+                    console.log(market_page_id, market_id);
                     let remain = difference % 60;
                     pie = ((100 * remain) / 60);
                     TimerClock(difference, pie, status);
@@ -43,7 +43,7 @@
 
 
                 if (status == 1) {
-                    waiting_to_open(status, market_id,difference);
+                    waiting_to_open(status, market_id, difference);
                 }
                 if (status == 2) {
                     ready_to_open(status, market_id);
@@ -71,11 +71,11 @@
             });
 
 
-        function waiting_to_open(status, id,difference) {
+        function waiting_to_open(status, id, difference) {
             hide_result(id);
             deactive_bid(id)
             let color = '#162fa2';
-            if (difference>1800){
+            if (difference > 1800) {
                 color = '#727272';
             }
             let statusText = '<span>Waiting To Open</span>';
@@ -528,8 +528,9 @@
         }
 
         .clockk {
-            top: 50%;
-            left: 50%;
+            left: 0;
+            right: 0;
+            margin: auto;
             width: 125px;
             height: 125px;
             border-radius: 50%;
@@ -633,10 +634,12 @@
         #timer_section {
             margin-bottom: 100px;
         }
-        .timer-clock .timer{
+
+        .timer-clock .timer {
             font-size: 26px !important;
         }
-        .timer-clock .text{
+
+        .timer-clock .text {
             font-size: 13px !important;
         }
     </style>
@@ -645,39 +648,30 @@
 
 @section('content')
     <div class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-12 col-md-12 col-xl-4 d-flex justify-content-center align-items-end menu-des">
+
+        <div class="row justify-content-between">
+            <div class="col-12 col-md-12 col-xl-4 mb-5">
                 <h5 class="text-center text-info text-center p-3 commodity-title">
                     {{ $market->SalesForm->commodity }}
                 </h5>
-            </div>
-            <div class="col-12 col-md-12 col-xl-8 mb-1">
-                <h5 id="status-box-{{ $market->id }}" class="text-center">
-                    Step : <span id="market-status-{{ $market->id }}"></span>
-                </h5>
-
-                <div class="clockk-wrap">
-                    <div class="clockk pro-0">
-                        <span id="market-difference1-{{ $market->id }}" class="d-flex timer-clock">
-
-                        </span>
-                    </div>
-                </div>
-
-                {{--                <span id="market-difference-{{ $market->id }}" class="circle_timer">--}}
-
-                {{--                        </span>--}}
-            </div>
-        </div>
-        <div class="row justify-content-between">
-
-            <div class="col-12 col-md-12 col-xl-4 mb-5">
-
                 @include('home.market.market_info')
             </div>
             {{--            //menu_desktop--}}
             <div class="col-12 col-md-12 col-xl-8 mb-5 menu-des">
                 <div class="row mb-4">
+                    <div class="col-12">
+                        <h5 id="status-box-{{ $market->id }}" class="text-center">
+                            Step : <span id="market-status-{{ $market->id }}"></span>
+                        </h5>
+
+                        <div class="clockk-wrap">
+                            <div class="clockk pro-0">
+                        <span id="market-difference1-{{ $market->id }}" class="d-flex timer-clock">
+
+                        </span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-12 col-md-6 mb-3">
                         <div class="bid_textarea">
                             <table class="table">
