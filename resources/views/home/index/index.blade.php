@@ -574,8 +574,5 @@
         </div>
     </div>
 
-    @include('home.index.login_modal')
-    @include('home.index.register_modal')
-    @include('home.index.reset_password_modal')
 
 @endsection
