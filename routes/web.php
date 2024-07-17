@@ -329,6 +329,13 @@ Route::get('/logout', function () {
     return redirect()->route('home.index');
 });
 
+Route::get('/login',function (){
+    return redirect()->route('home.index');
+})->name('login');
+Route::get('/register',function (){
+    return redirect()->route('home.index');
+})->name('register');
+
 
 Route::get('check_market/{id}', [IndexController::class, 'check_market'])->name('home.check_market');
 
