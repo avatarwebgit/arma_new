@@ -1,7 +1,7 @@
 <div class="timer_index clock" @if($timer_is_red==1)  style="color: #c20000 !important;" @endif>
     <div class="column">
         <div class="timer">{{ $hours }}</div>
-        <div class="text hour" style="margin-right: 5px !important;">HR</div>
+        <div class="text hour" style="margin-right: 3px !important;">HR</div>
     </div>
 
     <div style="font-family:none !important" class="timer">:</div>

@@ -7,9 +7,14 @@
                                     @auth
                         {{ $market->SalesForm->contract_type }}
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
                         </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
+                        </a>
+
                     @endif
                                 </span>
             </td>
@@ -19,8 +24,12 @@
                                     @auth
                         {{ $market->SalesForm->min_order }}
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
                         </a>
                     @endauth
                                 </span>
@@ -32,8 +41,12 @@
                                     @auth
                         {{ $market->SalesForm->company_type }}
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
                         </a>
                     @endauth
                                 </span>
@@ -48,8 +61,12 @@
                                                                 @auth
                         Available
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
                         </a>
                     @endauth
                                                             </span>
@@ -60,8 +77,12 @@
                                     @auth
                         {{ $market->SalesForm->price_type }}
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
                         </a>
                     @endauth
                                 </span>
@@ -72,8 +93,12 @@
                                     @auth
                         {{ $market->SalesForm->payment }}
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
                         </a>
                     @endauth
                                 </span>
@@ -87,8 +112,12 @@
                                                                 @auth
                         Available
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
                         </a>
                     @endauth
                                                             </span>
@@ -100,8 +129,12 @@
                                     @auth
                         {{ $market->SalesForm->unit }}
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
                         </a>
                     @endauth
                                 </span>
@@ -113,8 +146,12 @@
                                         @auth
                         {{ $market->SalesForm->currency }}
                     @else
-                        <a href="{{ route('login') }}">
-                            Log in/Register
+                        <a href="#" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()">
+                            Register
                         </a>
                     @endauth
                                 </span>
