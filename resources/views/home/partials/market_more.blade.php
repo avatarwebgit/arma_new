@@ -91,7 +91,7 @@
                 <span class="text-bold">Payment</span>
                 <span>
                                     @auth
-                        {{ $market->SalesForm->payment }}
+                        LC/TT/DP/DA
                     @else
                         <a href="#" onclick="ShowLoginModal()">
                             Log in
@@ -110,7 +110,11 @@
                 <span class="text-bold">Offer Price</span>
                 <span>
                                                                 @auth
-                        Available
+                        @if($market->SalesForm->price_type=='Fix')
+                            <td class="text-center">{{ number_format($market->SalesForm->price) }}</td>
+                        @else
+                            <td class="text-center">{{ number_format($market->SalesForm->alpha)  }}</td>
+                        @endif
                     @else
                         <a href="#" onclick="ShowLoginModal()">
                             Log in
