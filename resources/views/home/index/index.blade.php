@@ -5,6 +5,7 @@
     <script type="module">
         window.Echo.channel('market-index-table')
             .listen('MarketTableIndex', function (e) {
+                Create_timer_for_market();
                 let view_table = e.view_table;
                 let market_values_html = e.market_values_html;
                 let show_market_value = e.show_market_value;
@@ -22,6 +23,26 @@
                     $('#timer_section').html(timer);
                 }
             });
+
+        function Create_timer_for_market() {
+            let rows = $('.timer_index_difference');
+            $.each(rows, function (i, val) {
+                let tag = $(val)[0];
+                let id = $(tag).data('id');
+                timerCreator(id);
+            });
+        }
+
+        function timerCreator(id) {
+            let time = $('#market-timer-difference-' + id).text();
+            let TimerText='';
+            setInterval(function () {
+                TimerText = time;
+                console.log(TimerText);
+                $('#market-timer-difference-' + id).text(TimerText);
+                time = time - 1;
+            }, 1000);
+        }
 
         window.Echo.channel('line_header_updated')
             .listen('LIneHeaderUpdated', function (e) {
@@ -105,9 +126,10 @@
             if (seconds < "10") {
                 seconds = "0" + seconds;
             }
-            Hours.text(hours);
-            Minutes.text(minutes);
-            Seconds.text(seconds);
+            // Hours.text(hours);
+            // Minutes.text(minutes);
+            // Seconds.text(seconds);
+            return minutes + ':' + seconds;
         }
 
         function get_market_info(market_id) {
@@ -194,7 +216,6 @@
         });
 
         function GetMarkets() {
-
             $.ajax({
                 url: "{{ route('home.today_market_status') }}",
                 data: {
@@ -216,6 +237,9 @@
                     let now = msg[7];
                     $('#market_table').html(table_view);
                     $('#market_value').html(market_value);
+
+                    console.log('oooooooooooooooooooooooooooooo');
+                    console.log(ids);
                     // $('#Market_Status_Text').html(Market_Status_Text);
                     // $('#Market_Status_Text').html(msg[4]);
 
@@ -237,12 +261,12 @@
         function startTime() {
             var dayOfWeek = moment().tz("Europe/London").format("dddd");
             let clockk = moment().tz("Europe/London").format("ll");
-            let hour=moment().tz("Europe/London").format("h");
-            if (hour<10){
-                hour='0'+hour;
+            let hour = moment().tz("Europe/London").format("h");
+            if (hour < 10) {
+                hour = '0' + hour;
             }
             let a = moment().tz("Europe/London").format("mm A");
-            a=hour+':'+a;
+            a = hour + ':' + a;
             let time_now = '<h3 id="dayOfWeek">' + dayOfWeek + '</h3><span style="font-size: 16px !important;font-weight: bold">' + clockk + '</span><span class="ml-3" style="font-size: 16px !important;font-weight: bold !important;">' + a + ' GMT</span>'
             $('#time_now').html(time_now);
             t = setTimeout(function () {
@@ -357,6 +381,7 @@
         .error-message {
             color: red;
         }
+
         .timer_index > .column > div {
             width: 30px !important;
         }
@@ -576,6 +601,5 @@
             </div>
         </div>
     </div>
-
 
 @endsection
