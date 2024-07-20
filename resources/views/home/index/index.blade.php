@@ -35,7 +35,7 @@
 
         function timerCreator(id) {
             let time = $('#market-deference-' + id).val();
-            let TimerText='';
+            let TimerText = '';
             setInterval(function () {
                 TimerText = Timer(time);
                 console.log(TimerText);
@@ -129,7 +129,12 @@
             // Hours.text(hours);
             // Minutes.text(minutes);
             // Seconds.text(seconds);
-            return minutes + ':' + seconds;
+            if (hours > 0) {
+                return hours + ':' + minutes + ':' + seconds;
+            } else {
+                return minutes + ':' + seconds;
+            }
+
         }
 
         function get_market_info(market_id) {
