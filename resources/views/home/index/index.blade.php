@@ -5,7 +5,7 @@
     <script type="module">
         window.Echo.channel('market-index-table')
             .listen('MarketTableIndex', function (e) {
-                Create_timer_for_market();
+
                 let view_table = e.view_table;
                 let market_values_html = e.market_values_html;
                 let show_market_value = e.show_market_value;
@@ -23,27 +23,16 @@
                     $('#timer_section').html(timer);
                 }
             });
-
-        function Create_timer_for_market() {
-            let rows = $('.timer_index_difference');
-            $.each(rows, function (i, val) {
-                let tag = $(val)[0];
-                let id = $(tag).data('id');
-                timerCreator(id);
+        window.Echo.channel('market-status-updated')
+            .listen('MarketStatusUpdated', function (e) {
+                let market_id = e.market_id;
+                let difference = e.difference;
+                let timer = e.timer;
+                let status = e.status;
+                console.log('okkkkkkkkkkkk');
+                console.log(e);
+                $('#market-timer-difference-' + market_id).html(Timer(difference));
             });
-        }
-
-        function timerCreator(id) {
-            let time = $('#market-deference-' + id).val();
-            $('#market-timer-difference-' + id).text('');
-            let TimerText = '';
-            setInterval(function () {
-                TimerText = Timer(time);
-                console.log(TimerText);
-                $('#market-timer-difference-' + id).text(TimerText);
-                time = time - 1;
-            }, 1000);
-        }
 
         window.Echo.channel('line_header_updated')
             .listen('LIneHeaderUpdated', function (e) {
