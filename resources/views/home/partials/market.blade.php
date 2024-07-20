@@ -114,6 +114,7 @@
                     class="{{ $i%2==0 ? 'bg-white' : 'bg-gray' }}"
                 >
                     <td class="position-relative">
+                        <input type="hidden" id="market-deference-{{ $market->id }}">
                         @if(1 <$market->status and  $market->status< 7)
                             <div class="animation_main_div" style="position: absolute;left: 5px;top: -3px">
                                 <div class="circle " style="background-color: {{ $color }} !important;"></div>
