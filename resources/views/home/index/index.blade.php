@@ -35,6 +35,7 @@
 
         function timerCreator(id) {
             let time = $('#market-deference-' + id).val();
+            $('#market-timer-difference-' + id).text('');
             let TimerText = '';
             setInterval(function () {
                 TimerText = Timer(time);
