@@ -1,7 +1,7 @@
 {{--<h5 class="text-center text-info text-center p-3 commodity-title menu-mobile">--}}
 {{--    {{ $market->SalesForm->commodity }}--}}
 {{--</h5>--}}
-<div id="commodity_information" style="width: 100%;margin-bottom: 50px">
+<div id="commodity_information" style="width: 100%">
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Type/Grade</span>
         <span class="text-bold text-light-blue ">{{ $market->SalesForm->type_grade }}</span>

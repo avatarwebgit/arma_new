@@ -435,11 +435,11 @@
             display: none
         }
 
-        .bid_textarea {
-            width: 100%;
-            height: auto;
-            border: 1px solid #7e7e7e;
-        }
+        /*.bid_textarea {*/
+        /*    width: 100%;*/
+        /*    height: auto;*/
+        /*    border: 1px solid #7e7e7e;*/
+        /*}*/
 
         .bg-inactive {
             background-color: #cecaca !important;

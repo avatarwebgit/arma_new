@@ -6,7 +6,7 @@
             <h4 class="m-b-10">{{ __('Line 2') }}</h4>
         </div>
         <ul class="breadcrumb">
-            <li class="breadcrumb-item">{!! Html::link(route('home'), __('Dashboard'), []) !!}</li>
+            <li class="breadcrumb-item">{!! Html::link(route('admin.dashboard'), __('Dashboard'), []) !!}</li>
             <li class="breadcrumb-item active">{{ __('Line 2') }}</li>
         </ul>
     </div>
