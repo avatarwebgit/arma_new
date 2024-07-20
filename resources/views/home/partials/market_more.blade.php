@@ -109,11 +109,11 @@
             <td class="text-center">
                 <span class="text-bold">Offer Price</span>
                 <span>
-                                                                @auth
+                    @auth
                         @if($market->SalesForm->price_type=='Fix')
-                            <td class="text-center">{{ number_format($market->SalesForm->price) }}</td>
+                            {{ number_format($market->SalesForm->price) }}
                         @else
-                            <td class="text-center">{{ number_format($market->SalesForm->alpha)  }}</td>
+                            {{ number_format($market->SalesForm->alpha)  }}
                         @endif
                     @else
                         <a href="#" onclick="ShowLoginModal()">
