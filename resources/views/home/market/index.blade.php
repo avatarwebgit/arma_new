@@ -785,9 +785,9 @@
                             </div>
                         @endif
                     </div>
-                    <div class="col-12 mt-3">
-                        <div class="bid_textarea"></div>
-                    </div>
+{{--                    <div class="col-12 mt-3">--}}
+{{--                        <div class="bid_textarea"></div>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="row">
                     <div class="col-12 mt-3 display-none" id="final_status_section-{{ $market->id }}">
