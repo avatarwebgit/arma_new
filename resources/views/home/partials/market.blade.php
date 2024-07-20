@@ -59,7 +59,7 @@
                     if ($market->status == 2){
                          $statusText = 'Ready to open';
                          $timer='<span data-id="'.$market->id.'" class="timer_index_difference" id="market-timer-difference-'.$market->id.'"></span>';
-                          $timer='<div class="d-flex">('.$timer.')</div>';
+                          $timer='<div class="d-flex justify-content-center">'.$timer.'</div>';
                           $statusText=$statusText.'<br>'.$timer;
                          $color = '#1f9402';
                     }
@@ -67,28 +67,28 @@
                          $color = '#1f9402';
                          $statusText = 'Opening';
                          $timer='<span style="margin:0 !important" data-id="'.$market->id.'" class="timer_index_difference" id="market-timer-difference-'.$market->id.'"></span>';
-                         $timer='<div class="d-flex justify-content-center">('.$timer.')</div>';
+                         $timer='<div class="d-flex justify-content-center">'.$timer.'</div>';
                          $statusText=$statusText.'<br>'.$timer;
                     }
                     if ($market->status == 4){
                          $color = '#1f9402';
                          $statusText = 'Quotation 1/2';
                          $timer='<span style="margin:0 !important" data-id="'.$market->id.'" class="timer_index_difference" id="market-timer-difference-'.$market->id.'"></span>';
-                         $timer='<div class="d-flex justify-content-center">('.$timer.')</div>';
+                         $timer='<div class="d-flex justify-content-center">'.$timer.'</div>';
                          $statusText=$statusText.'<br>'.$timer;
                     }
                     if ($market->status == 5){
                          $color = '#1f9402';
                          $statusText = 'Quotation 2/2';
                          $timer='<span style="margin:0 !important" data-id="'.$market->id.'" class="timer_index_difference" id="market-timer-difference-'.$market->id.'"></span>';
-                         $timer='<div class="d-flex justify-content-center">('.$timer.')</div>';
+                         $timer='<div class="d-flex justify-content-center">'.$timer.'</div>';
                          $statusText=$statusText.'<br>'.$timer;
                     }
                     if ($market->status == 6){
                          $color = '#1f9402';
                          $statusText = 'Competition';
                          $timer='<span style="margin:0 !important" data-id="'.$market->id.'" class="timer_index_difference" id="market-timer-difference-'.$market->id.'"></span>';
-                         $timer='<div class="d-flex justify-content-center">('.$timer.')</div>';
+                         $timer='<div class="d-flex justify-content-center">'.$timer.'</div>';
                          $statusText=$statusText.'<br>'.$timer;
                     }
                     if ($market->status == 7 or $market->status == 8 or $market->status == 9){
