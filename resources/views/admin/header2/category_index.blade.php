@@ -17,10 +17,27 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive py-5 pb-4">
-                        <div style="padding: 5px 26px;" class="btn-group">
-                            <a href="{{ route('admin.header2.category.headers.create') }}" class="btn btn-default btn-primary btn-sm no-corner"
-                               tabindex="0"
-                               aria-controls="users-table"><span><i class="ti ti-plus"></i> Create</span></a>
+                        <div class="container-fluid d-flex justify-content-between mb-3">
+                            <div>
+                                <a href="{{ route('admin.header2.category.headers.create') }}"
+                                   class="btn btn-default btn-primary btn-sm no-corner"
+                                   tabindex="0"
+                                   aria-controls="users-table"><span><i class="ti ti-plus"></i> Create</span></a>
+                                <a href="{{ route('admin.dashboard') }}"
+                                   class="btn btn-default btn-dark btn-sm no-corner ml5" tabindex="0"
+                                   aria-controls="users-table">
+                                    <span> Back</span>
+                                </a>
+                            </div>
+                            <div class="w-15">
+                                <label>Speed</label>
+                                <select onchange="ChangeLineSpeed(1,this)" class="form-control">
+                                    <option {{ $speed==4000 ? 'selected' : '' }} value="4000">1</option>
+                                    <option {{ $speed==1200 ? 'selected' : '' }} value="1200">2</option>
+                                    <option {{ $speed==500 ? 'selected' : '' }} value="500">3</option>
+                                    <option {{ $speed==100 ? 'selected' : '' }} value="100">4</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="container-fluid">
 
@@ -44,7 +61,7 @@
                                         <td class="d-flex justify-content-end">
                                             <a href="{{ route('admin.header2.category.headers.list',['id'=>$item->id]) }}"
                                                class="btn btn-icon btn-dark btn-sm edit-header2 ml5">
-                                                <i class="fa fa-list"></i>
+                                                <i class="fa fa-arrow-right"></i>
                                             </a>
                                             <a  href="{{ route('admin.header2.category.headers.edit',['id'=>$item->id]) }}"
                                                class="btn btn-icon btn-primary btn-sm edit-header2 ml5">
@@ -106,4 +123,11 @@
             })
         }
     </script>
+@endpush
+@push('style')
+    <style>
+        .w-15{
+            width: 15%;
+        }
+    </style>
 @endpush

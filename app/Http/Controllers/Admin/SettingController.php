@@ -14,8 +14,6 @@ class SettingController extends Controller
 {
 
 
-
-
     /**
      * Display a listing of the resource.
      */
@@ -63,12 +61,12 @@ class SettingController extends Controller
             'alert_text_color',
             'alert_font_size',
             'alert_height',
-        'alert_active',
-        'about_arma',
-        'facebook',
-        'twitter',
-        'linkedin',
-        'copy_right',
+            'alert_active',
+            'about_arma',
+            'facebook',
+            'twitter',
+            'linkedin',
+            'copy_right',
         ));
     }
 
@@ -124,6 +122,23 @@ class SettingController extends Controller
         session()->flash($result[0], $result[1]);
         return \response()->json($result);
     }
+
+    public function ChangeLineSpeed(Request $request)
+    {
+        $value = $request->value;
+        $line = $request->line;
+        if ($line == 1) {
+            $title = 'start_market';
+        } else {
+            $title = 'end_market';
+        }
+        $setting = Setting::where('key', $title)->first();
+        $setting->update([
+            'value' => $value,
+        ]);
+        return \response()->json([1, 'ok']);
+    }
+
     public function updateRepo($request)
     {
         try {
@@ -140,17 +155,17 @@ class SettingController extends Controller
             $email = $request->email;
             $top_bar_color = $request->top_bar_color;
             $side_bar_color = $request->side_bar_color;
-            $alert_description =$request->alert_description;
+            $alert_description = $request->alert_description;
             $alert_bg_color = $request->alert_bg_color;
             $alert_text_color = $request->alert_text_color;
-            $alert_font_size =$request->alert_font_size;
+            $alert_font_size = $request->alert_font_size;
             $alert_height = $request->alert_height;
             $facebook = $request->facebook;
             $twitter = $request->twitter;
             $linkedin = $request->linkedin;
             $about_arma = $request->about_arma;
-            $alert_active=$request->has('alert_active')?1:0;
-            $copy_right=$request->copy_right;
+            $alert_active = $request->has('alert_active') ? 1 : 0;
+            $copy_right = $request->copy_right;
             $array = [
                 'logo' => $logo,
                 'fav_icon' => $fav_icon,
@@ -178,29 +193,32 @@ class SettingController extends Controller
                 'copy_right' => $copy_right,
             ];
             foreach ($array as $key => $value) {
-                $key_exists=Setting::where("key", $key)->exists();
-                if (!$key_exists){
+                $key_exists = Setting::where("key", $key)->exists();
+                if (!$key_exists) {
                     Setting::create([
                         'key' => $key,
                     ]);
                 }
-                Setting::where("key", $key)->update(["value"=> $value]);
+                Setting::where("key", $key)->update(["value" => $value]);
             }
-            return ['success'=>'Items updated successfully'];
-        }catch (\Exception $exception){
-            return ['failed'=>$exception->getMessage()];
+            return ['success' => 'Items updated successfully'];
+        } catch (\Exception $exception) {
+            return ['failed' => $exception->getMessage()];
         }
 
     }
-    public function deleteRepo($setting){
+
+    public function deleteRepo($setting)
+    {
         try {
-            $setting=Setting::where("value", $setting)->firstOrFail();
-            $setting->update(['value'=>null]);
-            return [0=>'success',1=>'Items deleted successfully'];
-        }catch (\Exception $exception){
-            return [0=>'failed',1=>$exception->getMessage()];
+            $setting = Setting::where("value", $setting)->firstOrFail();
+            $setting->update(['value' => null]);
+            return [0 => 'success', 1 => 'Items deleted successfully'];
+        } catch (\Exception $exception) {
+            return [0 => 'failed', 1 => $exception->getMessage()];
         }
     }
+
     private function fileUploaderRepo($request, $file_name)
     {
         if ($request->has($file_name)) {
@@ -212,19 +230,19 @@ class SettingController extends Controller
         }
         return $fileNameImage;
     }
+
     public function form_contact_index()
     {
         $contacts = ContactForm::paginate(25);
 
-        return view('admin.contact.index',compact('contacts'));
+        return view('admin.contact.index', compact('contacts'));
     }
 
     public function form_contact_show(ContactForm $contact)
     {
 
 
-
-        return view('admin.contact.show',compact('contact'));
+        return view('admin.contact.show', compact('contact'));
     }
 
 }

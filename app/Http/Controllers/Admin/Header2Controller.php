@@ -8,6 +8,8 @@ use App\Http\Requests\Header2Request;
 use App\Models\Header2;
 use App\Models\HeaderCategory;
 use App\Models\HeaderCurencies;
+use App\Models\Setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class Header2Controller extends Controller
@@ -16,7 +18,8 @@ class Header2Controller extends Controller
     {
 //        $items = Header2::latest()->paginate(20);
         $items = HeaderCategory::orderBy('priority', 'asc')->get();
-        return view('admin.header2.category_index', compact('items'));
+        $speed = Setting::where('key', 'end_market')->pluck('value')->first();
+        return view('admin.header2.category_index', compact('items','speed'));
     }
 
     public function create()
@@ -81,6 +84,7 @@ class Header2Controller extends Controller
             'priority' => 'required',
         ]);
         $item = Header2::where('id', $id)->first();
+        $request['updated_at'] =Carbon::now();
         $item->update($request->all());
         $item->Categories()->detach();
         if ($request->category != null) {

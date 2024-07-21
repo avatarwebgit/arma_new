@@ -51,18 +51,18 @@
                 @enderror
             </div>
 
-            <div class="form-group col-md-4">
-                <label class="col-form-label" for="number_1">Minimum price</label>
-                <input id="number_1" type="text" name="number_1" class="form-control"
-                       placeholder="Number 1(min)" value="{{ $item->number_1 }}">
-                @error('number_1')
-                <p class="input-error-validate">
-                    {{ $message }}
-                </p>
-                @enderror
-            </div>
-            <div class="form-group col-md-4">
-                <label class="col-form-label" for="number_2">Maximum price</label>
+{{--            <div class="form-group col-md-4">--}}
+{{--                <label class="col-form-label" for="number_1">Minimum price</label>--}}
+{{--                <input id="number_1" type="text" name="number_1" class="form-control"--}}
+{{--                       placeholder="Number 1(min)" value="{{ $item->number_1 }}">--}}
+{{--                @error('number_1')--}}
+{{--                <p class="input-error-validate">--}}
+{{--                    {{ $message }}--}}
+{{--                </p>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
+            <div class="form-group col-md-6">
+                <label class="col-form-label" for="number_2">Price</label>
                 <input id="number_2" type="text" name="number_2" class="form-control"
                        placeholder="Number 2(max)" value="{{$item->number_2 }}">
                 @error('number_2')
@@ -71,7 +71,7 @@
                 </p>
                 @enderror
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label class="col-form-label" for="number_3">changes</label>
                 <input id="number_3" type="text" name="number_3" class="form-control"
                        placeholder="Number 3(percent)" value="{{ $item->number_3 }}">

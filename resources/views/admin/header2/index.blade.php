@@ -23,6 +23,9 @@
                             <a href="{{ route('admin.header2.create') }}" class="btn btn-default btn-primary btn-sm no-corner"
                                tabindex="0"
                                aria-controls="users-table"><span><i class="ti ti-plus"></i> Create</span></a>
+                            <a href="{{ route('admin.header2.index') }}" class="btn btn-default btn-dark btn-sm no-corner ml5" tabindex="0"
+                               aria-controls="users-table">
+                                <span> Back</span></a>
                         </div>
                         <div class="container-fluid">
 
@@ -33,8 +36,8 @@
                                     <th>priority</th>
                                     <th>Title</th>
 {{--                                    <th>Title 2</th>--}}
-{{--                                    <th>minimum price</th>--}}
-                                    <th>price</th>
+                                    <th>min</th>
+                                    <th>max</th>
                                     <th>changes</th>
                                     <th>Currency</th>
                                     <th>Latest Update</th>
@@ -65,9 +68,9 @@
 {{--                                            {{ $item->title_2 }}--}}
 {{--                                        </td>--}}
 
-{{--                                        <td class="{{ $item->number_1>0 ? 'text-success' : ($item->number_1<0 ? 'text-danger' : 'text-muted') }}">--}}
-{{--                                            {{ $item->number_1 }}--}}
-{{--                                        </td>--}}
+                                        <td class="{{ $item->number_1>0 ? 'text-success' : ($item->number_1<0 ? 'text-danger' : 'text-muted') }}">
+                                            {{ $item->number_1 }}
+                                        </td>
                                         <td class="{{ $item->number_2>0 ? 'text-success' : ($item->number_2<0 ? 'text-danger' : 'text-muted') }}">
                                             {{ $item->number_2 }}
                                         </td>
@@ -80,7 +83,11 @@
                                         <td>
                                             {{ \Carbon\Carbon::parse($item->updated_at)->format('Y-m-d') }}
                                         </td>
-                                        <td class="d-flex justify-content-center">
+                                        <td class="d-flex justify-content-end">
+                                            <a style="margin-left: 10px !important;" href="{{ route('admin.header2.edit',['id'=>$item->id]) }}"
+                                               class="btn btn-icon btn-primary btn-sm edit-header2 ml5">
+                                                <i class="ti ti-edit"></i>
+                                            </a>
                                             {!! Form::open([
 'method' => 'POST',
 'route' => ['admin.header2.remove', $item->id],
@@ -91,10 +98,7 @@
                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
                                                data-bs-original-title="{{ __('Delete') }}"><i class="ti ti-trash mr-1"></i></a>
                                             {!! Form::close() !!}
-                                            <a style="margin-left: 10px !important;" href="{{ route('admin.header2.edit',['id'=>$item->id]) }}"
-                                               class="btn btn-icon btn-primary btn-sm edit-header2 ml5">
-                                                <i class="ti ti-edit"></i>
-                                            </a>
+
                                             <div class="checkbox-wrapper-6 ml5">
 
                                                 <input {{ $item->status==1 ? 'checked' : '' }} onchange="ItemChangeStatus(this,{{ $item->id }})"

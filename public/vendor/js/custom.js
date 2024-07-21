@@ -16,7 +16,7 @@ $(document).ready(function () {
         })
         swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
-            text: "This action can not be undone. Do you want to continue?",
+            text: "This item will remove permanently. Do you want to continue?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes',

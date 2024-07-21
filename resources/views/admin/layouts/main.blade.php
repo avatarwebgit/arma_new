@@ -237,7 +237,8 @@
                 <input id="id_cash_pending" type="hidden">
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button class="button_create_modal" data-dismiss="modal" aria-label="Close" type="button">Cancel</button>
+                <button class="button_create_modal" data-dismiss="modal" aria-label="Close" type="button">Cancel
+                </button>
                 <button class="button_create_modal" onclick="CreateMarketModal()" type="button">Create</button>
             </div>
         </div>
@@ -317,12 +318,30 @@
     function CreateMarketModal() {
         let Market_Date = $('#Market_Date').val();
         if (Market_Date.length > 0) {
-            let url="{{ route('admin.market.create',['market_data'=>':market_data']) }}";
-            url=url.replace(':market_data',Market_Date);
+            let url = "{{ route('admin.market.create',['market_data'=>':market_data']) }}";
+            url = url.replace(':market_data', Market_Date);
             window.location.href = url;
-        }else {
+        } else {
             alert('Please select Date');
         }
+    }
+
+    function ChangeLineSpeed(line, tag) {
+        let value = $(tag).val();
+        $.ajax({
+            url: "{{ route('admin.ChangeLineSpeed') }}",
+            data: {
+                _token: "{{ csrf_token() }}",
+                value: value,
+                line: line,
+            },
+            dataType: 'json',
+            method: 'POST',
+            success: function(msg){
+                console.log(msg);
+            }
+        });
+
     }
 </script>
 @yield('script')
