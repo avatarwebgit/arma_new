@@ -31,7 +31,7 @@
                             </div>
                             <div class="w-15">
                                 <label>Speed</label>
-                                <select onchange="ChangeLineSpeed(1,this)" class="form-control">
+                                <select onchange="ChangeLineSpeed(2,this)" class="form-control">
                                     <option {{ $speed==4000 ? 'selected' : '' }} value="4000">1</option>
                                     <option {{ $speed==1200 ? 'selected' : '' }} value="1200">2</option>
                                     <option {{ $speed==500 ? 'selected' : '' }} value="500">3</option>

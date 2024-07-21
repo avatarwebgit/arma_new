@@ -15,6 +15,7 @@ use App\Models\HeaderCurencies;
 use App\Models\InspectionPlace;
 use App\Models\Market;
 use App\Models\MarketSetting;
+use App\Models\MarketStatus;
 use App\Models\Menus;
 use App\Models\Message;
 use App\Models\Packing;
@@ -42,6 +43,10 @@ class IndexController extends Controller
 {
     public function index()
     {
+        $first = MarketStatus::where('id', 1)->first();
+        $first->update([
+            'title'=>'Waiting'
+        ]);
         $is_logged_in = 0;
         $is_logged_in = session()->exists('is_logged_in');
         session()->forget('is_logged_in');

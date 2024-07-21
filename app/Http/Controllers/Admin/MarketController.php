@@ -46,7 +46,7 @@ class MarketController extends Controller
 {
     public function index()
     {
-        $group_markets = Market::orderby('date')->get()->groupby('date');
+        $group_markets = Market::orderby('date','desc')->get()->groupby('date');
         return view('admin.markets.index', compact('group_markets'));
     }
 

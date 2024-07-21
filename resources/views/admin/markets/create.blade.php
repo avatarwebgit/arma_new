@@ -80,7 +80,7 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="bid_deposit">Bid Deposit</label>
                                                     <input id="bid_deposit" name="bid_deposit" class="form-control"
-                                                           value="{{ old('bid_deposit') }}">
+                                                           value="0">
                                                     @error('bid_deposit')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -158,7 +158,7 @@
                                                         Competition</label>
                                                     <input id="step_price_competition" name="step_price_competition"
                                                            min="1" class="form-control"
-                                                           value="2">
+                                                           value="0">
                                                     @error('step_price_competition')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -178,16 +178,16 @@
                                                 <div class="col-12">
                                                     <hr>
                                                 </div>
-                                                <div class="col-12 mb-3">
-                                                    <label for="term_conditions">Term & Conditions</label>
-                                                    <textarea id="term_conditions" name="term_conditions"
-                                                              class="form-control text_area"></textarea>
-                                                    @error('term_conditions')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
+{{--                                                <div class="col-12 mb-3">--}}
+{{--                                                    <label for="term_conditions">Term & Conditions</label>--}}
+{{--                                                    <textarea id="term_conditions" name="term_conditions"--}}
+{{--                                                              class="form-control text_area"></textarea>--}}
+{{--                                                    @error('term_conditions')--}}
+{{--                                                    <p class="input-error-validate">--}}
+{{--                                                        {{ $message }}--}}
+{{--                                                    </p>--}}
+{{--                                                    @enderror--}}
+{{--                                                </div>--}}
                                                 <div class="col-md-12 mt-3">
                                                     <button type="submit" class="btn btn-primary btn-block btn-sm">
                                                         Create

@@ -58,12 +58,12 @@
         <div>
 
                                         <span class="d-block text-center {{ $class }}">
-                            {{ $item->number_1 }}
-                                            @if($item->number_1==null or $item->number_1=='')
+{{--                            {{ $item->number_1 }}--}}
+{{--                                            @if($item->number_1==null or $item->number_1=='')--}}
                                                 {{ $item->number_2 }}
-                                            @else
-                                                {{ ' - '.$item->number_2 }}
-                                            @endif
+{{--                                            @else--}}
+{{--                                                {{ ' - '.$item->number_2 }}--}}
+{{--                                            @endif--}}
 
                         </span>
 
