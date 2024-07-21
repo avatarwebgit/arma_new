@@ -39,10 +39,10 @@
 
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-8 d-flex justify-content-center ">
                 <a href="{{ route('admin.header2.index') }}" type="button" class="btn btn-secondary">{{ __('Back') }}</a>
                 <button type="submit" class="btn btn-primary" style="margin-left: 5px">
-                    Store
+                    Create
                 </button>
             </div>
 

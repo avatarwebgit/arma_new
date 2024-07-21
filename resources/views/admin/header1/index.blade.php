@@ -72,24 +72,25 @@
                                             <td>
                                                 {{ \Carbon\Carbon::parse($item->updated_at)->format('Y-m-d') }}
                                             </td>
-                                            <td class="d-flex justify-content-center">
+                                            <td class="d-flex justify-content-end">
+
+                                                <a data-action="/admin-panel/management/setting/header1/edit/{{ $item->id }}"
+                                                   style="margin-left: 10px" href="{{ route('admin.header1.edit',['id'=>$item->id]) }}"
+                                                   class="btn btn-icon btn-primary btn-sm edit-header1">
+                                                    <i class="ti ti-edit"></i>
+                                                </a>
                                                 {!! Form::open([
 'method' => 'POST',
 'route' => ['admin.header1.remove', $item->id],
 'id' => 'delete-form-' . $item->id,
 'class' => 'd-inline',
 ]) !!}
-                                                <a href="#" class="btn btn-sm small btn-danger show_confirm"
+                                                <a href="#" class="btn btn-sm small btn-danger show_confirm ml5"
                                                    id="delete-form-{{ $item->id }}"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
                                                    data-bs-original-title="{{ __('Delete') }}"><i
                                                         class="ti ti-trash mr-1"></i></a>
                                                 {!! Form::close() !!}
-                                                <a data-action="/admin-panel/management/setting/header1/edit/{{ $item->id }}"
-                                                   style="margin-left: 10px" href="{{ route('admin.header1.edit',['id'=>$item->id]) }}"
-                                                   class="btn btn-icon btn-primary btn-sm edit-header1">
-                                                    <i class="ti ti-edit"></i>
-                                                </a>
                                                 <div class="checkbox-wrapper-6 ml5">
 
                                                     <input {{ $item->status==1 ? 'checked' : '' }} onchange="ItemChangeStatus(this,{{ $item->id }})"

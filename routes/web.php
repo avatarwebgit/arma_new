@@ -185,6 +185,7 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::resource('setting', SettingController::class)->except('update', 'destroy')->middleware('permission:Settings-Setting')->names('settings');
     Route::put('/admin/settings', [SettingController::class, 'update'])->name('settings.update');
     Route::post('/admin/settings/delete/{setting}', [SettingController::class, 'destroy'])->name('settings.destroy');
+    Route::post('/admin/settings/ChangeLineSpeed', [SettingController::class, 'ChangeLineSpeed'])->name('ChangeLineSpeed');
 
     //menus
     Route::get('menus/index', [MenuController::class, 'index'])->name('menus.index');

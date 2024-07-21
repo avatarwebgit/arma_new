@@ -253,6 +253,8 @@
 @if (setting('rtl') == '1')
 @endif
 <script>
+
+
     @if (session('failed'))
     notifier.show('Failed!', '{{ session('failed') }}', 'danger',
         '{{ asset('assets/images/notification/high_priority-48.png') }}', 4000);
@@ -301,7 +303,7 @@
     feather.replace();
     var pctoggle = document.querySelector("#pct-toggler");
     if (pctoggle) {
-        pctoggle.addEventListener("click", function() {
+        pctoggle.addEventListener("click", function () {
             if (
                 !document.querySelector(".pct-customizer").classList.contains("active")
             ) {
@@ -314,7 +316,7 @@
     var themescolors = document.querySelectorAll(".themes-color > a");
     for (var h = 0; h < themescolors.length; h++) {
         var c = themescolors[h];
-        c.addEventListener("click", function(event) {
+        c.addEventListener("click", function (event) {
             var targetElement = event.target;
             if (targetElement.tagName == "SPAN") {
                 targetElement = targetElement.parentNode;
@@ -324,6 +326,7 @@
             document.querySelector("body").classList.add(temp);
         });
     }
+
     function removeClassByPrefix(node, prefix) {
         for (let i = 0; i < node.classList.length; i++) {
             let value = node.classList[i];

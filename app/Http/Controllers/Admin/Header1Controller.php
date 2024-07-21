@@ -8,6 +8,8 @@ use App\Http\Requests\Header1Request;
 use App\Models\Header1;
 use App\Models\HeaderCategoryLine1;
 use App\Models\HeaderCurencies;
+use App\Models\Setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class Header1Controller extends Controller
@@ -16,7 +18,8 @@ class Header1Controller extends Controller
     {
 //        $items = header1::latest()->paginate(20);
         $items = HeaderCategoryLine1::orderBy('priority', 'asc')->get();
-        return view('admin.header1.category_index', compact('items'));
+        $speed = Setting::where('key', 'start_market')->pluck('value')->first();
+        return view('admin.header1.category_index', compact('items','speed'));
     }
 
     public function create($cat)
@@ -32,14 +35,14 @@ class Header1Controller extends Controller
             'title' => 'required',
             'title_2' => 'nullable',
             'cat_id' => 'required',
-            'number_1' => 'nullable|numeric',
+//            'number_1' => 'nullable|numeric',
             'number_2' => 'nullable|numeric',
             'number_3' => 'nullable|numeric',
             'currency' => 'nullable|nullable',
             'priority' => 'required',
         ]);
         try {
-
+            $request['number_1'] = 0;
             $item = Header1::create($request->all());
 
             $type = 'success';
@@ -49,7 +52,7 @@ class Header1Controller extends Controller
             $type = 'failed';
             $msg = $exception->getMessage();
         }
-        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status',1)->get();
+        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status', 1)->get();
         $html = view('home.sections.header1', compact('header1_categories'))->render();
         broadcast(new LIneHeaderUpdated($html, 1, null));
         session()->flash($type, $msg);
@@ -70,12 +73,14 @@ class Header1Controller extends Controller
             'title' => 'required',
             'title_2' => 'nullable',
             'cat_id' => 'required',
-            'number_1' => 'nullable|numeric',
+//            'number_1' => 'nullable|numeric',
             'number_2' => 'nullable|numeric',
             'number_3' => 'nullable|numeric',
             'currency' => 'nullable|nullable',
             'priority' => 'required',
         ]);
+        $request['number_1'] = 0;
+        $request['updated_at'] = Carbon::now();
         $item = Header1::where('id', $id)->first();
         $item->update($request->all());
         $html = view('home.sections.header1_row', compact('item'))->render();
@@ -91,7 +96,7 @@ class Header1Controller extends Controller
 
             $item->delete();
             $message = 'The Item Has Been Deleted Successfully';
-            $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status',1)->get();
+            $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status', 1)->get();
             $html = view('home.sections.header1', compact('header1_categories'))->render();
             broadcast(new LIneHeaderUpdated($html, 1, null));
 
@@ -175,7 +180,7 @@ class Header1Controller extends Controller
             }
             $item->delete();
             $message = 'The Item Has Been Deleted Successfully';
-            $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status',1)->get();
+            $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status', 1)->get();
             $html = view('home.sections.header1', compact('header1_categories'))->render();
             broadcast(new LIneHeaderUpdated($html, 1, null));
             return redirect()->back()->with('success', __($message));
@@ -196,7 +201,7 @@ class Header1Controller extends Controller
             $item->update([
                 'status' => $status
             ]);
-            $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status',1)->get();
+            $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status', 1)->get();
             $html = view('home.sections.header1', compact('header1_categories'))->render();
             broadcast(new LIneHeaderUpdated($html, 1, null));
             return response()->json([1, 'ok']);

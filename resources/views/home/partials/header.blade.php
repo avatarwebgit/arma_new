@@ -5,7 +5,7 @@
         </div>
     </div>
 
-    <div id="scroll-container2" class="p-2 header2 d-flex scroll-container">
+    <div id="scroll-container2" class="header2 d-flex scroll-container" style="padding: 2px 0">
         <div id="scroll-container-first-div2">
             @include('home.sections.header2')
         </div>

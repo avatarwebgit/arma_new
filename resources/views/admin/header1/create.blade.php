@@ -52,18 +52,18 @@
             @enderror
         </div>
 
-        <div class="form-group col-md-4">
-            <label class="col-form-label" for="number_1">Minimum price</label>
-            <input id="number_1" type="text" name="number_1" class="form-control"
-                    value="{{ old('number_1') }}">
-            @error('number_1')
-            <p class="input-error-validate">
-                {{ $message }}
-            </p>
-            @enderror
-        </div>
-        <div class="form-group col-md-4">
-            <label class="col-form-label" for="number_2">Maximum price</label>
+{{--        <div class="form-group col-md-4">--}}
+{{--            <label class="col-form-label" for="number_1">Minimum price</label>--}}
+{{--            <input id="number_1" type="text" name="number_1" class="form-control"--}}
+{{--                    value="{{ old('number_1') }}">--}}
+{{--            @error('number_1')--}}
+{{--            <p class="input-error-validate">--}}
+{{--                {{ $message }}--}}
+{{--            </p>--}}
+{{--            @enderror--}}
+{{--        </div>--}}
+        <div class="form-group col-md-6">
+            <label class="col-form-label" for="number_2">Price</label>
             <input id="number_2" type="text" name="number_2" class="form-control"
                     value="{{ old('number_2') }}">
             @error('number_2')
@@ -72,7 +72,7 @@
             </p>
             @enderror
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label class="col-form-label" for="number_3">Changes</label>
             <input id="number_3" type="text" name="number_3" class="form-control"
                     value="{{ old('number_3') }}">
