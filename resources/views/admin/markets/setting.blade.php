@@ -27,16 +27,16 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 mb-3">
-                                                    <label for="bid_deposit_text_area">Bid Deposit</label>
-                                                    <textarea id="bid_deposit_text_area" name="bid_deposit_text_area"
-                                                              class="form-control text_area">{{ $bid_deposit_text_area }}</textarea>
-                                                    @error('bid_deposit_text_area')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
+{{--                                                <div class="col-12 mb-3">--}}
+{{--                                                    <label for="bid_deposit_text_area">Bid Deposit</label>--}}
+{{--                                                    <textarea id="bid_deposit_text_area" name="bid_deposit_text_area"--}}
+{{--                                                              class="form-control text_area">{{ $bid_deposit_text_area }}</textarea>--}}
+{{--                                                    @error('bid_deposit_text_area')--}}
+{{--                                                    <p class="input-error-validate">--}}
+{{--                                                        {{ $message }}--}}
+{{--                                                    </p>--}}
+{{--                                                    @enderror--}}
+{{--                                                </div>--}}
                                                 <div class="col-12">
                                                     Bid Instructions
                                                     <hr>

@@ -23,27 +23,72 @@
                                     <button onclick="createMarketModal()" class="btn btn-primary btn-sm">
                                         Create
                                     </button>
+                                    <a href="{{ route('admin.header1.index') }}"
+                                       class="btn btn-default btn-dark btn-sm no-corner ml5" tabindex="0"
+                                       aria-controls="users-table">
+                                        <span> Back</span></a>
                                 </div>
                                 <div class="row">
-                                    @foreach($group_markets as $key=>$m)
-                                        <div class="col-12 col-md-3 text-center">
-                                            <a href="{{ route('admin.markets.folder',['date'=>$key]) }}">
-                                                <img width="200" style="margin: auto"
-                                                     src="{{ asset('home/img/folder.jpg') }}">
-                                                {!! Form::open([
+                                    <div class="col-md-12">
+                                        <div class="markets-pair-list">
+                                            <div id="alert"></div>
+                                            <table class="table">
+                                                <thead class="bg-dark">
+                                                <tr>
+                                                    <th>Row</th>
+                                                    <th>Date</th>
+                                                    <th>Transactions</th>
+                                                    <th>Status</th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @php
+                                                    $i=count($group_markets);
+                                                @endphp
+                                                @foreach($group_markets as $key=>$m)
+                                                    @php
+                                                        $last_market=\App\Models\Market::where('date',$key)->orderBy('time','desc')->first();
+                                                    @endphp
+                                                    <tr onclick="window.location.href='{{ route('admin.markets.folder',['date'=>$key]) }}'" style="cursor: pointer;color: {{ $last_market->Status->color }}">
+                                                        <td>
+                                                            {{ $i }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $key }}
+                                                        </td>
+                                                        <td>
+
+                                                        </td>
+                                                        <td>
+                                                            {{ $last_market->Status->title }}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            @if($last_market->Status->id==7 or $last_market->Status->id==8 or $last_market->Status->id==9)
+                                                            @else
+                                                                {!! Form::open([
 'method' => 'POST',
 'route' => ['admin.market.folder.remove',['date'=>$key]],
 'class' => 'd-inline',
 ]) !!}
-                                                <a href="#" class="btn btn-sm small btn-danger show_confirm"
-                                                   data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                                   data-bs-original-title="{{ __('Delete') }}"><i
-                                                        class="ti ti-trash mr-1"></i></a>
-                                                {!! Form::close() !!}
-                                                <h5>{{ $key }}</h5>
-                                            </a>
+                                                                <a href="#"
+                                                                   class="btn btn-sm small btn-danger show_confirm"
+                                                                   data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                   title=""
+                                                                   data-bs-original-title="{{ __('Delete') }}"><i
+                                                                        class="ti ti-trash mr-1"></i></a>
+                                                                {!! Form::close() !!}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    @php
+                                                        $i--
+                                                    @endphp
+                                                @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>

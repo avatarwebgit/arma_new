@@ -267,7 +267,7 @@
                 </li>
 
                 @php
-                    $market_count=\App\Models\Market::all()->count();
+                    $market_count=\App\Models\Market::all()->groupBy('date')->count();
                 @endphp
 
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/markets*') ? 'active dash-trigger' : 'collapsed' }}">

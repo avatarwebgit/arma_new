@@ -13,6 +13,7 @@
 @endsection
 @section('content')
 
+
     <div class="settings mtb15 position-relative">
         <div class="container-fluid">
             <div class="row">
@@ -21,7 +22,6 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-md-12 mb-3">
-
                                     <a href="{{ route('admin.markets.index') }}" class="btn btn-sm btn-dark">
                                         Back
                                     </a>
@@ -35,30 +35,45 @@
                                 <div class="col-md-12">
                                     <div class="markets-pair-list">
                                         <div id="alert"></div>
-                                        <table class="table table-striped">
+                                        <table class="table">
                                             <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>commodity</th>
-                                                <th>User</th>
-                                                <th>date</th>
+                                                <th>Deal ID</th>
+                                                <th>Account</th>
+                                                <th>Commodity</th>
+                                                <th>Date</th>
                                                 <th>Time</th>
+                                                <th>Market Value</th>
+                                                <th>Bid Deposit</th>
+                                                <th>Bidder</th>
                                                 <th>status</th>
-                                                <th>Market Value ($)</th>
-                                                <th>action</th>
+                                                <th></th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($markets->sortBy('time') as $key=>$item)
-                                                <tr>
+                                                @if($item->status==7 or $item->status==8 or $item->status==9)
+                                                    @php
+                                                        $status_text='closed';
+                                                        $color='red';
+                                                        $show_btn=0;
+                                                    @endphp
+                                                @else
+                                                    @php
+                                                        $status_text=$item->Status->title;
+                                                        $color=$item->Status->color;
+                                                        $show_btn=1;
+                                                    @endphp
+                                                @endif
+                                                <tr style="color: {{ $color }}">
                                                     <td>
-                                                        {{ $key }}
+                                                        Armx-T{{ $item->id }}
+                                                    </td>
+                                                    <td>
+                                                        Account
                                                     </td>
                                                     <td>
                                                         {{ $item->SalesForm->commodity }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->SalesForm->User->name }}
                                                     </td>
                                                     <td>
                                                         {{ $item->date }}
@@ -66,22 +81,21 @@
                                                     <td>
                                                         {{ Carbon\Carbon::parse($item->time)->format('g:i A') }}
                                                     </td>
-                                                    @if($item->status==8 or $item->status==9)
-                                                        <td id="market_status_{{ $item->id }}"
-                                                            style="color: red">
-                                                            close
-                                                        </td>
-                                                    @else
-                                                        <td id="market_status_{{ $item->id }}"
-                                                            style="color: {{ $item->Status->color }}">
-
-                                                            {{ $item->Status->title }}
-                                                        </td>
-                                                    @endif
                                                     <td>
                                                         {{ number_format($item->market_value) }}
                                                     </td>
                                                     <td>
+                                                        Bid Deposit
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->SalesForm->User->id }}
+                                                    </td>
+                                                        <td id="market_status_{{ $item->id }}">
+                                                            {{ $status_text }}
+                                                        </td>
+
+                                                    <td class="d-flex justify-content-end">
+                                                        @if($show_btn==1)
                                                         <a title="Edit Market"
                                                            href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
                                                            class="btn btn-sm btn-info">
@@ -115,7 +129,9 @@
                                                                 class="ti ti-trash mr-1"></i></a>
                                                         <input type="hidden" name="id" value="{{ $item->id }}">
                                                         {!! Form::close() !!}
+                                                        @endif
                                                     </td>
+
                                                 </tr>
                                             @endforeach
                                             </tbody>
