@@ -43,10 +43,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $first = MarketStatus::where('id', 1)->first();
-        $first->update([
-            'title'=>'Waiting'
-        ]);
         $is_logged_in = 0;
         $is_logged_in = session()->exists('is_logged_in');
         session()->forget('is_logged_in');
