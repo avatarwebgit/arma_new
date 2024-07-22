@@ -23,7 +23,7 @@
                                     <button onclick="createMarketModal()" class="btn btn-primary btn-sm">
                                         Create
                                     </button>
-                                    <a href="{{ route('admin.header1.index') }}"
+                                    <a href="{{ route('admin.dashboard') }}"
                                        class="btn btn-default btn-dark btn-sm no-corner ml5" tabindex="0"
                                        aria-controls="users-table">
                                         <span> Back</span></a>
@@ -49,8 +49,16 @@
                                                 @foreach($group_markets as $key=>$m)
                                                     @php
                                                         $last_market=\App\Models\Market::where('date',$key)->orderBy('time','desc')->first();
+                                                        if (\Carbon\Carbon::now()->format('Y-m-d')==$last_market->date){
+                                                            $color='green';
+                                                            $status_text='Doing';
+                                                        }else{
+                                                            $color=$last_market->Status->color;
+                                                            $status_text=$last_market->Status->title;
+                                                        }
                                                     @endphp
-                                                    <tr onclick="window.location.href='{{ route('admin.markets.folder',['date'=>$key]) }}'" style="cursor: pointer;color: {{ $last_market->Status->color }}">
+                                                    <tr onclick="window.location.href='{{ route('admin.markets.folder',['date'=>$key]) }}'"
+                                                        style="cursor: pointer;color: {{ $color }}">
                                                         <td>
                                                             {{ $i }}
                                                         </td>
@@ -58,10 +66,10 @@
                                                             {{ $key }}
                                                         </td>
                                                         <td>
-
+                                                            {{ count($m) }}
                                                         </td>
                                                         <td>
-                                                            {{ $last_market->Status->title }}
+                                                            {{ $status_text }}
                                                         </td>
                                                         <td class="text-right">
                                                             @if($last_market->Status->id==7 or $last_market->Status->id==8 or $last_market->Status->id==9)
@@ -76,7 +84,7 @@
                                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                    title=""
                                                                    data-bs-original-title="{{ __('Delete') }}"><i
-                                                                        class="ti ti-trash mr-1"></i></a>
+                                                                            class="ti ti-trash mr-1"></i></a>
                                                                 {!! Form::close() !!}
                                                             @endif
                                                         </td>
