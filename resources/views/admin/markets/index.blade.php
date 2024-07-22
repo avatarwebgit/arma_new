@@ -52,9 +52,11 @@
                                                         if (\Carbon\Carbon::now()->format('Y-m-d')==$last_market->date){
                                                             $color='green';
                                                             $status_text='Doing';
+                                                            $show_delete_btn=0;
                                                         }else{
                                                             $color=$last_market->Status->color;
                                                             $status_text=$last_market->Status->title;
+                                                            $show_delete_btn=1;
                                                         }
                                                     @endphp
                                                     <tr onclick="window.location.href='{{ route('admin.markets.folder',['date'=>$key]) }}'"
@@ -72,7 +74,7 @@
                                                             {{ $status_text }}
                                                         </td>
                                                         <td class="text-right">
-                                                            @if($last_market->Status->id==7 or $last_market->Status->id==8 or $last_market->Status->id==9)
+                                                            @if($last_market->Status->id==7 or $last_market->Status->id==8 or $last_market->Status->id==9 or $show_delete_btn==0)
                                                             @else
                                                                 {!! Form::open([
 'method' => 'POST',
