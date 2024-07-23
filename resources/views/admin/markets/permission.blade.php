@@ -83,7 +83,7 @@
                                                         @if($user->user_id==null or $user->user_id=='')
                                                             <span class="text-danger">User Not Registered</span>
                                                         @else
-                                                            $user->user_id
+                                                            {{ $user->user_id }}
                                                         @endif
                                                     </td>
                                                     <td>
