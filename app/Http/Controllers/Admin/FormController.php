@@ -28,6 +28,8 @@ use App\Models\FormValue;
 use App\Models\Incoterms;
 use App\Models\IncotermsVersion;
 use App\Models\InspectionPlace;
+use App\Models\Market;
+use App\Models\MarketPermission;
 use App\Models\Packing;
 use App\Models\PaymentTerm;
 use App\Models\PlatFom;
@@ -583,6 +585,107 @@ class FormController extends Controller
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
+    }
+
+    public function sale_form_permission($item)
+    {
+        $role_ids = [];
+        $user_ids = [];
+        $market_id = $item;
+        $roles = Role::where('name', '!=', 'admin')->get();
+        $market = Market::where('id', $market_id)->first();
+        $market_permission = MarketPermission::where('market_id', $market_id)->first();
+        if (!$market_permission) {
+            $market_permission = MarketPermission::create([
+                'market_id' => $market_id,
+            ]);
+        }
+        if ($market_permission->user_ids != null) {
+            $user_ids = unserialize($market_permission->user_ids);
+        }
+        if ($market_permission->role_ids != null) {
+            $role_ids = unserialize($market_permission->role_ids);
+        }
+        $users = User::whereIn('id', $user_ids)->get();
+        $all_users = User::all();
+        return view('admin.markets.permission',
+            compact('market_id',
+                'roles',
+                'market_permission',
+                'market',
+                'users',
+                'role_ids',
+                'all_users'
+            ));
+    }
+
+    function sale_form_permission_store_roles(Request $request)
+    {
+        try {
+            $market_id = $request->market_id;
+            $market = MarketPermission::where('market_id', $market_id)->first();
+            $role_ids = $request->role_ids;
+
+            if ($role_ids != null) {
+                $role_ids = serialize($role_ids);
+            }
+
+            $market->update([
+                'role_ids' => $role_ids,
+            ]);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $exception) {
+            return response()->json([0, $exception->getMessage()]);
+        }
+    }
+
+    function sale_form_permission_store_ids(Request $request)
+    {
+        try {
+            $market_id = $request->market_id;
+            $market = MarketPermission::where('market_id', $market_id)->first();
+            $market_user_ids = $market->user_ids;
+            if ($market_user_ids != null) {
+                $market_user_ids = unserialize($market_user_ids);
+            } else {
+                $market_user_ids = [];
+            }
+            $user_ids_array = [];
+            foreach ($market_user_ids as $id) {
+                $user_ids_array[] = $id;
+            }
+            $user_ids_array[] = $request->user_id;
+            $user_ids_array = array_unique($user_ids_array);
+            $user_ids_array = serialize($user_ids_array);
+            $market->update([
+                'user_ids' => $user_ids_array,
+            ]);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $exception) {
+            return response()->json([0, $exception->getMessage()]);
+        }
+    }
+
+    function marketPermissionRemove($user, $market)
+    {
+
+        $marketPermission = MarketPermission::where('market_id', $market)->first();
+        $user_ids = unserialize($marketPermission->user_ids);
+        // Search
+        $index = array_search($user, $user_ids);
+        if ($index !== false) {
+            // Remove from array
+            unset($user_ids[$index]);
+        }
+        if (count($user_ids) == 0) {
+            $user_ids = null;
+        } else {
+            $user_ids = serialize($user_ids);
+        }
+        $marketPermission->update([
+            'user_ids' => $user_ids
+        ]);
+        return redirect()->back();
     }
 
     public function UpdateCashPending(Request $request)

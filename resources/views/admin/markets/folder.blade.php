@@ -104,9 +104,15 @@
                                                         </a>
                                                         <a title="Edit Commodity"
                                                            href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
-                                                           class="btn btn-sm btn-primary" style="margin-right: 20px">
+                                                           class="btn btn-sm btn-primary ml-2">
                                                             <i class="fa fa-list"></i>
                                                             Commodity
+                                                        </a>
+                                                        <a title="Bidder"
+                                                           href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
+                                                           class="btn btn-sm btn-success ml-2">
+                                                            <i class="fa fa-plus"></i>
+                                                            Bidder
                                                         </a>
 {{--                                                        <button type="button" title="Copy Market"--}}
 {{--                                                                onclick="copyMarket({{ $item->id }},this)"--}}
@@ -122,7 +128,7 @@
 'route' => ['admin.market.remove'],
 'class' => 'd-inline',
 ]) !!}
-                                                        <a href="#" class="btn btn-sm small btn-danger show_confirm"
+                                                        <a href="#" class="btn btn-sm small btn-danger show_confirm ml-2"
                                                            id="delete-form-{{ $item->id }}"
                                                            data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
                                                            data-bs-original-title="{{ __('Delete') }}"><i
@@ -163,6 +169,9 @@
         .modal-content{
             width: 30%;
             margin: 0 auto;
+        }
+        .ml-2{
+            margin-left: 5px;
         }
     </style>
     @include('admin.layouts.includes.datatable_css')
