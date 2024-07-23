@@ -291,6 +291,10 @@ Route::post('/preparation_store/{form_id}', [FormController::class, 'sales_form_
 Route::post('/sales_form_preparation_remove_file', [FormController::class, 'sales_form_preparation_remove_file'])->name('sale_form.preparation.remove_file');
 Route::post('/sales_form/update_or_store/{item?}/{is_preparation?}', [FormController::class, 'sales_form_update_or_store'])->name('sale_form.update_or_store');
 Route::post('/sales_form_change_status/', [FormController::class, 'change_status'])->name('sale_form.change_status');
+Route::get('/sale_form_permission/{item}', [FormController::class, 'sale_form_permission'])->name('sale_form.permission');
+Route::post('/sale_form_permission_store_roles', [FormController::class, 'sale_form_permission_store_roles'])->name('sale_form.store_roles');
+Route::post('/sale_form_permission_store_ids', [FormController::class, 'sale_form_permission_store_ids'])->name('sale_form.store_ids');
+Route::post('/marketPermission/remove/{user}/{market}', [FormController::class, 'marketPermissionRemove'])->name('marketPermission.remove');
 Route::post('/UpdateCashPending/', [FormController::class, 'UpdateCashPending'])->name('sale_form.UpdateCashPending');
 Route::get('sales_offer/show/{id}', [FormController::class, 'sales_form_show'])->name('sale_form.show');
 Route::get('sales_offer/edit/{id}', [FormController::class, 'sales_form_edit'])->name('sale_form.edit');

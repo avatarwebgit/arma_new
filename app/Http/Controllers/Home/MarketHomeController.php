@@ -9,6 +9,7 @@ use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\BidHistory;
 use App\Models\Market;
+use App\Models\MarketPermission;
 use App\Models\MarketSetting;
 use App\Models\MarketStatus;
 use App\Models\Transaction;
@@ -72,13 +73,12 @@ class MarketHomeController extends Controller
         $market_id = $request->market_id;
         $rout = route('home.bid', ['market' => $market_id]);
         if (!auth()->check()) {
-            session()->put('bid_page',$rout);
+            session()->put('bid_page', $rout);
             return response()->json(['auth']);
         }
 
 
-
-        return response()->json(['ok',$rout]);
+        return response()->json(['ok', $rout]);
 
     }
 
@@ -334,7 +334,7 @@ class MarketHomeController extends Controller
 
 
         try {
-            $bid_permission = $this->Bid_Permissions($bid_deposit);
+            $bid_permission = $this->Bid_Permissions($bid_deposit, $request->market);
 
             if ($bid_permission['response'] === 'error') {
                 return response()->json([$bid_permission['response'], $bid_permission['message']]);
@@ -503,20 +503,55 @@ class MarketHomeController extends Controller
         return [0 => true];
     }
 
-    public function Bid_Permissions($bid_deposit)
+    public function Bid_Permissions($bid_deposit, $market_id)
     {
         //            //user must login
+        $user = auth()->user();
         if (!auth()->check()) {
             $msg = 'You must Login!';
             return ['response' => 'error', 'message' => $msg];
         }
+        $marketPermission = MarketPermission::where('market_id', $market_id)->first();
+        if (!$marketPermission) {
+            $marketPermission = MarketPermission::create([
+                'market_id' => $market_id
+            ]);
+        }
+        $user_ids = $marketPermission->user_ids;
+        $role_ids = $marketPermission->role_ids;
+        if ($role_ids == null or $role_ids == '') {
+            $role_exists = 0;
+        } else {
+            $role_array = unserialize($role_ids);
+            $role_exists = 0;
+            if (in_array($user->id, $role_array)) {
+                $role_exists = 1;
+            }
+        }
+        if ($user_ids == null or $user_ids == '') {
+            $user_exists = 0;
+        } else {
+            $user_array = unserialize($user_ids);
+            $user_exists = 0;
+            if (in_array($user->id, $user_array)) {
+                $user_exists = 1;
+            }
+        }
+
+        if ($user_exists==1 or $role_exists==1){
+            return ['response' => true, 'message' => 'success'];
+        }else{
+            $msg = 'You Dont Have Permission To Bid This Market';
+            return ['response' => 'error', 'message' => $msg];
+        }
+
 //            //user must bidder
         if (auth()->user()->hasRole('seller')) {
             $msg = 'You must Buyer!';
             return ['response' => 'error', 'message' => $msg];
         }
         //user can bid
-        $user = auth()->user();
+
         if ($user->can_bid === 0) {
             $msg = 'You Do not have permission to Bid!';
             return ['response' => 'error', 'message' => $msg];
@@ -526,7 +561,7 @@ class MarketHomeController extends Controller
             $msg = 'you cannot place bids due to a history of unpaid deposit';
             return ['response' => 'error', 'message' => $msg];
         }
-        return ['response' => true, 'message' => 'success'];
+
     }
 
     public function get_market_bit_result(Request $request)

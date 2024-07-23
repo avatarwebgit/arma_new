@@ -30,6 +30,10 @@
     <link rel="stylesheet" href="{{ asset('vendor/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/developer.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/bootstrap-clockpicker.min.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"
+          integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <style>
         .button_create_modal {
             border: 1px solid black;
