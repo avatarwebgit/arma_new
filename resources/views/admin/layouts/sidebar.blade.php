@@ -95,7 +95,7 @@
                             <li class="dash-item {{ request()->is('users/1*') ? 'active' : '' }}">
                                 <a class="dash-link"
                                    href="{{ route('admin.users.zero.index',['type'=>0]) }}">
-                                    Index ({{ $index_count }})
+                                    Inbox ({{ $index_count }})
                                 </a>
                             </li>
                         @endcan
