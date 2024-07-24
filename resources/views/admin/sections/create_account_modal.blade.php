@@ -39,7 +39,7 @@
                         password was copied
                     </p>
                     <button onclick="CopyUserName()" class="w-100 btn btn-info mb-3" type="button">
-                        Copy Username and Password
+                        Copy Password
                     </button>
                 </div>
 

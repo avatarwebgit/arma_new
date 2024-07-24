@@ -206,10 +206,12 @@ class IndexController extends Controller
 
     public function redirectUser()
     {
+
         $user_check = auth()->check();
         if ($user_check) {
 
             $user = auth()->user();
+
             if ($user->active != 1 or $user->active_status != 2) {
                 auth()->logout();
                 session()->put('user_inactive', 1);
@@ -221,7 +223,7 @@ class IndexController extends Controller
                 return redirect()->to($route);
             }
 
-            if ($user->hasRole(['admin'])) {
+            if ($user->hasRole(['admin','Members','Representatives','Brokers'])) {
                 return redirect()->route('admin.dashboard');
             }
             if ($user->hasRole(['seller'])) {
@@ -646,62 +648,62 @@ class IndexController extends Controller
         dd('Congratulations');
     }
 
-//    public function ResetSystem()
-//    {
-//        //clear all Bid History
-//        $bidHistory = BidHistory::all();
-//        foreach ($bidHistory as $item) {
-//            $item->delete();
-//        }
-//
-//        //clear all Bid MarketsPermission
-//        $items = MarketPermission::all();
-//        foreach ($items as $item) {
-//            $item->delete();
-//        }
-//        //clear all Bid Markets
-//        $items = Market::all();
-//        foreach ($items as $item) {
-//            $item->delete();
-//        }
-//        //clear all Bid Sales Offer Form
-//        $items = SalesOfferForm::all();
-//        foreach ($items as $item) {
-//            $item->delete();
-//        }
-//        //clear all Bid Sales Offer FormCopy
-//        $items = SalesOfferFormCopy::all();
-//        foreach ($items as $item) {
-//            $item->delete();
-//        }
-//        //clear all Bid Sales Transactions
-//        $items = Transaction::all();
-//        foreach ($items as $item) {
-//            $item->delete();
-//        }
-//        //clear all Wallet
-//        $items = Wallet::all();
-//        foreach ($items as $item) {
-//            $item->delete();
-//        }
-//        //clear all User News
-//        $items = UserNews::all();
-//        foreach ($items as $item) {
-//            $item->delete();
-//        }
-//        //clear all Users
-//        $items = User::all();
-//        foreach ($items as $item) {
-//            $item->delete();
-//        }
-//    }
-//
-//    public function CreateAdmin()
-//    {
-//        $user1 = [
-//            'email' => 'h.khoram@armaitimex.com',
-//            'password' => Hash::make('i{%|4rlwnQQ!qQ{JBIy9'),
-//        ];
+    public function ResetSystem()
+    {
+        //clear all Bid History
+        $bidHistory = BidHistory::all();
+        foreach ($bidHistory as $item) {
+            $item->delete();
+        }
+
+        //clear all Bid MarketsPermission
+        $items = MarketPermission::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Bid Markets
+        $items = Market::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Bid Sales Offer Form
+        $items = SalesOfferForm::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Bid Sales Offer FormCopy
+        $items = SalesOfferFormCopy::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Bid Sales Transactions
+        $items = Transaction::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Wallet
+        $items = Wallet::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all User News
+        $items = UserNews::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Users
+        $items = User::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+    }
+
+    public function CreateAdmin()
+    {
+        $user1 = [
+            'email' => 'h.khoram@armaitimex.com',
+            'password' => Hash::make('i{%|4rlwnQQ!qQ{JBIy9'),
+        ];
 //        $user2 = [
 //            'email' => 'z.rostami@armaitimex.com',
 //            'password' => Hash::make('%3eO8!BK)(J8JWO3>ruw'),
@@ -714,20 +716,20 @@ class IndexController extends Controller
 //            'email' => 'm.mozafari@armaitime.com',
 //            'password' => Hash::make('EHXYWE5Zq)yNJ@iSH|A]'),
 //        ];
-//        $users = [$user1, $user2, $user3, $user4];
-//        foreach ($users as $user) {
-//            $email=$user['email'];
-//            $password=$user['password'];
-//            $user = User::create([
-//                'email' => $email,
-//                'password' => $password,
-//                'active_status' => 2,
-//                'active' => 1,
-//            ]);
-//            $role = 'admin';
-//            $user->syncRoles($role);
-//        }
-//        dd('done');
-//    }
+        $users = [$user1];
+        foreach ($users as $user) {
+            $email=$user['email'];
+            $password=$user['password'];
+            $user = User::create([
+                'email' => $email,
+                'password' => $password,
+                'active_status' => 2,
+                'active' => 1,
+            ]);
+            $role = 'admin';
+            $user->syncRoles($role);
+        }
+        dd('done');
+    }
 
 }
