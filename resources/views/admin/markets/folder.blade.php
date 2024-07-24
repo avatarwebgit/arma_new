@@ -85,7 +85,7 @@
                                                         {{ number_format($item->market_value) }}
                                                     </td>
                                                     <td>
-                                                        Bid Deposit
+                                                        {{ $item->bid_deposit }}
                                                     </td>
                                                     <td>
                                                         {{ $item->SalesForm->User->id }}

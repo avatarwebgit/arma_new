@@ -58,7 +58,6 @@
                                                 <th>User Type</th>
                                                 <th>User ID</th>
                                                 <th>Email</th>
-                                                <th>Deposit Status</th>
                                                 <th></th>
                                             </tr>
                                             </thead>
@@ -89,9 +88,7 @@
                                                     <td>
                                                         {{ $user->email }}
                                                     </td>
-                                                    <td>
-                                                        ?????????
-                                                    </td>
+
                                                     <td class="text-right">
 
                                                         {!! Form::open([
