@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\BidHistory;
 use App\Models\Blog;
 use App\Models\ContainerType;
 use App\Models\Country;
@@ -14,6 +15,7 @@ use App\Models\HeaderCategory;
 use App\Models\HeaderCurencies;
 use App\Models\InspectionPlace;
 use App\Models\Market;
+use App\Models\MarketPermission;
 use App\Models\MarketSetting;
 use App\Models\MarketStatus;
 use App\Models\Menus;
@@ -23,6 +25,8 @@ use App\Models\Page;
 use App\Models\PlatFom;
 use App\Models\QualityQuantityInspector;
 use App\Models\RefundStatus;
+use App\Models\SalesOfferForm;
+use App\Models\SalesOfferFormCopy;
 use App\Models\ShippingTerm;
 use App\Models\TargetMarket;
 use App\Models\THCIncluded;
@@ -33,6 +37,7 @@ use App\Models\User;
 use App\Models\UserActivationStatus;
 use App\Models\UserNews;
 use App\Models\UserStatus;
+use App\Models\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -639,6 +644,90 @@ class IndexController extends Controller
             ]);
         }
         dd('Congratulations');
+    }
+
+    public function ResetSystem()
+    {
+        //clear all Bid History
+        $bidHistory = BidHistory::all();
+        foreach ($bidHistory as $item) {
+            $item->delete();
+        }
+
+        //clear all Bid MarketsPermission
+        $items = MarketPermission::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Bid Markets
+        $items = Market::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Bid Sales Offer Form
+        $items = SalesOfferForm::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Bid Sales Offer FormCopy
+        $items = SalesOfferFormCopy::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Bid Sales Transactions
+        $items = Transaction::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Wallet
+        $items = Wallet::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all User News
+        $items = UserNews::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        //clear all Users
+        $items = User::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+    }
+
+    public function CreateAdmin()
+    {
+        $user1 = [
+            'email' => 'h.khoram@armaitimex.com',
+            'password' => Hash::make('i{%|4rlwnQQ!qQ{JBIy9'),
+        ];
+        $user2 = [
+            'email' => 'z.rostami@armaitimex.com',
+            'password' => Hash::make('%3eO8!BK)(J8JWO3>ruw'),
+        ];
+        $user3 = [
+            'email' => 'm.khoram@armaitimex.com',
+            'password' => Hash::make('$Z~}8XbCJDqQYZZs&HH2'),
+        ];
+        $user4 = [
+            'email' => 'm.mozafari@armaitime.com',
+            'password' => Hash::make('EHXYWE5Zq)yNJ@iSH|A]'),
+        ];
+        $users = [$user1, $user2, $user3, $user4];
+        foreach ($users as $user) {
+            $email=$user['email'];
+            $password=$user['password'];
+            $user = User::create([
+                'email' => $email,
+                'password' => $password,
+                'active_status' => 2,
+                'active' => 1,
+            ]);
+            $role = 'admin';
+            $user->syncRoles($role);
+        }
+        dd('done');
     }
 
 }
