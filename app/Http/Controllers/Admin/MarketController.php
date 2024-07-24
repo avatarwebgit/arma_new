@@ -46,7 +46,7 @@ class MarketController extends Controller
 {
     public function index()
     {
-        $group_markets = Market::orderby('date','desc')->get()->groupby('date');
+        $group_markets = Market::orderby('date', 'desc')->get()->groupby('date');
         return view('admin.markets.index', compact('group_markets'));
     }
 
@@ -81,6 +81,8 @@ class MarketController extends Controller
 //            'term_conditions' => 'nullable',
             'show_alpha' => 'required',
         ]);
+        $created_market_by = auth()->id();
+        $request['created_market_by'] = $created_market_by;
         $sales_form = SalesOfferForm::where('id', $request->commodity_id)->first();
         $sales_form->update(['used_in_market' => 1]);
         $market = Market::create($request->all());
