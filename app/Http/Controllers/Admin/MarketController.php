@@ -78,7 +78,7 @@ class MarketController extends Controller
             'q_2' => 'required',
             'q_3' => 'required',
             'alpha' => $request->show_alpha == 1 ? 'required' : '',
-            'term_conditions' => 'nullable',
+//            'term_conditions' => 'nullable',
             'show_alpha' => 'required',
         ]);
         $sales_form = SalesOfferForm::where('id', $request->commodity_id)->first();
