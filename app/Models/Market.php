@@ -21,6 +21,10 @@ class Market extends Model
     {
         return $this->belongsTo(MarketStatus::class, 'status', 'id');
     }
+    public function CreatedBy()
+    {
+        return $this->belongsTo(User::class, 'created_market_by', 'id');
+    }
 
     public function Bids()
     {

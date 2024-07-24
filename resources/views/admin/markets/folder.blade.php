@@ -70,7 +70,11 @@
                                                         Armx-T{{ $item->id }}
                                                     </td>
                                                     <td>
-                                                        Account
+                                                        @if($item->created_market_by!=null)
+                                                            {{ $item->CreatedBy->user_id }}
+                                                        @else
+                                                            -
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         {{ $item->SalesForm->commodity }}
