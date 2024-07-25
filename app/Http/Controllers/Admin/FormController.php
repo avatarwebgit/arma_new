@@ -420,11 +420,9 @@ class FormController extends Controller
             $role = auth()->user()->Roles()->first()->name;
             if ($role == 'seller') {
                 $rote = route('seller.requests');
-            }
-            if ($role == 'admin') {
+            }else{
                 $rote = route('admin.sales_form.first.index', ['status' => 1]);
             }
-
             return response()->json([1, $rote]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
