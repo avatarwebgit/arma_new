@@ -88,19 +88,11 @@
                                 <p class="email font-weight-bold mb-3">{{ auth()->user()->email }}</p>
                                 <p class="name font-weight-bold mb-0">{{ auth()->user()->user_id }}</p>
                                 <p class="name font-weight-bold mb-0">{{ auth()->user()->Roles()->first()->name }}</p>
-                                @if(auth()->user()->hasRole('admin'))
-                                    <a href="{{ route('admin.dashboard') }}">
-                                        <p class="name font-weight-bold mb-0">My Profile</p>
-                                    </a>
-                                @elseif(auth()->user()->hasRole('seller'))
-                                    <a href="{{ route('seller.dashboard') }}">
-                                        <p class="name font-weight-bold mb-0">My Profile</p>
-                                    </a>
-                                @elseif(auth()->user()->hasRole('buyer'))
-                                    <a href="{{ route('bidder.dashboard') }}">
-                                        <p class="name font-weight-bold mb-0">My Profile</p>
-                                    </a>
-                                @endif
+
+                                <a href="{{ route('profile') }}">
+                                    <p class="name font-weight-bold mb-0">My Profile</p>
+                                </a>
+
                             </div>
                         </div>
                         <div class="dropdown-body">
@@ -158,7 +150,7 @@
             @else
                 <ul style="margin-left: auto" class="d-flex justify-content-center">
                     <li title="login" class="login_btn">
-                        <a onclick="ShowLoginModal()"  class="nav-link login-padding" href="#">
+                        <a onclick="ShowLoginModal()" class="nav-link login-padding" href="#">
                             login
                         </a>
                     </li>
@@ -174,7 +166,7 @@
     {{--    //mobile Menu--}}
     <nav class="navbar mobile-menu">
         <div class="d-flex justify-content-between align-items-center w-100">
-            <button  class="navbar-toggler" type="button" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
                 <a href="{{ route('home.index') }}">
                     <img style="width: 58px !important;height: auto" class="logo"
                          src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
@@ -191,8 +183,8 @@
                          src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
                          alt="logo">
                 </a>
-{{--                <i onclick="CloseMenu()" class="fa fa-times-circle fa-2x cursor-pointer"--}}
-{{--                   style="position: absolute;top: 20px;right: 20px"></i>--}}
+                {{--                <i onclick="CloseMenu()" class="fa fa-times-circle fa-2x cursor-pointer"--}}
+                {{--                   style="position: absolute;top: 20px;right: 20px"></i>--}}
 
             </div>
             @auth
@@ -214,19 +206,10 @@
                                 <p class="email font-weight-bold mb-3">{{ auth()->user()->email }}</p>
                                 <p class="name font-weight-bold mb-0">{{ auth()->user()->user_id }}</p>
                                 <p class="name font-weight-bold mb-0">{{ auth()->user()->Roles()->first()->name }}</p>
-                                @if(auth()->user()->hasRole('admin'))
-                                    <a href="{{ route('admin.dashboard') }}">
-                                        <p class="name font-weight-bold mb-0">My Profile</p>
-                                    </a>
-                                @elseif(auth()->user()->hasRole('seller'))
-                                    <a href="{{ route('seller.dashboard') }}">
-                                        <p class="name font-weight-bold mb-0">My Profile</p>
-                                    </a>
-                                @elseif(auth()->user()->hasRole('buyer'))
-                                    <a href="{{ route('bidder.dashboard') }}">
-                                        <p class="name font-weight-bold mb-0">My Profile</p>
-                                    </a>
-                                @endif
+                                <a href="{{ route('profile') }}">
+                                    <p class="name font-weight-bold mb-0">My Profile</p>
+                                </a>
+
                             </div>
                         </div>
                         <div class="dropdown-body">
@@ -296,7 +279,7 @@
                         </li>
                     </ul>
                 </div>
-                @endif
+            @endif
 
             <div class="mt-2 mb-2 position-relative">
                 <form action="{{ route('home.search') }}" method="get">
