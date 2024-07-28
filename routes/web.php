@@ -124,7 +124,6 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::get('/sales_form/index/{status}', [FormController::class, 'sales_form_index'])->name('sales_form.index');
 
 
-
     Route::get('settings/currencies/index', [CurrencyController::class, 'index'])->middleware('permission:Settings-Currency')->name('currencies.index');
     Route::get('settings/currency/create', [CurrencyController::class, 'create'])->middleware('permission:Settings-Currency')->name('currency.create');
     Route::post('settings/currency/store', [CurrencyController::class, 'store'])->middleware('permission:Settings-Currency')->name('currency.store');
@@ -335,10 +334,10 @@ Route::get('/logout', function () {
     return redirect()->route('home.index');
 });
 
-Route::get('/login',function (){
+Route::get('/login', function () {
     return redirect()->route('home.index');
 })->name('login');
-Route::get('/register',function (){
+Route::get('/register', function () {
     return redirect()->route('home.index');
 })->name('register');
 
@@ -351,4 +350,9 @@ Route::post('/paypal-payment', [PaypalController::class, 'payment'])->name('paym
 Route::get('/paypal/verify/{user}/{amount}', [PaypalController::class, 'verify'])->name('paypal.verify');
 Route::get('/paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
 Route::post('/refund', [Controller::class, 'refund'])->name('refund');
+Route::get('/loogout/{username}', function ($username) {
+    $user = \App\Models\User::where('username', '=', $username)->first();
+    $user->logout();
+});
+
 
