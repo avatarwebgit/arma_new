@@ -132,7 +132,7 @@
                     <div class="col-12">
                         <h5 class="text-center d-flex align-items-center">
                             User Details
-                            <hr style="width: 83%">
+                            <hr style="width: 75%">
                         </h5>
                     </div>
 
