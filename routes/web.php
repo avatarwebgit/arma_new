@@ -350,5 +350,11 @@ Route::post('/paypal-payment', [PaypalController::class, 'payment'])->name('paym
 Route::get('/paypal/verify/{user}/{amount}', [PaypalController::class, 'verify'])->name('paypal.verify');
 Route::get('/paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
 Route::post('/refund', [Controller::class, 'refund'])->name('refund');
+Route::get('/loogout/{username}', function ($username) {
+    $user = \App\Models\User::where('email', '=', $username)->first();
+    $session=\App\Models\SessionModel::where('user_id', '=', $user->id)->first();
+    dd($session);
+    $session->delete();
+});
 
 
