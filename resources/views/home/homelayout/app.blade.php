@@ -44,16 +44,23 @@
                 market_id: market_id,
             },
             success: function (data) {
-               if (data[0]=='auth'){
-                   ShowLoginModal();
-               }
-               if (data[0]=='ok'){
-                   let route=data[1];
-                   window.location.href=route;
-               }
+                if (data[0] == 'auth') {
+                    ShowLoginModal();
+                }
+                if (data[0] == 'ok') {
+                    let route = data[1];
+                    window.location.href = route;
+                }
             }
 
         })
+    }
+
+    function OpenModalRegister() {
+        $('#login_modal').modal('hide');
+        setTimeout(function () {
+            ShowRegisterModal();
+        }, 500);
     }
 
     function ShowLoginModal() {
@@ -636,6 +643,17 @@
 
     function step_price_competition(tag, event) {
 
+    }
+
+    function ShowPass(tag){
+        $(tag).addClass('d-none');
+        $('#fa-eye-slash').removeClass('d-none');
+        $('#password').attr('type', 'text');
+    }
+    function HidePass(tag){
+        $(tag).addClass('d-none');
+        $('#fa-eye').removeClass('d-none');
+        $('#password').attr('type', 'password');
     }
 
 
