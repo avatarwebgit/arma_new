@@ -10,6 +10,7 @@ use App\Models\Header2;
 use App\Models\HeaderCategory;
 use App\Models\HeaderCategoryLine1;
 use App\Models\MarketSetting;
+use App\Models\PlatFom;
 use App\Models\Salutation;
 use App\Models\Setting;
 use App\Models\Type;
@@ -56,14 +57,15 @@ class AppServiceProvider extends ServiceProvider
         $q_2 = MarketSetting::where('key', 'q_2')->pluck('value')->first();
         $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
         $copy_right = Setting::where('key', 'copy_right')->pluck('value')->first();
-        $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status',1)->get();
-        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status',1)->get();
+        $header2_categories = HeaderCategory::orderBy('priority', 'asc')->where('status', 1)->get();
+        $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status', 1)->get();
 
         $types = Type::where('id', '!=', 1)->get();
+        $platforms = PlatFom::all();
         $commodities = Commodity::all();
-        $countries = Country::OrderBy('countryName','asc')->get();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
         $companyFunction = CompanyFunction::all();
-        $salutation= Salutation::all();
+        $salutation = Salutation::all();
         view()->share(
             compact(
                 'header1',
@@ -102,7 +104,8 @@ class AppServiceProvider extends ServiceProvider
                 'commodities',
                 'countries',
                 'companyFunction',
-                'salutation'
+                'salutation',
+                'platforms'
             ));
     }
 }

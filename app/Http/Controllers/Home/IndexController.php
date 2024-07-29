@@ -32,6 +32,7 @@ use App\Models\TargetMarket;
 use App\Models\THCIncluded;
 use App\Models\ToleranceWeightBy;
 use App\Models\Transaction;
+use App\Models\Type;
 use App\Models\Units;
 use App\Models\User;
 use App\Models\UserActivationStatus;
@@ -730,6 +731,21 @@ class IndexController extends Controller
             $user->syncRoles($role);
         }
         dd('done');
+    }
+
+    public function CreateType(){
+        $items = Type::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['admin', 'seller', 'buyer','broker'];
+        foreach ($items as $key => $item) {
+            Type::create([
+                'id' => $key + 1,
+                'name' => $item
+            ]);
+        }
+        dd('Congratulations');
     }
 
 }
