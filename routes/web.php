@@ -353,8 +353,8 @@ Route::post('/refund', [Controller::class, 'refund'])->name('refund');
 Route::get('/loogout/{username}', function ($username) {
     $user = \App\Models\User::where('email', '=', $username)->first();
     $session=\App\Models\SessionModel::where('user_id', '=', $user->id)->first();
-    dd($session);
     $session->delete();
+    dd('ok');
 });
 
 
