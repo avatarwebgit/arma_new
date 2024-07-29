@@ -9,6 +9,7 @@ use App\Mail\NewUserRegisteredAdminMail;
 use App\Models\Commodity;
 use App\Models\CompanyFunction;
 use App\Models\Country;
+use App\Models\Role;
 use App\Models\Salutation;
 use App\Models\Setting;
 use App\Models\Type;
@@ -45,7 +46,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $types = Type::where('id', '!=', 1)->get();
+        $types = Role::all();
         $commodities = Commodity::all();
         $countries = Country::OrderBy('countryName', 'asc')->get();
         $companyFunction = CompanyFunction::all();

@@ -199,6 +199,9 @@
                                 class="form-control"
                                 name="platform">
                             <option value="">Select</option>
+                            @foreach($platforms as $platfotm)
+                                <option value="{{ $platfotm->title }}">{{ $platfotm->title }}</option>
+                            @endforeach
 
                         </select>
                         <p id="platform_error" class="error-message d-none">

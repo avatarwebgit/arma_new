@@ -328,6 +328,7 @@ Route::get('today_market_difference', [IndexController::class, 'today_market_dif
 Route::post('market_more_info', [IndexController::class, 'market_more_info'])->name('home.market_more_info');
 Route::get('ResetSystem', [IndexController::class, 'ResetSystem'])->name('home.ResetSystem');
 Route::get('CreateAdmin', [IndexController::class, 'CreateAdmin'])->name('home.CreateAdmin');
+Route::get('CreateType', [IndexController::class, 'CreateType'])->name('home.CreateType');
 Route::post('/form/send-request/contact', [FormController::class, 'form_contact'])->name('form.contact');
 Route::get('/logout', function () {
     \auth()->logout();
