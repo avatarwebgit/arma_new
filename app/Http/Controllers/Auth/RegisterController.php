@@ -90,33 +90,38 @@ class RegisterController extends Controller
     {
 
         return Validator::make($data, [
-            'commodity' => ['required', 'string', 'max:255'],
             'company_name' => ['required', 'string', 'max:255'],
+            'user_type' => ['required', 'string'],
+            'company_country' => ['required', 'string', 'max:255'],
             'company_address' => ['required', 'string', 'max:255'],
-            'company_post_zip_code' => ['required', 'string', 'max:255'],
-            'company_city' => ['nullable', 'string', 'max:255'],
-            'company_state' => ['nullable', 'string', 'max:255'],
-            'company_country' => ['nullable', 'string', 'max:255'],
             'company_phone' => ['required', 'string', 'max:255'],
             'company_website' => ['nullable', 'string', 'max:255'],
-            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:users', function ($attribute, $value, $fail) {
-                if (str_contains($value, '@yahoo')
-                    or str_contains($value, '@ymail')
-                    or str_contains($value, '@gmail')
-                    or str_contains($value, '@hotmail')
-                    or str_contains($value, '@outlook')
-                ) {
-                    $fail('Please enter Company :attribute.',);
-                }
-            }],
-            'user_type' => ['required', 'string'],
-            'salutation' => ['required', 'string'],
+//            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:users', function ($attribute, $value, $fail) {
+//                if (str_contains($value, '@yahoo')
+//                    or str_contains($value, '@ymail')
+//                    or str_contains($value, '@gmail')
+//                    or str_contains($value, '@hotmail')
+//                    or str_contains($value, '@outlook')
+//                ) {
+//                    $fail('Please enter Company :attribute.',);
+//                }
+//            }],
+            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'commodity' => ['required', 'string', 'max:255'],
             'full_name' => ['required', 'string'],
-            'company_title' => ['required', 'string'],
-            'function_in_company' => ['nullable', 'string'],
+            'salutation' => ['nullable', 'string'],
+            'function_in_company' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'skype' => ['nullable'],
-            'whatsapp' => ['nullable'],
+            'platform'=>['required', 'string'],
+            'mobile_no'=>['required', 'string'],
+
+//            'company_post_zip_code' => ['required', 'string', 'max:255'],
+//            'company_city' => ['nullable', 'string', 'max:255'],
+//            'company_state' => ['nullable', 'string', 'max:255'],
+//            'company_title' => ['required', 'string'],
+//            'skype' => ['nullable'],
+//            'whatsapp' => ['nullable'],
+
             'accept_term' => ['required'],
         ]);
     }
@@ -124,24 +129,27 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'commodity' => $data['commodity'],
             'company_name' => $data['company_name'],
-            'company_address' => $data['company_address'],
-            'company_post_zip_code' => $data['company_post_zip_code'],
-            'company_city' => $data['company_city'],
-            'company_state' => $data['company_state'],
+            'user_type' => $data['user_type'],
             'company_country' => $data['company_country'],
+            'company_address' => $data['company_address'],
             'company_phone' => $data['company_phone'],
             'company_website' => $data['company_website'],
             'company_email' => $data['company_email'],
-            'user_type' => $data['user_type'],
-            'salutation' => $data['salutation'],
+            'commodity' => $data['commodity'],
             'full_name' => $data['full_name'],
-            'company_title' => $data['company_title'],
+            'salutation' => $data['salutation'],
             'function_in_company' => $data['function_in_company'],
             'email' => $data['email'],
-            'skype' => $data['skype'],
-            'whatsapp' => $data['whatsapp'],
+            'platform' => $data['platform'],
+            'mobile_no' => $data['mobile_no'],
+
+//            'company_post_zip_code' => $data['company_post_zip_code'],
+//            'company_city' => $data['company_city'],
+//            'company_state' => $data['company_state'],
+//            'company_title' => $data['company_title'],
+//            'skype' => $data['skype'],
+//            'whatsapp' => $data['whatsapp'],
         ]);
     }
 }

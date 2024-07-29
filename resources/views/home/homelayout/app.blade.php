@@ -106,46 +106,39 @@
     function SubmitRegisterModal(tag) {
         $(tag).prop('disabled', true);
         $('.error-message').addClass('d-none');
-        let commodity = $('#commodity').val();
         let company_name = $('#company_name').val();
-        let company_address = $('#company_address').val();
-        let company_post_zip_code = $('#company_post_zip_code').val();
-        let company_city = $('#company_city').val();
-        let company_state = $('#company_state').val();
+        //user type or company type
+        let user_type = $('#user_type').val();
         let company_country = $('#company_country').val();
+        let company_address = $('#company_address').val();
         let company_phone = $('#company_phone').val();
         let company_website = $('#company_website').val();
         let company_email = $('#company_email').val();
-        let user_type = $('#user_type').val();
-        let salutation = $('#salutation').val();
+        let commodity = $('#commodity').val();
         let full_name = $('#full_name').val();
-        let company_title = $('#company_title').val();
+        let salutation = $('#salutation').val();
         let function_in_company = $('#function_in_company').val();
         let email = $('#email_register').val();
-        let skype = $('#skype').val();
-        let whatsapp = $('#whatsapp').val();
+        let platform = $('#platform').val();
+        let mobile_no = $('#mobile_no').val();
         let accept_term = $('input[name="accept_term"]:checked').val();
         $.ajax({
             url: "{{ route('register') }}",
             data: {
-                commodity: commodity,
                 company_name: company_name,
-                company_address: company_address,
-                company_post_zip_code: company_post_zip_code,
-                company_city: company_city,
-                company_state: company_state,
+                user_type: user_type,
                 company_country: company_country,
+                company_address: company_address,
                 company_phone: company_phone,
                 company_website: company_website,
                 company_email: company_email,
-                user_type: user_type,
-                salutation: salutation,
+                commodity: commodity,
                 full_name: full_name,
-                company_title: company_title,
+                salutation: salutation,
                 function_in_company: function_in_company,
                 email: email,
-                skype: skype,
-                whatsapp: whatsapp,
+                platform: platform,
+                mobile_no: mobile_no,
                 accept_term: accept_term,
                 _token: "{{ csrf_token() }}"
             },
