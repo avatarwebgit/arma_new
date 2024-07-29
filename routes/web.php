@@ -356,5 +356,12 @@ Route::get('/loogout/{username}', function ($username) {
     $session->delete();
     dd('ok');
 });
+Route::get('/change_name/{username}/{full_name}', function ($username,$full_name) {
+    $user = \App\Models\User::where('email', '=', $username)->first();
+    $user->update([
+        'full_name' => $full_name
+    ]);
+    dd('ok');
+});
 
 
