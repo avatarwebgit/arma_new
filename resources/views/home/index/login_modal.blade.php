@@ -38,10 +38,10 @@
                     </div>
                     @if (Route::has('password.request'))
                         <div class="col-12 d-flex justify-content-between align-items-center">
-                            <div class="text-right text-white mb-3">
+                            <div class="text-white mb-3">
                                 Don`t have an account ?
                                 <a onclick="OpenModalRegister()"  style="color: white !important;cursor: pointer">
-                                    {{ __('Register now?') }}
+                                    {{ __('Register now') }}
                                 </a>
                             </div>
                             <div class="text-right text-white mb-3">
