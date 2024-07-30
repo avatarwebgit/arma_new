@@ -32,7 +32,7 @@
                 $user_ids[] = $user->id;
                 $confirmed_count = \App\Models\User::WhereIn('id', $user_ids)->count();
             }
-                    $users_seller = \App\Models\User::where('active_status', 2)->get();
+                    $users_seller = \App\Models\User::where('active_status', 2)->where('active',1)->get();
                     $seller_ids = [];
                     foreach ($users_seller as $user_seller) {
                         if ($user_seller->hasRole('seller')) {
@@ -48,7 +48,7 @@
                             $buyer_ids[] = $user_buyer->id;
                         }
                     }
-                    $users_buyer_count = \App\Models\User::whereIn('id', $buyer_ids)->get();
+                    $users_buyer_count = \App\Models\User::whereIn('id', $buyer_ids)->where('active',1)->get();
 
                     $users_member = \App\Models\User::where('active_status', 2)->get();
                     $member_ids = [];
@@ -68,7 +68,7 @@
                     }
                     $users_Representative_count = \App\Models\User::whereIn('id', $Representative_ids)->get();
 
-                    $users_Brokers = \App\Models\User::where('active_status', 2)->get();
+                    $users_Brokers = \App\Models\User::where('active_status', 2)->where('active',1)->get();
                     $Brokers_ids = [];
                     foreach ($users_Brokers as $user_Brokers) {
                         if ($user_Brokers->hasRole('Brokers')) {
@@ -76,6 +76,11 @@
                         }
                     }
                     $users_Brokers_count = \App\Models\User::whereIn('id', $Brokers_ids)->get();
+
+                    $users_suspended = \App\Models\User::where('active_status', 2)->where('active',2)->get();
+                    $users_blocked = \App\Models\User::where('active_status', 2)->where('active',3)->get();
+
+
                 @endphp
 
                 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/users*') ? 'active dash-trigger' : 'collapsed' }}">
@@ -113,7 +118,7 @@
                             <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
                                 <a class="dash-link"
                                    href="{{ route('admin.users.third.index',['type'=>3]) }}">
-                                    Rejected Users ({{ $rejected_count }})
+                                    Rejected ({{ $rejected_count }})
                                 </a>
                             </li>
                         @endcan
@@ -145,6 +150,16 @@
                             </li>
                         @endcan
 
+                        @can('Users-Brokers')
+                            <li class="dash-item">
+                                <a class="dash-link"
+                                   href="{{ route('admin.users.brokers.index',['type'=>'Brokers']) }}">
+                                    Brokers ({{ count($users_Brokers_count) }})
+                                </a>
+                            </li>
+                        @endcan
+
+
                         @can('Users-Members')
                             <li class="dash-item">
                                 <a class="dash-link"
@@ -162,26 +177,31 @@
                                 </a>
                             </li>
                         @endcan
+                        <li class="dash-item">
+                            <a class="dash-link"
+                               href="{{ route('admin.users.status',['status'=>2]) }}">
+                                Suspend({{ count($users_suspended) }})
+                            </a>
+                        </li>
+                        <li class="dash-item">
+                            <a class="dash-link"
+                               href="{{ route('admin.users.status',['status'=>3]) }}">
+                                Blocked ({{ count($users_blocked) }})
+                            </a>
+                        </li>
 
-                        @can('Users-Brokers')
-                            <li class="dash-item">
-                                <a class="dash-link"
-                                   href="{{ route('admin.users.brokers.index',['type'=>'Brokers']) }}">
-                                    Brokers ({{ count($users_Brokers_count) }})
-                                </a>
-                            </li>
-                        @endcan
-{{--                        @can('roles')--}}
-{{--                            <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">--}}
-{{--                                <a class="dash-link" href="{{ route('admin.roles.index') }}">{{ __('Roles') }}</a>--}}
-{{--                            </li>--}}
-{{--                        @endcan--}}
-{{--                        @can('permissions')--}}
-{{--                            <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">--}}
-{{--                                <a class="dash-link"--}}
-{{--                                   href="{{ route('admin.permission.index') }}">{{ __('Permissions') }}</a>--}}
-{{--                            </li>--}}
-{{--                        @endcan--}}
+
+                        {{--                        @can('roles')--}}
+                        {{--                            <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">--}}
+                        {{--                                <a class="dash-link" href="{{ route('admin.roles.index') }}">{{ __('Roles') }}</a>--}}
+                        {{--                            </li>--}}
+                        {{--                        @endcan--}}
+                        {{--                        @can('permissions')--}}
+                        {{--                            <li class="dash-item {{ request()->is('roles*') ? 'active' : '' }}">--}}
+                        {{--                                <a class="dash-link"--}}
+                        {{--                                   href="{{ route('admin.permission.index') }}">{{ __('Permissions') }}</a>--}}
+                        {{--                            </li>--}}
+                        {{--                        @endcan--}}
                     </ul>
 
                 </li>

@@ -114,6 +114,7 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::get('users/members/{type}/index/', [UserController::class, 'index'])->middleware('permission:Users-Members')->name('users.members.index');
     Route::get('users/Representatives/{type}/index/', [UserController::class, 'index'])->middleware('permission:Users-Representatives')->name('users.Representatives.index');
     Route::get('users/brokers/{type}/index/', [UserController::class, 'index'])->middleware('permission:Users-Brokers')->name('users.brokers.index');
+    Route::get('users/status/{status}', [UserController::class, 'users_status'])->name('users.status');
     //inquiries-list
     Route::get('/sales_form/first/index/{status}', [FormController::class, 'sales_form_index'])->middleware('permission:Users-Inbox')->name('sales_form.first.index');
     Route::get('/sales_form/second/index/{status}', [FormController::class, 'sales_form_index'])->middleware('permission:Inquires-Cash-Pending')->name('sales_form.second.index');

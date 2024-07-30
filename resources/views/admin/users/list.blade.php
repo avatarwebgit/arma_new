@@ -1,9 +1,10 @@
 @extends('admin.layouts.main')
 
+
 @section('title')
     @if($type==0)
         @php
-            $user_status='Index';
+            $user_status='Inbox';
         @endphp
     @elseif($type==1)
         @php
@@ -11,11 +12,11 @@
         @endphp
     @elseif($type==3)
         @php
-            $user_status='Confirmed';
+            $user_status='Rejected';
         @endphp
     @elseif($type==2)
         @php
-            $user_status='Rejected';
+            $user_status='Confirmed';
         @endphp
     @elseif($type=='seller')
         @php
@@ -25,6 +26,14 @@
     @elseif($type=='buyer')
         @php
             $user_status='Buyer';
+        @endphp
+    @elseif($type=='suspended')
+        @php
+            $user_status='Suspended';
+        @endphp
+    @elseif($type=='blocked')
+        @php
+            $user_status='Blocked';
         @endphp
     @elseif($type=='Members' or $type=='Representatives' or $type=='Brokers')
         @php
@@ -61,6 +70,9 @@
                             <div class="col-md-12">
                                 <div class="markets-pair-list">
                                     <div id="alert"></div>
+                                    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-dark mb-2">
+                                        Back
+                                    </a>
                                     @if($type==0)
                                         @include('admin.users.index')
                                     @elseif($type==1)
@@ -69,11 +81,11 @@
                                         @include('admin.users.confirmed_users')
                                     @elseif($type==3)
                                         @include('admin.users.rejected_user')
-                                    @elseif($type=='seller')
+                                    @elseif($type=='suspended' or $type=='blocked')
+                                        @include('admin.users.users_status')
+                                    @elseif($type=='seller' or $type=='buyer' or $type=='Brokers')
                                         @include('admin.users.seller')
-                                    @elseif($type=='buyer')
-                                        @include('admin.users.buyer')
-                                    @elseif($type=='Members' or $type=='Representatives' or $type=='Brokers')
+                                    @elseif($type=='Members' or $type=='Representatives')
                                         @include('admin.users.members')
                                     @endif
                                     <div class="text-center">
@@ -100,10 +112,11 @@
 @endpush
 @push('script')
     <script>
-        $('#Full-Access').click(function (){
-            let is_checked=$(this).is(':checked');
+        $('#Full-Access').click(function () {
+            let is_checked = $(this).is(':checked');
             $('input[type=checkbox]').prop('checked', is_checked);
         })
+
         function showUserPreview(user_id) {
             let UserPreview = $('#UserPreview');
             UserPreview.modal('show');
@@ -169,8 +182,8 @@
             $('#is_reject_error').addClass('d-none');
             let user_id = $('#user_id').val();
             let reason = $('#Reject_reason').val();
-            let is_reject = $('input[name="is_reject"]:checked').val();
-
+            // let is_reject = $('input[name="is_reject"]:checked').val();
+            let is_reject = 1;
             if (is_reject != 1) {
                 $('#is_reject_error').removeClass('d-none');
                 return;
@@ -244,14 +257,36 @@
         }
 
         function ChangeActivationStatus(tag, user_id) {
-            let active = $(tag).val();
+            let RejectedModal = $('#RejectedModal');
+            let status = $(tag).val();
+            if (status==1){
+                ajaxChangeStatus(status,user_id,null)
+            }else {
+                RejectedModal.modal('show');
+                $('#reject_user_question_button').find('button').removeAttr('onclick');
+                $('#reject_user_question_button').find('button').attr('onclick','SuspendBlocked('+status+','+user_id+')');
+                // $('#Reject_reason').removeAttr('id');
+                $('#Reject_reason').attr('id','Reject_reason_2');
+            }
+        }
+
+        function SuspendBlocked(status,user_id){
+            let Reject_reason_2=$('#Reject_reason_2').val();
+            if (Reject_reason_2.length<20){
+                alert('The Minimum Character You Must Enter is 20');
+                return;
+            }
+            ajaxChangeStatus(status,user_id,Reject_reason_2)
+        }
+        function ajaxChangeStatus(status,user_id,Reject_reason_2){
             $.ajax({
                 url: "{{ route('admin.user.change_active_status') }}",
                 method: "post",
                 dataType: "json",
                 data: {
                     user_id: user_id,
-                    active: active,
+                    status: status,
+                    reject_reason: Reject_reason_2,
                     _token: "{{ csrf_token() }}"
                 },
                 success: function (msg) {
@@ -329,6 +364,10 @@
         function CopyUserName() {
             let password = $('#new_password').val();
             let user_type = $('input[name="role"]:checked').val();
+            if(typeof user_type=='undefined'){
+                alert('Select Type Of User');
+                return;
+            }
             let user_id = $('#user_id').val();
             if (password.length == 0) {
                 alert('Please enter Password');
@@ -357,6 +396,10 @@
                     window.location.reload();
                 },
             })
+        }
+
+        function ShowName(role) {
+            $('#role').text(role);
         }
 
         function CreateMember(type) {

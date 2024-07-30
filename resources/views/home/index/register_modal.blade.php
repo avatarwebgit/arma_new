@@ -40,8 +40,7 @@
                             name="user_type">
                             <option value="">Select User Type</option>
                             @foreach($types as $type)
-                                <option
-                                    {{ old('type')==$type->id ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->name }}</option>
+                                <option value="{{ $type->id }}">{{ $type->name }}</option>
                             @endforeach
                         </select>
 
@@ -54,8 +53,7 @@
                         <select name="company_country" id="company_country" class="form-control">
                             <option value="">Select Country</option>
                             @foreach($countries as $country)
-                                <option
-                                    {{ old('company_country')==$country->id ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->countryName }}</option>
+                                <option value="{{ $country->countryName }}">{{ $country->countryName }}</option>
                             @endforeach
                         </select>
                         <p id="company_country_error" class="error-message d-none">
@@ -114,8 +112,7 @@
                         <select name="commodity" id="commodity" class="form-control">
                             <option value="">Select Commodity</option>
                             @foreach($commodities as $commodity)
-                                <option
-                                    {{ old('commodity')==$commodity->id ? 'selected' : ''  }} value="{{ $commodity->id }}">
+                                <option value="{{ $commodity->title }}">
                                     {{ $commodity->title }}
                                 </option>
                             @endforeach
@@ -155,7 +152,7 @@
                                 name="salutation">
                             <option value="">Select</option>
                             @foreach($salutation as $item)
-                                <option {{ old('salutation')==$item->id  ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->title }}</option>
+                                <option value="{{ $item->title }}">{{ $item->title }}</option>
                             @endforeach
                         </select>
                         <p id="salutation_error" class="error-message d-none">
@@ -171,8 +168,7 @@
                             name="function_in_company">
                             <option value="">Select</option>
                             @foreach($companyFunction as $item)
-                                <option
-                                    {{ old('function_in_company')==$item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->title }}</option>
+                                <option value="{{ $item->title }}">{{ $item->title }}</option>
                             @endforeach
                         </select>
 
@@ -181,7 +177,7 @@
                         </p>
                     </div>
                     <div class="form-group col-12 col-md-6">
-                        <label for="email" class="mb-1">Email *</label>
+                        <label for="email_register" class="mb-1">Email *</label>
                         <input
                             id="email_register"
                             type="email"

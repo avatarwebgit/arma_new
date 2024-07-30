@@ -1,18 +1,18 @@
 <table class="table table-striped">
     <thead>
-    <tr>
+    <tr class="text-center">
         <th>#</th>
         <th>Date</th>
         <th>Time</th>
         <th>email</th>
-        <th>Country</th>
+        <th>Company</th>
         <th>User Type</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
     @foreach($users as $key=>$item)
-        <tr>
+        <tr class="text-center">
             <td>
                 {{ $users->firstItem()+$key }}
             </td>
@@ -29,14 +29,24 @@
                 {{ $item->company_name }}
             </td>
             <td>
-                {{ isset($item->Roles()->first()->name) ? $item->Roles()->first()->name : '-' }}
+                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">
+                     @if($item->user_type==2)
+                        Seller
+                    @elseif($item->user_type==3)
+                        Buyer
+                    @else
+                        Broker
+                    @endif
+                </strong>
+
+
             </td>
-            <td>
+            <td class="text-right">
                 <a onclick="showUserPreview({{ $item->id }})"
-                   style="margin-right: 10px"
+                   style="margin-right: 10px;padding: 5px 20px"
                    class="btn btn-sm btn-info text-white">
-                    <i class="icon ion-md-close text-white"></i>
-                    Preview
+                    <i class="fa fa-eye text-white"></i>
+
                 </a>
                 <a style="margin-right: 10px"
                    onclick="ChangeStatus({{ $item->id }},1)"
