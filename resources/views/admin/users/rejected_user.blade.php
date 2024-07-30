@@ -1,9 +1,9 @@
 <table class="table table-striped">
     <thead>
-    <tr>
+    <tr class="text-center">
         <th>#</th>
         <th>Date</th>
-        <th>Time</th>
+{{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
         <th>User Type</th>
@@ -12,16 +12,16 @@
     </thead>
     <tbody>
     @foreach($users as $key=>$item)
-        <tr>
+        <tr class="text-center">
             <td>
                 {{ $users->firstItem()+$key }}
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
             </td>
-            <td>
-                {{ \Carbon\Carbon::parse($item->created_at)->format('h:i a') }}
-            </td>
+{{--            <td>--}}
+{{--                {{ \Carbon\Carbon::parse($item->created_at)->format('h:i a') }}--}}
+{{--            </td>--}}
             <td>
                 {{ $item->email }}
             </td>
@@ -29,9 +29,17 @@
                 {{ $item->company_name }}
             </td>
             <td>
-                {{ isset($item->Roles()->first()->name) ? $item->Roles()->first()->name : '-' }}
+                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">
+                    @if($item->user_type==2)
+                        Seller
+                    @elseif($item->user_type==3)
+                        Buyer
+                    @else
+                        Broker
+                    @endif
+                </strong>
             </td>
-            <td>
+            <td class="text-right">
                 <a onclick="RejectedUser({{ $item->id }},'{{ $item->reject_reason }}')"
                    style="margin-right: 10px"
                    class="btn btn-sm btn-info text-white">

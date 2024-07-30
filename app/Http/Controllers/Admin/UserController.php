@@ -31,21 +31,20 @@ class UserController extends Controller
         $user_status = UserStatus::where('id', $type)->pluck('title')->first();
         $activation_status = UserActivationStatus::all();
         if ($type == 'seller' or $type == 'buyer' or $type == 'Members' or $type == 'Representatives' or $type == 'Brokers') {
-
-            $users = User::where('active_status', 2)->get();
+            $users = User::where('active_status', 2)->where('active',1)->orderBy('updated_at','desc')->get();
             $ids = [];
             foreach ($users as $user) {
                 if ($user->hasRole($type)) {
                     $ids[] = $user->id;
                 }
             }
-            $users = User::whereIn('id', $ids)->paginate(100);
+            $users = User::whereIn('id', $ids)->orderBy('created_at','desc')->paginate(100);
         } else {
-            $users = User::where('active_status', $type)->paginate(100);
+            $users = User::where('active_status', $type)->orderBy('created_at','desc')->paginate(100);
             $user_ids = [];
 
             if ($type == 2) {
-                $users = User::where('active_status', $type)->get();
+                $users = User::where('active_status', $type)->orderBy('created_at','desc')->get();
 
                 foreach ($users as $key => $user) {
                     $role_count = $user->Roles()->count();
@@ -55,10 +54,25 @@ class UserController extends Controller
                     }
                     $user_ids[] = $user->id;
                 }
-                $users = User::WhereIn('id', $user_ids)->paginate(100);
+                $users = User::WhereIn('id', $user_ids)->orderBy('created_at','desc')->paginate(100);
             }
         }
 
+        return view('admin.users.list', compact('users', 'type', 'user_status', 'activation_status', 'permission_groups'));
+    }
+
+    public function users_status($status){
+        $users = User::where('active_status', 2)->where('active',$status)->orderBy('updated_at','desc')->paginate(100);
+        $type=4;
+        $permission_groups = Permission::where('group', '!=', '0')->orderBy('priority','asc')->get()->groupby('group');
+        $user_status = UserStatus::where('id', $type)->pluck('title')->first();
+        $activation_status = UserActivationStatus::all();
+        if ($status==2){
+            $type='suspended';
+        }
+        if ($status==3){
+            $type='blocked';
+        }
         return view('admin.users.list', compact('users', 'type', 'user_status', 'activation_status', 'permission_groups'));
     }
 
@@ -121,6 +135,10 @@ class UserController extends Controller
             }
             if ($request->role == 3) {
                 $role = 'buyer';
+                $initial = 'B';
+            }
+            if ($request->role == 6) {
+                $role = 'Brokers';
                 $initial = 'B';
             }
             $USER_ID = $this->User_ID_Creator($initial, $user->id);
@@ -334,10 +352,12 @@ class UserController extends Controller
     function change_active_status(Request $request)
     {
         $user_id = $request->user_id;
-        $active = $request->active;
+        $status = $request->status;
+        $reject_reason = $request->reject_reason;
         $user = User::where('id', $user_id)->first();
         $user->update([
-            'active' => $active,
+            'active' => $status,
+            'reject_reason' => $reject_reason,
         ]);
         return response()->json([1, 'ok']);
     }
@@ -345,7 +365,7 @@ class UserController extends Controller
     public function User_ID_Creator($initial, $user_id)
     {
         $number = 1000 + $user_id;
-        $ID = 'Armx-' . $initial . ' ' . $number;
+        $ID = 'Armx-' . $initial . $number;
         return $ID;
     }
 

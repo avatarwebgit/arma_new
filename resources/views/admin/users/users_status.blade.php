@@ -3,6 +3,7 @@
     <tr class="text-center">
         <th>#</th>
         <th>Date</th>
+{{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
         <th>User Type</th>
@@ -19,6 +20,9 @@
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
             </td>
+{{--            <td>--}}
+{{--                {{ \Carbon\Carbon::parse($item->created_at)->format('h:i a') }}--}}
+{{--            </td>--}}
             <td>
                 {{ $item->email }}
             </td>
@@ -37,34 +41,41 @@
                 </strong>
             </td>
             <td>
-                <select onchange="ChangeRegisterStatus(this,{{ $item->id }})" class="form-control">
-                    <option value="0">Step 1</option>
-                    <option value="1">Step 2</option>
-                    <option value="2">Create Account</option>
+                <select onchange="ChangeActivationStatus(this,{{ $item->id }})" class="form-control form-control-sm">
+                    @foreach($activation_status as   $activation)
+                        <option {{ $item->active==$activation->id ? 'selected' : '' }} value="{{ $activation->id}}">{{ $activation->title }}</option>
+                    @endforeach
                 </select>
             </td>
             <td class="text-right">
-                <a onclick="showUserPreview({{ $item->id }})"
-                   style="margin-right: 10px;padding: 5px 20px"
-                   class="btn btn-sm btn-info text-white">
-                    <i class="fa fa-eye text-white"></i>
-
-                </a>
-                <a style="margin-right: 10px"
-                   onclick="RejectedUser({{ $item->id }},null)"
-                   class="btn btn-sm btn-danger text-white">
+                <a onclick="RejectedUser({{ $item->id }},'{{ $item->reject_reason }}')"
+                   style="margin-right: 10px"
+                   class="btn btn-sm btn-info text-white mr-2">
                     <i class="icon ion-md-close text-white"></i>
-                    Reject
+                    Reason
                 </a>
-                <a style="margin-right: 10px" onclick="removeModal({{ $item->id }},event)"
+{{--                <a style="margin-right: 10px"--}}
+{{--                   onclick="ChangeStatus({{ $item->id }},1)"--}}
+{{--                   class="btn btn-sm btn-success text-white">--}}
+{{--                    <i class="icon ion-md-close text-white"></i>--}}
+{{--                    Registering--}}
+{{--                </a>--}}
+{{--                <a style="margin-right: 10px"--}}
+{{--                   onclick="RejectedUser({{ $item->id }})"--}}
+{{--                   class="btn btn-sm btn-danger text-white">--}}
+{{--                    <i class="icon ion-md-close text-white"></i>--}}
+{{--                    Reject--}}
+{{--                </a>--}}
+                                                                    <a style="margin-right: 10px" onclick="removeModal({{ $item->id }},event)"
                                                                        class="btn btn-sm btn-danger text-white">
-                                                                        <i class="fa fa-trash text-white"></i>
+                                                                        <i class="icon ion-md-close text-white"></i>
+                                                                        Delete
                                                                     </a>
-                {{--                                                                    <a href="{{ route('admin.user.edit',['type'=>$type,'user'=>$item->id]) }}"--}}
-                {{--                                                                       class="btn btn-sm btn-warning mr-1">--}}
-                {{--                                                                        <i class="icon-md-eye text-white"></i>--}}
-                {{--                                                                        Edit--}}
-                {{--                                                                    </a>--}}
+                {{--                                                    <a href="{{ route('admin.user.edit',['type'=>$type,'user'=>$item->id]) }}"--}}
+                {{--                                                       class="btn btn-sm btn-warning mr-1">--}}
+                {{--                                                        <i class="icon ion-md-eye text-white"></i>--}}
+                {{--                                                        Edit--}}
+                {{--                                                    </a>--}}
                 {{--                                                    <a href="{{ route('admin.user.wallet',['user'=>$item->id]) }}"--}}
                 {{--                                                       class="btn btn-sm btn-info mr-1">--}}
                 {{--                                                        <i class="icon ion-md-eye text-white"></i>--}}

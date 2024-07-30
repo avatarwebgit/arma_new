@@ -1,9 +1,9 @@
 <table class="table table-striped">
     <thead>
-    <tr>
+    <tr class="text-center">
         <th>#</th>
         <th>Date</th>
-        <th>Time</th>
+{{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
         <th>User Type</th>
@@ -12,16 +12,16 @@
     </thead>
     <tbody>
     @foreach($users as $key=>$item)
-        <tr>
+        <tr class="text-center">
             <td>
                 {{ $users->firstItem()+$key }}
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
             </td>
-            <td>
-                {{ \Carbon\Carbon::parse($item->created_at)->format('h:i a') }}
-            </td>
+{{--            <td>--}}
+{{--                {{ \Carbon\Carbon::parse($item->created_at)->format('h:i a') }}--}}
+{{--            </td>--}}
             <td>
                 {{ $item->email }}
             </td>
@@ -29,9 +29,17 @@
                 {{ $item->company_name }}
             </td>
             <td>
-                {{ isset($item->Roles()->first()->name) ? $item->Roles()->first()->name : '-' }}
+                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">
+                    @if($item->user_type==2)
+                        Seller
+                    @elseif($item->user_type==3)
+                        Buyer
+                    @else
+                        Broker
+                    @endif
+                </strong>
             </td>
-            <td>
+            <td class="text-right">
 
 {{--                <a onclick="RejectedUser({{ $item->id }},'{{ $item->reject_reason }}')"--}}
 {{--                   style="margin-right: 10px"--}}
@@ -45,22 +53,27 @@
                     <i class="icon ion-md-close text-white"></i>
                     Create Account
                 </a>
-                {{--                <a style="margin-right: 10px"--}}
-                {{--                   onclick="RejectedUser({{ $item->id }})"--}}
-                {{--                   class="btn btn-sm btn-danger text-white">--}}
-                {{--                    <i class="icon ion-md-close text-white"></i>--}}
-                {{--                    Reject--}}
-                {{--                </a>--}}
-                <a style="margin-right: 10px" onclick="removeModal({{ $item->id }},event)"
+                <a onclick="showUserPreview({{ $item->id }})"
+                   style="margin-right: 10px;padding: 5px 20px"
+                   class="btn btn-sm btn-info text-white">
+                    <i class="fa fa-eye text-white"></i>
+
+                </a>
+                <a style="margin-right: 10px"
+                   onclick="RejectedUser({{ $item->id }},null)"
                    class="btn btn-sm btn-danger text-white">
                     <i class="icon ion-md-close text-white"></i>
-                    Delete
+                    Reject
                 </a>
-                                                                    <a href="{{ route('admin.user.edit',['type'=>$type,'user'=>$item->id]) }}"
-                                                                       class="btn btn-sm btn-warning mr-1">
-                                                                        <i class="icon ion-md-eye text-white"></i>
-                                                                        Edit
-                                                                    </a>
+                <a style="margin-right: 10px" onclick="removeModal({{ $item->id }},event)"
+                   class="btn btn-sm btn-danger text-white">
+                    <i class="fa fa-trash text-white"></i>
+                </a>
+{{--                                                                    <a href="{{ route('admin.user.edit',['type'=>$type,'user'=>$item->id]) }}"--}}
+{{--                                                                       class="btn btn-sm btn-warning mr-1">--}}
+{{--                                                                        <i class="icon ion-md-eye text-white"></i>--}}
+{{--                                                                        Edit--}}
+{{--                                                                    </a>--}}
                 {{--                                                    <a href="{{ route('admin.user.wallet',['user'=>$item->id]) }}"--}}
                 {{--                                                       class="btn btn-sm btn-info mr-1">--}}
                 {{--                                                        <i class="icon ion-md-eye text-white"></i>--}}
