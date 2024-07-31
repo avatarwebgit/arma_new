@@ -2543,6 +2543,7 @@ tbody.ob-heading {
     margin-right: 10px;
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 .header_title:after {
@@ -2550,8 +2551,8 @@ tbody.ob-heading {
     position: absolute;
     content: "";
     width: 2px !important;
-    height: 130% !important;
-    background-color: black;
+    height: 80% !important;
+    background-color: #000000;
     right: -10px;
 }
 

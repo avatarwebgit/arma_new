@@ -1,4 +1,4 @@
-<button class="btn btn-success mb-3" onclick="CreateMember('{{ $type }}')">Create +</button>
+<button class="btn btn-success btn-sm mb-2" onclick="CreateMember('{{ $type }}')">Create +</button>
 <table class="table table-striped">
     <thead>
     <tr class="text-center">
@@ -8,6 +8,7 @@
         <th>email</th>
         <th>Country</th>
         <th>User Type</th>
+        <th>Edit</th>
         <th>Status</th>
     </tr>
     </thead>
@@ -29,12 +30,23 @@
                 {{ $item->email }}
             </td>
             <td>
-                {{ $item->company_name }}
+                {{ $item->company_country }}
             </td>
             <td>
                 <strong>
-                    {{ isset($item->Roles()->first()->name) ? $item->Roles()->first()->name : '-' }}
+                    @if(isset($item->Roles()->first()->name))
+                        @if($item->Roles()->first()->name=='Members')
+                            Member
+                        @else
+                            {{ $item->Roles()->first()->name }}
+                        @endif
+                    @else
+                        -
+                    @endif
                 </strong>
+            </td>
+            <td>
+               <i onclick="ShowEditModal({{ $item->id }})" class="fa fa-edit fa-2x" style="cursor: pointer"></i>
             </td>
             <td>
                 <select onchange="ChangeActivationStatus(this,{{ $item->id }})" class="form-control">

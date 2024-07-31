@@ -106,6 +106,9 @@
     @include('admin.sections.RejectedUser')
     @include('admin.sections.create_account_modal')
     @include('admin.sections.add_member_modal')
+    <div id="edit_member_modal_div">
+
+    </div>
 @endsection
 @push('style')
 
@@ -116,6 +119,7 @@
             let is_checked = $(this).is(':checked');
             $('input[type=checkbox]').prop('checked', is_checked);
         })
+
 
         function showUserPreview(user_id) {
             let UserPreview = $('#UserPreview');
@@ -259,26 +263,27 @@
         function ChangeActivationStatus(tag, user_id) {
             let RejectedModal = $('#RejectedModal');
             let status = $(tag).val();
-            if (status==1){
-                ajaxChangeStatus(status,user_id,null)
-            }else {
+            if (status == 1) {
+                ajaxChangeStatus(status, user_id, null)
+            } else {
                 RejectedModal.modal('show');
                 $('#reject_user_question_button').find('button').removeAttr('onclick');
-                $('#reject_user_question_button').find('button').attr('onclick','SuspendBlocked('+status+','+user_id+')');
+                $('#reject_user_question_button').find('button').attr('onclick', 'SuspendBlocked(' + status + ',' + user_id + ')');
                 // $('#Reject_reason').removeAttr('id');
-                $('#Reject_reason').attr('id','Reject_reason_2');
+                $('#Reject_reason').attr('id', 'Reject_reason_2');
             }
         }
 
-        function SuspendBlocked(status,user_id){
-            let Reject_reason_2=$('#Reject_reason_2').val();
-            if (Reject_reason_2.length<20){
+        function SuspendBlocked(status, user_id) {
+            let Reject_reason_2 = $('#Reject_reason_2').val();
+            if (Reject_reason_2.length < 20) {
                 alert('The Minimum Character You Must Enter is 20');
                 return;
             }
-            ajaxChangeStatus(status,user_id,Reject_reason_2)
+            ajaxChangeStatus(status, user_id, Reject_reason_2)
         }
-        function ajaxChangeStatus(status,user_id,Reject_reason_2){
+
+        function ajaxChangeStatus(status, user_id, Reject_reason_2) {
             $.ajax({
                 url: "{{ route('admin.user.change_active_status') }}",
                 method: "post",
@@ -359,12 +364,13 @@
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
             }
             $('#new_password2').val(text);
+            $('#new_password2_edit').val(text);
         }
 
         function CopyUserName() {
             let password = $('#new_password').val();
             let user_type = $('input[name="role"]:checked').val();
-            if(typeof user_type=='undefined'){
+            if (typeof user_type == 'undefined') {
                 alert('Select Type Of User');
                 return;
             }
@@ -403,6 +409,8 @@
         }
 
         function CreateMember(type) {
+            $('.create_account_radio').addClass('d-none');
+            $('.' + type).removeClass('d-none');
             $('#' + type).prop('checked', true);
             $('#add_member_modal').modal('show');
             $('#email_error').add('d-none');
@@ -413,7 +421,12 @@
             $('#email_error').add('d-none');
             let password = $('#new_password2').val();
             let email = $('#email').val();
+            let company_country = $('#company_country').val();
 
+            if (company_country.length == 0) {
+                alert('Please Select Country');
+                return;
+            }
             if (email.length == 0) {
                 alert('Please enter Email');
                 return;
@@ -442,6 +455,72 @@
                 }
             })
 
+        }
+
+        function UpdateMember(user_id) {
+            $('#email_error_edit').add('d-none');
+            let email = $('#email_edit').val();
+            let company_country = $('#company_country_edit').val();
+            let password = $('#new_password2_edit').val();
+
+            if (company_country.length == 0) {
+                alert('Please Select Country');
+                return;
+            }
+            if (email.length == 0) {
+                alert('Please enter Email');
+                return;
+            }
+            if (password.length != 0) {
+                $('#new_password2_edit').select();
+                document.execCommand('copy');
+                $('#new_password_copied2_edit').removeClass('d-none');
+            }
+
+            $.ajax({
+                url: "{{ route('admin.user.check_email_exist') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    email: email,
+                    user_id: user_id,
+                },
+                method: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == 1) {
+                        $('#email_error_edit').removeClass('d-none');
+                    } else {
+                        $('#member_form_update').submit();
+                    }
+                }
+            })
+
+        }
+
+        function FullAccess(tag) {
+            let is_checked = $(tag).is(':checked');
+            $('input[type=checkbox]').prop('checked', is_checked);
+        }
+
+        function ShowEditModal(user_id) {
+            $('.create_account_radio').addClass('d-none');
+            $.ajax({
+                url: "{{ route('admin.user.edit_modal') }}",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    user_id: user_id,
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function (data) {
+                    if (data[0] == 1) {
+                        $('#edit_member_modal_div').html(data[1]);
+                        $('#edit_member_modal').modal('show');
+                    } else {
+                        console.error(data[1]);
+                    }
+                }
+            })
         }
 
     </script>

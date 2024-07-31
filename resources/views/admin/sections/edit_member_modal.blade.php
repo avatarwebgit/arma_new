@@ -1,17 +1,17 @@
-<div class="modal fade" id="add_member_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="edit_member_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
     <div style="max-width: 760px" class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
 
                 <h3>
-                    Create Account
+                    Edit Account
                 </h3>
                 <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"></i>
 
             </div>
-            <form id="member_form" method="post" action="{{ route('admin.user.member.save') }}" class="modal-body p-5 row">
-
+            <form id="member_form_update" method="post" action="{{ route('admin.user.member.update',['user'=>$user->id]) }}" class="modal-body p-5 row">
+                @method('put')
                 @csrf
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     {{--                    <div>--}}
@@ -20,28 +20,28 @@
                     {{--                    </div>--}}
 <div>
     <div class="ml5 create_account_radio Members">
-        <input type="radio" name="role" id="Members" value="Members">
+        <input {{ $user->hasRole('Members') ? 'checked' : '' }} type="radio" name="role" id="Members" value="Members">
         <label for="Members">Member</label>
 
     </div>
     <div class="ml5 create_account_radio Representatives">
-        <input type="radio" name="role" id="Representatives" value="Representatives">
+        <input {{ $user->hasRole('Representatives') ? 'checked' : '' }} type="radio" name="role" id="Representatives" value="Representatives">
         <label for="Representatives">Representatives</label>
     </div>
-    <div class="ml5 create_account_radio Brokers">
-        <input type="radio" name="role" id="Brokers" value="Brokers">
-        <label for="Brokers">Brokers</label>
-    </div>
+{{--    <div class="ml5 create_account_radio Brokers">--}}
+{{--        <input type="radio" name="role" id="Brokers" value="Brokers">--}}
+{{--        <label for="Brokers">Brokers</label>--}}
+{{--    </div>--}}
 </div>
                     <div class="w-50 d-flex align-items-center">
                         <span style="margin-right: 5px">Country</span>
-                        <select name="company_country" id="company_country" class="form-control form-control-sm">
+                        <select name="company_country_edit" id="company_country_edit" class="form-control form-control-sm">
                             <option value="">Select Country</option>
                             @foreach($countries as $country)
-                                <option value="{{ $country->countryName }}">{{ $country->countryName }}</option>
+                                <option {{ $country->countryName==$user->company_country ? 'selected' : '' }} value="{{ $country->countryName }}">{{ $country->countryName }}</option>
                             @endforeach
                         </select>
-                        <p id="company_country_error" class="error-message d-none">
+                        <p id="company_country_edit_error" class="error-message d-none">
 
                         </p>
                     </div>
@@ -58,7 +58,9 @@
                                 </strong>
                                 @foreach($permission_group as $permission)
                                     <div class="ml5">
-                                        <input style="cursor: pointer" type="checkbox" name="{{ $permission->name }}"
+                                        <input onclick="FullAccess(this)"
+                                            {{ in_array($permission->id,$user_permissions->pluck('id')->toArray()) ? 'checked' : '' }}
+                                            style="cursor: pointer" type="checkbox" name="{{ $permission->name }}"
                                                id="{{ $permission->name }}"
                                                value="{{ $permission->id }}">
                                         <label style="cursor: pointer" class="{{  $permission->name=='Full-Access' ? 'text-danger' : '' }}"
@@ -73,28 +75,27 @@
                             <div class="mb-3" style="width: 40%;margin: 10px auto">
                                 <label>Enter a Email</label>
                                 <div class="d-flex justify-content-center align-items-center ">
-                                    <input name="email" type="text" class="form-control mb-3" id="email">
+                                    <input name="email_edit" type="text" class="form-control mb-3" id="email_edit" value="{{ $email_name }}">
                                     <span class="mb-3 ml5">@armaitimex.com</span>
                                 </div>
-                                <p id="email_error" class="error-message d-none">
+                                <p id="email_error_edit" class="error-message d-none">
                                     Email is invalid
                                 </p>
 
                                 <button onclick="randString2()" class="w-100 btn btn-success mb-3" type="button">
-                                    Create a Password
+                                    Reset Password
                                 </button>
-                                <input type="text" class="form-control mb-3" id="new_password2" name="new_password" data-character-set="a-z,A-Z,0-9,#">
-                                <p id="new_password_copied2" style="text-align: left;" class="d-none mb-3">
+                                <input type="text" class="form-control mb-3" id="new_password2_edit" name="new_password" data-character-set="a-z,A-Z,0-9,#">
+                                <p id="new_password_copied2_edit" style="text-align: left;" class="d-none mb-3">
                                     password was copied
                                 </p>
-                                <button onclick="SaveMember()" class="w-100 btn btn-info mb-3" type="button">
-                                    Copy Password
+                                <button onclick="UpdateMember({{ $user->id }})" class="w-100 btn btn-info mb-3" type="button">
+                                    Update & Copy Password
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="hidden" id="user_id">
             </form>
         </div>
     </div>

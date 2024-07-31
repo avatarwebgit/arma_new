@@ -20,6 +20,7 @@ use App\Models\UserActivationStatus;
 use App\Models\UserStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
 
@@ -27,24 +28,26 @@ class UserController extends Controller
 {
     public function index($type)
     {
-        $permission_groups = Permission::where('group', '!=', '0')->orderBy('priority','asc')->get()->groupby('group');
+        $permission_groups = Permission::where('group', '!=', '0')->orderBy('priority', 'asc')->get()->groupby('group');
         $user_status = UserStatus::where('id', $type)->pluck('title')->first();
         $activation_status = UserActivationStatus::all();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
+
         if ($type == 'seller' or $type == 'buyer' or $type == 'Members' or $type == 'Representatives' or $type == 'Brokers') {
-            $users = User::where('active_status', 2)->where('active',1)->orderBy('updated_at','desc')->get();
+            $users = User::where('active_status', 2)->where('active', 1)->orderBy('updated_at', 'desc')->get();
             $ids = [];
             foreach ($users as $user) {
                 if ($user->hasRole($type)) {
                     $ids[] = $user->id;
                 }
             }
-            $users = User::whereIn('id', $ids)->orderBy('created_at','desc')->paginate(100);
+            $users = User::whereIn('id', $ids)->orderBy('created_at', 'desc')->paginate(100);
         } else {
-            $users = User::where('active_status', $type)->orderBy('created_at','desc')->paginate(100);
+            $users = User::where('active_status', $type)->orderBy('created_at', 'desc')->paginate(100);
             $user_ids = [];
 
             if ($type == 2) {
-                $users = User::where('active_status', $type)->orderBy('created_at','desc')->get();
+                $users = User::where('active_status', $type)->orderBy('created_at', 'desc')->get();
 
                 foreach ($users as $key => $user) {
                     $role_count = $user->Roles()->count();
@@ -54,26 +57,44 @@ class UserController extends Controller
                     }
                     $user_ids[] = $user->id;
                 }
-                $users = User::WhereIn('id', $user_ids)->orderBy('created_at','desc')->paginate(100);
+                $users = User::WhereIn('id', $user_ids)->orderBy('created_at', 'desc')->paginate(100);
             }
         }
 
+        return view('admin.users.list', compact('users', 'type', 'user_status', 'activation_status', 'permission_groups', 'countries'));
+    }
+
+    public function users_status($status)
+    {
+        $users = User::where('active_status', 2)->where('active', $status)->orderBy('updated_at', 'desc')->paginate(100);
+        $type = 4;
+        $permission_groups = Permission::where('group', '!=', '0')->orderBy('priority', 'asc')->get()->groupby('group');
+        $user_status = UserStatus::where('id', $type)->pluck('title')->first();
+        $activation_status = UserActivationStatus::all();
+        if ($status == 2) {
+            $type = 'suspended';
+        }
+        if ($status == 3) {
+            $type = 'blocked';
+        }
         return view('admin.users.list', compact('users', 'type', 'user_status', 'activation_status', 'permission_groups'));
     }
 
-    public function users_status($status){
-        $users = User::where('active_status', 2)->where('active',$status)->orderBy('updated_at','desc')->paginate(100);
-        $type=4;
-        $permission_groups = Permission::where('group', '!=', '0')->orderBy('priority','asc')->get()->groupby('group');
-        $user_status = UserStatus::where('id', $type)->pluck('title')->first();
-        $activation_status = UserActivationStatus::all();
-        if ($status==2){
-            $type='suspended';
+    function edit_modal(Request $request)
+    {
+        try {
+            $user = User::where('id', $request->user_id)->first();
+            $user_permissions = $user->permissions;
+            $email = explode('@', $user->email);
+            $email_name = $email[0];
+            $countries = Country::OrderBy('countryName', 'asc')->get();
+            $permission_groups = Permission::where('group', '!=', '0')->orderBy('priority', 'asc')->get()->groupby('group');
+            $html = view('admin.sections.edit_member_modal', compact('user', 'countries', 'permission_groups', 'email_name', 'user_permissions'))->render();
+            return response()->json([1, $html]);
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
         }
-        if ($status==3){
-            $type='blocked';
-        }
-        return view('admin.users.list', compact('users', 'type', 'user_status', 'activation_status', 'permission_groups'));
+
     }
 
     public function remove(Request $request)
@@ -167,40 +188,100 @@ class UserController extends Controller
 
     public function member_save(Request $request)
     {
-        $email = $request->email;
-        $email = $email . '@armaitimex.com';
-        $password = Hash::make($request->new_password);
-        $role = $request->role;
-        $initial = mb_substr($role, 0, 1);
-        $initial = strtoupper($initial);
+        try {
+            DB::beginTransaction();
+            $email = $request->email;
+            $company_country = $request->company_country;
+            $email = $email . '@armaitimex.com';
+            $password = Hash::make($request->new_password);
+            $role = $request->role;
+            $initial = mb_substr($role, 0, 1);
+            $initial = strtoupper($initial);
 
-        $user = User::create([
-            'email' => $email,
-            'password' => $password,
-            'active_status' => 2,
-        ]);
-        $user_id = $this->User_ID_Creator($initial, $user->id);
-        $user->update([
-            'user_id' => $user_id,
-        ]);
-        $user->syncRoles($role);
-        $permissions = $request->except(['_token', 'role', 'email', 'new_password']);
-        $user->syncPermissions($permissions);
-        $message = $role . ' Created successfully';
-        session()->flash('success', $message);
-        return redirect()->back();
+            $user = User::create([
+                'email' => $email,
+                'password' => $password,
+                'company_country' => $company_country,
+                'active_status' => 2,
+            ]);
+            $user_id = $this->User_ID_Creator($initial, $user->id);
+            $user->update([
+                'user_id' => $user_id,
+            ]);
+            $user->syncRoles($role);
+            $permissions = $request->except(['_token', 'role', 'email', 'new_password', 'company_country']);
+            $user->syncPermissions($permissions);
+            $message = $role . ' Created successfully';
+            DB::commit();
+            session()->flash('success', $message);
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            session()->flash('error', $exception->getMessage());
+            return redirect()->back();
+        }
+
+    }
+    public function member_update(User $user,Request $request)
+    {
+
+        try {
+            $email = $request->email_edit;
+            $company_country = $request->company_country_edit;
+            $email = $email . '@armaitimex.com';
+            $role = $request->role;
+            $initial = mb_substr($role, 0, 1);
+            $initial = strtoupper($initial);
+
+            $user->update([
+                'email' => $email,
+                'company_country' => $company_country,
+                'active_status' => 2,
+            ]);
+            $user_id = $this->User_ID_Creator($initial, $user->id);
+            $user->update([
+                'user_id' => $user_id,
+            ]);
+            if ($request->new_password==null){
+                $password = Hash::make($request->new_password);
+                $user->update([
+                    'password' => $password,
+                ]);
+            }
+            $user->syncRoles($role);
+            $permissions = $request->except(['_token','_method', 'role', 'email_edit', 'new_password', 'company_country_edit']);
+            $user->syncPermissions($permissions);
+            $message = $role . ' Updated successfully';
+            DB::commit();
+            session()->flash('success', $message);
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            session()->flash('error', $exception->getMessage());
+            return redirect()->back();
+        }
+
     }
 
     public function check_email_exist(Request $request)
     {
         $email = $request->email;
         $email = $email . '@armaitimex.com';
-        $user_exists = User::where('email', $email)->exists();
-        if ($user_exists) {
-            return 1;
+        $user_exists = User::where('email', $email)->first();
+        if ($request->has('user_id')) {
+            if ($user_exists->id == $request->user_id) {
+                return 0;
+            } else {
+                return 1;
+            }
         } else {
-            return 0;
+            if ($user_exists) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
+
     }
 
 

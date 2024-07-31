@@ -12,6 +12,10 @@
     </div>
 @endsection
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
     <form enctype="multipart/form-data" method="post" action="{{ route('admin.header1.update',['item'=>$item->id]) }}">
         @method('put')
         @csrf
@@ -112,6 +116,10 @@
 
         </div>
     </form>
+                </div>
+            </div>
+            </div>
+            </div>
 
 
 

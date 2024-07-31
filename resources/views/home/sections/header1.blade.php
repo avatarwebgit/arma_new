@@ -3,7 +3,7 @@
         @foreach($header1_categories as $header1)
             @if(count($header1->Headers)>0)
                 <div class="d-flex justify-content-center align-items-center">
-                    <strong class="header_title2 mr-4" style="margin-left: 80px !important;">
+                    <strong class="header_title mr-4" style="margin-left: 80px !important;">
                         {{ $header1->title }}
                     </strong>
                 </div>

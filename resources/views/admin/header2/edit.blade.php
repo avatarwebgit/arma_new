@@ -12,8 +12,13 @@
     </div>
 @endsection
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ route('admin.header2.category.headers.list',['id'=>$item->Categories[0]->id]) }}" type="button" class="btn btn-sm btn-dark">{{ __('Back') }}</a>
 
-    <form enctype="multipart/form-data" method="post" action="{{ route('admin.header2.update',['id'=>$item->id]) }}">
+                    <form enctype="multipart/form-data" method="post" action="{{ route('admin.header2.update',['id'=>$item->id]) }}">
         @method('put')
         @csrf
         <div class="row">
@@ -105,14 +110,17 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <a href="{{ route('admin.header2.category.headers.list',['id'=>$item->Categories[0]->id]) }}" type="button" class="btn btn-secondary">{{ __('Back') }}</a>
-                <button type="submit" class="btn btn-primary" style="margin-left: 5px">
+<button type="submit" class="btn btn-primary" style="margin-left: 5px">
                     Update
                 </button>
             </div>
 
         </div>
     </form>
+                </div>
+                </div>
+                </div>
+                </div>
 
 
 
