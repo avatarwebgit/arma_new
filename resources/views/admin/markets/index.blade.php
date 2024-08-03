@@ -32,7 +32,7 @@
                                     <div class="col-md-12">
                                         <div class="markets-pair-list">
                                             <div id="alert"></div>
-                                            <table class="table">
+                                            <table class="table text-center">
                                                 <thead class="bg-dark">
                                                 <tr>
                                                     <th>Row</th>
@@ -71,7 +71,7 @@
                                                             {{ count($m) }}
                                                         </td>
                                                         <td>
-                                                            {{ $status_text }}
+                                                            {{ $status_text=='close' ? 'Close' : $status_text }}
                                                         </td>
                                                         <td class="text-right">
                                                             @if($last_market->Status->id==7 or $last_market->Status->id==8 or $last_market->Status->id==9 or $show_delete_btn==0)

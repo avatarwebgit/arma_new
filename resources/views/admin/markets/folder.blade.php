@@ -13,7 +13,6 @@
 @endsection
 @section('content')
 
-
     <div class="settings mtb15 position-relative">
         <div class="container-fluid">
             <div class="row">
@@ -25,7 +24,8 @@
                                     <a href="{{ route('admin.markets.index') }}" class="btn btn-sm btn-dark">
                                         Back
                                     </a>
-                                    <a href="{{ route('admin.market.create',['market_data'=>$date]) }}" class="btn btn-sm btn-success">
+                                    <a href="{{ route('admin.market.create',['market_data'=>$date]) }}"
+                                       class="btn btn-sm btn-success">
                                         Create
                                     </a>
                                     {{--                                        <a href="{{ route('admin.market.create') }}" class="btn btn-primary btn-sm">--}}
@@ -41,10 +41,8 @@
                                                 <th>Deal ID</th>
                                                 <th>Account</th>
                                                 <th>Commodity</th>
-                                                <th>Date</th>
                                                 <th>Time</th>
                                                 <th>Market Value</th>
-                                                <th>Bid Deposit</th>
                                                 <th>Bidder</th>
                                                 <th>status</th>
                                                 <th></th>
@@ -52,98 +50,108 @@
                                             </thead>
                                             <tbody>
                                             @foreach($markets->sortBy('time') as $key=>$item)
-                                                @if($item->status==7 or $item->status==8 or $item->status==9)
+                                                @if($item->status==1)
                                                     @php
-                                                        $status_text='closed';
-                                                        $color='red';
-                                                        $show_btn=0;
+                                                        $show_btn=1;
                                                     @endphp
                                                 @else
                                                     @php
-                                                        $status_text=$item->Status->title;
-                                                        $color=$item->Status->color;
-                                                        $show_btn=1;
+                                                        $show_btn=0;
                                                     @endphp
-                                                @endif
-                                                <tr style="color: {{ $color }}">
-                                                    <td>
-                                                        Armx-T{{ $item->id }}
-                                                    </td>
-                                                    <td>
-                                                        @if($item->created_market_by!=null)
-                                                            {{ $item->CreatedBy->user_id }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->SalesForm->commodity }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->date }}
-                                                    </td>
-                                                    <td>
-                                                        {{ Carbon\Carbon::parse($item->time)->format('g:i A') }}
-                                                    </td>
-                                                    <td>
-                                                        {{ number_format($item->market_value) }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->bid_deposit }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->SalesForm->User->id }}
-                                                    </td>
+                                                    @endif
+
+                                                    @if($item->status==7 or $item->status==8 or $item->status==9)
+                                                        @php
+                                                            $status_text='closed';
+                                                            $color='red';
+                                                        @endphp
+                                                    @else
+                                                        @php
+                                                            $status_text=$item->Status->title;
+                                                            $color=$item->Status->color;
+                                                        @endphp
+                                                    @endif
+                                                    <tr style="color: {{ $color }}">
+                                                        <td>
+                                                            Armx-T{{ $item->id }}
+                                                        </td>
+                                                        <td>
+                                                            @if($item->created_market_by!=null)
+                                                                {{ $item->CreatedBy->user_id }}
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            {{ $item->SalesForm->commodity }}
+                                                        </td>
+                                                        {{--                                                    <td>--}}
+                                                        {{--                                                        {{ $item->date }}--}}
+                                                        {{--                                                    </td>--}}
+                                                        <td>
+                                                            {{ Carbon\Carbon::parse($item->time)->format('g:i A') }}
+                                                        </td>
+                                                        <td>
+                                                            {{ number_format($item->market_value) }}
+                                                        </td>
+                                                        {{--                                                    <td>--}}
+                                                        {{--                                                        {{ $item->bid_deposit }}--}}
+                                                        {{--                                                    </td>--}}
+                                                        <td>
+                                                            {{ $item->SalesForm->User->user_id }}
+                                                        </td>
                                                         <td id="market_status_{{ $item->id }}">
                                                             {{ $status_text }}
                                                         </td>
 
-                                                    <td class="d-flex justify-content-end">
-                                                        @if($show_btn==1)
-                                                        <a title="Edit Market"
-                                                           href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
-                                                           class="btn btn-sm btn-info">
-                                                            <i class="fa fa-pen"></i>
-                                                            Market
-                                                        </a>
-                                                        <a title="Edit Commodity"
-                                                           href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
-                                                           class="btn btn-sm btn-primary ml-2">
-                                                            <i class="fa fa-list"></i>
-                                                            Commodity
-                                                        </a>
-                                                        <a title="Bidder"
-                                                           href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
-                                                           class="btn btn-sm btn-success ml-2">
-                                                            <i class="fa fa-plus"></i>
-                                                            Bidder
-                                                        </a>
-{{--                                                        <button type="button" title="Copy Market"--}}
-{{--                                                                onclick="copyMarket({{ $item->id }},this)"--}}
-{{--                                                                class="btn btn-sm btn-secondary">--}}
-{{--                                                            <div class="loader d-none"></div>--}}
-{{--                                                            <span>--}}
-{{--                                                                Copy--}}
-{{--                                                            </span>--}}
-{{--                                                        </button>--}}
+                                                        <td class="d-flex justify-content-end">
+                                                            @if($show_btn==1)
+                                                                <a title="Edit Market"
+                                                                   href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
+                                                                   class="btn btn-sm btn-info">
+                                                                    <i class="fa fa-pen"></i>
+                                                                    Market
+                                                                </a>
+                                                                <a title="Edit Commodity"
+                                                                   href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
+                                                                   class="btn btn-sm btn-primary ml-2">
+                                                                    <i class="fa fa-list"></i>
+                                                                    Commodity
+                                                                </a>
+                                                                <a title="Bidder"
+                                                                   href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
+                                                                   class="btn btn-sm btn-success ml-2">
+                                                                    <i class="fa fa-plus"></i>
+                                                                    Bidder
+                                                                </a>
+                                                                {{--                                                        <button type="button" title="Copy Market"--}}
+                                                                {{--                                                                onclick="copyMarket({{ $item->id }},this)"--}}
+                                                                {{--                                                                class="btn btn-sm btn-secondary">--}}
+                                                                {{--                                                            <div class="loader d-none"></div>--}}
+                                                                {{--                                                            <span>--}}
+                                                                {{--                                                                Copy--}}
+                                                                {{--                                                            </span>--}}
+                                                                {{--                                                        </button>--}}
 
-                                                        {!! Form::open([
-'method' => 'POST',
-'route' => ['admin.market.remove'],
-'class' => 'd-inline',
-]) !!}
-                                                        <a href="#" class="btn btn-sm small btn-danger show_confirm ml-2"
-                                                           id="delete-form-{{ $item->id }}"
-                                                           data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                                           data-bs-original-title="{{ __('Delete') }}"><i
-                                                                class="ti ti-trash mr-1"></i></a>
-                                                        <input type="hidden" name="id" value="{{ $item->id }}">
-                                                        {!! Form::close() !!}
-                                                        @endif
-                                                    </td>
+                                                                {!! Form::open([
+        'method' => 'POST',
+        'route' => ['admin.market.remove'],
+        'class' => 'd-inline',
+        ]) !!}
+                                                                <a href="#"
+                                                                   class="btn btn-sm small btn-danger show_confirm ml-2"
+                                                                   id="delete-form-{{ $item->id }}"
+                                                                   data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                   title=""
+                                                                   data-bs-original-title="{{ __('Delete') }}"><i
+                                                                        class="ti ti-trash mr-1"></i></a>
+                                                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                                                {!! Form::close() !!}
+                                                            @endif
+                                                        </td>
 
-                                                </tr>
-                                            @endforeach
+                                                    </tr>
+                                                    @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -170,11 +178,12 @@
 @endsection
 @push('style')
     <style>
-        .modal-content{
+        .modal-content {
             width: 30%;
             margin: 0 auto;
         }
-        .ml-2{
+
+        .ml-2 {
             margin-left: 5px;
         }
     </style>
@@ -200,11 +209,11 @@
                 },
                 success: function (msg) {
                     $('#copied_modal').modal('show');
-                    if (msg[0]==1){
-                        setTimeout(function() {
+                    if (msg[0] == 1) {
+                        setTimeout(function () {
                             window.location.reload();
-                        },2000)
-                    }else {
+                        }, 2000)
+                    } else {
                         $('#copy_modal_msg').text(msg[1]);
                     }
 
