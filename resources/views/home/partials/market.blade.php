@@ -20,7 +20,7 @@
             </th>
             <th>
              <span style="width: 90px;margin-left: 0">
-            Delivery Term
+            Delivery
             </span>
             </th>
             <th>
