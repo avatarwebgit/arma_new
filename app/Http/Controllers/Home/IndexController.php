@@ -49,6 +49,15 @@ class IndexController extends Controller
 {
     public function index()
     {
+//        $sales_forms = SalesOfferForm::all();
+//        foreach ($sales_forms as $sales_form){
+//            $form_id='Armx-So'.$sales_form->id;
+//            $sales_form->update([
+//                'status' => 1,
+//                'form_id' => $form_id,
+//            ]);
+//        }
+
         $is_logged_in = 0;
         $is_logged_in = session()->exists('is_logged_in');
         session()->forget('is_logged_in');
@@ -207,10 +216,9 @@ class IndexController extends Controller
 
     public function redirectUser()
     {
-
+        dd('ok');
         $user_check = auth()->check();
         if ($user_check) {
-
             $user = auth()->user();
 
             if ($user->active != 1 or $user->active_status != 2) {

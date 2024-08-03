@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Commodity;
 use App\Models\CompanyFunction;
 use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Header1;
 use App\Models\Header2;
 use App\Models\HeaderCategory;
@@ -66,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
         $countries = Country::OrderBy('countryName', 'asc')->get();
         $companyFunction = CompanyFunction::all();
         $salutation = Salutation::all();
+        $currencies=Currency::all();
         view()->share(
             compact(
                 'header1',
@@ -105,7 +107,8 @@ class AppServiceProvider extends ServiceProvider
                 'countries',
                 'companyFunction',
                 'salutation',
-                'platforms'
+                'platforms',
+                'currencies'
             ));
     }
 }

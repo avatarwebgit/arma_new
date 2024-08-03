@@ -78,7 +78,6 @@ class FormController extends Controller
 
     public function sales_form($page_type = 'Create', $item = 'null')
     {
-
         $role = \auth()->user()->Roles()->first()->name;
 //        session()->forget('form_id_exists');
         $sale_form_exist = 0;
@@ -193,7 +192,6 @@ class FormController extends Controller
         $cargoInsurance = CargoInsurance::all();
         $contract_types = ContractType::all();
         $platforms = PlatFom::all();
-
         return view('admin.sales_form_preparation', compact(
             'sale_form_exist',
             'form',
@@ -393,7 +391,7 @@ class FormController extends Controller
 
     public function sales_form_index($status)
     {
-        $items = SalesOfferForm::where('status', $status)->paginate(100);
+        $items = SalesOfferForm::where('status', $status)->where('used_in_market',0)->orderBy('created_at','desc')->paginate(100);
         return view('admin.sales_form.list', compact('items', 'status'));
     }
 
@@ -416,7 +414,11 @@ class FormController extends Controller
         try {
             $id = $request->id;
             $sales_form = SalesOfferForm::where('id', $id)->first();
-            $sales_form->update(['status' => 1]);
+            $form_id='Armx-So'.$sales_form->id;
+            $sales_form->update([
+                'status' => 1,
+                'form_id' => $form_id,
+            ]);
             $role = auth()->user()->Roles()->first()->name;
             if ($role == 'seller') {
                 $rote = route('seller.requests');

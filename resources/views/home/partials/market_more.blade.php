@@ -7,11 +7,11 @@
                                     @auth
                         {{ $market->SalesForm->contract_type }}
                     @else
-                        <a href="#" onclick="ShowLoginModal()">
+                        <a href="#" onclick="ShowLoginModal()" class="text-login">
                             Log in
                         </a>
                         /
-                        <a href="#" onclick="ShowRegisterModal()">
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
                             Register
                         </a>
 
@@ -24,11 +24,11 @@
                                     @auth
                         {{ $market->SalesForm->min_order }}
                     @else
-                        <a href="#" onclick="ShowLoginModal()">
+                        <a href="#" onclick="ShowLoginModal()" class="text-login">
                             Log in
                         </a>
                         /
-                        <a href="#" onclick="ShowRegisterModal()">
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
                             Register
                         </a>
                     @endauth
@@ -41,11 +41,11 @@
                                     @auth
                         {{ $market->SalesForm->company_type }}
                     @else
-                        <a href="#" onclick="ShowLoginModal()">
+                        <a href="#" onclick="ShowLoginModal()" class="text-login">
                             Log in
                         </a>
                         /
-                        <a href="#" onclick="ShowRegisterModal()">
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
                             Register
                         </a>
                     @endauth
@@ -61,11 +61,11 @@
                                                                 @auth
                         Available
                     @else
-                        <a href="#" onclick="ShowLoginModal()">
+                        <a href="#" onclick="ShowLoginModal()" class="text-login">
                             Log in
                         </a>
                         /
-                        <a href="#" onclick="ShowRegisterModal()">
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
                             Register
                         </a>
                     @endauth
@@ -77,11 +77,11 @@
                                     @auth
                         {{ $market->SalesForm->price_type }}
                     @else
-                        <a href="#" onclick="ShowLoginModal()">
+                        <a href="#" onclick="ShowLoginModal()" class="text-login">
                             Log in
                         </a>
                         /
-                        <a href="#" onclick="ShowRegisterModal()">
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
                             Register
                         </a>
                     @endauth
@@ -93,11 +93,11 @@
                                     @auth
                         LC/TT/DP/DA
                     @else
-                        <a href="#" onclick="ShowLoginModal()">
+                        <a href="#" onclick="ShowLoginModal()" class="text-login">
                             Log in
                         </a>
                         /
-                        <a href="#" onclick="ShowRegisterModal()">
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
                             Register
                         </a>
                     @endauth
@@ -116,33 +116,18 @@
                             {{ number_format($market->SalesForm->alpha)  }}
                         @endif
                     @else
-                        <a href="#" onclick="ShowLoginModal()">
+                        <a href="#" onclick="ShowLoginModal()" class="text-login">
                             Log in
                         </a>
                         /
-                        <a href="#" onclick="ShowRegisterModal()">
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
                             Register
                         </a>
                     @endauth
                                                             </span>
             </td>
 
-            <td class="text-center">
-                <span class="text-bold">Unit</span>
-                <span>
-                                    @auth
-                        {{ $market->SalesForm->unit }}
-                    @else
-                        <a href="#" onclick="ShowLoginModal()">
-                            Log in
-                        </a>
-                        /
-                        <a href="#" onclick="ShowRegisterModal()">
-                            Register
-                        </a>
-                    @endauth
-                                </span>
-            </td>
+
 
             <td class="text-center">
                 <span class="text-bold">Currency</span>
@@ -150,11 +135,27 @@
                                         @auth
                         {{ $market->SalesForm->currency }}
                     @else
-                        <a href="#" onclick="ShowLoginModal()">
+                        <a href="#" onclick="ShowLoginModal()" class="text-login">
                             Log in
                         </a>
                         /
-                        <a href="#" onclick="ShowRegisterModal()">
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
+                            Register
+                        </a>
+                    @endauth
+                                </span>
+            </td>
+            <td class="text-center">
+                <span class="text-bold">Unit</span>
+                <span>
+                                    @auth
+                        {{ $market->SalesForm->unit }}
+                    @else
+                        <a href="#" class="text-info" onclick="ShowLoginModal()">
+                            Log in
+                        </a>
+                        /
+                        <a href="#" onclick="ShowRegisterModal()" class="text-register">
                             Register
                         </a>
                     @endauth

@@ -148,6 +148,7 @@
         }
 
         function SaveChangeStatus() {
+            $('#message_error').addClass('d-none');
             let has_deposit = null;
             let deposit_value = null;
             let message = null;
@@ -181,7 +182,10 @@
             if (status_id == 3) {
                 message = $('#message').val();
                 if (message.length === 0) {
-                    alert('please determine Message');
+                    $('#message_error').text('please determine Message');
+                    $('#message_error').removeClass('d-none');
+
+
                     return;
                 }
             }
