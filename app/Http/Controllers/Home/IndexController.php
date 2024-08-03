@@ -216,7 +216,6 @@ class IndexController extends Controller
 
     public function redirectUser()
     {
-        dd('ok');
         $user_check = auth()->check();
         if ($user_check) {
             $user = auth()->user();

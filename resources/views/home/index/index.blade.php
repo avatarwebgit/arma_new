@@ -506,7 +506,7 @@
               2
             </span>
                         <h3>
-                            pay the deposit
+                            Evaluation
                         </h3>
                     </div>
                 </div>
