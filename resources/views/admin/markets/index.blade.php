@@ -50,9 +50,16 @@
                                                     @php
                                                         $last_market=\App\Models\Market::where('date',$key)->orderBy('time','desc')->first();
                                                         if (\Carbon\Carbon::now()->format('Y-m-d')==$last_market->date){
-                                                            $color='green';
+                                                            if ($last_market->Status->id<7){
+                                                                $color=$last_market->Status->color;
+                                                            $status_text=$last_market->Status->title;
+                                                            $show_delete_btn=1;
+                                                            }else{
+                                                                $color='green';
                                                             $status_text='Doing';
                                                             $show_delete_btn=0;
+                                                            }
+
                                                         }else{
                                                             $color=$last_market->Status->color;
                                                             $status_text=$last_market->Status->title;
@@ -71,7 +78,7 @@
                                                             {{ count($m) }}
                                                         </td>
                                                         <td>
-                                                            {{ $status_text=='close' ? 'Close' : $status_text }}
+                                                            {{ $status_text=='close' ? 'Closed' : $status_text }}
                                                         </td>
                                                         <td class="text-right">
                                                             @if($last_market->Status->id==7 or $last_market->Status->id==8 or $last_market->Status->id==9 or $show_delete_btn==0)
@@ -86,7 +93,7 @@
                                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                    title=""
                                                                    data-bs-original-title="{{ __('Delete') }}"><i
-                                                                            class="ti ti-trash mr-1"></i></a>
+                                                                        class="ti ti-trash mr-1"></i></a>
                                                                 {!! Form::close() !!}
                                                             @endif
                                                         </td>
