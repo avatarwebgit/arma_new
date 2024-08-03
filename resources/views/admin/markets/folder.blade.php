@@ -62,7 +62,7 @@
 
                                                     @if($item->status==7 or $item->status==8 or $item->status==9)
                                                         @php
-                                                            $status_text='closed';
+                                                            $status_text='close';
                                                             $color='red';
                                                         @endphp
                                                     @else
@@ -104,50 +104,52 @@
                                                             {{ $status_text }}
                                                         </td>
 
-                                                        <td class="d-flex justify-content-end">
-                                                            @if($show_btn==1)
-                                                                <a title="Edit Market"
-                                                                   href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
-                                                                   class="btn btn-sm btn-info">
-                                                                    <i class="fa fa-pen"></i>
-                                                                    Market
-                                                                </a>
-                                                                <a title="Edit Commodity"
-                                                                   href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
-                                                                   class="btn btn-sm btn-primary ml-2">
-                                                                    <i class="fa fa-list"></i>
-                                                                    Commodity
-                                                                </a>
-                                                                <a title="Bidder"
-                                                                   href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
-                                                                   class="btn btn-sm btn-success ml-2">
-                                                                    <i class="fa fa-plus"></i>
-                                                                    Bidder
-                                                                </a>
-                                                                {{--                                                        <button type="button" title="Copy Market"--}}
-                                                                {{--                                                                onclick="copyMarket({{ $item->id }},this)"--}}
-                                                                {{--                                                                class="btn btn-sm btn-secondary">--}}
-                                                                {{--                                                            <div class="loader d-none"></div>--}}
-                                                                {{--                                                            <span>--}}
-                                                                {{--                                                                Copy--}}
-                                                                {{--                                                            </span>--}}
-                                                                {{--                                                        </button>--}}
+                                                        <td>
+                                                            <div class="d-flex justify-content-end">
+                                                                @if($show_btn==1)
+                                                                    <a title="Edit Market"
+                                                                       href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
+                                                                       class="btn btn-sm btn-info">
+                                                                        <i class="fa fa-pen"></i>
+                                                                        Market
+                                                                    </a>
+                                                                    <a title="Edit Commodity"
+                                                                       href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
+                                                                       class="btn btn-sm btn-primary ml-2">
+                                                                        <i class="fa fa-list"></i>
+                                                                        Commodity
+                                                                    </a>
+                                                                    <a title="Bidder"
+                                                                       href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
+                                                                       class="btn btn-sm btn-success ml-2">
+                                                                        <i class="fa fa-plus"></i>
+                                                                        Bidder
+                                                                    </a>
+                                                                    {{--                                                        <button type="button" title="Copy Market"--}}
+                                                                    {{--                                                                onclick="copyMarket({{ $item->id }},this)"--}}
+                                                                    {{--                                                                class="btn btn-sm btn-secondary">--}}
+                                                                    {{--                                                            <div class="loader d-none"></div>--}}
+                                                                    {{--                                                            <span>--}}
+                                                                    {{--                                                                Copy--}}
+                                                                    {{--                                                            </span>--}}
+                                                                    {{--                                                        </button>--}}
 
-                                                                {!! Form::open([
-        'method' => 'POST',
-        'route' => ['admin.market.remove'],
-        'class' => 'd-inline',
-        ]) !!}
-                                                                <a href="#"
-                                                                   class="btn btn-sm small btn-danger show_confirm ml-2"
-                                                                   id="delete-form-{{ $item->id }}"
-                                                                   data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                                   title=""
-                                                                   data-bs-original-title="{{ __('Delete') }}"><i
-                                                                        class="ti ti-trash mr-1"></i></a>
-                                                                <input type="hidden" name="id" value="{{ $item->id }}">
-                                                                {!! Form::close() !!}
-                                                            @endif
+                                                                    {!! Form::open([
+            'method' => 'POST',
+            'route' => ['admin.market.remove'],
+            'class' => 'd-inline',
+            ]) !!}
+                                                                    <a href="#"
+                                                                       class="btn btn-sm small btn-danger show_confirm ml-2"
+                                                                       id="delete-form-{{ $item->id }}"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                       title=""
+                                                                       data-bs-original-title="{{ __('Delete') }}"><i
+                                                                            class="ti ti-trash mr-1"></i></a>
+                                                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                                                    {!! Form::close() !!}
+                                                                @endif
+                                                            </div>
                                                         </td>
 
                                                     </tr>
