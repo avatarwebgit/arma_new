@@ -206,12 +206,12 @@
 
                 </li>
                 @php
-                    $inbox_count=\App\Models\SalesOfferForm::where('status',1)->count();
-                    $cash_pending_count=\App\Models\SalesOfferForm::where('status',2)->count();
-                    $data_pending_count=\App\Models\SalesOfferForm::where('status',3)->count();
-                    $reject_count=\App\Models\SalesOfferForm::where('status',4)->count();
-                    $approved_count=\App\Models\SalesOfferForm::where('status',5)->count();
-                    $preparation_count=\App\Models\SalesOfferForm::where('status',6)->count();
+                    $inbox_count=\App\Models\SalesOfferForm::where('status',1)->where('used_in_market',0)->count();
+                    $cash_pending_count=\App\Models\SalesOfferForm::where('status',2)->where('used_in_market',0)->count();
+                    $data_pending_count=\App\Models\SalesOfferForm::where('status',3)->where('used_in_market',0)->count();
+                    $reject_count=\App\Models\SalesOfferForm::where('status',4)->where('used_in_market',0)->count();
+                    $approved_count=\App\Models\SalesOfferForm::where('status',5)->where('used_in_market',0)->count();
+                    $preparation_count=\App\Models\SalesOfferForm::where('status',6)->where('used_in_market',0)->count();
                 @endphp
 
                 <li class="dash-item">
@@ -246,7 +246,7 @@
                             <li class="dash-item d-flex align-items-center">
                                 <a href="{{ route('admin.sales_form.second.index',['status'=>2]) }}"
                                    class="dash-link"><span
-                                        class="dash-mtext custom-weight">{{ __('Cash Pending').'('.$cash_pending_count.')' }}
+                                        class="dash-mtext custom-weight">{{ __('Offer Payment').'('.$cash_pending_count.')' }}
                                 </a>
                             </li>
                         @endcan
@@ -263,7 +263,7 @@
                             <li class="dash-item d-flex align-items-center">
                                 <a href="{{ route('admin.sales_form.forth.index',['status'=>4]) }}"
                                    class="dash-link"><span
-                                        class="dash-mtext custom-weight">{{ __('Rejected Inquiries').'('.$reject_count.')' }}
+                                        class="dash-mtext custom-weight">{{ __('Rejected').'('.$reject_count.')' }}
                                 </a>
                             </li>
                         @endcan

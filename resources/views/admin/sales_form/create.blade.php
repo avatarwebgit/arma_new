@@ -2,6 +2,7 @@
 
 @section('content')
     @include('admin.sales_form.modal')
+
     <div class="settings mtb15">
         <div class="container-fluid">
             <div class="row">

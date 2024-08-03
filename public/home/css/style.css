@@ -3200,3 +3200,10 @@ footer input::placeholder {
     padding: 10px !important;
     color: white !important;
 }
+
+.text-login{
+    color: #2274ec;
+}
+.text-register{
+    color: #1a54a8;
+}

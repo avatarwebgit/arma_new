@@ -84,7 +84,7 @@
             method: 'post',
             success: function (msg) {
                 if (msg[0] === 1) {
-                    window.location.href = "{{ route('profile') }}";
+                    window.location.href = "/";
                 }
             },
             error: function (error) {

@@ -14,7 +14,7 @@
             </div>
             <div id="modal_body" class="modal-body p-5 row">
                 <div class="d-flex justify-content-center">
-                    <button data-id="4" class="change_status_btn">Reject</button>
+                    <button id="Reject-status-btn" data-id="4" class="change_status_btn">Reject</button>
                     <button id="pending_button" data-id="3" class="change_status_btn">Pending</button>
                     <button data-id="5" class="change_status_btn">Confirm</button>
                 </div>
@@ -22,6 +22,9 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             <label for="safety_product" class="mb-2">Offer Deposit</label>
+                            <p id="deposit_error" class="input-error-validate d-none">
+
+                            </p>
                         </div>
                         <div>
                             <div class="form-check form-check-inline mr-3">
@@ -46,12 +49,23 @@
                         <div class="mt-3 mb-3 col-6">
                             <label for="deposit" class="form-label">Amount</label>
                             <input class="form-control" id="deposit">
+                            <p id="amount_error" class="input-error-validate d-none">
+
+                            </p>
                         </div>
                         <div class="mt-3 mb-3 col-6">
                             <label for="currency" class="form-label">
                                 Currency
                             </label>
-                            <input class="form-control" id="currency">
+                            <select class="form-control" id="currency">
+                                <option value="">select</option>
+                                @foreach($currencies as $currency)
+                                <option value="{{ $currency->title }}">{{ $currency->title }}</option>
+                                @endforeach
+                            </select>
+                            <p id="currency_error" class="input-error-validate d-none">
+
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -59,6 +73,9 @@
                     <div class="mt-3 mb-3">
                         <label for="message" class="form-label">Message</label>
                         <textarea class="form-control" id="message" rows="3"></textarea>
+                        <p id="message_error" class="input-error-validate d-none">
+
+                        </p>
                     </div>
                 </div>
             </div>
@@ -98,7 +115,15 @@
                         <label for="currency_cash_pending" class="form-label">
                             Currency
                         </label>
-                        <input class="form-control" id="currency_cash_pending">
+                        <select class="form-control" id="currency_cash_pending">
+                            <option value="">select</option>
+                            @foreach($currencies as $currency)
+                                <option value="{{ $currency->title }}">{{ $currency->title }}</option>
+                            @endforeach
+                        </select>
+                        <p id="currency_cash_pending_error" class="input-error-validate d-none">
+
+                        </p>
                     </div>
                 </div>
                 <input id="id_cash_pending" type="hidden">
