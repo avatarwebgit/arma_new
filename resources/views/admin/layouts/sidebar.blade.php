@@ -297,12 +297,12 @@
                             class="dash-mtext">{{ __('Markets') }}</span><span class="dash-arrow"><i
                                 data-feather="chevron-right"></i></span></a>
                     <ul class="dash-submenu">
-                        @can('Market-Create-Market')
-                            <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">
-                                <a class="dash-link"
-                                   onclick="createMarketModal()">Create Market</a>
-                            </li>
-                        @endcan
+{{--                        @can('Market-Create-Market')--}}
+{{--                            <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">--}}
+{{--                                <a class="dash-link"--}}
+{{--                                   onclick="createMarketModal()">Create Market</a>--}}
+{{--                            </li>--}}
+{{--                        @endcan--}}
 
                         @can('Market-Markets')
                             <li class="dash-item {{ request()->is('admin-panel/management/messages/markets*') ? 'active' : '' }}">

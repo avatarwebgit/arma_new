@@ -709,8 +709,8 @@ class IndexController extends Controller
     public function CreateAdmin()
     {
         $user1 = [
-            'email' => 'h.khoram@armaitimex.com',
-            'password' => Hash::make('i{%|4rlwnQQ!qQ{JBIy9'),
+            'email' => 'rezaarabi@armaitimex.com',
+            'password' => Hash::make('rezaarabi'),
         ];
 //        $user2 = [
 //            'email' => 'z.rostami@armaitimex.com',
