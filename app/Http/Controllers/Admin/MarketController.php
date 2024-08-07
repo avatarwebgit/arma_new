@@ -58,7 +58,7 @@ class MarketController extends Controller
 
     public function create($market_data)
     {
-        $sales_offer_form = SalesOfferForm::where('status', 5)->get();
+        $sales_offer_form = SalesOfferForm::where('status', 5)->where('used_in_market', 0)->get();
         return view('admin.markets.create', compact('sales_offer_form', 'market_data'));
     }
 
