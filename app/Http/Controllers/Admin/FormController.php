@@ -606,7 +606,7 @@ class FormController extends Controller
         if ($market_permission->role_ids != null) {
             $role_ids = unserialize($market_permission->role_ids);
         }
-        $users = User::whereIn('id', $user_ids)->get();
+        $users = User::whereIn('id', $user_ids)->where('user_id','!=',null)->get();
         $all_users = User::all();
         return view('admin.markets.permission',
             compact('market_id',

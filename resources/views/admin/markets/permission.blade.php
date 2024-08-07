@@ -7,7 +7,7 @@
 @section('breadcrumb')
     <div class="col-md-12 mb-3">
         <div class="page-header-title">
-            <h4 class="m-b-10">{{ __('Market Permission') }}</h4>
+            <h4 class="m-b-10">{{ __('Market Participants') }}</h4>
         </div>
     </div>
 @endsection
@@ -54,7 +54,6 @@
                                             <tr>
                                                 <th>Account</th>
                                                 <th>Date</th>
-                                                <th>Time</th>
                                                 <th>User Type</th>
                                                 <th>User ID</th>
                                                 <th>Email</th>
@@ -69,9 +68,6 @@
                                                     </td>
                                                     <td>
                                                         {{ $market->date }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $market->time }}
                                                     </td>
                                                     <td>
                                                         <strong>

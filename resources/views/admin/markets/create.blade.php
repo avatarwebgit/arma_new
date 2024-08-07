@@ -78,6 +78,16 @@
                                                     <label for="RigenInput">Rigen</label>
                                                     <input disabled id="RigenInput" type="text" class="form-control">
                                                 </div>
+                                                <div class="col-12 col-md-4 mb-3 d-none" id="alpha_parent">
+                                                    <label for="step_price_competition">Tolerance For Alpha</label>
+                                                    <input id="alpha" name="alpha" class="form-control"
+                                                           value="{{ old('alpha') }}">
+                                                    @error('alpha')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
                                                 <div class="col-12">
                                                     <hr>
                                                 </div>
@@ -190,16 +200,7 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-4 mb-3 d-none" id="alpha_parent">
-                                                    <label for="step_price_competition">Tolerance For Alpha</label>
-                                                    <input id="alpha" name="alpha" class="form-control"
-                                                           value="{{ old('alpha') }}">
-                                                    @error('alpha')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
+
                                                 <div class="col-12">
                                                     <hr>
                                                 </div>

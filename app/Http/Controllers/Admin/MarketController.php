@@ -114,7 +114,6 @@ class MarketController extends Controller
 
     }
 
-
     public function update(Market $market, Request $request)
     {
         $request->validate([
@@ -410,7 +409,6 @@ class MarketController extends Controller
         }
 
     }
-
 
     public function Upload_files($env, $file)
     {
