@@ -58,7 +58,7 @@ class MarketController extends Controller
 
     public function create($market_data)
     {
-        $sales_offer_form = SalesOfferForm::where('status', 5)->where('used_in_market', 0)->get();
+        $sales_offer_form = SalesOfferForm::where('status', 5)->get();
         return view('admin.markets.create', compact('sales_offer_form', 'market_data'));
     }
 
@@ -81,6 +81,8 @@ class MarketController extends Controller
 //            'term_conditions' => 'nullable',
             'show_alpha' => 'required',
         ]);
+        $market_value = str_replace(',', '', $request->market_value);
+        $request['market_value'] = $market_value;
         $created_market_by = auth()->id();
         $request['created_market_by'] = $created_market_by;
         $sales_form = SalesOfferForm::where('id', $request->commodity_id)->first();
@@ -132,6 +134,8 @@ class MarketController extends Controller
             'term_conditions' => 'nullable',
             'show_alpha' => 'required',
         ]);
+        $market_value = str_replace(',', '', $request->market_value);
+        $request['market_value'] = $market_value;
         $market->update($request->all());
         $this->statusTimeMarket($market, 1);
         $now = Carbon::now();

@@ -11,7 +11,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div>
-                                        <a href="{{ route('admin.markets.index') }}"
+                                        <a href="{{ route('admin.markets.folder',['date'=>$market->date]) }}"
                                            class="btn btn-secondary btn-sm mb-2">
                                             <i class="icon ion-md-arrow-back mr-1"></i>
                                             <span>
@@ -42,11 +42,25 @@
 
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="min_wallet">Commodity</label>
-                                                    <select disabled onchange="CheckHasAlpha(this)"
+                                                    <select disabled onchange="CommodityChanged(this)"
                                                             class="form-control" id="commodity_id" name="commodity_id">
                                                         <option value="">select</option>
                                                         @foreach($sales_offer_form as $item)
-                                                            <option data-type="{{ $item->price_type }}"
+                                                            @if($item->price_type=='Fix')
+                                                                @php
+                                                                    $offer=number_format($item->price);
+                                                                @endphp
+                                                            @else
+                                                                @php
+                                                                    $offer=number_format($item->alpha);
+                                                                @endphp
+                                                            @endif
+                                                            <option
+                                                                data-type="{{ $item->price_type }}"
+                                                                data-offer="{{ $offer }}"
+                                                                data-quantity="{{ $item->min_order }}"
+                                                                data-term="{{ $item->incoterms }}"
+                                                                data-rigen="{{ $item->country }}"
                                                                     {{ $market->commodity_id==$item->id?'selected':'' }} value="{{ $item->id }}">
                                                                 Commodity:{{ $item->commodity }}
                                                                 /User:{{ $item->User->email }}</option>
@@ -57,6 +71,31 @@
                                                         {{ $message }}
                                                     </p>
                                                     @enderror
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="PriceTypeInput">Price Type</label>
+                                                    <input disabled id="PriceTypeInput" type="text"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="OfferPriceInput">Offer Price</label>
+                                                    <input disabled id="OfferPriceInput" type="text"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="QuantityInput">Quantity</label>
+                                                    <input disabled id="QuantityInput" type="text" class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="DeliveryInput">Delivery</label>
+                                                    <input disabled id="DeliveryInput" type="text" class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="RigenInput">Rigen</label>
+                                                    <input disabled id="RigenInput" type="text" class="form-control">
+                                                </div>
+                                                <div class="col-12">
+                                                    <hr>
                                                 </div>
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="start">start(Time)</label>
@@ -75,8 +114,7 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                </div>
+
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="bid_deposit">Bid Deposit</label>
                                                     <input id="bid_deposit" name="bid_deposit" class="form-control"
@@ -90,22 +128,19 @@
 
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="market_value">Market Value ($)</label>
-                                                    <input id="market_value" name="market_value" class="form-control"
-                                                           value="{{ $market->market_value }}" type="number">
+                                                    <input onkeyup="numberFormat(this)" id="market_value" name="market_value" class="form-control"
+                                                           value="{{ number_format($market->market_value) }}">
                                                     @error('market_value')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12">
-                                                    <hr>
-                                                </div>
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="ready_to_open">Ready to Open(min)</label>
                                                     <input id="ready_to_open" type="number" name="ready_to_open"
                                                            class="form-control"
-                                                           value="{{ $market->ready_to_open }}">
+                                                           value="{{ $market->ready_to_open }}" min="1">
                                                     @error('ready_to_open')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -116,7 +151,7 @@
                                                     <label for="date">Opening(min)</label>
                                                     <input id="opening" type="number" name="opening"
                                                            class="form-control"
-                                                           value="{{ $market->opening }}">
+                                                           value="{{ $market->opening }}"  min="1">
                                                     @error('opening')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -126,7 +161,7 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="date">Quotation 1/2 (min)</label>
                                                     <input id="q_1" type="number" name="q_1" class="form-control"
-                                                           value="{{ $market->q_1 }}">
+                                                           value="{{ $market->q_1 }}"  min="1">
                                                     @error('q_1')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -136,7 +171,7 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="date">Quotation 2/2 (min)</label>
                                                     <input id="q_2" type="number" name="q_2" class="form-control"
-                                                           value="{{ $market->q_2 }}">
+                                                           value="{{ $market->q_2 }}"  min="1">
                                                     @error('q_2')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -146,7 +181,7 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="q_3">Competition(min)</label>
                                                     <input id="q_3" type="number" name="q_3" class="form-control"
-                                                           value="{{ $market->q_3 }}">
+                                                           value="{{ $market->q_3 }}"  min="1">
                                                     @error('q_3')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -214,11 +249,20 @@
     <script>
         $(document).ready(function () {
             var element = $('#commodity_id')[0]; // انتخاب المان با آی‌دی مورد نظر
-            CheckHasAlpha(element); // فراخوانی تابع CheckHasAlpha() با المان مورد نظر به عنوان ورودی
+            CommodityChanged(element); // فراخوانی تابع CheckHasAlpha() با المان مورد نظر به عنوان ورودی
         })
-        function CheckHasAlpha(selectElement) {
+        function CommodityChanged(selectElement) {
             var selectedOption = selectElement.options[selectElement.selectedIndex];
-            var dataType = selectedOption.getAttribute('data-type');
+            var priceType = selectedOption.getAttribute('data-type');
+            var dataOffer = selectedOption.getAttribute('data-offer');
+            var QuantityInput = selectedOption.getAttribute('data-quantity');
+            var DeliveryInput = selectedOption.getAttribute('data-term');
+            var RigenInput = selectedOption.getAttribute('data-rigen');
+            $('#PriceTypeInput').val(priceType);
+            $('#OfferPriceInput').val(dataOffer);
+            $('#QuantityInput').val(QuantityInput);
+            $('#DeliveryInput').val(DeliveryInput);
+            $('#RigenInput').val(RigenInput);
             let show_alpha = 0;
             if (dataType == 'Formulla') {
                 show_alpha = 1;

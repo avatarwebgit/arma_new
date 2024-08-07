@@ -20,18 +20,32 @@
                                         </a>
                                     </div>
                                     <div class="settings-profile">
-                                        <form method="POST"
-                                              action="{{ route('admin.market.store') }}">
+                                        <form method="POST" action="{{ route('admin.market.store') }}">
+                                            <input type="hidden" name="date" id="date" value="{{ $market_data }}">
                                             @csrf
                                             <div class="row mt-4">
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="min_wallet">Commodity</label>
-                                                    <select onchange="CheckHasAlpha(this)"
+                                                    <select onchange="CommodityChanged(this)"
                                                             class="form-control" name="commodity_id" id="commodity_id">
                                                         <option value="">select</option>
                                                         @foreach($sales_offer_form as $item)
-                                                            <option data-type="{{ $item->price_type }}"
-                                                                    {{ old('commodity_id')==$item->id?'selected':'' }} value="{{ $item->id }}">
+                                                            @if($item->price_type=='Fix')
+                                                                @php
+                                                                    $offer=number_format($item->price);
+                                                                @endphp
+                                                            @else
+                                                                @php
+                                                                    $offer=number_format($item->alpha);
+                                                                @endphp
+                                                            @endif
+                                                            <option
+                                                                data-type="{{ $item->price_type }}"
+                                                                data-offer="{{ $offer }}"
+                                                                data-quantity="{{ $item->min_order }}"
+                                                                data-term="{{ $item->incoterms }}"
+                                                                data-rigen="{{ $item->country }}"
+                                                                {{ old('commodity_id')==$item->id?'selected':'' }} value="{{ $item->id }}">
                                                                 Commodity:{{ $item->commodity }}
                                                                 /User:{{ $item->User->email }}</option>
                                                         @endforeach
@@ -41,6 +55,31 @@
                                                         {{ $message }}
                                                     </p>
                                                     @enderror
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="PriceTypeInput">Price Type</label>
+                                                    <input disabled id="PriceTypeInput" type="text"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="OfferPriceInput">Offer Price</label>
+                                                    <input disabled id="OfferPriceInput" type="text"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="QuantityInput">Quantity</label>
+                                                    <input disabled id="QuantityInput" type="text" class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="DeliveryInput">Delivery</label>
+                                                    <input disabled id="DeliveryInput" type="text" class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="RigenInput">Rigen</label>
+                                                    <input disabled id="RigenInput" type="text" class="form-control">
+                                                </div>
+                                                <div class="col-12">
+                                                    <hr>
                                                 </div>
 
                                                 <div class="col-12 col-md-4 mb-3">
@@ -60,21 +99,16 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-
                                                 <div class="col-12 col-md-4 mb-3">
-                                                    <input onchange="getDate(this)" id="date" type="hidden" name="date"
-                                                           class="form-control"
-                                                           value="{{ $market_data }}">
-{{--                                                    <label for="date">start(Date)</label>--}}
-{{--                                                    --}}
-{{--                                                    <p id="DayName" class="mt-2">--}}
-
-{{--                                                    </p>--}}
-{{--                                                    @error('date')--}}
-{{--                                                    <p class="input-error-validate">--}}
-{{--                                                        {{ $message }}--}}
-{{--                                                    </p>--}}
-{{--                                                    @enderror--}}
+                                                    <label for="market_value">Market Value ($)</label>
+                                                    <input onkeyup="numberFormat(this)" id="market_value"
+                                                           name="market_value" class="form-control"
+                                                           value="{{ old('market_value') }}">
+                                                    @error('market_value')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="col-12 col-md-4 mb-3">
@@ -89,21 +123,8 @@
                                                 </div>
 
                                                 <div class="col-12 col-md-4 mb-3">
-                                                    <label for="market_value">Market Value ($)</label>
-                                                    <input id="market_value" name="market_value" class="form-control"
-                                                           value="{{ old('market_value') }}" type="number">
-                                                    @error('market_value')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-12">
-                                                    <hr>
-                                                </div>
-                                                <div class="col-12 col-md-4 mb-3">
                                                     <label for="ready_to_open">Ready to Open(min)</label>
-                                                    <input id="ready_to_open" type="number" name="ready_to_open"
+                                                    <input id="ready_to_open" type="number" name="ready_to_open" min="1"
                                                            class="form-control"
                                                            value="1">
                                                     @error('ready_to_open')
@@ -116,7 +137,9 @@
                                                     <label for="opening">Opening(min)</label>
                                                     <input id="opening" type="number" name="opening"
                                                            class="form-control"
-                                                           value="5">
+                                                           value="5"
+                                                           min="1"
+                                                    >
                                                     @error('opening')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -126,7 +149,9 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="q_1">Quotation 1/2 (min)</label>
                                                     <input id="q_1" type="number" name="q_1" class="form-control"
-                                                           value="3">
+                                                           value="3"
+                                                           min="1"
+                                                    >
                                                     @error('q_1')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -136,7 +161,7 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="q_2">Quotation 2/2 (min)</label>
                                                     <input id="q_2" type="number" name="q_2" class="form-control"
-                                                           value="5">
+                                                           value="5" min="1">
                                                     @error('q_2')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -146,7 +171,7 @@
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="q_3">Competition(min)</label>
                                                     <input id="q_3" type="number" name="q_3" class="form-control"
-                                                           value="3">
+                                                           value="3" min="1">
                                                     @error('q_3')
                                                     <p class="input-error-validate">
                                                         {{ $message }}
@@ -178,16 +203,16 @@
                                                 <div class="col-12">
                                                     <hr>
                                                 </div>
-{{--                                                <div class="col-12 mb-3">--}}
-{{--                                                    <label for="term_conditions">Term & Conditions</label>--}}
-{{--                                                    <textarea id="term_conditions" name="term_conditions"--}}
-{{--                                                              class="form-control text_area"></textarea>--}}
-{{--                                                    @error('term_conditions')--}}
-{{--                                                    <p class="input-error-validate">--}}
-{{--                                                        {{ $message }}--}}
-{{--                                                    </p>--}}
-{{--                                                    @enderror--}}
-{{--                                                </div>--}}
+                                                {{--                                                <div class="col-12 mb-3">--}}
+                                                {{--                                                    <label for="term_conditions">Term & Conditions</label>--}}
+                                                {{--                                                    <textarea id="term_conditions" name="term_conditions"--}}
+                                                {{--                                                              class="form-control text_area"></textarea>--}}
+                                                {{--                                                    @error('term_conditions')--}}
+                                                {{--                                                    <p class="input-error-validate">--}}
+                                                {{--                                                        {{ $message }}--}}
+                                                {{--                                                    </p>--}}
+                                                {{--                                                    @enderror--}}
+                                                {{--                                                </div>--}}
                                                 <div class="col-md-12 mt-3">
                                                     <button type="submit" class="btn btn-primary btn-block btn-sm">
                                                         Create
@@ -214,12 +239,21 @@
     <script>
         $(document).ready(function () {
             var element = $('#commodity_id')[0]; // انتخاب المان با آی‌دی مورد نظر
-            CheckHasAlpha(element); // فراخوانی تابع CheckHasAlpha() با المان مورد نظر به عنوان ورودی
+            CommodityChanged(element); // فراخوانی تابع CommodityChanged() با المان مورد نظر به عنوان ورودی
         })
 
-        function CheckHasAlpha(selectElement) {
+        function CommodityChanged(selectElement) {
             var selectedOption = selectElement.options[selectElement.selectedIndex];
-            var dataType = selectedOption.getAttribute('data-type');
+            var priceType = selectedOption.getAttribute('data-type');
+            var dataOffer = selectedOption.getAttribute('data-offer');
+            var QuantityInput = selectedOption.getAttribute('data-quantity');
+            var DeliveryInput = selectedOption.getAttribute('data-term');
+            var RigenInput = selectedOption.getAttribute('data-rigen');
+            $('#PriceTypeInput').val(priceType);
+            $('#OfferPriceInput').val(dataOffer);
+            $('#QuantityInput').val(QuantityInput);
+            $('#DeliveryInput').val(DeliveryInput);
+            $('#RigenInput').val(RigenInput);
             let show_alpha = 0;
             if (dataType == 'Formulla') {
                 show_alpha = 1;
@@ -269,6 +303,7 @@
             filebrowserUploadUrl: "{{ route('admin.ckeditor.upload', ['_token' => csrf_token()]) }}",
             filebrowserUploadMethod: 'form'
         });
+
     </script>
 @endpush
 
