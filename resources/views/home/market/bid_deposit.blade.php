@@ -1,4 +1,4 @@
-<div id="bid_deposit_section-{{ $market->id }}" class="bid_deposit p-3 bid_deposit_section-{{ $market->id }}">
+<div git  class="bid_deposit p-3 bid_deposit_section-{{ $market->id }}">
     <h4 class="text-center text-white">Bid Deposit: {{ number_format($market->bid_deposit).' $' }}</h4>
     {!! $bid_deposit_text_area !!}
         <br>
