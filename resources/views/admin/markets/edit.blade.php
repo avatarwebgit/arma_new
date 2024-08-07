@@ -210,9 +210,9 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12">
-                                                    <hr>
-                                                </div>
+{{--                                                <div class="col-12">--}}
+{{--                                                    <hr>--}}
+{{--                                                </div>--}}
 {{--                                                <div class="col-12 mb-3">--}}
 {{--                                                    <label for="term_conditions">Term & Conditions</label>--}}
 {{--                                                    <textarea id="term_conditions" name="term_conditions"--}}
@@ -223,8 +223,8 @@
 {{--                                                    </p>--}}
 {{--                                                    @enderror--}}
 {{--                                                </div>--}}
-                                                <div class="col-md-12 mt-3">
-                                                    <button type="submit" class="btn btn-primary btn-block btn-sm">
+                                                <div class="col-md-12 d-flex justify-content-center mt-3">
+                                                    <button type="submit" class="btn btn-primary btn-block">
                                                         Update
                                                     </button>
                                                 </div>
