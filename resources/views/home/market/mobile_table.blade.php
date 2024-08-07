@@ -170,7 +170,7 @@
     </div>
     <div class="row">
         <div class="col-12 mt-3">
-            @include('home.market.bid_deposit')
+{{--            @include('home.market.bid_deposit')--}}
         </div>
     </div>
 </div>
