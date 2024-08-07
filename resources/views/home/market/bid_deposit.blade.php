@@ -7,5 +7,6 @@
         <div class="d-flex justify-content-end">
             <button id="PayBidDepositBTN-{{ $market->id }}" type="button" onclick="PayBidDeposit({{ $market->id }})" class="btn pay-btn">Pay</button>
         </div>
-    @endif
+    @
+
 </div>
