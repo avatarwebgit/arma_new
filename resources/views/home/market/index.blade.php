@@ -153,10 +153,9 @@
         }
 
         function close_bid_deposit(id) {
-            console.log('pppppppppppppppppp');
-            $('#bid_deposit_section-' + id).addClass('d-none');
-            $('#bid_deposit_section-' + id).addClass('bg-inactive');
-            $('#bid_deposit_section-' + id).find('input').prop('disabled', true);
+            $('.bid_deposit_section-' + id).addClass('d-none');
+            $('.bid_deposit_section-' + id).addClass('bg-inactive');
+            $('.bid_deposit_section-' + id).find('input').prop('disabled', true);
         }
 
         function change_market_status(status, color, statusText, id) {
