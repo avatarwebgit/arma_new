@@ -153,6 +153,7 @@
         }
 
         function close_bid_deposit(id) {
+            console.log('pppppppppppppppppp');
             $('#bid_deposit_section-' + id).addClass('d-none');
             $('#bid_deposit_section-' + id).addClass('bg-inactive');
             $('#bid_deposit_section-' + id).find('input').prop('disabled', true);
@@ -785,9 +786,9 @@
                             </div>
                         @endif
                     </div>
-{{--                    <div class="col-12 mt-3">--}}
-{{--                        <div class="bid_textarea"></div>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="col-12 mt-3">--}}
+                    {{--                        <div class="bid_textarea"></div>--}}
+                    {{--                    </div>--}}
                 </div>
                 <div class="row">
                     <div class="col-12 mt-3 display-none" id="final_status_section-{{ $market->id }}">
@@ -817,11 +818,11 @@
                         </div>
                     </div>
                 </div>
-{{--                <div class="row">--}}
-{{--                    <div class="col-12 mt-3">--}}
-{{--                        @include('home.market.bid_deposit')--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                {{--                <div class="row">--}}
+                {{--                    <div class="col-12 mt-3">--}}
+                {{--                        @include('home.market.bid_deposit')--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </div>
             {{--            //menu_mobile--}}
             @include('home.market.mobile_table')
