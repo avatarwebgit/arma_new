@@ -8,5 +8,5 @@
     </label>
 </div>
 <div class="bid_term_condition p-3 text-justify mt-3">
-    {!! $market->term_conditions !!}
+    {!! $market->SalesForm->term_conditions !!}
 </div>
