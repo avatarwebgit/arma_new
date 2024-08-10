@@ -60,48 +60,8 @@
                                                 <th></th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            @foreach($users as $user)
-                                                <tr>
-                                                    <td>
-
-                                                    </td>
-                                                    <td>
-                                                        {{ $market->date }}
-                                                    </td>
-                                                    <td>
-                                                        <strong>
-                                                            {{ isset($user->Roles()->first()->name) ? $user->Roles()->first()->name : '-' }}
-                                                        </strong>
-                                                    </td>
-                                                    <td>
-                                                        @if($user->user_id==null or $user->user_id=='')
-                                                            <span class="text-danger">User Not Registered</span>
-                                                        @else
-                                                            {{ $user->user_id }}
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        {{ $user->email }}
-                                                    </td>
-
-                                                    <td class="text-right">
-
-                                                        {!! Form::open([
-'method' => 'POST',
-'route' => ['marketPermission.remove', ['user'=>$user->id,'market'=>$market_id]],
-'class' => 'd-inline',
-]) !!}
-                                                        <a href="#"
-                                                           class="btn btn-sm small btn-danger show_confirm"
-                                                           data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                           title=""
-                                                           data-bs-original-title="{{ __('Delete') }}"><i
-                                                                class="ti ti-trash mr-1"></i></a>
-                                                        {!! Form::close() !!}
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                            <tbody id="permission_users">
+                                            @include('admin.markets.permission_users')
                                             </tbody>
                                         </table>
                                     </div>
@@ -178,13 +138,12 @@
                     market_id: market_id,
                     role_ids: role_ids,
                     _token: "{{ csrf_token() }}"
-
                 },
                 dataType: "json",
                 method: "POST",
                 success: function (data) {
                     if (data[0] == 1) {
-                        console.log('Success');
+                        $('#permission_users').html(data[1]);
                     } else {
                         alert('something went wrong')
                     }

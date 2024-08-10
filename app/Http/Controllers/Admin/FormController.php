@@ -52,6 +52,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\DocBlock\Serializer;
 use Spatie\Permission\Models\Role;
 use function App\Http\Controllers\public_path;
 
@@ -391,7 +392,7 @@ class FormController extends Controller
 
     public function sales_form_index($status)
     {
-        $items = SalesOfferForm::where('status', $status)->where('used_in_market',0)->orderBy('created_at','desc')->paginate(100);
+        $items = SalesOfferForm::where('status', $status)->where('used_in_market', 0)->orderBy('created_at', 'desc')->paginate(100);
         return view('admin.sales_form.list', compact('items', 'status'));
     }
 
@@ -414,7 +415,7 @@ class FormController extends Controller
         try {
             $id = $request->id;
             $sales_form = SalesOfferForm::where('id', $id)->first();
-            $form_id='Armx-So'.$sales_form->id;
+            $form_id = 'Armx-So' . $sales_form->id;
             $sales_form->update([
                 'status' => 1,
                 'form_id' => $form_id,
@@ -422,7 +423,7 @@ class FormController extends Controller
             $role = auth()->user()->Roles()->first()->name;
             if ($role == 'seller') {
                 $rote = route('seller.requests');
-            }else{
+            } else {
                 $rote = route('admin.sales_form.first.index', ['status' => 1]);
             }
             return response()->json([1, $rote]);
@@ -606,7 +607,7 @@ class FormController extends Controller
         if ($market_permission->role_ids != null) {
             $role_ids = unserialize($market_permission->role_ids);
         }
-        $users = User::whereIn('id', $user_ids)->where('user_id','!=',null)->get();
+        $users = User::whereIn('id', $user_ids)->where('user_id', '!=', null)->get();
         $all_users = User::all();
         return view('admin.markets.permission',
             compact('market_id',
@@ -621,19 +622,44 @@ class FormController extends Controller
 
     function sale_form_permission_store_roles(Request $request)
     {
+
         try {
             $market_id = $request->market_id;
-            $market = MarketPermission::where('market_id', $market_id)->first();
+            $marketPermission = MarketPermission::where('market_id', $market_id)->first();
             $role_ids = $request->role_ids;
+            $user_ids = [];
+            if ($role_ids==null){
+                $role_ids=[];
+            }
+            foreach ($role_ids as $role) {
+                $role = Role::where('id', $role)->first();
+                $users = $role->users;
+                foreach ($users as $user) {
+                    $user_ids[] = $user->id;
+                }
+            }
 
             if ($role_ids != null) {
                 $role_ids = serialize($role_ids);
             }
+//            if ($marketPermission->user_ids != null) {
+//                $market_user_ids = unserialize($marketPermission->user_ids);
+//                foreach ($market_user_ids as $market_user_id) {
+//                    $user_ids[] = $market_user_id;
+//                }
+//            }
+            $user_ids = array_unique($user_ids);
+            $user_ids = serialize($user_ids);
 
-            $market->update([
+            $marketPermission->update([
                 'role_ids' => $role_ids,
+                'user_ids' => $user_ids,
             ]);
-            return response()->json([1, 'ok']);
+
+            $users = User::whereIn('id', unserialize($user_ids))->get();
+            $market = Market::where('id', $market_id)->first();
+            $view_html = view('admin.markets.permission_users', compact('users', 'market', 'market_id'))->render();
+            return response()->json([1, $view_html]);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
         }
