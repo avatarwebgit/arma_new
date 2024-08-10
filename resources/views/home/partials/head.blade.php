@@ -21,6 +21,9 @@
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
+        .modal-backdrop.show{
+            opacity: 0.7 !important;
+        }
         #scroll-container > div {
             -moz-transform: translateX(100%);
             -webkit-transform: translateX(100%);

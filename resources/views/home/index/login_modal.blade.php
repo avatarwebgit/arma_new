@@ -1,6 +1,6 @@
 <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
-    <div style="max-width: 650px !important;" class="modal-dialog" role="document">
+    <div style="max-width: 500px !important;" class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="auth-form">
                 <div class="modal-header position-relative" style="border-bottom: none !important;">
