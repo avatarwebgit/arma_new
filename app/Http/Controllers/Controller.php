@@ -256,6 +256,8 @@ class Controller extends BaseController
         $hours = floor(($diffSeconds - ($days * 86400)) / 3600);
         $minutes = floor(($diffSeconds - ($days * 86400) - ($hours * 3600)) / 60);
         $seconds = floor(($diffSeconds - ($days * 86400) - ($hours * 3600) - ($minutes * 60)));
+        $extra_hour=$days*24;
+        $hours=$hours+$extra_hour;
         if ($hours < "10") {
             $hours = "0" . $hours;
         }
@@ -300,7 +302,7 @@ class Controller extends BaseController
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
             $today = Carbon::today();
-            $the_day_after_tomorrow = Carbon::today()->copy()->addDay(2);
+            $the_day_after_tomorrow = Carbon::today()->copy()->addDay(3);
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $tomorrow_markets_groups = Market::where('date', '>', $today)->where('date', '<', $the_day_after_tomorrow)->orderby('date', 'asc')->get()->groupby('date');
 
