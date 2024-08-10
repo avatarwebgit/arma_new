@@ -146,7 +146,11 @@
             method: 'POST',
             success: function (msg) {
                 if (msg[0] === 1) {
-                    window.location.href = "{{ route('profile') }}";
+
+                    $('#register_modal').modal('hide');
+                    setTimeout(function (){
+                        $('#AlertModal').modal('show');
+                    },1000)
                 }
             },
             error: function (error) {

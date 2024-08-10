@@ -1,6 +1,6 @@
 <div class="modal fade" id="reset_password_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
-    <div style="max-width: 650px !important;" class="modal-dialog" role="document">
+    <div style="max-width: 600px !important;" class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="auth-form">
                 @csrf

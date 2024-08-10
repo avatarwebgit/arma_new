@@ -2961,9 +2961,9 @@ img.logo {
 
 .auth-form {
     padding: 20px;
-    border: 1px solid #006;
+    border: 1px solid #003343;
     border-radius: 5px;
-    background-color: rgba(0, 0, 102, 0.8);
+    background-color: #003343;
     color: white;
     box-shadow: 0 0 16px black;
 }

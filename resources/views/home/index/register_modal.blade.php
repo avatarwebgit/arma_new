@@ -1,6 +1,6 @@
 <div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
-    <div style="max-width: 630px !important;" class="modal-dialog" role="document">
+    <div style="max-width: 600px !important;" class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="register_form_modal" class="auth-form">
                 <div class="modal-header position-relative" style="border-bottom: none !important;">
@@ -38,9 +38,9 @@
                             type="text"
                             class="form-control"
                             name="user_type">
-                            <option value="">Select User Type</option>
+                            <option value="">Select</option>
                             @foreach($types as $type)
-                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                <option value="{{ $type->id }}">{{ ucfirst($type->name) }}</option>
                             @endforeach
                         </select>
 
@@ -196,7 +196,9 @@
                                 name="platform">
                             <option value="">Select</option>
                             @foreach($platforms as $platfotm)
+                                @if($platfotm->id!=4 and $platfotm->id!=5)
                                 <option value="{{ $platfotm->title }}">{{ $platfotm->title }}</option>
+                                @endif
                             @endforeach
 
                         </select>
@@ -241,8 +243,8 @@
 {{--                {!! NoCaptcha::display() !!}--}}
 
 
-                <div class="row">
-                    <div class="col-12 col-md-4">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-4 text-center">
                         <button onclick="SubmitRegisterModal(this)" type="button"
                                 class="btn btn-primary">{{ __('Submit') }}</button>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\SessionModel;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -72,11 +73,18 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         $user = \App\Models\User::where('email', $request->get('email'))->first();
+        $ip = $request->ip();
         if ($user){
             $sessions = DB::table('sessions')->where('user_id',$user->id)->exists();
             if ($sessions){
-                session()->put('is_logged_in','this user is already logged in with another Device');
-                return redirect()->route('home.index');
+                $sessions = DB::table('sessions')->where('user_id',$user->id)->where('ip_address',$ip)->exists();
+                if (!$sessions) {
+                    session()->put('is_logged_in', 'this user is already logged in with another Device');
+                    return redirect()->route('home.index');
+                }else{
+                    $sessions = SessionModel::where('user_id',$user->id)->where('ip_address',$ip)->first();
+                    $sessions->delete();
+                }
             }
         }
 
