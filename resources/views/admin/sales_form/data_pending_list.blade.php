@@ -9,7 +9,7 @@
     <th>User ID</th>
     <th>Email</th>
     <th>Status</th>
-    <th>Actions</th>
+    <th></th>
 </tr>
 </thead>
 <tbody>
