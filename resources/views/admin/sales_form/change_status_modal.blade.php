@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="change_status_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 700px">
         <div class="modal-content">
             <div class="modal-header justify-content-center position-relative">
 
@@ -96,7 +96,7 @@
 <!-- Modal -->
 <div class="modal fade" id="Edit_Currency" tabindex="-1" role="dialog" aria-labelledby="Edit_Currency"
      aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 700px">
         <div class="modal-content">
             <div class="modal-header justify-content-center position-relative">
                 <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"

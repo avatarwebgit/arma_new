@@ -10,7 +10,7 @@
     <th>Email</th>
     <th>Status</th>
     <th>Amount</th>
-    <th>Actions</th>
+    <th></th>
 </tr>
 </thead>
 <tbody>
