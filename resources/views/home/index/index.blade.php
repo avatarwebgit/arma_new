@@ -380,6 +380,11 @@
         .timer_index > .column > div {
             width: 30px !important;
         }
+        .modal-backdrop{
+            background-color:rgba(0,0,0,.7);
+
+            backdrop-filter:blur(7px)
+        }
     </style>
 @endsection
 
