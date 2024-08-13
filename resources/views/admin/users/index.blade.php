@@ -5,8 +5,8 @@
         <th>Date</th>
         <th>Time</th>
         <th>email</th>
-        <th>Company</th>
-        <th>User Type</th>
+        <th>Country</th>
+{{--        <th>User Type</th>--}}
         <th></th>
     </tr>
     </thead>
@@ -26,21 +26,21 @@
                 {{ $item->email }}
             </td>
             <td>
-                {{ $item->company_name }}
+                {{ $item->company_country }}
             </td>
-            <td>
-                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">
-                     @if($item->user_type==2)
-                        Seller
-                    @elseif($item->user_type==3)
-                        Buyer
-                    @else
-                        Broker
-                    @endif
-                </strong>
+{{--            <td>--}}
+{{--                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">--}}
+{{--                     @if($item->user_type==2)--}}
+{{--                        Seller--}}
+{{--                    @elseif($item->user_type==3)--}}
+{{--                        Buyer--}}
+{{--                    @else--}}
+{{--                        Broker--}}
+{{--                    @endif--}}
+{{--                </strong>--}}
 
 
-            </td>
+{{--            </td>--}}
             <td class="text-right">
                 <a onclick="showUserPreview({{ $item->id }})"
                    style="margin-right: 10px;padding: 5px 20px"

@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class,'user_id');
     }
+
+    public function CreatedBy()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

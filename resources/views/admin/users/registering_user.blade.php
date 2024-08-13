@@ -5,7 +5,7 @@
         <th>Date</th>
         <th>email</th>
         <th>Country</th>
-        <th>User Type</th>
+{{--        <th>User Type</th>--}}
         <th>Status</th>
         <th></th>
     </tr>
@@ -23,19 +23,19 @@
                 {{ $item->email }}
             </td>
             <td>
-                {{ $item->company_name }}
+                {{ $item->company_country }}
             </td>
-            <td>
-                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">
-                    @if($item->user_type==2)
-                        Seller
-                    @elseif($item->user_type==3)
-                        Buyer
-                    @else
-                        Broker
-                    @endif
-                </strong>
-            </td>
+{{--            <td>--}}
+{{--                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">--}}
+{{--                    @if($item->user_type==2)--}}
+{{--                        Seller--}}
+{{--                    @elseif($item->user_type==3)--}}
+{{--                        Buyer--}}
+{{--                    @else--}}
+{{--                        Broker--}}
+{{--                    @endif--}}
+{{--                </strong>--}}
+{{--            </td>--}}
             <td>
                 <select onchange="ChangeRegisterStatus(this,{{ $item->id }})" class="form-control">
                     <option value="0">Step 1</option>
