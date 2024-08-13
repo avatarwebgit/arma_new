@@ -415,6 +415,7 @@
             $('#add_member_modal').modal('show');
             $('#email_error').add('d-none');
             $('#new_password_copied2').add('d-none');
+            $('#new_password').val('');
         }
 
         function SaveMember() {

@@ -2,19 +2,26 @@
 <table class="table table-striped">
     <thead>
     <tr class="text-center">
+        <th>Create User By</th>
         <th>User ID</th>
         <th>Date</th>
 {{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
-        <th>User Type</th>
+{{--        <th>User Type</th>--}}
         <th>Edit</th>
         <th>Status</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     @foreach($users as $key=>$item)
         <tr class="text-center">
+            <td>
+                @if($item->created_by!=null)
+                    {{ $item->CreatedBy->email }}
+                @endif
+            </td>
             <td>
                 <strong class="text-info">
                     {{ $item->user_id }}
@@ -32,19 +39,19 @@
             <td>
                 {{ $item->company_country }}
             </td>
-            <td>
-                <strong>
-                    @if(isset($item->Roles()->first()->name))
-                        @if($item->Roles()->first()->name=='Members')
-                            Member
-                        @else
-                            {{ $item->Roles()->first()->name }}
-                        @endif
-                    @else
-                        -
-                    @endif
-                </strong>
-            </td>
+{{--            <td>--}}
+{{--                <strong>--}}
+{{--                    @if(isset($item->Roles()->first()->name))--}}
+{{--                        @if($item->Roles()->first()->name=='Members')--}}
+{{--                            Member--}}
+{{--                        @else--}}
+{{--                            {{ $item->Roles()->first()->name }}--}}
+{{--                        @endif--}}
+{{--                    @else--}}
+{{--                        ---}}
+{{--                    @endif--}}
+{{--                </strong>--}}
+{{--            </td>--}}
             <td>
                <i onclick="ShowEditModal({{ $item->id }})" class="fa fa-edit fa-2x" style="cursor: pointer"></i>
             </td>
@@ -54,6 +61,13 @@
                         <option {{ $item->active==$activation->id ? 'selected' : '' }} value="{{ $activation->id}}">{{ $activation->title }}</option>
                     @endforeach
                 </select>
+            </td>
+            <td>
+                <a style="margin-right: 10px" onclick="removeModal({{ $item->id }},event)"
+                   class="btn btn-sm btn-danger text-white">
+                    <i class="icon ion-md-close text-white"></i>
+                    Delete
+                </a>
             </td>
         </tr>
     @endforeach

@@ -172,9 +172,11 @@ class UserController extends Controller
 //                $can_bid = 0;
 //            }
             $password = Hash::make($request->password);
+            $created_by = \auth()->id();
             $user->update([
                 'user_id' => $USER_ID,
-                'password' => $password
+                'password' => $password,
+                'created_by' => $created_by,
             ]);
             $message = 'The Item Updated Successfully';
             session()->flash('success', $message);
@@ -205,8 +207,10 @@ class UserController extends Controller
                 'active_status' => 2,
             ]);
             $user_id = $this->User_ID_Creator($initial, $user->id);
+            $created_by = \auth()->id();
             $user->update([
                 'user_id' => $user_id,
+                'created_by' => $created_by,
             ]);
             $user->syncRoles($role);
             $permissions = $request->except(['_token', 'role', 'email', 'new_password', 'company_country']);
@@ -222,7 +226,8 @@ class UserController extends Controller
         }
 
     }
-    public function member_update(User $user,Request $request)
+
+    public function member_update(User $user, Request $request)
     {
 
         try {
@@ -242,14 +247,14 @@ class UserController extends Controller
             $user->update([
                 'user_id' => $user_id,
             ]);
-            if ($request->new_password==null){
+            if ($request->new_password == null) {
                 $password = Hash::make($request->new_password);
                 $user->update([
                     'password' => $password,
                 ]);
             }
             $user->syncRoles($role);
-            $permissions = $request->except(['_token','_method', 'role', 'email_edit', 'new_password', 'company_country_edit']);
+            $permissions = $request->except(['_token', '_method', 'role', 'email_edit', 'new_password', 'company_country_edit']);
             $user->syncPermissions($permissions);
             $message = $role . ' Updated successfully';
             DB::commit();

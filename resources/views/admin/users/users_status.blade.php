@@ -27,7 +27,7 @@
                 {{ $item->email }}
             </td>
             <td>
-                {{ $item->company_name }}
+                {{ $item->company_country }}
             </td>
             <td>
                 <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">

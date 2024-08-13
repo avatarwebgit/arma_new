@@ -83,7 +83,7 @@
                                 <button onclick="randString2()" class="w-100 btn btn-success mb-3" type="button">
                                     Create a Password
                                 </button>
-                                <input type="text" class="form-control mb-3" id="new_password2" name="new_password" data-character-set="a-z,A-Z,0-9,#">
+                                <input readonly type="text" class="form-control mb-3" id="new_password2" name="new_password" data-character-set="a-z,A-Z,0-9,#">
                                 <p id="new_password_copied2" style="text-align: left;" class="d-none mb-3">
                                     password was copied
                                 </p>
