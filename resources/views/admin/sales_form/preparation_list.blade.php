@@ -70,7 +70,7 @@
             {{ $items->firstItem()+$key }}
         </td>
         <td>
-            Account
+            -
         </td>
         <td>
             {{ $form->form_id }}
@@ -82,8 +82,7 @@
             {{ \Carbon\Carbon::parse($form->crated_at)->format('H:m') }}
         </td>
         <td>
-            {{--            {{ $form->commodity }}--}}
-            On
+                        {{ $form->commodity }}
         </td>
         <td>
             {{ $form->User->user_id }}

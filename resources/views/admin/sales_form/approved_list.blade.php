@@ -1,5 +1,3 @@
-
-
 <thead>
 <tr>
     <th>Row</th>
@@ -21,7 +19,11 @@
             {{ $items->firstItem()+$key }}
         </td>
         <td>
-            Account
+            @if($form->created_by!=null)
+                {{ $form->CreatedBy->user_id }}
+            @else
+                -
+            @endif
         </td>
         <td>
             {{ $form->form_id }}
@@ -33,8 +35,7 @@
             {{ \Carbon\Carbon::parse($form->crated_at)->format('H:m') }}
         </td>
         <td>
-            {{--            {{ $form->commodity }}--}}
-            On
+            {{ $form->commodity }}
         </td>
         <td>
             {{ $form->User->user_id }}
@@ -52,10 +53,10 @@
                class="btn btn-sm btn-primary text-white mr-1">
                 <i class="fa fa-eye"></i>
             </a>
-{{--            <a href="{{ route('sale_form',['page_type'=>'Edit','item'=>$form->id]) }}"--}}
-{{--               class="btn btn-sm btn-info text-white mr-1">--}}
-{{--                <i class="fa fa-pen"></i>--}}
-{{--            </a>--}}
+            {{--            <a href="{{ route('sale_form',['page_type'=>'Edit','item'=>$form->id]) }}"--}}
+            {{--               class="btn btn-sm btn-info text-white mr-1">--}}
+            {{--                <i class="fa fa-pen"></i>--}}
+            {{--            </a>--}}
             {{--            <button onclick="show_change_status_modal({{ $form->id }})"--}}
             {{--                    class="btn btn-sm btn-warning text-white mr-1">--}}
             {{--                change status--}}

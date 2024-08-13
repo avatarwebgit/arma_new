@@ -21,4 +21,8 @@ class SalesOfferForm extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function CreatedBy()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

@@ -237,8 +237,9 @@ class FormController extends Controller
             $env = env('SALE_OFFER_FORM');
             $sale_form = SalesOfferForm::where('id', $form_id)->first();
             $array = [
-                'status' => $status
-            ];
+                'status' => $status,
+                'created_by' => \auth()->id()
+                ];
             foreach ($files as $file) {
                 if ($request->has($file)) {
                     $path = \public_path($env . '/' . $sale_form[$file]);
@@ -255,8 +256,11 @@ class FormController extends Controller
             $sale_form->update($array);
             session()->flash('success', 'Your Information has been saved successfully');
             session()->flash('contact-tab', 'ok');
-
-            return redirect()->route('sale_form.preparation', ['item' => $sale_form->id]);
+            if ($form_type == 'save') {
+                return redirect()->route('sale_form.preparation', ['item' => $sale_form->id]);
+            }else{
+                return redirect()->route('admin.sales_form.fifth.index',['status'=>5]);
+            }
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
@@ -628,8 +632,8 @@ class FormController extends Controller
             $marketPermission = MarketPermission::where('market_id', $market_id)->first();
             $role_ids = $request->role_ids;
             $user_ids = [];
-            if ($role_ids==null){
-                $role_ids=[];
+            if ($role_ids == null) {
+                $role_ids = [];
             }
             foreach ($role_ids as $role) {
                 $role = Role::where('id', $role)->first();
