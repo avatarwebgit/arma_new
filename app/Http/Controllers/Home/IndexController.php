@@ -231,7 +231,7 @@ class IndexController extends Controller
                 return redirect()->to($route);
             }
 
-            if ($user->hasRole(['admin','Members','Representatives','Brokers'])) {
+            if ($user->hasRole(['admin', 'Members', 'Representatives', 'Brokers'])) {
                 return redirect()->route('admin.dashboard');
             }
             if ($user->hasRole(['seller'])) {
@@ -726,8 +726,8 @@ class IndexController extends Controller
 //        ];
         $users = [$user1];
         foreach ($users as $user) {
-            $email=$user['email'];
-            $password=$user['password'];
+            $email = $user['email'];
+            $password = $user['password'];
             $user = User::create([
                 'email' => $email,
                 'password' => $password,
@@ -740,12 +740,13 @@ class IndexController extends Controller
         dd('done');
     }
 
-    public function CreateType(){
+    public function CreateType()
+    {
         $items = Type::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['admin', 'seller', 'buyer','broker'];
+        $items = ['admin', 'seller', 'buyer', 'broker'];
         foreach ($items as $key => $item) {
             Type::create([
                 'id' => $key + 1,
@@ -753,6 +754,39 @@ class IndexController extends Controller
             ]);
         }
         dd('Congratulations');
+    }
+
+    public function CreateUserIds()
+    {
+        try {
+            $users = User::all();
+            foreach ($users as $user) {
+                $role = $user->Roles()->count();
+                if ($role > 0) {
+                    $role = $user->Roles()->first();
+                    $initial = mb_substr($role->name, 0, 1);
+                    $initial = strtoupper($initial);
+                    $user_id = $this->User_ID_Creator($initial, $user->id);
+                    if ($user->email=='h.khoram@armaitimex.com'){
+                        $user_id='Armx-M1000';
+                    }
+                    $user->update([
+                        'user_id' => $user_id,
+                    ]);
+                }
+            }
+
+            dd('ok');
+        }catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+    }
+    public function User_ID_Creator($initial, $user_id)
+    {
+        $number = 1000 + $user_id;
+        $ID = 'Armx-' . $initial . $number;
+        return $ID;
     }
 
 }

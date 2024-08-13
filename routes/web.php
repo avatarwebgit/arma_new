@@ -332,6 +332,7 @@ Route::post('market_more_info', [IndexController::class, 'market_more_info'])->n
 Route::get('ResetSystem', [IndexController::class, 'ResetSystem'])->name('home.ResetSystem');
 Route::get('CreateAdmin', [IndexController::class, 'CreateAdmin'])->name('home.CreateAdmin');
 Route::get('CreateType', [IndexController::class, 'CreateType'])->name('home.CreateType');
+Route::get('CreateUserIds', [IndexController::class, 'CreateUserIds'])->name('home.CreateUserIds');
 Route::post('/form/send-request/contact', [FormController::class, 'form_contact'])->name('form.contact');
 Route::get('/logout', function () {
     \auth()->logout();
