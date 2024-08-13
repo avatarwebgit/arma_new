@@ -89,7 +89,8 @@
                                                     </td>
                                                     <td>
                                                         @if($item->created_market_by!=null)
-                                                            {{ 'Armx-'.ucfirst(mb_substr($item->CreatedBy->Roles[0]->name, 0, 1)).(1000+$item->CreatedBy->id) }}
+{{--                                                            {{ 'Armx-'.ucfirst(mb_substr($item->CreatedBy->Roles[0]->name, 0, 1)).(1000+$item->CreatedBy->id) }}--}}
+                                                            {{ $item->CreatedBy->user_id }}
                                                         @else
                                                             -
                                                         @endif
@@ -110,7 +111,8 @@
                                                     {{--                                                        {{ $item->bid_deposit }}--}}
                                                     {{--                                                    </td>--}}
                                                     <td>
-                                                        {{ 'Armx-'.ucfirst(mb_substr($item->SalesForm->User->Roles[0]->name, 0, 1)).(1000+$item->SalesForm->User->id) }}
+{{--                                                        {{ 'Armx-'.ucfirst(mb_substr($item->SalesForm->User->Roles[0]->name, 0, 1)).(1000+$item->SalesForm->User->id) }}--}}
+                                                        {{ count($item->Bids) }}
                                                     </td>
                                                     <td id="market_status_{{ $item->id }}">
                                                         {{ $status_text }}
