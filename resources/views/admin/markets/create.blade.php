@@ -28,7 +28,8 @@
                                                     <label for="min_wallet">Commodity</label>
                                                     <select onchange="CommodityChanged(this)"
                                                             class="form-control" name="commodity_id" id="commodity_id">
-                                                        <option value="">select</option>
+
+                                                        <option value="">Select</option>
                                                         @foreach($sales_offer_form as $item)
                                                             @if($item->price_type=='Fix')
                                                                 @php
@@ -42,9 +43,10 @@
                                                             <option
                                                                 data-type="{{ $item->price_type }}"
                                                                 data-offer="{{ $offer }}"
-                                                                data-quantity="{{ $item->min_order }}"
+                                                                data-quantity="{{ $item->max_quantity }}"
                                                                 data-term="{{ $item->incoterms }}"
                                                                 data-rigen="{{ $item->country }}"
+                                                                data-packing="{{ $item->packing }}"
                                                                 {{ old('commodity_id')==$item->id?'selected':'' }} value="{{ $item->id }}">
                                                                 Commodity:{{ $item->commodity }}
                                                                 /User:{{ $item->User->email }}</option>
@@ -56,14 +58,19 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="PriceTypeInput">Price Type</label>
-                                                    <input disabled id="PriceTypeInput" type="text"
-                                                           class="form-control">
-                                                </div>
+{{--                                                <div class="col-12 col-md-4 mb-3">--}}
+{{--                                                    <label for="PriceTypeInput">Price Type</label>--}}
+{{--                                                    <input disabled id="PriceTypeInput" type="text"--}}
+{{--                                                           class="form-control">--}}
+{{--                                                </div>--}}
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="OfferPriceInput">Offer Price</label>
                                                     <input disabled id="OfferPriceInput" type="text"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="PriceTypeInput">Packing</label>
+                                                    <input disabled id="PackingInput" type="text"
                                                            class="form-control">
                                                 </div>
                                                 <div class="col-12 col-md-4 mb-3">
@@ -123,7 +130,7 @@
 
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="bid_deposit">Bid Deposit</label>
-                                                    <input id="bid_deposit" name="bid_deposit" class="form-control"
+                                                    <input readonly id="bid_deposit" name="bid_deposit" class="form-control"
                                                            value="0">
                                                     @error('bid_deposit')
                                                     <p class="input-error-validate">
@@ -201,9 +208,9 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="col-12">
-                                                    <hr>
-                                                </div>
+{{--                                                <div class="col-12">--}}
+{{--                                                    <hr>--}}
+{{--                                                </div>--}}
                                                 {{--                                                <div class="col-12 mb-3">--}}
                                                 {{--                                                    <label for="term_conditions">Term & Conditions</label>--}}
                                                 {{--                                                    <textarea id="term_conditions" name="term_conditions"--}}
@@ -214,8 +221,8 @@
                                                 {{--                                                    </p>--}}
                                                 {{--                                                    @enderror--}}
                                                 {{--                                                </div>--}}
-                                                <div class="col-md-12 mt-3">
-                                                    <button type="submit" class="btn btn-primary btn-block btn-sm">
+                                                <div class="col-md-12 mt-3 text-center">
+                                                    <button type="submit" class="btn btn-primary btn-block">
                                                         Create
                                                     </button>
                                                 </div>
@@ -250,11 +257,13 @@
             var QuantityInput = selectedOption.getAttribute('data-quantity');
             var DeliveryInput = selectedOption.getAttribute('data-term');
             var RigenInput = selectedOption.getAttribute('data-rigen');
+            var PackingInput = selectedOption.getAttribute('data-packing');
             $('#PriceTypeInput').val(priceType);
             $('#OfferPriceInput').val(dataOffer);
             $('#QuantityInput').val(QuantityInput);
             $('#DeliveryInput').val(DeliveryInput);
             $('#RigenInput').val(RigenInput);
+            $('#PackingInput').val(PackingInput);
             let show_alpha = 0;
             if (dataType == 'Formulla') {
                 show_alpha = 1;

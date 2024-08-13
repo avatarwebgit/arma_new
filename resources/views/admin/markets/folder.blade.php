@@ -50,8 +50,9 @@
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th>Deal ID</th>
+
                                                 <th>Account</th>
+                                                <th>Deal ID</th>
                                                 <th>Commodity</th>
                                                 <th>Time</th>
                                                 <th>Market Value</th>
@@ -84,9 +85,7 @@
                                                     @endphp
                                                 @endif
                                                 <tr style="color: {{ $color }}">
-                                                    <td>
-                                                        Armx-T{{ $item->id }}
-                                                    </td>
+
                                                     <td>
                                                         @if($item->created_market_by!=null)
 {{--                                                            {{ 'Armx-'.ucfirst(mb_substr($item->CreatedBy->Roles[0]->name, 0, 1)).(1000+$item->CreatedBy->id) }}--}}
@@ -94,6 +93,9 @@
                                                         @else
                                                             -
                                                         @endif
+                                                    </td>
+                                                    <td>
+                                                        Armx-T{{ $item->id }}
                                                     </td>
                                                     <td>
                                                         {{ $item->SalesForm->commodity }}
@@ -127,12 +129,12 @@
                                                                     <i class="fa fa-pen"></i>
                                                                     Market
                                                                 </a>
-                                                                <a title="Edit Commodity"
-                                                                   href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
-                                                                   class="btn btn-sm btn-primary ml-2">
-                                                                    <i class="fa fa-list"></i>
-                                                                    Commodity
-                                                                </a>
+{{--                                                                <a title="Edit Commodity"--}}
+{{--                                                                   href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"--}}
+{{--                                                                   class="btn btn-sm btn-primary ml-2">--}}
+{{--                                                                    <i class="fa fa-list"></i>--}}
+{{--                                                                    Commodity--}}
+{{--                                                                </a>--}}
                                                                 <a title="Bidder"
                                                                    href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
                                                                    class="btn btn-sm btn-success ml-2">

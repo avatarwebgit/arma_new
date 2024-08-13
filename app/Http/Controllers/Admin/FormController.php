@@ -597,7 +597,10 @@ class FormController extends Controller
         $role_ids = [];
         $user_ids = [];
         $market_id = $item;
-        $roles = Role::where('name', '!=', 'admin')->get();
+        $customOrder = ['buyer', 'Members', 'Brokers', 'Representatives', 'seller'];
+        $roles = Role::where('name', '!=', 'admin')
+            ->orderByRaw("FIELD(name, '".implode("', '", $customOrder)."') ASC")
+            ->get();
         $market = Market::where('id', $market_id)->first();
         $market_permission = MarketPermission::where('market_id', $market_id)->first();
         if (!$market_permission) {
