@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="NeedToSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="max-width: 1200px">
         <div class="modal-content">
             <div class="modal-header">
 
