@@ -58,9 +58,10 @@
                                                             <option
                                                                 data-type="{{ $item->price_type }}"
                                                                 data-offer="{{ $offer }}"
-                                                                data-quantity="{{ $item->min_order }}"
+                                                                data-quantity="{{ $item->max_quantity }}"
                                                                 data-term="{{ $item->incoterms }}"
                                                                 data-rigen="{{ $item->country }}"
+                                                                data-packing="{{ $item->packing }}"
                                                                     {{ $market->commodity_id==$item->id?'selected':'' }} value="{{ $item->id }}">
                                                                 Commodity:{{ $item->commodity }}
                                                                 /User:{{ $item->User->email }}</option>
@@ -72,14 +73,19 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="PriceTypeInput">Price Type</label>
-                                                    <input disabled id="PriceTypeInput" type="text"
-                                                           class="form-control">
-                                                </div>
+{{--                                                <div class="col-12 col-md-4 mb-3">--}}
+{{--                                                    <label for="PriceTypeInput">Price Type</label>--}}
+{{--                                                    <input disabled id="PriceTypeInput" type="text"--}}
+{{--                                                           class="form-control">--}}
+{{--                                                </div>--}}
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="OfferPriceInput">Offer Price</label>
                                                     <input disabled id="OfferPriceInput" type="text"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="PriceTypeInput">Packing</label>
+                                                    <input disabled id="PackingInput" type="text"
                                                            class="form-control">
                                                 </div>
                                                 <div class="col-12 col-md-4 mb-3">
@@ -114,18 +120,6 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label for="bid_deposit">Bid Deposit</label>
-                                                    <input id="bid_deposit" name="bid_deposit" class="form-control"
-                                                           value="{{ $market->bid_deposit }}">
-                                                    @error('bid_deposit')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="market_value">Market Value ($)</label>
                                                     <input onkeyup="numberFormat(this)" id="market_value" name="market_value" class="form-control"
@@ -136,6 +130,18 @@
                                                     </p>
                                                     @enderror
                                                 </div>
+                                                <div class="col-12 col-md-4 mb-3">
+                                                    <label for="bid_deposit">Bid Deposit</label>
+                                                    <input readonly id="bid_deposit" name="bid_deposit" class="form-control"
+                                                           value="{{ $market->bid_deposit }}">
+                                                    @error('bid_deposit')
+                                                    <p class="input-error-validate">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
+                                                </div>
+
+
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="ready_to_open">Ready to Open(min)</label>
                                                     <input id="ready_to_open" type="number" name="ready_to_open"
@@ -258,11 +264,13 @@
             var QuantityInput = selectedOption.getAttribute('data-quantity');
             var DeliveryInput = selectedOption.getAttribute('data-term');
             var RigenInput = selectedOption.getAttribute('data-rigen');
+            var PackingInput = selectedOption.getAttribute('data-packing');
             $('#PriceTypeInput').val(priceType);
             $('#OfferPriceInput').val(dataOffer);
             $('#QuantityInput').val(QuantityInput);
             $('#DeliveryInput').val(DeliveryInput);
             $('#RigenInput').val(RigenInput);
+            $('#PackingInput').val(PackingInput);
             let show_alpha = 0;
             if (dataType == 'Formulla') {
                 show_alpha = 1;

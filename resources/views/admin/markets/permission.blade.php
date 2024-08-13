@@ -96,12 +96,12 @@
                         </select>
                         <p id="user_error" class="d-none input-error-validate">select a user</p>
                     </div>
-                    <div class="d-flex mt-1">
+                    <div class="text-center mt-1">
                         <button class="btn btn-sm btn-success" onclick="SaveUserMarketPermission({{ $market_id }})">
                             Save
                         </button>
-                        <button class="btn btn-sm btn-danger me-2" data-dismiss="modal" aria-label="Close">Close
-                        </button>
+{{--                        <button class="btn btn-sm btn-danger me-2" data-dismiss="modal" aria-label="Close">Close--}}
+{{--                        </button>--}}
                     </div>
                 </div>
             </div>

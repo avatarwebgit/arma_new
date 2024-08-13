@@ -41,7 +41,7 @@
                     }
                     $users_seller_count = \App\Models\User::whereIn('id', $seller_ids)->count();
 
-                    $users_buyer = \App\Models\User::where('active_status', 2)->get();
+                    $users_buyer = \App\Models\User::where('active_status', 2)->where('active',1)->get();
                     $buyer_ids = [];
                     foreach ($users_buyer as $user_buyer) {
                         if ($user_buyer->hasRole('buyer')) {
@@ -50,7 +50,7 @@
                     }
                     $users_buyer_count = \App\Models\User::whereIn('id', $buyer_ids)->where('active',1)->get();
 
-                    $users_member = \App\Models\User::where('active_status', 2)->get();
+                    $users_member = \App\Models\User::where('active_status', 2)->where('active',1)->get();
                     $member_ids = [];
                     foreach ($users_member as $user_member) {
                         if ($user_member->hasRole('Members')) {
@@ -59,7 +59,7 @@
                     }
                     $users_member_count = \App\Models\User::whereIn('id', $member_ids)->get();
 
-                    $users_Representative = \App\Models\User::where('active_status', 2)->get();
+                    $users_Representative = \App\Models\User::where('active_status', 2)->where('active',1)->get();
                     $Representative_ids = [];
                     foreach ($users_Representative as $user_Representative) {
                         if ($user_Representative->hasRole('Representatives')) {
