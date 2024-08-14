@@ -9,6 +9,7 @@
         <th>Country</th>
 {{--        <th>User Type</th>--}}
         <th>Status</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -43,6 +44,12 @@
                         <option {{ $item->active==$activation->id ? 'selected' : '' }} value="{{ $activation->id}}">{{ $activation->title }}</option>
                     @endforeach
                 </select>
+            </td>
+            <td>
+                <a style="margin-left: 20px" onclick="removeModal({{ $item->id }},event)"
+                   class="btn btn-sm btn-danger text-white">
+                    <i class="fa fa-trash text-white"></i>
+                </a>
             </td>
         </tr>
     @endforeach

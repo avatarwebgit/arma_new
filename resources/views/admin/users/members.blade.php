@@ -63,10 +63,9 @@
                 </select>
             </td>
             <td>
-                <a style="margin-right: 10px" onclick="removeModal({{ $item->id }},event)"
+                <a style="margin-left: 20px" onclick="removeModal({{ $item->id }},event)"
                    class="btn btn-sm btn-danger text-white">
-                    <i class="icon ion-md-close text-white"></i>
-                    Delete
+                    <i class="fa fa-trash text-white"></i>
                 </a>
             </td>
         </tr>
