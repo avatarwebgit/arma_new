@@ -87,7 +87,14 @@
                             <div class="info text-center">
                                 <p class="email font-weight-bold mb-3">{{ auth()->user()->email }}</p>
                                 <p class="name font-weight-bold mb-0">{{ auth()->user()->user_id }}</p>
-                                <p class="name font-weight-bold mb-0">{{ auth()->user()->Roles()->first()->name }}</p>
+                                @if(auth()->user()->Roles()->first()->name=='admin')
+                                    <p class="name font-weight-bold mb-0">
+                                        Super Admin
+                                    </p>
+                                @else
+                                    <p class="name font-weight-bold mb-0">{{ auth()->user()->Roles()->first()->name }}</p>
+                                @endif
+
 
                                 <a href="{{ route('profile') }}">
                                     <p class="name font-weight-bold mb-0">My Profile</p>

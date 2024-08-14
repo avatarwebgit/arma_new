@@ -463,7 +463,7 @@
     </div>
     {{--    //removeModal--}}
     <div id="remove_modal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="max-width: 400px">
             <div class="modal-content">
                 <div class="modal-body">
                     <p>

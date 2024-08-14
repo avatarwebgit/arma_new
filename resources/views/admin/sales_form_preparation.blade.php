@@ -561,7 +561,7 @@
 
     <div class="modal fade" id="remove_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
-        <div class="modal-dialog" role="document" style="max-width: 578px">
+        <div class="modal-dialog" role="document" style="max-width: 400px">
             <div class="modal-content">
                 <div class="modal-header">
 
