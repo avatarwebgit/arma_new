@@ -38,7 +38,7 @@
 <div class="col-12 col-md-3 mb-3">
     @php
         $name='Type/Grade';
-        $is_required=1;
+        $is_required=0;
         $required_span='';
         $required='';
        //common conditional

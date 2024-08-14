@@ -38,11 +38,15 @@
                                                             <h5 class="text-center text-white text-center p-3 commodity-title bg-dark mb-0">
                                                                 {{ $form->commodity }}
                                                             </h5>
-                                                            <div class="d-flex justify-content-between">
-                                                                <span class="text-bold text-gray-100">Type/Grade</span>
-                                                                <span
-                                                                    class="text-bold text-light-blue ">{{ $form->type_grade }}</span>
-                                                            </div>
+                                                            @if($form->type_grade==null or $form->type_grade=='')
+
+                                                            @else
+                                                                <div class="d-flex justify-content-between">
+                                                                    <span class="text-bold text-gray-100">Type/Grade</span>
+                                                                    <span
+                                                                        class="text-bold text-light-blue ">{{ $form->type_grade }}</span>
+                                                                </div>
+                                                            @endif
                                                             <div class="d-flex justify-content-between">
                                                                 <span class="text-bold text-gray-100">Supplier</span>
                                                                 <span class="text-bold text-light-blue ">

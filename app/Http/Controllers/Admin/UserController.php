@@ -431,6 +431,7 @@ class UserController extends Controller
         $user->update([
             'active_status' => $new_status,
             'reject_reason' => $reject_reason,
+            'created_by' => \auth()->id(),
         ]);
         return response()->json([1, 'ok']);
     }
@@ -444,6 +445,7 @@ class UserController extends Controller
         $user->update([
             'active' => $status,
             'reject_reason' => $reject_reason,
+            'created_by' => \auth()->id(),
         ]);
         return response()->json([1, 'ok']);
     }

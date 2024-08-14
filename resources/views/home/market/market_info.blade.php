@@ -2,10 +2,15 @@
 {{--    {{ $market->SalesForm->commodity }}--}}
 {{--</h5>--}}
 <div id="commodity_information" style="width: 100%">
-    <div class="d-flex justify-content-between">
-        <span class="text-bold text-gray-100">Type/Grade</span>
-        <span class="text-bold text-light-blue ">{{ $market->SalesForm->type_grade }}</span>
-    </div>
+    @if($market->SalesForm->type_grade==null or $market->SalesForm->type_grade=='')
+
+    @else
+        <div class="d-flex justify-content-between">
+            <span class="text-bold text-gray-100">Type/Grade</span>
+            <span class="text-bold text-light-blue ">{{ $market->SalesForm->type_grade }}</span>
+        </div>
+    @endif
+
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Supplier</span>
         <span class="text-bold text-light-blue ">
