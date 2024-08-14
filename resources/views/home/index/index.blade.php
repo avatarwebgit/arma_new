@@ -506,7 +506,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="landing-feature-item">
-                        <img src="{{ asset('home/img/landing/bank.svg') }}" alt="">
+                        <img src="{{ asset('evaluation.jpg') }}" alt="">
                         <span>
               2
             </span>
