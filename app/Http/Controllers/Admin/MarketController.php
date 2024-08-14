@@ -427,7 +427,7 @@ class MarketController extends Controller
             'currency' => 'required',
             'currency_other' => ['required_if:currency,other'],
             'commodity' => 'required',
-            'type_grade' => 'required',
+            'type_grade' => 'nullable',
             'hs_code' => 'nullable',
             'cas_no' => 'nullable',
             'product_more_details' => 'nullable',

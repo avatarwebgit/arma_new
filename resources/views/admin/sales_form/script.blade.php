@@ -2,7 +2,7 @@
 <script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
 
 <script>
-    $(document).ready(function (){
+    $(document).ready(function () {
         @if(session()->exists('need_submit'))
         show_submit_modal();
         @endif
@@ -45,6 +45,25 @@
         show_page();
         @endif
     });
+
+    function CheckMinOrder(tag) {
+        let min_quantity = $(tag).val();
+        min_quantity = min_quantity.replaceAll(',', '');
+        let max_quantity = $('#max_quantity').val();
+        max_quantity = max_quantity.replaceAll(',', '');
+
+        if (max_quantity == 0 || max_quantity == '' || max_quantity == null) {
+            $(tag).val('');
+            alert('Please Fill Max Quantity');
+        }else {
+            if (min_quantity == max_quantity || min_quantity > max_quantity) {
+                $(tag).val('');
+                alert('Min Quantity must be more than Max Quantity');
+            }
+        }
+
+
+    }
 
     function maybe_first_in_object(ob) {
         for (var props in ob) {
@@ -685,7 +704,6 @@
             }
         }
     }
-
 
 
     function hasOtherContractTypes(tag) {

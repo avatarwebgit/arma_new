@@ -396,7 +396,7 @@ class FormController extends Controller
 
     public function sales_form_index($status)
     {
-        $items = SalesOfferForm::where('status', $status)->where('used_in_market', 0)->orderBy('created_at', 'desc')->paginate(100);
+        $items = SalesOfferForm::where('status', $status)->where('form_id','!=',null)->where('used_in_market', 0)->orderBy('created_at', 'desc')->paginate(100);
         return view('admin.sales_form.list', compact('items', 'status'));
     }
 
@@ -760,7 +760,7 @@ class FormController extends Controller
             'contract_type_other' => ['required_if:contract_type,other'],
             //
             'commodity' => 'required',
-            'type_grade' => 'required',
+            'type_grade' => 'nullable',
             'hs_code' => 'nullable',
             'cas_no' => 'nullable',
             'product_more_details' => 'nullable',

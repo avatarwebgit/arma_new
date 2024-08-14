@@ -59,7 +59,7 @@
     @endphp
     <label for="{{ filed_name($name) }}"
            class="mb-2">{!! $name.' '.$required_span !!}</label>
-    <input onkeyup="numberFormat(this)" {{ $required }} id="{{ filed_name($name) }}" type="text"
+    <input onblur="CheckMinOrder(this)" onkeyup="numberFormat(this)" {{ $required }} id="{{ filed_name($name) }}" type="text"
            name="{{ filed_name($name) }}" class="form-control"
            value="{{ $value }}">
     @error(filed_name($name))

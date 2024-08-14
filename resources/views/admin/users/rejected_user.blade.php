@@ -2,6 +2,7 @@
     <thead>
     <tr class="text-center">
         <th>#</th>
+        <th>Create User By</th>
         <th>Date</th>
 {{--        <th>Time</th>--}}
         <th>email</th>
@@ -15,6 +16,11 @@
         <tr class="text-center">
             <td>
                 {{ $users->firstItem()+$key }}
+            </td>
+            <td>
+                @if($item->created_by!=null)
+                    {{ $item->CreatedBy->email }}
+                @endif
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}

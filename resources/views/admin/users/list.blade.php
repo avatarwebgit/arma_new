@@ -196,7 +196,7 @@
                 $('#Reject_reason_error').removeClass('d-none');
                 return;
             }
-            console.log('okkk');
+
 
             let url = "{{ route('admin.change_status') }}"
             $.ajax({
