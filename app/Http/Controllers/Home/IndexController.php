@@ -220,7 +220,7 @@ class IndexController extends Controller
         if ($user_check) {
             $user = auth()->user();
 
-            if ($user->active != 1 or $user->active_status != 2) {
+            if ($user->active ==3 or $user->active_status != 2) {
                 auth()->logout();
                 session()->put('user_inactive', 1);
                 return redirect()->route('home.index');

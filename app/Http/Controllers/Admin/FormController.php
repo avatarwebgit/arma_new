@@ -648,7 +648,6 @@ class FormController extends Controller
 
     function sale_form_permission_store_roles(Request $request)
     {
-
         try {
             $market_id = $request->market_id;
             $marketPermission = MarketPermission::where('market_id', $market_id)->first();
@@ -682,7 +681,7 @@ class FormController extends Controller
                 'user_ids' => $user_ids,
             ]);
 
-            $users = User::whereIn('id', unserialize($user_ids))->get();
+            $users = User::whereIn('id', unserialize($user_ids))->where('active',1)->get();
             $market = Market::where('id', $market_id)->first();
             $view_html = view('admin.markets.permission_users', compact('users', 'market', 'market_id'))->render();
             return response()->json([1, $view_html]);
@@ -701,7 +700,7 @@ class FormController extends Controller
         }
 
         // شروع جستجوی کاربران با نقش مشخص
-        $query = $role->users();
+        $query = $role->users()->where('active',1);
 
         // اضافه کردن شروط به کوئری در صورت وجود
         if ($request->user_name) {
