@@ -116,6 +116,7 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::get('users/brokers/{type}/index/', [UserController::class, 'index'])->middleware('permission:Users-Brokers')->name('users.brokers.index');
     Route::get('users/status/{status}', [UserController::class, 'users_status'])->name('users.status');
     Route::post('users/edit_modal', [UserController::class, 'edit_modal'])->name('user.edit_modal');
+
     //inquiries-list
     Route::get('/sales_form/first/index/{status}', [FormController::class, 'sales_form_index'])->middleware('permission:Users-Inbox')->name('sales_form.first.index');
     Route::get('/sales_form/second/index/{status}', [FormController::class, 'sales_form_index'])->middleware('permission:Inquires-Cash-Pending')->name('sales_form.second.index');
@@ -294,6 +295,7 @@ Route::post('/sales_form/update_or_store/{item?}/{is_preparation?}', [FormContro
 Route::post('/sales_form_change_status/', [FormController::class, 'change_status'])->name('sale_form.change_status');
 Route::get('/sale_form_permission/{item}', [FormController::class, 'sale_form_permission'])->name('sale_form.permission');
 Route::post('/sale_form_permission_store_roles', [FormController::class, 'sale_form_permission_store_roles'])->name('sale_form.store_roles');
+Route::post('users/user_permission', [FormController::class, 'user_permission'])->name('sale_form.user_permission.search');
 Route::post('/sale_form_permission_store_ids', [FormController::class, 'sale_form_permission_store_ids'])->name('sale_form.store_ids');
 Route::post('/marketPermission/remove/{user}/{market}', [FormController::class, 'marketPermissionRemove'])->name('marketPermission.remove');
 Route::post('/UpdateCashPending/', [FormController::class, 'UpdateCashPending'])->name('sale_form.UpdateCashPending');

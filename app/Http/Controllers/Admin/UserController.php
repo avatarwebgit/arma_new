@@ -97,6 +97,8 @@ class UserController extends Controller
 
     }
 
+
+
     public function remove(Request $request)
     {
         try {

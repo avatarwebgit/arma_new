@@ -206,7 +206,7 @@
 
                 </li>
                 @php
-                    $inbox_count=\App\Models\SalesOfferForm::where('status',1)->where('used_in_market',0)->count();
+                    $inbox_count=\App\Models\SalesOfferForm::where('status',1)->where('form_id','!=',null)->where('used_in_market',0)->count();
                     $cash_pending_count=\App\Models\SalesOfferForm::where('status',2)->where('used_in_market',0)->count();
                     $data_pending_count=\App\Models\SalesOfferForm::where('status',3)->where('used_in_market',0)->count();
                     $reject_count=\App\Models\SalesOfferForm::where('status',4)->where('used_in_market',0)->count();

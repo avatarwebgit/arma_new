@@ -226,6 +226,9 @@ class FormController extends Controller
 
     public function sales_form_preparation_store(Request $request, $form_id)
     {
+        $request->validate([
+            'term_conditions'=>'required|min:400',
+        ]);
         $form_type = $request->form_type;
         $status = 5;
         if ($form_type == 'save') {
@@ -239,7 +242,7 @@ class FormController extends Controller
             $array = [
                 'status' => $status,
                 'created_by' => \auth()->id()
-                ];
+            ];
             foreach ($files as $file) {
                 if ($request->has($file)) {
                     $path = \public_path($env . '/' . $sale_form[$file]);
@@ -258,8 +261,8 @@ class FormController extends Controller
             session()->flash('contact-tab', 'ok');
             if ($form_type == 'save') {
                 return redirect()->route('sale_form.preparation', ['item' => $sale_form->id]);
-            }else{
-                return redirect()->route('admin.sales_form.fifth.index',['status'=>5]);
+            } else {
+                return redirect()->route('admin.sales_form.fifth.index', ['status' => 5]);
             }
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -396,7 +399,7 @@ class FormController extends Controller
 
     public function sales_form_index($status)
     {
-        $items = SalesOfferForm::where('status', $status)->where('form_id','!=',null)->where('used_in_market', 0)->orderBy('created_at', 'desc')->paginate(100);
+        $items = SalesOfferForm::where('status', $status)->where('form_id', '!=', null)->where('used_in_market', 0)->orderBy('created_at', 'desc')->paginate(100);
         return view('admin.sales_form.list', compact('items', 'status'));
     }
 
@@ -585,8 +588,21 @@ class FormController extends Controller
 //            if ($new_status == 5) {
 //                SalesOfferFormCopy::create($sale_form->toArray());
 //            }
+            $route = '';
+            if ($new_status == 4) {
+                $route = route('admin.sales_form.forth.index', ['status' => 4]);
+            }
+            if ($new_status == 3) {
+                $route = route('admin.sales_form.third.index', ['status' => 3]);
+            }
+            if ($new_status == 6) {
+                $route = route('admin.sales_form.sixth.index', ['status' => 6]);
+            }
+            if ($new_status == 2) {
+                $route = route('admin.sales_form.second.index', ['status' => 2]);
+            }
             session()->flash('success', 'Successfully Updated');
-            return response()->json([1, 'success'], 200);
+            return response()->json([1, 'success', $route], 200);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }
@@ -599,7 +615,7 @@ class FormController extends Controller
         $market_id = $item;
         $customOrder = ['buyer', 'Members', 'Brokers', 'Representatives', 'seller'];
         $roles = Role::where('name', '!=', 'admin')
-            ->orderByRaw("FIELD(name, '".implode("', '", $customOrder)."') ASC")
+            ->orderByRaw("FIELD(name, '" . implode("', '", $customOrder) . "') ASC")
             ->get();
         $market = Market::where('id', $market_id)->first();
         $market_permission = MarketPermission::where('market_id', $market_id)->first();
@@ -611,6 +627,7 @@ class FormController extends Controller
         if ($market_permission->user_ids != null) {
             $user_ids = unserialize($market_permission->user_ids);
         }
+
         if ($market_permission->role_ids != null) {
             $role_ids = unserialize($market_permission->role_ids);
         }
@@ -672,32 +689,61 @@ class FormController extends Controller
         }
     }
 
+    public function user_permission(Request $request)
+    {
+        $usersType = $request->user_type;
+        $role = Role::find($usersType);
+
+        if (!$role) {
+            return response()->json(['success' => false, 'message' => 'Role not found'], 404);
+        }
+
+        // شروع جستجوی کاربران با نقش مشخص
+        $query = $role->users();
+
+        // اضافه کردن شروط به کوئری در صورت وجود
+        if ($request->user_name) {
+            $query->where('full_name', 'like', '%' . $request->user_name . '%');
+        }
+
+        if ($request->user_email) {
+            $query->where('email', 'like', '%' . $request->user_email . '%');
+        }
+
+        if ($request->user_company) {
+            $query->where('company_name', 'like', '%' . $request->user_company . '%');
+        }
+
+        // اجرای کوئری و دریافت نتایج
+        $users = $query->get();
+
+        return response()->json(['success' => true, 'data' => $users]);
+    }
+
+
+
     function sale_form_permission_store_ids(Request $request)
     {
+
         try {
             $market_id = $request->market_id;
-            $market = MarketPermission::where('market_id', $market_id)->first();
-            $market_user_ids = $market->user_ids;
-            if ($market_user_ids != null) {
-                $market_user_ids = unserialize($market_user_ids);
-            } else {
-                $market_user_ids = [];
+            $market = MarketPermission::where('market_id',$market_id)->first(); // استفاده از findOrFail به‌جای where و first
+            $market_user_ids = $market->user_ids ? unserialize($market->user_ids) : [];
+            // افزودن شناسه کاربر جدید و حذف تکراری‌ها
+            $ids=$request->ids;
+            foreach ($ids as $id){
+                $market_user_ids[] = $id; // فرض می‌کنیم user_id از درخواست وجود دارد
             }
-            $user_ids_array = [];
-            foreach ($market_user_ids as $id) {
-                $user_ids_array[] = $id;
-            }
-            $user_ids_array[] = $request->user_id;
-            $user_ids_array = array_unique($user_ids_array);
-            $user_ids_array = serialize($user_ids_array);
-            $market->update([
-                'user_ids' => $user_ids_array,
-            ]);
+            $unique_user_ids = array_unique($market_user_ids);
+            // به‌روزرسانی شناسه‌های کاربران
+            $market->user_ids = serialize($unique_user_ids);
+            $market->save();
             return response()->json([1, 'ok']);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
         }
     }
+
 
     function marketPermissionRemove($user, $market)
     {
