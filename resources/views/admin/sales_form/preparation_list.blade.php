@@ -70,7 +70,11 @@
             {{ $items->firstItem()+$key }}
         </td>
         <td>
-            -
+            @if($form->created_by!=null)
+                {{ $form->CreatedBy->user_id }}
+            @else
+                -
+            @endif
         </td>
         <td>
             {{ $form->form_id }}

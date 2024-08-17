@@ -227,7 +227,7 @@ class FormController extends Controller
     public function sales_form_preparation_store(Request $request, $form_id)
     {
         $request->validate([
-            'term_conditions'=>'required|min:400',
+            'term_conditions' => 'required|min:400',
         ]);
         $form_type = $request->form_type;
         $status = 5;
@@ -578,12 +578,14 @@ class FormController extends Controller
             }
             $form_id = $request->form_id;
             $sale_form = SalesOfferForm::where('id', $form_id)->first();
+            $created_by = \auth()->id();
             $sale_form->update([
                 'status' => $new_status,
                 'has_deposit' => $has_deposit,
                 'deposit_value' => $deposit_value,
                 'data_pending_message' => $message,
                 'cash_pending_currency' => $currency,
+                'created_by' => $created_by,
             ]);
 //            if ($new_status == 5) {
 //                SalesOfferFormCopy::create($sale_form->toArray());
@@ -721,17 +723,16 @@ class FormController extends Controller
     }
 
 
-
     function sale_form_permission_store_ids(Request $request)
     {
 
         try {
             $market_id = $request->market_id;
-            $market = MarketPermission::where('market_id',$market_id)->first(); // استفاده از findOrFail به‌جای where و first
+            $market = MarketPermission::where('market_id', $market_id)->first(); // استفاده از findOrFail به‌جای where و first
             $market_user_ids = $market->user_ids ? unserialize($market->user_ids) : [];
             // افزودن شناسه کاربر جدید و حذف تکراری‌ها
-            $ids=$request->ids;
-            foreach ($ids as $id){
+            $ids = $request->ids;
+            foreach ($ids as $id) {
                 $market_user_ids[] = $id; // فرض می‌کنیم user_id از درخواست وجود دارد
             }
             $unique_user_ids = array_unique($market_user_ids);
