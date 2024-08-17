@@ -309,7 +309,7 @@
                     if (data[0] == 1) {
                         $('.change_status_btn').prop('disabled', false);
                         $(change_status_modal).modal('hide');
-                        window.location.reload();
+                        window.location.href=data[2];
                     }
                 }
             })

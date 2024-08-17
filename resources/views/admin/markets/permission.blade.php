@@ -78,7 +78,7 @@
 
     <div class="modal fade" id="ShowAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
-        <div style="max-width: 500px" class="modal-dialog" role="document">
+        <div style="max-width: 900px" class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3>
@@ -87,22 +87,51 @@
                     <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"></i>
                 </div>
                 <div class="modal-body p-5 row text-center">
-                    <div class="text-left">
-                        <label for="search_user" class="mb-2">Select User</label>
-                        <select class="form-control" id="search_user" data-live-search="true">
-                            @foreach($all_users as $item)
-                                <option value="{{ $item->id }}">{{ $item->email }}</option>
-                            @endforeach
-                        </select>
-                        <p id="user_error" class="d-none input-error-validate">select a user</p>
+                    <div class="row">
+
+                        <div class="col-12 col-md-3">
+                            <div class="text-left">
+                                <label for="user_type" class="mb-2">User Type *</label>
+                                <select class="form-control" id="user_type" data-live-search="true">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="text-left">
+                                <label for="user_name" class="mb-2">Name</label>
+                                <input class="form-control" id="user_name">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="text-left">
+                                <label for="user_email" class="mb-2">Email</label>
+                                <input class="form-control" id="user_email">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="text-left">
+                                <label for="user_company" class="mb-2">Company</label>
+                                <input class="form-control" id="user_company">
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="text-center mt-1">
-                        <button class="btn btn-sm btn-success" onclick="SaveUserMarketPermission({{ $market_id }})">
-                            Save
+
+                    <div class="text-center mt-3 mb-5">
+                        <button class="btn btn-sm btn-info" onclick="SearchUser()">
+                            Search
                         </button>
-{{--                        <button class="btn btn-sm btn-danger me-2" data-dismiss="modal" aria-label="Close">Close--}}
-{{--                        </button>--}}
+                        {{--                        <button class="btn btn-sm btn-danger me-2" data-dismiss="modal" aria-label="Close">Close--}}
+                        {{--                        </button>--}}
                     </div>
+
+                    <ul id="userList" class="list-group"></ul>
+
+                    <div id="noResults" class="no-results" style="display:none;">کاربری پیدا نشد!</div>
                 </div>
             </div>
         </div>
@@ -115,23 +144,139 @@
             text-align: left !important;
         }
 
+        .user-list .list-group-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+        .user-actions button {
+
+            margin-left: 10px;
+
+        }
+
+        .no-results {
+
+            text-align: center;
+
+            color: #dc3545;
+
+            padding: 20px;
+
+        }
+
     </style>
 @endpush
 @push('script')
     <script>
+        function SearchUser() {
+            // گرفتن مقادیر از فرم
+            var userType = $('#user_type').val();
+            var userName = $('#user_name').val();
+            var userEmail = $('#user_email').val();
+            var userCompany = $('#user_company').val();
+
+            // بررسی کنید که userType انتخاب شده
+            if (!userType) {
+                alert('User Type is required!'); // پیغام خطا در صورت عدم انتخاب
+                return;
+            }
+
+            $('#userList').empty();
+            $('#noResults').hide(); // مخفی کردن پیام عدم نتیجه
+
+            // انجام درخواست AJAX
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('sale_form.user_permission.search') }}", // آدرس نقطه پایانی که اطلاعات را در سمت سرور پردازش می‌کند
+                data: {
+                    user_type: userType,
+                    user_name: userName,
+                    user_email: userEmail,
+                    user_company: userCompany,
+                    _token: "{{ csrf_token() }}" // اضافه کردن توکن CSRF
+                },
+                success: function (response) {
+                    if (response.success) {
+                        if (response.data.length === 0) {
+                            $('#noResults').show();
+                        } else {
+                            response.data.forEach(function (user) {
+                                $('#userList').append(`
+                                <li class="list-group-item">
+                                    <div class="text-left">
+                                        <input type="checkbox" value="${user.id}" class="user-checkbox ms-3">User ID: ${user.user_id} / Name: ${user.full_name} / Email: ${user.email} / Company: ${user.company_name}
+                                    </div>
+                                </li>
+                            `);
+                            });
+
+                            // اضافه کردن دکمه جمع‌آوری ID ها پس از لیست کاربر
+                            $('#userList').append(`
+                            <button style="max-width: 150px" id="collectIdsButton" class="btn btn-success btn-sm mt-2">
+                                Add Users
+                            </button>
+                        `);
+                        }
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                    alert('An error occurred while processing your request.');
+                }
+            });
+        }
+
+        // جمع‌آوری ID کاربران انتخاب شده
+        $(document).on('click', '#collectIdsButton', function () {
+            const selectedIds = $('.user-checkbox:checked').map(function () {
+                return this.value;
+            }).get();
+
+            let market_id = "{{ $market_id }}"; // شناسه بازار را از PHP گرفته‌ایم
+
+            if (selectedIds.length > 0) {
+                // ارسال داده‌ها به سرور
+                $.ajax({
+                    url: "{{ route('sale_form.store_ids') }}", // آدرس سرور
+                    type: 'POST', // نوع درخواست
+                    data: {
+                        ids: selectedIds,
+                        market_id: market_id,
+                        _token: "{{ csrf_token() }}"
+                    }, // داده‌ها را به فرمتی مناسب ارسال می‌کنیم
+                    success: function (response) {
+                        // واکنش موفقیت‌آمیز
+                        window.location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        // واکنش خطا
+                        alert('Error sending IDs to the server: ' + error);
+                    }
+                });
+            } else {
+                alert('At least one user must be selected');
+            }
+        });
+
         function rolePermission(market_id) {
             let checkbox = $('.checkbox');
             let role_ids = [];
+
             $.each(checkbox, function (index, val) {
-                let checked = $(val)[0].checked;
-                let id = $(val).data('id');
-                if (checked) {
-                    role_ids.push(id);
+                if ($(val)[0].checked) {
+                    role_ids.push($(val).data('id'));
                 }
             });
 
-
-            let url = "{{ route('sale_form.store_roles') }}"
+            let url = "{{ route('sale_form.store_roles') }}";
             $.ajax({
                 url: url,
                 data: {
@@ -145,27 +290,28 @@
                     if (data[0] == 1) {
                         $('#permission_users').html(data[1]);
                     } else {
-                        alert('something went wrong')
+                        alert('something went wrong');
                     }
                 }
-            })
+            });
         }
 
         function SaveUserMarketPermission(market_id) {
             $('#user_error').addClass('d-none');
             let user_id = $('#search_user').val();
+
             if (user_id.length == 0) {
                 $('#user_error').removeClass('d-none');
                 return false;
             }
-            let url = "{{ route('sale_form.store_ids') }}"
+
+            let url = "{{ route('sale_form.store_ids') }}";
             $.ajax({
                 url: url,
                 data: {
                     market_id: market_id,
                     user_id: user_id,
                     _token: "{{ csrf_token() }}"
-
                 },
                 dataType: "json",
                 method: "POST",
@@ -173,21 +319,20 @@
                     if (data[0] == 1) {
                         window.location.reload();
                     } else {
-                        alert('something went wrong')
+                        alert('something went wrong');
                     }
                 }
-            })
+            });
         }
 
         function ShowAddModal() {
             $('#user_error').addClass('d-none');
-            let ShowAddModal = $('#ShowAddModal');
-            ShowAddModal.modal('show');
+            $('#ShowAddModal').modal('show');
         }
 
         $('select').selectpicker({
             'title': 'Select'
         });
-
     </script>
 @endpush
+
