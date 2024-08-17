@@ -62,3 +62,26 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="BlockUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+     aria-hidden="true">
+    <div style="max-width: 500px !important;" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="auth-form">
+                <div class="modal-header position-relative" style="border-bottom: none !important;">
+                    <i style="position: absolute;top:0;right: 0" data-dismiss="modal" aria-label="Close"
+                       class="fa fa-times-circle fa-2x"></i>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-danger text-center">
+                            Your Account has been Blocked
+                            <br>
+                            Contact your administrator
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
