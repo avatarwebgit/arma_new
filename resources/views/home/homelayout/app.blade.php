@@ -83,6 +83,11 @@
             dataType: 'JSON',
             method: 'post',
             success: function (msg) {
+                $(tag).prop('disabled', false);
+                if (msg[0]==3){
+                 $('#login_modal').modal('hide');
+                 $('#BlockUser').modal('show');
+                }
                 if (msg[0] === 1) {
                     window.location.href = "/";
                 }

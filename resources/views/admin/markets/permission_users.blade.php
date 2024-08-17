@@ -12,7 +12,7 @@
         </td>
         <td>
             <strong>
-                {{ isset($user->Roles()->first()->name) ? $user->Roles()->first()->name : '-' }}
+                {{ isset($user->Roles()->first()->name) ? ucfirst($user->Roles()->first()->name) : '-' }}
             </strong>
         </td>
         <td>

@@ -94,7 +94,7 @@
                                 <label for="user_type" class="mb-2">User Type *</label>
                                 <select class="form-control" id="user_type" data-live-search="true">
                                     @foreach($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
                                     @endforeach
                                 </select>
 

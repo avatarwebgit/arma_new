@@ -7,6 +7,7 @@ use App\Models\SessionModel;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
@@ -59,6 +60,12 @@ class LoginController extends Controller
             if ($request->hasSession()) {
                 $request->session()->put('auth.password_confirmed_at', time());
             }
+            $user = Auth::user();
+            if ($user->active == 3) {
+                \auth()->logout();
+                return response()->json([3, 'user_blocked']);
+
+            }
             return response()->json([1, 'ok']);
         }
 
@@ -74,15 +81,15 @@ class LoginController extends Controller
     {
         $user = \App\Models\User::where('email', $request->get('email'))->first();
         $ip = $request->ip();
-        if ($user){
-            $sessions = DB::table('sessions')->where('user_id',$user->id)->exists();
-            if ($sessions){
-                $sessions = DB::table('sessions')->where('user_id',$user->id)->where('ip_address',$ip)->exists();
+        if ($user) {
+            $sessions = DB::table('sessions')->where('user_id', $user->id)->exists();
+            if ($sessions) {
+                $sessions = DB::table('sessions')->where('user_id', $user->id)->where('ip_address', $ip)->exists();
                 if (!$sessions) {
                     session()->put('is_logged_in', 'this user is already logged in with another Device');
                     return redirect()->route('home.index');
-                }else{
-                    $sessions = SessionModel::where('user_id',$user->id)->where('ip_address',$ip)->first();
+                } else {
+                    $sessions = SessionModel::where('user_id', $user->id)->where('ip_address', $ip)->first();
                     $sessions->delete();
                 }
             }
