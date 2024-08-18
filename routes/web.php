@@ -239,8 +239,8 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::post('/wallet_change', [WalletController::class, 'wallet_change'])->name('user.wallet.change');
 
     Route::post('users/reset_password/{user}', [UserController::class, 'reset_password'])->name('user.reset_password');
-    Route::get('users/{type}/{user}', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('users/{type}/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::get('users/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('users/{user}', [UserController::class, 'update'])->name('user.update');
 
     //form
     Route::resource('forms', FormController::class);

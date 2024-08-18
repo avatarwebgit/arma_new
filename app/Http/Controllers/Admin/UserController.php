@@ -98,7 +98,6 @@ class UserController extends Controller
     }
 
 
-
     public function remove(Request $request)
     {
         try {
@@ -115,10 +114,9 @@ class UserController extends Controller
         return response()->json([$type, $alert]);
     }
 
-    public function edit($type, User $user)
+    public function edit(User $user)
     {
         $userStatus = UserStatus::whereIn('id', [0, 1, 2])->get();
-        $user_status = UserStatus::where('id', $type)->pluck('title')->first();
         $messages = MailMessages::whereIn('id', [3, 4])->get();
         $userTypes = Type::all();
         $roles = Role::all();
@@ -130,10 +128,8 @@ class UserController extends Controller
         $salutation = Salutation::all();
         return view('admin.users.edit', compact(
             'user',
-            'type',
             'userStatus',
             'messages',
-            'user_status',
             'userTypes',
             'permissions',
             'roles',
@@ -292,30 +288,39 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request, $type, User $user)
+    public function update(Request $request, User $user)
     {
-
-        $pre_active_status = $user->active_status;
-        $active_status = $request->active_status;
         try {
-            $user->update($request->all());
-            if ($pre_active_status == 0) {
-                if ($active_status == 1) {
-                    $mail = MailMessages::where('id', 4)->first();
-                    $title = $mail->title;
-                    $text = $mail->text;
-                    $password = $this->randomPassword();
-                    $text = str_replace('{username}', $user->email, $text);
-                    $text = str_replace('{password}', $password, $text);
-                    $user->update(['password' => $password]);
-                }
-                if ($active_status == 2) {
-                    $mail = MailMessages::where('id', 3)->first();
-                    $title = $mail->title;
-                    $text = $mail->text;
-                }
-                dispatch(new AdminChangeStatusUserJob($user, $title, $text, $request->note, $user->email));
+
+            if ($request->has('image')) {
+                $env = env('UPLOAD_IMAGE_PROFILE');
+                $image = generateFileName($request->image->getClientOriginalName());
+                $request->image->move(public_path($env), $image);
+            } else {
+                $image = $user->image;
             }
+            $user->update([
+                'image' => $image,
+                'full_name' => $request->full_name,
+                'company_country' => $request->company_country,
+            ]);
+//            if ($pre_active_status == 0) {
+//                if ($active_status == 1) {
+//                    $mail = MailMessages::where('id', 4)->first();
+//                    $title = $mail->title;
+//                    $text = $mail->text;
+//                    $password = $this->randomPassword();
+//                    $text = str_replace('{username}', $user->email, $text);
+//                    $text = str_replace('{password}', $password, $text);
+//                    $user->update(['password' => $password]);
+//                }
+//                if ($active_status == 2) {
+//                    $mail = MailMessages::where('id', 3)->first();
+//                    $title = $mail->title;
+//                    $text = $mail->text;
+//                }
+//                dispatch(new AdminChangeStatusUserJob($user, $title, $text, $request->note, $user->email));
+//            }
             $message = 'The Item Has Been Updated Successfully';
             session()->flash('success', $message);
         } catch (\Exception $exception) {
