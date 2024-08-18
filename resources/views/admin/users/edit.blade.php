@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('title')
-    {{ $user_status }} Users
+    Edit User Information
 @endsection
 
 @push('script')
@@ -55,368 +55,93 @@
                         <div class="col-12 col-xl-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <div>
-                                        <h3>Edit User</h3>
-                                        <hr>
-                                    </div>
                                     <div class="settings-profile">
-                                        <form method="POST"
-                                              action="{{ route('admin.user.update',['type'=>$type,'user'=>$user->id]) }}">
+                                        <form method="POST" action="{{ route('admin.user.update', ['user' => $user->id]) }}" enctype="multipart/form-data">
                                             @csrf
                                             @method('put')
+
                                             <div class="row">
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="commodity" class="mb-1">Commodities *</label>
-                                                    <select disabled name="commodity" id="commodity"
-                                                            class="form-control">
-                                                        <option value="">Select Commodity</option>
-                                                        @foreach($commodities as $commodity)
-                                                            <option
-                                                                {{ $user->commodity==$commodity->id ? 'selected' : ''  }} value="{{ $commodity->id }}">
-                                                                {{ $commodity->title }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('commodity')
+                                                <div class="form-group col-12 text-center">
+                                                    <div class="user-img mb-2">
+                                                        <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="{{ auth()->user()->name }}" class="rounded-circle" width="50">
+                                                    </div>
+                                                    {{ auth()->user()->user_id }}
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <label for="profile_picture" class="mb-1">Profile Picture</label>
+                                                    <input type="file" class="form-control" name="profile_picture" id="profile_picture">
+                                                    @error('profile_picture')
                                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_name" class="mb-1">Company Name *</label>
-                                                    <input disabled
-                                                           id="company_name"
-                                                           type="text"
-                                                           class="form-control @error('company_name') is-invalid @enderror"
-                                                           name="company_name"
-                                                           value="{{ $user->company_name }}" required>
-                                                    @error('company_name')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h5 class="mt-3  text-left">
-                                                        Company Address
-                                                        <hr>
-                                                    </h5>
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_address" class="mb-1">address *</label>
-                                                    <input disabled
-                                                           id="company_address"
-                                                           type="text"
-                                                           class="form-control @error('company_address') is-invalid @enderror"
-                                                           name="company_address"
-                                                           value="{{$user->company_address }}" required>
 
-                                                    @error('company_address')
-                                                    <span class="invalid-feedback">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_post_zip_code" class="mb-1">post/zip code
-                                                        *</label>
-                                                    <input disabled
-                                                           id="company_post_zip_code"
-                                                           type="text"
-                                                           class="form-control @error('company_post_zip_code') is-invalid @enderror"
-                                                           name="company_post_zip_code"
-                                                           value="{{ $user->company_post_zip_code }}" required>
-
-                                                    @error('company_post_zip_code')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_city" class="mb-1">company city</label>
-                                                    <input disabled
-                                                           id="company_city"
-                                                           type="text"
-                                                           class="form-control @error('company_city') is-invalid @enderror"
-                                                           name="company_city"
-                                                           value="{{ $user->company_city }}">
-
-                                                    @error('company_city')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_state" class="mb-1">State (US entities
-                                                        only)</label>
-                                                    <input disabled
-                                                           id="company_state"
-                                                           type="text"
-                                                           class="form-control @error('company_state') is-invalid @enderror"
-                                                           name="company_state"
-                                                           value="{{ $user->company_state }}">
-                                                    @error('company_state')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_country" class="mb-1">Select Country</label>
-                                                    <select disabled name="company_country" id="company_country"
-                                                            class="form-control">
-                                                        <option value="">Select Country</option>
-                                                        @foreach($countries as $country)
-                                                            <option
-                                                                {{ $user->company_country==$country->id ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->title }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('company_country')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h5 class="mt-3">
-                                                        Company Contact
-                                                        <hr>
-                                                    </h5>
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_phone" class="mb-1">Main Telephone Number
-                                                        *</label>
-                                                    <input disabled
-                                                           id="company_phone"
-                                                           type="text"
-                                                           class="form-control @error('company_phone') is-invalid @enderror"
-                                                           name="company_phone"
-                                                           value="{{ $user->company_phone }}" required>
-
-                                                    @error('company_phone')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_website" class="mb-1">Website</label>
-                                                    <input disabled
-                                                           id="company_website"
-                                                           type="text"
-                                                           class="form-control @error('company_website') is-invalid @enderror"
-                                                           name="company_website"
-                                                           value="{{ $user->company_website }}" required>
-
-                                                    @error('company_website')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_email" class="mb-1">Email</label>
-                                                    <input disabled
-                                                           id="company_email"
-                                                           type="email"
-                                                           class="form-control @error('company_email') is-invalid @enderror"
-                                                           name="company_email"
-                                                           value="{{ $user->company_email }}" required>
-                                                    @error('company_email')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h5>
-                                                        Master User Details
-                                                        <hr>
-                                                    </h5>
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="user_type" class="mb-1">User Type *</label>
-                                                    <select disabled
-                                                            id="user_type"
-                                                            type="text"
-                                                            class="form-control @error('user_type') is-invalid @enderror"
-                                                            name="user_type">
-                                                        <option value="">Select User Type</option>
-                                                        @foreach($types as $type)
-                                                            <option
-                                                                {{ $user->user_type==$type->id ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->name }}</option>
-                                                        @endforeach
-                                                    </select>
-
-                                                    @error('user_type')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="salutation" class="mb-1">Salutation *</label>
-                                                    <select disabled id="salutation"
-                                                            type="text"
-                                                            class="form-control @error('salutation') is-invalid @enderror"
-                                                            name="salutation">
-                                                        <option value="">Select</option>
-                                                        @foreach($salutation as $item)
-                                                            <option
-                                                                {{ $user->salutation==$item->id  ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->title }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('salutation')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
                                                 <div class="form-group col-12 col-md-6">
                                                     <label for="full_name" class="mb-1">Full Name *</label>
-                                                    <input disabled
-                                                           id="full_name"
-                                                           type="text"
-                                                           class="form-control @error('full_name') is-invalid @enderror"
-                                                           name="full_name"
-                                                           value="{{ $user->full_name }}"
-                                                           required
-                                                    >
-                                                    @error('full_name')
+                                                    <input id="full_name" type="text" class="form-control @error('firfull_namest_name') is-invalid @enderror" name="full_name" value="{{ $user->full_name }}" required>
+                                                    @error('first_name')
                                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group col-12 col-md-6">
-                                                    <label for="company_title" class="mb-1">Company Title *</label>
-                                                    <input disabled
-                                                           id="company_title"
-                                                           type="text"
-                                                           class="form-control @error('company_title') is-invalid @enderror"
-                                                           name="company_title"
-                                                           value="{{ $user->company_title }}"
-                                                           required
-                                                    >
-                                                    @error('company_title')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="function_in_company" class="mb-1">Function in
-                                                        company</label>
-                                                    <select disabled
-                                                            id="function_in_company"
-                                                            type="text"
-                                                            class="form-control @error('function_in_company') is-invalid @enderror"
-                                                            name="function_in_company">
-                                                        <option value="">Select</option>
-                                                        @foreach($companyFunction as $item)
-                                                            <option
-                                                                {{ $user->function_in_company==$item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->title }}</option>
+                                                    <label for="company_country" class="mb-1">Country *</label>
+                                                    <select name="company_country" id="company_country" class="form-control @error('company_country') is-invalid @enderror" required>
+                                                        <option value="">Select Country</option>
+                                                        @foreach($countries as $country)
+                                                            <option {{ $user->company_country == $country->countryName ? 'selected' : '' }} value="{{ $country->countryName }}">{{ $country->countryName }}</option>
                                                         @endforeach
                                                     </select>
-
-                                                    @error('function_in_company')
+                                                    @error('country')
                                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group col-12 col-md-6">
                                                     <label for="email" class="mb-1">Email *</label>
-                                                    <input disabled
-                                                           id="email"
-                                                           type="email"
-                                                           class="form-control @error('email') is-invalid @enderror"
-                                                           name="email"
-                                                           value="{{ $user->email }}"
-                                                           required>
+                                                    <input disabled id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required>
                                                     @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group col-12 col-md-6">
-                                                    <label for="skype" class="mb-1">Skype</label>
-                                                    <input disabled
-                                                           id="skype"
-                                                           type="text"
-                                                           class="form-control @error('skype') is-invalid @enderror"
-                                                           name="skype" value="{{ $user->skype }}">
-                                                    @error('skype')
+                                                    <label for="role" class="mb-1">Role *</label>
+                                                    <select disabled name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
+                                                        <option value="">Select Role</option>
+                                                        @foreach($roles as $role)
+                                                            <option {{ $user->Roles()->first()->id == $role->id ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('role')
                                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group col-12 col-md-6">
-                                                    <label for="whatsapp" class="mb-1">whatsapp</label>
-                                                    <input disabled
-                                                           id="whatsapp"
-                                                           type="text"
-                                                           class="form-control @error('whatsapp') is-invalid @enderror"
-                                                           name="whatsapp" value="{{ $user->whatsapp }}">
-                                                    @error('whatsapp')
+                                                    <label for="join_date" class="mb-1">Join Date</label>
+                                                    <input disabled id="join_date" type="date" class="form-control @error('join_date') is-invalid @enderror" name="join_date" value="{{ $user->created_at }}" required>
+                                                    @error('join_date')
                                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="row mt-4">
 
-
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="role_request_id">Role Request</label>
-                                                    <select
-                                                        id="role_request_id"
-                                                        type="text"
-                                                        class="form-control"
-                                                        name="role_request_id">
-                                                        @if($user->type!='Admin')
-                                                            <option value="0">Nothing</option>
-                                                            @foreach($userTypes as $type)
-                                                                <option
-                                                                    {{ $user->role_request_id==$type->id ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->name }}</option>
-                                                            @endforeach
-                                                        @else
-                                                            <option value="1">Admin</option>
-                                                        @endif
-                                                    </select>
-                                                </div>
-                                                <div class="col-12 mb-2">
-                                                    <label for="status">User Status</label>
-                                                    <select name="active_status" id="status"
-                                                            class="form-control">
-                                                        @foreach($userStatus as $status)
-                                                            <option
-                                                                {{ $user->active_status == $status->id ? 'selected' : ' ' }} value="{{ $status->id }}">{{ $status->title }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-12 mb-3 mb-2">
-                                                    <label for="note">Note:</label>
-                                                    <textarea rows="5" id="note" name="note"
-                                                              class="form-control">{{ $user->note }}</textarea>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <button class="btn btn-info btn-sm mb-2" type="submit">
-                                                        Update
-                                                    </button>
-                                                </div>
+                                            <div class="col-md-12 mt-4">
+                                                <button class="btn btn-info btn-sm mb-2" type="submit">
+                                                    Update
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
