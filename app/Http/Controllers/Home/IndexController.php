@@ -235,10 +235,12 @@ class IndexController extends Controller
                 return redirect()->route('admin.dashboard');
             }
             if ($user->hasRole(['seller'])) {
-                return redirect()->route('seller.dashboard');
+                return redirect()->route('admin.dashboard');
+//                return redirect()->route('seller.dashboard');
             }
             if ($user->hasRole(['buyer'])) {
-                return redirect()->route('bidder.dashboard');
+                dd('redirect');
+//                return redirect()->route('bidder.dashboard');
             }
         } else {
             return redirect()->route('home.index');

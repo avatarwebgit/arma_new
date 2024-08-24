@@ -1,3 +1,13 @@
+@php
+$role=auth()->user()->Roles[0]->name;
+if ($role=='admin' or $role=='Members'){
+    $side_bar_color='#1400c6';
+}
+    if ($role=='seller'){
+        $side_bar_color='black';
+    }
+@endphp
+
 <nav class="dash-sidebar light-sidebar transprent-bg" style="background-color: {{ $side_bar_color }} !important;">
     <div class="navbar-wrapper">
         <div class="m-header">
@@ -22,6 +32,13 @@
             </div>
 
             <ul class="dash-navbar" style="display: block;">
+                <li class="dash-item dash-hasmenu {{ request()->is('/') ? 'active' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}" class="dash-link">
+                        <span class="dash-micon"><i class="ti ti-home"></i></span>
+                        <span class="dash-mtext custom-weight">{{ __('Dashboard') }}</span>
+                    </a>
+                </li>
+
                 <li class="dash-item">
                     <a href="#" class="dash-link">
                         <span class="dash-micon"><i class="ti ti-user"></i></span>
@@ -36,7 +53,7 @@
                             </a>
                         </li>
                         <li class="dash-item">
-                            <a href="#" class="dash-link">
+                            <a href="{{ route('admin.user.edit',['user'=>auth()->id(),'type'=>'change_password']) }}" class="dash-link">
                                 <span class="dash-micon"><i class="ti ti-lock"></i></span>
                                 <span class="dash-mtext">{{ __('Change Password') }}</span>
                             </a>
@@ -44,13 +61,54 @@
                     </ul>
                 </li>
 
+                @if($role=='seller')
+                    <!-- Sales Order Section -->
+                    <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/orders*') ? 'active dash-trigger' : 'collapsed' }}">
+                        <a href="#!" class="dash-link">
+                            <span class="dash-micon"><i class="ti ti-package"></i></span>
+                            <span class="dash-mtext">{{ __('Sales Order') }}</span>
+                            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="dash-submenu">
 
-                <li class="dash-item dash-hasmenu {{ request()->is('/') ? 'active' : '' }}">
-                    <a href="{{ route('admin.dashboard') }}" class="dash-link">
-                        <span class="dash-micon"><i class="ti ti-home"></i></span>
-                        <span class="dash-mtext custom-weight">{{ __('Dashboard') }}</span>
-                    </a>
-                </li>
+                                <li class="dash-item">
+                                    <a class="dash-link" href="{{ route('sale_form', ['page_type' => 'Create']) }}">
+                                        <span class="dash-micon"><i class="ti ti-file"></i></span>
+                                        Sales Offer Form
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+                    <!-- Sales Order Section -->
+                    <li class="dash-item dash-hasmenu">
+                        <a href="#!" class="dash-link">
+                            <span class="dash-micon"><i class="ti ti-package"></i></span>
+                            <span class="dash-mtext">{{ __('Transactions') }}</span>
+                            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="dash-submenu">
+                                <li class="dash-item">
+
+                                </li>
+                        </ul>
+                    </li>
+                    <!-- Sales Order Section -->
+                    <li class="dash-item dash-hasmenu">
+                        <a href="#!" class="dash-link">
+                            <span class="dash-micon"><i class="ti ti-package"></i></span>
+                            <span class="dash-mtext">{{ __('Messages') }}</span>
+                            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="dash-submenu">
+                            <li class="dash-item">
+
+                            </li>
+                        </ul>
+                    </li>
+
+                @elseif($role=='admin' or $role=='Members')
+
+
 
                 @php
                     // Counts for Users
@@ -324,7 +382,7 @@
                     <li class="dash-item">
                         <a href="{{ route('admin.header1.index') }}" class="dash-link">
                             <span class="dash-micon"><i class="ti ti-header"></i></span>
-                            <span class="dash-mtext custom-weight">{{ __('Line 1') }}</span>
+                            <span class="dash-mtext custom-weight">{{ __('Line |') }}</span>
                         </a>
                     </li>
                 @endcan
@@ -333,7 +391,7 @@
                     <li class="dash-item">
                         <a href="{{ route('admin.header2.index') }}" class="dash-link">
                             <span class="dash-micon"><i class="ti ti-header"></i></span>
-                            <span class="dash-mtext custom-weight">{{ __('Line 2') }}</span>
+                            <span class="dash-mtext custom-weight">{{ __('Line ||') }}</span>
                         </a>
                     </li>
                 @endcan
@@ -348,9 +406,21 @@
                     <ul class="dash-submenu">
                         @can('Settings-Setting')
                             <li class="dash-item">
-                                <a class="dash-link" href="{{ route('admin.settings.index') }}">
+                                <a class="dash-link" href="{{ route('admin.settings.index',['type'=>'header']) }}">
                                     <span class="dash-micon"><i class="ti ti-settings"></i></span>
-                                    {{ __('Setting') }}
+                                    {{ __('Header') }}
+                                </a>
+                            </li>
+                            <li class="dash-item">
+                                <a class="dash-link" href="{{ route('admin.settings.index',['type'=>'footer']) }}">
+                                    <span class="dash-micon"><i class="ti ti-settings"></i></span>
+                                    {{ __('Footer') }}
+                                </a>
+                            </li>
+                            <li class="dash-item">
+                                <a class="dash-link" href="{{ route('admin.settings.index',['type'=>'general']) }}">
+                                    <span class="dash-micon"><i class="ti ti-settings"></i></span>
+                                    {{ __('General') }}
                                 </a>
                             </li>
                         @endcan
@@ -362,6 +432,21 @@
                                 </a>
                             </li>
                         @endcan
+
+                        <li class="dash-item">
+                            <a class="dash-link" href="{{ route('admin.countries.index') }}">
+                                <span class="dash-micon"><i class="ti ti-money"></i></span>
+                                {{ __('Country') }}
+                            </a>
+                        </li>
+
+                        <li class="dash-item">
+                            <a class="dash-link" href="{{ route('admin.packages.index') }}">
+                                <span class="dash-micon"><i class="ti ti-money"></i></span>
+                                {{ __('Package') }}
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
@@ -447,6 +532,11 @@
                         </ul>
                     </li>
                 @endcan
+
+                @endif
+
+
+
             </ul>
         </div>
     </div>

@@ -85,3 +85,26 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="anotheruserloggedin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+     aria-hidden="true">
+    <div style="max-width: 500px !important;" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="auth-form">
+                <div class="modal-header position-relative" style="border-bottom: none !important;">
+                    <i style="position: absolute;top:0;right: 0" data-dismiss="modal" aria-label="Close"
+                       class="fa fa-times-circle fa-2x"></i>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-danger text-center">
+                            this user is already logged in By another Device
+                            <br>
+                            please try again later
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

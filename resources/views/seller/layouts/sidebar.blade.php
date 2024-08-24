@@ -1,5 +1,14 @@
 {{--  {{ dd($forms) }}  --}}
-<nav class="dash-sidebar light-sidebar transprent-bg" style="background-color: {{ $side_bar_color }} !important;">
+
+@php
+    $role=auth()->user()->Roles[0]->name;
+
+    if ($role=='seller'){
+        $side_bar_color='white';
+    }
+@endphp
+
+<nav class="dash-sidebar light-sidebar transprent-bg seller" style="background-color: {{ $side_bar_color }} !important;color: black !important;">
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="{{ route('home.index') }}" class="b-brand text-center">

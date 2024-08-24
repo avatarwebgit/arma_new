@@ -29,6 +29,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
     <link rel="stylesheet" href="{{ asset('vendor/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/developer.css') }}">
+    <style>
+        .seller *{
+            color: black;
+        }
+    </style>
     @stack('style')
 </head>
 
