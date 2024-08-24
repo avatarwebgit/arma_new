@@ -61,12 +61,15 @@ class LoginController extends Controller
                 $request->session()->put('auth.password_confirmed_at', time());
             }
             $user = Auth::user();
-            if ($user->active == 3) {
-                \auth()->logout();
-                return response()->json([3, 'user_blocked']);
+            if ($user){
+                if ($user->active == 3) {
+                    \auth()->logout();
+                    return response()->json([3, 'user_blocked']);
 
+                }
+                return response()->json([1, 'ok']);
             }
-            return response()->json([1, 'ok']);
+
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -80,20 +83,15 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         $user = \App\Models\User::where('email', $request->get('email'))->first();
-        $ip = $request->ip();
         if ($user) {
             $sessions = DB::table('sessions')->where('user_id', $user->id)->exists();
             if ($sessions) {
-                $sessions = DB::table('sessions')->where('user_id', $user->id)->where('ip_address', $ip)->exists();
-                if (!$sessions) {
-                    session()->put('is_logged_in', 'this user is already logged in with another Device');
-                    return redirect()->route('home.index');
-                } else {
-                    $sessions = SessionModel::where('user_id', $user->id)->where('ip_address', $ip)->first();
-                    $sessions->delete();
-                }
+//                session()->put('is_logged_in', 'this user is already logged in with another Device');
+                return false;
             }
         }
+
+
 
         return $this->guard()->attempt(
             $this->credentials($request), $request->boolean('remember')

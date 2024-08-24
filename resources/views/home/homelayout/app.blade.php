@@ -33,6 +33,19 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+    window.addEventListener('beforeunload', function (event) {
+        // Call logout route
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        });
+
+        // // پیام تایید خروج در بعضی مرورگرها
+        event.preventDefault();
+        event.returnValue = ''; // برای نشان دادن پیغام کارتیک
+    });
 
     function ShowBidPage(market_id) {
         $.ajax({
@@ -90,6 +103,10 @@
                 }
                 if (msg[0] === 1) {
                     window.location.href = "/";
+                }
+                if (msg[0] === 0) {
+                    $('#login_modal').modal('hide');
+                    $('#anotheruserloggedin').modal('show');
                 }
             },
             error: function (error) {

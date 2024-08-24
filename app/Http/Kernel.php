@@ -73,7 +73,8 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'seller' => \App\Http\Middleware\SellerMiddleware::class,
         'bidder' => \App\Http\Middleware\BidderMiddleware::class,
-        'prevent.concurrent.login' => \App\Http\Middleware\PreventConcurrentLogin::class
+        'prevent.concurrent.login' => \App\Http\Middleware\PreventConcurrentLogin::class,
+        'check.session' => \App\Http\Middleware\CheckSession::class,
     ];
 
     /**

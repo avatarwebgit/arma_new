@@ -114,8 +114,9 @@ class UserController extends Controller
         return response()->json([$type, $alert]);
     }
 
-    public function edit(User $user)
+    public function edit(User $user, $type = null)
     {
+
         $userStatus = UserStatus::whereIn('id', [0, 1, 2])->get();
         $messages = MailMessages::whereIn('id', [3, 4])->get();
         $userTypes = Type::all();
@@ -137,7 +138,8 @@ class UserController extends Controller
             'commodities',
             'countries',
             'companyFunction',
-            'salutation'
+            'salutation',
+            'type'
         ));
     }
 
@@ -227,7 +229,7 @@ class UserController extends Controller
 
     public function member_update(User $user, Request $request)
     {
-
+        dd('ok');
         try {
             $email = $request->email_edit;
             $company_country = $request->company_country_edit;
@@ -235,6 +237,7 @@ class UserController extends Controller
             $role = $request->role;
             $initial = mb_substr($role, 0, 1);
             $initial = strtoupper($initial);
+
 
             $user->update([
                 'email' => $email,
@@ -245,7 +248,7 @@ class UserController extends Controller
             $user->update([
                 'user_id' => $user_id,
             ]);
-            if ($request->new_password == null) {
+            if ($request->new_password != null) {
                 $password = Hash::make($request->new_password);
                 $user->update([
                     'password' => $password,
@@ -290,20 +293,134 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        try {
+        if ($request->has('new_password')) {
+            $request->validate([
 
-            if ($request->has('image')) {
-                $env = env('UPLOAD_IMAGE_PROFILE');
-                $image = generateFileName($request->image->getClientOriginalName());
-                $request->image->move(public_path($env), $image);
-            } else {
-                $image = $user->image;
-            }
-            $user->update([
-                'image' => $image,
-                'full_name' => $request->full_name,
-                'company_country' => $request->company_country,
+                'old_password' => 'required|string',
+
+                'new_password' => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/',
+
+                'repeat_password' => 'required|string|same:new_password',
+
             ]);
+
+            // بررسی رمز عبور قدیمی
+
+            if (!Hash::check($request->old_password, $user->password)) {
+
+                return back()->withErrors(['old_password' => 'old password is incorrect']);
+
+            }
+        }
+
+        try {
+            if ($user->Roles[0]->name == 'seller') {
+                $validatedData = $request->validate([
+
+                    'company_country' => 'required|string',
+
+                    'company_address' => 'required|string',
+
+                    'company_phone' => 'required|string',
+
+                    'company_website' => 'nullable',
+
+                    'company_email' => 'required|email',
+
+                    'full_name' => 'required|string',
+
+                    'salutation' => 'nullable|string',
+
+                    'function_in_company' => 'required|string',
+
+                    'platform' => 'required|string',
+
+                    'mobile_no' => 'required|string',
+
+                    'commodity' => 'required|string',
+
+                ]);
+
+                $user->company_country = $validatedData['company_country'];
+
+                $user->company_address = $validatedData['company_address'];
+
+                $user->company_phone = $validatedData['company_phone'];
+
+                $user->company_website = $validatedData['company_website'];
+
+                $user->company_email = $validatedData['company_email'];
+
+                $user->full_name = $validatedData['full_name'];
+
+                $user->salutation = $validatedData['salutation'];
+
+                $user->function_in_company = $validatedData['function_in_company'];
+
+                $user->platform = $validatedData['platform'];
+
+                $user->mobile_no = $validatedData['mobile_no'];
+                $user->commodity = $validatedData['commodity'];
+
+                $user->save(); // ذخیره کاربر در دیتابیس
+
+                // پردازش تصویر و اطلاعات دیگر
+                $image = $request->has('image') ?
+                    generateFileName($request->image->getClientOriginalName()) :
+                    $user->image;
+                if ($request->has('image')) {
+                    $env = env('UPLOAD_IMAGE_PROFILE');
+                    $request->image->move(public_path($env), $image);
+                }
+                $user->update([
+                    'image' => $image
+                ]);
+            } else {
+
+
+            // بررسی و اعتبارسنجی رمز عبور جدید
+            if ($request->has('new_password')) {
+                $new_password = Hash::make($request->get('new_password'));
+                $user->update(['password' => $new_password]);
+            } else {
+                // پردازش تصویر و اطلاعات دیگر
+                $image = $request->has('image') ?
+                    generateFileName($request->image->getClientOriginalName()) :
+                    $user->image;
+                if ($request->has('image')) {
+                    $env = env('UPLOAD_IMAGE_PROFILE');
+                    $request->image->move(public_path($env), $image);
+                }
+                if ($request->has('company_address')) {
+                    $company_address = $request->company_address;
+                } else {
+                    $company_address = $user->company_address;
+                }
+
+                if ($request->has('mobile_no')) {
+                    $mobile_no = $request->mobile_no;
+                } else {
+                    $mobile_no = $user->mobile_no;
+                }
+
+                $user->update([
+
+                    'image' => $image,
+
+                    'full_name' => $request->full_name,
+
+                    'company_country' => $request->company_country,
+
+                    'company_address' => $company_address,
+
+                    'mobile_no' => $mobile_no,
+
+                ]);
+            }
+
+            }
+
+
 //            if ($pre_active_status == 0) {
 //                if ($active_status == 1) {
 //                    $mail = MailMessages::where('id', 4)->first();

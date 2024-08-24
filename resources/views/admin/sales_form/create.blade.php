@@ -1,4 +1,5 @@
-@extends($role=='seller'?'seller.layouts.main':'admin.layouts.main')
+{{--@extends($role=='seller'?'seller.layouts.main':'admin.layouts.main')--}}
+@extends('admin.layouts.main')
 
 @section('content')
     @include('admin.sales_form.modal')

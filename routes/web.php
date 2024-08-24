@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Admin\CKEditorController;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FormController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Admin\HeaderCategoryController;
 use App\Http\Controllers\Admin\MarketController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MessagesController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
@@ -101,7 +103,7 @@ Route::get('/market_status_update', [IndexController::class, 'market_status_upda
 Route::get('/Create_User_Activation_Status', [IndexController::class, 'Create_User_Activation_Status'])->name('home.Create_User_Activation_Status');
 
 //Admin Panel Route
-Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-panel/management/')->group(function () {
+Route::name('admin.')->middleware(['check.session'])->prefix('/admin-panel/management/')->group(function () {
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //users-list
@@ -126,13 +128,27 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::get('/sales_form/fifth/index/{status}', [FormController::class, 'sales_form_index'])->middleware('permission:Inquires-Approved')->name('sales_form.fifth.index');
     Route::get('/sales_form/index/{status}', [FormController::class, 'sales_form_index'])->name('sales_form.index');
 
-
+    //currencies
     Route::get('settings/currencies/index', [CurrencyController::class, 'index'])->middleware('permission:Settings-Currency')->name('currencies.index');
     Route::get('settings/currency/create', [CurrencyController::class, 'create'])->middleware('permission:Settings-Currency')->name('currency.create');
     Route::post('settings/currency/store', [CurrencyController::class, 'store'])->middleware('permission:Settings-Currency')->name('currency.store');
     Route::get('settings/currency/edit/{currency}', [CurrencyController::class, 'edit'])->middleware('permission:Settings-Currency')->name('currency.edit');
     Route::put('settings/currency/update/{currency}', [CurrencyController::class, 'update'])->middleware('permission:Settings-Currency')->name('currency.update');
     Route::post('settings/currency/remove/{id}', [CurrencyController::class, 'remove'])->middleware('permission:Settings-Currency')->name('currency.remove');
+    //countries
+    Route::get('settings/countries/index', [CountryController::class, 'index'])->name('countries.index');
+    Route::get('settings/country/create', [CountryController::class, 'create'])->name('country.create');
+    Route::post('settings/country/store', [CountryController::class, 'store'])->name('country.store');
+    Route::get('settings/country/edit/{country}', [CountryController::class, 'edit'])->name('country.edit');
+    Route::put('settings/country/update/{country}', [CountryController::class, 'update'])->name('country.update');
+    Route::post('settings/country/remove/{id}', [CountryController::class, 'remove'])->name('country.remove');
+    //package
+    Route::get('settings/packages/index', [PackageController::class, 'index'])->name('packages.index');
+    Route::get('settings/package/create', [PackageController::class, 'create'])->name('package.create');
+    Route::post('settings/package/store', [PackageController::class, 'store'])->name('package.store');
+    Route::get('settings/package/edit/{package}', [PackageController::class, 'edit'])->name('package.edit');
+    Route::put('settings/package/update/{package}', [PackageController::class, 'update'])->name('package.update');
+    Route::post('settings/package/remove/{id}', [PackageController::class, 'remove'])->name('package.remove');
 
 
     Route::get('setting/header1', [Header1Controller::class, 'index'])->middleware('permission:Line-1')->name('header1.index');
@@ -183,7 +199,9 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::post('category/remove', [BlogCategoryController::class, 'remove'])->middleware('permission:Blog')->name('blog.category.remove');
 
     //settings
-    Route::resource('setting', SettingController::class)->except('update', 'destroy')->middleware('permission:Settings-Setting')->names('settings');
+
+    Route::resource('setting', SettingController::class)->except('update', 'destroy','index')->middleware('permission:Settings-Setting')->names('settings');
+    Route::get('/admin/settings/index/{type}', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/admin/settings', [SettingController::class, 'update'])->name('settings.update');
     Route::post('/admin/settings/delete/{setting}', [SettingController::class, 'destroy'])->name('settings.destroy');
     Route::post('/admin/settings/ChangeLineSpeed', [SettingController::class, 'ChangeLineSpeed'])->name('ChangeLineSpeed');
@@ -239,7 +257,7 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
     Route::post('/wallet_change', [WalletController::class, 'wallet_change'])->name('user.wallet.change');
 
     Route::post('users/reset_password/{user}', [UserController::class, 'reset_password'])->name('user.reset_password');
-    Route::get('users/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('users/{user}/edit/{type?}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('users/{user}', [UserController::class, 'update'])->name('user.update');
 
     //form
@@ -287,7 +305,7 @@ Route::name('admin.')->middleware(['prevent.concurrent.login'])->prefix('/admin-
 Route::post('admin-panel/management/Final_Submit', [FormController::class, 'Final_Submit'])->name('admin.Final_Submit');
 
 //SaleForm
-Route::get('/sale_form/{page_type?}/{item?}', [FormController::class, 'sales_form'])->middleware('permission:Sales-Order-Sales-Offer-form')->name('sale_form');
+Route::get('/sale_form/{page_type?}/{item?}', [FormController::class, 'sales_form'])->name('sale_form');
 Route::get('/sale_form_preparation/{item?}', [FormController::class, 'sales_form_preparation'])->name('sale_form.preparation');
 Route::post('/preparation_store/{form_id}', [FormController::class, 'sales_form_preparation_store'])->name('sale_form.preparation_store');
 Route::post('/sales_form_preparation_remove_file', [FormController::class, 'sales_form_preparation_remove_file'])->name('sale_form.preparation.remove_file');

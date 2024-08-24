@@ -34,6 +34,12 @@
             $('#new_password').val(text);
         }
 
+        function cancelSavePassword(){
+            $('#old_password').val('');
+            $('#new_password').val('');
+            $('#repeat_password').val('');
+        }
+
         CKEDITOR.replace('message', {
             filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
@@ -52,7 +58,7 @@
                 <div id="settings-profile"
                      aria-labelledby="settings-profile-tab">
                     <div class="row">
-                        <div class="col-12 col-xl-6">
+                        <div class="col-12 {{ $type!=null ? 'col-xl-3' : 'col-xl-6' }} ">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="settings-profile">
@@ -60,90 +66,79 @@
                                             @csrf
                                             @method('put')
 
-                                            <div class="row">
-                                                <div class="form-group col-12 text-center">
-                                                    <div class="user-img mb-2">
-                                                        <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="{{ auth()->user()->name }}" class="rounded-circle" width="50">
+                                            @if($type != null)
+                                                <h5 class="mt-4">Update Password</h5>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="form-group col-12">
+                                                        <label for="old_password" class="mb-1">Old Password</label>
+                                                        <input id="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" name="old_password" required>
+                                                        @error('old_password')
+                                                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                                                        @enderror
+                                                    </div> <div class="form-group col-12">
+                                                        <label for="new_password" class="mb-1">New Password</label>
+                                                        <input id="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" name="new_password" required>
+                                                        @error('new_password')
+                                                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                                                        @enderror
                                                     </div>
-                                                    {{ auth()->user()->user_id }}
+                                                    <div class="form-group col-12">
+                                                        <label for="repeat_password" class="mb-1">Repeat Password</label>
+                                                        <input id="repeat_password" type="password" class="form-control @error('repeat_password') is-invalid @enderror" name="repeat_password" required>
+                                                        @error('repeat_password')
+                                                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-12">
-                                                    <label for="profile_picture" class="mb-1">Profile Picture</label>
-                                                    <input type="file" class="form-control" name="profile_picture" id="profile_picture">
-                                                    @error('profile_picture')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
+                                                <div class="col-md-12 mt-4 d-flex justify-content-between">
+                                                    <button class="btn btn-success btn-sm mb-2" type="submit">change password</button>
+                                                    <button onclick="cancelSavePassword()" class="btn btn-dark btn-sm mb-2">cancel</button>
                                                 </div>
+                                            @else
+                                                <h5 class="mt-4">Update Profile</h5>
+                                            <hr>
+                                                <div class="row">
+                                                    <div class="form-group col-12 text-center">
+                                                        <div class="user-img mb-2">
+                                                            <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="{{ auth()->user()->name }}" class="rounded-circle" width="50">
+                                                        </div>
+                                                        <h5>{{ auth()->user()->user_id }}</h5>
+                                                    </div>
 
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="full_name" class="mb-1">Full Name *</label>
-                                                    <input id="full_name" type="text" class="form-control @error('firfull_namest_name') is-invalid @enderror" name="full_name" value="{{ $user->full_name }}" required>
-                                                    @error('first_name')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
+                                                    <div class="form-group col-12">
+                                                        <label for="profile_picture" class="mb-1">Profile Picture</label>
+                                                        <input type="file" class="form-control" name="image" id="image">
+                                                        @error('image')
+                                                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                                                        @enderror
+                                                    </div>
 
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="company_country" class="mb-1">Country *</label>
-                                                    <select name="company_country" id="company_country" class="form-control @error('company_country') is-invalid @enderror" required>
-                                                        <option value="">Select Country</option>
-                                                        @foreach($countries as $country)
-                                                            <option {{ $user->company_country == $country->countryName ? 'selected' : '' }} value="{{ $country->countryName }}">{{ $country->countryName }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('country')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
+                                                    @if($user->Roles[0]->name == 'seller')
+                                                        @include('admin.users.user_seller_info')
+                                                    @else
+                                                        @include('admin.users.admin_user_info')
+                                                    @endif
 
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="email" class="mb-1">Email *</label>
-                                                    <input disabled id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required>
-                                                    @error('email')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
 
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="role" class="mb-1">Role *</label>
-                                                    <select disabled name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
-                                                        <option value="">Select Role</option>
-                                                        @foreach($roles as $role)
-                                                            <option {{ $user->Roles()->first()->id == $role->id ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('role')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
-                                                </div>
 
-                                                <div class="form-group col-12 col-md-6">
-                                                    <label for="join_date" class="mb-1">Join Date</label>
-                                                    <input disabled id="join_date" type="date" class="form-control @error('join_date') is-invalid @enderror" name="join_date" value="{{ $user->created_at }}" required>
-                                                    @error('join_date')
-                                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                    @enderror
                                                 </div>
-                                            </div>
+                                                <div class="col-md-12 mt-4 text-center">
+                                                    <button class="btn btn-info btn-sm mb-2" type="submit">Update</button>
+                                                </div>
+                                            @endif
 
-                                            <div class="col-md-12 mt-4">
-                                                <button class="btn btn-info btn-sm mb-2" type="submit">
-                                                    Update
-                                                </button>
-                                            </div>
+
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
