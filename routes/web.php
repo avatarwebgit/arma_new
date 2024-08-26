@@ -103,7 +103,7 @@ Route::get('/market_status_update', [IndexController::class, 'market_status_upda
 Route::get('/Create_User_Activation_Status', [IndexController::class, 'Create_User_Activation_Status'])->name('home.Create_User_Activation_Status');
 
 //Admin Panel Route
-Route::name('admin.')->middleware(['check.session'])->prefix('/admin-panel/management/')->group(function () {
+Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //users-list
