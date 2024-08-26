@@ -27,6 +27,7 @@ use App\Models\QualityQuantityInspector;
 use App\Models\RefundStatus;
 use App\Models\SalesOfferForm;
 use App\Models\SalesOfferFormCopy;
+use App\Models\SessionModel;
 use App\Models\ShippingTerm;
 use App\Models\TargetMarket;
 use App\Models\THCIncluded;
@@ -49,6 +50,8 @@ class IndexController extends Controller
 {
     public function index()
     {
+        $sessions=SessionModel::all();
+        dd($sessions);
 //        $sales_forms = SalesOfferForm::all();
 //        foreach ($sales_forms as $sales_form){
 //            $form_id='Armx-So'.$sales_form->id;
