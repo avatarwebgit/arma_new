@@ -50,10 +50,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $sessions = SessionModel::all();
-        foreach ($sessions as $session) {
-            $session->delete();
-        }
+
+        ///
 //        $sales_forms = SalesOfferForm::all();
 //        foreach ($sales_forms as $sales_form){
 //            $form_id='Armx-So'.$sales_form->id;
