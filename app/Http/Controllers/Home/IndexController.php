@@ -50,8 +50,10 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $sessions=SessionModel::all();
-        dd($sessions);
+        $sessions = SessionModel::all();
+        foreach ($sessions as $session) {
+            $session->delete();
+        }
 //        $sales_forms = SalesOfferForm::all();
 //        foreach ($sales_forms as $sales_form){
 //            $form_id='Armx-So'.$sales_form->id;
@@ -223,7 +225,7 @@ class IndexController extends Controller
         if ($user_check) {
             $user = auth()->user();
 
-            if ($user->active ==3 or $user->active_status != 2) {
+            if ($user->active == 3 or $user->active_status != 2) {
                 auth()->logout();
                 session()->put('user_inactive', 1);
                 return redirect()->route('home.index');
@@ -772,8 +774,8 @@ class IndexController extends Controller
                     $initial = mb_substr($role->name, 0, 1);
                     $initial = strtoupper($initial);
                     $user_id = $this->User_ID_Creator($initial, $user->id);
-                    if ($user->email=='h.khoram@armaitimex.com'){
-                        $user_id='Armx-M1000';
+                    if ($user->email == 'h.khoram@armaitimex.com') {
+                        $user_id = 'Armx-M1000';
                     }
                     $user->update([
                         'user_id' => $user_id,
@@ -782,11 +784,12 @@ class IndexController extends Controller
             }
 
             dd('ok');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
 
     }
+
     public function User_ID_Creator($initial, $user_id)
     {
         $number = 1000 + $user_id;
