@@ -51,6 +51,7 @@ class IndexController extends Controller
     public function index()
     {
 
+        ///
 //        $sales_forms = SalesOfferForm::all();
 //        foreach ($sales_forms as $sales_form){
 //            $form_id='Armx-So'.$sales_form->id;
