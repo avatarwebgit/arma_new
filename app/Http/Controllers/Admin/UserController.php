@@ -229,7 +229,6 @@ class UserController extends Controller
 
     public function member_update(User $user, Request $request)
     {
-        dd('ok');
         try {
             $email = $request->email_edit;
             $company_country = $request->company_country_edit;
