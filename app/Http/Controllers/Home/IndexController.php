@@ -242,7 +242,7 @@ class IndexController extends Controller
 //                return redirect()->route('seller.dashboard');
             }
             if ($user->hasRole(['buyer'])) {
-                dd('redirect');
+                return redirect()->route('admin.dashboard');
 //                return redirect()->route('bidder.dashboard');
             }
         } else {

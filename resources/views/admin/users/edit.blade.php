@@ -122,8 +122,10 @@
                                                         @enderror
                                                     </div>
 
-                                                    @if($user->Roles[0]->name == 'seller')
+                                                    @if($user->Roles[0]->name == 'seller' or $user->Roles[0]->name == 'buyer')
                                                         @include('admin.users.user_seller_info')
+                                                    @elseif($user->Roles[0]->name == 'Representatives' or $user->Roles[0]->name == 'Brokers')
+                                                        @include('admin.users.brokers_representatives_info')
                                                     @else
                                                         @include('admin.users.admin_user_info')
                                                     @endif

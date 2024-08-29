@@ -313,68 +313,69 @@ class UserController extends Controller
         }
 
         try {
-            if ($user->Roles[0]->name == 'seller') {
-                $validatedData = $request->validate([
 
-                    'company_country' => 'required|string',
-
-                    'company_address' => 'required|string',
-
-                    'company_phone' => 'required|string',
-
-                    'company_website' => 'nullable',
-
-                    'company_email' => 'required|email',
-
-                    'full_name' => 'required|string',
-
-                    'salutation' => 'nullable|string',
-
-                    'function_in_company' => 'required|string',
-
-                    'platform' => 'required|string',
-
-                    'mobile_no' => 'required|string',
-
-                    'commodity' => 'required|string',
-
-                ]);
-
-                $user->company_country = $validatedData['company_country'];
-
-                $user->company_address = $validatedData['company_address'];
-
-                $user->company_phone = $validatedData['company_phone'];
-
-                $user->company_website = $validatedData['company_website'];
-
-                $user->company_email = $validatedData['company_email'];
-
-                $user->full_name = $validatedData['full_name'];
-
-                $user->salutation = $validatedData['salutation'];
-
-                $user->function_in_company = $validatedData['function_in_company'];
-
-                $user->platform = $validatedData['platform'];
-
-                $user->mobile_no = $validatedData['mobile_no'];
-                $user->commodity = $validatedData['commodity'];
-
-                $user->save(); // ذخیره کاربر در دیتابیس
-
-                // پردازش تصویر و اطلاعات دیگر
-                $image = $request->has('image') ?
-                    generateFileName($request->image->getClientOriginalName()) :
-                    $user->image;
-                if ($request->has('image')) {
-                    $env = env('UPLOAD_IMAGE_PROFILE');
-                    $request->image->move(public_path($env), $image);
-                }
-                $user->update([
-                    'image' => $image
-                ]);
-            } else {
+//            if ($user->Roles[0]->name == 'seller' or $user->Roles[0]->name == 'buyer') {
+//                $validatedData = $request->validate([
+//
+//                    'company_country' => 'required|string',
+//
+//                    'company_address' => 'required|string',
+//
+//                    'company_phone' => 'required|string',
+//
+//                    'company_website' => 'nullable',
+//
+//                    'company_email' => 'required|email',
+//
+//                    'full_name' => 'required|string',
+//
+//                    'salutation' => 'nullable|string',
+//
+//                    'function_in_company' => 'required|string',
+//
+//                    'platform' => 'required|string',
+//
+//                    'mobile_no' => 'required|string',
+//
+//                    'commodity' => 'required|string',
+//
+//                ]);
+//
+//                $user->company_country = $validatedData['company_country'];
+//
+//                $user->company_address = $validatedData['company_address'];
+//
+//                $user->company_phone = $validatedData['company_phone'];
+//
+//                $user->company_website = $validatedData['company_website'];
+//
+//                $user->company_email = $validatedData['company_email'];
+//
+//                $user->full_name = $validatedData['full_name'];
+//
+//                $user->salutation = $validatedData['salutation'];
+//
+//                $user->function_in_company = $validatedData['function_in_company'];
+//
+//                $user->platform = $validatedData['platform'];
+//
+//                $user->mobile_no = $validatedData['mobile_no'];
+//                $user->commodity = $validatedData['commodity'];
+//
+//                $user->save(); // ذخیره کاربر در دیتابیس
+//
+//                // پردازش تصویر و اطلاعات دیگر
+//                $image = $request->has('image') ?
+//                    generateFileName($request->image->getClientOriginalName()) :
+//                    $user->image;
+//                if ($request->has('image')) {
+//                    $env = env('UPLOAD_IMAGE_PROFILE');
+//                    $request->image->move(public_path($env), $image);
+//                }
+//                $user->update([
+//                    'image' => $image
+//                ]);
+//            } else {
 
 
             // بررسی و اعتبارسنجی رمز عبور جدید
@@ -382,6 +383,8 @@ class UserController extends Controller
                 $new_password = Hash::make($request->get('new_password'));
                 $user->update(['password' => $new_password]);
             } else {
+
+                $user->update($request->all());
                 // پردازش تصویر و اطلاعات دیگر
                 $image = $request->has('image') ?
                     generateFileName($request->image->getClientOriginalName()) :
@@ -390,34 +393,34 @@ class UserController extends Controller
                     $env = env('UPLOAD_IMAGE_PROFILE');
                     $request->image->move(public_path($env), $image);
                 }
-                if ($request->has('company_address')) {
-                    $company_address = $request->company_address;
-                } else {
-                    $company_address = $user->company_address;
-                }
+//                if ($request->has('company_address')) {
+//                    $company_address = $request->company_address;
+//                } else {
+//                    $company_address = $user->company_address;
+//                }
 
-                if ($request->has('mobile_no')) {
-                    $mobile_no = $request->mobile_no;
-                } else {
-                    $mobile_no = $user->mobile_no;
-                }
+//                if ($request->has('mobile_no')) {
+//                    $mobile_no = $request->mobile_no;
+//                } else {
+//                    $mobile_no = $user->mobile_no;
+//                }
 
                 $user->update([
 
                     'image' => $image,
 
-                    'full_name' => $request->full_name,
-
-                    'company_country' => $request->company_country,
-
-                    'company_address' => $company_address,
-
-                    'mobile_no' => $mobile_no,
+//                    'full_name' => $request->full_name,
+//
+//                    'company_country' => $request->company_country,
+//
+//                    'company_address' => $company_address,
+//
+//                    'mobile_no' => $mobile_no,
 
                 ]);
             }
 
-            }
+
 
 
 //            if ($pre_active_status == 0) {

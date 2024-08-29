@@ -1,10 +1,10 @@
 <div class="form-group col-12 col-md-6">
     <label for="company_name" class="mb-1">Company Name *</label>
-    <input disabled id="company_name" type="text" class="form-control" name="company_name" value="{{ $user->company_name }}" required>
+    <input id="company_name" type="text" class="form-control" name="company_name" value="{{ $user->company_name }}" required>
 
 </div>
 <div class="form-group col-12 col-md-6">
-    <label for="company_type" class="mb-1">Company Type *</label>
+    <label for="company_type" class="mb-1">Type *</label>
     <input disabled id="company_type" type="text" class="form-control" name="company_type" value="{{ ucfirst($user->Roles[0]->name) }}" required>
 
 </div>
@@ -70,7 +70,7 @@
     <label for="commodity" class="mb-1">Commodities *</label>
     <select name="commodity" id="commodity" class="form-control @error('commodity') is-invalid @enderror" required>
         @foreach($commodities as $commodity)
-        <option {{ $user->commodity==$commodity->title ? 'selected' : '' }}>{{ $commodity->title }}</option>
+            <option {{ $user->commodity==$commodity->title ? 'selected' : '' }}>{{ $commodity->title }}</option>
         @endforeach
     </select>
     @error('commodity')
@@ -112,33 +112,33 @@
 <div class="form-group col-12 col-md-6">
     <label for="function_in_company" class="mb-1">Function In Company *</label>
     <select
-    id="function_in_company"
-    type="text"
-    class="form-control"
-    name="function_in_company">
-    <option value="">Select</option>
-    @foreach($companyFunction as $item)
-        <option {{ $user->function_in_company==$item->title ? 'selected' : '' }} value="{{ $item->title }}">{{ $item->title }}</option>
+        id="function_in_company"
+        type="text"
+        class="form-control"
+        name="function_in_company">
+        <option value="">Select</option>
+        @foreach($companyFunction as $item)
+            <option {{ $user->function_in_company==$item->title ? 'selected' : '' }} value="{{ $item->title }}">{{ $item->title }}</option>
         @endforeach
-        </select>
+    </select>
     @error('function_in_company')
     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
     @enderror
 </div>
-<div class="form-group col-12 col-md-6">
-    <label for="company_email" class="mb-1">Email *</label>
-    <input id="company_email" type="text" class="form-control
-    @error('company_email') is-invalid @enderror"
-           name="company_email"
-           value="{{ $user->company_email }}" required>
-    @error('company_email')
-    <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-    @enderror
-</div>
+{{--<div class="form-group col-12 col-md-6">--}}
+{{--    <label for="company_email" class="mb-1">Email *</label>--}}
+{{--    <input id="company_email" type="text" class="form-control--}}
+{{--    @error('company_email') is-invalid @enderror"--}}
+{{--           name="company_email"--}}
+{{--           value="{{ $user->company_email }}" required>--}}
+{{--    @error('company_email')--}}
+{{--    <span class="invalid-feedback" role="alert">--}}
+{{--                    <strong>{{ $message }}</strong>--}}
+{{--                </span>--}}
+{{--    @enderror--}}
+{{--</div>--}}
 <div class="form-group col-12 col-md-6">
     <label for="platform" class="mb-1">Platform *</label>
     <select name="platform" id="platform" class="form-control @error('platform') is-invalid @enderror" required>
