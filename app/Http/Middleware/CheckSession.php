@@ -18,15 +18,27 @@ class CheckSession
     {
         if (auth()->check()) {
             $lastActivity = session('lastActivity', time());
-            if (time() - $lastActivity > config('session.lifetime') * 60) {
-                auth()->logout();
-                session()->invalidate();
+            $inactivityDuration = time() - $lastActivity;
+
+            if ($inactivityDuration > config('session.lifetime') * 60) {
+                $this->logoutUser();
                 return redirect('/login')->withErrors(['message' => 'شما به دلیل inactivity خارج شده‌اید.']);
             }
+
             session(['lastActivity' => time()]);
+        } else {
+            $this->logoutUser();
+            return redirect('/login')->withErrors(['message' => 'شما به دلیل inactivity خارج شده‌اید.']);
         }
 
         return $next($request);
     }
+
+    protected function logoutUser()
+    {
+        auth()->logout();
+        session()->invalidate();
+    }
+
 
 }

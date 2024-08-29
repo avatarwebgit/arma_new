@@ -73,7 +73,7 @@ class LoginController extends Controller
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
+        // to log in and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
 
@@ -82,16 +82,13 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-//        $user = \App\Models\User::where('email', $request->get('email'))->first();
-//        if ($user) {
-//            $sessions = DB::table('sessions')->where('user_id', $user->id)->exists();
-//            if ($sessions) {
-////                session()->put('is_logged_in', 'this user is already logged in with another Device');
-//                return false;
-//            }
-//        }
-
-
+        $user = \App\Models\User::where('email', $request->get('email'))->first();
+        if ($user) {
+            $session_exists = DB::table('sessions')->where('user_id', $user->id)->exists();
+            if ($session_exists) {
+                DB::table('sessions')->where('user_id', $user->id)->delete();
+            }
+        }
 
         return $this->guard()->attempt(
             $this->credentials($request), $request->boolean('remember')

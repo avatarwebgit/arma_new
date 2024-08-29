@@ -17,6 +17,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -144,6 +145,12 @@ class Controller extends BaseController
         broadcast(new MarketIndexResult($timer, $market_status, $difference));
         $this->today_market_difference();
     }
+
+    public function SessionCheck()
+    {
+        DB::table('sessions')->where('user_id', null)->delete();
+    }
+
 
     function create_index_timer()
     {
