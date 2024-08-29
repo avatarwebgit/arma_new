@@ -103,7 +103,7 @@ Route::get('/market_status_update', [IndexController::class, 'market_status_upda
 Route::get('/Create_User_Activation_Status', [IndexController::class, 'Create_User_Activation_Status'])->name('home.Create_User_Activation_Status');
 
 //Admin Panel Route
-Route::name('admin.')->prefix('/admin-panel/management/')->group(function () {
+Route::name('admin.')->middleware('check.session')->prefix('/admin-panel/management/')->group(function () {
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //users-list
@@ -320,7 +320,7 @@ Route::post('/UpdateCashPending/', [FormController::class, 'UpdateCashPending'])
 Route::get('sales_offer/show/{id}', [FormController::class, 'sales_form_show'])->name('sale_form.show');
 Route::get('sales_offer/edit/{id}', [FormController::class, 'sales_form_edit'])->name('sale_form.edit');
 //seller
-Route::name('seller.')->prefix('/seller/')->middleware(['seller', 'prevent.concurrent.login'])->group(function () {
+Route::name('seller.')->middleware('check.session')->prefix('/seller/')->middleware(['seller', 'prevent.concurrent.login'])->group(function () {
     Route::get('dashboard', [SellerController::class, 'dashboard'])->name('dashboard');
     Route::put('update/profile/{user}', [SellerController::class, 'updateProfile'])->name('update.profile');
     Route::put('update/password', [SellerController::class, 'updatePassword'])->name('update.password');
@@ -329,7 +329,7 @@ Route::name('seller.')->prefix('/seller/')->middleware(['seller', 'prevent.concu
     Route::get('requests', [SellerController::class, 'requests'])->name('requests');
     Route::get('refund_request', [SellerController::class, 'refund_request'])->middleware('permission:Bid-Deposit-Refund-Request')->name('refund_request');
 });
-Route::name('bidder.')->prefix('/bidder/')->middleware(['bidder', 'prevent.concurrent.login'])->group(function () {
+Route::name('bidder.')->middleware('check.session')->prefix('/bidder/')->middleware(['bidder', 'prevent.concurrent.login'])->group(function () {
     Route::get('dashboard', [BidderController::class, 'dashboard'])->name('dashboard');
     Route::put('update/profile/{user}', [BidderController::class, 'updateProfile'])->name('update.profile');
     Route::put('update/password', [BidderController::class, 'updatePassword'])->name('update.password');
@@ -346,6 +346,7 @@ Route::post('join/news', [IndexController::class, 'join_news'])->name('join.news
 Route::get('blogs', [IndexController::class, 'blogs'])->name('home.blogs.index');
 Route::get('blog/show/{blog}', [IndexController::class, 'blog_show'])->name('home.blog.show');
 Route::get('StartCheck', [IndexController::class, 'StartCheck'])->name('home.StartCheck');
+Route::get('SessionCheck', [IndexController::class, 'SessionCheck'])->name('home.SessionCheck');
 Route::get('today_market_status', [IndexController::class, 'today_market_status'])->name('home.today_market_status');
 Route::get('today_market_difference', [IndexController::class, 'today_market_difference'])->name('home.today_market_difference');
 Route::post('market_more_info', [IndexController::class, 'market_more_info'])->name('home.market_more_info');
