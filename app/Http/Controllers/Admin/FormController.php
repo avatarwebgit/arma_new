@@ -400,6 +400,8 @@ class FormController extends Controller
     public function sales_form_index($status)
     {
         $items = SalesOfferForm::where('status', $status)->where('form_id', '!=', null)->where('used_in_market', 0)->orderBy('created_at', 'desc')->paginate(100);
+        $rows=$items[0]->toArray();
+
         return view('admin.sales_form.list', compact('items', 'status'));
     }
 
