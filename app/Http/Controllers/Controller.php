@@ -55,7 +55,7 @@ class Controller extends BaseController
         if ($now <= $benchmark1) {
             //normal show time
             $status = 1;
-            $difference = $benchmark1->diffInSeconds($now);
+            $difference = $benchmark2->diffInSeconds($now);
 
         } elseif ($benchmark1 < $now and $now <= $benchmark2) {
             //ready to open

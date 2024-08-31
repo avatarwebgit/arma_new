@@ -640,7 +640,7 @@
         }
 
         .timer-clock .text {
-            font-size: 8px !important;
+            font-size: 11px !important;
             margin-top: 5px !important;
         }
     </style>
@@ -798,12 +798,12 @@
                     {{--                    </div>--}}
                 </div>
                 <div class="row">
-                    <div class="col-12 mt-3 display-none" id="final_status_section-{{ $market->id }}">
+                    <div class="col-12 mt-3" id="final_status_section-{{ $market->id }}">
                         <div class="bid_textarea">
                             <table class="table">
                                 <thead class="bg-blue text-center text-white">
                                 <tr>
-                                    <th class="text-white" colspan="5">final Result</th>
+                                    <th class="text-white" colspan="5">Result</th>
                                 </tr>
                                 </thead>
                                 <thead class="bg-secondary">
