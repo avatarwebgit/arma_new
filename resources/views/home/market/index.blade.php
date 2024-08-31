@@ -640,7 +640,8 @@
         }
 
         .timer-clock .text {
-            font-size: 13px !important;
+            font-size: 8px !important;
+            margin-top: 5px !important;
         }
     </style>
     {{--    /*//clockk*/--}}
@@ -683,10 +684,11 @@
                                 <thead class="bg-secondary">
                                 <tr>
                                     <th class="text-center text-white w-50">Max
-                                        Quantity( {{ $market->SalesForm->unit }} )
+                                        Quantity
+{{--                                        ( {{ $market->SalesForm->unit }} )--}}
                                     </th>
                                     <th class="text-center text-white w-50">Price
-                                        ( {{ $market->SalesForm->currency }} )
+{{--                                        ( {{ $market->SalesForm->currency }} )--}}
                                     </th>
                                 </tr>
                                 </thead>
@@ -709,10 +711,12 @@
                                     <th class="text-center text-white">
                                         Bidder
                                     </th>
-                                    <th class="text-center text-white">Quantity( {{ $market->SalesForm->unit }})
+                                    <th class="text-center text-white">Quantity
+{{--                                        ( {{ $market->SalesForm->unit }})--}}
                                     </th>
-                                    <th class="text-center text-white">Price ( {{ $market->SalesForm->currency }}
-                                        )
+                                    <th class="text-center text-white">Price
+{{--                                        ( {{ $market->SalesForm->currency }}--}}
+{{--                                        )--}}
                                     </th>
 
                                 </tr>
@@ -732,8 +736,9 @@
                                     <div class="col-12">
                                         <div class="mt-3 text-center">
                                             <label
-                                                for="seller_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }}
-                                                )</label>
+                                                for="seller_price-{{ $market->id }}">Price
+{{--                                                ( {{ $market->SalesForm->currency }})--}}
+                                            </label>
                                             <input disabled id="seller_price-{{ $market->id }}" type="text"
                                                    class="form-control"
                                                    name="seller_quantity-{{ $market->id }}">
@@ -761,8 +766,10 @@
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3 text-center">
                                         <label
-                                            for="bid_quantity-{{ $market->id }}">Quantity( {{ $market->SalesForm->unit }}
-                                            )</label>
+                                            for="bid_quantity-{{ $market->id }}">Quantity
+{{--                                            ( {{ $market->SalesForm->unit }}--}}
+{{--                                            )--}}
+                                        </label>
                                         <input disabled id="bid_quantity-{{ $market->id }}" type="text"
                                                class="form-control">
                                         <p id="bid_quantity_error" class="error_text">please enter quantity</p>
@@ -771,8 +778,9 @@
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3 text-center">
                                         <label
-                                            for="bid_price-{{ $market->id }}">Price( {{ $market->SalesForm->currency }}
-                                            )</label>
+                                            for="bid_price-{{ $market->id }}">Price
+{{--                                            ( {{ $market->SalesForm->currency }})--}}
+                                        </label>
                                         <input disabled id="bid_price-{{ $market->id }}" class="form-control">
                                         <p id="bid_price_error" class="error_text">please enter price</p>
                                     </div>
@@ -800,10 +808,12 @@
                                 </thead>
                                 <thead class="bg-secondary">
                                 <tr>
-                                    <th class="text-center text-white">Quantity( {{ $market->SalesForm->unit }})
+                                    <th class="text-center text-white">Quantity
+{{--                                        ( {{ $market->SalesForm->unit }})--}}
                                     </th>
-                                    <th class="text-center text-white">Price ( {{ $market->SalesForm->currency }}
-                                        )
+                                    <th class="text-center text-white">Price
+{{--                                        ( {{ $market->SalesForm->currency }}--}}
+{{--                                        )--}}
                                     </th>
                                     <th class="text-center text-white">
                                         status
