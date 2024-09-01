@@ -338,14 +338,14 @@
                 $barColor = '#1f9402';
                 $backColor = '#afff98';
             }
-            if (seconds < 10) {
-                $barColor = '#c20000';
-                $backColor = '#ff9595';
-            }
-            if (seconds > 1800) {
-                $barColor = '#727272';
-                $backColor = '#d7d6d6';
-            }
+            // if (seconds < 10) {
+            //     $barColor = '#c20000';
+            //     $backColor = '#ff9595';
+            // }
+            // if (seconds > 1800) {
+            //     $barColor = '#727272';
+            //     $backColor = '#d7d6d6';
+            // }
             // console.log('sec: ', sec);
             // if (min > 1) {
             //     pie = pie + (100 / (lop / min));
