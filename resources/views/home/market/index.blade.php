@@ -402,7 +402,7 @@
             display: none;
         }
         .bid_term_condition{
-            max-height: 200px;
+            max-height: 1000px;
             overflow-y: auto;
         }
         .commodity-title {
@@ -747,7 +747,7 @@
                                                 for="seller_price-{{ $market->id }}">Price
 {{--                                                ( {{ $market->SalesForm->currency }})--}}
                                             </label>
-                                            <input disabled id="seller_price-{{ $market->id }}" type="text"
+                                            <input style="max-width: 250px;margin: 0 auto" disabled id="seller_price-{{ $market->id }}" type="text"
                                                    class="form-control"
                                                    name="seller_quantity-{{ $market->id }}">
                                             <p id="seller_price_error" class="error_text">please enter price</p>
