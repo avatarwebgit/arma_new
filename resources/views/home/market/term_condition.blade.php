@@ -1,4 +1,4 @@
-<div class="form-check">
+<div class="form-check mt-5">
     <input class="form-check-input" type="checkbox" value="1" id="CheckTermCondition_{{ $market->id }}" name="term_condition">
     <label class="form-check-label" for="flexCheckDefault">
         <strong>

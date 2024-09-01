@@ -398,6 +398,13 @@
 
 @section('style')
     <style>
+        .d-none{
+            display: none;
+        }
+        .bid_term_condition{
+            max-height: 200px;
+            overflow-y: auto;
+        }
         .commodity-title {
             padding: 10px 82px !important;
             background: #6c757d;
@@ -821,7 +828,7 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody id="final_status_section_table-{{ $market->id }}">
+                                <tbody class="d-none" id="final_status_section_table-{{ $market->id }}">
                                 @include('home.market.final_status')
                                 </tbody>
                             </table>
