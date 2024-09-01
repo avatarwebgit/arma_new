@@ -122,7 +122,7 @@
 
                                                     <td>
                                                         <div class="d-flex justify-content-end">
-                                                            @if($show_btn==1)
+{{--                                                            @if($show_btn==1)--}}
                                                                 <a title="Edit Market"
                                                                    href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
                                                                    class="btn btn-sm btn-info">
@@ -164,7 +164,7 @@
                                                                         class="ti ti-trash mr-1"></i></a>
                                                                 <input type="hidden" name="id" value="{{ $item->id }}">
                                                                 {!! Form::close() !!}
-                                                            @endif
+{{--                                                            @endif--}}
                                                         </div>
                                                     </td>
 
