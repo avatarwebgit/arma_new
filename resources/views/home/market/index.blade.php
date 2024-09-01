@@ -260,7 +260,7 @@
         }
 
         function hide_result(market_id) {
-            $('#final_status_section-' + market_id).hide();
+            // $('#final_status_section-' + market_id).hide();
             $('#Winner_Modal').modal('hide');
         }
 
