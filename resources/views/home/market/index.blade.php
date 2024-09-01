@@ -251,6 +251,7 @@
                             show_win_modal(id);
                         }
                         $('#final_status_section_table-' + id).html(msg[1]);
+                        $('#final_status_section_table-' + id).show();
                         $('#final_status_section-' + id).show();
                     } else {
                         console.log('error');
@@ -260,7 +261,7 @@
         }
 
         function hide_result(market_id) {
-            // $('#final_status_section-' + market_id).hide();
+            $('#final_status_section_table-' + market_id).hide();
             $('#Winner_Modal').modal('hide');
         }
 
