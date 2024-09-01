@@ -178,6 +178,7 @@
             // let seller_quantity = $('#seller_quantity-'+id);
             let seller_price = $('#seller_price-' + id);
             let seller_button = $('#seller_button-' + id);
+            seller_price.removeClass('btn-success');
             if (status == 1) {
                 // seller_quantity.prop('disabled', true);
                 seller_price.prop('disabled', true);
@@ -202,6 +203,7 @@
                 // seller_quantity.prop('disabled', true);
                 seller_price.prop('disabled', false);
                 seller_button.prop('disabled', false);
+                seller_price.addClass('btn-success');
             }
             if (status == 6) {
                 // seller_quantity.prop('disabled', true);
