@@ -747,7 +747,7 @@
                                         <div class="mt-3 text-center">
                                             <label
                                                 for="seller_price-{{ $market->id }}">Price
-{{--                                                ( {{ $market->SalesForm->currency }})--}}
+                                                ( {{ $market->SalesForm->currency }})
                                             </label>
                                             <input style="max-width: 250px;margin: 0 auto" disabled id="seller_price-{{ $market->id }}" type="text"
                                                    class="form-control"
@@ -777,8 +777,8 @@
                                     <div class="mt-3 text-center">
                                         <label
                                             for="bid_quantity-{{ $market->id }}">Quantity
-{{--                                            ( {{ $market->SalesForm->unit }}--}}
-{{--                                            )--}}
+                                            ( {{ $market->SalesForm->unit }}
+                                            )
                                         </label>
                                         <input disabled id="bid_quantity-{{ $market->id }}" type="text"
                                                class="form-control">
@@ -789,7 +789,7 @@
                                     <div class="mt-3 text-center">
                                         <label
                                             for="bid_price-{{ $market->id }}">Price
-{{--                                            ( {{ $market->SalesForm->currency }})--}}
+                                            ( {{ $market->SalesForm->currency }})
                                         </label>
                                         <input disabled id="bid_price-{{ $market->id }}" class="form-control">
                                         <p id="bid_price_error" class="error_text">please enter price</p>
