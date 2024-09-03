@@ -4,6 +4,10 @@
     display: inline-block;
     vertical-align: top;
     line-height: 1 !important;
+    margin-top: 10px !important;
+}
+.seprator {
+    margin-top: 6px !important;
 }
 
 .clock {

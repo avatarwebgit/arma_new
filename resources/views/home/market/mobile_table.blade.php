@@ -49,7 +49,7 @@
                                     <div class="mt-3 text-center">
                                         <label
                                             for="seller_price-{{ $market->id }}">Price
-{{--                                            ( {{ $market->SalesForm->currency }})--}}
+                                            ( {{ $market->SalesForm->currency }})
                                         </label>
                                         <input disabled id="seller_price-{{ $market->id }}" type="text"
                                                class="form-control"
@@ -83,10 +83,10 @@
                             <thead class="bg-secondary">
                             <tr>
                                 <th class="text-center text-white">Quantity
-{{--                                    ( {{ $market->SalesForm->unit }})--}}
+                                    ( {{ $market->SalesForm->unit }})
                                 </th>
                                 <th class="text-center text-white">Price
-{{--                                    ( {{ $market->SalesForm->currency }})--}}
+                                    ( {{ $market->SalesForm->currency }})
                                 </th>
                                 <th class="text-center text-white">
                                     Bidder
