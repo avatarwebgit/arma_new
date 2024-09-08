@@ -115,7 +115,7 @@
                                                     {{--                                                    </td>--}}
                                                     <td>
 {{--                                                        {{ 'Armx-'.ucfirst(mb_substr($item->SalesForm->User->Roles[0]->name, 0, 1)).(1000+$item->SalesForm->User->id) }}--}}
-                                                        @if($item->Participants->user_ids!=null)
+                                                        @if(isset($item->Participants) && $item->Participants->user_ids!=null)
                                                             {{ count(unserialize($item->Participants->user_ids)) }}
                                                         @else
                                                             0
