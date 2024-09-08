@@ -633,7 +633,12 @@ class FormController extends Controller
         }
 
         if ($market_permission->role_ids != null) {
-            $role_ids = unserialize($market_permission->role_ids);
+            if ($market_permission->role_ids=="[]"){
+                $role_ids=[];
+            }else{
+                $role_ids = unserialize($market_permission->role_ids);
+            }
+
         }
         $users = User::whereIn('id', $user_ids)->where('user_id', '!=', null)->get();
         $all_users = User::all();
@@ -660,7 +665,7 @@ class FormController extends Controller
             }
             foreach ($role_ids as $role) {
                 $role = Role::where('id', $role)->first();
-                $users = $role->users;
+                $users = $role->users()->where('active',1)->get();
                 foreach ($users as $user) {
                     $user_ids[] = $user->id;
                 }

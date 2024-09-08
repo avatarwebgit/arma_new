@@ -132,11 +132,13 @@
 @php
     $inquiryCounts = [
         'inbox' => \App\Models\SalesOfferForm::where('status', 1)->whereNotNull('form_id')->where('used_in_market', 0)->count(),
-        'cash_pending' => \App\Models\SalesOfferForm::where('status', 2)->where('used_in_market', 0)->count(),
-        'data_pending' => \App\Models\SalesOfferForm::where('status', 3)->where('used_in_market', 0)->count(),
-        'rejected' => \App\Models\SalesOfferForm::where('status', 4)->where('used_in_market', 0)->count(),
-        'approved' => \App\Models\SalesOfferForm::where('status', 5)->where('used_in_market', 0)->count(),
-        'preparation' => \App\Models\SalesOfferForm::where('status', 6)->where('used_in_market', 0)->count(),
+        'cash_pending' => \App\Models\SalesOfferForm::where('status', 2)->where('form_id', '!=', null)->where('used_in_market', 0)->count(),
+        'data_pending' => \App\Models\SalesOfferForm::where('status', 3)->where('form_id', '!=', null)->where('used_in_market', 0)->count(),
+        'rejected' => \App\Models\SalesOfferForm::where('status', 4)->where('form_id', '!=', null)->where('used_in_market', 0)->count(),
+        'approved' => \App\Models\SalesOfferForm::where('status', 5)->where('form_id', '!=', null)->where('used_in_market', 0)->count(),
+        'preparation' => \App\Models\SalesOfferForm::where('status', 6)->where('form_id', '!=', null)->where('used_in_market', 0)->count(),
+
+
     ];
 @endphp
 

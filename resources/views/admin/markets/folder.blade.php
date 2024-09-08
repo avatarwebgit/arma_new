@@ -34,12 +34,12 @@
                                     <a href="{{ route('admin.markets.index') }}" class="btn btn-sm btn-dark">
                                         Back
                                     </a>
-                                    @if($close==0)
+{{--                                    @if($close==0)--}}
                                         <a href="{{ route('admin.market.create',['market_data'=>$date]) }}"
                                            class="btn btn-sm btn-success">
                                             Create
                                         </a>
-                                    @endif
+{{--                                    @endif--}}
                                     {{--                                        <a href="{{ route('admin.market.create') }}" class="btn btn-primary btn-sm">--}}
                                     {{--                                            Create--}}
                                     {{--                                        </a>--}}
@@ -63,6 +63,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($markets->sortBy('time') as $key=>$item)
+
                                                 @if($item->status==1)
                                                     @php
                                                         $show_btn=1;
@@ -114,7 +115,12 @@
                                                     {{--                                                    </td>--}}
                                                     <td>
 {{--                                                        {{ 'Armx-'.ucfirst(mb_substr($item->SalesForm->User->Roles[0]->name, 0, 1)).(1000+$item->SalesForm->User->id) }}--}}
-                                                        {{ count($item->Bids) }}
+                                                        @if($item->Participants->user_ids!=null)
+                                                            {{ count(unserialize($item->Participants->user_ids)) }}
+                                                        @else
+                                                            0
+                                                        @endif
+
                                                     </td>
                                                     <td id="market_status_{{ $item->id }}">
                                                         {{ $status_text }}
