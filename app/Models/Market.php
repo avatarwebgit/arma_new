@@ -30,4 +30,8 @@ class Market extends Model
     {
         return $this->hasMany(BidHistory::class, 'market_id');
     }
+    public function Participants()
+    {
+        return $this->hasOne(MarketPermission::class,'market_id','id');
+    }
 }

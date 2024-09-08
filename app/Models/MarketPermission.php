@@ -11,4 +11,5 @@ class MarketPermission extends Model
 
     protected $table = "market_permission";
     protected $guarded = [];
+
 }

@@ -506,7 +506,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="landing-feature-item">
-                        <img src="{{ asset('evaluation.jpg') }}" alt="">
+                        <img style="scale: 1.15" src="{{ asset('evaluation.jpg') }}" alt="">
                         <span>
               2
             </span>

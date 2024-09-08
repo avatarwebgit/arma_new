@@ -8,6 +8,8 @@ use App\Models\Commodity;
 use App\Models\CompanyFunction;
 use App\Models\Country;
 use App\Models\MailMessages;
+use App\Models\Market;
+use App\Models\MarketPermission;
 use App\Models\Permission;
 use App\Models\Refund;
 use App\Models\RefundStatus;
@@ -421,8 +423,6 @@ class UserController extends Controller
             }
 
 
-
-
 //            if ($pre_active_status == 0) {
 //                if ($active_status == 1) {
 //                    $mail = MailMessages::where('id', 4)->first();
@@ -564,16 +564,47 @@ class UserController extends Controller
 
     function change_active_status(Request $request)
     {
-        $user_id = $request->user_id;
-        $status = $request->status;
-        $reject_reason = $request->reject_reason;
-        $user = User::where('id', $user_id)->first();
-        $user->update([
-            'active' => $status,
-            'reject_reason' => $reject_reason,
-            'created_by' => \auth()->id(),
-        ]);
-        return response()->json([1, 'ok']);
+        try {
+            $user_id = $request->user_id;
+            $status = $request->status;
+            $reject_reason = $request->reject_reason;
+            $user = User::where('id', $user_id)->first();
+            $user->update([
+                'active' => $status,
+                'reject_reason' => $reject_reason,
+                'created_by' => \auth()->id(),
+            ]);
+// به‌روزرسانی مجوزهای بازار
+            Market::where('status', 1)->each(function ($market) {
+
+                $market_permission = $market->marketPermissions()->first();
+
+
+                if ($market_permission && $market_permission->user_ids) {
+
+                    $user_ids = unserialize($market_permission->user_ids);
+
+                    $active_users = User::whereIn('id', $user_ids)->where('active', 1)->pluck('id')->toArray();
+
+
+                    if ($active_users) {
+
+                        $market_permission->update([
+
+                            'user_ids' => serialize($active_users),
+
+                        ]);
+
+                    }
+
+                }
+
+            });
+            return response()->json([1, 'ok']);
+        }catch (\Exception $e) {
+            dd($e->getMessage);
+        }
+
     }
 
     public function User_ID_Creator($initial, $user_id)
