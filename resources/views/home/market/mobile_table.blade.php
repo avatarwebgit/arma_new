@@ -82,15 +82,16 @@
                             </thead>
                             <thead class="bg-secondary">
                             <tr>
-                                <th class="text-center text-white">Quantity
-                                    ( {{ $market->SalesForm->unit }})
-                                </th>
-                                <th class="text-center text-white">Price
-                                    ( {{ $market->SalesForm->currency }})
-                                </th>
                                 <th class="text-center text-white">
                                     Bidder
                                 </th>
+                                <th class="text-center text-white">Quantity
+{{--                                    ( {{ $market->SalesForm->unit }})--}}
+                                </th>
+                                <th class="text-center text-white">Price
+{{--                                    ( {{ $market->SalesForm->currency }})--}}
+                                </th>
+
                             </tr>
                             </thead>
                             <tbody id="bidder_offer_{{ $market->id }}">
@@ -164,7 +165,7 @@
 {{--                            )--}}
                         </th>
                         <th class="text-center text-white">
-                            status
+                            Status
                         </th>
                     </tr>
                     </thead>

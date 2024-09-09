@@ -832,7 +832,7 @@
 {{--                                        )--}}
                                     </th>
                                     <th class="text-center text-white">
-                                        status
+                                        Status
                                     </th>
                                 </tr>
                                 </thead>
