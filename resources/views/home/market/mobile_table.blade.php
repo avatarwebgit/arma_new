@@ -1,10 +1,10 @@
 
-<div class="col-12 col-md-12 col-xl-8 mb-5 menu-mobile">
+<div class="col-12 col-md-12 col-xl-8 mb-5 menu-mobile mt-3">
     <div class="row mb-4">
         <div class="col-12 col-md-6 mb-3">
             <div class="row">
                 <div class="col-12">
-                    <h5 id="status-box-{{ $market->id }}" class="text-center">
+                    <h5 style="font-size: 14pt !important;" id="status-box-{{ $market->id }}" class="text-center">
                         Step : <span id="market-status-{{ $market->id }}"></span>
                     </h5>
 

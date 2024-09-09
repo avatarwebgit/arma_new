@@ -309,6 +309,9 @@
 
 @section('style')
     <style>
+        .header-img-icon .nav-link img{
+            border-radius: 10px;
+        }
         .navbar {
             background-color: #f2f2f2 !important;
         }
