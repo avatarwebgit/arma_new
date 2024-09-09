@@ -59,15 +59,9 @@
 </div>
 <!-- [ Pre-loader ] End -->
 <!-- [ Mobile header ] start -->
-<div class="dash-mob-header dash-header">
+<div class="dash-mob-header dash-header" style="background-color: #006">
     <div class="pcm-logo">
-        @if (setting('app_logo'))
-            {!! Form::image(asset('vendor/img/prime-white.png'), null, [
-                'class' => 'logo logo-lg img_setting w-100',
-            ]) !!}
-        @else
-            {!! Html::link(route('home'), config('app.name'), []) !!}
-        @endif
+
     </div>
     <div class="pcm-toolbar">
         <a href="#!" class="dash-head-link" id="mobile-collapse">

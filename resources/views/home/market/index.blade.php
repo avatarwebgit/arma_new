@@ -400,6 +400,12 @@
 
 @section('style')
     <style>
+        @media screen and (max-width:768px){
+            #commodity_information span{
+                font-size: 10pt !important;
+            }
+        }
+
         .d-none{
             display: none;
         }

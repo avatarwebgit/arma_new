@@ -50,16 +50,16 @@
                             </p>
                             @enderror
                         </div>
-                        <div class="form-group col-md-4">
-                            <label class="col-form-label" for="title_2">Title 2</label>
-                            <input id="title_2" type="text" name="title_2" class="form-control"
-                                   value="{{ old('title_2') }}">
-                            @error('title_2')
-                            <p class="input-error-validate">
-                                {{ $message }}
-                            </p>
-                            @enderror
-                        </div>
+{{--                        <div class="form-group col-md-4">--}}
+{{--                            <label class="col-form-label" for="title_2">Title 2</label>--}}
+{{--                            <input id="title_2" type="text" name="title_2" class="form-control"--}}
+{{--                                   value="{{ old('title_2') }}">--}}
+{{--                            @error('title_2')--}}
+{{--                            <p class="input-error-validate">--}}
+{{--                                {{ $message }}--}}
+{{--                            </p>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
 
                         {{--        <div class="form-group col-md-4">--}}
                         {{--            <label class="col-form-label" for="number_1">Minimum price</label>--}}
