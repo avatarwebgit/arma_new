@@ -55,11 +55,11 @@
     <th>Account</th>
     <th>Sales Order No.</th>
     <th>Date</th>
-    <th>Time</th>
+{{--    <th>Time</th>--}}
     <th>Commodity</th>
     <th>User ID</th>
     <th>Email</th>
-    <th>Status</th>
+{{--    <th>Status</th>--}}
     <th></th>
 </tr>
 </thead>
@@ -82,9 +82,9 @@
         <td>
             {{ \Carbon\Carbon::parse($form->crated_at)->format('m/d/Y') }}
         </td>
-        <td>
-            {{ \Carbon\Carbon::parse($form->crated_at)->format('H:m') }}
-        </td>
+{{--        <td>--}}
+{{--            {{ \Carbon\Carbon::parse($form->crated_at)->format('H:m') }}--}}
+{{--        </td>--}}
         <td>
                         {{ $form->commodity }}
         </td>
@@ -94,9 +94,9 @@
         <td>
             {{ $form->User->email }}
         </td>
-        <td>
-            {{ $form->Status->title }}
-        </td>
+{{--        <td>--}}
+{{--            {{ $form->Status->title }}--}}
+{{--        </td>--}}
 
         <td>
 

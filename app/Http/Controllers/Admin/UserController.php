@@ -574,35 +574,25 @@ class UserController extends Controller
                 'reject_reason' => $reject_reason,
                 'created_by' => \auth()->id(),
             ]);
-// به‌روزرسانی مجوزهای بازار
-            Market::where('status', 1)->each(function ($market) {
-
-                $market_permission = $market->marketPermissions()->first();
-
-
-                if ($market_permission && $market_permission->user_ids) {
-
+            $markets = Market::where('status', 1)->get();
+            foreach ($markets as $market) {
+                $market_permission = MarketPermission::where('market_id', $market->id)->first();
+                if ($market_permission and $market_permission->user_ids!=null){
                     $user_ids = unserialize($market_permission->user_ids);
-
-                    $active_users = User::whereIn('id', $user_ids)->where('active', 1)->pluck('id')->toArray();
-
-
-                    if ($active_users) {
-
-                        $market_permission->update([
-
-                            'user_ids' => serialize($active_users),
-
-                        ]);
-
+                    $users=User::whereIn('id',$user_ids)->where('active',1)->get();
+                    $new_ids=[];
+                    foreach ($users as $user){
+                        $new_ids[]=$user->id;
                     }
-
+                    $market_permission->update([
+                        'user_ids' =>serialize($new_ids),
+                    ]);
                 }
 
-            });
+            }
             return response()->json([1, 'ok']);
-        }catch (\Exception $e) {
-            dd($e->getMessage);
+        }catch (\Exception $e){
+            dd($e->getMessage());
         }
 
     }

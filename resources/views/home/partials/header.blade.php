@@ -12,13 +12,13 @@
     </div>
     <nav class="navbar navbar-expand-lg menu-desktop">
         {{--        //logo--}}
-        <div style="width: 10%;text-align: center">
+        <div style="width: 7%;text-align: center">
             <a class='navbar-brand' href='{{ route('home.index') }}'><img class="logo"
                                                                           src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
                                                                           alt="logo"></a>
         </div>
         {{--        //menu--}}
-        <div style="width: 55%;">
+        <div style="width: 48%;">
             <ul class="navbar-nav d-flex ">
                 @php
                     $menus=\App\Models\Menus::where('parent',0)->where('show_on_header',1)->get();
@@ -56,7 +56,7 @@
             </ul>
         </div>
         {{--        //search--}}
-        <div style="width: 25%;">
+        <div style="width: 30%;">
             <ul class="navbar-nav ml-auto d-flex align-items-center search_and_btns">
                 <li class="nav-item header-custom-icon position-relative mr-2" style="width: 100%">
                     <form action="{{ route('home.search') }}" method="get">
@@ -69,14 +69,14 @@
             </ul>
         </div>
         {{--        //menu--}}
-        <div style="width: 10%">
+        <div style="width: 15%">
             @auth
                 <li class="nav-item dropdown header-img-icon d-flex justify-content-center">
                     <a style="padding:0 !important; " class="nav-link dropdown-toggle mr-2" href="#" role="button"
                        data-toggle="dropdown"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        <img src="{{ asset('home/img/avatar.svg') }}" alt="avatar">
+                        <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="avatar">
                     </a>
                     <p class="mt-1 pr-4">Hi {{ auth()->user()->full_name }}</p>
                     <div class="dropdown-menu profile" style="left: -130px !important;">
@@ -200,7 +200,7 @@
                        data-toggle="dropdown"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        <img src="{{ asset('home/img/avatar.svg') }}" alt="avatar">
+                        <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="avatar">
                     </a>
                     <p class="mt-1 pr-4">Hi {{ auth()->user()->full_name }}</p>
                     <div class="dropdown-menu profile">

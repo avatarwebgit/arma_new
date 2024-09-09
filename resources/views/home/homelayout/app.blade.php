@@ -677,7 +677,12 @@
 
 
 </script>
-
+<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
+<script>
+    $('select').selectpicker({
+        'title': 'Select'
+    });
+</script>
 @yield('script')
 </body>
 

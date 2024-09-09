@@ -354,6 +354,7 @@ Route::get('ResetSystem', [IndexController::class, 'ResetSystem'])->name('home.R
 Route::get('CreateAdmin', [IndexController::class, 'CreateAdmin'])->name('home.CreateAdmin');
 Route::get('CreateType', [IndexController::class, 'CreateType'])->name('home.CreateType');
 Route::get('CreateUserIds', [IndexController::class, 'CreateUserIds'])->name('home.CreateUserIds');
+Route::get('CreateAllCommodity', [IndexController::class, 'CreateAllCommodity'])->name('home.CreateAllCommodity');
 Route::post('/form/send-request/contact', [FormController::class, 'form_contact'])->name('form.contact');
 Route::get('/logout', function () {
     \auth()->logout();

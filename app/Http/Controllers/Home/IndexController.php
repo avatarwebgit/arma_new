@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\BidHistory;
 use App\Models\Blog;
+use App\Models\Commodity;
 use App\Models\ContainerType;
 use App\Models\Country;
 use App\Models\Currency;
@@ -793,6 +794,16 @@ class IndexController extends Controller
         $number = 1000 + $user_id;
         $ID = 'Armx-' . $initial . $number;
         return $ID;
+    }
+
+    public function CreateAllCommodity(){
+        $commodity=Commodity::where('title','All')->exists();
+        if (!$commodity){
+            Commodity::create([
+                'title'=>'All'
+            ]);
+        }
+        dd('okkk');
     }
 
 }

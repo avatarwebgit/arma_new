@@ -2,13 +2,13 @@
 <table class="table table-striped">
     <thead>
     <tr class="text-center">
-        <th>Create User By</th>
+        <th>Confirmed By</th>
         <th>User ID</th>
         <th>Date</th>
 {{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
-{{--        <th>User Type</th>--}}
+        <th>Type</th>
         <th>Edit</th>
         <th>Status</th>
         <th></th>
@@ -39,19 +39,22 @@
             <td>
                 {{ $item->company_country }}
             </td>
-{{--            <td>--}}
-{{--                <strong>--}}
-{{--                    @if(isset($item->Roles()->first()->name))--}}
-{{--                        @if($item->Roles()->first()->name=='Members')--}}
-{{--                            Member--}}
-{{--                        @else--}}
-{{--                            {{ $item->Roles()->first()->name }}--}}
-{{--                        @endif--}}
-{{--                    @else--}}
-{{--                        ---}}
-{{--                    @endif--}}
-{{--                </strong>--}}
-{{--            </td>--}}
+            <td>
+                <strong>
+                    @if(isset($item->Roles()->first()->name))
+                        @if($item->Roles()->first()->name=='Members')
+                            Member
+                        @else
+                            {{ $item->Roles()->first()->name }}
+                        @endif
+                    @else
+                        -
+                    @endif
+                </strong>
+            </td>
+            <td>
+                {{ $item->commodity }}
+            </td>
             <td>
                <i onclick="ShowEditModal({{ $item->id }})" class="fa fa-edit fa-2x" style="cursor: pointer"></i>
             </td>

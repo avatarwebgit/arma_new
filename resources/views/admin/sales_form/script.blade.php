@@ -51,12 +51,11 @@
         min_quantity = min_quantity.replaceAll(',', '');
         let max_quantity = $('#max_quantity').val();
         max_quantity = max_quantity.replaceAll(',', '');
-
         if (max_quantity == 0 || max_quantity == '' || max_quantity == null) {
             $(tag).val('');
             alert('Please Fill Max Quantity');
         }else {
-            if (min_quantity == max_quantity || min_quantity > max_quantity) {
+            if (min_quantity > max_quantity) {
                 $(tag).val('');
                 alert('Min Quantity must be more than Max Quantity');
             }
@@ -766,7 +765,7 @@
             '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed lectus. Non nisi est sit amet facilisis magna. Dignissim diam quis enim lobortis scelerisque fermentum. Odio ut enim blandit volutpat maecenas volutpat. Ornare lectus sit amet est placerat in egestas erat. Nisi vitae suscipit tellus mauris a ' +
             'diam maecenas sed. Placerat duis ultricies lacus sed turpis tincidunt id aliquet. </p>' +
             '</div>';
-        let formulla_operator = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="Operator" class="mb-2">Operator<span class="text-danger">*</span></label>' +
+        let formulla_operator = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="Operator" class="mb-2">Telorance<span class="text-danger">*</span></label>' +
             '<select required id="Operator" type="text" name="Operator" class="form-control" ><option value="+">+</option><option value="-">-</option><option value="-/+">-/+</option></select>' +
             '</div>';
         let alpha = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="alpha" class="mb-2">alpha<span class="text-danger">*</span></label>' +
@@ -780,7 +779,7 @@
             '</div>';
         let element = formulla;
         if (value === 'Formulla') {
-            element = formulla_text + formulla + formulla_operator + alpha + more_details + base_price_notes;
+            element = formulla_text + formulla + formulla_operator + alpha + more_details;
         }
         $(element).insertAfter($(tag).parent().parent());
     }

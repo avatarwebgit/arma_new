@@ -226,10 +226,13 @@ class FormController extends Controller
 
     public function sales_form_preparation_store(Request $request, $form_id)
     {
-        $request->validate([
-            'term_conditions' => 'required|min:400',
-        ]);
         $form_type = $request->form_type;
+
+            $request->validate([
+                'term_conditions' => 'required|min:400',
+            ]);
+
+
         $status = 5;
         if ($form_type == 'save') {
             $status = 6;
@@ -239,6 +242,10 @@ class FormController extends Controller
             $files = ['specification_file', 'picture_packing_file', 'quality_inspection_report_file', 'safety_product_file', 'reach_certificate_file'];
             $env = env('SALE_OFFER_FORM');
             $sale_form = SalesOfferForm::where('id', $form_id)->first();
+            if ($form_type == 'Edit') {
+                $status=$sale_form->status;
+            }
+
             $array = [
                 'status' => $status,
                 'created_by' => \auth()->id()
@@ -255,6 +262,7 @@ class FormController extends Controller
                 }
                 $array[$file] = $file_name;
             }
+
             $array['term_conditions'] = $term_conditions;
             $sale_form->update($array);
             session()->flash('success', 'Your Information has been saved successfully');
@@ -296,12 +304,14 @@ class FormController extends Controller
 
     public function sales_form_update_or_store(Request $request, $item = null, $is_preparation = null)
     {
+
         $is_complete = 0;
         $rules = $this->rules($item);
         $validator = Validator::make($request->all(), $rules);
         if ($validator->passes()) {
             $is_complete = 1;
         }
+
         $validate_items = $validator->valid();
         $validate_items = collect($validate_items);
         $env = env('SALE_OFFER_FORM');
@@ -334,14 +344,19 @@ class FormController extends Controller
         $validate_items['is_complete'] = $is_complete;
         $validate_items['status'] = 1;
         if ($item != null) {
-
             $sale_form = SalesOfferForm::where('id', $item)->first();
             $validate_items['user_id'] = $sale_form->user_id;
             if ($sale_form->unique_number == null) {
                 $unique_number = 'Arma-' . $sale_form->id;
                 $validate_items['unique_number'] = $unique_number;
             }
+
             $sale_form->update($validate_items->except('_token')->all());
+            if($request->has('status')){
+                $sale_form->update([
+                    'status'=>6
+                ]);
+            }
             if ($is_complete == 1 and $sale_form->status == 0) {
                 session()->flash('need_submit', 1);
             }
@@ -354,11 +369,13 @@ class FormController extends Controller
                 return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
             }
             if ($validator->fails()) {
-                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
+//                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
+                return redirect()->back()->withErrors($validator->errors());
             }
             return redirect()->back()->with('success', 'updated successfully');
 
         } else {
+
             $sale_form = SalesOfferForm::create($validate_items->except('_token')->all());
             $sale_form_id = $sale_form->id;
             $unique_number = 'Arma-' . $sale_form_id;
@@ -400,7 +417,8 @@ class FormController extends Controller
     public function sales_form_index($status)
     {
         $items = SalesOfferForm::where('status', $status)->where('form_id', '!=', null)->where('used_in_market', 0)->orderBy('created_at', 'desc')->paginate(100);
-        $rows=$items[0]->toArray();
+
+//        $rows=$items[0]->toArray();
 
         return view('admin.sales_form.list', compact('items', 'status'));
     }
@@ -633,9 +651,9 @@ class FormController extends Controller
         }
 
         if ($market_permission->role_ids != null) {
-            if ($market_permission->role_ids=="[]"){
-                $role_ids=[];
-            }else{
+            if ($market_permission->role_ids == "[]") {
+                $role_ids = [];
+            } else {
                 $role_ids = unserialize($market_permission->role_ids);
             }
 
@@ -665,7 +683,7 @@ class FormController extends Controller
             }
             foreach ($role_ids as $role) {
                 $role = Role::where('id', $role)->first();
-                $users = $role->users()->where('active',1)->get();
+                $users = $role->users()->where('active', 1)->get();
                 foreach ($users as $user) {
                     $user_ids[] = $user->id;
                 }
@@ -688,7 +706,7 @@ class FormController extends Controller
                 'user_ids' => $user_ids,
             ]);
 
-            $users = User::whereIn('id', unserialize($user_ids))->where('active',1)->get();
+            $users = User::whereIn('id', unserialize($user_ids))->where('active', 1)->get();
             $market = Market::where('id', $market_id)->first();
             $view_html = view('admin.markets.permission_users', compact('users', 'market', 'market_id'))->render();
             return response()->json([1, $view_html]);
@@ -707,7 +725,7 @@ class FormController extends Controller
         }
 
         // شروع جستجوی کاربران با نقش مشخص
-        $query = $role->users()->where('active',1);
+        $query = $role->users()->where('active', 1);
 
         // اضافه کردن شروط به کوئری در صورت وجود
         if ($request->user_name) {
@@ -867,8 +885,10 @@ class FormController extends Controller
             'loading_type' => ['required_if:has_loading,1'],
             'loading_country' => ['required_unless:loading_type,null'],
             'loading_port_city' => ['required_unless:loading_type,null'],
-            'loading_from' => ['required_unless:loading_type,null'],
-            'loading_to' => ['required_unless:loading_type,null'],
+//            'loading_from' => ['required_unless:loading_type,null'],
+//            'loading_to' => ['required_unless:loading_type,null'],
+            'loading_from' => ['required'],
+            'loading_to' => ['required'],
             'bulk_loading_rate' => 'nullable|integer',
             'loading_bulk_shipping_term' => 'nullable',
             'loading_container_type' => 'nullable',
@@ -881,8 +901,8 @@ class FormController extends Controller
             'discharging_type' => ['required_if:has_discharging,1'],
             'discharging_country' => ['required_unless:discharging_type,null'],
             'discharging_port_city' => ['required_unless:discharging_type,null'],
-            'discharging_from' => ['required_unless:discharging_type,null'],
-            'discharging_to' => ['required_unless:discharging_type,null'],
+//            'discharging_from' => ['required_unless:discharging_type,null'],
+//            'discharging_to' => ['required_unless:discharging_type,null'],
             'bulk_discharging_rate' => 'nullable|integer',
             'discharging_bulk_shipping_term' => 'nullable',
             'discharging_container_type' => 'nullable',

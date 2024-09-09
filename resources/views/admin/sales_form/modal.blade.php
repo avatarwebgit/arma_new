@@ -1,15 +1,14 @@
 <!-- Modal -->
 <div class="modal fade" id="NeedToSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="max-width: 1200px">
+    <div class="modal-dialog" role="document" style="max-width: 800px">
         <div class="modal-content">
-            <div class="modal-header">
-
-                   <h3>
-                       Preview Sales Form Offer
-                   </h3>
-                <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"></i>
-
+            <div class="modal-header" style="text-align: center;position: relative">
+                <h5 style="width: 100%;text-align: center">
+                    Preview Sales Offer Form
+                </h5>
+                <i style="position: absolute;right: 40px;top: 10px" data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"></i>
             </div>
+
             <div id="modal_body" class="modal-body p-5 row">
 
             </div>

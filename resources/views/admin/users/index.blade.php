@@ -6,7 +6,8 @@
         <th>Time</th>
         <th>email</th>
         <th>Country</th>
-{{--        <th>User Type</th>--}}
+        <th>Type</th>
+        <th>Commodity</th>
         <th></th>
     </tr>
     </thead>
@@ -28,19 +29,18 @@
             <td>
                 {{ $item->company_country }}
             </td>
-{{--            <td>--}}
-{{--                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">--}}
-{{--                     @if($item->user_type==2)--}}
-{{--                        Seller--}}
-{{--                    @elseif($item->user_type==3)--}}
-{{--                        Buyer--}}
-{{--                    @else--}}
-{{--                        Broker--}}
-{{--                    @endif--}}
-{{--                </strong>--}}
-
-
-{{--            </td>--}}
+            <td>
+                @if($item->user_type==2)
+                    Seller
+                @elseif($item->user_type==3)
+                    Buyer
+                @else
+                    Broker
+                @endif
+            </td>
+            <td>
+                {{ $item->commodity }}
+            </td>
             <td class="text-right">
                 <a onclick="showUserPreview({{ $item->id }})"
                    style="margin-right: 10px;padding: 5px 20px"

@@ -59,6 +59,8 @@
 
                                                 @include('admin.sales_form.origin')
 
+                                                @include('admin.sales_form.delivery_period')
+
                                                 @include('admin.sales_form.loading')
 
                                                 @include('admin.sales_form.discharging')
