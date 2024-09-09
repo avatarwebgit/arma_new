@@ -68,10 +68,10 @@
 {{--                                            {{ $item->title_2 }}--}}
 {{--                                        </td>--}}
 
-                                        <td class="{{ $item->number_1>0 ? 'text-success' : ($item->number_1<0 ? 'text-danger' : 'text-muted') }}">
+                                        <td class="{{ $item->number_3>0 ? 'text-success' : ($item->number_3<0 ? 'text-danger' : 'text-muted') }}">
                                             {{ $item->number_1 }}
                                         </td>
-                                        <td class="{{ $item->number_2>0 ? 'text-success' : ($item->number_2<0 ? 'text-danger' : 'text-muted') }}">
+                                        <td class="{{ $item->number_3>0 ? 'text-success' : ($item->number_3<0 ? 'text-danger' : 'text-muted') }}">
                                             {{ $item->number_2 }}
                                         </td>
                                         <td class="{{ $item->number_3>0 ? 'text-success' : ($item->number_3<0 ? 'text-danger' : 'text-muted') }}">
@@ -99,7 +99,7 @@
                                                data-bs-original-title="{{ __('Delete') }}"><i class="ti ti-trash mr-1"></i></a>
                                             {!! Form::close() !!}
 
-                                            <div class="checkbox-wrapper-6 ml5">
+                                            <div class="checkbox-wrapper-6 ml5 ms-4">
 
                                                 <input {{ $item->status==1 ? 'checked' : '' }} onchange="ItemChangeStatus(this,{{ $item->id }})"
                                                        class="tgl tgl-light" id="cb1-{{ $item->id }}" type="checkbox">

@@ -38,7 +38,7 @@
                     FOLLOW US
                 </h3>
                 <ul class="social-icon">
-                    <li class="icon-social-media"><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>
+{{--                    <li class="icon-social-media"><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>--}}
                     <li class="icon-social-media"><a href="/{{ $twitter }}"><i class="icon ion-logo-twitter"></i></a></li>
                     <li class="icon-social-media"><a href="/{{ $linkedin }}"><i class="icon ion-logo-linkedin"></i></a></li>
                 </ul>
@@ -52,11 +52,11 @@
 
                 </div>
 
-                <div class="col-md-1">
-                    <a href="{{ route('home.index') }}">
-                        <img src="{{ imageExist(env('UPLOAD_SETTING'),$footer_logo) }}" alt="">
-                    </a>
-                </div>
+{{--                <div class="col-md-1">--}}
+{{--                    <a href="{{ route('home.index') }}">--}}
+{{--                        <img src="{{ imageExist(env('UPLOAD_SETTING'),$footer_logo) }}" alt="">--}}
+{{--                    </a>--}}
+{{--                </div>--}}
             </div>
             <div class="col-md-12 mt-5">
                 <div class="d-flex flex-column align-items-start  justify-content-between">

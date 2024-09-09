@@ -33,7 +33,7 @@ class Header1Controller extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'title_2' => 'nullable',
+//            'title_2' => 'nullable',
             'cat_id' => 'required',
 //            'number_1' => 'nullable|numeric',
             'number_2' => 'nullable|numeric',
@@ -71,7 +71,7 @@ class Header1Controller extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'title_2' => 'nullable',
+//            'title_2' => 'nullable',
             'cat_id' => 'required',
 //            'number_1' => 'nullable|numeric',
             'number_2' => 'nullable|numeric',
