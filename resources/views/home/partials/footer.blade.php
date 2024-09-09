@@ -6,7 +6,7 @@
                     @csrf
                     @method('POST')
                     <div class="input-group">
-                        <input placeholder="example@gmail.com ..." aria-describedby="button-addon2" type="text" name="email" class="form-control">
+                        <input aria-describedby="button-addon2" type="text" name="email" class="form-control">
                         <button class="btn btn-warning ml-3" type="submit" id="button-addon2">Subscribe</button>
                     </div>
                 </form>
@@ -20,7 +20,7 @@
             @foreach($menus as $menu)
                     <div class="col-6 col-md-2">
                         <h3 class="mb-3 fw-bold">
-                            <a class="text-white" href="{{ route('home.menus',['menus'=>$menu->id]) }}">
+                            <a class="text-white" >
                                 {{ $menu->title }}
                             </a>
                         </h3>
@@ -37,9 +37,9 @@
                 <h3 class="text-white mb-5">
                     FOLLOW US
                 </h3>
-                <ul class="social-icon">
+                <ul class="social-icon" style="justify-content: flex-start !important;">
 {{--                    <li class="icon-social-media"><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>--}}
-                    <li class="icon-social-media"><a href="/{{ $twitter }}"><i class="icon ion-logo-twitter"></i></a></li>
+                    <li class="icon-social-media mr-2"><a href="/{{ $twitter }}"><i class="icon ion-logo-twitter"></i></a></li>
                     <li class="icon-social-media"><a href="/{{ $linkedin }}"><i class="icon ion-logo-linkedin"></i></a></li>
                 </ul>
             </div>
@@ -60,7 +60,7 @@
             </div>
             <div class="col-md-12 mt-5">
                 <div class="d-flex flex-column align-items-start  justify-content-between">
-                    <span class="text-white text-muted">
+                    <span class="text-white">
                         {{ $copy_right }}
                     </span>
                 </div>

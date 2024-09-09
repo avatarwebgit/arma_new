@@ -309,7 +309,13 @@
 
 @section('style')
     <style>
-
+        .navbar {
+            background-color: #f2f2f2 !important;
+        }
+        .ion-logo-twitter::before {
+            content: "x" !important;
+            font-size: 32px;
+        }
         html {
             -webkit-overflow-scrolling: auto !important;
         }
@@ -519,7 +525,7 @@
                     <div class="landing-feature-item">
                         <img src="{{ asset('home/img/landing/trade.svg') }}" alt="">
                         <span>3</span>
-                        <h3>Start buying & selling</h3>
+                        <h3>Start Buying & Selling</h3>
                     </div>
                 </div>
             </div>
