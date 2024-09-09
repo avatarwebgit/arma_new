@@ -63,7 +63,7 @@
     <select disabled name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
         <option value="">Select Role</option>
         @foreach($roles as $role)
-            <option {{ $user->Roles()->first()->id == $role->id ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
+            <option {{ $user->Roles()->first()->id == $role->id ? 'selected' : '' }} value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
         @endforeach
     </select>
     @error('role')
@@ -75,7 +75,7 @@
 
 <div class="form-group col-12 col-md-6">
     <label for="join_date" class="mb-1">Join Date</label>
-    <input disabled id="join_date" type="date" class="form-control @error('join_date') is-invalid @enderror" name="join_date" value="{{ $user->created_at }}" required>
+    <input disabled id="join_date" class="form-control @error('join_date') is-invalid @enderror" name="join_date" value="{{ $user->created_at->format('Y-m-d') }}" required>
     @error('join_date')
     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

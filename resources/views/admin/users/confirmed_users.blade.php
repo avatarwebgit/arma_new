@@ -2,11 +2,13 @@
     <thead>
     <tr class="text-center">
         <th>#</th>
+        <th>Confirmed By</th>
         <th>Date</th>
 {{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
-        <th>User Type</th>
+        <th>Type</th>
+        <th>Commodity</th>
         <th></th>
     </tr>
     </thead>
@@ -15,6 +17,11 @@
         <tr class="text-center">
             <td>
                 {{ $users->firstItem()+$key }}
+            </td>
+            <td>
+                @if($item->created_by!=null)
+                    {{ $item->CreatedBy->email }}
+                @endif
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
@@ -29,15 +36,13 @@
                 {{ $item->company_country }}
             </td>
             <td>
-                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">
-                    @if($item->user_type==2)
-                        Seller
-                    @elseif($item->user_type==3)
-                        Buyer
-                    @else
-                        Broker
-                    @endif
-                </strong>
+                @if($item->user_type==2)
+                    Seller
+                @elseif($item->user_type==3)
+                    Buyer
+                @else
+                    Broker
+                @endif
             </td>
             <td class="text-right">
 

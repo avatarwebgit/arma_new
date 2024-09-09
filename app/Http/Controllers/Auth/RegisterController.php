@@ -97,7 +97,7 @@ class RegisterController extends Controller
             'company_country' => ['required', 'string', 'max:255'],
             'company_address' => ['required', 'string', 'max:255'],
             'company_phone' => ['required','numeric'],
-            'company_website' => ['nullable', 'string', 'max:255'],
+            'company_website' => ['nullable', 'string', 'max:255','regex:/^(http:\/\/|https:\/\/)?(www\.)?([a-zA-Z0-9_]+\.[a-zA-Z]{2,})(\/[^\s]*)?$/'],
             'company_email' => ['required', 'email', 'max:255', 'unique:users', function ($attribute, $value, $fail) {
                 if (
                     str_contains($value, '@onedrive')
@@ -121,10 +121,31 @@ class RegisterController extends Controller
             }],
 //            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'commodity' => ['required', 'string', 'max:255'],
-            'full_name' => ['required', 'string'],
+            'full_name' => ['required', 'string','regex:/^[A-Za-z]+$/'],
             'salutation' => ['nullable', 'string'],
             'function_in_company' => ['required', 'string'],
-            'email' => ['required', 'email'],
+//            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'max:255', function ($attribute, $value, $fail) {
+                if (
+                    str_contains($value, '@onedrive')
+                    or str_contains($value, '@googlemail')
+                    or str_contains($value, '@youtube')
+                    or str_contains($value, '@outlook')
+                    or str_contains($value, '@yahoo')
+                    or str_contains($value, '@ymail')
+                    or str_contains($value, '@hotmail')
+                    or str_contains($value, '@gmail')
+                    or str_contains($value, '@rocketmail')
+                    or str_contains($value, '@pm')
+                    or str_contains($value, '@protonmail')
+                    or str_contains($value, '@yandex')
+                    or str_contains($value, '@zoho')
+                    or str_contains($value, '@zohomail')
+
+                ) {
+                    $fail('Please enter Company :attribute.',);
+                }
+            }],
             'platform' => ['required', 'string'],
             'mobile_no' => ['required', 'numeric'],
 

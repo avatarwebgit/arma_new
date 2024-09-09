@@ -1,13 +1,14 @@
 <table class="table table-striped">
     <thead>
     <tr class="text-center">
-        <th>Create User By</th>
-        <th>User ID</th>
+        <th>Confirmed By</th>
+{{--        <th>User ID</th>--}}
         <th>Date</th>
 {{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
-{{--        <th>User Type</th>--}}
+        <th>Type</th>
+        <th>Commodity</th>
         <th>Status</th>
         <th></th>
     </tr>
@@ -20,9 +21,9 @@
                     {{ $item->CreatedBy->email }}
                @endif
             </td>
-            <td>
-                {{ $item->user_id }}
-            </td>
+{{--            <td>--}}
+{{--                {{ $item->user_id }}--}}
+{{--            </td>--}}
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
             </td>
@@ -35,9 +36,12 @@
             <td>
                 {{ $item->company_country }}
             </td>
-{{--            <td>--}}
-{{--                {{ isset($item->Roles()->first()->name) ? ucfirst($item->Roles()->first()->name) : '-' }}--}}
-{{--            </td>--}}
+            <td>
+                {{ isset($item->Roles()->first()->name) ? ucfirst($item->Roles()->first()->name) : '-' }}
+            </td>
+            <td>
+                {{ $item->commodity }}
+            </td>
             <td>
                 <select onchange="ChangeActivationStatus(this,{{ $item->id }})" class="form-control">
                     @foreach($activation_status as   $activation)

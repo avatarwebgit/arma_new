@@ -23,7 +23,7 @@
                 <a href="#!" class="dash-link position-relative">
                     <div class="d-flex flex-column align-items-center">
                         <div class="user-img mb-2">
-                            <img src="{{ auth()->user()->avatar ?? asset('home/img/avatar.svg') }}"
+                            <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}"
                                  alt="{{ auth()->user()->name }}" class="rounded-circle" width="50">
                         </div>
                         <div class="user-details text-center">

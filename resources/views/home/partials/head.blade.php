@@ -17,10 +17,18 @@
     <link rel="stylesheet" href="{{ asset('home/css/font-awsome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset("vendor/cookie-consent/css/cookie-consent.css")}}">
     {{--    <meta name="viewport" content="width=1024">--}}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"
+          integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
+        div.dropdown-menu.show{
+            width: 90% !important;
+            margin-top: 20px !important;
+        }
         .modal-backdrop.show{
             opacity: 0.7 !important;
         }

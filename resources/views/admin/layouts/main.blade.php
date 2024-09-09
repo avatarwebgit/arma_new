@@ -286,7 +286,9 @@
 @endif
 
 <script>
-
+    $('select').selectpicker({
+        'title': 'Select'
+    });
     function numberFormat(tag) {
         let number = $(tag).val();
         let number_formatted = number_format_js(number);

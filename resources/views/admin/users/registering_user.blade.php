@@ -2,11 +2,12 @@
     <thead>
     <tr class="text-center">
         <th>#</th>
-        <th>Create User By</th>
+        <th>Confirmed By</th>
         <th>Date</th>
         <th>email</th>
         <th>Country</th>
-{{--        <th>User Type</th>--}}
+        <th>Type</th>
+        <th>Commodity</th>
         <th>Status</th>
         <th></th>
     </tr>
@@ -31,38 +32,39 @@
             <td>
                 {{ $item->company_country }}
             </td>
-{{--            <td>--}}
-{{--                <strong style="width: 40px;display: block;text-align: left;margin: 0 auto">--}}
-{{--                    @if($item->user_type==2)--}}
-{{--                        Seller--}}
-{{--                    @elseif($item->user_type==3)--}}
-{{--                        Buyer--}}
-{{--                    @else--}}
-{{--                        Broker--}}
-{{--                    @endif--}}
-{{--                </strong>--}}
-{{--            </td>--}}
             <td>
+                {{ $item->company_country }}
+            </td>
+            <td>
+                @if($item->user_type==2)
+                    Seller
+                @elseif($item->user_type==3)
+                    Buyer
+                @else
+                    Broker
+                @endif
+            </td>
+            <td style="width: 200px">
                 <select onchange="ChangeRegisterStatus(this,{{ $item->id }})" class="form-control">
                     <option value="0">Step 1</option>
                     <option value="1">Step 2</option>
                     <option value="2">Create Account</option>
                 </select>
             </td>
-            <td class="text-right">
+            <td style="width: 100px" class="text-right">
                 <a onclick="showUserPreview({{ $item->id }})"
-                   style="margin-right: 10px;padding: 5px 20px"
+                   style="margin-left: 2px;padding: 5px 20px"
                    class="btn btn-sm btn-info text-white">
                     <i class="fa fa-eye text-white"></i>
 
                 </a>
-                <a style="margin-right: 10px"
+                <a style="margin-left: 2px"
                    onclick="RejectedUser({{ $item->id }},null)"
                    class="btn btn-sm btn-danger text-white">
                     <i class="icon ion-md-close text-white"></i>
                     Reject
                 </a>
-                <a style="margin-left: 20px" onclick="removeModal({{ $item->id }},event)"
+                <a style="margin-left: 2px" onclick="removeModal({{ $item->id }},event)"
                    class="btn btn-sm btn-danger text-white">
                     <i class="fa fa-trash text-white"></i>
                 </a>

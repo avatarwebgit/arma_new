@@ -38,7 +38,6 @@
                             type="text"
                             class="form-control"
                             name="user_type">
-                            <option value="">Select</option>
                             @foreach($types as $type)
                                 <option value="{{ $type->id }}">{{ ucfirst($type->name) }}</option>
                             @endforeach
@@ -51,7 +50,6 @@
                     <div class="form-group col-12 col-md-6">
                         <label for="company_country" class="mb-1">Country *</label>
                         <select name="company_country" id="company_country" class="form-control">
-                            <option value="">Select Country</option>
                             @foreach($countries as $country)
                                 <option value="{{ $country->countryName }}">{{ $country->countryName }}</option>
                             @endforeach
@@ -110,7 +108,6 @@
                     <div class="form-group col-12 col-md-6">
                         <label for="commodity" class="mb-1">Commodities *</label>
                         <select name="commodity" id="commodity" class="form-control">
-                            <option value="">Select Commodity</option>
                             @foreach($commodities as $commodity)
                                 <option value="{{ $commodity->title }}">
                                     {{ $commodity->title }}
@@ -150,7 +147,6 @@
                                 type="text"
                                 class="form-control"
                                 name="salutation">
-                            <option value="">Select</option>
                             @foreach($salutation as $item)
                                 <option value="{{ $item->title }}">{{ $item->title }}</option>
                             @endforeach
@@ -166,7 +162,6 @@
                             type="text"
                             class="form-control"
                             name="function_in_company">
-                            <option value="">Select</option>
                             @foreach($companyFunction as $item)
                                 <option value="{{ $item->title }}">{{ $item->title }}</option>
                             @endforeach
@@ -194,7 +189,6 @@
                                 type="text"
                                 class="form-control"
                                 name="platform">
-                            <option value="">Select</option>
                             @foreach($platforms as $platfotm)
                                 @if($platfotm->id!=4 and $platfotm->id!=5)
                                 <option value="{{ $platfotm->title }}">{{ $platfotm->title }}</option>

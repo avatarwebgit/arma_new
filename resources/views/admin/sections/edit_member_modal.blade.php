@@ -19,12 +19,12 @@
                     {{--                        <label for="Admin">Admin</label>--}}
                     {{--                    </div>--}}
 <div>
-    <div class="ml5 create_account_radio Members">
+    <div class="ml5 create_account_radio Members {{ $user->hasRole('Members') ? '' : 'd-none' }}">
         <input {{ $user->hasRole('Members') ? 'checked' : '' }} type="radio" name="role" id="Members" value="Members">
         <label for="Members">Member</label>
 
     </div>
-    <div class="ml5 create_account_radio Representatives">
+    <div class="ml5 create_account_radio Representatives {{ $user->hasRole('Representatives') ? '' : 'd-none' }}">
         <input {{ $user->hasRole('Representatives') ? 'checked' : '' }} type="radio" name="role" id="Representatives" value="Representatives">
         <label for="Representatives">Representatives</label>
     </div>

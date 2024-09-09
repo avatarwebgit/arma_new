@@ -8,7 +8,7 @@
     <th>Commodity</th>
     <th>User ID</th>
     <th>Email</th>
-    <th>Status</th>
+{{--    <th>Status</th>--}}
     <th></th>
 </tr>
 </thead>
@@ -43,9 +43,9 @@
         <td>
             {{ $form->User->email }}
         </td>
-        <td>
-            {{ $form->Status->title }}
-        </td>
+{{--        <td>--}}
+{{--            {{ $form->Status->title }}--}}
+{{--        </td>--}}
 
         <td>
 

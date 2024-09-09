@@ -42,7 +42,8 @@
 
                                                             @else
                                                                 <div class="d-flex justify-content-between">
-                                                                    <span class="text-bold text-gray-100">Type/Grade</span>
+                                                                    <span
+                                                                        class="text-bold text-gray-100">Type/Grade</span>
                                                                     <span
                                                                         class="text-bold text-light-blue ">{{ $form->type_grade }}</span>
                                                                 </div>
@@ -114,23 +115,21 @@
                                                             <div class="d-flex justify-content-between">
                                                                 <span
                                                                     class="text-bold text-gray-100">Delivery period</span>
-                                                                <span class="text-bold text-light-blue ">????</span>
+                                                                <span
+                                                                    class="text-bold text-light-blue ">{{ $form->loading_from }}</span>
                                                             </div>
 
                                                             <div class="d-flex justify-content-between">
                                                                 <span class="text-bold text-gray-100">Origin</span>
                                                                 <span class="text-bold text-light-blue ">
-                           {{ $form->country }}
+                           {{ $form->origin_country }}
                         </span>
                                                             </div>
                                                             <div class="d-flex justify-content-between">
                                                                 <span
                                                                     class="text-bold text-gray-100">Specification</span>
                                                                 <span class="text-bold text-light-blue ">
-                           <a target="_blank"
-                              href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->specification_file)) }}">
-                            Download
-                        </a>
+                           {{ $form->specification }}
                         </span>
                                                             </div>
                                                             <div class="d-flex justify-content-between">
@@ -245,7 +244,8 @@
                                                             </div>
                                                             <div class="mb-2">
                                                                 <label class="mb-2">Pictures</label>
-                                                                <div class="col-12 d-flex align-items-end justify-content-between ">
+                                                                <div
+                                                                    class="col-12 d-flex align-items-end justify-content-between ">
                                                                     <div class="w-80">
 
                                                                         <input type="file" class="form-control"
@@ -275,63 +275,67 @@
                                                             </div>
                                                             <div class="mb-2">
                                                                 <label class="mb-2">MSDS</label>
-                                                            <div class="col-12 d-flex align-items-end justify-content-between ">
-                                                                <div class="w-80">
-                                                                    <input type="file" class="form-control" name="safety_product_file">
-                                                                </div>
-                                                                <div>
-                                                                    @if($form->safety_product_file==null or $form->safety_product_file=='')
-                                                                        <button disabled
-                                                                                class="p-2 ml-2 bg-danger text-white">
-                                                                            No File
-                                                                        </button>
-                                                                    @else
-                                                                        <a target="_blank" class="btn btn-primary ml5"
-                                                                           href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->safety_product_file)) }}">
-                                                                            <i class="fa fa-file fa-2x"></i>
-                                                                        </a>
+                                                                <div
+                                                                    class="col-12 d-flex align-items-end justify-content-between ">
+                                                                    <div class="w-80">
+                                                                        <input type="file" class="form-control"
+                                                                               name="safety_product_file">
+                                                                    </div>
+                                                                    <div>
+                                                                        @if($form->safety_product_file==null or $form->safety_product_file=='')
+                                                                            <button disabled
+                                                                                    class="p-2 ml-2 bg-danger text-white">
+                                                                                No File
+                                                                            </button>
+                                                                        @else
+                                                                            <a target="_blank"
+                                                                               class="btn btn-primary ml5"
+                                                                               href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->safety_product_file)) }}">
+                                                                                <i class="fa fa-file fa-2x"></i>
+                                                                            </a>
 
-                                                                        <button type="button"
-                                                                                onclick="RemoveFile('safety_product_file')"
-                                                                                class="btn btn-danger ml5">
-                                                                            <i class="fa fa-times-circle fa-2x"></i>
-                                                                        </button>
-                                                                    @endif
+                                                                            <button type="button"
+                                                                                    onclick="RemoveFile('safety_product_file')"
+                                                                                    class="btn btn-danger ml5">
+                                                                                <i class="fa fa-times-circle fa-2x"></i>
+                                                                            </button>
+                                                                        @endif
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             </div>
                                                             <div class="mb-2">
                                                                 <label class="mb-2">Reach Certificate</label>
-                                                            <div
-                                                                class="col-12 d-flex align-items-end justify-content-between ">
-                                                                <div class="w-80">
+                                                                <div
+                                                                    class="col-12 d-flex align-items-end justify-content-between ">
+                                                                    <div class="w-80">
 
-                                                                    <input type="file" class="form-control"
-                                                                           name="reach_certificate_file">
-                                                                </div>
-                                                                <div>
-                                                                    @if($form->reach_certificate_file==null or $form->reach_certificate_file=='')
-                                                                        <button disabled
-                                                                                class="p-2 ml-2 bg-danger text-white">
-                                                                            No File
-                                                                        </button>
-                                                                    @else
-                                                                        <a target="_blank" class="btn btn-primary ml5"
-                                                                           href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->reach_certificate_file)) }}">
-                                                                            <i class="fa fa-file fa-2x"></i>
-                                                                        </a>
+                                                                        <input type="file" class="form-control"
+                                                                               name="reach_certificate_file">
+                                                                    </div>
+                                                                    <div>
+                                                                        @if($form->reach_certificate_file==null or $form->reach_certificate_file=='')
+                                                                            <button disabled
+                                                                                    class="p-2 ml-2 bg-danger text-white">
+                                                                                No File
+                                                                            </button>
+                                                                        @else
+                                                                            <a target="_blank"
+                                                                               class="btn btn-primary ml5"
+                                                                               href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$form->reach_certificate_file)) }}">
+                                                                                <i class="fa fa-file fa-2x"></i>
+                                                                            </a>
 
-                                                                        <button type="button"
-                                                                                onclick="RemoveFile('reach_certificate_file')"
-                                                                                class="btn btn-danger ml5">
-                                                                            <i class="fa fa-times-circle fa-2x"></i>
-                                                                        </button>
-                                                                    @endif
+                                                                            <button type="button"
+                                                                                    onclick="RemoveFile('reach_certificate_file')"
+                                                                                    class="btn btn-danger ml5">
+                                                                                <i class="fa fa-times-circle fa-2x"></i>
+                                                                            </button>
+                                                                        @endif
 
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -351,10 +355,10 @@
 
                                         <input type="hidden" name="form_type" id="form_type">
                                         <div class="d-flex justify-content-center mt-5">
-{{--                                            <a href="{{ route('admin.sales_form.sixth.index',['status'=>6]) }}"--}}
-{{--                                               class="button-theme mt-3">--}}
-{{--                                                Cancel--}}
-{{--                                            </a>--}}
+                                            {{--                                            <a href="{{ route('admin.sales_form.sixth.index',['status'=>6]) }}"--}}
+                                            {{--                                               class="button-theme mt-3">--}}
+                                            {{--                                                Cancel--}}
+                                            {{--                                            </a>--}}
                                             <button onclick="submitForm('confirm')" type="button"
                                                     class="btn btn-info ms-2 px-4">
                                                 Approve
@@ -497,6 +501,8 @@
 
                                                             @include('admin.sales_form.origin')
 
+                                                            @include('admin.sales_form.delivery_period')
+
                                                             @include('admin.sales_form.loading')
 
                                                             @include('admin.sales_form.discharging')
@@ -520,7 +526,7 @@
                                                         <div id="status_buttons" class="row">
                                                             <div class="col-md-12 text-center">
                                                                 <button title="Submit" type="button"
-                                                                        onclick="submitForm()"
+                                                                        onclick="SaleEdit()"
                                                                         class="btn btn-info">
                                                                     Edit
                                                                 </button>
@@ -545,7 +551,9 @@
                                                             {{--                                                                --}}{{--                                                    @include('admin.sales_form.change_status')--}}
                                                             {{--                                                            </div>--}}
                                                         </div>
+                                                        <input id="status" name="status" type="hidden" value="6">
                                                         <input id="is_save" name="is_save" type="hidden" value="0">
+                                                        <input id="accept_terms" name="accept_terms" type="hidden" value="1">
                                                     </form>
                                                 </div>
                                             </div>
@@ -675,6 +683,10 @@
     @include('admin.sales_form.script')
 
     <script>
+        function SaleEdit() {
+            $('#sales_form').submit();
+        }
+
         function submitForm(type) {
             $('#form_type').val(type);
             $('#term_form').submit();

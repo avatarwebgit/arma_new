@@ -58,7 +58,8 @@
                 <div id="settings-profile"
                      aria-labelledby="settings-profile-tab">
                     <div class="row">
-                        <div class="col-12 {{ $type!=null ? 'col-xl-3' : 'col-xl-6' }} ">
+{{--                        <div class="col-12 {{ $type!=null ? 'col-xl-3' : 'col-xl-6' }} "> --}}
+                            <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="settings-profile">
@@ -112,7 +113,7 @@
                                                         <h5>{{ auth()->user()->user_id }}</h5>
                                                     </div>
 
-                                                    <div class="form-group col-12">
+                                                    <div class="form-group col-12 col-md-6">
                                                         <label for="profile_picture" class="mb-1">Profile Picture</label>
                                                         <input type="file" class="form-control" name="image" id="image">
                                                         @error('image')
