@@ -12,13 +12,13 @@
     </div>
     <nav class="navbar navbar-expand-lg menu-desktop">
         {{--        //logo--}}
-        <div style="width: 7%;text-align: center">
+        <div style="width: 10%;text-align: center">
             <a class='navbar-brand' href='{{ route('home.index') }}'><img class="logo"
                                                                           src="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}"
                                                                           alt="logo"></a>
         </div>
         {{--        //menu--}}
-        <div style="width: 48%;">
+        <div style="width: 55%;margin-left: 22px">
             <ul class="navbar-nav d-flex ">
                 @php
                     $menus=\App\Models\Menus::where('parent',0)->where('show_on_header',1)->get();
@@ -56,7 +56,7 @@
             </ul>
         </div>
         {{--        //search--}}
-        <div style="width: 30%;">
+        <div style="width: 20%;">
             <ul class="navbar-nav ml-auto d-flex align-items-center search_and_btns">
                 <li class="nav-item header-custom-icon position-relative mr-2" style="width: 100%">
                     <form action="{{ route('home.search') }}" method="get">
@@ -82,7 +82,7 @@
                     <div class="dropdown-menu profile" style="left: -130px !important;">
                         <div class="dropdown-header d-flex flex-column align-items-center">
                             <div class="figure mb-3">
-                                <img src="{{ asset('home/img/avatar.svg') }}" alt="">
+                                <img width="80px" src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="avatar">
                             </div>
                             <div class="info text-center">
                                 <p class="email font-weight-bold mb-3">{{ auth()->user()->email }}</p>

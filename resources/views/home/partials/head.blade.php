@@ -10,7 +10,7 @@
             {{ $title }}
         @show
     </title>
-    <link rel="icon" href="{{ imageExist(env('SETTING_UPLOAD_PATH'),$fav_icon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('home/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/timer.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/developer.css') }}">
