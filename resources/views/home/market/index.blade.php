@@ -407,7 +407,7 @@
             }
         }
         #seller_offer_table > tr {
-
+           box-shadow:  0 1px 1px #c3c4c6 !important;
         }
 
         .d-none{
