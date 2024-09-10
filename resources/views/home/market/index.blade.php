@@ -74,7 +74,8 @@
         function waiting_to_open(status, id, difference) {
             hide_result(id);
             deactive_bid(id)
-            let color = '#162fa2';
+            // let color = '#162fa2';
+            let color = '#727272';
             if (difference > 1800) {
                 color = '#727272';
             }
@@ -404,6 +405,9 @@
             #commodity_information span{
                 font-size: 9pt !important;
             }
+        }
+        #seller_offer_table > tr {
+
         }
 
         .d-none{
@@ -772,7 +776,7 @@
                         @endauth
                     </div>
                     <div class="col-12  col-md-6">
-                        @if(auth()->user()->hasRole('buyer') or auth()->user()->hasRole('admin'))
+                        @unless(auth()->user()->hasRole('seller'))
                             <div class="row">
                                 <div class="col-12">
                                     <div id="bid_validate_error" class="alert alert-danger text-left p-2 ">
@@ -825,11 +829,10 @@
                                 <thead class="bg-secondary">
                                 <tr>
                                     <th class="text-center text-white">Quantity
-{{--                                        ( {{ $market->SalesForm->unit }})--}}
+                                        ( {{ $market->SalesForm->unit }} )
                                     </th>
                                     <th class="text-center text-white">Price
-{{--                                        ( {{ $market->SalesForm->currency }}--}}
-{{--                                        )--}}
+                                        ( {{ $market->SalesForm->currency }} )
                                     </th>
                                     <th class="text-center text-white">
                                         Status
