@@ -538,9 +538,13 @@ class MarketHomeController extends Controller
             }
         }
 
-        if ($user_exists==1){
+        if (auth()->user()->hasRole(['admin'])) {
+            $user_exists = 1;
+        }
+
+        if ($user_exists == 1) {
             return ['response' => true, 'message' => 'success'];
-        }else{
+        } else {
             $msg = 'You Dont Have Permission To Bid This Market';
             return ['response' => 'error', 'message' => $msg];
         }
