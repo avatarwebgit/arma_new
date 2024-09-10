@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <div class="col-12  col-md-12">
-                    @if(auth()->user()->hasRole('buyer') or auth()->user()->hasRole('admin'))
+                    @unless(auth()->user()->hasRole('seller'))
                         <div class="row">
                             <div class="col-12">
                                 <div id="bid_validate_error" class="alert alert-danger text-left p-2">
@@ -158,11 +158,10 @@
                     <thead class="bg-secondary">
                     <tr>
                         <th class="text-center text-white">Quantity
-{{--                            ( {{ $market->SalesForm->unit }})--}}
+                            ( {{ $market->SalesForm->unit }} )
                         </th>
                         <th class="text-center text-white">Price
-{{--                            ( {{ $market->SalesForm->currency }}--}}
-{{--                            )--}}
+                            ( {{ $market->SalesForm->currency }} )
                         </th>
                         <th class="text-center text-white">
                             Status
