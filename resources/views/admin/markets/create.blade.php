@@ -85,13 +85,13 @@
                                                     <label for="RigenInput">Rigen</label>
                                                     <input disabled id="RigenInput" type="text" class="form-control">
                                                 </div>
-                                                <div class="col-12 col-md-4 mb-3 d-none" id="alpha_parent">
-                                                    <label for="step_price_competition">Tolerance For Alpha</label>
-                                                    <input id="alpha" name="alpha" class="form-control"
+                                                <div class="col-12 col-md-4 mb-3" id="alpha_parent">
+                                                    <label for="step_price_competition">Gama</label>
+                                                    <input id="alpha" name="alpha" class="form-control" type="number" min="0"
                                                            value="{{ old('alpha') }}">
                                                     @error('alpha')
                                                     <p class="input-error-validate">
-                                                        {{ $message }}
+                                                        Enter Valid Gama
                                                     </p>
                                                     @enderror
                                                 </div>
@@ -264,11 +264,11 @@
             $('#DeliveryInput').val(DeliveryInput);
             $('#RigenInput').val(RigenInput);
             $('#PackingInput').val(PackingInput);
-            let show_alpha = 0;
-            if (dataType == 'Formulla') {
-                show_alpha = 1;
-            }
-            AlphaInput(show_alpha);
+            // let show_alpha = 0;
+            // if (dataType == 'Formulla') {
+            //     show_alpha = 1;
+            // }
+            // AlphaInput(show_alpha);
         }
 
         function AlphaInput(show_alpha) {
