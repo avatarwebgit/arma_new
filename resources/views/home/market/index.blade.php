@@ -326,8 +326,8 @@
             $loops = Math.round(100 / $step);
             $increment = 360 / $loops;
             $half = Math.round($loops / 2);
-            $barColor = '#162fa2';
-            $backColor = '#748dff';
+            // $barColor = '#162fa2';
+            // $backColor = '#748dff';
             var num = 0;
             var sec = seconds;
             var lop = sec;
@@ -407,6 +407,9 @@
             }
         }
         #seller_offer_table > tr {
+           box-shadow:  0 1px 1px #c3c4c6 !important;
+        }
+        .bidder_offer_table > tr {
            box-shadow:  0 1px 1px #c3c4c6 !important;
         }
 
@@ -741,7 +744,7 @@
 
                                 </tr>
                                 </thead>
-                                <tbody id="bidder_offer_{{ $market->id }}">
+                                <tbody class="bidder_offer_table" id="bidder_offer_{{ $market->id }}">
                                 @include('home.market.bidder_table')
                                 </tbody>
                             </table>
