@@ -255,6 +255,7 @@
                         }
                         $('#final_status_section_table-' + id).html(msg[1]);
                         $('#final_status_section_table-' + id).show();
+                        $('#final_status_section_table-' + id).removeClass('d-none');
                         $('#final_status_section-' + id).show();
                     } else {
                         console.log('error');
@@ -265,6 +266,7 @@
 
         function hide_result(market_id) {
             $('#final_status_section_table-' + market_id).hide();
+            $('#final_status_section_table-' + market_id).addClass('d-none');
             $('#Winner_Modal').modal('hide');
         }
 
