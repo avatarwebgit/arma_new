@@ -64,25 +64,27 @@
                                             <tbody>
                                             @foreach($markets->sortBy('time') as $key=>$item)
 
-                                                @if($item->status==1)
-                                                    @php
-                                                        $show_btn=1;
-                                                    @endphp
-                                                @else
-                                                    @php
-                                                        $show_btn=0;
-                                                    @endphp
-                                                @endif
+{{--                                                @if($item->status==1)--}}
+{{--                                                    @php--}}
+{{--                                                        $show_btn=1;--}}
+{{--                                                    @endphp--}}
+{{--                                                @else--}}
+{{--                                                    @php--}}
+{{--                                                        $show_btn=0;--}}
+{{--                                                    @endphp--}}
+{{--                                                @endif--}}
 
                                                 @if($item->status==7 or $item->status==8 or $item->status==9)
                                                     @php
                                                         $status_text='close';
                                                         $color='red';
+                                                         $show_btn=0;
                                                     @endphp
                                                 @else
                                                     @php
                                                         $status_text=$item->Status->title;
                                                         $color=$item->Status->color;
+                                                         $show_btn=1;
                                                     @endphp
                                                 @endif
                                                 <tr style="color: {{ $color }}">
