@@ -402,7 +402,7 @@ class MarketHomeController extends Controller
         }
         if ($market_type == 'Formulla') {
             $alpha = $market->SalesForm->alpha;
-            $base_price = intval($alpha) + ($market->alpha);
+            $base_price = intval($alpha) - ($market->alpha);
             $price = $alpha;
             $currency = '';
         }
