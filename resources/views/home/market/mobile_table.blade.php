@@ -94,7 +94,7 @@
 
                             </tr>
                             </thead>
-                            <tbody id="bidder_offer_{{ $market->id }}">
+                            <tbody class="bidder_offer_table" id="bidder_offer_{{ $market->id }}">
                             @include('home.market.bidder_table')
                             </tbody>
                         </table>
