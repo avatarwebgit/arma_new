@@ -20,11 +20,21 @@
 @else
     <tr>
         {{--        <td class="text-center">{{ $item->quantity }}</td>--}}
-        <td class="text-center">N.A</td>
-        <td class="text-center">N.A</td>
+        <td class="text-center">
+            <strong>
+                N.A
+            </strong>
+        </td>
+        <td class="text-center">
+            <strong>
+                N.A
+            </strong>
+        </td>
         {{--        <td class="text-center">{{ $item->User->id }}</td>--}}
         <td class="text-center">
-            N.A
+            <strong>
+                N.A
+            </strong>
         </td>
     </tr>
 @endif
