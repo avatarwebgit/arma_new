@@ -26,7 +26,7 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Max Quantity</span>
         @php
-        $maxQuantity=str_replace(',','',$market->SalesForm->max_quantity);
+            $maxQuantity=str_replace(',','',$market->SalesForm->max_quantity);
         @endphp
         <span class="text-bold text-light-blue ">{{ number_format($maxQuantity) }}</span>
     </div>
@@ -59,7 +59,7 @@
                         </span>
     </div>
     <div class="d-flex justify-content-between">
-        <span class="text-bold text-gray-100">packaging</span>
+        <span class="text-bold text-gray-100">Packaging</span>
         <span class="text-bold text-light-blue ">
                             {{ $market->SalesForm->packing }}
                         </span>
@@ -71,8 +71,10 @@
         </span>
     </div>
     <div class="d-flex justify-content-between">
-        <span class="text-bold text-gray-100">Delivery period</span>
-        <span class="text-bold text-light-blue ">????</span>
+        <span class="text-bold text-gray-100">Delivery Period</span>
+        <span class="text-bold text-light-blue ">
+            {{ $market->SalesForm->loading_from }}
+        </span>
     </div>
 
     <div class="d-flex justify-content-between">
@@ -80,6 +82,18 @@
         <span class="text-bold text-light-blue ">
                            {{ $market->SalesForm->country }}
                         </span>
+    </div>
+    <div class="d-flex justify-content-between">
+        <span class="text-bold text-gray-100">Currency</span>
+        <span class="text-bold text-light-blue ">
+            {{ $market->SalesForm->currency }}
+        </span>
+    </div>
+    <div class="d-flex justify-content-between">
+        <span class="text-bold text-gray-100">Unit</span>
+        <span class="text-bold text-light-blue ">
+            {{ $market->SalesForm->unit }}
+        </span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Specification</span>
@@ -90,30 +104,19 @@
                         </a>
                         </span>
     </div>
-    <div class="d-flex justify-content-between">
-        <span class="text-bold text-gray-100">Unit</span>
-        <span class="text-bold text-light-blue ">
-            {{ $market->SalesForm->unit }}
-        </span>
-    </div>
-    <div class="d-flex justify-content-between">
-        <span class="text-bold text-gray-100">Currency</span>
-        <span class="text-bold text-light-blue ">
-            {{ $market->SalesForm->currency }}
-        </span>
-    </div>
+
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">GTC</span>
         <span class="text-bold text-light-blue ">
             @if($gtc_use=='Link')
                 <a target="_blank"
                    href="{{ $gtc_Link }}">
-                            Download
+                            Read
                         </a>
             @else
                 <a target="_blank"
                    href="{{ imageExist(env('UPLOAD_SETTING'),$gtc_file) }}">
-                            Download
+                            Read
                         </a>
             @endif
 
@@ -125,12 +128,12 @@
                            @if($bid_use=='Link')
                 <a target="_blank"
                    href="{{ $Bid_Instructions_link }}">
-                            Download
+                            Read
                         </a>
             @else
                 <a target="_blank"
                    href="{{ imageExist(env('UPLOAD_SETTING'),$Bid_Instructions_file) }}">
-                            Download
+                            Read
                         </a>
             @endif
                         </span>
