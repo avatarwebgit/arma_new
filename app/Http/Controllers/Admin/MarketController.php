@@ -77,7 +77,8 @@ class MarketController extends Controller
             'q_1' => 'required',
             'q_2' => 'required',
             'q_3' => 'required',
-            'alpha' => $request->show_alpha == 1 ? 'required' : '',
+//            'alpha' => $request->show_alpha == 1 ? 'required' : '',
+            'alpha' => 'required',
 //            'term_conditions' => 'nullable',
             'show_alpha' => 'required',
         ]);
@@ -129,7 +130,8 @@ class MarketController extends Controller
             'q_1' => 'required',
             'q_2' => 'required',
             'q_3' => 'required',
-            'alpha' => $request->show_alpha == 1 ? 'required' : '',
+//            'alpha' => $request->show_alpha == 1 ? 'required' : '',
+            'alpha' => 'required',
             'term_conditions' => 'nullable',
             'show_alpha' => 'required',
         ]);
