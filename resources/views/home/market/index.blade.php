@@ -326,8 +326,8 @@
             $loops = Math.round(100 / $step);
             $increment = 360 / $loops;
             $half = Math.round($loops / 2);
-            // $barColor = '#162fa2';
-            // $backColor = '#748dff';
+            $barColor = '#727272';
+            $backColor = '#748dff';
             var num = 0;
             var sec = seconds;
             var lop = sec;
