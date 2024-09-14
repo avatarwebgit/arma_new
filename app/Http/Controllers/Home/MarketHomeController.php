@@ -330,7 +330,13 @@ class MarketHomeController extends Controller
         $bid_deposit = $market->bid_deposit;
 
         $currency = $market->SalesForm->currency;
-        $base_price = $price / 2;
+        if ($market->SalesForm->alpha == null or $market->SalesForm->alpha == 0) {
+            $gama = 0;
+        } else {
+            $gama = $market->SalesForm->alpha;
+        }
+//        $base_price = $price / 2;
+        $base_price = $price - $gama;
 
 
         try {
