@@ -850,6 +850,7 @@
                                 </thead>
                                 <tbody class="d-none" id="final_status_section_table-{{ $market->id }}">
                                 @include('home.market.final_status')
+
                                 </tbody>
                             </table>
                         </div>
