@@ -338,6 +338,10 @@
             } else {
                 $('.count').addClass('sec')
             }
+            if (status==2) {
+                $barColor = '#162fa2';
+                $backColor = '#3354f1';
+            }
             if (2 < status && status < 7) {
                 $barColor = '#1f9402';
                 $backColor = '#afff98';
