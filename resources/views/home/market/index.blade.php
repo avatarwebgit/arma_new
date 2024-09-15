@@ -439,7 +439,11 @@
             margin-bottom: 0 !important;
             width: 100%;
         }
-
+        .btn-info{
+            color: #fff;
+            background-color: #138496 !important;
+            border-color: #117a8b !important;
+        }
         .alert-box {
             position: fixed;
             left: 40px;
