@@ -330,14 +330,13 @@ class MarketHomeController extends Controller
         $bid_deposit = $market->bid_deposit;
 
         $currency = $market->SalesForm->currency;
-        if ($market->SalesForm->alpha == null or $market->SalesForm->alpha == 0) {
+        if ($market->alpha == null or $market->alpha == 0) {
             $gama = 0;
         } else {
-            $gama = $market->SalesForm->alpha;
+            $gama = $market->alpha;
         }
 //        $base_price = $price / 2;
         $base_price = $price - $gama;
-
 
         try {
             $bid_permission = $this->Bid_Permissions($bid_deposit, $request->market);
@@ -398,13 +397,24 @@ class MarketHomeController extends Controller
         $market_type = $market->SalesForm->price_type;
         $max_bid = $market->Bids()->orderby('price', 'desc')->first();
         if ($max_bid) {
-            $base_price = $max_bid->price;
+            if ($market->status==3){
+                $user_bid_exists = $market->Bids()->where('user_id',auth()->id())->orderby('price', 'desc')->exists();
+                if ($user_bid_exists){
+                    $base_price = $max_bid->price;
+                }
+            }
         }
         if ($market_type == 'Formulla') {
             $alpha = $market->SalesForm->alpha;
             $base_price = intval($alpha) - ($market->alpha);
             $price = $alpha;
             $currency = '';
+            if ($market->status==3){
+                $user_bid_exists = $market->Bids()->where('user_id',auth()->id())->orderby('price', 'desc')->exists();
+                if ($user_bid_exists){
+                    $base_price = $max_bid->price;
+                }
+            }
         }
         if ($request['price'] < $base_price) {
             $key = 'price';

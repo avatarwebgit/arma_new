@@ -407,6 +407,10 @@
 
 @section('style')
     <style>
+        .gray-bg{
+            background-color: #f6f8f9;
+        }
+
         @media screen and (max-width:768px){
             #commodity_information span{
                 font-size: 9pt !important;
@@ -417,6 +421,8 @@
         }
         .bidder_offer_table > tr {
            box-shadow:  0 1px 1px #c3c4c6 !important;
+            background-color: #f6f8f9;
+
         }
 
         .d-none{
@@ -485,6 +491,7 @@
             width: 100%;
             height: fit-content;
             border: 1px solid black;
+            background-color: #f6f8f9;
         }
 
         .bid_input {
