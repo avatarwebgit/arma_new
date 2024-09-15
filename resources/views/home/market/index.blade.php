@@ -418,12 +418,14 @@
         }
         #seller_offer_table > tr {
            box-shadow:  0 1px 1px #c3c4c6 !important;
+            background-color: #f6f8f9;
         }
         .bidder_offer_table > tr {
            box-shadow:  0 1px 1px #c3c4c6 !important;
             background-color: #f6f8f9;
 
         }
+
 
         .d-none{
             display: none;
