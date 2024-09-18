@@ -269,9 +269,9 @@
         }
 
         function hide_result(market_id) {
-            $('#final_status_section_table-' + market_id).hide();
-            $('#final_status_section_table-' + market_id).addClass('d-none');
-            $('#Winner_Modal').modal('hide');
+            // $('#final_status_section_table-' + market_id).hide();
+            // $('#final_status_section_table-' + market_id).addClass('d-none');
+            // $('#Winner_Modal').modal('hide');
         }
 
         function show_win_modal(id) {
@@ -279,9 +279,6 @@
             $('#Winner_Modal-' + id).removeAttr('id');
         }
 
-
-    </script>
-    <script>
         $(document).ready(function () {
 
             let width = window.innerWidth;
@@ -406,6 +403,34 @@
             return pie;
         }
 
+        function NumberFormat(tag){
+            let value=$(tag).val();
+            value=SetDevider(value);
+            $(tag).val(value);
+        }
+
+        function SetDevider(number, decimals, decPoint, thousandsSep) {
+
+            // تعیین پیشفرض‌ها
+
+            decimals = isNaN(decimals) ? 2 : Math.abs(decimals);
+
+            decPoint = decPoint === undefined ? '.' : decPoint;
+
+            thousandsSep = thousandsSep === undefined ? ',' : thousandsSep;
+
+
+            // فرمت عدد
+
+            var str = parseFloat(number).toFixed(decimals);
+
+            var parts = str.split('.');
+
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSep);
+
+            return parts.join(decPoint);
+
+        }
     </script>
 @endsection
 
@@ -785,7 +810,7 @@
                                                 for="seller_price-{{ $market->id }}">Price
                                                 ( {{ $market->SalesForm->currency }} )
                                             </label>
-                                            <input style="max-width: 250px;margin: 0 auto" disabled id="seller_price-{{ $market->id }}" type="text"
+                                            <input onkeyup="NumberFormat(this)" style="max-width: 250px;margin: 0 auto" disabled id="seller_price-{{ $market->id }}" type="text"
                                                    class="form-control"
                                                    name="seller_quantity-{{ $market->id }}">
                                             <p id="seller_price_error" class="error_text">please enter price</p>
@@ -816,7 +841,7 @@
                                             ( {{ $market->SalesForm->unit }}
                                             )
                                         </label>
-                                        <input disabled id="bid_quantity-{{ $market->id }}" type="text"
+                                        <input onkeyup="NumberFormat(this)" disabled id="bid_quantity-{{ $market->id }}" type="text"
                                                class="form-control">
                                         <p id="bid_quantity_error" class="error_text">please enter quantity</p>
                                     </div>
@@ -827,7 +852,7 @@
                                             for="bid_price-{{ $market->id }}">Price
                                             ( {{ $market->SalesForm->currency }} )
                                         </label>
-                                        <input disabled id="bid_price-{{ $market->id }}" class="form-control">
+                                        <input onkeyup="NumberFormat(this)" disabled id="bid_price-{{ $market->id }}" class="form-control">
                                         <p id="bid_price_error" class="error_text">please enter price</p>
                                     </div>
                                 </div>
@@ -865,8 +890,19 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody class="d-none" id="final_status_section_table-{{ $market->id }}">
-                                @include('home.market.final_status')
+                                <tbody id="final_status_section_table-{{ $market->id }}">
+                                <tr style="height: 27px;background-color: #e4e4e4">
+                                    <td class="text-center ">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                </tr>
+{{--                                @include('home.market.final_status')--}}
 
                                 </tbody>
                             </table>
