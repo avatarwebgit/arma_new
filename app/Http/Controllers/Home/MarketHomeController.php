@@ -147,7 +147,7 @@ class MarketHomeController extends Controller
             $bid = BidHistory::where('id', $id)->first();
             $bids[] = $bid;
         }
-        $view = view('home.market.bidder_table', compact('bids'))->render();
+        $view = view('home.market.bidder_table', compact('bids','market'))->render();
         return response()->json([1, $view]);
     }
 
