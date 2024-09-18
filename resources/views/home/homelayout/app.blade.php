@@ -419,13 +419,13 @@
         $('#bid_quantity-' + id).prop('disabled', true);
     }
 
-    function removeBid(bid_id) {
-        $('#remove_bid_modal_' + bid_id).show();
-        $('#delete_bid_button_' + bid_id).removeAttr('onclick');
-        $('#delete_bid_button_' + bid_id).attr('onclick', 'ForceRemoveBid(' + bid_id + ')');
+    function removeBid(market_id,bid_id) {
+        $('#remove_bid_modal_' + market_id).modal('show');
+        $('#delete_bid_button_' + market_id).removeAttr('onclick');
+        $('#delete_bid_button_' + market_id).attr('onclick', 'ForceRemoveBid('+market_id+',' + bid_id + ')');
     }
 
-    function ForceRemoveBid(bid_id) {
+    function ForceRemoveBid(market_id,bid_id) {
         $.ajax({
             url: "{{  route('home.remove_bid') }}",
             data: {
@@ -434,6 +434,9 @@
             },
             dataType: 'json',
             method: "post",
+            success: function(){
+                $('#remove_bid_modal_' + market_id).modal('hide');
+            }
         })
     }
 
