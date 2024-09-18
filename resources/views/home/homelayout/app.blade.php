@@ -389,7 +389,7 @@
 
     function Competition_Bid_buttons(id) {
         $('#bid_quantity-' + id).prop('disabled', true);
-        $('#bid_quantity-' + id).removeClass('btn-success');
+        $('#bid_quantity-' + id).addClass('d-none');
 
         $('#bid_price-' + id).prop('disabled', false);
         $('#bid_price-' + id).addClass('btn-success');
