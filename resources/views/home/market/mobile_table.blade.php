@@ -51,7 +51,7 @@
                                             for="seller_price-{{ $market->id }}">Price
                                             ( {{ $market->SalesForm->currency }} )
                                         </label>
-                                        <input disabled id="seller_price-{{ $market->id }}" type="text"
+                                        <input onkeyup="NumberFormat(this)" disabled id="seller_price-{{ $market->id }}" type="text"
                                                class="form-control"
                                                name="seller_quantity-{{ $market->id }}">
                                         <p id="seller_price_error" class="error_text">please enter price</p>
@@ -114,7 +114,7 @@
                                         for="bid_quantity-{{ $market->id }}">Quantity
                                         ( {{ $market->SalesForm->unit }} )
                                     </label>
-                                    <input disabled id="bid_quantity-{{ $market->id }}" type="text"
+                                    <input onkeyup="NumberFormat(this)" disabled id="bid_quantity-{{ $market->id }}" type="text"
                                            class="form-control">
                                     <p id="bid_quantity_error" class="error_text">please enter quantity</p>
                                 </div>
@@ -125,7 +125,7 @@
                                         for="bid_price-{{ $market->id }}">Price
                                         ( {{ $market->SalesForm->currency }} )
                                     </label>
-                                    <input disabled id="bid_price-{{ $market->id }}" class="form-control">
+                                    <input onkeyup="NumberFormat(this)" disabled id="bid_price-{{ $market->id }}" class="form-control">
                                     <p id="bid_price_error" class="error_text">please enter price</p>
                                 </div>
                             </div>
