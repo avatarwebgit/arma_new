@@ -278,6 +278,8 @@
             $('#Winner_Modal-' + id).modal('show');
             $('#Winner_Modal-' + id).removeAttr('id');
         }
+    </script>
+    <script>
 
         $(document).ready(function () {
 
