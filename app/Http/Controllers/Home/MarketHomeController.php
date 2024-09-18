@@ -247,6 +247,7 @@ class MarketHomeController extends Controller
         try {
             $user_id = auth()->id();
             $price = $request->price;
+            $price=str_replace(',', '', $price);
 //            $quantity = $request->quantity;
             $market_id = $request->market_id;
             $market = Market::where('id', $market_id)->first();
@@ -322,6 +323,7 @@ class MarketHomeController extends Controller
         }
 //        $price = $market->offer_price;
         $price = $market->SalesForm->price;
+        $price = str_replace(',', '', $price);
         $min_order = $market->SalesForm->min_order;
         $min_order = str_replace(',', '', $min_order);
         $max_quantity = $market->SalesForm->max_quantity;
