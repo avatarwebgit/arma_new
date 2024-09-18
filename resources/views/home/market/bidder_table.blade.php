@@ -16,12 +16,15 @@
         </td>
         <td class="text-center">
             {{ number_format($bid->price) }}
-            @if($key!=0 and $bid->user_id==auth()->id() and $bid->Market->status==3 )
-                <span class="remove_function" onclick="removeBid({{ $bid->id }})">
+
+
+            @if($key!=0 )
+                @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
+                <span onclick="removeBid({{ $bid->id }})">
                      <i  class="fa fa-times-circle text-danger"></i>
                 </span>
+                @endif
             @endif
         </td>
-
     </tr>
 @endforeach

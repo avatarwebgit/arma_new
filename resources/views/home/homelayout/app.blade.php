@@ -97,9 +97,9 @@
             method: 'post',
             success: function (msg) {
                 $(tag).prop('disabled', false);
-                if (msg[0]==3){
-                 $('#login_modal').modal('hide');
-                 $('#BlockUser').modal('show');
+                if (msg[0] == 3) {
+                    $('#login_modal').modal('hide');
+                    $('#BlockUser').modal('show');
                 }
                 if (msg[0] === 1) {
                     window.location.href = "/";
@@ -170,9 +170,9 @@
                 if (msg[0] === 1) {
 
                     $('#register_modal').modal('hide');
-                    setTimeout(function (){
+                    setTimeout(function () {
                         $('#AlertModal').modal('show');
-                    },1000)
+                    }, 1000)
                 }
             },
             error: function (error) {
@@ -420,6 +420,12 @@
     }
 
     function removeBid(bid_id) {
+        $('#remove_bid_modal_' + bid_id).show();
+        $('#delete_bid_button_' + bid_id).removeAttr('onclick');
+        $('#delete_bid_button_' + bid_id).attr('onclick', 'ForceRemoveBid(' + bid_id + ')');
+    }
+
+    function ForceRemoveBid(bid_id) {
         $.ajax({
             url: "{{  route('home.remove_bid') }}",
             data: {
@@ -664,12 +670,13 @@
 
     }
 
-    function ShowPass(tag){
+    function ShowPass(tag) {
         $(tag).addClass('d-none');
         $('#fa-eye-slash').removeClass('d-none');
         $('#password').attr('type', 'text');
     }
-    function HidePass(tag){
+
+    function HidePass(tag) {
         $(tag).addClass('d-none');
         $('#fa-eye').removeClass('d-none');
         $('#password').attr('type', 'password');
