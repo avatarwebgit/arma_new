@@ -458,6 +458,9 @@
         $('.error_text').hide();
         let price = $('#bid_price-' + market_id).val();
         let quantity = $('#bid_quantity-' + market_id).val();
+
+        price=price.replaceAll(',','');
+        quantity=quantity.replaceAll(',','');
         $.ajax({
             url: "{{  route('home.bid_market') }}",
             data: {
@@ -528,6 +531,7 @@
         if (price_is_disable) {
             price = 'disabled';
         }
+        price=price.replaceAll(',','');
         $.ajax({
             url: "{{  route('home.seller_change_offer') }}",
             data: {
