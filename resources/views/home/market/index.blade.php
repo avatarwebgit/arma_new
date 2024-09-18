@@ -233,10 +233,14 @@
         window.Echo.channel('new_bid_created')
             .listen('NewBidCreated', function (e) {
                 let market_id = e.market_id;
+                let is_delete = e.is_delete;
                 refreshBidTable(market_id);
                 let msg = 'New Bid Created';
                 let bg = 'green';
-                ShowAlert(market_id, msg, bg);
+                if (is_delete===false){
+                    ShowAlert(market_id, msg, bg);
+                }
+
             });
 
         function show_market_result(id) {
