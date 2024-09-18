@@ -306,7 +306,7 @@ Route::post('admin-panel/management/Final_Submit', [FormController::class, 'Fina
 
 //SaleForm
 Route::get('/sale_form/{page_type?}/{item?}', [FormController::class, 'sales_form'])->name('sale_form');
-Route::get('/sale_form_preparation/{item?}', [FormController::class, 'sales_form_preparation'])->name('sale_form.preparation');
+Route::get('/sale_form_preparation/{item?}/{folder?}', [FormController::class, 'sales_form_preparation'])->name('sale_form.preparation');
 Route::post('/preparation_store/{form_id}', [FormController::class, 'sales_form_preparation_store'])->name('sale_form.preparation_store');
 Route::post('/sales_form_preparation_remove_file', [FormController::class, 'sales_form_preparation_remove_file'])->name('sale_form.preparation.remove_file');
 Route::post('/sales_form/update_or_store/{item?}/{is_preparation?}', [FormController::class, 'sales_form_update_or_store'])->name('sale_form.update_or_store');

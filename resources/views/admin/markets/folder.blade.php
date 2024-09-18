@@ -131,18 +131,18 @@
                                                     <td>
                                                         <div class="d-flex justify-content-end">
                                                             @if($show_btn==1)
+                                                                <a href="{{ route('sale_form.preparation',['item'=>$item->SalesForm->id,'folder'=>$item->date]) }}"
+                                                                   class="btn btn-sm btn-warning text-white mr-1">
+                                                                    <i class="fa fa-pen"></i>
+                                                                    Edit
+                                                                </a>
+
                                                                 <a title="Edit Market"
                                                                    href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
-                                                                   class="btn btn-sm btn-info">
+                                                                   class="btn btn-sm btn-info ml-2">
                                                                     <i class="fa fa-pen"></i>
                                                                     Market
                                                                 </a>
-{{--                                                                <a title="Edit Commodity"--}}
-{{--                                                                   href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"--}}
-{{--                                                                   class="btn btn-sm btn-primary ml-2">--}}
-{{--                                                                    <i class="fa fa-list"></i>--}}
-{{--                                                                    Commodity--}}
-{{--                                                                </a>--}}
                                                                 <a title="Bidder"
                                                                    href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
                                                                    class="btn btn-sm btn-success ml-2">

@@ -408,7 +408,7 @@
 @section('style')
     <style>
         .gray-bg{
-            background-color: #f6f8f9;
+            background-color: #e4e4e4;
         }
 
         @media screen and (max-width:768px){
@@ -418,11 +418,11 @@
         }
         #seller_offer_table > tr {
            box-shadow:  0 1px 1px #c3c4c6 !important;
-            background-color: #f6f8f9;
+            background-color: #e4e4e4;
         }
         .bidder_offer_table > tr {
            box-shadow:  0 1px 1px #c3c4c6 !important;
-            background-color: #f6f8f9;
+            background-color: #e4e4e4;
 
         }
 
@@ -497,7 +497,7 @@
             width: 100%;
             height: fit-content;
             border: 1px solid black;
-            background-color: #f6f8f9;
+            background-color: #e4e4e4;
         }
 
         .bid_input {
@@ -917,6 +917,27 @@
                 <div class="modal-footer" style="justify-content: space-between;border: 0">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade " id="remove_bid_modal_{{ $market->id }}" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog validate_modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <i class="fa fa-times-circle fa-3x text-danger"></i>
+                    </span>
+                    <h5 style="width: 100%" class="modal-title text-center">Warning</h5>
+                </div>
+                <div id="remove_modal_body_{{ $market->id }}" class="modal-body">
+                    If You Remove Your Bid,You wont be able to Enter Bid On This Competition
+                </div>
+                <div class="modal-footer" style="justify-content: space-between;border: 0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="delete_bid_button_{{ $market->id }}" type="button" class="btn btn-secondary">Delete</button>
                 </div>
             </div>
         </div>

@@ -20,7 +20,20 @@
                     </li>
 
                 </ul>
+
                 <div class="tab-content" id="myTabContent">
+                    @if($folder!=null)
+                        <a href="{{ route('admin.markets.folder',['date'=>$folder]) }}"
+                           class="btn btn-dark bt-sm mt-3">
+                            Back
+                        </a>
+                    @else
+                        <a href="{{ route('admin.sales_form.sixth.index',['status'=>6]) }}"
+                           class="btn btn-dark bt-sm mt-3">
+                            Back
+                        </a>
+                    @endif
+
                     <div class="tab-pane fade show active" id="contact"
                          role="tabpanel" aria-labelledby="contact-tab">
                         <div class="row mt-4">
@@ -359,10 +372,13 @@
                                             {{--                                               class="button-theme mt-3">--}}
                                             {{--                                                Cancel--}}
                                             {{--                                            </a>--}}
-                                            <button onclick="submitForm('confirm')" type="button"
-                                                    class="btn btn-info ms-2 px-4">
-                                                Approve
-                                            </button>
+                                            @unless($folder)
+                                                <button onclick="submitForm('confirm')" type="button"
+                                                        class="btn btn-info ms-2 px-4">
+                                                    Approve
+                                                </button>
+                                            @endif
+
                                             <button onclick="submitForm('save')" type="button"
                                                     class="btn btn-warning px-4">
                                                 Save
@@ -383,10 +399,6 @@
                                          aria-labelledby="settings-profile-tab">
                                         <div class="card">
                                             <div class="card-body">
-                                                <a href="{{ route('admin.sales_form.sixth.index',['status'=>6]) }}"
-                                                   class="btn btn-dark bt-sm mb-3">
-                                                    Back
-                                                </a>
                                                 <div class="settings-profile">
                                                     <form id="sales_form" method="POST" action="{{ $route }}"
                                                           enctype="multipart/form-data">

@@ -165,7 +165,7 @@ class FormController extends Controller
         ));
     }
 
-    public function sales_form_preparation($item)
+    public function sales_form_preparation($item,$folder=null)
     {
         $role = \auth()->user()->Roles()->first()->name;
         $previous_form_id = false;
@@ -220,7 +220,8 @@ class FormController extends Controller
             'platforms',
             'item',
             'role',
-            'previous_form_id'
+            'previous_form_id',
+            'folder'
         ));
     }
 
@@ -268,7 +269,8 @@ class FormController extends Controller
             session()->flash('success', 'Your Information has been saved successfully');
             session()->flash('contact-tab', 'ok');
             if ($form_type == 'save') {
-                return redirect()->route('sale_form.preparation', ['item' => $sale_form->id]);
+//                return redirect()->route('sale_form.preparation', ['item' => $sale_form->id]);
+                return redirect()->back();
             } else {
                 return redirect()->route('admin.sales_form.fifth.index', ['status' => 5]);
             }
