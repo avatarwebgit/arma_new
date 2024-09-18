@@ -384,7 +384,8 @@ class MarketHomeController extends Controller
             $bid = BidHistory::where('id', $bid_id,)->where('user_id', auth()->id())->first();
             $market_id = $bid->market_id;
             $bid->delete();
-            broadcast(new NewBidCreated($market_id));
+            broadcast(new NewBidCreated($market_id,1));
+            return response()->json('success');
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
