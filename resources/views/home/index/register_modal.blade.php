@@ -221,7 +221,7 @@
                                    class="custom-control-input">
                             <label class="custom-control-label" for="accept_term">
                                 I accept the
-                                <a href="{{ route('home.menus',['menus'=>16]) }}">
+                                <a target="_blank" href="{{ route('home.menus',['menus'=>16]) }}">
                                     Term and Conditions
                                 </a>
                             </label>
