@@ -147,7 +147,7 @@ class MarketHomeController extends Controller
             $bid = BidHistory::where('id', $id)->first();
             $bids[] = $bid;
         }
-        $view = view('home.market.bidder_table', compact('bids','market'))->render();
+        $view = view('home.market.bidder_table', compact('bids', 'market'))->render();
         return response()->json([1, $view]);
     }
 
@@ -380,11 +380,24 @@ class MarketHomeController extends Controller
     public function remove_bid(Request $request)
     {
         try {
+            $user_id=auth()->id();
             $bid_id = $request->bid_id;
-            $bid = BidHistory::where('id', $bid_id,)->where('user_id', auth()->id())->first();
+            $bid = BidHistory::where('id', $bid_id,)->where('user_id', $user_id)->first();
             $market_id = $bid->market_id;
             $bid->delete();
-            broadcast(new NewBidCreated($market_id,1));
+            $marketPermissions = MarketPermission::where('market_id', $market_id)->first();
+            if ($marketPermissions && $marketPermissions->user_ids != null) {
+                $user_ids = unserialize($marketPermissions->user_ids);
+                // حذف user_id از آرایه
+                $user_ids = array_filter($user_ids, function($id) use ($user_id) {
+                    return $id !== $user_id;
+                });
+                // سریالایز کردن دوباره آرایه
+                $marketPermissions->user_ids = serialize(array_values($user_ids));
+                // ذخیره تغییرات در دیتابیس
+                $marketPermissions->save();
+            }
+            broadcast(new NewBidCreated($market_id, 1));
             return response()->json('success');
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -398,9 +411,9 @@ class MarketHomeController extends Controller
         $market_type = $market->SalesForm->price_type;
         $max_bid = $market->Bids()->orderby('price', 'desc')->first();
         if ($max_bid) {
-            if ($market->status==3){
-                $user_bid_exists = $market->Bids()->where('user_id',auth()->id())->orderby('price', 'desc')->exists();
-                if ($user_bid_exists){
+            if ($market->status == 3) {
+                $user_bid_exists = $market->Bids()->where('user_id', auth()->id())->orderby('price', 'desc')->exists();
+                if ($user_bid_exists) {
                     $base_price = $max_bid->price;
                 }
             }
@@ -410,9 +423,9 @@ class MarketHomeController extends Controller
             $base_price = intval($alpha) - ($market->alpha);
             $price = $alpha;
             $currency = '';
-            if ($market->status==3){
-                $user_bid_exists = $market->Bids()->where('user_id',auth()->id())->orderby('price', 'desc')->exists();
-                if ($user_bid_exists){
+            if ($market->status == 3) {
+                $user_bid_exists = $market->Bids()->where('user_id', auth()->id())->orderby('price', 'desc')->exists();
+                if ($user_bid_exists) {
                     $base_price = $max_bid->price;
                 }
             }
