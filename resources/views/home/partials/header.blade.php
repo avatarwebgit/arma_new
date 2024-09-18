@@ -76,7 +76,7 @@
                        data-toggle="dropdown"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="avatar">
+                        <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="{{ auth()->user()->full_name }}">
                     </a>
                     <p class="mt-1 pr-4">Hi {{ auth()->user()->full_name }}</p>
                     <div class="dropdown-menu profile" style="left: -130px !important;">
@@ -200,7 +200,7 @@
                        data-toggle="dropdown"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="avatar">
+                        <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="{{ auth()->user()->full_name }}">
                     </a>
                     <p class="mt-1 pr-4">Hi {{ auth()->user()->full_name }}</p>
                     <div class="dropdown-menu profile">
