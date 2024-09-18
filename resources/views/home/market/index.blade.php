@@ -237,7 +237,7 @@
                 refreshBidTable(market_id);
                 let msg = 'New Bid Created';
                 let bg = 'green';
-                if (is_delete===false){
+                if (is_delete === false) {
                     ShowAlert(market_id, msg, bg);
                 }
 
@@ -343,7 +343,7 @@
             } else {
                 $('.count').addClass('sec')
             }
-            if (status==2) {
+            if (status == 2) {
                 $barColor = '#162fa2';
                 $backColor = '#3354f1';
             }
@@ -405,67 +405,65 @@
             return pie;
         }
 
-        function NumberFormat(tag){
-            let value=$(tag).val();
-            value=SetDevider(value);
-            $(tag).val(value);
+        function NumberFormat(tag) {
+            let value = $(tag).val();
+            $(tag).val(separateNum(value));
         }
 
-        function SetDevider (number, decimals, dec_point, thousands_sep) {
-            // Strip all characters but numerical ones.
-            number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
-            var n = !isFinite(+number) ? 0 : +number,
-                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-                s = '',
-                toFixedFix = function (n, prec) {
-                    var k = Math.pow(10, prec);
-                    return '' + Math.round(n * k) / k;
-                };
-            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-            if (s[0].length > 3) {
-                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        function separateNum(value, input) {
+            /* seprate number input 3 number */
+            var nStr = value + '';
+            nStr = nStr.replace(/\,/g, "");
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
             }
-            if ((s[1] || '').length < prec) {
-                s[1] = s[1] || '';
-                s[1] += new Array(prec - s[1].length + 1).join('0');
+            if (input !== undefined) {
+
+                input.value = x1 + x2;
+            } else {
+                return x1 + x2;
             }
-            return s.join(dec);
         }
     </script>
 @endsection
 
 @section('style')
     <style>
-        .gray-bg{
+        .gray-bg {
             background-color: #e4e4e4;
         }
 
-        @media screen and (max-width:768px){
-            #commodity_information span{
+        @media screen and (max-width: 768px) {
+            #commodity_information span {
                 font-size: 9pt !important;
             }
         }
+
         #seller_offer_table > tr {
-           box-shadow:  0 1px 1px #c3c4c6 !important;
+            box-shadow: 0 1px 1px #c3c4c6 !important;
             background-color: #e4e4e4;
         }
+
         .bidder_offer_table > tr {
-           box-shadow:  0 1px 1px #c3c4c6 !important;
+            box-shadow: 0 1px 1px #c3c4c6 !important;
             background-color: #e4e4e4;
 
         }
 
 
-        .d-none{
+        .d-none {
             display: none;
         }
-        .bid_term_condition{
+
+        .bid_term_condition {
             max-height: 1000px;
             overflow-y: auto;
         }
+
         .commodity-title {
             padding: 10px 82px !important;
             background: #6c757d;
@@ -473,11 +471,13 @@
             margin-bottom: 0 !important;
             width: 100%;
         }
-        .btn-info{
+
+        .btn-info {
             color: #fff;
             background-color: #138496 !important;
             border-color: #117a8b !important;
         }
+
         .alert-box {
             position: fixed;
             left: 40px;
@@ -599,7 +599,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin:2px auto 10px;
+            margin: 2px auto 10px;
         }
 
         .clockk {
@@ -759,10 +759,10 @@
                                 <tr>
                                     <th class="text-center text-white w-50">Max
                                         Quantity
-{{--                                        ( {{ $market->SalesForm->unit }} )--}}
+                                        {{--                                        ( {{ $market->SalesForm->unit }} )--}}
                                     </th>
                                     <th class="text-center text-white w-50">Price
-{{--                                        ( {{ $market->SalesForm->currency }} )--}}
+                                        {{--                                        ( {{ $market->SalesForm->currency }} )--}}
                                     </th>
                                 </tr>
                                 </thead>
@@ -786,11 +786,11 @@
                                         Bidder
                                     </th>
                                     <th class="text-center text-white">Quantity
-{{--                                        ( {{ $market->SalesForm->unit }})--}}
+                                        {{--                                        ( {{ $market->SalesForm->unit }})--}}
                                     </th>
                                     <th class="text-center text-white">Price
-{{--                                        ( {{ $market->SalesForm->currency }}--}}
-{{--                                        )--}}
+                                        {{--                                        ( {{ $market->SalesForm->currency }}--}}
+                                        {{--                                        )--}}
                                     </th>
 
                                 </tr>
@@ -813,7 +813,8 @@
                                                 for="seller_price-{{ $market->id }}">Price
                                                 ( {{ $market->SalesForm->currency }} )
                                             </label>
-                                            <input onkeyup="NumberFormat(this)" style="max-width: 250px;margin: 0 auto" disabled id="seller_price-{{ $market->id }}" type="text"
+                                            <input onkeyup="NumberFormat(this)" style="max-width: 250px;margin: 0 auto"
+                                                   disabled id="seller_price-{{ $market->id }}" type="text"
                                                    class="form-control"
                                                    name="seller_quantity-{{ $market->id }}">
                                             <p id="seller_price_error" class="error_text">please enter price</p>
@@ -844,7 +845,8 @@
                                             ( {{ $market->SalesForm->unit }}
                                             )
                                         </label>
-                                        <input onkeyup="NumberFormat(this)" disabled id="bid_quantity-{{ $market->id }}" type="text"
+                                        <input onkeyup="NumberFormat(this)" disabled id="bid_quantity-{{ $market->id }}"
+                                               type="text"
                                                class="form-control">
                                         <p id="bid_quantity_error" class="error_text">please enter quantity</p>
                                     </div>
@@ -855,7 +857,8 @@
                                             for="bid_price-{{ $market->id }}">Price
                                             ( {{ $market->SalesForm->currency }} )
                                         </label>
-                                        <input onkeyup="NumberFormat(this)" disabled id="bid_price-{{ $market->id }}" class="form-control">
+                                        <input onkeyup="NumberFormat(this)" disabled id="bid_price-{{ $market->id }}"
+                                               class="form-control">
                                         <p id="bid_price_error" class="error_text">please enter price</p>
                                     </div>
                                 </div>
@@ -905,7 +908,7 @@
 
                                     </td>
                                 </tr>
-{{--                                @include('home.market.final_status')--}}
+                                {{--                                @include('home.market.final_status')--}}
 
                                 </tbody>
                             </table>
@@ -980,7 +983,8 @@
                 </div>
                 <div class="modal-footer" style="justify-content: space-between;border: 0">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="delete_bid_button_{{ $market->id }}" type="button" class="btn btn-secondary">Delete</button>
+                    <button id="delete_bid_button_{{ $market->id }}" type="button" class="btn btn-secondary">Delete
+                    </button>
                 </div>
             </div>
         </div>
