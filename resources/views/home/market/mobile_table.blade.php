@@ -168,7 +168,7 @@
                         </th>
                     </tr>
                     </thead>
-                    <tbody class="d-none" id="final_status_section_table-{{ $market->id }}">
+                    <tbody class="d-none final_status_section_table" id="final_status_section_table-{{ $market->id }}">
                     @include('home.market.final_status')
                     </tbody>
                 </table>
