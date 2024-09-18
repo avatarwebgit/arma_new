@@ -900,7 +900,7 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody id="final_status_section_table-{{ $market->id }}">
+                                <tbody class="final_status_section_table" id="final_status_section_table-{{ $market->id }}">
                                 <tr style="height: 27px;background-color: #e4e4e4">
                                     <td class="text-center ">
 
