@@ -446,18 +446,17 @@
         #seller_offer_table > tr {
             box-shadow: 0 1px 1px #c3c4c6 !important;
             background-color: #e4e4e4;
-            height: 36px;
+            height: 36px !important;
         }
 
         .bidder_offer_table > tr {
             box-shadow: 0 1px 1px #c3c4c6 !important;
             background-color: #e4e4e4;
-            height: 36px;
-
+            height: 36px !important;
         }
 
         .final_status_section_table > tr{
-            height: 36px;
+            height: 36px !important;
         }
 
         .d-none {
