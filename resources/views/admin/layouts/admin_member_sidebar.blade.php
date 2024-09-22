@@ -247,7 +247,19 @@
             <li class="dash-item">
                 <a class="dash-link" href="{{ route('sale_form', ['page_type' => 'Create']) }}">
                     <span class="dash-micon"><i class="ti ti-file"></i></span>
-                    Sales Offer Form
+                    New
+                </a>
+            </li>
+            <li class="dash-item">
+                <a class="dash-link" href="{{ route('sale_form', ['page_type' => 'Save']) }}">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                    Save
+                </a>
+            </li>
+            <li class="dash-item">
+                <a class="dash-link" href="{{ route('sale_form', ['page_type' => 'Draft']) }}">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                    Draft
                 </a>
             </li>
         </ul>
