@@ -35,6 +35,7 @@
                         <p id="password_error" class="d-none error-message mt-2">
 
                         </p>
+                        <input type="hidden" id="login_modal_market_id">
                     </div>
                     @if (Route::has('password.request'))
                         <div class="col-12 d-flex justify-content-between align-items-center">

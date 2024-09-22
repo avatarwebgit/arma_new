@@ -58,7 +58,7 @@
             },
             success: function (data) {
                 if (data[0] == 'auth') {
-                    ShowLoginModal();
+                    ShowLoginModal(market_id);
                 }
                 if (data[0] == 'ok') {
                     let route = data[1];
@@ -76,9 +76,10 @@
         }, 500);
     }
 
-    function ShowLoginModal() {
+    function ShowLoginModal(market_id=null) {
         $('.error-message').addClass('d-none');
         $('#login_modal').modal('show');
+        $('#login_modal_market_id').val(market_id);
     }
 
     function LoginFormSubmit(tag) {
@@ -86,11 +87,13 @@
         $('.error-message').addClass('d-none');
         let email = $('#email').val();
         let password = $('#password').val();
+        let market_id = $('#login_modal_market_id').val();
         $.ajax({
             url: "{{ route('login') }}",
             data: {
                 email: email,
                 password: password,
+                market_id: market_id,
                 _token: "{{ csrf_token() }}",
             },
             dataType: 'JSON',
