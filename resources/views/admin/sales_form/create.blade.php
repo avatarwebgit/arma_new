@@ -25,8 +25,17 @@
                                             <div>
                                                 <p>No: {{ $form->unique_number }}</p>
                                                 <p>Date: {{ $form->created_at->format('Y-M-d') }}</p>
-                                                <p>
-                                                    Status: {{ $form->is_complete===1?$form->Status->title:'The form is not complete' }}</p>
+                                                @if($form->is_complete==1)
+                                                    <p>Status: Complete</p>
+                                                @else
+                                                    @if($form->is_save==1)
+                                                        <p>Status: Save</p>
+                                                    @elseif($form->is_save==2)
+                                                        <p>Status: Draft</p>
+                                                    @else
+                                                        <p>Status: -</p>
+                                                    @endif
+                                                @endif
                                             </div>
                                         @endif
                                         <hr>
@@ -89,12 +98,17 @@
                                                     </button>
                                                 </div>
                                                 <div class="col-md-12" style="text-align: right">
+                                                    <button title=""
+                                                            type="button" onclick="submitForm(2)"
+                                                            class="btn btn-sm btn-warning">
+                                                        Draft
+                                                    </button>
                                                     <button title="Your Information Saved But Not Submitted"
                                                             type="button" onclick="submitForm(1)"
                                                             class="btn btn-sm btn-success">
                                                         Save
                                                     </button>
-                                                    @if(request()->is('sale_form/Edit*'))
+                                                    @if(request()->is('sale_form/Create'))
 
                                                     @else
                                                         <button title="Your Information Permanently deleted" type="button"

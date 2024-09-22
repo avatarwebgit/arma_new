@@ -305,6 +305,7 @@ Route::name('admin.')->middleware('check.session')->prefix('/admin-panel/managem
 Route::post('admin-panel/management/Final_Submit', [FormController::class, 'Final_Submit'])->name('admin.Final_Submit');
 
 //SaleForm
+Route::get('/sale_form_list/{type}', [FormController::class, 'sale_form_list'])->name('sale_form_list');
 Route::get('/sale_form/{page_type?}/{item?}', [FormController::class, 'sales_form'])->name('sale_form');
 Route::get('/sale_form_preparation/{item?}/{folder?}', [FormController::class, 'sales_form_preparation'])->name('sale_form.preparation');
 Route::post('/preparation_store/{form_id}', [FormController::class, 'sales_form_preparation_store'])->name('sale_form.preparation_store');
