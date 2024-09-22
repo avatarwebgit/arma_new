@@ -54,7 +54,7 @@
         if (max_quantity == 0 || max_quantity == '' || max_quantity == null) {
             $(tag).val('');
             alert('Please Fill Max Quantity');
-        }else {
+        } else {
             if (min_quantity > max_quantity) {
                 $(tag).val('');
                 alert('Min Quantity must be more than Max Quantity');
@@ -617,6 +617,7 @@
                 value = "{{ isset($form['documents_options'])?$form['documents_options']:'' }}";
             }
         }
+
         let documents_options = value;
         documents_options = documents_options.split(",");
         let documents_options_length = documents_options.length;
@@ -661,24 +662,46 @@
     }
 
     function check_payment_term() {
-        let old_value = "{{ old('payment_term') }}";
+
+        let old_value = "{{ old('payment_options') }}";
         let value;
         let other_value;
         let sale_form_exist = {{ $sale_form_exist }};
+        let src = null;
         if (old_value !== '') {
             value = old_value;
-            other_value = "{{ old('payment_term_description') }}";
         } else {
             if (sale_form_exist === 1) {
-                value = "{{ isset($form['payment_term'])?$form['payment_term']:'' }}";
-                other_value = "{{ isset($form['payment_term_description'])?$form['payment_term_description']:'' }}";
+                value = "{{ isset($form['payment_options'])?$form['payment_options']:'' }}";
             }
         }
-        let has_payment_term = value;
-        if (has_payment_term.length !== 0) {
-            PaymentTerm($('#payment_term'));
-            $('#payment_term_description').val(other_value);
-        }
+        let payment_options = value;
+        payment_options = payment_options.split(",");
+        let payment_options_length = payment_options.length;
+        $('#payment_options').val(payment_options);
+        $('#payment_count').val(payment_options_length);
+        $.each(payment_options, function (key, value) {
+            $("#payment-term-box input[value='" + value + "']").prop('checked', true);
+        });
+        paymentTermOptions();
+        {{--let old_value = "{{ old('payment_term') }}";--}}
+        {{--let value;--}}
+        {{--let other_value;--}}
+        {{--let sale_form_exist = {{ $sale_form_exist }};--}}
+        {{--if (old_value !== '') {--}}
+        {{--    value = old_value;--}}
+        {{--    other_value = "{{ old('payment_term_description') }}";--}}
+        {{--} else {--}}
+        {{--    if (sale_form_exist === 1) {--}}
+        {{--        value = "{{ isset($form['payment_term'])?$form['payment_term']:'' }}";--}}
+        {{--        other_value = "{{ isset($form['payment_term_description'])?$form['payment_term_description']:'' }}";--}}
+        {{--    }--}}
+        {{--}--}}
+        {{--let has_payment_term = value;--}}
+        {{--if (has_payment_term.length !== 0) {--}}
+        {{--    PaymentTerm($('#payment_term'));--}}
+        {{--    $('#payment_term_description').val(other_value);--}}
+        {{--}--}}
     }
 
     function hasOther(tag, is_yes = 0) {
@@ -1107,6 +1130,32 @@
 
 
     //end
+
+    function paymentTermOptions() {
+        let check_inputs = $("#payment-term-box input[type='checkbox']:checked");
+        $('.term_condition_option').addClass('d-none');
+        let payments = '';
+        let pass = 'Yes';
+
+        $.each(check_inputs, function (index, value) {
+            let param = $(value).val();
+            $('#' + param + '_term_and_conditions_parent').removeClass('d-none');
+            if (payments == '') {
+                payments = param;
+            } else {
+                payments = payments + ',' + param;
+            }
+        });
+        $('#payment_options').val(payments);
+        if (check_inputs.length < 2) {
+            pass = 'No';
+            $('#documents_options').val('');
+        }
+
+        $('#payment_count').val(pass);
+
+
+    }
 
     function documentOptions() {
         let check_inputs = $("#documents-box input[type='checkbox']:checked");

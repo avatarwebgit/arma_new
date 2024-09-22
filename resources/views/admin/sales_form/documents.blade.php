@@ -6,6 +6,7 @@
         </strong>
     </div>
 </div>
+
 <div class="row" id="documents-box">
     <div class="col-12 col-md-3 mb-3">
         @php

@@ -85,26 +85,27 @@ class FormController extends Controller
         $previous_form_id = false;
         $route = route('sale_form.update_or_store');
         $form = [];
-        if ($page_type === 'Create') {
-            if (isset($_GET['previous_form'])) {
+        if (isset($_GET['previous_form'])) {
+            $sale_form_exist = 1;
+            $form = SalesOfferForm::where('id', $_GET['previous_form'])->first();
+        } else {
+            $form_exist = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 1)->exists();
+            if ($form_exist) {
                 $sale_form_exist = 1;
-                $form = SalesOfferForm::where('id', $_GET['previous_form'])->first();
+                $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 1)->latest()->first();
             } else {
-                $form_exist = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 1)->exists();
-                if ($form_exist) {
-                    $sale_form_exist = 1;
-                    $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 1)->latest()->first();
-                } else {
 
-                    $form_exist = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 1)->first();
-                    if ($form_exist) {
-                        $sale_form_exist = 0;
-                        $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 1)->latest()->first();
-                        $previous_form_id = $form->id;
-                        $form = [];
-                    }
+                $form_exist = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 1)->first();
+                if ($form_exist) {
+                    $sale_form_exist = 0;
+                    $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 1)->latest()->first();
+                    $previous_form_id = $form->id;
+                    $form = [];
                 }
             }
+        }
+        if ($page_type === 'Create') {
+            $previous_form_id = false;
         }
         if ($page_type === 'Edit') {
             $sale_form_exist = 1;
@@ -306,13 +307,15 @@ class FormController extends Controller
 
     public function sales_form_update_or_store(Request $request, $item = null, $is_preparation = null)
     {
-
         $is_complete = 0;
-        $rules = $this->rules($item);
+        $rules = $this->rules($item,$request);
         $validator = Validator::make($request->all(), $rules);
         if ($validator->passes()) {
             $is_complete = 1;
         }
+
+
+
 
         $validate_items = $validator->valid();
         $validate_items = collect($validate_items);
@@ -397,6 +400,7 @@ class FormController extends Controller
             }
 
             if ($validator->fails()) {
+
                 return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
             }
         }
@@ -817,7 +821,7 @@ class FormController extends Controller
         }
     }
 
-    public function rules($item)
+    public function rules($item,$request)
     {
         $rules = [
             //company
@@ -868,9 +872,19 @@ class FormController extends Controller
             'formulla_more_details' => ['nullable'],
             'base_price_notes' => ['nullable'],
             'price' => ['required_if:price_type,Fix'],
-
-            'payment_term' => 'required',
-            'payment_term_description' => 'required',
+            'payment_count' => 'required',
+            'payment_options' => ['required_if:payment_count,No'],
+            'lc_term_and_conditions'=>$request->has('lc') ? 'required' : 'nullable',
+            'oa_term_and_conditions'=>$request->has('oa') ? 'required' : 'nullable',
+            'tt_term_and_conditions'=>$request->has('tt') ? 'required' : 'nullable',
+            'dp_term_and_conditions'=>$request->has('dp') ? 'required' : 'nullable',
+            'da_term_and_conditions'=>$request->has('da') ? 'required' : 'nullable',
+            'paypal_term_and_conditions'=>$request->has('paypal') ? 'required' : 'nullable',
+            'western_union_term_and_conditions'=>$request->has('western_union') ? 'required' : 'nullable',
+            'moneygram_term_and_conditions'=>$request->has('moneygram') ? 'required' : 'nullable',
+            'other_payment_term_and_conditions'=>$request->has('other_payment') ? 'required' : 'nullable',
+//            'payment_term' => 'required',
+//            'payment_term_description' => 'required',
             'packing' => 'required',
             'packing_more_details' => 'nullable',
             'packing_other' => ['required_if:packing,other'],
