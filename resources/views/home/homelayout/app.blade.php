@@ -105,7 +105,7 @@
                     $('#BlockUser').modal('show');
                 }
                 if (msg[0] === 1) {
-                    window.location.href = "/";
+                    window.location.href = msg[1];
                 }
                 if (msg[0] === 0) {
                     $('#login_modal').modal('hide');
