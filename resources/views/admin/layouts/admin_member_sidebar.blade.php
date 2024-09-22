@@ -236,6 +236,8 @@
     </ul>
 </li>
 @can('Sales-Order-Sales-Offer-form')
+
+
     <!-- Sales Order Section -->
     <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/orders*') ? 'active dash-trigger' : 'collapsed' }}">
         <a href="#!" class="dash-link">
@@ -251,15 +253,15 @@
                 </a>
             </li>
             <li class="dash-item">
-                <a class="dash-link" href="{{ route('sale_form', ['page_type' => 'Save']) }}">
+                <a class="dash-link" href="{{ route('sale_form_list',['type'=>'Save']) }}">
                     <span class="dash-micon"><i class="ti ti-file"></i></span>
-                    Save
+                    Save ( {{ $SalesFormCounts['Save'] }} )
                 </a>
             </li>
             <li class="dash-item">
-                <a class="dash-link" href="{{ route('sale_form', ['page_type' => 'Draft']) }}">
+                <a class="dash-link" href="{{ route('sale_form_list',['type'=>'Draft']) }}">
                     <span class="dash-micon"><i class="ti ti-file"></i></span>
-                    Draft
+                    Draft ( {{ $SalesFormCounts['Draft'] }} )
                 </a>
             </li>
         </ul>

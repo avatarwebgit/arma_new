@@ -77,6 +77,20 @@ class FormController extends Controller
         }
     }
 
+    public function sale_form_list($type)
+    {
+        if ($type=='Save'){
+            $is_save=1;
+            $is_complete=0;
+        }
+        if ($type=='Draft'){
+            $is_save=2;
+            $is_complete=0;
+        }
+        $forms = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', $is_complete)->where('is_save', $is_save)->paginate(20);
+        return view('admin.sales_form.sales_form_index',compact('forms', 'is_complete', 'is_save','type'));
+    }
+
     public function sales_form($page_type = 'Create', $item = 'null')
     {
         $role = \auth()->user()->Roles()->first()->name;
@@ -105,13 +119,36 @@ class FormController extends Controller
             }
         }
         if ($page_type === 'Create') {
+            $sale_form_exist = 0;
             $previous_form_id = false;
+            $form = [];
         }
         if ($page_type === 'Edit') {
+            $previous_form_id = false;
             $sale_form_exist = 1;
             $route = route('sale_form.update_or_store', ['item' => $item]);
             $form = SalesOfferForm::where('id', $item)->first();
-
+        }
+        if ($page_type === 'Save') {
+            $previous_form_id = false;
+            $sale_form_exist = 1;
+            $route = route('sale_form.update_or_store', ['item' => $item]);
+            $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 1)->latest()->first();
+            if (!$form) {
+                dd('no form exists');
+            } else {
+                $item = $form->id;
+                $route = route('sale_form.update_or_store', ['item' => $item]);
+            }
+        }
+        if ($page_type === 'Draft') {
+            $previous_form_id = false;
+            $sale_form_exist = 1;
+            $route = route('sale_form.update_or_store', ['item' => $item]);
+            $form = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 2)->latest()->first();
+            if (!$form) {
+                dd('no form exists');
+            }
         }
         $company_types = CompanyType::all();
         $unites = Units::all();
@@ -134,7 +171,6 @@ class FormController extends Controller
         $cargoInsurance = CargoInsurance::all();
         $contract_types = ContractType::all();
         $platforms = PlatFom::all();
-
         return view('admin.sales_form.create', compact(
             'sale_form_exist',
             'form',
@@ -166,7 +202,7 @@ class FormController extends Controller
         ));
     }
 
-    public function sales_form_preparation($item,$folder=null)
+    public function sales_form_preparation($item, $folder = null)
     {
         $role = \auth()->user()->Roles()->first()->name;
         $previous_form_id = false;
@@ -228,11 +264,12 @@ class FormController extends Controller
 
     public function sales_form_preparation_store(Request $request, $form_id)
     {
+
         $form_type = $request->form_type;
 
-            $request->validate([
-                'term_conditions' => 'required|min:400',
-            ]);
+        $request->validate([
+            'term_conditions' => 'required|min:400',
+        ]);
 
 
         $status = 5;
@@ -245,7 +282,7 @@ class FormController extends Controller
             $env = env('SALE_OFFER_FORM');
             $sale_form = SalesOfferForm::where('id', $form_id)->first();
             if ($form_type == 'Edit') {
-                $status=$sale_form->status;
+                $status = $sale_form->status;
             }
 
             $array = [
@@ -308,14 +345,21 @@ class FormController extends Controller
     public function sales_form_update_or_store(Request $request, $item = null, $is_preparation = null)
     {
         $is_complete = 0;
-        $rules = $this->rules($item,$request);
+        $rules = $this->rules($item, $request);
         $validator = Validator::make($request->all(), $rules);
+        if ($request->is_save == 2) {
+            $save = 0;
+        } else {
+            $save = $request->is_save;
+        }
         if ($validator->passes()) {
             $is_complete = 1;
+            $save = $request->is_save;
         }
-
-
-
+        if ($item != null) {
+            $pre_form = SalesOfferForm::where('id', $item)->first();
+            $save = $pre_form->is_save;
+        }
 
         $validate_items = $validator->valid();
         $validate_items = collect($validate_items);
@@ -347,6 +391,7 @@ class FormController extends Controller
         $validate_items['has_loading'] = $has_loading;
         $validate_items['accept_terms'] = $accept_terms;
         $validate_items['is_complete'] = $is_complete;
+        $validate_items['is_save'] = $save;
         $validate_items['status'] = 1;
         if ($item != null) {
             $sale_form = SalesOfferForm::where('id', $item)->first();
@@ -357,9 +402,9 @@ class FormController extends Controller
             }
 
             $sale_form->update($validate_items->except('_token')->all());
-            if($request->has('status')){
+            if ($request->has('status')) {
                 $sale_form->update([
-                    'status'=>6
+                    'status' => 6
                 ]);
             }
             if ($is_complete == 1 and $sale_form->status == 0) {
@@ -373,6 +418,7 @@ class FormController extends Controller
                 session()->flash('success', 'Your Information has been saved successfully');
                 return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
             }
+
             if ($validator->fails()) {
 //                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
                 return redirect()->back()->withErrors($validator->errors());
@@ -398,6 +444,7 @@ class FormController extends Controller
                 session()->flash('success', 'Your Information has been saved successfully');
                 return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
             }
+
 
             if ($validator->fails()) {
 
@@ -821,7 +868,7 @@ class FormController extends Controller
         }
     }
 
-    public function rules($item,$request)
+    public function rules($item, $request)
     {
         $rules = [
             //company
@@ -874,15 +921,15 @@ class FormController extends Controller
             'price' => ['required_if:price_type,Fix'],
             'payment_count' => 'required',
             'payment_options' => ['required_if:payment_count,No'],
-            'lc_term_and_conditions'=>$request->has('lc') ? 'required' : 'nullable',
-            'oa_term_and_conditions'=>$request->has('oa') ? 'required' : 'nullable',
-            'tt_term_and_conditions'=>$request->has('tt') ? 'required' : 'nullable',
-            'dp_term_and_conditions'=>$request->has('dp') ? 'required' : 'nullable',
-            'da_term_and_conditions'=>$request->has('da') ? 'required' : 'nullable',
-            'paypal_term_and_conditions'=>$request->has('paypal') ? 'required' : 'nullable',
-            'western_union_term_and_conditions'=>$request->has('western_union') ? 'required' : 'nullable',
-            'moneygram_term_and_conditions'=>$request->has('moneygram') ? 'required' : 'nullable',
-            'other_payment_term_and_conditions'=>$request->has('other_payment') ? 'required' : 'nullable',
+            'lc_term_and_conditions' => $request->has('lc') ? 'required' : 'nullable',
+            'oa_term_and_conditions' => $request->has('oa') ? 'required' : 'nullable',
+            'tt_term_and_conditions' => $request->has('tt') ? 'required' : 'nullable',
+            'dp_term_and_conditions' => $request->has('dp') ? 'required' : 'nullable',
+            'da_term_and_conditions' => $request->has('da') ? 'required' : 'nullable',
+            'paypal_term_and_conditions' => $request->has('paypal') ? 'required' : 'nullable',
+            'western_union_term_and_conditions' => $request->has('western_union') ? 'required' : 'nullable',
+            'moneygram_term_and_conditions' => $request->has('moneygram') ? 'required' : 'nullable',
+            'other_payment_term_and_conditions' => $request->has('other_payment') ? 'required' : 'nullable',
 //            'payment_term' => 'required',
 //            'payment_term_description' => 'required',
             'packing' => 'required',
