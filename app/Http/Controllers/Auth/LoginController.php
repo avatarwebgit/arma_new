@@ -44,6 +44,8 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $market_id=$request->market_id;
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -67,7 +69,12 @@ class LoginController extends Controller
                     return response()->json([3, 'user_blocked']);
 
                 }
-                return response()->json([1, 'ok']);
+                if ($market_id==null){
+                    $route=route('home.index');
+                }else{
+                    $route=route('home.bid',['market'=>$market_id]);
+                }
+                return response()->json([1, $route]);
             }
 
         }
