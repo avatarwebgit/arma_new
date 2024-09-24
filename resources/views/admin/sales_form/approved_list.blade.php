@@ -53,6 +53,7 @@
                class="btn btn-sm btn-primary text-white mr-1">
                 <i class="fa fa-eye"></i>
             </a>
+            @if(auth()->user()->hasRole(['admin']))
             {{--            <a href="{{ route('sale_form',['page_type'=>'Edit','item'=>$form->id]) }}"--}}
             {{--               class="btn btn-sm btn-info text-white mr-1">--}}
             {{--                <i class="fa fa-pen"></i>--}}
@@ -65,6 +66,7 @@
                class="btn btn-sm btn-danger text-white mr-1">
                 <i class="fa fa-trash"></i>
             </a>
+            @endif
 
         </td>
     </tr>
