@@ -411,7 +411,9 @@ class FormController extends Controller
                 $unique_number = 'Arma-' . $sale_form->id;
                 $validate_items['unique_number'] = $unique_number;
             }
-
+            if (count($validator->errors()) > 0) {
+                $validate_items['is_save'] = $sale_form->is_save;
+            }
             $sale_form->update($validate_items->except('_token')->all());
             if ($request->has('status')) {
                 $sale_form->update([
