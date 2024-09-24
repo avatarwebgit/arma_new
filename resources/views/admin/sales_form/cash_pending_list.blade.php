@@ -59,17 +59,21 @@
                class="btn btn-sm btn-primary text-white mr-1">
                 <i class="fa fa-eye"></i>
             </a>
-            <button onclick="EditCurrency({{$form->id}},'{{ $form->deposit_value }}','{{ $form->cash_pending_currency }}')" class="btn btn-sm btn-info text-white mr-1">
+            <button
+                onclick="EditCurrency({{$form->id}},'{{ $form->deposit_value }}','{{ $form->cash_pending_currency }}')"
+                class="btn btn-sm btn-info text-white mr-1">
                 <i class="fa fa-pen"></i>
             </button>
-            <button onclick="show_change_status_modal({{ $form->id }},6)"
-                    class="btn btn-sm btn-warning text-white mr-1">
-                change status
-            </button>
-            <a onclick="removeModal({{ $form->id }},event)"
-               class="btn btn-sm btn-danger text-white mr-1">
-                <i class="fa fa-trash"></i>
-            </a>
+            @if(auth()->user()->hasRole(['admin']))
+                <button onclick="show_change_status_modal({{ $form->id }},6)"
+                        class="btn btn-sm btn-warning text-white mr-1">
+                    change status
+                </button>
+                <a onclick="removeModal({{ $form->id }},event)"
+                   class="btn btn-sm btn-danger text-white mr-1">
+                    <i class="fa fa-trash"></i>
+                </a>
+            @endif
         </td>
     </tr>
 @endforeach

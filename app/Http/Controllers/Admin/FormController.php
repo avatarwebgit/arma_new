@@ -91,6 +91,12 @@ class FormController extends Controller
         return view('admin.sales_form.sales_form_index', compact('forms', 'is_complete', 'is_save', 'type'));
     }
 
+    public function sale_forms($status)
+    {
+        $items = SalesOfferForm::where('status', $status)->where('form_id', '!=', null)->where('user_id', \auth()->id())->orderBy('created_at', 'desc')->paginate(100);
+        return view('admin.sales_form.list', compact('items', 'status'));
+    }
+
     public function sales_form($page_type = 'Create', $item = 'null')
     {
         $role = \auth()->user()->Roles()->first()->name;
@@ -363,7 +369,6 @@ class FormController extends Controller
 //        }
 
 
-
         $validate_items = $validator->valid();
 
         $validate_items = collect($validate_items);
@@ -423,15 +428,15 @@ class FormController extends Controller
 //                }
                 session()->flash('success', 'Your Information has been saved successfully');
 //                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
-                return redirect()->route('sale_form_list',['type'=>'Save']);
+                return redirect()->route('sale_form_list', ['type' => 'Save']);
             }
-            if (count($validator->errors())>0) {
+            if (count($validator->errors()) > 0) {
 //                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
                 return redirect()->back()->withErrors($validator->errors());
             }
             if ($save == 2) {
                 session()->flash('success', 'Your Information has been Draft successfully');
-                return redirect()->route('sale_form_list',['type'=>'Draft']);
+                return redirect()->route('sale_form_list', ['type' => 'Draft']);
             }
             return redirect()->back()->with('success', 'updated successfully');
 
@@ -454,16 +459,16 @@ class FormController extends Controller
                 session()->flash('success', 'Your Information has been saved successfully');
 
 //                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
-                return redirect()->route('sale_form_list',['type'=>'Save']);
+                return redirect()->route('sale_form_list', ['type' => 'Save']);
             }
 
-            if (count($validator->errors())>0) {
+            if (count($validator->errors()) > 0) {
                 return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
             }
 
             if ($save == 2) {
                 session()->flash('success', 'Your Information has been Draft successfully');
-                return redirect()->route('sale_form_list',['type'=>'Draft']);
+                return redirect()->route('sale_form_list', ['type' => 'Draft']);
             }
         }
 

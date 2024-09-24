@@ -55,11 +55,11 @@
     <th>Account</th>
     <th>Sales Order No.</th>
     <th>Date</th>
-{{--    <th>Time</th>--}}
+    {{--    <th>Time</th>--}}
     <th>Commodity</th>
     <th>User ID</th>
     <th>Email</th>
-{{--    <th>Status</th>--}}
+    {{--    <th>Status</th>--}}
     <th></th>
 </tr>
 </thead>
@@ -82,11 +82,11 @@
         <td>
             {{ \Carbon\Carbon::parse($form->crated_at)->format('m/d/Y') }}
         </td>
-{{--        <td>--}}
-{{--            {{ \Carbon\Carbon::parse($form->crated_at)->format('H:m') }}--}}
-{{--        </td>--}}
+        {{--        <td>--}}
+        {{--            {{ \Carbon\Carbon::parse($form->crated_at)->format('H:m') }}--}}
+        {{--        </td>--}}
         <td>
-                        {{ $form->commodity }}
+            {{ $form->commodity }}
         </td>
         <td>
             {{ $form->User->user_id }}
@@ -94,9 +94,9 @@
         <td>
             {{ $form->User->email }}
         </td>
-{{--        <td>--}}
-{{--            {{ $form->Status->title }}--}}
-{{--        </td>--}}
+        {{--        <td>--}}
+        {{--            {{ $form->Status->title }}--}}
+        {{--        </td>--}}
 
         <td>
 
@@ -104,11 +104,12 @@
                class="btn btn-sm btn-info text-white mr-1">
                 <i class="fa fa-pen"></i>
             </a>
-            <a onclick="removeModal({{ $form->id }},event)"
-               class="btn btn-sm btn-danger text-white mr-1">
-                <i class="fa fa-trash"></i>
-            </a>
-
+            @if(auth()->user()->hasRole(['admin']))
+                <a onclick="removeModal({{ $form->id }},event)"
+                   class="btn btn-sm btn-danger text-white mr-1">
+                    <i class="fa fa-trash"></i>
+                </a>
+            @endif
         </td>
     </tr>
 @endforeach

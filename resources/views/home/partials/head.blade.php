@@ -25,6 +25,9 @@
     @yield('style')
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
+        .header-img-icon .nav-link img{
+            border-radius: 50% !important;
+        }
         div.dropdown-menu.show{
             width: 90% !important;
             margin-top: 20px !important;
