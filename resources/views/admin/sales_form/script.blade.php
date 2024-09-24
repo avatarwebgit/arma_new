@@ -285,6 +285,8 @@
             addAttachmentFile($('#quality_inspection_report'), 0, other_value, src);
         }
         let quality_inspection_report_file_error = "{{ $errors->has('quality_inspection_report_file') }}";
+        console.log(quality_inspection_report_file_error);
+        console.log('/////////////////////////');
         if (quality_inspection_report_file_error) {
             let quality_inspection_report_file = "{{ $errors->first('quality_inspection_report_file') }}";
             let error_message = `<p class="input-error-validate">${quality_inspection_report_file}</p>`;

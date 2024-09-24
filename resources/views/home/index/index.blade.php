@@ -310,7 +310,7 @@
 @section('style')
     <style>
         .header-img-icon .nav-link img{
-            border-radius: 10px;
+            border-radius: 50%;
         }
         .navbar {
             background-color: #f2f2f2 !important;

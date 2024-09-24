@@ -79,16 +79,16 @@ class FormController extends Controller
 
     public function sale_form_list($type)
     {
-        if ($type=='Save'){
-            $is_save=1;
-            $is_complete=0;
+        if ($type == 'Save') {
+            $is_save = 1;
+            $is_complete = 0;
         }
-        if ($type=='Draft'){
-            $is_save=2;
-            $is_complete=0;
+        if ($type == 'Draft') {
+            $is_save = 2;
+            $is_complete = 0;
         }
         $forms = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', $is_complete)->where('is_save', $is_save)->paginate(20);
-        return view('admin.sales_form.sales_form_index',compact('forms', 'is_complete', 'is_save','type'));
+        return view('admin.sales_form.sales_form_index', compact('forms', 'is_complete', 'is_save', 'type'));
     }
 
     public function sales_form($page_type = 'Create', $item = 'null')
@@ -347,6 +347,7 @@ class FormController extends Controller
         $is_complete = 0;
         $rules = $this->rules($item, $request);
         $validator = Validator::make($request->all(), $rules);
+
         if ($request->is_save == 2) {
             $save = 0;
         } else {
@@ -356,12 +357,15 @@ class FormController extends Controller
             $is_complete = 1;
             $save = $request->is_save;
         }
-        if ($item != null) {
-            $pre_form = SalesOfferForm::where('id', $item)->first();
-            $save = $pre_form->is_save;
-        }
+//        if ($item != null) {
+//            $pre_form = SalesOfferForm::where('id', $item)->first();
+//            $save = $pre_form->is_save;
+//        }
+
+
 
         $validate_items = $validator->valid();
+
         $validate_items = collect($validate_items);
         $env = env('SALE_OFFER_FORM');
         $files = ['specification_file', 'picture_packing_file', 'quality_inspection_report_file', 'safety_product_file', 'reach_certificate_file'];
@@ -384,6 +388,7 @@ class FormController extends Controller
             }
             $validate_items[$file] = $file_name;
         }
+
         $has_loading = $validate_items->has('has_loading') ? 1 : 0;
         $accept_terms = $validate_items->has('accept_terms') ? 1 : 0;
         $user_id = \auth()->id();
@@ -393,6 +398,7 @@ class FormController extends Controller
         $validate_items['is_complete'] = $is_complete;
         $validate_items['is_save'] = $save;
         $validate_items['status'] = 1;
+
         if ($item != null) {
             $sale_form = SalesOfferForm::where('id', $item)->first();
             $validate_items['user_id'] = $sale_form->user_id;
@@ -410,18 +416,22 @@ class FormController extends Controller
             if ($is_complete == 1 and $sale_form->status == 0) {
                 session()->flash('need_submit', 1);
             }
-            if ($validate_items['is_save'] == 1) {
-                $user_forms = SalesOfferForm::where('user_id', $sale_form->user_id)->where('id', '!=', $sale_form->id)->get();
-                foreach ($user_forms as $user_form) {
-                    $user_form->update(['is_save' => 0]);
-                }
+            if ($save == 1) {
+//                $user_forms = SalesOfferForm::where('user_id', $sale_form->user_id)->where('id', '!=', $sale_form->id)->get();
+//                foreach ($user_forms as $user_form) {
+//                    $user_form->update(['is_save' => 0]);
+//                }
                 session()->flash('success', 'Your Information has been saved successfully');
-                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
+//                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
+                return redirect()->route('sale_form_list',['type'=>'Save']);
             }
-
-            if ($validator->fails()) {
+            if (count($validator->errors())>0) {
 //                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
                 return redirect()->back()->withErrors($validator->errors());
+            }
+            if ($save == 2) {
+                session()->flash('success', 'Your Information has been Draft successfully');
+                return redirect()->route('sale_form_list',['type'=>'Draft']);
             }
             return redirect()->back()->with('success', 'updated successfully');
 
@@ -436,19 +446,24 @@ class FormController extends Controller
                 session()->flash('need_submit', 1);
             }
 
-            if ($validate_items['is_save'] == 1) {
-                $user_forms = SalesOfferForm::where('user_id', $sale_form->user_id)->where('id', '!=', $sale_form->id)->get();
-                foreach ($user_forms as $user_form) {
-                    $user_form->update(['is_save' => 0]);
-                }
+            if ($save == 1) {
+//                $user_forms = SalesOfferForm::where('user_id', $sale_form->user_id)->where('id', '!=', $sale_form->id)->get();
+//                foreach ($user_forms as $user_form) {
+//                    $user_form->update(['is_save' => 0]);
+//                }
                 session()->flash('success', 'Your Information has been saved successfully');
-                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
+
+//                return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id]);
+                return redirect()->route('sale_form_list',['type'=>'Save']);
             }
 
-
-            if ($validator->fails()) {
-
+            if (count($validator->errors())>0) {
                 return redirect()->route('sale_form', ['page_type' => 'Edit', 'item' => $sale_form->id])->withErrors($validator->errors());
+            }
+
+            if ($save == 2) {
+                session()->flash('success', 'Your Information has been Draft successfully');
+                return redirect()->route('sale_form_list',['type'=>'Draft']);
             }
         }
 
@@ -881,7 +896,7 @@ class FormController extends Controller
             'currency_other' => ['required_if:currency,other'],
             //contract type
             'contract_type' => 'required',
-            'contract_type_other' => ['required_if:contract_type,other'],
+            'contract_type_other' => ['required_if:contract_type,other|required_if:contract_type,Contract'],
             //
             'commodity' => 'required',
             'type_grade' => 'nullable',
@@ -1067,6 +1082,7 @@ class FormController extends Controller
 
 
         } else {
+
             //is_create
             $rules += [
                 'specification_file' => ['required_if:specification,null'],
