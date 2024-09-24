@@ -95,6 +95,7 @@ Route::get('/Platforms', [IndexController::class, 'Platforms'])->name('home.Plat
 Route::get('/header_category', [IndexController::class, 'header_category'])->name('home.header_category');
 Route::get('/header_currency', [IndexController::class, 'header_currency'])->name('home.header_currency');
 Route::get('/Container_Type', [IndexController::class, 'Container_Type'])->name('home.Container_Type');
+Route::get('/ContractType', [IndexController::class, 'ContractType'])->name('home.ContractType');
 Route::get('/Flexi_tank', [IndexController::class, 'Flexi_tank'])->name('home.Flexi_tank');
 Route::get('/THC_Included', [IndexController::class, 'THC_Included'])->name('home.THC_Included');
 Route::get('/TargetMarket', [IndexController::class, 'TargetMarket'])->name('home.TargetMarket');

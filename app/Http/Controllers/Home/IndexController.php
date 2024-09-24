@@ -7,6 +7,7 @@ use App\Models\BidHistory;
 use App\Models\Blog;
 use App\Models\Commodity;
 use App\Models\ContainerType;
+use App\Models\ContractType;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\Destination;
@@ -550,6 +551,21 @@ class IndexController extends Controller
         $items = ['20 ft', '40 ft'];
         foreach ($items as $key => $item) {
             ContainerType::create([
+                'id' => $key + 1,
+                'title' => $item
+            ]);
+        }
+        dd('Congratulations');
+    }
+    public function ContractType()
+    {
+        $items = ContractType::all();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $items = ['Spot', 'Contract','Other'];
+        foreach ($items as $key => $item) {
+            ContractType::create([
                 'id' => $key + 1,
                 'title' => $item
             ]);
