@@ -420,7 +420,7 @@ class FormController extends Controller
                     'status' => 6
                 ]);
             }
-            if ($is_complete == 1 and $sale_form->status == 0) {
+            if ($is_complete == 1) {
                 session()->flash('need_submit', 1);
             }
             if ($save == 1) {
