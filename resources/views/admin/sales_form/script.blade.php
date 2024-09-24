@@ -734,9 +734,9 @@
         let name = $(tag).attr('name');
         let value = $(tag).val();
         removeOtherElement(name);
-        if (value === 'other' || value === 'Contract') {
+        if (value === 'other' || value === 'Other' || value === 'Contract') {
             let label = '';
-            if (value === 'other') {
+            if (value === 'other' || value === 'Other') {
                 label = 'Contract Type';
             }
             if (value === 'Contract') {
