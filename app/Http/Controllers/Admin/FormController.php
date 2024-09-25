@@ -81,14 +81,12 @@ class FormController extends Controller
     {
         if ($type == 'Save') {
             $is_save = 1;
-            $is_complete = 0;
         }
         if ($type == 'Draft') {
             $is_save = 2;
-            $is_complete = 0;
         }
-        $forms = SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', $is_complete)->where('is_save', $is_save)->paginate(20);
-        return view('admin.sales_form.sales_form_index', compact('forms', 'is_complete', 'is_save', 'type'));
+        $forms = SalesOfferForm::where('user_id', \auth()->id())->where('is_save', $is_save)->paginate(20);
+        return view('admin.sales_form.sales_form_index', compact('forms', 'is_save', 'type'));
     }
 
     public function sale_forms($status)
