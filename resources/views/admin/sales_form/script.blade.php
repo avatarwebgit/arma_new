@@ -11,6 +11,7 @@
         let previous_form_id = '{{ $previous_form_id }}';
         show_modal_form_exists(previous_form_id);
         @endif
+
         check_unit();
         check_currency();
         check_contract_type();
@@ -826,10 +827,11 @@
 
     function addShipmentNumber(tag) {
         let value = $(tag).val();
+        let shipment_number_value = "{{ old('partial_shipment_number') }}";
         let field_name = 'partial_shipment_number';
         if (value === 'Yes') {
             let element = '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">Shipment Number<span class="text-danger">*</span></label>` +
-                '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
+                '<input required id="' + field_name + '" type="text" name="' + field_name + '"  value="' + shipment_number_value + '" class="form-control" >' +
                 '</div>';
             $(element).insertAfter($(tag).parent().parent().parent());
         } else {

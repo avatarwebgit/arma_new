@@ -75,6 +75,10 @@
                                         </td>
 
                                         <td class="text-right">
+                                            <button onclick="copy_sales_form({{ $form->id }})"
+                                                    class="btn btn-sm btn-primary text-white mr-1">
+                                                Copy
+                                            </button>
 
                                                                                                 <a href="{{ route('sale_form',['page_type'=>'Edit','item'=>$form->id]) }}"
                                                                                                    class="btn btn-sm btn-info text-white mr-1">
@@ -88,6 +92,7 @@
 {{--                                                    class="btn btn-sm btn-warning text-white mr-1">--}}
 {{--                                                change status--}}
 {{--                                            </button>--}}
+
                                             <a onclick="removeModal({{ $form->id }},event)"
                                                class="btn btn-sm btn-danger text-white mr-1">
                                                 <i class="fa fa-trash"></i>
@@ -161,6 +166,30 @@
                 success: function (msg) {
                     if (msg) {
                         $('#remove_modal').modal('hide');
+                        if (msg[0] == 1) {
+                            window.location.reload();
+                        } else {
+                            $('#alert').html(msg[1]);
+                        }
+                    }
+                }
+            })
+        }
+
+        function copy_sales_form(form_id) {
+            $.ajax({
+                url: "{{ route('admin.sales_form.copy') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    form_id: form_id,
+                },
+                dataType: "json",
+                method: "post",
+                beforeSend: function () {
+
+                },
+                success: function (msg) {
+                    if (msg) {
                         if (msg[0] == 1) {
                             window.location.reload();
                         } else {

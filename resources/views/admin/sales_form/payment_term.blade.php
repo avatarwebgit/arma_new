@@ -133,7 +133,7 @@
         <div class="col-12 col-md-6 mb-3 term_condition_option d-none" id="{{ filed_name($name).'_parent' }}">
             <label for="{{ filed_name($name) }}"
                    class="mb-2">{!! $name.' '.$required_span !!}</label>
-            <textarea  {{ $required }} id="{{ filed_name($name) }}" type="text"
+            <textarea autocomplete="on" {{ $required }} id="{{ filed_name($name) }}" type="text"
                       name="{{ filed_name($name) }}" class="form-control">{{ $value }}</textarea>
             @error(filed_name($name))
             <p class="input-error-validate">
