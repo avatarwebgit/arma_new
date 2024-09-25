@@ -300,6 +300,7 @@ Route::name('admin.')->middleware('check.session')->prefix('/admin-panel/managem
     Route::post('market/FolderMarketRemove/{date}', [MarketController::class, 'FolderMarketRemove'])->name('market.folder.remove');
 
     Route::post('/sales_form/remove', [FormController::class, 'sales_form_remove'])->name('sales_form.remove');
+    Route::post('/sales_form/copy', [FormController::class, 'sales_form_copy'])->name('sales_form.copy');
 
 });
 

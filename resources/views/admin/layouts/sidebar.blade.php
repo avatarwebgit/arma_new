@@ -67,8 +67,8 @@
                 </li>
                 @php
                     $SalesFormCounts = [
-                        'Save' => \App\Models\SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 1)->count(),
-                        'Draft' => \App\Models\SalesOfferForm::where('user_id', \auth()->id())->where('is_complete', 0)->where('is_save', 2)->count(),
+                        'Save' => \App\Models\SalesOfferForm::where('user_id', \auth()->id())->where('is_save', 1)->count(),
+                        'Draft' => \App\Models\SalesOfferForm::where('user_id', \auth()->id())->where('is_save', 2)->count(),
                     ];
                 @endphp
                 @if($role=='seller')

@@ -510,6 +510,19 @@ class FormController extends Controller
         return response()->json([1]);
     }
 
+    public function sales_form_copy(Request $request)
+    {
+        try {
+            $form_id = $request->form_id;
+            $form = SalesOfferForm::where('id', $form_id)->first();
+            SalesOfferForm::create($form->toArray());
+            return response()->json([1,'ok']);
+        }catch (\Exception $e) {
+            return response()->json([0,$e->getMessage()]);
+        }
+
+    }
+
     public function Final_Submit(Request $request)
     {
         try {
