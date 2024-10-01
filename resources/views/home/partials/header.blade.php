@@ -206,7 +206,7 @@
                     <div class="dropdown-menu profile" style="width: 100% !important;">
                         <div class="dropdown-header d-flex flex-column align-items-center">
                             <div class="figure mb-3">
-                                <img src="{{ asset('home/img/avatar.svg') }}" alt="">
+                                <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="">
                             </div>
                             <div class="info text-center">
 
