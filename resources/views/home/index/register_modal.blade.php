@@ -191,7 +191,7 @@
                                 name="platform">
                             @foreach($platforms as $platfotm)
                                 @if($platfotm->id!=4 and $platfotm->id!=5)
-                                <option value="{{ $platfotm->title }}">{{ $platfotm->title }}</option>
+                                    <option value="{{ $platfotm->title }}">{{ $platfotm->title }}</option>
                                 @endif
                             @endforeach
 
@@ -221,9 +221,9 @@
                                    class="custom-control-input">
                             <label class="custom-control-label" for="accept_term">
                                 I accept the
-                                <a target="_blank" href="{{ route('home.menus',['menus'=>16]) }}">
+                                <span style="color: #7a7aff" onclick="ShowTermConditionModal()">
                                     Term and Conditions
-                                </a>
+                                </span>
                             </label>
                             <p id="accept_term_error" class="error-message d-none">
 
@@ -233,8 +233,8 @@
                 </div>
 
 
-{{--                {!! NoCaptcha::renderJs() !!}--}}
-{{--                {!! NoCaptcha::display() !!}--}}
+                {{--                {!! NoCaptcha::renderJs() !!}--}}
+                {{--                {!! NoCaptcha::display() !!}--}}
 
 
                 <div class="row justify-content-center">

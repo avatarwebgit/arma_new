@@ -15,6 +15,7 @@
 
 @include('home.index.login_modal')
 @include('home.index.register_modal')
+@include('home.index.term_condition_modal')
 @include('home.index.reset_password_modal')
 {{--<script src="{{ asset('home/js/jquery-3.4.1.min.js') }}"></script>--}}
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -76,7 +77,7 @@
         }, 500);
     }
 
-    function ShowLoginModal(market_id=null) {
+    function ShowLoginModal(market_id = null) {
         $('.error-message').addClass('d-none');
         $('#login_modal').modal('show');
         $('#login_modal_market_id').val(market_id);
@@ -242,6 +243,10 @@
 
             }
         })
+    }
+
+    function ShowTermConditionModal() {
+        $('#term_condition_modal').modal('show');
     }
 
     function header_search(tag, event) {
@@ -468,8 +473,8 @@
         let price = $('#bid_price-' + market_id).val();
         let quantity = $('#bid_quantity-' + market_id).val();
 
-        price=price.replaceAll(',','');
-        quantity=quantity.replaceAll(',','');
+        price = price.replaceAll(',', '');
+        quantity = quantity.replaceAll(',', '');
         $.ajax({
             url: "{{  route('home.bid_market') }}",
             data: {
@@ -540,7 +545,7 @@
         if (price_is_disable) {
             price = 'disabled';
         }
-        price=price.replaceAll(',','');
+        price = price.replaceAll(',', '');
         $.ajax({
             url: "{{  route('home.seller_change_offer') }}",
             data: {
