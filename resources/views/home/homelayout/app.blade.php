@@ -224,6 +224,12 @@
                 if (data[0] == 0) {
                     $('#SubmitResetPasswordModalBtn').prop('disabled', false);
                     $('.alert_reset_password2').removeClass('d-none');
+                    $('.alert_reset_password2').text('Your Account is Inactive, Please Contact Admin');
+                }
+                if (data[0] == 2) {
+                    $('#SubmitResetPasswordModalBtn').prop('disabled', false);
+                    $('.alert_reset_password2').removeClass('d-none');
+                    $('.alert_reset_password2').text('User Not Found');
                 }
             },
             error: function (error) {

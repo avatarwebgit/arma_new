@@ -19,6 +19,9 @@ class ForgotPasswordController extends Controller
         $this->validateEmail($request);
         $email = $request->email;
         $user=User::where('email',$email)->first();
+        if (!$user){
+            return response()->json([2]);
+        }
         if ($user->active != 1 or $user->active_status!=2 ){
             return response()->json([0]);
         }

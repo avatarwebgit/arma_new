@@ -7,7 +7,7 @@
                     <i style="position: absolute;top:0;right: 0" data-dismiss="modal" aria-label="Close"
                        class="fa fa-times-circle fa-2x"></i>
                 </div>
-                <h4 style="display: block;text-align: center" class="text-center mt-3">
+                <h4 style="display: block;text-align: center;margin-top: -33px" class="text-center">
                     Sign In
                 </h4>
 

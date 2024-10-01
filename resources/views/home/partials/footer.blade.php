@@ -18,27 +18,34 @@
                 $menus=\App\Models\Menus::where('parent',0)->where('show_on_footer',1)->get();
             @endphp
             @foreach($menus as $menu)
-                    <div class="col-6 col-md-2">
-                        <h3 class="mb-3 fw-bold">
-                            <a class="text-white" >
-                                {{ $menu->title }}
-                            </a>
-                        </h3>
-                        <ul>
-                            @foreach($menu->children as $child)
-                                <li class="mb-2"><a href="{{ route('home.menus',['menus'=>$child->id]) }}">
-                                        {{ $child->title }}
-                                    </a></li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="col-6 col-md-2">
+                    <h3 class="mb-3 fw-bold">
+                        <a class="text-white" >
+                            {{ $menu->title }}
+                        </a>
+                    </h3>
+                    <ul>
+                        @foreach($menu->children()->where('show_on_footer',1)->get() as $child)
+                            <li class="mb-2"><a
+                                    @if($menu->id==2)
+                                        href="#"
+                                    @else
+                                        href="{{ route('home.menus',['menus'=>$child->id]) }}"
+                                    @endif
+
+                                >
+                                    {{ $child->title }}
+                                </a></li>
+                        @endforeach
+                    </ul>
+                </div>
             @endforeach
             <div class="col-md-2">
                 <h3 class="text-white mb-5">
                     FOLLOW US
                 </h3>
                 <ul class="social-icon" style="justify-content: flex-start !important;">
-{{--                    <li class="icon-social-media"><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>--}}
+                    {{--                    <li class="icon-social-media"><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>--}}
                     <li class="icon-social-media mr-2"><a href="/{{ $twitter }}"><i class="icon ion-logo-twitter"></i></a></li>
                     <li class="icon-social-media"><a href="/{{ $linkedin }}"><i class="icon ion-logo-linkedin"></i></a></li>
                 </ul>
@@ -52,11 +59,11 @@
 
                 </div>
 
-{{--                <div class="col-md-1">--}}
-{{--                    <a href="{{ route('home.index') }}">--}}
-{{--                        <img src="{{ imageExist(env('UPLOAD_SETTING'),$footer_logo) }}" alt="">--}}
-{{--                    </a>--}}
-{{--                </div>--}}
+                {{--                <div class="col-md-1">--}}
+                {{--                    <a href="{{ route('home.index') }}">--}}
+                {{--                        <img src="{{ imageExist(env('UPLOAD_SETTING'),$footer_logo) }}" alt="">--}}
+                {{--                    </a>--}}
+                {{--                </div>--}}
             </div>
             <div class="col-md-12 mt-5">
                 <div class="d-flex flex-column align-items-start  justify-content-between">
@@ -67,6 +74,6 @@
             </div>
 
         </div>
-{{--        <a href="javascript:void(0)" class="js-lcc-settings-toggle">@lang('cookie-consent::texts.alert_settings')</a>--}}
+        {{--        <a href="javascript:void(0)" class="js-lcc-settings-toggle">@lang('cookie-consent::texts.alert_settings')</a>--}}
     </div>
 </footer>
