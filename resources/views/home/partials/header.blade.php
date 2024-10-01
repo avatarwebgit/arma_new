@@ -79,13 +79,13 @@
                         <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="{{ auth()->user()->full_name }}">
                     </a>
                     <p class="mt-1 pr-4">Hi {{ auth()->user()->full_name }}</p>
-                    <div class="dropdown-menu profile" style="left: -130px !important;">
-                        <div class="dropdown-header d-flex flex-column align-items-center">
-                            <div class="figure mb-3">
+                    <div class="dropdown-menu profile" style="width: 100% !important;">
+                        <div class="dropdown-header d-flex flex-column align-items-center mb-3">
+                            <div class="figure">
                                 <img width="80px" src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="avatar">
                             </div>
                             <div class="info text-center">
-                                <p class="email font-weight-bold mb-3">{{ auth()->user()->email }}</p>
+                                <p class="email font-weight-bold mb-0">{{ auth()->user()->email }}</p>
                                 <p class="name font-weight-bold mb-0">{{ auth()->user()->user_id }}</p>
                                 @if(auth()->user()->Roles()->first()->name=='admin')
                                     <p class="name font-weight-bold mb-0">
@@ -203,7 +203,7 @@
                         <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="{{ auth()->user()->full_name }}">
                     </a>
                     <p class="mt-1 pr-4">Hi {{ auth()->user()->full_name }}</p>
-                    <div class="dropdown-menu profile">
+                    <div class="dropdown-menu profile" style="width: 100% !important;">
                         <div class="dropdown-header d-flex flex-column align-items-center">
                             <div class="figure mb-3">
                                 <img src="{{ asset('home/img/avatar.svg') }}" alt="">

@@ -27,10 +27,11 @@
     <style>
         .header-img-icon .nav-link img{
             border-radius: 50% !important;
+            border: 1px solid #C3C3C3;
         }
         div.dropdown-menu.show{
             width: 90% !important;
-            margin-top: 20px !important;
+            margin-top: 17px !important;
         }
         .modal-backdrop.show{
             opacity: 0.7 !important;
@@ -152,6 +153,20 @@
             position: absolute;
             right: 24px;
             bottom: 5px
+        }
+        .dropdown-menu::before{
+            left: 0 !important;
+            right: 0 !important;
+            margin: auto;
+        }
+        .profile-nav{
+            padding: 0 !important;
+        }
+        .dropdown-body{
+            padding: 0 !important;
+        }
+        .dropdown-header{
+            border: none !important;
         }
     </style>
 </head>
