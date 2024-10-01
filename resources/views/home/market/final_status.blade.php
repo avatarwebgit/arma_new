@@ -1,6 +1,6 @@
 @if(count($bids)>0)
     @foreach($bids as $item)
-            <tr>
+        <tr style="height: 27px;background-color: #e4e4e4">
                 {{--        <td class="text-center">{{ $item->quantity }}</td>--}}
                 <td class="text-center">{{ number_format($item->quantity_win) }}</td>
                 <td class="text-center">{{ number_format($item->price) }}</td>
@@ -18,23 +18,23 @@
             </tr>
     @endforeach
 @else
-    <tr>
+    <tr style="height: 27px;background-color: #e4e4e4">
         {{--        <td class="text-center">{{ $item->quantity }}</td>--}}
         <td class="text-center">
-            <strong>
+
                 N.A
-            </strong>
+
         </td>
         <td class="text-center">
-            <strong>
+
                 N.A
-            </strong>
+
         </td>
         {{--        <td class="text-center">{{ $item->User->id }}</td>--}}
         <td class="text-center">
-            <strong>
+
                 N.A
-            </strong>
+
         </td>
     </tr>
 @endif
