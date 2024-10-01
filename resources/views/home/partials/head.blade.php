@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('home/css/developer.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/font-awsome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset("vendor/cookie-consent/css/cookie-consent.css")}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('home/img/iphone.jpg') }}">
     {{--    <meta name="viewport" content="width=1024">--}}
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"
