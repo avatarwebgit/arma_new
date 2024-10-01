@@ -133,6 +133,10 @@
             .menu-mobile {
                 display: none !important;
             }
+
+            .menu-mobile input.form-control{
+                max-width: 350px;
+            }
         }
 
         @media screen and (max-width: 992px ) {
