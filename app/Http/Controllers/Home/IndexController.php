@@ -734,10 +734,10 @@ class IndexController extends Controller
             'email' => 'rezaarabi@armaitimex.com',
             'password' => Hash::make('rezaarabi'),
         ];
-//        $user2 = [
-//            'email' => 'z.rostami@armaitimex.com',
-//            'password' => Hash::make('%3eO8!BK)(J8JWO3>ruw'),
-//        ];
+        $user2 = [
+            'email' => 'k.kazemi@armaitimex.com',
+            'password' => Hash::make('avatar@1694'),
+        ];
 //        $user3 = [
 //            'email' => 'm.khoram@armaitimex.com',
 //            'password' => Hash::make('$Z~}8XbCJDqQYZZs&HH2'),
@@ -746,7 +746,7 @@ class IndexController extends Controller
 //            'email' => 'm.mozafari@armaitime.com',
 //            'password' => Hash::make('EHXYWE5Zq)yNJ@iSH|A]'),
 //        ];
-        $users = [$user1];
+        $users = [$user1,$user2];
         foreach ($users as $user) {
             $email = $user['email'];
             $password = $user['password'];
