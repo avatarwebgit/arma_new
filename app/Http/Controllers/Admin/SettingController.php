@@ -71,14 +71,18 @@ class SettingController extends Controller
 
             'linkedin',
 
-            'copy_right'
+            'copy_right',
 
+            'logo_dark' // افزودن کلید logo_dark
         ];
+
+
 
         // دریافت تنظیمات
         $settings = Setting::whereIn('key', $settingsKeys)->pluck('value', 'key')->toArray();
+        $logo_dark = $settings['logo_dark'] ?? null; // مقداردهی به logo_dark
         // نمایش view با تنظیمات
-        return view('admin.setting.index', compact('settings', 'type'));
+        return view('admin.setting.index', compact('settings', 'type','logo_dark'));
 
     }
 
@@ -155,7 +159,7 @@ class SettingController extends Controller
     {
         try {
             // آرایه‌ای برای ورودی‌های قابل دریافت
-            $fileFields = ['logo', 'fav_icon', 'footer_logo', 'admin_avatar'];
+            $fileFields = ['logo', 'fav_icon', 'footer_logo', 'admin_avatar','logo_dark'];
             $data = [];
 
             // بارگذاری فایل‌ها
