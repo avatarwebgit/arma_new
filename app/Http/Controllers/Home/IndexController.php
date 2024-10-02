@@ -30,6 +30,7 @@ use App\Models\RefundStatus;
 use App\Models\SalesOfferForm;
 use App\Models\SalesOfferFormCopy;
 use App\Models\SessionModel;
+use App\Models\Setting;
 use App\Models\ShippingTerm;
 use App\Models\TargetMarket;
 use App\Models\THCIncluded;
@@ -820,6 +821,15 @@ class IndexController extends Controller
             ]);
         }
         dd('okkk');
+    }
+
+    public function CreateLogoDark(){
+        $logo_dark=Setting::where('key','logo_dark')->exists();
+        if (!$logo_dark){
+            Setting::create([
+               'key'=>'logo_dark'
+            ]);
+        }
     }
 
 }

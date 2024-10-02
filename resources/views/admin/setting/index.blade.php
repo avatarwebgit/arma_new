@@ -70,6 +70,7 @@
     </script>
 @endpush
 @section('content')
+
     <div class="row">
         <div class="col-12">
             <div class="tab-content" id="v-pills-tabContent">
@@ -92,7 +93,7 @@
                                             <hr>
                                             <div class="settings-profile">
                                                 <div class="row mt-4">
-                                                    @foreach(['logo' => $logo, 'fav_icon' => $fav_icon, 'footer_logo' => $footer_logo, 'admin_avatar' => $admin_avatar] as $key => $image)
+                                                    @foreach(['logo' => $logo, 'fav_icon' => $fav_icon, 'footer_logo' => $footer_logo, 'admin_avatar' => $admin_avatar, 'logo_dark' => $logo_dark] as $key => $image)
                                                         <div class="col-12 col-md-6 mb-3 text-center">
                                                             <div class="position-relative">
                                                                 <img class="small-image img-fluid" alt="{{ $key }}" src="{{ imageExist(env('UPLOAD_SETTING'), $image) }}">
@@ -114,7 +115,8 @@
                                 </div>
                             @endif
 
-                            @if($type == 'general')
+
+                        @if($type == 'general')
                                 <div class="col-12 mb-4">
                                     <div class="card">
                                         <div class="card-body">

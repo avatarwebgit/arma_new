@@ -359,6 +359,7 @@ Route::get('CreateAdmin', [IndexController::class, 'CreateAdmin'])->name('home.C
 Route::get('CreateType', [IndexController::class, 'CreateType'])->name('home.CreateType');
 Route::get('CreateUserIds', [IndexController::class, 'CreateUserIds'])->name('home.CreateUserIds');
 Route::get('CreateAllCommodity', [IndexController::class, 'CreateAllCommodity'])->name('home.CreateAllCommodity');
+Route::get('CreateLogoDark', [IndexController::class, 'CreateLogoDark'])->name('home.CreateLogoDark');
 Route::post('/form/send-request/contact', [FormController::class, 'form_contact'])->name('form.contact');
 Route::get('/logout', function () {
     \auth()->logout();

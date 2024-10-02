@@ -15,7 +15,7 @@
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="{{ route('home.index') }}" class="b-brand text-center">
-                <img width="100" src="{{ imageExist(env('UPLOAD_SETTING'), $logo) }}" class="app-logo img_setting"/>
+                <img width="100" src="{{ imageExist(env('UPLOAD_SETTING'), $logo_dark) }}" class="app-logo img_setting"/>
             </a>
         </div>
         <div class="navbar-content">
