@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         $header1_categories = HeaderCategoryLine1::orderBy('priority', 'asc')->where('status', 1)->get();
 
         $settingsKeys = [
-            'logo', 'fav_icon', 'title', 'meta_keywords', 'robot_index',
+            'logo', 'logo_dark','fav_icon', 'title', 'meta_keywords', 'robot_index',
             'meta_description', 'footer_logo', 'start_market', 'end_market',
             'admin_avatar', 'top_bar_color', 'alert_description',
             'alert_bg_color', 'alert_text_color', 'alert_font_size',
