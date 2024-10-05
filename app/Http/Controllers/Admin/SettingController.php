@@ -174,12 +174,22 @@ class SettingController extends Controller
                 'side_bar_color', 'alert_description', 'alert_bg_color',
                 'alert_text_color', 'alert_font_size', 'alert_height',
                 'facebook', 'twitter', 'linkedin', 'about_arma',
-                'copy_right'
+                'copy_right',
+                'start_market',
+                'end_market',
             ];
 
             foreach ($fields as $field) {
-                $data[$field] = $request->$field;
+
+                if ($request->has($field)) {
+                    $value=$request->$field;
+                }else{
+                    $item=Setting::where('key',$field)->first();
+                    $value=$item->value;
+                }
+                $data[$field] = $value;
             }
+
 
             // تنظیم مقدار active در صورت وجود
             $data['alert_active'] = $request->has('alert_active') ? 1 : 0;

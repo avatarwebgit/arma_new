@@ -25,26 +25,29 @@
                                             @csrf
                                             @method('put')
                                             <div class="row mt-4">
-{{--                                                <div class="col-12 col-md-4 mb-3">--}}
-{{--                                                    <label for="date">start(Date)</label>--}}
-{{--                                                    <input onchange="getDate(this)" id="date" type="date" name="date"--}}
-{{--                                                           class="form-control"--}}
-{{--                                                           value="{{ $market->date }}">--}}
-{{--                                                    <p id="DayName" class="mt-2">--}}
+                                                {{--                                                <div class="col-12 col-md-4 mb-3">--}}
+                                                {{--                                                    <label for="date">start(Date)</label>--}}
+                                                {{--                                                    <input onchange="getDate(this)" id="date" type="date" name="date"--}}
+                                                {{--                                                           class="form-control"--}}
+                                                {{--                                                           value="{{ $market->date }}">--}}
+                                                {{--                                                    <p id="DayName" class="mt-2">--}}
 
-{{--                                                    </p>--}}
-{{--                                                    @error('date')--}}
-{{--                                                    <p class="input-error-validate">--}}
-{{--                                                        {{ $message }}--}}
-{{--                                                    </p>--}}
-{{--                                                    @enderror--}}
-{{--                                                </div>--}}
+                                                {{--                                                    </p>--}}
+                                                {{--                                                    @error('date')--}}
+                                                {{--                                                    <p class="input-error-validate">--}}
+                                                {{--                                                        {{ $message }}--}}
+                                                {{--                                                    </p>--}}
+                                                {{--                                                    @enderror--}}
+                                                {{--                                                </div>--}}
+
+
 
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="min_wallet">Commodity</label>
                                                     <select disabled onchange="CommodityChanged(this)"
                                                             class="form-control" id="commodity_id" name="commodity_id">
                                                         <option value="">select</option>
+
                                                         @foreach($sales_offer_form as $item)
                                                             @if($item->price_type=='Fix')
                                                                 @php
@@ -55,16 +58,18 @@
                                                                     $offer=number_format($item->alpha);
                                                                 @endphp
                                                             @endif
-                                                            <option
-                                                                data-type="{{ $item->price_type }}"
-                                                                data-offer="{{ $offer }}"
-                                                                data-quantity="{{ $item->max_quantity }}"
-                                                                data-term="{{ $item->incoterms }}"
-                                                                data-rigen="{{ $item->country }}"
-                                                                data-packing="{{ $item->packing }}"
+                                                            @if(isset($item->User->email))
+                                                                <option
+                                                                    data-type="{{ $item->price_type }}"
+                                                                    data-offer="{{ $offer }}"
+                                                                    data-quantity="{{ $item->max_quantity }}"
+                                                                    data-term="{{ $item->incoterms }}"
+                                                                    data-rigen="{{ $item->country }}"
+                                                                    data-packing="{{ $item->packing }}"
                                                                     {{ $market->commodity_id==$item->id?'selected':'' }} value="{{ $item->id }}">
-                                                                Commodity:{{ $item->commodity }}
-                                                                /User:{{ $item->User->email }}</option>
+                                                                    Commodity:{{ $item->commodity }}
+                                                                    /User:{{ $item->User->email }}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                     @error('commodity_id')
@@ -73,11 +78,11 @@
                                                     </p>
                                                     @enderror
                                                 </div>
-{{--                                                <div class="col-12 col-md-4 mb-3">--}}
-{{--                                                    <label for="PriceTypeInput">Price Type</label>--}}
-{{--                                                    <input disabled id="PriceTypeInput" type="text"--}}
-{{--                                                           class="form-control">--}}
-{{--                                                </div>--}}
+                                                {{--                                                <div class="col-12 col-md-4 mb-3">--}}
+                                                {{--                                                    <label for="PriceTypeInput">Price Type</label>--}}
+                                                {{--                                                    <input disabled id="PriceTypeInput" type="text"--}}
+                                                {{--                                                           class="form-control">--}}
+                                                {{--                                                </div>--}}
                                                 <div class="col-12 col-md-4 mb-3">
                                                     <label for="OfferPriceInput">Offer Price</label>
                                                     <input disabled id="OfferPriceInput" type="text"
@@ -217,19 +222,19 @@
                                                     @enderror
                                                 </div>
 
-{{--                                                <div class="col-12">--}}
-{{--                                                    <hr>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-12 mb-3">--}}
-{{--                                                    <label for="term_conditions">Term & Conditions</label>--}}
-{{--                                                    <textarea id="term_conditions" name="term_conditions"--}}
-{{--                                                              class="form-control text_area">{{ $market->term_conditions }}</textarea>--}}
-{{--                                                    @error('term_conditions')--}}
-{{--                                                    <p class="input-error-validate">--}}
-{{--                                                        {{ $message }}--}}
-{{--                                                    </p>--}}
-{{--                                                    @enderror--}}
-{{--                                                </div>--}}
+                                                {{--                                                <div class="col-12">--}}
+                                                {{--                                                    <hr>--}}
+                                                {{--                                                </div>--}}
+                                                {{--                                                <div class="col-12 mb-3">--}}
+                                                {{--                                                    <label for="term_conditions">Term & Conditions</label>--}}
+                                                {{--                                                    <textarea id="term_conditions" name="term_conditions"--}}
+                                                {{--                                                              class="form-control text_area">{{ $market->term_conditions }}</textarea>--}}
+                                                {{--                                                    @error('term_conditions')--}}
+                                                {{--                                                    <p class="input-error-validate">--}}
+                                                {{--                                                        {{ $message }}--}}
+                                                {{--                                                    </p>--}}
+                                                {{--                                                    @enderror--}}
+                                                {{--                                                </div>--}}
                                                 <div class="col-md-12 d-flex justify-content-center mt-3">
                                                     <button type="submit" class="btn btn-primary btn-block">
                                                         Update
