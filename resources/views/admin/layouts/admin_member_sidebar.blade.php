@@ -268,6 +268,79 @@
     </li>
 @endcan
 
+
+
+    <!-- Sales Order Section -->
+    <li class="dash-item dash-hasmenu ">
+        <a href="#!" class="dash-link">
+            <span class="dash-micon"><i class="ti ti-package"></i></span>
+            <span class="dash-mtext">{{ __('Transactions') }}</span>
+            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
+        </a>
+        <ul class="dash-submenu">
+            <li class="dash-item">
+                <a class="dash-link" href="">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                    1
+                </a>
+            </li>
+            <li class="dash-item">
+                <a class="dash-link" href="#">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                   2
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <!-- Sales Order Section -->
+    <li class="dash-item dash-hasmenu ">
+        <a href="#!" class="dash-link">
+            <span class="dash-micon"><i class="ti ti-package"></i></span>
+            <span class="dash-mtext">{{ __('Messages') }}</span>
+            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
+        </a>
+        <ul class="dash-submenu">
+            <li class="dash-item">
+                <a class="dash-link" href="">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                    Websites(2)
+                </a>
+            </li>
+            <li class="dash-item">
+                <a class="dash-link" href="#">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                   Sellers(1)
+                </a>
+            </li>
+            <li class="dash-item">
+                <a class="dash-link" href="#">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                   Buyers(5)
+                </a>
+            </li>
+            <li class="dash-item">
+                <a class="dash-link" href="#">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                   Brokers(4)
+                </a>
+            </li>
+            <li class="dash-item">
+                <a class="dash-link" href="#">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                   Representives(4)
+                </a>
+            </li>
+            <li class="dash-item">
+                <a class="dash-link" href="#">
+                    <span class="dash-micon"><i class="ti ti-file"></i></span>
+                   Members(41)
+                </a>
+            </li>
+        </ul>
+    </li>
+
+
 <!-- Bid Deposit Section -->
 @can('Bid-Deposit-Refund-Request')
     <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/bid*') ? 'active dash-trigger' : 'collapsed' }}">
@@ -310,6 +383,8 @@
         </a>
     </li>
 @endcan
+
+@if($role=='admin')
 
 <!-- Settings Section -->
 <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/settings*') ? 'active' : '' }}">
@@ -364,86 +439,88 @@
 
     </ul>
 </li>
+@endif
 
 <!-- Page Builder Section -->
-<li class="dash-item dash-hasmenu">
-    <a href="#!" class="dash-link">
-        <span class="dash-micon"><i class="ti ti-layout"></i></span>
-        <span class="dash-mtext">{{ __('Page builder') }}</span>
-        <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
-    </a>
-    <ul class="dash-submenu">
-        <li class="dash-item">
-            <a class="dash-link" href="{{ route('admin.menus.index') }}">
-                <span class="dash-micon"><i class="ti ti-menu"></i></span>
-                {{ __('Menus') }}
-            </a>
-        </li>
-        <li class="dash-item">
-            <a class="dash-link" href="{{ route('admin.pages.index') }}">
-                <span class="dash-micon"><i class="ti ti-page"></i></span>
-                {{ __('Pages') }}
-            </a>
-        </li>
-    </ul>
-</li>
+
+{{--<li class="dash-item dash-hasmenu">--}}
+{{--    <a href="#!" class="dash-link">--}}
+{{--        <span class="dash-micon"><i class="ti ti-layout"></i></span>--}}
+{{--        <span class="dash-mtext">{{ __('Page builder') }}</span>--}}
+{{--        <span class="dash-arrow"><i data-feather="chevron-right"></i></span>--}}
+{{--    </a>--}}
+{{--    <ul class="dash-submenu">--}}
+{{--        <li class="dash-item">--}}
+{{--            <a class="dash-link" href="{{ route('admin.menus.index') }}">--}}
+{{--                <span class="dash-micon"><i class="ti ti-menu"></i></span>--}}
+{{--                {{ __('Menus') }}--}}
+{{--            </a>--}}
+{{--        </li>--}}
+{{--        <li class="dash-item">--}}
+{{--            <a class="dash-link" href="{{ route('admin.pages.index') }}">--}}
+{{--                <span class="dash-micon"><i class="ti ti-page"></i></span>--}}
+{{--                {{ __('Pages') }}--}}
+{{--            </a>--}}
+{{--        </li>--}}
+{{--    </ul>--}}
+{{--</li>--}}
 
 <!-- Messages Section -->
-@can('Message')
-    <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/messages*') ? 'active dash-trigger' : 'collapsed' }}">
-        <a href="#!" class="dash-link">
-            <span class="dash-micon"><i class="ti ti-comment"></i></span>
-            <span class="dash-mtext">{{ __('Message') }}</span>
-            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
-        </a>
-        <ul class="dash-submenu">
-            <li class="dash-item {{ request()->is('admin-panel/management/messages/emails*') ? 'active' : '' }}">
-                <a class="dash-link" href="{{ route('admin.emails.index') }}">
-                    <span class="dash-micon"><i class="ti ti-email"></i></span>
-                    {{ __('Email') }}
-                </a>
-            </li>
-            <li class="dash-item {{ request()->is('admin-panel/management/messages/alerts*') ? 'active' : '' }}">
-                <a class="dash-link" href="{{ route('admin.alerts.index') }}">
-                    <span class="dash-micon"><i class="ti ti-alert-circle"></i></span>
-                    {{ __('Alert') }}
-                </a>
-            </li>
-        </ul>
-    </li>
-@endcan
+{{--@can('Message')--}}
+{{--    <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/messages*') ? 'active dash-trigger' : 'collapsed' }}">--}}
+{{--        <a href="#!" class="dash-link">--}}
+{{--            <span class="dash-micon"><i class="ti ti-comment"></i></span>--}}
+{{--            <span class="dash-mtext">{{ __('Message') }}</span>--}}
+{{--            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>--}}
+{{--        </a>--}}
+{{--        <ul class="dash-submenu">--}}
+{{--            <li class="dash-item {{ request()->is('admin-panel/management/messages/emails*') ? 'active' : '' }}">--}}
+{{--                <a class="dash-link" href="{{ route('admin.emails.index') }}">--}}
+{{--                    <span class="dash-micon"><i class="ti ti-email"></i></span>--}}
+{{--                    {{ __('Email') }}--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li class="dash-item {{ request()->is('admin-panel/management/messages/alerts*') ? 'active' : '' }}">--}}
+{{--                <a class="dash-link" href="{{ route('admin.alerts.index') }}">--}}
+{{--                    <span class="dash-micon"><i class="ti ti-alert-circle"></i></span>--}}
+{{--                    {{ __('Alert') }}--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--        </ul>--}}
+{{--    </li>--}}
+{{--@endcan--}}
 
 <!-- Contact Messages Section -->
-@can('Contact-Message')
-    <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/form-contact*') ? 'active dash-trigger' : 'collapsed' }}">
-        <a href="{{ route('admin.contact.index') }}" class="dash-link">
-            <span class="dash-micon"><i class="ti ti-comments"></i></span>
-            <span class="dash-mtext">{{ __('Contact Message') }}</span>
-        </a>
-    </li>
-@endcan
+{{--@can('Contact-Message')--}}
+{{--    <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/form-contact*') ? 'active dash-trigger' : 'collapsed' }}">--}}
+{{--        <a href="{{ route('admin.contact.index') }}" class="dash-link">--}}
+{{--            <span class="dash-micon"><i class="ti ti-comments"></i></span>--}}
+{{--            <span class="dash-mtext">{{ __('Contact Message') }}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcan--}}
 
 <!-- Blog Section -->
-@can('Blog')
-    <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/blog*') ? 'active dash-trigger' : 'collapsed' }}">
-        <a href="#!" class="dash-link">
-            <span class="dash-micon"><i class="ti ti-book"></i></span>
-            <span class="dash-mtext">{{ __('Blogs') }}</span>
-            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
-        </a>
-        <ul class="dash-submenu">
-            <li class="dash-item {{ request()->is('admin-panel/management/messages/blogs*') ? 'active' : '' }}">
-                <a class="dash-link" href="{{ route('admin.blog.index') }}">
-                    <span class="dash-micon"><i class="ti ti-pencil"></i></span>
-                    {{ __('Blog') }}
-                </a>
-            </li>
-            <li class="dash-item {{ request()->is('admin-panel/management/messages/category*') ? 'active' : '' }}">
-                <a class="dash-link" href="{{ route('admin.blog.category.index') }}">
-                    <span class="dash-micon"><i class="ti ti-tag"></i></span>
-                    {{ __('Category') }}
-                </a>
-            </li>
-        </ul>
-    </li>
-@endcan
+{{--@can('Blog')--}}
+{{--    <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/blog*') ? 'active dash-trigger' : 'collapsed' }}">--}}
+{{--        <a href="#!" class="dash-link">--}}
+{{--            <span class="dash-micon"><i class="ti ti-book"></i></span>--}}
+{{--            <span class="dash-mtext">{{ __('Blogs') }}</span>--}}
+{{--            <span class="dash-arrow"><i data-feather="chevron-right"></i></span>--}}
+{{--        </a>--}}
+{{--        <ul class="dash-submenu">--}}
+{{--            <li class="dash-item {{ request()->is('admin-panel/management/messages/blogs*') ? 'active' : '' }}">--}}
+{{--                <a class="dash-link" href="{{ route('admin.blog.index') }}">--}}
+{{--                    <span class="dash-micon"><i class="ti ti-pencil"></i></span>--}}
+{{--                    {{ __('Blog') }}--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li class="dash-item {{ request()->is('admin-panel/management/messages/category*') ? 'active' : '' }}">--}}
+{{--                <a class="dash-link" href="{{ route('admin.blog.category.index') }}">--}}
+{{--                    <span class="dash-micon"><i class="ti ti-tag"></i></span>--}}
+{{--                    {{ __('Category') }}--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--        </ul>--}}
+{{--    </li>--}}
+{{--@endcan--}}

@@ -96,7 +96,7 @@ class RegisterController extends Controller
             'user_type' => ['required', 'string'],
             'company_country' => ['required', 'string', 'max:255'],
             'company_address' => ['required', 'string', 'min:10', 'max:255', 'regex:/^[A-Za-z]*$/'],
-            'company_phone' => ['required', 'numeric', 'digits_between:8,20'],
+            'company_phone' => ['required', 'numeric', 'digits_between:5,20'],
             'company_website' => ['nullable', 'string', 'max:255', 'regex:/^(http:\/\/|https:\/\/)?(www\.)?([a-zA-Z0-9_]+\.[a-zA-Z]{2,})(\/[^\s]*)?$/'],
             'company_email' => ['required', 'email', 'max:255', 'unique:users', function ($attribute, $value, $fail) {
                 if (
