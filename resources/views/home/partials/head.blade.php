@@ -158,7 +158,7 @@
         .password-eye-icon {
             position: absolute;
             right: 24px;
-            bottom: 5px
+            bottom: 15px
         }
         .dropdown-menu::before{
             left: 0 !important;
@@ -173,6 +173,10 @@
         }
         .dropdown-header{
             border: none !important;
+        }
+        .error-message{
+            height: 10px !important;
+            margin: 0 !important;
         }
     </style>
 </head>

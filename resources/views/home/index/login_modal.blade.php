@@ -19,7 +19,7 @@
                                name="email" value="{{ old('email') }}"
                                required autocomplete="email" autofocus>
 
-                        <p id="email_error" class="d-none error-message mt-2">
+                        <p id="email_error" class=" error-message mt-2">
 
                         </p>
                     </div>
@@ -31,8 +31,8 @@
                             required
                             autocomplete="current-password">
                         <i onclick="ShowPass(this)" id="fa-eye" class="fa fa-eye fa-2x text-dark password-eye-icon cursor-pointer"></i>
-                        <i onclick="HidePass(this)" id="fa-eye-slash" class="password-eye-icon fa fa-eye-slash fa-2x cursor-pointer text-dark d-none"></i>
-                        <p id="password_error" class="d-none error-message mt-2">
+                        <i onclick="HidePass(this)" id="fa-eye-slash" class="password-eye-icon fa fa-eye-slash fa-2x cursor-pointer text-dark "></i>
+                        <p id="password_error" class=" error-message mt-2">
 
                         </p>
                         <input type="hidden" id="login_modal_market_id">

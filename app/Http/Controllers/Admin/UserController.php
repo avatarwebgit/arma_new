@@ -45,8 +45,13 @@ class UserController extends Controller
             }
             $users = User::whereIn('id', $ids)->orderBy('created_at', 'desc')->paginate(100);
         } else {
-            $users = User::where('active_status', $type)->orderBy('created_at', 'desc')->paginate(100);
             $user_ids = [];
+
+            $users = User::where('active_status', $type)->orderBy('created_at', 'desc')->paginate(100);
+            if ($type == 1) {
+                $users = User::whereIn('active_status', [1,10,11])->orderBy('created_at', 'desc')->paginate(100);
+            }
+
 
             if ($type == 2) {
                 $users = User::where('active_status', $type)->orderBy('created_at', 'desc')->get();
@@ -577,21 +582,21 @@ class UserController extends Controller
             $markets = Market::where('status', 1)->get();
             foreach ($markets as $market) {
                 $market_permission = MarketPermission::where('market_id', $market->id)->first();
-                if ($market_permission and $market_permission->user_ids!=null){
+                if ($market_permission and $market_permission->user_ids != null) {
                     $user_ids = unserialize($market_permission->user_ids);
-                    $users=User::whereIn('id',$user_ids)->where('active',1)->get();
-                    $new_ids=[];
-                    foreach ($users as $user){
-                        $new_ids[]=$user->id;
+                    $users = User::whereIn('id', $user_ids)->where('active', 1)->get();
+                    $new_ids = [];
+                    foreach ($users as $user) {
+                        $new_ids[] = $user->id;
                     }
                     $market_permission->update([
-                        'user_ids' =>serialize($new_ids),
+                        'user_ids' => serialize($new_ids),
                     ]);
                 }
 
             }
             return response()->json([1, 'ok']);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
 

@@ -252,11 +252,11 @@
         }
 
         function ChangeRegisterStatus(tag, user_id) {
-            let status = $(tag).val();
-            if (status != 2) {
-                return;
-            }
-            let new_status = 2;
+            let new_status = $(tag).val();
+            // if (status != 2) {
+            //     return;
+            // }
+            // let new_status = 2;
             ChangeStatus(user_id, new_status);
         }
 

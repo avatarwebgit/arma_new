@@ -78,14 +78,14 @@
     }
 
     function ShowLoginModal(market_id = null) {
-        $('.error-message').addClass('d-none');
+        // $('.error-message').addClass('d-none');
         $('#login_modal').modal('show');
         $('#login_modal_market_id').val(market_id);
     }
 
     function LoginFormSubmit(tag) {
         $(tag).prop('disabled', true);
-        $('.error-message').addClass('d-none');
+        // $('.error-message').addClass('d-none');
         let email = $('#email').val();
         let password = $('#password').val();
         let market_id = $('#login_modal_market_id').val();
@@ -125,13 +125,13 @@
     }
 
     function ShowRegisterModal() {
-        $('.error-message').add('d-none');
+        // $('.error-message').add('d-none');
         $('#register_modal').modal('show');
     }
 
     function SubmitRegisterModal(tag) {
         $(tag).prop('disabled', true);
-        $('.error-message').addClass('d-none');
+        // $('.error-message').addClass('d-none');
         let company_name = $('#company_name').val();
         //user type or company type
         let user_type = $('#user_type').val();
@@ -198,7 +198,7 @@
     function ResetPassword() {
         $('.alert_reset_password').addClass('d-none');
         $('.alert_reset_password2').addClass('d-none');
-        $('.error-message').addClass('d-none');
+        // $('.error-message').addClass('d-none');
         console.log('reset password');
         $('#reset_password_modal').modal('show');
         $('#login_modal').modal('hide');
@@ -208,7 +208,7 @@
         $('#SubmitResetPasswordModalBtn').prop('disabled', true);
         $('.alert_reset_password').addClass('d-none');
         $('.alert_reset_password2').addClass('d-none');
-        $('.error-message').addClass('d-none');
+        // $('.error-message').addClass('d-none');
         let email_reset_password = $('#email_reset_password').val();
         $.ajax({
             url: "{{ route('password.email') }}",

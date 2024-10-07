@@ -27,7 +27,7 @@
                             class="form-control"
                             name="company_name"
                             required>
-                        <p id="company_name_error" class="error-message d-none">
+                        <p id="company_name_error" class="error-message ">
 
                         </p>
                     </div>
@@ -43,7 +43,7 @@
                             @endforeach
                         </select>
 
-                        <p id="user_type_error" class="error-message d-none">
+                        <p id="user_type_error" class="error-message ">
 
                         </p>
                     </div>
@@ -54,7 +54,7 @@
                                 <option value="{{ $country->countryName }}">{{ $country->countryName }}</option>
                             @endforeach
                         </select>
-                        <p id="company_country_error" class="error-message d-none">
+                        <p id="company_country_error" class="error-message ">
 
                         </p>
                     </div>
@@ -65,7 +65,7 @@
                             type="text"
                             class="form-control"
                             name="company_address" required>
-                        <p id="company_address_error" class="error-message d-none">
+                        <p id="company_address_error" class="error-message ">
 
                         </p>
                     </div>
@@ -77,7 +77,7 @@
                             class="form-control"
                             name="company_phone"
                             required>
-                        <p id="company_phone_error" class="error-message d-none">
+                        <p id="company_phone_error" class="error-message ">
 
                         </p>
                     </div>
@@ -88,7 +88,7 @@
                             type="text"
                             class="form-control"
                             name="company_website" required>
-                        <p id="company_website_error" class="error-message d-none">
+                        <p id="company_website_error" class="error-message ">
 
                         </p>
                     </div>
@@ -100,7 +100,7 @@
                             class="form-control"
                             name="company_email"
                             required>
-                        <p id="company_email_error" class="error-message d-none">
+                        <p id="company_email_error" class="error-message ">
 
                         </p>
                     </div>
@@ -114,7 +114,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <p id="commodity_error" class="error-message d-none">
+                        <p id="commodity_error" class="error-message ">
 
                         </p>
                     </div>
@@ -137,7 +137,7 @@
                             type="text"
                             class="form-control"
                             required>
-                        <p id="full_name_error" class="error-message d-none">
+                        <p id="full_name_error" class="error-message ">
 
                         </p>
                     </div>
@@ -151,7 +151,7 @@
                                 <option value="{{ $item->title }}">{{ $item->title }}</option>
                             @endforeach
                         </select>
-                        <p id="salutation_error" class="error-message d-none">
+                        <p id="salutation_error" class="error-message ">
 
                         </p>
                     </div>
@@ -167,7 +167,7 @@
                             @endforeach
                         </select>
 
-                        <p id="function_in_company_error" class="error-message d-none">
+                        <p id="function_in_company_error" class="error-message ">
 
                         </p>
                     </div>
@@ -179,7 +179,7 @@
                             class="form-control"
                             name="email"
                             required>
-                        <p id="email_register_error" class="error-message d-none">
+                        <p id="email_register_error" class="error-message ">
 
                         </p>
                     </div>
@@ -196,7 +196,7 @@
                             @endforeach
 
                         </select>
-                        <p id="platform_error" class="error-message d-none">
+                        <p id="platform_error" class="error-message ">
 
                         </p>
                     </div>
@@ -209,7 +209,7 @@
                             name="mobile_no"
                             required
                         >
-                        <p id="mobile_no_error" class="error-message d-none">
+                        <p id="mobile_no_error" class="error-message ">
 
                         </p>
                     </div>
@@ -225,7 +225,7 @@
                                     Term and Conditions
                                 </span>
                             </label>
-                            <p id="accept_term_error" class="error-message d-none">
+                            <p id="accept_term_error" class="error-message ">
 
                             </p>
                         </div>
