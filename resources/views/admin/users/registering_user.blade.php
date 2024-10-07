@@ -46,9 +46,9 @@
             </td>
             <td style="width: 200px">
                 <select onchange="ChangeRegisterStatus(this,{{ $item->id }})" class="form-control">
-                    <option value="0">Step 1</option>
-                    <option value="1">Step 2</option>
-                    <option value="2">Create Account</option>
+                    <option {{ $item->active_status==10 ? 'selected' : '' }} value="10">Step 1</option>
+                    <option {{ $item->active_status==11 ? 'selected' : '' }} value="11">Step 2</option>
+                    <option {{ $item->active_status==2 ? 'selected' : '' }} value="2">Create Account</option>
                 </select>
             </td>
             <td style="width: 100px" class="text-right">

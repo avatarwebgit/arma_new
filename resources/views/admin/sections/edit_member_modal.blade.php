@@ -58,7 +58,7 @@
                                 </strong>
                                 @foreach($permission_group as $permission)
                                     <div class="ml5">
-                                        <input onclick="FullAccess(this)"
+                                        <input @if($permission->id==30) onclick="FullAccess(this)" @endif
                                             {{ in_array($permission->id,$user_permissions->pluck('id')->toArray()) ? 'checked' : '' }}
                                             style="cursor: pointer" type="checkbox" name="{{ $permission->name }}"
                                                id="{{ $permission->name }}"
