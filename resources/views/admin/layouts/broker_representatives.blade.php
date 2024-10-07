@@ -55,7 +55,16 @@
     </a>
     <ul class="dash-submenu">
         <li class="dash-item">
-
+            <a class="dash-link" href="#">
+                <span class="dash-micon"><i class="ti ti-file"></i></span>
+                Admin
+            </a>
+        </li>
+        <li class="dash-item">
+            <a class="dash-link" href="#">
+                <span class="dash-micon"><i class="ti ti-file"></i></span>
+                Member
+            </a>
         </li>
     </ul>
 </li>

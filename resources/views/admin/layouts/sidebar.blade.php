@@ -80,6 +80,13 @@
                 @elseif($role=='admin' or $role=='Members')
                     @include('admin.layouts.admin_member_sidebar')
                 @endif
+
+                <li class="dash-item dash-hasmenu mb-5 mt-2{{ request()->is('/') ? 'active' : '' }}">
+                    <a href="{{ route('logout') }}" class="dash-link">
+                        <span class="dash-micon"><i class="ti ti-logout"></i></span>
+                        <span class="dash-mtext custom-weight">{{ __('Logout') }}</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
