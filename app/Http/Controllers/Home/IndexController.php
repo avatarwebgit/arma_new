@@ -558,13 +558,14 @@ class IndexController extends Controller
         }
         dd('Congratulations');
     }
+
     public function ContractType()
     {
         $items = ContractType::all();
         foreach ($items as $item) {
             $item->delete();
         }
-        $items = ['Spot', 'Contract','Other'];
+        $items = ['Spot', 'Contract', 'Other'];
         foreach ($items as $key => $item) {
             ContractType::create([
                 'id' => $key + 1,
@@ -739,16 +740,20 @@ class IndexController extends Controller
             'email' => 'k.kazemi@armaitimex.com',
             'password' => Hash::make('avatar@1694'),
         ];
-//        $user3 = [
-//            'email' => 'm.khoram@armaitimex.com',
-//            'password' => Hash::make('$Z~}8XbCJDqQYZZs&HH2'),
-//        ];
+        $user3 = [
+            'email' => 'h.khoram@armaitimex.com',
+            'password' => Hash::make('i{%|4rlwnQQ!qQ{JBIy9'),
+        ];
 //        $user4 = [
 //            'email' => 'm.mozafari@armaitime.com',
 //            'password' => Hash::make('EHXYWE5Zq)yNJ@iSH|A]'),
 //        ];
-        $users = [$user1,$user2];
+        $users = [$user1, $user2];
         foreach ($users as $user) {
+            $items = User::where('email', $user)->get();
+            foreach ($items as $item) {
+                $item->delete();
+            }
             $email = $user['email'];
             $password = $user['password'];
             $user = User::create([
@@ -813,21 +818,23 @@ class IndexController extends Controller
         return $ID;
     }
 
-    public function CreateAllCommodity(){
-        $commodity=Commodity::where('title','All')->exists();
-        if (!$commodity){
+    public function CreateAllCommodity()
+    {
+        $commodity = Commodity::where('title', 'All')->exists();
+        if (!$commodity) {
             Commodity::create([
-                'title'=>'All'
+                'title' => 'All'
             ]);
         }
         dd('okkk');
     }
 
-    public function CreateLogoDark(){
-        $logo_dark=Setting::where('key','logo_dark')->exists();
-        if (!$logo_dark){
+    public function CreateLogoDark()
+    {
+        $logo_dark = Setting::where('key', 'logo_dark')->exists();
+        if (!$logo_dark) {
             Setting::create([
-               'key'=>'logo_dark'
+                'key' => 'logo_dark'
             ]);
         }
     }

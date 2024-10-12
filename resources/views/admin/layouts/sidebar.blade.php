@@ -9,6 +9,7 @@
         if ($role=='Representatives' or $role=='Brokers'){
             $side_bar_color='#7f74ff';
         }
+
 @endphp
 
 <nav class="dash-sidebar light-sidebar transprent-bg" style="background-color: {{ $side_bar_color }} !important;">

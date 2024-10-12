@@ -443,27 +443,27 @@
 
 <!-- Page Builder Section -->
 
-{{--<li class="dash-item dash-hasmenu">--}}
-{{--    <a href="#!" class="dash-link">--}}
-{{--        <span class="dash-micon"><i class="ti ti-layout"></i></span>--}}
-{{--        <span class="dash-mtext">{{ __('Page builder') }}</span>--}}
-{{--        <span class="dash-arrow"><i data-feather="chevron-right"></i></span>--}}
-{{--    </a>--}}
-{{--    <ul class="dash-submenu">--}}
-{{--        <li class="dash-item">--}}
-{{--            <a class="dash-link" href="{{ route('admin.menus.index') }}">--}}
-{{--                <span class="dash-micon"><i class="ti ti-menu"></i></span>--}}
-{{--                {{ __('Menus') }}--}}
-{{--            </a>--}}
-{{--        </li>--}}
-{{--        <li class="dash-item">--}}
-{{--            <a class="dash-link" href="{{ route('admin.pages.index') }}">--}}
-{{--                <span class="dash-micon"><i class="ti ti-page"></i></span>--}}
-{{--                {{ __('Pages') }}--}}
-{{--            </a>--}}
-{{--        </li>--}}
-{{--    </ul>--}}
-{{--</li>--}}
+<li class="dash-item dash-hasmenu">
+    <a href="#!" class="dash-link">
+        <span class="dash-micon"><i class="ti ti-layout"></i></span>
+        <span class="dash-mtext">{{ __('Page builder') }}</span>
+        <span class="dash-arrow"><i data-feather="chevron-right"></i></span>
+    </a>
+    <ul class="dash-submenu">
+        <li class="dash-item">
+            <a class="dash-link" href="{{ route('admin.menus.index') }}">
+                <span class="dash-micon"><i class="ti ti-menu"></i></span>
+                {{ __('Menus') }}
+            </a>
+        </li>
+        <li class="dash-item">
+            <a class="dash-link" href="{{ route('admin.pages.index') }}">
+                <span class="dash-micon"><i class="ti ti-page"></i></span>
+                {{ __('Pages') }}
+            </a>
+        </li>
+    </ul>
+</li>
 
 <!-- Messages Section -->
 {{--@can('Message')--}}
