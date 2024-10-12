@@ -23,7 +23,7 @@
           integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    @yield('style')
+
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
         .header-img-icon .nav-link img{
@@ -178,5 +178,10 @@
             height: 10px !important;
             margin: 0 !important;
         }
+
+        thead tr th {
+            padding: 8px 10px 5px !important;
+        }
     </style>
+    @yield('style')
 </head>
