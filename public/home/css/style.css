@@ -106,9 +106,9 @@ tbody tr {
     color: #4a4a4a;
 }
 
-tbody tr:hover {
-    background: #f6f8f9;
-}
+/*tbody tr:hover {*/
+/*    background: #f6f8f9;*/
+/*}*/
 
 .input-group-text,
 .form-control {

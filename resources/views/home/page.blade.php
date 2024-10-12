@@ -4,18 +4,25 @@
     <style>
         td, th {
             border: none !important;
+            padding-left: 10px !important;
         }
+
+        tbody td:hover {
+            background: #f6f8f9;
+        }
+
 
         th {
             color: #036f88 !important;
             position: relative;
+            padding-left: 10px !important;
         }
 
         th:before {
             content: "";
             position: absolute;
             top: 8px !important;
-            left: 10px !important;
+            left: 0 !important;
             width: 2px;
             height: 20px !important;
             background-color: #ffa700;
