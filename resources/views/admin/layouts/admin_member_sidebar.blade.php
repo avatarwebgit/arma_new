@@ -350,7 +350,7 @@
 @can('Line-1')
     <li class="dash-item">
         <a href="{{ route('admin.header1.index') }}" class="dash-link">
-            <span class="dash-micon"><i class="fas fa-list-ol"></i></span>
+            <span class="dash-micon"><i class="fas fa-cogs"></i></span>
             <span class="dash-mtext custom-weight">{{ __('Line |') }}</span>
         </a>
     </li>
@@ -359,7 +359,7 @@
 @can('Line-2')
     <li class="dash-item">
         <a href="{{ route('admin.header2.index') }}" class="dash-link">
-            <span class="dash-micon"><i class="fas fa-list-ol"></i></span>
+            <span class="dash-micon"><i class="fas fa-cogs"></i></span>
             <span class="dash-mtext custom-weight">{{ __('Line ||') }}</span>
         </a>
     </li>
@@ -377,13 +377,13 @@
             @can('Settings-Setting')
                 <li class="dash-item">
                     <a class="dash-link" href="{{ route('admin.settings.index',['type'=>'header']) }}">
-                        <span class="dash-micon"><i class="fas fa-header"></i></span>
+                        <span class="dash-micon"><i class="fas fa-cogs"></i></span>
                         {{ __('Header') }}
                     </a>
                 </li>
                 <li class="dash-item">
                     <a class="dash-link" href="{{ route('admin.settings.index',['type'=>'footer']) }}">
-                        <span class="dash-micon"><i class="fas fa-footer"></i></span>
+                        <span class="dash-micon"><i class="fas fa-cogs"></i></span>
                         {{ __('Footer') }}
                     </a>
                 </li>
