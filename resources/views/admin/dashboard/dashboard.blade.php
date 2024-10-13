@@ -60,6 +60,167 @@
             background-color: red !important;
         }
     </style>
+    {{--    /*//clockk*/--}}
+    <style>
+        *, :after, :before {
+            box-sizing: border-box
+        }
+
+        .pull-left {
+            float: left
+        }
+
+        .pull-right {
+            float: right
+        }
+
+        .clearfix:after, .clearfix:before {
+            content: '';
+            display: table
+        }
+
+        .clearfix:after {
+            clear: both;
+            display: block
+        }
+
+        .clockk:before,
+        .count:after {
+            content: '';
+            position: absolute;
+        }
+
+        .clockk-wrap {
+            width: 240px;
+            height: 150px;
+            /*margin-top: 100px;*/
+            position: relative;
+            border-radius: 50px;
+            /*background-color: #fff;*/
+            /*box-shadow: 0 0 15px rgba(0, 0, 0, .15);*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2px auto 10px;
+        }
+
+        .clockk {
+            left: 0;
+            right: 0;
+            top: 5px;
+            margin: auto !important;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: #feeff4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clockk span {
+            z-index: 999;
+            font-size: 20px !important;
+        }
+
+        .clockk:before {
+            /*top: 50%;*/
+            /*left: 50%;*/
+            width: 100px;
+            height: 100px;
+            /*margin-top: -60px;*/
+            /*margin-left: -60px;*/
+            border-radius: inherit;
+            background-color: #ffffff;
+
+            box-shadow: 0 0 15px rgba(0, 0, 0, .15), 0 0 3px rgba(255, 255, 255, .75) inset;
+            /*border:1px solid rgba(255,255,255,.1);*/
+        }
+
+        .count {
+            width: 100%;
+            color: #fff;
+            height: 100%;
+            padding: 50px;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 50px;
+            position: absolute;
+            text-align: center;
+        }
+
+        .count:after {
+            width: 100%;
+            display: block;
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        .count.sec:after {
+            content: 'sec'
+        }
+
+        .count.min:after {
+            content: 'min'
+        }
+
+        .action {
+            margin: auto;
+            max-width: 200px;
+        }
+
+        .action .input {
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .action .input-num {
+            width: 100%;
+            border: none;
+            padding: 12px;
+            border-radius: 60px;
+        }
+
+        .action .input-btn {
+            top: 0;
+            right: 0;
+            color: #fff;
+            border: none;
+            border: none;
+            padding: 12px;
+            position: absolute;
+            border-radius: 60px;
+            background-color: #ec366b;
+            text-transform: uppercase;
+        }
+
+        .tbl {
+            display: table;
+            width: 100%
+        }
+
+        .tbl .col {
+            display: table-cell
+        }
+
+        #timer_section {
+            margin-bottom: 100px;
+        }
+
+        .timer-clock .timer {
+            font-size: 26px !important;
+        }
+
+        .timer-clock .text {
+            font-size: 11px !important;
+            margin-top: 5px !important;
+        }
+    </style>
+    {{--    /*//clockk*/--}}
 @endpush
 @push('script')
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
@@ -221,6 +382,84 @@
                 chart.render();
             });
         }
+        function TimerClock(seconds, pie, status) {
+            $step = 1;
+            $loops = Math.round(100 / $step);
+            $increment = 360 / $loops;
+            $half = Math.round($loops / 2);
+            $barColor = '#727272';
+            $backColor = '#b2b2b2';
+            var num = 0;
+            var sec = seconds;
+            var lop = sec;
+            var min = parseInt(seconds / 60);
+            $('.count').text(min);
+            if (min > 0) {
+                $('.count').addClass('min')
+            } else {
+                $('.count').addClass('sec')
+            }
+            if (status == 2) {
+                $barColor = '#162fa2';
+                $backColor = '#3354f1';
+            }
+            if (2 < status && status < 7) {
+                $barColor = '#1f9402';
+                $backColor = '#afff98';
+            }
+            // if (seconds < 10) {
+            //     $barColor = '#c20000';
+            //     $backColor = '#ff9595';
+            // }
+            // if (seconds > 1800) {
+            //     $barColor = '#727272';
+            //     $backColor = '#d7d6d6';
+            // }
+            // console.log('sec: ', sec);
+            // if (min > 1) {
+            //     pie = pie + (100 / (lop / min));
+            // } else {
+            //     pie = pie + (100 / (lop));
+            // }
+            // if (pie >= 101) {
+            //     pie = 1;
+            // }
+            num = (sec / 60).toFixed(2).slice(0, -3);
+            if (num == 0) {
+                $('.count').removeClass('min').addClass('sec').text(sec);
+            } else {
+                $('.count').removeClass('sec').addClass('min').text(num);
+            }
+
+            $i = (pie.toFixed(2).slice(0, -3)) - 1;
+            if (1 < pie && pie < 3) {
+                pie = 3;
+            }
+            console.log('pie', pie);
+            if (pie < 1) {
+
+                $nextdeg = 90 + 'deg';
+                $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+
+            } else {
+                if ($i < $half) {
+
+                    $nextdeg = (90 + ($increment * $i)) + 'deg';
+                    $('.clockk').css({'background-image': 'linear-gradient(90deg,' + $backColor + ' 50%,transparent 50%,transparent),linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+                } else {
+
+                    $nextdeg = (-90 + ($increment * ($i - $half))) + 'deg';
+                    $('.clockk').css({'background-image': 'linear-gradient(' + $nextdeg + ',' + $barColor + ' 50%,transparent 50%,transparent),linear-gradient(270deg,' + $barColor + ' 50%,' + $backColor + ' 50%,' + $backColor + ')'});
+                }
+            }
+
+            if (sec == 0) {
+                $('.count').text(0);
+                //$('.clockk').removeAttr('class','clockk pro-100');
+                $('.clockk').removeAttr('style');
+            }
+            return pie;
+        }
     </script>
     @if($market!=null)
         <script type="module">
@@ -264,6 +503,8 @@
                 }
 
 
+
+
                 if (status == 1) {
                     waiting_to_open(status, market_id, difference);
                 }
@@ -295,7 +536,7 @@
 
         function waiting_to_open(status, id, difference) {
             hide_result(id);
-            deactive_bid(id)
+            // deactive_bid(id)
             // let color = '#162fa2';
             let color = '#727272';
             if (difference > 1800) {
@@ -309,7 +550,7 @@
         function ready_to_open(status, id) {
             close_bid_deposit(id);
             hide_result(id);
-            deactive_bid(id);
+            // deactive_bid(id);
             let statusText = '<span>Ready to open</span>';
             let color = '#162fa2';
             change_market_status(status, color, statusText, id)
@@ -326,7 +567,7 @@
 
         function Quotation_1_2(status, id) {
             hide_result(id);
-            remove_function();
+            // remove_function();
             close_bid_deposit(id);
             active_bid(id);
             let color = '#1f9402';
@@ -336,7 +577,7 @@
 
         function Quotation_2_2(status, id) {
             hide_result(id);
-            remove_function();
+            // remove_function();
             close_bid_deposit(id);
             active_bid(id);
             let color = '#1f9402';
@@ -348,7 +589,7 @@
             close_bid_deposit(id);
             // $('#bid_price-'+id).attr('onkeyup', 'step_price_competition(this,event)');
             // $('#bid_price-'+id).attr('step', step);
-            remove_function();
+            // remove_function();
             Competition_Bid_buttons(id);
             let color = '#1f9402';
             let statusText = '<span>Competition</span>';
@@ -357,8 +598,8 @@
 
         function Stop(status, id) {
             close_bid_deposit(id);
-            remove_function();
-            deactive_bid(id);
+            // remove_function();
+            // deactive_bid(id);
             let color = '#c20000';
             let statusText = '<span>Close</span>';
             change_market_status(status, color, statusText, id);
@@ -366,8 +607,8 @@
 
         function Close_and_show_result(status, id) {
             close_bid_deposit(id);
-            remove_function();
-            deactive_bid(id);
+            // remove_function();
+            // deactive_bid(id);
             let color = '#c20000';
             let statusText = '<span>Close</span>';
             $('#market-difference1-' + id).css({color: color})
