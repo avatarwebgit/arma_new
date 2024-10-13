@@ -15,6 +15,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <button onclick="createMarketModal()" class="btn btn-primary btn-sm">
+                        <span class="dash-micon"><i class="fas fa-plus"></i></span>
                         Create
                     </button>
                     <a href="{{ route('admin.markets.settings') }}" class="btn btn-success">
