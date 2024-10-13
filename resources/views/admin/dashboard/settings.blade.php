@@ -218,7 +218,7 @@
         <!--begin::Col-->
         <div class="col d-flex flex-column bg-light-info px-6 py-8 rounded-2 me-7 mr10">
             <i class="fas fa-cogs fs-2x text-info my-2"></i>
-            <a href="{{ route('admin.header1.index') }}" class="text-danger fw-semibold text-inf fs-6 mt-2">
+            <a href="{{ route('admin.header1.index') }}" class="text-danger fw-semibold text-info fs-6 mt-2">
                 {{ __('Line |') }}
             </a>
         </div>
