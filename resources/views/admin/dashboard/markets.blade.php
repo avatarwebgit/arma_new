@@ -13,12 +13,12 @@
                                  Market
                             </span>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <button onclick="createMarketModal()" class="btn btn-primary btn-sm">
+                <div class="d-flex justify-content-center">
+                    <button style="width: 150px" onclick="createMarketModal()" class="btn btn-primary btn-sm mr-3">
                         <span class="dash-micon"><i class="fas fa-plus"></i></span>
                         Create
                     </button>
-                    <a href="{{ route('admin.markets.settings') }}" class="btn btn-success">
+                    <a style="width: 150px" href="{{ route('admin.markets.settings') }}" class="btn btn-success">
                         <span class="dash-micon"><i class="fas fa-cog"></i></span>
                          Setting
                     </a>
