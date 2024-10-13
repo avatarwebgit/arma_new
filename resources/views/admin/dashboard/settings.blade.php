@@ -216,7 +216,7 @@
     </div>
     <div class="row g-0">
         <!--begin::Col-->
-        <div class="col d-flex flex-column bg-light-danger px-6 py-8 rounded-2 me-7 mr10">
+        <div class="col d-flex flex-column bg-light-info px-6 py-8 rounded-2 me-7 mr10">
             <i class="fas fa-cogs fs-2x text-danger my-2"></i>
             <a href="{{ route('admin.header1.index') }}" class="text-danger fw-semibold fs-6 mt-2">
                 {{ __('Line |') }}
@@ -224,7 +224,7 @@
         </div>
         <!--end::Col-->
         <!--begin::Col-->
-        <div class="col d-flex flex-column bg-light-success px-6 py-8 rounded-2">
+        <div class="col d-flex flex-column bg-light-dark px-6 py-8 rounded-2">
             <i class="fas fa-cogs fs-2x text-success my-2"></i>
             <a href="{{ route('admin.header2.index') }}" class="text-success fw-semibold fs-6 mt-2">
                 Line ||
