@@ -46,25 +46,23 @@
                 <div class="d-flex align-items-center mb-6">
                     <div class="d-flex align-items-center flex-wrap w-100">
                         <div class="mb-1 pe-3 flex-grow-1">
-                            <a href="{{ route('admin.user.edit',['user'=>auth()->id()]) }}" class="fs-5 text-gray-800 text-hover-primary fw-bold">Account</a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="fw-bold fs-5 text-gray-800 pe-1">
+                            <a href="{{ route('admin.user.edit',['user'=>auth()->id()]) }}" class="button-dashboard fs-5 text-gray-800 text-hover-primary fw-bold">
                                 <span class="dash-micon"><i class="fas fa-user"></i></span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center mb-6">
-                    <div class="d-flex align-items-center flex-wrap w-100">
-                        <div class="mb-1 pe-3 flex-grow-1">
-                            <a href="{{ route('admin.user.edit',['user'=>auth()->id(),'type'=>'change_password']) }}" class="fs-5 text-gray-800 text-hover-primary fw-bold">Change Password</a>
+                                Account</a>
                         </div>
                         <div class="d-flex align-items-center">
-                            <div class="fw-bold fs-5 text-gray-800 pe-1">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-6">
+                    <div class="d-flex align-items-center flex-wrap w-100">
+                        <div class="mb-1 pe-3 flex-grow-1">
+                            <a href="{{ route('admin.user.edit',['user'=>auth()->id(),'type'=>'change_password']) }}" class="button-dashboard fs-5 text-gray-800 text-hover-primary fw-bold">
                                 <span class="dash-micon"><i class="fas fa-lock"></i></span>
-                            </div>
+                                Change Password</a>
+                        </div>
+                        <div class="d-flex align-items-center">
+
 
                         </div>
                     </div>
@@ -72,13 +70,14 @@
                 <div class="d-flex align-items-center mb-6">
                     <div class="d-flex align-items-center flex-wrap w-100">
                         <div class="mb-1 pe-3 flex-grow-1">
-                            <a href="{{ route('logout') }}" class="fs-5 text-gray-800 text-hover-primary fw-bold">
+                            <a href="{{ route('logout') }}" class="button-dashboard fs-5 text-gray-800 text-hover-primary fw-bold">
+                                <span class="dash-micon"><i class="ti ti-power"></i></span>
                                 logout
                             </a>
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="fw-bold fs-5 text-gray-800 pe-1">
-                                <span class="dash-micon"><i class="ti ti-power"></i></span>
+
                             </div>
 
                         </div>

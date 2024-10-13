@@ -60,6 +60,8 @@ class DashboardController extends Controller
             $commodities[]=$item->SalesForm->commodity;
             $bids[]=count($item->Bids);
         }
+        $today=Carbon::now()->format('Y-m-d');
+        $market=Market::where('date','>',$today)->orWhere('date','=',$today)->where('status','!=',7)->orderby('time')->first();
         return view('admin.dashboard.dashboard', compact(
             'roleCounts',
             'inquiryCounts',
@@ -69,6 +71,7 @@ class DashboardController extends Controller
             'latest_markets',
             'commodities',
             'bids',
+            'market'
         ));
     }
 }

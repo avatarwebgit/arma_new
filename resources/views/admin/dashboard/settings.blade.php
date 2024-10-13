@@ -195,7 +195,7 @@
             <div class="card-p mt-n20 position-relative">
                 <!--begin::Row-->
                 <div class="row g-0">
-                    <div class="col d-flex flex-column bg-light-warning px-6 py-8 rounded-2 me-7 mb-7">
+                    <div class="col d-flex flex-column bg-light-warning px-6 py-8 rounded-2 me-7 mb-7 mr10">
                         <i class="fas fa-list fs-2x text-warning my-2"></i>
                         <a href="{{ route('admin.menus.index') }}" class="text-warning fw-semibold fs-6">
                             {{ __('Menus') }}
@@ -215,7 +215,7 @@
                 <!--begin::Row-->
                 <div class="row g-0">
                     <!--begin::Col-->
-                    <div class="col d-flex flex-column bg-light-danger px-6 py-8 rounded-2 me-7">
+                    <div class="col d-flex flex-column bg-light-danger px-6 py-8 rounded-2 me-7 mr10">
                         <i class="fas fa-cogs fs-2x text-danger my-2"></i>
                         <a href="{{ route('admin.settings.index',['type'=>'general']) }}" class="text-danger fw-semibold fs-6 mt-2">
                             {{ __('General') }}
