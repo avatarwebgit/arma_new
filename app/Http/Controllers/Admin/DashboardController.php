@@ -51,12 +51,24 @@ class DashboardController extends Controller
             ->get()
             ->groupBy('date')
             ->take(5);
+        $latest_markets = Market::orderBy('date', 'asc')
+            ->get()
+            ->take(10);
+        $commodities = [];
+        $bids = [];
+        foreach ($latest_markets as $key=>$item){
+            $commodities[]=$item->SalesForm->commodity;
+            $bids[]=count($item->Bids);
+        }
         return view('admin.dashboard.dashboard', compact(
             'roleCounts',
             'inquiryCounts',
             'market_count',
             'SalesFormCounts',
-            'group_markets'
+            'group_markets',
+            'latest_markets',
+            'commodities',
+            'bids',
         ));
     }
 }
