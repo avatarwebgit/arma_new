@@ -70,6 +70,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="d-flex align-items-center mb-6">
+                    <div class="d-flex align-items-center flex-wrap w-100">
+                        <div class="mb-1 pe-3 flex-grow-1">
+                            <a href="{{ route('logout') }}" class="fs-5 text-gray-800 text-hover-primary fw-bold">
+                                logout
+                            </a>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="fw-bold fs-5 text-gray-800 pe-1">
+                                <span class="dash-micon"><i class="fas fa-sign-out"></i></span>
+                            </div>
+                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-1"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
