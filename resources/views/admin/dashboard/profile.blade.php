@@ -27,7 +27,6 @@
                             <div class="fw-bold fs-5 text-gray-800 pe-1">
                                 {{ auth()->user()->email }}
                             </div>
-                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-1"></i>
                         </div>
                     </div>
                 </div>
@@ -40,7 +39,7 @@
                             <div class="fw-bold fs-5 text-gray-800 pe-1">
                                 {{ ucfirst(auth()->user()->Roles()->first()->name) ?? 'User' }}
                             </div>
-                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-1"></i>
+
                         </div>
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                             <div class="fw-bold fs-5 text-gray-800 pe-1">
                                 <span class="dash-micon"><i class="fas fa-user"></i></span>
                             </div>
-                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-1"></i>
+
                         </div>
                     </div>
                 </div>
@@ -66,7 +65,7 @@
                             <div class="fw-bold fs-5 text-gray-800 pe-1">
                                 <span class="dash-micon"><i class="fas fa-lock"></i></span>
                             </div>
-                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-1"></i>
+
                         </div>
                     </div>
                 </div>
@@ -79,9 +78,9 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="fw-bold fs-5 text-gray-800 pe-1">
-                                <span class="dash-micon"><i class="fas fa-sign-out"></i></span>
+                                <span class="dash-micon"><i class="ti ti-power"></i></span>
                             </div>
-                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-1"></i>
+
                         </div>
                     </div>
                 </div>
