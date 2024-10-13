@@ -14,7 +14,7 @@
                             </span>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button style="width: 150px" onclick="createMarketModal()" class="btn btn-primary btn-sm mr-3">
+                    <button style="width: 150px;margin-right: 20px" onclick="createMarketModal()" class="btn btn-primary btn-sm">
                         <span class="dash-micon"><i class="fas fa-plus"></i></span>
                         Create
                     </button>
