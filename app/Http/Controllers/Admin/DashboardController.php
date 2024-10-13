@@ -45,7 +45,12 @@ class DashboardController extends Controller
             'Draft' => SalesOfferForm::where('user_id', \auth()->id())->where('is_save', 2)->count(),
         ];
         $yesterday = Carbon::yesterday()->format('Y-m-d');
-        $group_markets = Market::where('date','=>',$yesterday)->orderby('date', 'desc')->get()->groupby('date');
+        $group_markets = Market::where('date', '=', $yesterday)
+            ->orWhere('date', '>', $yesterday)
+            ->orderBy('date', 'asc')
+            ->get()
+            ->groupBy('date')
+            ->take(5);
         return view('admin.dashboard.dashboard', compact(
             'roleCounts',
             'inquiryCounts',
