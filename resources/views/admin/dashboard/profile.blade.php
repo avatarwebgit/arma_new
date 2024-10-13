@@ -9,7 +9,7 @@
                     <a href="#!" class="dash-link position-relative">
                         <div class="d-flex flex-column align-items-center">
                             <div class="user-img mb-2">
-                                <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'), auth()->user()->image) }}"
+                                <img style="position: relative;z-index: 999" src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'), auth()->user()->image) }}"
                                      alt="{{ auth()->user()->name }}" class="rounded-circle" width="180">
                             </div>
                         </div>
