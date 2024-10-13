@@ -17150,7 +17150,7 @@ body.theme-4 .card .card-header .h5:after {
 
 .dash-sidebar .dash-submenu .dash-link {
     font-weight: 500;
-    padding: 10px 30px 10px 65px;
+    padding: 10px 30px 10px 30px;
 }
 
 .dash-sidebar .dash-submenu .dash-submenu .dash-link {
@@ -17195,7 +17195,7 @@ body.theme-4 .card .card-header .h5:after {
 .dash-sidebar .dash-item > .dash-submenu .dash-item:hover > .dash-link {
     font-weight: 700;
     color: white !important;
-    font-size: 11pt !important;
+    /*font-size: 11pt !important;*/
 }
 
 .dash-sidebar .dash-item > .dash-submenu .dash-item.active > .dash-link .dash-micon i,
@@ -17247,6 +17247,7 @@ body:not(.minimenu) .dash-sidebar .dash-submenu .dash-item:before {
     transform: rotate(45deg);
     transition: 0.35s cubic-bezier(0.54, 1.6, 0.5, 1);
     color: #778290;
+    display: none !important;
 }
 
 body:not(.minimenu) .dash-sidebar .dash-submenu .dash-item.active:before {
