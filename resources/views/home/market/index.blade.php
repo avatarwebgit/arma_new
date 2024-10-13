@@ -168,6 +168,7 @@
             $('#status-box-' + id).css('color', color);
             $('#market-difference1-' + id).css('color', color);
             $('#market-difference-' + id).css('background', color);
+
             $('#market-status-' + id).html(statusText);
             if (status == 2 || status == 3 || status == 4 || status == 5) {
                 animation_main_div.removeClass('d-none');
