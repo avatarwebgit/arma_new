@@ -34672,11 +34672,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .btn.btn-primary.dropdown-toggle:after {
   color: var(--bs-primary-inverse);
 }
-.btn-check:checked + .btn.btn-primary, .btn-check:active + .btn.btn-primary, .btn.btn-primary:focus:not(.btn-active), .btn.btn-primary:hover:not(.btn-active), .btn.btn-primary:active:not(.btn-active), .btn.btn-primary.active, .btn.btn-primary.show, .show > .btn.btn-primary {
-  color: var(--bs-primary-inverse);
-  border-color: var(--bs-primary-active);
-  background-color: var(--bs-primary-active) !important;
-}
+/*.btn-check:checked + .btn.btn-primary, .btn-check:active + .btn.btn-primary, .btn.btn-primary:focus:not(.btn-active), .btn.btn-primary:hover:not(.btn-active), .btn.btn-primary:active:not(.btn-active), .btn.btn-primary.active, .btn.btn-primary.show, .show > .btn.btn-primary {*/
+/*  color: var(--bs-primary-inverse);*/
+/*  border-color: var(--bs-primary-active);*/
+/*  background-color: var(--bs-primary-active) !important;*/
+/*}*/
 .btn-check:checked + .btn.btn-primary i,
 .btn-check:checked + .btn.btn-primary .svg-icon, .btn-check:active + .btn.btn-primary i,
 .btn-check:active + .btn.btn-primary .svg-icon, .btn.btn-primary:focus:not(.btn-active) i,
