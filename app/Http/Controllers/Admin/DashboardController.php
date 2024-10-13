@@ -60,8 +60,13 @@ class DashboardController extends Controller
             $commodities[]=$item->SalesForm->commodity;
             $bids[]=count($item->Bids);
         }
-        $today=Carbon::yesterday()->format('Y-m-d');
-        $market=Market::where('date','>',$today)->orWhere('date','=',$today)->where('status','!=',7)->orderby('time')->first();
+        $today=Carbon::today()->format('Y-m-d');
+        $yesterday=Carbon::yesterday()->format('Y-m-d');
+        $market=Market::Where('date',$today)->where('status','!=',7)->orderby('time')->first();
+        $market_tomorrow=Market::Where('date','>',$yesterday)->where('status','!=',7)->orderby('time')->first();
+        if (!$market){
+            $market=$market_tomorrow;
+        }
         return view('admin.dashboard.dashboard', compact(
             'roleCounts',
             'inquiryCounts',

@@ -4,7 +4,7 @@
         <!--begin::Beader-->
         <div class="card-header border-0 py-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bold fs-3 mb-1">Online Market</span>
+                <span class="card-label fw-bold fs-3 mb-1">Current Market</span>
             </h3>
             <div class="card-toolbar">
 
@@ -26,6 +26,9 @@
                         </span>
                     </div>
                 </div>
+                <h5 id="status-box-{{ $market->id }}" class="text-center">
+                    Market : <span>{{ $market->SalesForm->commodity }}</span>
+                </h5>
             </div>
         </div>
         @endif
