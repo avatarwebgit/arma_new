@@ -46,7 +46,7 @@ class DashboardController extends Controller
         ];
         $yesterday = Carbon::yesterday()->format('Y-m-d');
         $group_markets = Market::where('date','=>',$yesterday)->orderby('date', 'desc')->get()->groupby('date');
-        return view('admin.Dashboard.dashboard', compact(
+        return view('admin.dashboard.dashboard', compact(
             'roleCounts',
             'inquiryCounts',
             'market_count',
