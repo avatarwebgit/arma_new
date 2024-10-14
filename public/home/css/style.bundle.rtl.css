@@ -4,14 +4,14 @@
  * Copyright 2011-2024 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@font-face {
-    font-family: "IRANSansWeb";
-    src: url("../fonts/IRANSansWeb.eot"); /* IE */
-    src: url("../fonts/IRANSansWeb.eot?#iefix") format("embedded-opentype"), /* IE */
-    url("../fonts/IRANSansWeb.woff") format("woff"), /* Modern Browsers */
-    url("../fonts/IRANSansWeb.ttf") format("truetype"); /* Safari, Android, iOS */
-    font-weight: normal;
-}
+/*@font-face {*/
+/*    font-family: "IRANSansWeb";*/
+/*    src: url("../fonts/IRANSansWeb.eot"); !* IE *!*/
+/*    src: url("../fonts/IRANSansWeb.eot?#iefix") format("embedded-opentype"), !* IE *!*/
+/*    url("../fonts/IRANSansWeb.woff") format("woff"), !* Modern Browsers *!*/
+/*    url("../fonts/IRANSansWeb.ttf") format("truetype"); !* Safari, Android, iOS *!*/
+/*    font-weight: normal;*/
+/*}*/
 :root,
 [data-bs-theme=light] {
   --bs-blue: #0d6efd;
@@ -79,10 +79,10 @@
   --bs-dark-border-subtle: #99A1B7;
   --bs-white-rgb: 255, 255, 255;
   --bs-black-rgb: 0, 0, 0;
-  --bs-font-sans-serif: IRANSansWeb, Helvetica, "sans-serif";
+  /*--bs-font-sans-serif: IRANSansWeb, Helvetica, "sans-serif";*/
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: var(--bs-font-sans-serif);
+  /*--bs-body-font-family: var(--bs-font-sans-serif);*/
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -198,7 +198,7 @@
 
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  /*font-family: var(--bs-body-font-family);*/
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -5969,7 +5969,7 @@ textarea.form-control-lg {
   z-index: var(--bs-tooltip-zindex);
   display: block;
   margin: var(--bs-tooltip-margin);
-  font-family: var(--bs-font-sans-serif);
+  /*font-family: var(--bs-font-sans-serif);*/
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -6071,7 +6071,7 @@ textarea.form-control-lg {
   z-index: var(--bs-popover-zindex);
   display: block;
   max-width: var(--bs-popover-max-width);
-  font-family: var(--bs-font-sans-serif);
+  /*font-family: var(--bs-font-sans-serif);*/
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -47213,7 +47213,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 13px !important;
   font-weight: 400;
-  font-family: IRANSansWeb, Helvetica, "sans-serif";
+  /*font-family: IRANSansWeb, Helvetica, "sans-serif";*/
 }
 @media (max-width: 991.98px) {
   html,
