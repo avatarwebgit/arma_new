@@ -122,6 +122,7 @@
         .clockk span {
             z-index: 999;
             font-size: 20px !important;
+            scale: 0.85;
         }
 
         .clockk:before {
