@@ -79,8 +79,8 @@
   --bs-dark-border-subtle: #99A1B7;
   --bs-white-rgb: 255, 255, 255;
   --bs-black-rgb: 0, 0, 0;
-  --bs-font-sans-serif: IRANSansWeb, Helvetica, "sans-serif";
-  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /*--bs-font-sans-serif: IRANSansWeb, Helvetica, "sans-serif";*/
+  /*--bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;*/
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
   --bs-body-font-size: 1rem;
@@ -47213,7 +47213,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 13px !important;
   font-weight: 400;
-  font-family: IRANSansWeb, Helvetica, "sans-serif";
+  /*font-family: IRANSansWeb, Helvetica, "sans-serif";*/
 }
 @media (max-width: 991.98px) {
   html,

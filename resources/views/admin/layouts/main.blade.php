@@ -44,6 +44,12 @@
             text-align: center;
             margin: 5px 10px;
         }
+        .dash-container{
+            top: 0 !important;
+        }
+        .dash-container .dash-content{
+            padding-top: 0 !important;
+        }
     </style>
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     @stack('style')
@@ -85,7 +91,7 @@
 
 <!-- [ navigation menu ] end -->
 <!-- [ Header ] start -->
-@include('admin.include.header')
+{{--@include('admin.include.header')--}}
 
 <!-- Modal -->
 <div class="modal notification-modal fade" id="notification-modal" tabindex="-1" role="dialog" aria-hidden="true">
