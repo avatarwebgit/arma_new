@@ -40,9 +40,9 @@
                                aria-expanded="false">
                                 {{ $menu->title }}
                             </a>
-                            @foreach($menu->children()->where('show_on_header',1)->get() as $child)
+                            @if(count($menu->children)>0)
                                 <div class="dropdown-menu">
-                                    @foreach($menu->children as $child)
+                                    @foreach($menu->children()->where('show_on_footer',1)->get() as $child)
                                         <a class='dropdown-item' href='{{ route('home.menus',['menus'=>$child->id]) }}'>
                                             {{ $child->title }}
                                         </a>
