@@ -1,7 +1,7 @@
 @php
     // Counts for Users
     $userCounts = [
-        'registering' => \App\Models\User::where('active_status', 1)->count(),
+        'registering' => \App\Models\User::whereIn('active_status', [1,10,11])->count(),
         'index' => \App\Models\User::where('active_status', 0)->count(),
         'rejected' => \App\Models\User::where('active_status', 3)->count(),
         'confirmed' => \App\Models\User::where('active_status', 2)->whereDoesntHave('roles')->count(),
