@@ -3,8 +3,14 @@
 @section('content')
     <div class="row g-5 g-xl-8">
         @include('admin.dashboard.profile')
-        @include('admin.dashboard.markets')
-        @include('admin.dashboard.settings')
+        @can(['Market-Markets','Market-Setting'])
+            @include('admin.dashboard.markets')
+        @endcan
+
+
+            @include('admin.dashboard.settings')
+
+
         @include('admin.dashboard.market_chart')
         @include('admin.dashboard.online_market')
         {{--        @include('admin.dashboard.users')--}}
@@ -360,7 +366,7 @@
                         },
                         y: {
                             formatter: function (val) {
-                                return  val;
+                                return val;
                             }
                         }
                     },
@@ -383,6 +389,7 @@
                 chart.render();
             });
         }
+
         function TimerClock(seconds, pie, status) {
             $step = 1;
             $loops = Math.round(100 / $step);
@@ -466,282 +473,280 @@
         <script type="module">
 
 
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            // TimerClock(60);
-            {{--GetMarket({{ $market->id }});--}}
-            {{--let now = '{{ $now }}';--}}
-            {{--now = new Date(now).getTime();--}}
-            {{--MarketOnline({{ $market->id }}, now);--}}
+                // TimerClock(60);
+                {{--GetMarket({{ $market->id }});--}}
+                {{--let now = '{{ $now }}';--}}
+                {{--now = new Date(now).getTime();--}}
+                {{--MarketOnline({{ $market->id }}, now);--}}
 
-        });
-        let i = 0;
-        let pie = 100;
-        window.Echo.channel('market-status-updated')
-            .listen('MarketStatusUpdated', function (e) {
-                let market_page_id = "{{ $market->id }}";
-                let market_id = e.market_id;
-                let difference = e.difference;
-                let timer = e.timer;
-                let status = e.status;
-                // let price_step = e.step;
-                let step = 1;
-                let loops = Math.round(100 / step);
-                let increment = 360 / loops;
-                let half = Math.round(loops / 2);
-                let barColor = '#ec366b';
-                let backColor = '#feeff4';
-                let nextdeg;
+            });
+            let i = 0;
+            let pie = 100;
+            window.Echo.channel('market-status-updated')
+                .listen('MarketStatusUpdated', function (e) {
+                    let market_page_id = "{{ $market->id }}";
+                    let market_id = e.market_id;
+                    let difference = e.difference;
+                    let timer = e.timer;
+                    let status = e.status;
+                    // let price_step = e.step;
+                    let step = 1;
+                    let loops = Math.round(100 / step);
+                    let increment = 360 / loops;
+                    let half = Math.round(loops / 2);
+                    let barColor = '#ec366b';
+                    let backColor = '#feeff4';
+                    let nextdeg;
 
-                $('#market-difference-' + market_id).html(timer);
-                $('#market-difference1-' + market_id).html(timer);
+                    $('#market-difference-' + market_id).html(timer);
+                    $('#market-difference1-' + market_id).html(timer);
 
-                if (market_page_id == market_id) {
-                    console.log(market_page_id, market_id);
-                    let remain = difference % 60;
-                    pie = ((100 * remain) / 60);
-                    TimerClock(difference, pie, status);
+                    if (market_page_id == market_id) {
+                        console.log(market_page_id, market_id);
+                        let remain = difference % 60;
+                        pie = ((100 * remain) / 60);
+                        TimerClock(difference, pie, status);
+                    }
+
+
+                    if (status == 1) {
+                        waiting_to_open(status, market_id, difference);
+                    }
+                    if (status == 2) {
+                        ready_to_open(status, market_id);
+                    }
+                    if (status == 3) {
+                        opening(status, market_id);
+                    }
+                    if (status == 4) {
+                        Quotation_1_2(status, market_id);
+                    }
+                    if (status == 5) {
+                        Quotation_2_2(status, market_id);
+                    }
+                    if (status == 6) {
+                        Competition(status, market_id);
+                    }
+                    if (status == 7) {
+                        Close_and_show_result(status, market_id);
+                    }
+                    // if (status == 8 || status == 9) {
+                    //     Close_and_show_result(status, market_id);
+                    // }
+
+
+                });
+
+
+            function waiting_to_open(status, id, difference) {
+                hide_result(id);
+                // deactive_bid(id)
+                // let color = '#162fa2';
+                let color = '#727272';
+                if (difference > 1800) {
+                    color = '#727272';
                 }
+                let statusText = '<span>Waiting To Open</span>';
 
+                change_market_status(status, color, statusText, id)
+            }
 
+            function ready_to_open(status, id) {
+                close_bid_deposit(id);
+                hide_result(id);
+                // deactive_bid(id);
+                let statusText = '<span>Ready to open</span>';
+                let color = '#162fa2';
+                change_market_status(status, color, statusText, id)
+            }
 
+            function opening(status, id) {
+                hide_result(id);
+                close_bid_deposit(id);
+                active_bid(id);
+                let color = '#1f9402';
+                let statusText = '<span>Opening</span>';
+                change_market_status(status, color, statusText, id)
+            }
 
+            function Quotation_1_2(status, id) {
+                hide_result(id);
+                // remove_function();
+                close_bid_deposit(id);
+                active_bid(id);
+                let color = '#1f9402';
+                let statusText = '<span>Quotation 1/2</span>';
+                change_market_status(status, color, statusText, id)
+            }
+
+            function Quotation_2_2(status, id) {
+                hide_result(id);
+                // remove_function();
+                close_bid_deposit(id);
+                active_bid(id);
+                let color = '#1f9402';
+                let statusText = '<span>Quotation 2/2</span>';
+                change_market_status(status, color, statusText, id)
+            }
+
+            function Competition(status, id) {
+                close_bid_deposit(id);
+                // $('#bid_price-'+id).attr('onkeyup', 'step_price_competition(this,event)');
+                // $('#bid_price-'+id).attr('step', step);
+                // remove_function();
+                Competition_Bid_buttons(id);
+                let color = '#1f9402';
+                let statusText = '<span>Competition</span>';
+                change_market_status(status, color, statusText, id)
+            }
+
+            function Stop(status, id) {
+                close_bid_deposit(id);
+                // remove_function();
+                // deactive_bid(id);
+                let color = '#c20000';
+                let statusText = '<span>Close</span>';
+                change_market_status(status, color, statusText, id);
+            }
+
+            function Close_and_show_result(status, id) {
+                close_bid_deposit(id);
+                // remove_function();
+                // deactive_bid(id);
+                let color = '#c20000';
+                let statusText = '<span>Close</span>';
+                $('#market-difference1-' + id).css({color: color})
+                show_market_result(id);
+                change_market_status(status, color, statusText, id);
+            }
+
+            function close_bid_deposit(id) {
+                $('.bid_deposit_section-' + id).addClass('d-none');
+                $('.bid_deposit_section-' + id).addClass('bg-inactive');
+                $('.bid_deposit_section-' + id).find('input').prop('disabled', true);
+            }
+
+            function change_market_status(status, color, statusText, id) {
+                let animation_main_div = $('#market-time-parent-' + id).find('.animation_main_div');
+                animation_main_div.removeClass('d-none');
+                animation_main_div.addClass('d-none');
+                $('#previous_status-' + id).val(status);
+                $('#market-' + id).css('color', color);
+                $('#status-box-' + id).css('color', color);
+                $('#market-difference1-' + id).css('color', color);
+                $('#market-difference-' + id).css('background', color);
+                $('#market-status-' + id).html(statusText);
+                if (status == 2 || status == 3 || status == 4 || status == 5) {
+                    animation_main_div.removeClass('d-none');
+                }
+                sales_offer_buttons(status, id);
+            }
+
+            function sales_offer_buttons(status, id) {
+                // let seller_quantity = $('#seller_quantity-'+id);
+                let seller_price = $('#seller_price-' + id);
+                let seller_button = $('#seller_button-' + id);
+                seller_price.removeClass('btn-success');
                 if (status == 1) {
-                    waiting_to_open(status, market_id, difference);
+                    // seller_quantity.prop('disabled', true);
+                    seller_price.prop('disabled', true);
+                    seller_button.prop('disabled', true);
                 }
                 if (status == 2) {
-                    ready_to_open(status, market_id);
+                    // seller_quantity.prop('disabled', true);
+                    seller_price.prop('disabled', true);
+                    seller_button.prop('disabled', true);
                 }
                 if (status == 3) {
-                    opening(status, market_id);
+                    // seller_quantity.prop('disabled', true);
+                    seller_price.prop('disabled', true);
+                    seller_button.prop('disabled', true);
                 }
                 if (status == 4) {
-                    Quotation_1_2(status, market_id);
+                    // seller_quantity.prop('disabled', false);
+                    seller_price.prop('disabled', true);
+                    seller_button.prop('disabled', false);
                 }
                 if (status == 5) {
-                    Quotation_2_2(status, market_id);
+                    // seller_quantity.prop('disabled', true);
+                    seller_price.prop('disabled', false);
+                    seller_button.prop('disabled', false);
+                    seller_price.addClass('btn-success');
                 }
                 if (status == 6) {
-                    Competition(status, market_id);
+                    // seller_quantity.prop('disabled', true);
+                    seller_price.prop('disabled', true);
+                    seller_button.prop('disabled', true);
                 }
-                if (status == 7) {
-                    Close_and_show_result(status, market_id);
+                if (status == 7 || status == 8 || status == 9) {
+                    // seller_quantity.prop('disabled', true);
+                    seller_price.prop('disabled', true);
+                    seller_button.prop('disabled', true);
                 }
-                // if (status == 8 || status == 9) {
-                //     Close_and_show_result(status, market_id);
-                // }
-
-
-            });
-
-
-        function waiting_to_open(status, id, difference) {
-            hide_result(id);
-            // deactive_bid(id)
-            // let color = '#162fa2';
-            let color = '#727272';
-            if (difference > 1800) {
-                color = '#727272';
             }
-            let statusText = '<span>Waiting To Open</span>';
 
-            change_market_status(status, color, statusText, id)
-        }
-
-        function ready_to_open(status, id) {
-            close_bid_deposit(id);
-            hide_result(id);
-            // deactive_bid(id);
-            let statusText = '<span>Ready to open</span>';
-            let color = '#162fa2';
-            change_market_status(status, color, statusText, id)
-        }
-
-        function opening(status, id) {
-            hide_result(id);
-            close_bid_deposit(id);
-            active_bid(id);
-            let color = '#1f9402';
-            let statusText = '<span>Opening</span>';
-            change_market_status(status, color, statusText, id)
-        }
-
-        function Quotation_1_2(status, id) {
-            hide_result(id);
-            // remove_function();
-            close_bid_deposit(id);
-            active_bid(id);
-            let color = '#1f9402';
-            let statusText = '<span>Quotation 1/2</span>';
-            change_market_status(status, color, statusText, id)
-        }
-
-        function Quotation_2_2(status, id) {
-            hide_result(id);
-            // remove_function();
-            close_bid_deposit(id);
-            active_bid(id);
-            let color = '#1f9402';
-            let statusText = '<span>Quotation 2/2</span>';
-            change_market_status(status, color, statusText, id)
-        }
-
-        function Competition(status, id) {
-            close_bid_deposit(id);
-            // $('#bid_price-'+id).attr('onkeyup', 'step_price_competition(this,event)');
-            // $('#bid_price-'+id).attr('step', step);
-            // remove_function();
-            Competition_Bid_buttons(id);
-            let color = '#1f9402';
-            let statusText = '<span>Competition</span>';
-            change_market_status(status, color, statusText, id)
-        }
-
-        function Stop(status, id) {
-            close_bid_deposit(id);
-            // remove_function();
-            // deactive_bid(id);
-            let color = '#c20000';
-            let statusText = '<span>Close</span>';
-            change_market_status(status, color, statusText, id);
-        }
-
-        function Close_and_show_result(status, id) {
-            close_bid_deposit(id);
-            // remove_function();
-            // deactive_bid(id);
-            let color = '#c20000';
-            let statusText = '<span>Close</span>';
-            $('#market-difference1-' + id).css({color: color})
-            show_market_result(id);
-            change_market_status(status, color, statusText, id);
-        }
-
-        function close_bid_deposit(id) {
-            $('.bid_deposit_section-' + id).addClass('d-none');
-            $('.bid_deposit_section-' + id).addClass('bg-inactive');
-            $('.bid_deposit_section-' + id).find('input').prop('disabled', true);
-        }
-
-        function change_market_status(status, color, statusText, id) {
-            let animation_main_div = $('#market-time-parent-' + id).find('.animation_main_div');
-            animation_main_div.removeClass('d-none');
-            animation_main_div.addClass('d-none');
-            $('#previous_status-' + id).val(status);
-            $('#market-' + id).css('color', color);
-            $('#status-box-' + id).css('color', color);
-            $('#market-difference1-' + id).css('color', color);
-            $('#market-difference-' + id).css('background', color);
-            $('#market-status-' + id).html(statusText);
-            if (status == 2 || status == 3 || status == 4 || status == 5) {
-                animation_main_div.removeClass('d-none');
-            }
-            sales_offer_buttons(status, id);
-        }
-
-        function sales_offer_buttons(status, id) {
-            // let seller_quantity = $('#seller_quantity-'+id);
-            let seller_price = $('#seller_price-' + id);
-            let seller_button = $('#seller_button-' + id);
-            seller_price.removeClass('btn-success');
-            if (status == 1) {
-                // seller_quantity.prop('disabled', true);
-                seller_price.prop('disabled', true);
-                seller_button.prop('disabled', true);
-            }
-            if (status == 2) {
-                // seller_quantity.prop('disabled', true);
-                seller_price.prop('disabled', true);
-                seller_button.prop('disabled', true);
-            }
-            if (status == 3) {
-                // seller_quantity.prop('disabled', true);
-                seller_price.prop('disabled', true);
-                seller_button.prop('disabled', true);
-            }
-            if (status == 4) {
-                // seller_quantity.prop('disabled', false);
-                seller_price.prop('disabled', true);
-                seller_button.prop('disabled', false);
-            }
-            if (status == 5) {
-                // seller_quantity.prop('disabled', true);
-                seller_price.prop('disabled', false);
-                seller_button.prop('disabled', false);
-                seller_price.addClass('btn-success');
-            }
-            if (status == 6) {
-                // seller_quantity.prop('disabled', true);
-                seller_price.prop('disabled', true);
-                seller_button.prop('disabled', true);
-            }
-            if (status == 7 || status == 8 || status == 9) {
-                // seller_quantity.prop('disabled', true);
-                seller_price.prop('disabled', true);
-                seller_button.prop('disabled', true);
-            }
-        }
-
-        window.Echo.channel('change-sales-offer')
-            .listen('ChangeSaleOffer', function (e) {
-                let market_id = e.market_id;
-                refreshSellerTable(market_id);
-                let msg = 'Seller decreased offer Price';
-                let bg = 'blue';
-                ShowAlert(market_id, msg, bg);
-            });
-        window.Echo.channel('market-setting-updated-channel')
-            .listen('MarketTimeUpdated', function (e) {
-                {{--GetMarket({{ $market->id }}, e.now);--}}
-            });
-        window.Echo.channel('new_bid_created')
-            .listen('NewBidCreated', function (e) {
-                let market_id = e.market_id;
-                let is_delete = e.is_delete;
-                refreshBidTable(market_id);
-                let msg = 'New Bid Created';
-                let bg = 'green';
-                if (is_delete === false) {
+            window.Echo.channel('change-sales-offer')
+                .listen('ChangeSaleOffer', function (e) {
+                    let market_id = e.market_id;
+                    refreshSellerTable(market_id);
+                    let msg = 'Seller decreased offer Price';
+                    let bg = 'blue';
                     ShowAlert(market_id, msg, bg);
-                }
-
-            });
-
-        function show_market_result(id) {
-            $.ajax({
-                url: "{{ route('home.get_market_bit_result') }}",
-                data: {
-                    id: id,
-                },
-                dataType: "json",
-                method: "POST",
-                success: function (msg) {
-                    if (msg[0] == 1) {
-                        let is_winner = msg[2];
-                        if (is_winner == 1) {
-                            show_win_modal(id);
-                        }
-                        $('#final_status_section_table-' + id).html(msg[1]);
-                        $('#final_status_section_table-' + id).show();
-                        $('#final_status_section_table-' + id).removeClass('d-none');
-                        $('#final_status_section-' + id).show();
-                    } else {
-                        console.log('error');
+                });
+            window.Echo.channel('market-setting-updated-channel')
+                .listen('MarketTimeUpdated', function (e) {
+                    {{--GetMarket({{ $market->id }}, e.now);--}}
+                });
+            window.Echo.channel('new_bid_created')
+                .listen('NewBidCreated', function (e) {
+                    let market_id = e.market_id;
+                    let is_delete = e.is_delete;
+                    refreshBidTable(market_id);
+                    let msg = 'New Bid Created';
+                    let bg = 'green';
+                    if (is_delete === false) {
+                        ShowAlert(market_id, msg, bg);
                     }
-                }
-            })
-        }
 
-        function hide_result(market_id) {
-            // $('#final_status_section_table-' + market_id).hide();
-            // $('#final_status_section_table-' + market_id).addClass('d-none');
-            // $('#Winner_Modal').modal('hide');
-        }
+                });
 
-        function show_win_modal(id) {
-            $('#Winner_Modal-' + id).modal('show');
-            $('#Winner_Modal-' + id).removeAttr('id');
-        }
-    </script>
+            function show_market_result(id) {
+                $.ajax({
+                    url: "{{ route('home.get_market_bit_result') }}",
+                    data: {
+                        id: id,
+                    },
+                    dataType: "json",
+                    method: "POST",
+                    success: function (msg) {
+                        if (msg[0] == 1) {
+                            let is_winner = msg[2];
+                            if (is_winner == 1) {
+                                show_win_modal(id);
+                            }
+                            $('#final_status_section_table-' + id).html(msg[1]);
+                            $('#final_status_section_table-' + id).show();
+                            $('#final_status_section_table-' + id).removeClass('d-none');
+                            $('#final_status_section-' + id).show();
+                        } else {
+                            console.log('error');
+                        }
+                    }
+                })
+            }
+
+            function hide_result(market_id) {
+                // $('#final_status_section_table-' + market_id).hide();
+                // $('#final_status_section_table-' + market_id).addClass('d-none');
+                // $('#Winner_Modal').modal('hide');
+            }
+
+            function show_win_modal(id) {
+                $('#Winner_Modal-' + id).modal('show');
+                $('#Winner_Modal-' + id).removeAttr('id');
+            }
+        </script>
     @endif
 @endpush
