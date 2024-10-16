@@ -1,3 +1,15 @@
+@php
+    $role = auth()->user()->Roles[0]->name;
+    if ($role == 'admin' or $role == 'Members') {
+        $side_bar_color = '#1400c6';
+    }
+    if ($role == 'seller' or $role == 'buyer') {
+        $side_bar_color = 'black';
+    }
+    if ($role == 'Representatives' or $role == 'Brokers') {
+        $side_bar_color = '#7f74ff';
+    }
+@endphp
 @extends('admin.layouts.main')
 @section('title', __('Dashboard'))
 @section('content')
