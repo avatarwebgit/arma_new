@@ -100,10 +100,55 @@
         <span class="text-bold text-light-blue ">
                            <a target="_blank"
                               href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$market->SalesForm->specification_file)) }}">
-                            Download
+                            Display
                         </a>
                         </span>
     </div>
+        <div class="d-flex justify-content-between">
+            <span class="text-bold text-gray-100">Definition</span>
+            <span class="text-bold text-light-blue ">
+
+                    <a target="_blank"
+                       href="/menu/29">
+                            Preview
+                        </a>
+
+
+                        </span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <span class="text-bold text-gray-100">Bid Instruction</span>
+            <span class="text-bold text-light-blue ">
+{{--                           @if($bid_use=='Link')--}}
+{{--                    <a target="_blank"--}}
+{{--                       href="{{ $Bid_Instructions_link }}">--}}
+{{--                            Preview--}}
+{{--                        </a>--}}
+{{--                @else--}}
+{{--                    <a target="_blank"--}}
+{{--                       href="{{ imageExist(env('UPLOAD_SETTING'),$Bid_Instructions_file) }}">--}}
+{{--                            Preview--}}
+{{--                        </a>--}}
+{{--                @endif--}}
+                <a target="_blank"
+                   href="/menu/13">
+                            Preview
+                        </a>
+                        </span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span class="text-bold text-gray-100">Transaction Regulation</span>
+            <span class="text-bold text-light-blue ">
+
+                    <a target="_blank"
+                       href="/menu/30">
+                            Preview
+                        </a>
+
+
+                        </span>
+        </div>
 
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">GTC</span>
@@ -122,21 +167,6 @@
 
                         </span>
     </div>
-    <div class="d-flex justify-content-between">
-        <span class="text-bold text-gray-100">Bid Instruction</span>
-        <span class="text-bold text-light-blue ">
-                           @if($bid_use=='Link')
-                <a target="_blank"
-                   href="{{ $Bid_Instructions_link }}">
-                            Read
-                        </a>
-            @else
-                <a target="_blank"
-                   href="{{ imageExist(env('UPLOAD_SETTING'),$Bid_Instructions_file) }}">
-                            Read
-                        </a>
-            @endif
-                        </span>
-    </div>
+
 </div>
 
