@@ -59,9 +59,7 @@
             </div>
             <!-- <i data-feather="menu"></i> -->
         </a>
-        <a href="#!" class="dash-head-link" id="header-collapse">
-            <i data-feather="more-vertical"></i>
-        </a>
+
     </div>
 </div>
 
