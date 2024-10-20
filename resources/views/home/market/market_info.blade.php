@@ -55,7 +55,7 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Payment</span>
         <span class="text-bold text-light-blue ">
-                            {{ $market->SalesForm->payment_options }}
+                            {{ ucwords($market->SalesForm->payment_options) }}
                         </span>
     </div>
     <div class="d-flex justify-content-between">
