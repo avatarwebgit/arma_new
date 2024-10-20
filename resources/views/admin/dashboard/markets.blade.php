@@ -14,13 +14,14 @@
                             </span>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button style="width: 150px;margin-right: 20px" onclick="createMarketModal()" class="btn btn-primary btn-sm">
+                    <button style="width: 150px;margin-right: 20px" onclick="createMarketModal()"
+                            class="btn btn-primary btn-sm">
                         <span class="dash-micon"><i class="fas fa-plus"></i></span>
                         Create
                     </button>
                     <a style="width: 150px" href="{{ route('admin.markets.settings') }}" class="btn btn-success">
                         <span class="dash-micon"><i class="fas fa-cog"></i></span>
-                         Setting
+                        Setting
                     </a>
                 </div>
             </div>
@@ -29,7 +30,9 @@
 
                 <div class="d-flex align-items-center mb-6">
                     <div class="d-flex align-items-center flex-wrap w-100">
-                        @include('admin.markets.table')
+                        <div class="col-md-12">
+                            @include('admin.markets.folder_items')
+                        </div>
                     </div>
                 </div>
 
