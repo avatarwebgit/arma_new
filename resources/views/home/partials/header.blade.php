@@ -33,6 +33,7 @@
                             </a>
                         </li>
                     @else
+                        @if(count($menu->children)>0)
                         <li class="nav-item dropdown d-flex align-items-center mr-3">
                             <a class="nav-link dropdown-toggle" href="{{ route('home.menus',['menus'=>$menu->id]) }}"
                                data-toggle="dropdown"
@@ -40,7 +41,6 @@
                                aria-expanded="false">
                                 {{ $menu->title }}
                             </a>
-                            @if(count($menu->children)>0)
                                 <div class="dropdown-menu">
                                     @foreach($menu->children()->orderby('priority','asc')->where('show_on_header',1)->get() as $child)
                                         <a class='dropdown-item' href='{{ route('home.menus',['menus'=>$child->id]) }}'>
@@ -48,8 +48,16 @@
                                         </a>
                                     @endforeach
                                 </div>
-                            @endif
                         </li>
+                        @else
+                            <li class="nav-item d-flex align-items-center">
+                                <a class="nav-link" href="{{ route('home.menus',['menus'=>$menu->id]) }}"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    {{ $menu->title }}
+                                </a>
+                            </li>
+                        @endif
                     @endif
 
                 @endforeach
