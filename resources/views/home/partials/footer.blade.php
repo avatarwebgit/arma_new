@@ -25,7 +25,7 @@
                         </a>
                     </h3>
                     <ul>
-                        @foreach($menu->children()->where('show_on_footer',1)->get() as $child)
+                        @foreach($menu->children()->orderby('priority','asc')->where('show_on_footer',1)->get() as $child)
                             <li class="mb-2"><a
                                     @if($menu->id==2)
                                         href="#"

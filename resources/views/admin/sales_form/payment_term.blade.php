@@ -2,6 +2,7 @@
     <hr>
     <strong>
         Payment Term
+        <span class="text-danger">*</span>
     </strong>
 </div>
 
