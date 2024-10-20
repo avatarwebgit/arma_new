@@ -9,7 +9,9 @@
         <th>Market Value</th>
         <th>Bidder</th>
         <th>status</th>
+        @unless(request()->is('admin-panel/management/dashboard'))
         <th></th>
+        @endunless
     </tr>
     </thead>
     <tbody>
@@ -79,53 +81,56 @@
                 {{ $status_text }}
             </td>
 
-            <td>
-                <div class="d-flex justify-content-end">
-                    @if($show_btn==1)
-                        <a href="{{ route('sale_form.preparation',['item'=>$item->SalesForm->id,'folder'=>$item->date]) }}"
-                           class="btn btn-sm btn-warning text-white mr-1">
-                            <i class="fa fa-pen"></i>
-                            Edit
-                        </a>
+            @unless(request()->is('admin-panel/management/dashboard'))
+                <td>
+                    <div class="d-flex justify-content-end">
+                        @if($show_btn==1)
+                            <a href="{{ route('sale_form.preparation',['item'=>$item->SalesForm->id,'folder'=>$item->date]) }}"
+                               class="btn btn-sm btn-warning text-white mr-1">
+                                <i class="fa fa-pen"></i>
+                                Edit
+                            </a>
 
-                        <a title="Edit Market"
-                           href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
-                           class="btn btn-sm btn-info ml-2">
-                            <i class="fa fa-pen"></i>
-                            Market
-                        </a>
-                        <a title="Bidder"
-                           href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
-                           class="btn btn-sm btn-success ml-2">
-                            <i class="fa fa-plus"></i>
-                            Bidder
-                        </a>
-                        {{--                                                        <button type="button" title="Copy Market"--}}
-                        {{--                                                                onclick="copyMarket({{ $item->id }},this)"--}}
-                        {{--                                                                class="btn btn-sm btn-secondary">--}}
-                        {{--                                                            <div class="loader d-none"></div>--}}
-                        {{--                                                            <span>--}}
-                        {{--                                                                Copy--}}
-                        {{--                                                            </span>--}}
-                        {{--                                                        </button>--}}
+                            <a title="Edit Market"
+                               href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
+                               class="btn btn-sm btn-info ml-2">
+                                <i class="fa fa-pen"></i>
+                                Market
+                            </a>
+                            <a title="Bidder"
+                               href="{{ route('sale_form.permission',['item'=>$item->id]) }}"
+                               class="btn btn-sm btn-success ml-2">
+                                <i class="fa fa-plus"></i>
+                                Bidder
+                            </a>
+                            {{--                                                        <button type="button" title="Copy Market"--}}
+                            {{--                                                                onclick="copyMarket({{ $item->id }},this)"--}}
+                            {{--                                                                class="btn btn-sm btn-secondary">--}}
+                            {{--                                                            <div class="loader d-none"></div>--}}
+                            {{--                                                            <span>--}}
+                            {{--                                                                Copy--}}
+                            {{--                                                            </span>--}}
+                            {{--                                                        </button>--}}
 
-                        {!! Form::open([
-'method' => 'POST',
-'route' => ['admin.market.remove'],
-'class' => 'd-inline',
-]) !!}
-                        <a href="#"
-                           class="btn btn-sm small btn-danger show_confirm ml-2"
-                           id="delete-form-{{ $item->id }}"
-                           data-bs-toggle="tooltip" data-bs-placement="bottom"
-                           title=""
-                           data-bs-original-title="{{ __('Delete') }}"><i
-                                class="ti ti-trash mr-1"></i></a>
-                        <input type="hidden" name="id" value="{{ $item->id }}">
-                        {!! Form::close() !!}
-                    @endif
-                </div>
-            </td>
+                            {!! Form::open([
+    'method' => 'POST',
+    'route' => ['admin.market.remove'],
+    'class' => 'd-inline',
+    ]) !!}
+                            <a href="#"
+                               class="btn btn-sm small btn-danger show_confirm ml-2"
+                               id="delete-form-{{ $item->id }}"
+                               data-bs-toggle="tooltip" data-bs-placement="bottom"
+                               title=""
+                               data-bs-original-title="{{ __('Delete') }}"><i
+                                    class="ti ti-trash mr-1"></i></a>
+                            <input type="hidden" name="id" value="{{ $item->id }}">
+                            {!! Form::close() !!}
+                        @endif
+                    </div>
+                </td>
+            @endunless
+
 
         </tr>
     @endforeach
