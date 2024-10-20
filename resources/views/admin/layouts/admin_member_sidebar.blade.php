@@ -365,7 +365,7 @@
     </li>
 @endcan
 
-@if($role == 'admin')
+@if($role == 'admin' or $role == 'Members')
     <!-- Settings Section -->
     <li class="dash-item dash-hasmenu {{ request()->is('admin-panel/management/settings*') ? 'active' : '' }}">
         <a href="#!" class="dash-link">

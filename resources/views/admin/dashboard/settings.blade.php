@@ -179,7 +179,7 @@
 {{--    </div>--}}
 
 <div class="col-xl-4">
-    @if($role == 'admin')
+    @if($role == 'admin' or $role == 'Members')
         @can('Settings-Setting')
             <div class="row g-0">
                 <div class="col d-flex flex-column bg-light-warning px-6 py-8 rounded-2 me-7 mb-7 mr10">

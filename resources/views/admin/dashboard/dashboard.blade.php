@@ -19,9 +19,9 @@
             @include('admin.dashboard.markets')
         @endcan
 
-        @canany(['Settings-Setting','Line-1','Line-2'])
+{{--        @canany(['Settings-Setting','Line-1','Line-2'])--}}
             @include('admin.dashboard.settings')
-        @endcanany
+{{--        @endcanany--}}
 
 
         @include('admin.dashboard.market_chart')
