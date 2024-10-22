@@ -222,7 +222,7 @@
                             <label class="custom-control-label" for="accept_term">
                                 I accept the
                                 <span style="color: #7a7aff" onclick="ShowTermConditionModal()">
-                                    Term and Conditions
+                                    Terms and Conditions
                                 </span>
                             </label>
                             <p id="accept_term_error" class="error-message ">
