@@ -1,8 +1,8 @@
-<footer  class="landing-footer-two mt-3">
+<footer class="landing-footer-two mt-3">
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-5">
-                <form method="post" action="{{route('join.news')}}" >
+                <form method="post" action="{{route('join.news')}}">
                     @csrf
                     @method('POST')
                     <div class="input-group">
@@ -20,17 +20,23 @@
             @foreach($menus as $menu)
                 <div class="col-6 col-md-2">
                     <h3 class="mb-3 fw-bold">
-                        <a class="text-white" >
+                        <a class="text-white">
                             {{ $menu->title }}
                         </a>
                     </h3>
                     <ul>
                         @foreach($menu->children()->orderby('priority','asc')->where('show_on_footer',1)->get() as $child)
-                            <li class="mb-2"><a
-                                        href="{{ route('home.menus',['menus'=>$child->id]) }}"
-                                >
-                                    {{ $child->title }}
-                                </a></li>
+                            <li class="mb-2">
+                                @if($menu->id==2)
+                                    <span>
+                                           {{ $child->title }}
+                                       </span>
+                                @else
+                                    <a href="{{ route('home.menus',['menus'=>$child->id]) }}">
+                                        {{ $child->title }}
+                                    </a>
+                                @endif
+                            </li>
                         @endforeach
                     </ul>
                 </div>
@@ -41,8 +47,10 @@
                 </h3>
                 <ul class="social-icon" style="justify-content: flex-start !important;">
                     {{--                    <li class="icon-social-media"><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>--}}
-                    <li class="icon-social-media mr-2"><a href="{{ $twitter }}"><i class="icon ion-logo-twitter"></i></a></li>
-                    <li class="icon-social-media"><a href="{{ $linkedin }}"><i class="icon ion-logo-linkedin"></i></a></li>
+                    <li class="icon-social-media mr-2"><a href="{{ $twitter }}"><i
+                                class="icon ion-logo-twitter"></i></a></li>
+                    <li class="icon-social-media"><a href="{{ $linkedin }}"><i class="icon ion-logo-linkedin"></i></a>
+                    </li>
                 </ul>
             </div>
             <div class="row mb-2">
