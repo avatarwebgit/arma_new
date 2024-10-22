@@ -209,6 +209,11 @@
             setTimeout(function () {
                 GetMarkets();
             }, 3000);
+            @if(!isset($is_logged_in))
+            @php
+                $is_logged_in=0;
+            @endphp
+            @endif
             let is_logged_in = "{{ $is_logged_in }}";
             if (is_logged_in == 1) {
                 $('#Login_two_device').modal('show');
