@@ -27,12 +27,7 @@
                     <ul>
                         @foreach($menu->children()->orderby('priority','asc')->where('show_on_footer',1)->get() as $child)
                             <li class="mb-2"><a
-                                    @if($menu->id==2)
-                                        href="#"
-                                    @else
                                         href="{{ route('home.menus',['menus'=>$child->id]) }}"
-                                    @endif
-
                                 >
                                     {{ $child->title }}
                                 </a></li>
