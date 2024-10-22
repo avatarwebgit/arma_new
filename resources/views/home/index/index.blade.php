@@ -62,6 +62,11 @@
             });
 
         document.addEventListener('DOMContentLoaded', function () {
+            @if(!isset($market_open_finished_modal_exists))
+            @php
+                $market_open_finished_modal_exists=false;
+            @endphp
+            @endif
 
             let market_open_finished_modal_exists = {{ $market_open_finished_modal_exists }};
             if (market_open_finished_modal_exists) {
@@ -313,10 +318,12 @@
         .navbar {
             background-color: #f2f2f2 !important;
         }
+
         .ion-logo-twitter::before {
             content: "x" !important;
             font-size: 32px;
         }
+
         html {
             -webkit-overflow-scrolling: auto !important;
         }
@@ -387,10 +394,11 @@
         .timer_index > .column > div {
             width: 30px !important;
         }
-        .modal-backdrop{
-            background-color:rgba(0,0,0,.7);
 
-            backdrop-filter:blur(7px)
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, .7);
+
+            backdrop-filter: blur(7px)
         }
     </style>
 @endsection
@@ -551,25 +559,25 @@
     <!-- Button trigger modal -->
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="AlertModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content auth-form">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Thanks for your registration
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" style="color: white !important;">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        We Will Contact You Soon
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="AlertModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content auth-form">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Thanks for your registration
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: white !important;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    We Will Contact You Soon
                 </div>
             </div>
         </div>
+    </div>
 
 
     @if($market_open_finished_modal_exists)
