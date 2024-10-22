@@ -147,7 +147,7 @@
 
     function SubmitRegisterModal(tag) {
         $(tag).prop('disabled', true);
-        $('.error-message').addClass('d-none');
+        $('.error-message').text('');
         let company_name = $('#company_name').val();
         //user type or company type
         let user_type = $('#user_type').val();
