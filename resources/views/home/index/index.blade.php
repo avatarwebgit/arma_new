@@ -253,7 +253,9 @@
             })
         }
         @if(!isset($show_modal))
+            @php
             $show_modal=false;
+            @endphp
         @endif
         @if($show_modal==true)
         $(document).ready(function () {
