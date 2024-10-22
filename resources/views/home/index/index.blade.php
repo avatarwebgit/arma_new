@@ -252,7 +252,9 @@
                 }
             })
         }
-
+        @if(!isset($show_modal))
+            $show_modal=false;
+        @endif
         @if($show_modal==true)
         $(document).ready(function () {
             let show_modal = {{ $show_modal }};
