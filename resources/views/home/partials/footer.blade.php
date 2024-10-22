@@ -28,7 +28,7 @@
                         @foreach($menu->children()->orderby('priority','asc')->where('show_on_footer',1)->get() as $child)
                             <li class="mb-2">
                                 @if($menu->id==2)
-                                    <span>
+                                    <span style="color: white">
                                            {{ $child->title }}
                                        </span>
                                 @else
