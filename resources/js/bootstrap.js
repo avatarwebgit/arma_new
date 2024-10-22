@@ -41,15 +41,9 @@ window.Pusher = Pusher;
 
 
 window.Echo = new Echo({
-<<<<<<< HEAD
     broadcaster: "pusher",
     key: "6c392d7dedc163e3cd4a",
     wsHost: 'ws.armaitimex.com',
-=======
-    broadcaster: 'pusher',
-    key: import.meta.env.MIX_PUSHER_APP_KEY,
-    wsHost: import.meta.env.PUSHER_HOST,
->>>>>>> c4d8bc7dd171fc955a7955c2e27a08d93c3a1e31
     wsPort: 6001,
     disableStats: true,
     forceTLS: true,
