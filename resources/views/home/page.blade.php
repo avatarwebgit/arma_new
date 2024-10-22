@@ -1,5 +1,9 @@
 @extends('home.homelayout.app')
 
+@section('title')
+    {{ $page->title }}
+@endsection
+
 @section('style')
     <style>
         td, th {

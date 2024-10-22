@@ -6,9 +6,7 @@
     <meta name="keywords" content="@section('meta_keywords'){{ $meta_keywords }}@show">
     <meta name="robots" content="{{ $robot_index==0 ? 'noindex,nofollow' : 'index,follow' }}"/>
     <title>
-        @section('title')
-            {{ $title }}
-        @show
+        @yield('title')
     </title>
     <link rel="icon" href="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('home/css/style.css') }}">

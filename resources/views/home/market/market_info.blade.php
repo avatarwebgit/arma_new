@@ -153,18 +153,21 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">GTC</span>
         <span class="text-bold text-light-blue ">
-            @if($gtc_use=='Link')
-                <a target="_blank"
-                   href="{{ $gtc_Link }}">
-                            Read
+{{--            @if($gtc_use=='Link')--}}
+{{--                <a target="_blank"--}}
+{{--                   href="{{ $gtc_Link }}">--}}
+{{--                            Read--}}
+{{--                        </a>--}}
+{{--            @else--}}
+{{--                <a target="_blank"--}}
+{{--                   href="{{ imageExist(env('UPLOAD_SETTING'),$gtc_file) }}">--}}
+{{--                            Read--}}
+{{--                        </a>--}}
+{{--            @endif--}}
+<a target="_blank"
+   href="/menu/32">
+                            Preview
                         </a>
-            @else
-                <a target="_blank"
-                   href="{{ imageExist(env('UPLOAD_SETTING'),$gtc_file) }}">
-                            Read
-                        </a>
-            @endif
-
                         </span>
     </div>
 
