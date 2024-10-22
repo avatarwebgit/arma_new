@@ -1,0 +1,1188 @@
+[2024-10-22 09:19:47] local.ERROR: Attempt to read property "title" on null {"view":{"view":"/var/www/arma_new/resources/views/home/page.blade.php","data":[]},"userId":156,"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): Attempt to read property \"title\" on null at /var/www/arma_new/resources/views/home/page.blade.php:4)
+[stacktrace]
+#0 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(270): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /var/www/arma_new/resources/views/home/page.blade.php(4): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#2 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(109): require('...')
+#3 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire()
+#5 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath()
+#6 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get()
+#7 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(178): Illuminate\\View\\View->getContents()
+#8 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(147): Illuminate\\View\\View->renderContents()
+#9 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Http/Response.php(69): Illuminate\\View\\View->render()
+#10 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent()
+#11 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\\Http\\Response->__construct()
+#12 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(875): Illuminate\\Routing\\Router::toResponse()
+#13 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Routing\\Router->prepareResponse()
+#14 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}()
+#15 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#16 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#17 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#18 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#19 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#20 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#21 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#23 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle()
+#24 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#25 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#26 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#27 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#28 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#29 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Pipeline\\Pipeline->then()
+#30 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(776): Illuminate\\Routing\\Router->runRouteWithinStack()
+#31 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(740): Illuminate\\Routing\\Router->runRoute()
+#32 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(729): Illuminate\\Routing\\Router->dispatchToRoute()
+#33 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(190): Illuminate\\Routing\\Router->dispatch()
+#34 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}()
+#35 /var/www/arma_new/vendor/statikbe/laravel-cookie-consent/src/CookieConsentMiddleware.php(13): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#36 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Statikbe\\CookieConsent\\CookieConsentMiddleware->handle()
+#37 /var/www/arma_new/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#38 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Fideloper\\Proxy\\TrustProxies->handle()
+#39 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#41 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#42 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#43 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#44 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#45 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#46 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#47 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#48 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#49 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#50 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(165): Illuminate\\Pipeline\\Pipeline->then()
+#51 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#52 /var/www/arma_new/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
+#53 {main}
+
+[previous exception] [object] (ErrorException(code: 0): Attempt to read property \"title\" on null at /var/www/arma_new/storage/framework/views/a06c4a896f70edd123defb6071901a23acab5296.php:2)
+[stacktrace]
+#0 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(270): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /var/www/arma_new/storage/framework/views/a06c4a896f70edd123defb6071901a23acab5296.php(2): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#2 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(109): require('...')
+#3 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire()
+#5 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath()
+#6 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get()
+#7 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(178): Illuminate\\View\\View->getContents()
+#8 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(147): Illuminate\\View\\View->renderContents()
+#9 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Http/Response.php(69): Illuminate\\View\\View->render()
+#10 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent()
+#11 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\\Http\\Response->__construct()
+#12 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(875): Illuminate\\Routing\\Router::toResponse()
+#13 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Routing\\Router->prepareResponse()
+#14 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}()
+#15 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#16 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#17 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#18 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#19 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#20 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#21 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#23 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle()
+#24 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#25 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#26 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#27 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#28 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#29 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Pipeline\\Pipeline->then()
+#30 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(776): Illuminate\\Routing\\Router->runRouteWithinStack()
+#31 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(740): Illuminate\\Routing\\Router->runRoute()
+#32 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(729): Illuminate\\Routing\\Router->dispatchToRoute()
+#33 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(190): Illuminate\\Routing\\Router->dispatch()
+#34 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}()
+#35 /var/www/arma_new/vendor/statikbe/laravel-cookie-consent/src/CookieConsentMiddleware.php(13): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#36 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Statikbe\\CookieConsent\\CookieConsentMiddleware->handle()
+#37 /var/www/arma_new/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#38 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Fideloper\\Proxy\\TrustProxies->handle()
+#39 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#41 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#42 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#43 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#44 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#45 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#46 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#47 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#48 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#49 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#50 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(165): Illuminate\\Pipeline\\Pipeline->then()
+#51 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#52 /var/www/arma_new/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
+#53 {main}
+"} 
+[2024-10-22 09:20:27] local.ERROR: Attempt to read property "title" on null {"view":{"view":"/var/www/arma_new/resources/views/home/page.blade.php","data":[]},"userId":156,"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): Attempt to read property \"title\" on null at /var/www/arma_new/resources/views/home/page.blade.php:4)
+[stacktrace]
+#0 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(270): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /var/www/arma_new/resources/views/home/page.blade.php(4): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#2 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(109): require('...')
+#3 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire()
+#5 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath()
+#6 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get()
+#7 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(178): Illuminate\\View\\View->getContents()
+#8 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(147): Illuminate\\View\\View->renderContents()
+#9 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Http/Response.php(69): Illuminate\\View\\View->render()
+#10 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent()
+#11 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\\Http\\Response->__construct()
+#12 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(875): Illuminate\\Routing\\Router::toResponse()
+#13 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Routing\\Router->prepareResponse()
+#14 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}()
+#15 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#16 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#17 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#18 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#19 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#20 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#21 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#23 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle()
+#24 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#25 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#26 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#27 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#28 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#29 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Pipeline\\Pipeline->then()
+#30 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(776): Illuminate\\Routing\\Router->runRouteWithinStack()
+#31 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(740): Illuminate\\Routing\\Router->runRoute()
+#32 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(729): Illuminate\\Routing\\Router->dispatchToRoute()
+#33 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(190): Illuminate\\Routing\\Router->dispatch()
+#34 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}()
+#35 /var/www/arma_new/vendor/statikbe/laravel-cookie-consent/src/CookieConsentMiddleware.php(13): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#36 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Statikbe\\CookieConsent\\CookieConsentMiddleware->handle()
+#37 /var/www/arma_new/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#38 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Fideloper\\Proxy\\TrustProxies->handle()
+#39 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#41 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#42 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#43 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#44 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#45 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#46 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#47 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#48 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#49 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#50 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(165): Illuminate\\Pipeline\\Pipeline->then()
+#51 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#52 /var/www/arma_new/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
+#53 {main}
+
+[previous exception] [object] (ErrorException(code: 0): Attempt to read property \"title\" on null at /var/www/arma_new/storage/framework/views/a06c4a896f70edd123defb6071901a23acab5296.php:2)
+[stacktrace]
+#0 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(270): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /var/www/arma_new/storage/framework/views/a06c4a896f70edd123defb6071901a23acab5296.php(2): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#2 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(109): require('...')
+#3 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire()
+#5 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath()
+#6 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get()
+#7 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(178): Illuminate\\View\\View->getContents()
+#8 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/View.php(147): Illuminate\\View\\View->renderContents()
+#9 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Http/Response.php(69): Illuminate\\View\\View->render()
+#10 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent()
+#11 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\\Http\\Response->__construct()
+#12 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(875): Illuminate\\Routing\\Router::toResponse()
+#13 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Routing\\Router->prepareResponse()
+#14 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}()
+#15 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#16 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#17 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#18 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#19 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#20 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#21 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#23 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle()
+#24 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#25 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#26 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#27 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#28 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#29 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Pipeline\\Pipeline->then()
+#30 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(776): Illuminate\\Routing\\Router->runRouteWithinStack()
+#31 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(740): Illuminate\\Routing\\Router->runRoute()
+#32 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(729): Illuminate\\Routing\\Router->dispatchToRoute()
+#33 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(190): Illuminate\\Routing\\Router->dispatch()
+#34 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}()
+#35 /var/www/arma_new/vendor/statikbe/laravel-cookie-consent/src/CookieConsentMiddleware.php(13): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#36 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Statikbe\\CookieConsent\\CookieConsentMiddleware->handle()
+#37 /var/www/arma_new/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#38 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Fideloper\\Proxy\\TrustProxies->handle()
+#39 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#41 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#42 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#43 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#44 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#45 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#46 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#47 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#48 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#49 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#50 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(165): Illuminate\\Pipeline\\Pipeline->then()
+#51 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#52 /var/www/arma_new/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
+#53 {main}
+"} 
+[2024-10-22 09:51:01] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'title' cannot be null (SQL: update `pages` set `title` = ?, `description` = <p style="text-align:center"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:28.0pt"><span style="color:#0070c0">General Terms and Conditions</span></span></span></span></p>
+
+<p style="text-align:center"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:28.0pt"><span style="color:#0070c0">(GTC)</span></span></span></span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><a name="_Hlk149708958"><span style="font-size:12.0pt">For sales and purchase of petroleum, petrochemical, mineral and metal products </span></a><span style="font-size:12.0pt">in addition to the terms and conditions</span> <span style="font-size:12.0pt">agreed in writing elsewhere between the seller and the buyer in particular the pro-forma invoice (PI), which are binding and effective between the parties, the following terms and conditions apply to the parties&rsquo; relationship unless otherwise agreed between the parties in the PI. By signing the PI, the parties are considered to have agreed with this GTC which are incorporated by reference in the parties&rsquo; agreement. The GTC and PI, will be collectively referred to as the &ldquo;Contract&rdquo;. </span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">1.Parties</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">- Seller</span></strong><span style="font-size:12.0pt"> is <a name="_Hlk155401029">a person</a>/ company that is verified by <a name="_Hlk148847433">the Armaiti MEX.</a></span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">- <strong>Buyer</strong> is a person/ company that is verified by the Armaiti MEX.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">- <strong>Armaiti MEX</strong></span><strong> </strong><span style="font-size:12.0pt">is </span><span style="font-size:12.0pt">a platform driven trading events for sales and purchase through which operations related to transactions are done.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Details of the parties will be determined in the PI. The physical transaction after trading session with the&nbsp;supervision&nbsp;of the Armaiti MEX will be executed by the</span> <span style="font-size:12.0pt">registered seller and buyer, unless otherwise agreed.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">2. <a name="_Hlk156261501">commodity</a></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Commodity is the good named in the Sales Notice and must be the same in the PI. <span style="color:black">In case of the discrepancies between the name of the commodities<strong> </strong>in the</span> <span style="color:black">Sales Notice, the PI and other documents, the reference of Sales Notice shall prevail.</span></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">3.Quality </span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The sole specifications of quality guaranteed by the seller is as expressly provided in the Sales Notice and the PI. In case of discrepancies all costs and losses shall be on seller. Expect as expressly provided, the seller provides no representations, guarantees or warranties expressed or implied with respect to merchantability, fitness, suitability of the commodity for any particular purpose or otherwise beyond the scope of the guaranteed specifications contained in the Sales Notice and the PI.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">4.Quantity </span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The quantity of the commodity and its tolerance is as specified in the Sales Notice and the PI, unless otherwise agreed.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">5. Inspection</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Inspection means determination of the quantities and qualities of the commodity and taking analysis of samples for the purpose of determination of compliance of the quality and quantity of the commodity with those specified in the Sales Notice and the PI. Commodity inspection services will be determined in the <a name="_Hlk156265062">Sales Notice </a>and any<strong> </strong>complaints to quality and quantity of the commodity must be submitted to the Armaiti MEX in writing&nbsp;no later than ten (10) calendar days from the date of delivery.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">5. Origin</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The origin of the commodity will be determined in the Sales Notice and the PI. The buyer is fully aware and knowledgeable of the origin of the cargo. </span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">6. Destination</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The destination of the commodity is as provided in the Sales Notice and the PI. The commodities shall not be imported directly or indirectly to excluded countries or any other destinations beyond the Sales Notice and the PI. The Buyer shall be solely responsible to comply with the regulations of the destination market.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">7.Delivery</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Terms of delivery is agreed on the <a name="_Hlk156265323">Sales Notice </a>and the PI based on incoterms. </span></span><span style="font-size:12.0pt">Dates of delivery will be determined in the Sales Notice and the PI. All Liabilities, Fulfilment of Custom Obligations, Timely Arrangement for Pilotage, Compliance with Local Ports Regulation and Quarantines, Lockdown,</span> <span style="font-size:12.0pt">Limitations and Instruction for Discharging shall be <a name="_Hlk156265245">on the parties&rsquo; agreement </a>based on incoterms.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The risk of loss or damage to the commodities passes from the seller to the buyer based on Incoterms&nbsp;rules.&nbsp;&nbsp;<a name="_Hlk156167972">Incoterms&nbsp;rules </a>specify when risk for the commodities passes from seller to buyer. The seller bears all risks involved in bringing the commodities to the named place of destination or&nbsp;to the agreed point within that place.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">9. Demurrage and Dispatch</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Rate of demurrage will be determined in the Sales Notice based on incoterms and the PI, otherwise it shall be on the parties&rsquo; agreement</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">10. Exchange Rates</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The exchange rate will be determined in the Sales Notice, <a name="_Hlk155215830">unless otherwise agreed.</a></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">11. Payment Term</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Terms of payment shall be in accordance with the <a name="_Hlk148477311">Sales Notice and the PI</a>. The payments shall be made in accordance with the agreement terms.&nbsp; Expect as agreed between the parties, payments shall be made on the date to the seller or its nominated bank account without any discount, deductions, offset, withholding or counterclaim on the same day of the payment due date as agreed by the parties. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">12.Governing Law</span></strong></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">This Contract and any dispute or claim arising out of or in connection with it or its subject matter or formation shall be construed, governed and interpreted in accordance with the UK law.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">13.Arbitration</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Any dispute in respect of validity, interpretation, application and execution of the Contract if not settled by amicable negotiations, shall be referred to and finally resolved either in accordance with the latest edition of the UNCITRAL Arbitration Rules. The language of arbitration will be in English. The arbitral award shall be final and binding upon the parties.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">14.Force Major</span></span></strong> </span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Neither buyer nor seller will be liable for damages or otherwise for any failure or delay in performance of any obligation hereunder other than any obligation to make payment, where such failure or delay is caused by force majeure, being any event or occurrence or circumstance reasonably beyond the control of that party, including but without prejudice to the generality of the foregoing, failure or delay caused by or resulting from acts of God, disruption, breakdown or shut down of production or transportation facilities, equipment, closing of harbors and pipelines, inability to obtain fuel, power, raw material and labor, breakdown of loading and receiving facilities or plants, feedstock and technical problems, strikes, labor or trade dispute or other industrial action, fires, floods, drought, wars (whether declared</span></span> <span style="font-size:12.0pt"><span style="color:black">or undeclared, civil commotion,</span></span> <span style="font-size:12.0pt"><span style="color:black">armed conflict,</span></span> <span style="font-size:12.0pt"><span style="color:black">terrorist attack,</span></span> <span style="font-size:12.0pt"><span style="color:black">epidemics,</span></span> <span style="font-size:12.0pt"><span style="color:black">including measures,</span></span> <span style="font-size:12.0pt"><span style="color:black">without riots,</span></span> <span style="font-size:12.0pt"><span style="color:black">limitation perils of any associated quarantine or other the sea,</span></span> <span style="font-size:12.0pt"><span style="color:black">embargoes,</span></span> <span style="font-size:12.0pt"><span style="color:black">accidents,</span></span> <span style="font-size:12.0pt"><span style="color:black">acts,</span></span> <span style="font-size:12.0pt"><span style="color:black">orders or restrictions imposed by any government authority or person purporting to act therefore (including allocations, priorities, requisitions, prohibitions, quotas and price controls or failing to grant necessary consents or licenses)(each a &ldquo;force majeure event&rdquo;).&nbsp; The party whose performance is so affected shall notify the other party hereto as soon as reasonably practicable indicating the nature of such force majeure event and, to the extent possible, inform the other party of the expected duration of the force majeure event.&nbsp; </span></span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The parties&rsquo; respective obligations under the agreement shall be suspended and the time for buyer and seller to perform their obligations shall be extended to the extent possible, during any period which these obligations are prevented, hindered, curtailed or delayed by reason of any force majeure event. If any of these obligations shall be prevented, hindered, curtailed or delayed for more than <span style="color:black">30</span> consecutive days, either party may terminate this agreement with respect to such delivery upon written notice to the other party, without prejudice to any rights and obligations of the parties which have accrued prior to the force majeure event.&nbsp; </span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">15. Confidentiality</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Both Seller and Buyer shall keep and maintain, and shall cause its officers, employees, agents and contractors to keep and maintain, the confidentiality of all information relating to the price, quantity and type of commodity purchased or sold under the Contract, and shall not disclose any information to any third party except to the extent necessary to perform its obligations under the contract, and except that neither party shall have any obligation of confidentiality with respect to information that (a) is generally available to the public, (b) is or becomes known to such party through sources not bound by any obligation of confidentiality, (c) is required to be disclosed under applicable law, or (d) as may be required to by a party to enforce its rights under</span></span> <span style="font-size:12.0pt"><span style="color:black">the Contract. The confidentiality obligations contained in this agreement shall survive the termination or expiry of this agreement as the cooperation is continued.</span></span> </span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">16. Assignment</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">All covenants and agreements contained in the Contract by or on behalf of the buyer or seller will bind and inure to the respective successors and assigns of the parties hereto; provided, however, that neither party may assign the Contract, in whole or in part, without the prior written consent of the other party, which consent shall not be unreasonably withheld.</span></span> </span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">17. Anti-corruption</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The parties to this agreement each agree and undertake to the other that in connection with this agreement, they will each respectively comply with and act in a manner consistent with all applicable laws, rules, regulations, decrees and/or official government orders of the UK and European union, or other jurisdiction applicable to the parties relating to anti-bribery and anti-money laundering. If one party reasonably believes that the other party is in breach of, or is likely to breach, its obligations under this clause, the non-breaching party may terminate this agreement forthwith upon written notice (supported by reasonable evidence) to the other party without prejudice to the non-breaching party&rsquo;s rights under this agreement or generally.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">18. Limitation of liability</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Each party&rsquo;s exclusive remedy against the other for any claim of any kind for any loss or damage arising out of or in any way relating to the Contract (whether in contract, tort, strict liability or otherwise) shall be for actual money damages and not for injunctive or other relief (whether at law or in equity).&nbsp; Notwithstanding any other provision of this agreement, neither party shall be liable to the other whether under this agreement or otherwise in connection with it, whether in contract, tort (including in negligence), breach of statutory duty or otherwise (whether or not foreseeable and howsoever arising) in respect of (a) any indirect or consequential losses or expenses; and (b) to the extent not constituting indirect or consequential losses or expenses, any loss of anticipated profits, refinery or plant shut-down or reduced production, goodwill, use, market reputation, business receipts or contracts or commercial opportunities.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">19. Notices</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">All communications and any notices for any purpose and of whatsoever nature shall be deemed to have been properly served when delivered by email which is mentioned in the PI. Either party that modifies the email shall forthwith notify the other party thereof by giving a notice.</span> </span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">20. Waivers </span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">The waiver by a party of any breach of the Contract or the failure of any party to enforce any of the terms or conditions of the Contract at any time shall not in any way affect, limit or waive that party&rsquo;s right thereafter to enforce and compel strict compliance with every term and condition of the Contract. The Contract may be amended, or any provision of the Contract waived, only in a writing or writings signed by both parties to the Contract.</span></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">21.Severability</span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">If one or more provisions of this GTC are found by a court of competent jurisdiction, or any governmental authority with competent jurisdiction over the parties hereto, to be illegal, invalid or unenforceable, in whole or in part, the remaining terms and provisions of the GTC shall remain in full force and effect.</span></span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">22.Free Will</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The parties agree that each has entered into the Contract upon their own free will, without coercion or undue influence from the other party. The parties further agree and acknowledge that each party has had ample time to seek and receive competent legal or other advice or counsel regarding the terms and conditions of and duties and obligations imposed under the Contract and that the parties fully understand, agree and accept all of the terms and conditions herein.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">23.Entire Agreement</span></span></strong><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">The Contract embodies the complete agreement and understanding between the buyer and the seller with respect to the subject matter hereof and supersedes and preempts all prior or contemporaneous understandings, agreements or representations, written or oral, relating to the subject matter hereof.</span></span> <span style="font-size:12.0pt"><span style="color:black">This GTC is incorporated into the Sales Notice and the PI, by entering into an agreement for sales and purchase between the buyer and seller, these general conditions shall apply, unless otherwise specifically provided in writing.</span></span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">24.Compliance with Laws</span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Each party shall comply with all applicable laws and regulations in its performance of the Contract. The parties warrant that they shall comply with all economic and trade sanction laws, anti-boycott laws and trade restrictions imposed by the applicable law of the countries where any party is established; provided that nothing herein shall require a party to violate any law of its home country. A non-compliant party shall defend and indemnify the other party for any costs incurred and/or fines/penalties/sanctions imposed as a result of non-compliance with this section. Any breach of this section by a non-compliant party shall enable the other party to immediately terminate the Contract. </span></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">25. Amendments</span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">This Contract may not be altered, modified, changed or amended, or waived, in whole or in part, except in writing, signed by both parties.</span></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">26. Survival of Claims </span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Termination or expiration of the Contract shall not relieve either party of any obligation or deprive it of any right arising prior to termination or expiration.</span></span><strong> </strong><span style="font-size:12.0pt"><span style="color:black">On &quot;termination&quot; after announcing in a formal notice, the seller has the right to sell the commodity to another person or use the product in any way, and the buyer waives the right to any subsequent claims.</span></span></span></span></p>, `pages`.`updated_at` = 2024-10-22 09:51:01 where `id` = 32) {"userId":156,"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'title' cannot be null (SQL: update `pages` set `title` = ?, `description` = <p style=\"text-align:center\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:28.0pt\"><span style=\"color:#0070c0\">General Terms and Conditions</span></span></span></span></p>
+
+
+
+<p style=\"text-align:center\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:28.0pt\"><span style=\"color:#0070c0\">(GTC)</span></span></span></span></p>
+
+
+
+<p style=\"text-align:center\">&nbsp;</p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><a name=\"_Hlk149708958\"><span style=\"font-size:12.0pt\">For sales and purchase of petroleum, petrochemical, mineral and metal products </span></a><span style=\"font-size:12.0pt\">in addition to the terms and conditions</span> <span style=\"font-size:12.0pt\">agreed in writing elsewhere between the seller and the buyer in particular the pro-forma invoice (PI), which are binding and effective between the parties, the following terms and conditions apply to the parties&rsquo; relationship unless otherwise agreed between the parties in the PI. By signing the PI, the parties are considered to have agreed with this GTC which are incorporated by reference in the parties&rsquo; agreement. The GTC and PI, will be collectively referred to as the &ldquo;Contract&rdquo;. </span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">1.Parties</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">- Seller</span></strong><span style=\"font-size:12.0pt\"> is <a name=\"_Hlk155401029\">a person</a>/ company that is verified by <a name=\"_Hlk148847433\">the Armaiti MEX.</a></span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">- <strong>Buyer</strong> is a person/ company that is verified by the Armaiti MEX.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">- <strong>Armaiti MEX</strong></span><strong> </strong><span style=\"font-size:12.0pt\">is </span><span style=\"font-size:12.0pt\">a platform driven trading events for sales and purchase through which operations related to transactions are done.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Details of the parties will be determined in the PI. The physical transaction after trading session with the&nbsp;supervision&nbsp;of the Armaiti MEX will be executed by the</span> <span style=\"font-size:12.0pt\">registered seller and buyer, unless otherwise agreed.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">2. <a name=\"_Hlk156261501\">commodity</a></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Commodity is the good named in the Sales Notice and must be the same in the PI. <span style=\"color:black\">In case of the discrepancies between the name of the commodities<strong> </strong>in the</span> <span style=\"color:black\">Sales Notice, the PI and other documents, the reference of Sales Notice shall prevail.</span></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">3.Quality </span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The sole specifications of quality guaranteed by the seller is as expressly provided in the Sales Notice and the PI. In case of discrepancies all costs and losses shall be on seller. Expect as expressly provided, the seller provides no representations, guarantees or warranties expressed or implied with respect to merchantability, fitness, suitability of the commodity for any particular purpose or otherwise beyond the scope of the guaranteed specifications contained in the Sales Notice and the PI.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">4.Quantity </span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The quantity of the commodity and its tolerance is as specified in the Sales Notice and the PI, unless otherwise agreed.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">5. Inspection</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Inspection means determination of the quantities and qualities of the commodity and taking analysis of samples for the purpose of determination of compliance of the quality and quantity of the commodity with those specified in the Sales Notice and the PI. Commodity inspection services will be determined in the <a name=\"_Hlk156265062\">Sales Notice </a>and any<strong> </strong>complaints to quality and quantity of the commodity must be submitted to the Armaiti MEX in writing&nbsp;no later than ten (10) calendar days from the date of delivery.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">5. Origin</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The origin of the commodity will be determined in the Sales Notice and the PI. The buyer is fully aware and knowledgeable of the origin of the cargo. </span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">6. Destination</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The destination of the commodity is as provided in the Sales Notice and the PI. The commodities shall not be imported directly or indirectly to excluded countries or any other destinations beyond the Sales Notice and the PI. The Buyer shall be solely responsible to comply with the regulations of the destination market.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">7.Delivery</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Terms of delivery is agreed on the <a name=\"_Hlk156265323\">Sales Notice </a>and the PI based on incoterms. </span></span><span style=\"font-size:12.0pt\">Dates of delivery will be determined in the Sales Notice and the PI. All Liabilities, Fulfilment of Custom Obligations, Timely Arrangement for Pilotage, Compliance with Local Ports Regulation and Quarantines, Lockdown,</span> <span style=\"font-size:12.0pt\">Limitations and Instruction for Discharging shall be <a name=\"_Hlk156265245\">on the parties&rsquo; agreement </a>based on incoterms.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The risk of loss or damage to the commodities passes from the seller to the buyer based on Incoterms&nbsp;rules.&nbsp;&nbsp;<a name=\"_Hlk156167972\">Incoterms&nbsp;rules </a>specify when risk for the commodities passes from seller to buyer. The seller bears all risks involved in bringing the commodities to the named place of destination or&nbsp;to the agreed point within that place.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">9. Demurrage and Dispatch</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Rate of demurrage will be determined in the Sales Notice based on incoterms and the PI, otherwise it shall be on the parties&rsquo; agreement</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">10. Exchange Rates</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The exchange rate will be determined in the Sales Notice, <a name=\"_Hlk155215830\">unless otherwise agreed.</a></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">11. Payment Term</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Terms of payment shall be in accordance with the <a name=\"_Hlk148477311\">Sales Notice and the PI</a>. The payments shall be made in accordance with the agreement terms.&nbsp; Expect as agreed between the parties, payments shall be made on the date to the seller or its nominated bank account without any discount, deductions, offset, withholding or counterclaim on the same day of the payment due date as agreed by the parties. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">12.Governing Law</span></strong></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">This Contract and any dispute or claim arising out of or in connection with it or its subject matter or formation shall be construed, governed and interpreted in accordance with the UK law.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">13.Arbitration</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Any dispute in respect of validity, interpretation, application and execution of the Contract if not settled by amicable negotiations, shall be referred to and finally resolved either in accordance with the latest edition of the UNCITRAL Arbitration Rules. The language of arbitration will be in English. The arbitral award shall be final and binding upon the parties.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">14.Force Major</span></span></strong> </span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Neither buyer nor seller will be liable for damages or otherwise for any failure or delay in performance of any obligation hereunder other than any obligation to make payment, where such failure or delay is caused by force majeure, being any event or occurrence or circumstance reasonably beyond the control of that party, including but without prejudice to the generality of the foregoing, failure or delay caused by or resulting from acts of God, disruption, breakdown or shut down of production or transportation facilities, equipment, closing of harbors and pipelines, inability to obtain fuel, power, raw material and labor, breakdown of loading and receiving facilities or plants, feedstock and technical problems, strikes, labor or trade dispute or other industrial action, fires, floods, drought, wars (whether declared</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">or undeclared, civil commotion,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">armed conflict,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">terrorist attack,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">epidemics,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">including measures,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">without riots,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">limitation perils of any associated quarantine or other the sea,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">embargoes,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">accidents,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">acts,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">orders or restrictions imposed by any government authority or person purporting to act therefore (including allocations, priorities, requisitions, prohibitions, quotas and price controls or failing to grant necessary consents or licenses)(each a &ldquo;force majeure event&rdquo;).&nbsp; The party whose performance is so affected shall notify the other party hereto as soon as reasonably practicable indicating the nature of such force majeure event and, to the extent possible, inform the other party of the expected duration of the force majeure event.&nbsp; </span></span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The parties&rsquo; respective obligations under the agreement shall be suspended and the time for buyer and seller to perform their obligations shall be extended to the extent possible, during any period which these obligations are prevented, hindered, curtailed or delayed by reason of any force majeure event. If any of these obligations shall be prevented, hindered, curtailed or delayed for more than <span style=\"color:black\">30</span> consecutive days, either party may terminate this agreement with respect to such delivery upon written notice to the other party, without prejudice to any rights and obligations of the parties which have accrued prior to the force majeure event.&nbsp; </span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">15. Confidentiality</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Both Seller and Buyer shall keep and maintain, and shall cause its officers, employees, agents and contractors to keep and maintain, the confidentiality of all information relating to the price, quantity and type of commodity purchased or sold under the Contract, and shall not disclose any information to any third party except to the extent necessary to perform its obligations under the contract, and except that neither party shall have any obligation of confidentiality with respect to information that (a) is generally available to the public, (b) is or becomes known to such party through sources not bound by any obligation of confidentiality, (c) is required to be disclosed under applicable law, or (d) as may be required to by a party to enforce its rights under</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">the Contract. The confidentiality obligations contained in this agreement shall survive the termination or expiry of this agreement as the cooperation is continued.</span></span> </span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">16. Assignment</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">All covenants and agreements contained in the Contract by or on behalf of the buyer or seller will bind and inure to the respective successors and assigns of the parties hereto; provided, however, that neither party may assign the Contract, in whole or in part, without the prior written consent of the other party, which consent shall not be unreasonably withheld.</span></span> </span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">17. Anti-corruption</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The parties to this agreement each agree and undertake to the other that in connection with this agreement, they will each respectively comply with and act in a manner consistent with all applicable laws, rules, regulations, decrees and/or official government orders of the UK and European union, or other jurisdiction applicable to the parties relating to anti-bribery and anti-money laundering. If one party reasonably believes that the other party is in breach of, or is likely to breach, its obligations under this clause, the non-breaching party may terminate this agreement forthwith upon written notice (supported by reasonable evidence) to the other party without prejudice to the non-breaching party&rsquo;s rights under this agreement or generally.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">18. Limitation of liability</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Each party&rsquo;s exclusive remedy against the other for any claim of any kind for any loss or damage arising out of or in any way relating to the Contract (whether in contract, tort, strict liability or otherwise) shall be for actual money damages and not for injunctive or other relief (whether at law or in equity).&nbsp; Notwithstanding any other provision of this agreement, neither party shall be liable to the other whether under this agreement or otherwise in connection with it, whether in contract, tort (including in negligence), breach of statutory duty or otherwise (whether or not foreseeable and howsoever arising) in respect of (a) any indirect or consequential losses or expenses; and (b) to the extent not constituting indirect or consequential losses or expenses, any loss of anticipated profits, refinery or plant shut-down or reduced production, goodwill, use, market reputation, business receipts or contracts or commercial opportunities.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">19. Notices</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">All communications and any notices for any purpose and of whatsoever nature shall be deemed to have been properly served when delivered by email which is mentioned in the PI. Either party that modifies the email shall forthwith notify the other party thereof by giving a notice.</span> </span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">20. Waivers </span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">The waiver by a party of any breach of the Contract or the failure of any party to enforce any of the terms or conditions of the Contract at any time shall not in any way affect, limit or waive that party&rsquo;s right thereafter to enforce and compel strict compliance with every term and condition of the Contract. The Contract may be amended, or any provision of the Contract waived, only in a writing or writings signed by both parties to the Contract.</span></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">21.Severability</span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">If one or more provisions of this GTC are found by a court of competent jurisdiction, or any governmental authority with competent jurisdiction over the parties hereto, to be illegal, invalid or unenforceable, in whole or in part, the remaining terms and provisions of the GTC shall remain in full force and effect.</span></span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">22.Free Will</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The parties agree that each has entered into the Contract upon their own free will, without coercion or undue influence from the other party. The parties further agree and acknowledge that each party has had ample time to seek and receive competent legal or other advice or counsel regarding the terms and conditions of and duties and obligations imposed under the Contract and that the parties fully understand, agree and accept all of the terms and conditions herein.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">23.Entire Agreement</span></span></strong><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">The Contract embodies the complete agreement and understanding between the buyer and the seller with respect to the subject matter hereof and supersedes and preempts all prior or contemporaneous understandings, agreements or representations, written or oral, relating to the subject matter hereof.</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">This GTC is incorporated into the Sales Notice and the PI, by entering into an agreement for sales and purchase between the buyer and seller, these general conditions shall apply, unless otherwise specifically provided in writing.</span></span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">24.Compliance with Laws</span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Each party shall comply with all applicable laws and regulations in its performance of the Contract. The parties warrant that they shall comply with all economic and trade sanction laws, anti-boycott laws and trade restrictions imposed by the applicable law of the countries where any party is established; provided that nothing herein shall require a party to violate any law of its home country. A non-compliant party shall defend and indemnify the other party for any costs incurred and/or fines/penalties/sanctions imposed as a result of non-compliance with this section. Any breach of this section by a non-compliant party shall enable the other party to immediately terminate the Contract. </span></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">25. Amendments</span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">This Contract may not be altered, modified, changed or amended, or waived, in whole or in part, except in writing, signed by both parties.</span></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">26. Survival of Claims </span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Termination or expiration of the Contract shall not relieve either party of any obligation or deprive it of any right arising prior to termination or expiration.</span></span><strong> </strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">On &quot;termination&quot; after announcing in a formal notice, the seller has the right to sell the commodity to another person or use the product in any way, and the buyer waives the right to any subsequent claims.</span></span></span></span></p>, `pages`.`updated_at` = 2024-10-22 09:51:01 where `id` = 32) at /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php:760)
+[stacktrace]
+#0 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback()
+#1 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(558): Illuminate\\Database\\Connection->run()
+#2 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(510): Illuminate\\Database\\Connection->affectingStatement()
+#3 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3356): Illuminate\\Database\\Connection->update()
+#4 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(1011): Illuminate\\Database\\Query\\Builder->update()
+#5 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1214): Illuminate\\Database\\Eloquent\\Builder->update()
+#6 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1131): Illuminate\\Database\\Eloquent\\Model->performUpdate()
+#7 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(991): Illuminate\\Database\\Eloquent\\Model->save()
+#8 /var/www/arma_new/app/Http/Controllers/Admin/PageController.php(75): Illuminate\\Database\\Eloquent\\Model->update()
+#9 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\Admin\\PageController->update()
+#10 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction()
+#11 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch()
+#12 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#13 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Routing\\Route->run()
+#14 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}()
+#15 /var/www/arma_new/app/Http/Middleware/CheckSession.php(34): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#16 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): App\\Http\\Middleware\\CheckSession->handle()
+#17 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#18 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#19 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#20 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#21 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#23 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#24 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#25 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle()
+#26 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#27 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#28 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#29 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#30 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#31 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Pipeline\\Pipeline->then()
+#32 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(776): Illuminate\\Routing\\Router->runRouteWithinStack()
+#33 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(740): Illuminate\\Routing\\Router->runRoute()
+#34 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(729): Illuminate\\Routing\\Router->dispatchToRoute()
+#35 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(190): Illuminate\\Routing\\Router->dispatch()
+#36 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}()
+#37 /var/www/arma_new/vendor/statikbe/laravel-cookie-consent/src/CookieConsentMiddleware.php(13): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#38 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Statikbe\\CookieConsent\\CookieConsentMiddleware->handle()
+#39 /var/www/arma_new/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Fideloper\\Proxy\\TrustProxies->handle()
+#41 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#42 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#43 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#44 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#45 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#46 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#47 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#48 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#49 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#50 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#51 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#52 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(165): Illuminate\\Pipeline\\Pipeline->then()
+#53 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#54 /var/www/arma_new/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
+#55 {main}
+
+[previous exception] [object] (PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'title' cannot be null at /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php:570)
+[stacktrace]
+#0 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(570): PDOStatement->execute()
+#1 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(753): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}()
+#2 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback()
+#3 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(558): Illuminate\\Database\\Connection->run()
+#4 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(510): Illuminate\\Database\\Connection->affectingStatement()
+#5 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3356): Illuminate\\Database\\Connection->update()
+#6 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(1011): Illuminate\\Database\\Query\\Builder->update()
+#7 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1214): Illuminate\\Database\\Eloquent\\Builder->update()
+#8 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1131): Illuminate\\Database\\Eloquent\\Model->performUpdate()
+#9 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(991): Illuminate\\Database\\Eloquent\\Model->save()
+#10 /var/www/arma_new/app/Http/Controllers/Admin/PageController.php(75): Illuminate\\Database\\Eloquent\\Model->update()
+#11 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\Admin\\PageController->update()
+#12 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction()
+#13 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch()
+#14 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#15 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Routing\\Route->run()
+#16 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}()
+#17 /var/www/arma_new/app/Http/Middleware/CheckSession.php(34): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#18 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): App\\Http\\Middleware\\CheckSession->handle()
+#19 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#20 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#21 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#23 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#24 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#25 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#26 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#27 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle()
+#28 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#29 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#30 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#31 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#32 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#33 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Pipeline\\Pipeline->then()
+#34 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(776): Illuminate\\Routing\\Router->runRouteWithinStack()
+#35 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(740): Illuminate\\Routing\\Router->runRoute()
+#36 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(729): Illuminate\\Routing\\Router->dispatchToRoute()
+#37 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(190): Illuminate\\Routing\\Router->dispatch()
+#38 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}()
+#39 /var/www/arma_new/vendor/statikbe/laravel-cookie-consent/src/CookieConsentMiddleware.php(13): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Statikbe\\CookieConsent\\CookieConsentMiddleware->handle()
+#41 /var/www/arma_new/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#42 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Fideloper\\Proxy\\TrustProxies->handle()
+#43 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#44 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#45 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#46 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#47 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#48 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#49 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#50 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#51 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#52 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#53 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#54 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(165): Illuminate\\Pipeline\\Pipeline->then()
+#55 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#56 /var/www/arma_new/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
+#57 {main}
+"} 
+[2024-10-22 09:52:00] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'title' cannot be null (SQL: update `pages` set `title` = ?, `description` = <p style="text-align:center"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:28.0pt"><span style="color:#0070c0">General Terms and Conditions</span></span></span></span></p>
+
+<p style="text-align:center"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:28.0pt"><span style="color:#0070c0">(GTC)</span></span></span></span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><a name="_Hlk149708958"><span style="font-size:12.0pt">For sales and purchase of petroleum, petrochemical, mineral and metal products </span></a><span style="font-size:12.0pt">in addition to the terms and conditions</span> <span style="font-size:12.0pt">agreed in writing elsewhere between the seller and the buyer in particular the pro-forma invoice (PI), which are binding and effective between the parties, the following terms and conditions apply to the parties&rsquo; relationship unless otherwise agreed between the parties in the PI. By signing the PI, the parties are considered to have agreed with this GTC which are incorporated by reference in the parties&rsquo; agreement. The GTC and PI, will be collectively referred to as the &ldquo;Contract&rdquo;. </span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">1.Parties</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">- Seller</span></strong><span style="font-size:12.0pt"> is <a name="_Hlk155401029">a person</a>/ company that is verified by <a name="_Hlk148847433">the Armaiti MEX.</a></span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">- <strong>Buyer</strong> is a person/ company that is verified by the Armaiti MEX.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">- <strong>Armaiti MEX</strong></span><strong> </strong><span style="font-size:12.0pt">is </span><span style="font-size:12.0pt">a platform driven trading events for sales and purchase through which operations related to transactions are done.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Details of the parties will be determined in the PI. The physical transaction after trading session with the&nbsp;supervision&nbsp;of the Armaiti MEX will be executed by the</span> <span style="font-size:12.0pt">registered seller and buyer, unless otherwise agreed.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">2. <a name="_Hlk156261501">commodity</a></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Commodity is the good named in the Sales Notice and must be the same in the PI. <span style="color:black">In case of the discrepancies between the name of the commodities<strong> </strong>in the</span> <span style="color:black">Sales Notice, the PI and other documents, the reference of Sales Notice shall prevail.</span></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">3.Quality </span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The sole specifications of quality guaranteed by the seller is as expressly provided in the Sales Notice and the PI. In case of discrepancies all costs and losses shall be on seller. Expect as expressly provided, the seller provides no representations, guarantees or warranties expressed or implied with respect to merchantability, fitness, suitability of the commodity for any particular purpose or otherwise beyond the scope of the guaranteed specifications contained in the Sales Notice and the PI.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">4.Quantity </span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The quantity of the commodity and its tolerance is as specified in the Sales Notice and the PI, unless otherwise agreed.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">5. Inspection</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Inspection means determination of the quantities and qualities of the commodity and taking analysis of samples for the purpose of determination of compliance of the quality and quantity of the commodity with those specified in the Sales Notice and the PI. Commodity inspection services will be determined in the <a name="_Hlk156265062">Sales Notice </a>and any<strong> </strong>complaints to quality and quantity of the commodity must be submitted to the Armaiti MEX in writing&nbsp;no later than ten (10) calendar days from the date of delivery.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">5. Origin</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The origin of the commodity will be determined in the Sales Notice and the PI. The buyer is fully aware and knowledgeable of the origin of the cargo. </span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">6. Destination</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The destination of the commodity is as provided in the Sales Notice and the PI. The commodities shall not be imported directly or indirectly to excluded countries or any other destinations beyond the Sales Notice and the PI. The Buyer shall be solely responsible to comply with the regulations of the destination market.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">7.Delivery</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Terms of delivery is agreed on the <a name="_Hlk156265323">Sales Notice </a>and the PI based on incoterms. </span></span><span style="font-size:12.0pt">Dates of delivery will be determined in the Sales Notice and the PI. All Liabilities, Fulfilment of Custom Obligations, Timely Arrangement for Pilotage, Compliance with Local Ports Regulation and Quarantines, Lockdown,</span> <span style="font-size:12.0pt">Limitations and Instruction for Discharging shall be <a name="_Hlk156265245">on the parties&rsquo; agreement </a>based on incoterms.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The risk of loss or damage to the commodities passes from the seller to the buyer based on Incoterms&nbsp;rules.&nbsp;&nbsp;<a name="_Hlk156167972">Incoterms&nbsp;rules </a>specify when risk for the commodities passes from seller to buyer. The seller bears all risks involved in bringing the commodities to the named place of destination or&nbsp;to the agreed point within that place.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">9. Demurrage and Dispatch</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Rate of demurrage will be determined in the Sales Notice based on incoterms and the PI, otherwise it shall be on the parties&rsquo; agreement</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">10. Exchange Rates</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The exchange rate will be determined in the Sales Notice, <a name="_Hlk155215830">unless otherwise agreed.</a></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">11. Payment Term</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Terms of payment shall be in accordance with the <a name="_Hlk148477311">Sales Notice and the PI</a>. The payments shall be made in accordance with the agreement terms.&nbsp; Expect as agreed between the parties, payments shall be made on the date to the seller or its nominated bank account without any discount, deductions, offset, withholding or counterclaim on the same day of the payment due date as agreed by the parties. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">12.Governing Law</span></strong></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">This Contract and any dispute or claim arising out of or in connection with it or its subject matter or formation shall be construed, governed and interpreted in accordance with the UK law.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">13.Arbitration</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Any dispute in respect of validity, interpretation, application and execution of the Contract if not settled by amicable negotiations, shall be referred to and finally resolved either in accordance with the latest edition of the UNCITRAL Arbitration Rules. The language of arbitration will be in English. The arbitral award shall be final and binding upon the parties.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">14.Force Major</span></span></strong> </span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Neither buyer nor seller will be liable for damages or otherwise for any failure or delay in performance of any obligation hereunder other than any obligation to make payment, where such failure or delay is caused by force majeure, being any event or occurrence or circumstance reasonably beyond the control of that party, including but without prejudice to the generality of the foregoing, failure or delay caused by or resulting from acts of God, disruption, breakdown or shut down of production or transportation facilities, equipment, closing of harbors and pipelines, inability to obtain fuel, power, raw material and labor, breakdown of loading and receiving facilities or plants, feedstock and technical problems, strikes, labor or trade dispute or other industrial action, fires, floods, drought, wars (whether declared</span></span> <span style="font-size:12.0pt"><span style="color:black">or undeclared, civil commotion,</span></span> <span style="font-size:12.0pt"><span style="color:black">armed conflict,</span></span> <span style="font-size:12.0pt"><span style="color:black">terrorist attack,</span></span> <span style="font-size:12.0pt"><span style="color:black">epidemics,</span></span> <span style="font-size:12.0pt"><span style="color:black">including measures,</span></span> <span style="font-size:12.0pt"><span style="color:black">without riots,</span></span> <span style="font-size:12.0pt"><span style="color:black">limitation perils of any associated quarantine or other the sea,</span></span> <span style="font-size:12.0pt"><span style="color:black">embargoes,</span></span> <span style="font-size:12.0pt"><span style="color:black">accidents,</span></span> <span style="font-size:12.0pt"><span style="color:black">acts,</span></span> <span style="font-size:12.0pt"><span style="color:black">orders or restrictions imposed by any government authority or person purporting to act therefore (including allocations, priorities, requisitions, prohibitions, quotas and price controls or failing to grant necessary consents or licenses)(each a &ldquo;force majeure event&rdquo;).&nbsp; The party whose performance is so affected shall notify the other party hereto as soon as reasonably practicable indicating the nature of such force majeure event and, to the extent possible, inform the other party of the expected duration of the force majeure event.&nbsp; </span></span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The parties&rsquo; respective obligations under the agreement shall be suspended and the time for buyer and seller to perform their obligations shall be extended to the extent possible, during any period which these obligations are prevented, hindered, curtailed or delayed by reason of any force majeure event. If any of these obligations shall be prevented, hindered, curtailed or delayed for more than <span style="color:black">30</span> consecutive days, either party may terminate this agreement with respect to such delivery upon written notice to the other party, without prejudice to any rights and obligations of the parties which have accrued prior to the force majeure event.&nbsp; </span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">15. Confidentiality</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Both Seller and Buyer shall keep and maintain, and shall cause its officers, employees, agents and contractors to keep and maintain, the confidentiality of all information relating to the price, quantity and type of commodity purchased or sold under the Contract, and shall not disclose any information to any third party except to the extent necessary to perform its obligations under the contract, and except that neither party shall have any obligation of confidentiality with respect to information that (a) is generally available to the public, (b) is or becomes known to such party through sources not bound by any obligation of confidentiality, (c) is required to be disclosed under applicable law, or (d) as may be required to by a party to enforce its rights under</span></span> <span style="font-size:12.0pt"><span style="color:black">the Contract. The confidentiality obligations contained in this agreement shall survive the termination or expiry of this agreement as the cooperation is continued.</span></span> </span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">16. Assignment</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">All covenants and agreements contained in the Contract by or on behalf of the buyer or seller will bind and inure to the respective successors and assigns of the parties hereto; provided, however, that neither party may assign the Contract, in whole or in part, without the prior written consent of the other party, which consent shall not be unreasonably withheld.</span></span> </span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">17. Anti-corruption</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The parties to this agreement each agree and undertake to the other that in connection with this agreement, they will each respectively comply with and act in a manner consistent with all applicable laws, rules, regulations, decrees and/or official government orders of the UK and European union, or other jurisdiction applicable to the parties relating to anti-bribery and anti-money laundering. If one party reasonably believes that the other party is in breach of, or is likely to breach, its obligations under this clause, the non-breaching party may terminate this agreement forthwith upon written notice (supported by reasonable evidence) to the other party without prejudice to the non-breaching party&rsquo;s rights under this agreement or generally.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">18. Limitation of liability</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">Each party&rsquo;s exclusive remedy against the other for any claim of any kind for any loss or damage arising out of or in any way relating to the Contract (whether in contract, tort, strict liability or otherwise) shall be for actual money damages and not for injunctive or other relief (whether at law or in equity).&nbsp; Notwithstanding any other provision of this agreement, neither party shall be liable to the other whether under this agreement or otherwise in connection with it, whether in contract, tort (including in negligence), breach of statutory duty or otherwise (whether or not foreseeable and howsoever arising) in respect of (a) any indirect or consequential losses or expenses; and (b) to the extent not constituting indirect or consequential losses or expenses, any loss of anticipated profits, refinery or plant shut-down or reduced production, goodwill, use, market reputation, business receipts or contracts or commercial opportunities.</span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">19. Notices</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">All communications and any notices for any purpose and of whatsoever nature shall be deemed to have been properly served when delivered by email which is mentioned in the PI. Either party that modifies the email shall forthwith notify the other party thereof by giving a notice.</span> </span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">20. Waivers </span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">The waiver by a party of any breach of the Contract or the failure of any party to enforce any of the terms or conditions of the Contract at any time shall not in any way affect, limit or waive that party&rsquo;s right thereafter to enforce and compel strict compliance with every term and condition of the Contract. The Contract may be amended, or any provision of the Contract waived, only in a writing or writings signed by both parties to the Contract.</span></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">21.Severability</span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">If one or more provisions of this GTC are found by a court of competent jurisdiction, or any governmental authority with competent jurisdiction over the parties hereto, to be illegal, invalid or unenforceable, in whole or in part, the remaining terms and provisions of the GTC shall remain in full force and effect.</span></span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt">22.Free Will</span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt">The parties agree that each has entered into the Contract upon their own free will, without coercion or undue influence from the other party. The parties further agree and acknowledge that each party has had ample time to seek and receive competent legal or other advice or counsel regarding the terms and conditions of and duties and obligations imposed under the Contract and that the parties fully understand, agree and accept all of the terms and conditions herein.</span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">23.Entire Agreement</span></span></strong><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">The Contract embodies the complete agreement and understanding between the buyer and the seller with respect to the subject matter hereof and supersedes and preempts all prior or contemporaneous understandings, agreements or representations, written or oral, relating to the subject matter hereof.</span></span> <span style="font-size:12.0pt"><span style="color:black">This GTC is incorporated into the Sales Notice and the PI, by entering into an agreement for sales and purchase between the buyer and seller, these general conditions shall apply, unless otherwise specifically provided in writing.</span></span></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">24.Compliance with Laws</span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Each party shall comply with all applicable laws and regulations in its performance of the Contract. The parties warrant that they shall comply with all economic and trade sanction laws, anti-boycott laws and trade restrictions imposed by the applicable law of the countries where any party is established; provided that nothing herein shall require a party to violate any law of its home country. A non-compliant party shall defend and indemnify the other party for any costs incurred and/or fines/penalties/sanctions imposed as a result of non-compliance with this section. Any breach of this section by a non-compliant party shall enable the other party to immediately terminate the Contract. </span></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">25. Amendments</span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">This Contract may not be altered, modified, changed or amended, or waived, in whole or in part, except in writing, signed by both parties.</span></span></span></span></p>
+
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><strong><span style="font-size:12.0pt"><span style="color:black">26. Survival of Claims </span></span></strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="color:black">Termination or expiration of the Contract shall not relieve either party of any obligation or deprive it of any right arising prior to termination or expiration.</span></span><strong> </strong><span style="font-size:12.0pt"><span style="color:black">On &quot;termination&quot; after announcing in a formal notice, the seller has the right to sell the commodity to another person or use the product in any way, and the buyer waives the right to any subsequent claims.</span></span></span></span></p>, `pages`.`updated_at` = 2024-10-22 09:52:00 where `id` = 32) {"userId":156,"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'title' cannot be null (SQL: update `pages` set `title` = ?, `description` = <p style=\"text-align:center\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:28.0pt\"><span style=\"color:#0070c0\">General Terms and Conditions</span></span></span></span></p>
+
+
+
+<p style=\"text-align:center\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:28.0pt\"><span style=\"color:#0070c0\">(GTC)</span></span></span></span></p>
+
+
+
+<p style=\"text-align:center\">&nbsp;</p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><a name=\"_Hlk149708958\"><span style=\"font-size:12.0pt\">For sales and purchase of petroleum, petrochemical, mineral and metal products </span></a><span style=\"font-size:12.0pt\">in addition to the terms and conditions</span> <span style=\"font-size:12.0pt\">agreed in writing elsewhere between the seller and the buyer in particular the pro-forma invoice (PI), which are binding and effective between the parties, the following terms and conditions apply to the parties&rsquo; relationship unless otherwise agreed between the parties in the PI. By signing the PI, the parties are considered to have agreed with this GTC which are incorporated by reference in the parties&rsquo; agreement. The GTC and PI, will be collectively referred to as the &ldquo;Contract&rdquo;. </span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">1.Parties</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">- Seller</span></strong><span style=\"font-size:12.0pt\"> is <a name=\"_Hlk155401029\">a person</a>/ company that is verified by <a name=\"_Hlk148847433\">the Armaiti MEX.</a></span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">- <strong>Buyer</strong> is a person/ company that is verified by the Armaiti MEX.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">- <strong>Armaiti MEX</strong></span><strong> </strong><span style=\"font-size:12.0pt\">is </span><span style=\"font-size:12.0pt\">a platform driven trading events for sales and purchase through which operations related to transactions are done.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Details of the parties will be determined in the PI. The physical transaction after trading session with the&nbsp;supervision&nbsp;of the Armaiti MEX will be executed by the</span> <span style=\"font-size:12.0pt\">registered seller and buyer, unless otherwise agreed.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">2. <a name=\"_Hlk156261501\">commodity</a></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Commodity is the good named in the Sales Notice and must be the same in the PI. <span style=\"color:black\">In case of the discrepancies between the name of the commodities<strong> </strong>in the</span> <span style=\"color:black\">Sales Notice, the PI and other documents, the reference of Sales Notice shall prevail.</span></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">3.Quality </span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The sole specifications of quality guaranteed by the seller is as expressly provided in the Sales Notice and the PI. In case of discrepancies all costs and losses shall be on seller. Expect as expressly provided, the seller provides no representations, guarantees or warranties expressed or implied with respect to merchantability, fitness, suitability of the commodity for any particular purpose or otherwise beyond the scope of the guaranteed specifications contained in the Sales Notice and the PI.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">4.Quantity </span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The quantity of the commodity and its tolerance is as specified in the Sales Notice and the PI, unless otherwise agreed.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">5. Inspection</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Inspection means determination of the quantities and qualities of the commodity and taking analysis of samples for the purpose of determination of compliance of the quality and quantity of the commodity with those specified in the Sales Notice and the PI. Commodity inspection services will be determined in the <a name=\"_Hlk156265062\">Sales Notice </a>and any<strong> </strong>complaints to quality and quantity of the commodity must be submitted to the Armaiti MEX in writing&nbsp;no later than ten (10) calendar days from the date of delivery.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">5. Origin</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The origin of the commodity will be determined in the Sales Notice and the PI. The buyer is fully aware and knowledgeable of the origin of the cargo. </span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">6. Destination</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The destination of the commodity is as provided in the Sales Notice and the PI. The commodities shall not be imported directly or indirectly to excluded countries or any other destinations beyond the Sales Notice and the PI. The Buyer shall be solely responsible to comply with the regulations of the destination market.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">7.Delivery</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Terms of delivery is agreed on the <a name=\"_Hlk156265323\">Sales Notice </a>and the PI based on incoterms. </span></span><span style=\"font-size:12.0pt\">Dates of delivery will be determined in the Sales Notice and the PI. All Liabilities, Fulfilment of Custom Obligations, Timely Arrangement for Pilotage, Compliance with Local Ports Regulation and Quarantines, Lockdown,</span> <span style=\"font-size:12.0pt\">Limitations and Instruction for Discharging shall be <a name=\"_Hlk156265245\">on the parties&rsquo; agreement </a>based on incoterms.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The risk of loss or damage to the commodities passes from the seller to the buyer based on Incoterms&nbsp;rules.&nbsp;&nbsp;<a name=\"_Hlk156167972\">Incoterms&nbsp;rules </a>specify when risk for the commodities passes from seller to buyer. The seller bears all risks involved in bringing the commodities to the named place of destination or&nbsp;to the agreed point within that place.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">9. Demurrage and Dispatch</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Rate of demurrage will be determined in the Sales Notice based on incoterms and the PI, otherwise it shall be on the parties&rsquo; agreement</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">10. Exchange Rates</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The exchange rate will be determined in the Sales Notice, <a name=\"_Hlk155215830\">unless otherwise agreed.</a></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">11. Payment Term</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Terms of payment shall be in accordance with the <a name=\"_Hlk148477311\">Sales Notice and the PI</a>. The payments shall be made in accordance with the agreement terms.&nbsp; Expect as agreed between the parties, payments shall be made on the date to the seller or its nominated bank account without any discount, deductions, offset, withholding or counterclaim on the same day of the payment due date as agreed by the parties. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">12.Governing Law</span></strong></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">This Contract and any dispute or claim arising out of or in connection with it or its subject matter or formation shall be construed, governed and interpreted in accordance with the UK law.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">13.Arbitration</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Any dispute in respect of validity, interpretation, application and execution of the Contract if not settled by amicable negotiations, shall be referred to and finally resolved either in accordance with the latest edition of the UNCITRAL Arbitration Rules. The language of arbitration will be in English. The arbitral award shall be final and binding upon the parties.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">14.Force Major</span></span></strong> </span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Neither buyer nor seller will be liable for damages or otherwise for any failure or delay in performance of any obligation hereunder other than any obligation to make payment, where such failure or delay is caused by force majeure, being any event or occurrence or circumstance reasonably beyond the control of that party, including but without prejudice to the generality of the foregoing, failure or delay caused by or resulting from acts of God, disruption, breakdown or shut down of production or transportation facilities, equipment, closing of harbors and pipelines, inability to obtain fuel, power, raw material and labor, breakdown of loading and receiving facilities or plants, feedstock and technical problems, strikes, labor or trade dispute or other industrial action, fires, floods, drought, wars (whether declared</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">or undeclared, civil commotion,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">armed conflict,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">terrorist attack,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">epidemics,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">including measures,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">without riots,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">limitation perils of any associated quarantine or other the sea,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">embargoes,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">accidents,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">acts,</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">orders or restrictions imposed by any government authority or person purporting to act therefore (including allocations, priorities, requisitions, prohibitions, quotas and price controls or failing to grant necessary consents or licenses)(each a &ldquo;force majeure event&rdquo;).&nbsp; The party whose performance is so affected shall notify the other party hereto as soon as reasonably practicable indicating the nature of such force majeure event and, to the extent possible, inform the other party of the expected duration of the force majeure event.&nbsp; </span></span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The parties&rsquo; respective obligations under the agreement shall be suspended and the time for buyer and seller to perform their obligations shall be extended to the extent possible, during any period which these obligations are prevented, hindered, curtailed or delayed by reason of any force majeure event. If any of these obligations shall be prevented, hindered, curtailed or delayed for more than <span style=\"color:black\">30</span> consecutive days, either party may terminate this agreement with respect to such delivery upon written notice to the other party, without prejudice to any rights and obligations of the parties which have accrued prior to the force majeure event.&nbsp; </span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">15. Confidentiality</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Both Seller and Buyer shall keep and maintain, and shall cause its officers, employees, agents and contractors to keep and maintain, the confidentiality of all information relating to the price, quantity and type of commodity purchased or sold under the Contract, and shall not disclose any information to any third party except to the extent necessary to perform its obligations under the contract, and except that neither party shall have any obligation of confidentiality with respect to information that (a) is generally available to the public, (b) is or becomes known to such party through sources not bound by any obligation of confidentiality, (c) is required to be disclosed under applicable law, or (d) as may be required to by a party to enforce its rights under</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">the Contract. The confidentiality obligations contained in this agreement shall survive the termination or expiry of this agreement as the cooperation is continued.</span></span> </span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">16. Assignment</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">All covenants and agreements contained in the Contract by or on behalf of the buyer or seller will bind and inure to the respective successors and assigns of the parties hereto; provided, however, that neither party may assign the Contract, in whole or in part, without the prior written consent of the other party, which consent shall not be unreasonably withheld.</span></span> </span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">17. Anti-corruption</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The parties to this agreement each agree and undertake to the other that in connection with this agreement, they will each respectively comply with and act in a manner consistent with all applicable laws, rules, regulations, decrees and/or official government orders of the UK and European union, or other jurisdiction applicable to the parties relating to anti-bribery and anti-money laundering. If one party reasonably believes that the other party is in breach of, or is likely to breach, its obligations under this clause, the non-breaching party may terminate this agreement forthwith upon written notice (supported by reasonable evidence) to the other party without prejudice to the non-breaching party&rsquo;s rights under this agreement or generally.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">18. Limitation of liability</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">Each party&rsquo;s exclusive remedy against the other for any claim of any kind for any loss or damage arising out of or in any way relating to the Contract (whether in contract, tort, strict liability or otherwise) shall be for actual money damages and not for injunctive or other relief (whether at law or in equity).&nbsp; Notwithstanding any other provision of this agreement, neither party shall be liable to the other whether under this agreement or otherwise in connection with it, whether in contract, tort (including in negligence), breach of statutory duty or otherwise (whether or not foreseeable and howsoever arising) in respect of (a) any indirect or consequential losses or expenses; and (b) to the extent not constituting indirect or consequential losses or expenses, any loss of anticipated profits, refinery or plant shut-down or reduced production, goodwill, use, market reputation, business receipts or contracts or commercial opportunities.</span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">19. Notices</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">All communications and any notices for any purpose and of whatsoever nature shall be deemed to have been properly served when delivered by email which is mentioned in the PI. Either party that modifies the email shall forthwith notify the other party thereof by giving a notice.</span> </span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">20. Waivers </span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">The waiver by a party of any breach of the Contract or the failure of any party to enforce any of the terms or conditions of the Contract at any time shall not in any way affect, limit or waive that party&rsquo;s right thereafter to enforce and compel strict compliance with every term and condition of the Contract. The Contract may be amended, or any provision of the Contract waived, only in a writing or writings signed by both parties to the Contract.</span></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">21.Severability</span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">If one or more provisions of this GTC are found by a court of competent jurisdiction, or any governmental authority with competent jurisdiction over the parties hereto, to be illegal, invalid or unenforceable, in whole or in part, the remaining terms and provisions of the GTC shall remain in full force and effect.</span></span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\">22.Free Will</span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\">The parties agree that each has entered into the Contract upon their own free will, without coercion or undue influence from the other party. The parties further agree and acknowledge that each party has had ample time to seek and receive competent legal or other advice or counsel regarding the terms and conditions of and duties and obligations imposed under the Contract and that the parties fully understand, agree and accept all of the terms and conditions herein.</span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">23.Entire Agreement</span></span></strong><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">The Contract embodies the complete agreement and understanding between the buyer and the seller with respect to the subject matter hereof and supersedes and preempts all prior or contemporaneous understandings, agreements or representations, written or oral, relating to the subject matter hereof.</span></span> <span style=\"font-size:12.0pt\"><span style=\"color:black\">This GTC is incorporated into the Sales Notice and the PI, by entering into an agreement for sales and purchase between the buyer and seller, these general conditions shall apply, unless otherwise specifically provided in writing.</span></span></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">24.Compliance with Laws</span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Each party shall comply with all applicable laws and regulations in its performance of the Contract. The parties warrant that they shall comply with all economic and trade sanction laws, anti-boycott laws and trade restrictions imposed by the applicable law of the countries where any party is established; provided that nothing herein shall require a party to violate any law of its home country. A non-compliant party shall defend and indemnify the other party for any costs incurred and/or fines/penalties/sanctions imposed as a result of non-compliance with this section. Any breach of this section by a non-compliant party shall enable the other party to immediately terminate the Contract. </span></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">25. Amendments</span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">This Contract may not be altered, modified, changed or amended, or waived, in whole or in part, except in writing, signed by both parties.</span></span></span></span></p>
+
+
+
+<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">26. Survival of Claims </span></span></strong></span></span></p>
+
+
+
+<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"color:black\">Termination or expiration of the Contract shall not relieve either party of any obligation or deprive it of any right arising prior to termination or expiration.</span></span><strong> </strong><span style=\"font-size:12.0pt\"><span style=\"color:black\">On &quot;termination&quot; after announcing in a formal notice, the seller has the right to sell the commodity to another person or use the product in any way, and the buyer waives the right to any subsequent claims.</span></span></span></span></p>, `pages`.`updated_at` = 2024-10-22 09:52:00 where `id` = 32) at /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php:760)
+[stacktrace]
+#0 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback()
+#1 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(558): Illuminate\\Database\\Connection->run()
+#2 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(510): Illuminate\\Database\\Connection->affectingStatement()
+#3 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3356): Illuminate\\Database\\Connection->update()
+#4 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(1011): Illuminate\\Database\\Query\\Builder->update()
+#5 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1214): Illuminate\\Database\\Eloquent\\Builder->update()
+#6 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1131): Illuminate\\Database\\Eloquent\\Model->performUpdate()
+#7 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(991): Illuminate\\Database\\Eloquent\\Model->save()
+#8 /var/www/arma_new/app/Http/Controllers/Admin/PageController.php(75): Illuminate\\Database\\Eloquent\\Model->update()
+#9 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\Admin\\PageController->update()
+#10 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction()
+#11 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch()
+#12 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#13 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Routing\\Route->run()
+#14 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}()
+#15 /var/www/arma_new/app/Http/Middleware/CheckSession.php(34): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#16 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): App\\Http\\Middleware\\CheckSession->handle()
+#17 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#18 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#19 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#20 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#21 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#23 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#24 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#25 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle()
+#26 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#27 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#28 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#29 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#30 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#31 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Pipeline\\Pipeline->then()
+#32 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(776): Illuminate\\Routing\\Router->runRouteWithinStack()
+#33 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(740): Illuminate\\Routing\\Router->runRoute()
+#34 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(729): Illuminate\\Routing\\Router->dispatchToRoute()
+#35 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(190): Illuminate\\Routing\\Router->dispatch()
+#36 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}()
+#37 /var/www/arma_new/vendor/statikbe/laravel-cookie-consent/src/CookieConsentMiddleware.php(13): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#38 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Statikbe\\CookieConsent\\CookieConsentMiddleware->handle()
+#39 /var/www/arma_new/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Fideloper\\Proxy\\TrustProxies->handle()
+#41 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#42 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#43 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#44 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#45 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#46 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#47 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#48 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#49 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#50 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#51 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#52 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(165): Illuminate\\Pipeline\\Pipeline->then()
+#53 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#54 /var/www/arma_new/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
+#55 {main}
+
+[previous exception] [object] (PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'title' cannot be null at /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php:570)
+[stacktrace]
+#0 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(570): PDOStatement->execute()
+#1 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(753): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}()
+#2 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback()
+#3 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(558): Illuminate\\Database\\Connection->run()
+#4 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Connection.php(510): Illuminate\\Database\\Connection->affectingStatement()
+#5 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3356): Illuminate\\Database\\Connection->update()
+#6 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(1011): Illuminate\\Database\\Query\\Builder->update()
+#7 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1214): Illuminate\\Database\\Eloquent\\Builder->update()
+#8 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1131): Illuminate\\Database\\Eloquent\\Model->performUpdate()
+#9 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(991): Illuminate\\Database\\Eloquent\\Model->save()
+#10 /var/www/arma_new/app/Http/Controllers/Admin/PageController.php(75): Illuminate\\Database\\Eloquent\\Model->update()
+#11 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\Admin\\PageController->update()
+#12 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction()
+#13 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch()
+#14 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#15 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Routing\\Route->run()
+#16 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}()
+#17 /var/www/arma_new/app/Http/Middleware/CheckSession.php(34): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#18 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): App\\Http\\Middleware\\CheckSession->handle()
+#19 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#20 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#21 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#23 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#24 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#25 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#26 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#27 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle()
+#28 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#29 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#30 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#31 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#32 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#33 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(797): Illuminate\\Pipeline\\Pipeline->then()
+#34 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(776): Illuminate\\Routing\\Router->runRouteWithinStack()
+#35 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(740): Illuminate\\Routing\\Router->runRoute()
+#36 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Routing/Router.php(729): Illuminate\\Routing\\Router->dispatchToRoute()
+#37 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(190): Illuminate\\Routing\\Router->dispatch()
+#38 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}()
+#39 /var/www/arma_new/vendor/statikbe/laravel-cookie-consent/src/CookieConsentMiddleware.php(13): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Statikbe\\CookieConsent\\CookieConsentMiddleware->handle()
+#41 /var/www/arma_new/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#42 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Fideloper\\Proxy\\TrustProxies->handle()
+#43 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#44 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#45 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#46 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#47 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#48 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#49 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#50 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#51 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#52 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#53 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#54 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(165): Illuminate\\Pipeline\\Pipeline->then()
+#55 /var/www/arma_new/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#56 /var/www/arma_new/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
+#57 {main}
+"} 
