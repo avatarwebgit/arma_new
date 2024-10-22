@@ -22,7 +22,9 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 
-    @vite(['resources/sass/app.scss','resources/js/app.js'])
+{{--    @vite(['resources/sass/app.scss','resources/js/app.js'])--}}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script  [src]="{{ asset('js/app.js') }}"></script>
     <style>
         input[name="search"]:focus::placeholder {
             color: transparent !important; /* مخفی کردن placeholder هنگام فوکوس */
