@@ -2,7 +2,7 @@
 <html lang="en"
       dir="ltr">
 <head>
-    <title>Admin Panel | {{  $title }}</title>
+    <title>{{  $title }} | Panel</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +29,29 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
     <link rel="stylesheet" href="{{ asset('vendor/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/developer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/bootstrap-clockpicker.min.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"
+          integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        .button_create_modal {
+            border: 1px solid black;
+            background: white;
+            color: black;
+            width: 100px;
+            padding: 3px 10px;
+            text-align: center;
+            margin: 5px 10px;
+        }
+        .dash-container{
+            top: 0 !important;
+        }
+        .dash-container .dash-content{
+            padding-top: 0 !important;
+        }
+    </style>
+    @vite(['resources/sass/app.scss','resources/js/app.js'])
     @stack('style')
 </head>
 
@@ -37,18 +60,14 @@
     <div class="loader-track">
         <div class="loader-fill"></div>
     </div>
+
+
 </div>
 <!-- [ Pre-loader ] End -->
 <!-- [ Mobile header ] start -->
-<div class="dash-mob-header dash-header">
+<div class="dash-mob-header dash-header" style="background-color: #006">
     <div class="pcm-logo">
-        @if (setting('app_logo'))
-            {!! Form::image(asset('vendor/img/prime-white.png'), null, [
-                'class' => 'logo logo-lg img_setting w-100',
-            ]) !!}
-        @else
-            {!! Html::link(route('home'), config('app.name'), []) !!}
-        @endif
+
     </div>
     <div class="pcm-toolbar">
         <a href="#!" class="dash-head-link" id="mobile-collapse">
@@ -59,9 +78,7 @@
             </div>
             <!-- <i data-feather="menu"></i> -->
         </a>
-        <a href="#!" class="dash-head-link" id="header-collapse">
-            <i data-feather="more-vertical"></i>
-        </a>
+
     </div>
 </div>
 
@@ -72,7 +89,7 @@
 
 <!-- [ navigation menu ] end -->
 <!-- [ Header ] start -->
-@include('admin.include.header')
+{{--@include('admin.include.header')--}}
 
 <!-- Modal -->
 <div class="modal notification-modal fade" id="notification-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -201,6 +218,35 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="CreateMarketModal" tabindex="-1" role="dialog" aria-labelledby="Edit_Currency"
+     aria-hidden="true">
+    <div style="max-width: 768px" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center position-relative">
+                <i data-dismiss="modal" aria-label="Close" class="fa fa-times-circle fa-2x"
+                   style="position: absolute;right: 10px;top: 10px"></i>
+                <h3>
+                    Enter Date
+                </h3>
+            </div>
+            <div id="modal_body" class="modal-body p-5 row">
+                <div id="deposit_input" class="mb-3 mt-3  row">
+                    <div class="mt-3 mb-3 col-12">
+                        <input class="form-control" type="date" id="Market_Date">
+                    </div>
+                </div>
+                <input id="id_cash_pending" type="hidden">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="button_create_modal" data-dismiss="modal" aria-label="Close" type="button">Cancel
+                </button>
+                <button class="button_create_modal" onclick="CreateMarketModal()" type="button">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{ asset('vendor/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -214,12 +260,14 @@
 <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
 <script src="{{ asset('assets/js/dash.js') }}"></script>
 <script src="{{ asset('vendor/modules/tooltip.js') }}"></script>
-<script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/notifier.js') }}"></script>
 <script src="{{ asset('vendor/js/custom.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bouncer.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/form-validation.js') }}"></script>
+<script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap-clockpicker.min.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
 
 @if (!empty(setting('gtag')))
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('gtag') }}"></script>
@@ -236,6 +284,39 @@
 @endif
 
 <script>
+    $('select').selectpicker({
+        'title': 'Select'
+    });
+    function numberFormat(tag) {
+        let number = $(tag).val();
+        let number_formatted = number_format_js(number);
+        $(tag).val(number_formatted);
+    }
+
+    function number_format_js(number, decimals, dec_point, thousands_sep) {
+        // Strip all characters but numerical ones.
+        number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function (n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+    }
+
     feather.replace();
     var pctoggle = document.querySelector("#pct-toggler");
     if (pctoggle) {
@@ -262,9 +343,43 @@
     $('#profile-toggle').click(function () {
         $('#profile-dropdown').slideToggle();
     })
+    $('.clockpicker').clockpicker();
 
+
+    function createMarketModal() {
+        $('#CreateMarketModal').modal('show');
+    }
+
+    function CreateMarketModal() {
+        let Market_Date = $('#Market_Date').val();
+        if (Market_Date.length > 0) {
+            let url = "{{ route('admin.market.create',['market_data'=>':market_data']) }}";
+            url = url.replace(':market_data', Market_Date);
+            window.location.href = url;
+        } else {
+            alert('Please select Date');
+        }
+    }
+
+    function ChangeLineSpeed(line, tag) {
+        let value = $(tag).val();
+        $.ajax({
+            url: "{{ route('admin.ChangeLineSpeed') }}",
+            data: {
+                _token: "{{ csrf_token() }}",
+                value: value,
+                line: line,
+            },
+            dataType: 'json',
+            method: 'POST',
+            success: function(msg){
+                console.log(msg);
+            }
+        });
+
+    }
 </script>
-
+@yield('script')
 @include('admin.layouts.includes.alerts')
 @stack('script')
 </body>

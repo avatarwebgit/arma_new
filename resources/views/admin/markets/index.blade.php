@@ -16,84 +16,69 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                        <div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-md-12 mb-3">
-                                        <a href="{{ route('admin.market.create') }}" class="btn btn-primary btn-sm">
-                                            Create
-                                        </a>
-                                    </div>
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-md-12 mb-3">
+                                    <button onclick="createMarketModal()" class="btn btn-primary btn-sm">
+                                        Create
+                                    </button>
+                                    <a href="{{ route('admin.dashboard') }}"
+                                       class="btn btn-default btn-dark btn-sm no-corner ml5" tabindex="0"
+                                       aria-controls="users-table">
+                                        <span> Back</span></a>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="markets-pair-list">
                                             <div id="alert"></div>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>commodity</th>
-                                                    <th>User</th>
-                                                    <th>date</th>
-                                                    <th>Time</th>
-                                                    <th>status</th>
-                                                    <th>action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($group_markets as $markets)
-                                                @foreach($markets->sortBy('time') as $key=>$item)
-                                                    <tr>
-                                                        <td>
-                                                            {{ $key }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->SalesForm->commodity }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->SalesForm->User->name }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->date }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->time }}
-                                                        </td>
-                                                        <td id="market_status_{{ $item->id }}" style="color: {{ $item->Status->color }}">
-                                                            {{ $item->Status->title }}
-                                                        </td>
-                                                        <td>
-                                                            <a title="Edit Market" href="{{ route('admin.market.edit', ['market'=>$item->id]) }}"
-                                                               class="btn btn-sm btn-info">
-                                                                <i class="fa fa-pen"></i>
-                                                                 Market
-                                                            </a>
-                                                            <a title="Edit Commodity" href="{{ route('sale_form',['page_type'=>'Edit','item'=>$item->commodity_id]) }}"
-                                                               class="btn btn-sm btn-primary">
-                                                                <i class="fa fa-list"></i>
-                                                                 Commodity
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                @endforeach
-                                                </tbody>
-                                            </table>
+                                            @include('admin.markets.table')
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     @include('admin.sections.remove_modal')
+
 @endsection
 @push('style')
     @include('admin.layouts.includes.datatable_css')
 @endpush
 @push('script')
-    <script>
+    <script type="module">
+
+        window.Echo.channel('market-status-updated')
+            .listen('MarketStatusUpdated', function (e) {
+                let market_id = e.market_id;
+                get_market_info(market_id)
+            });
+
+        function get_market_info(market_id) {
+
+            $.ajax({
+                url: "{{ route('home.get_market_info') }}",
+                dataType: "json",
+                method: "post",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    market_id: market_id,
+                },
+                success: function (msg) {
+                    if (msg[0] === 1) {
+                        console.log(msg);
+                        let status_text = msg[1];
+                        let status_color = msg[2];
+                        $('#market_status_' + market_id).text(status_text);
+                        $('#market_status_' + market_id).css('color', status_color);
+                    }
+                }
+            })
+        }
 
 
         function removeModal(id, e) {

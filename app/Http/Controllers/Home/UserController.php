@@ -35,32 +35,25 @@ class UserController extends Controller
         $wallets = $user->wallets;
         return view('home.profile.index',compact('user','wallets'));
     }
-
     public function profile()
     {
         $user = auth()->user();
         return view('home.profile.index',compact('user'));
     }
-
     public function updateProfile(User $user,Request $request)
     {
         $request->validate([
             'name' =>'required',
 
         ]);
-
         $user->update([
             'name' =>$request->name,
-
-
         ]);
-
         if ($request->has('password')){
             $user->update([
                 'password' =>Hash::make($request->password),
             ]);
         }
-
         session()->flash('success', 'Update Successfully');
         return redirect()->back();
 
@@ -68,26 +61,18 @@ class UserController extends Controller
     public function updatePassword(Request $request)
     {
         $user = auth()->user();
-
         $request->validate([
             'password' =>'required',
 
         ]);
-
-
         if ($request->has('password')){
             $user->update([
                 'password' =>Hash::make($request->password),
             ]);
         }
-
         session()->flash('success', 'Update Successfully');
         return redirect()->back();
-
     }
-
-
-
     public function requests()
     {
         $id = auth()->id();

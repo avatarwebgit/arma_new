@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "akaunting/laravel-setting": "^1.2",
-        "anhskohbo/no-captcha": "^3.4",
+        "anhskohbo/no-captcha": "^3.6",
         "avatar/setting-module": "dev-main",
         "bacon/bacon-qr-code": "^2.0",
         "beyondcode/laravel-websockets": "^1.14",
@@ -30,7 +30,6 @@
         "maatwebsite/excel": "^3.1",
         "mercadopago/dx-php": "^2.5",
         "munafio/chatify": "1.2",
-        "nwidart/laravel-modules": "^10.0",
         "paragonie/constant_time_encoding": "^2.6",
         "paragonie/recaptcha": "^2.1",
         "paragonie/sodium_compat": "^1.20",
@@ -43,12 +42,14 @@
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-database-mail-templates": "^3.5",
         "spatie/laravel-permission": "^5.7",
+        "statikbe/laravel-cookie-consent": "^1.8",
         "stevebauman/location": "^6.5",
         "stripe/stripe-php": "^10.0",
         "tecnickcom/tcpdf": "^6.5",
         "twilio/sdk": "^6.37",
         "yajra/laravel-datatables": "^9.0",
-        "yajra/laravel-datatables-oracle": "^10.0"
+        "yajra/laravel-datatables-oracle": "^10.0",
+      "ext-http": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -62,7 +63,6 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Modules\\": "Modules/",
             "Database\\Seeders\\": "database/seeders/",
             "Database\\Factories\\": "database/factories/"
         },

@@ -29,6 +29,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
     <link rel="stylesheet" href="{{ asset('vendor/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/developer.css') }}">
+    <style>
+        .seller *{
+            color: black;
+        }
+    </style>
     @stack('style')
 </head>
 
@@ -59,9 +64,7 @@
             </div>
             <!-- <i data-feather="menu"></i> -->
         </a>
-        <a href="#!" class="dash-head-link" id="header-collapse">
-            <i data-feather="more-vertical"></i>
-        </a>
+
     </div>
 </div>
 
@@ -214,12 +217,15 @@
 <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
 <script src="{{ asset('assets/js/dash.js') }}"></script>
 <script src="{{ asset('vendor/modules/tooltip.js') }}"></script>
-<script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/notifier.js') }}"></script>
 <script src="{{ asset('vendor/js/custom.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bouncer.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/form-validation.js') }}"></script>
+<script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap-clockpicker.min.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
+
 
 @if (!empty(setting('gtag')))
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('gtag') }}"></script>
@@ -265,6 +271,7 @@
 
 </script>
 
+@yield('script')
 @include('admin.layouts.includes.alerts')
 @stack('script')
 </body>

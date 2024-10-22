@@ -17,11 +17,13 @@ use App\Models\Packing;
 use App\Models\PaymentTerm;
 use App\Models\PriceType;
 use App\Models\QualityQuantityInspector;
+use App\Models\Refund;
 use App\Models\SalesOfferForm;
 use App\Models\ShippingTerm;
 use App\Models\TargetMarket;
 use App\Models\THCIncluded;
 use App\Models\ToleranceWeightBy;
+use App\Models\Transaction;
 use App\Models\Units;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,55 +35,40 @@ class SellerController extends Controller
     {
         $user = auth()->user();
         $wallets = $user->wallets;
-        return view('home.profile.index',compact('user','wallets'));
+        return view('seller.dashboard', compact('user', 'wallets'));
     }
+
     public function profile()
     {
         $user = auth()->user();
-        return view('home.profile.index',compact('user'));
-    }
-    public function updateProfile(User $user,Request $request)
-{
-    $request->validate([
-        'name' =>'required',
-
-    ]);
-
-    $user->update([
-        'name' =>$request->name,
-
-
-    ]);
-
-    if ($request->has('password')){
-        $user->update([
-            'password' =>Hash::make($request->password),
-        ]);
+        return view('seller.profile', compact('user'));
     }
 
-    session()->flash('success', 'Update Successfully');
-    return redirect()->back();
-
-}
-    public function updatePassword(Request $request)
+    public function wallet()
     {
         $user = auth()->user();
+        $wallet = $this->calculate_user_wallet($user);
+        $transactions = Transaction::where('user_id',$user->id)->latest()->get();
+        return view('seller.wallets.index', compact('wallet', 'user', 'transactions'));
+    }
 
+    public function updateProfile(User $user, Request $request)
+    {
         $request->validate([
-            'password' =>'required',
-
+            'name' => 'required',
+            'email' => 'required|email',
+            'company_name' => 'required',
+            'field' => 'required',
+            'mobile_number' => 'required',
         ]);
-
-
-        if ($request->has('password')){
+        $user->update($request->except('new_password'));
+        if ($request->has('new_password')) {
             $user->update([
-                'password' =>Hash::make($request->password),
+                'password' => Hash::make($request->new_password),
             ]);
         }
-
-        session()->flash('success', 'Update Successfully');
+        session()->flash('success', 'User Updated Successfully');
         return redirect()->back();
-
     }
 
     public function requests()
@@ -89,6 +76,12 @@ class SellerController extends Controller
         $id = auth()->id();
         $items = SalesOfferForm::where('user_id', $id)->where('is_complete', 1)->paginate();
         return view('seller.sales_form.list', compact('items'));
+    }
+    public function refund_request()
+    {
+        $id = auth()->id();
+        $items = Refund::where('user_id', $id)->paginate();
+        return view('seller.refund_request', compact('items'));
     }
 
 }

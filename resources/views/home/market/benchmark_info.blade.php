@@ -7,5 +7,6 @@
        data-benchmark4="{{ $market->benchmark4 }}"
        data-benchmark5="{{ $market->benchmark5 }}"
        data-benchmark6="{{ $market->benchmark6 }}"
+       data-time_to_close_bid_deposit="{{ $market->time_to_close_bid_deposit }}"
        data-step="{{ $market->step_price_competition }}"
 >

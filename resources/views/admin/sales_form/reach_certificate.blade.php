@@ -1,8 +1,8 @@
 <div class="col-12">
     <hr>
-    <strong>
-        Reach Certificate
-    </strong>
+{{--    <strong>--}}
+{{--        Reach Certificate--}}
+{{--    </strong>--}}
 </div>
 <div class="col-12 col-md-6 mb-3 d-flex justify-content-between align-items-end">
     @php

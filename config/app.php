@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Tehran',
+    'timezone' => 'Europe/London',
 
     /*
     |--------------------------------------------------------------------------
@@ -193,9 +193,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-        Nwidart\Modules\LaravelModulesServiceProvider::class,
-
-
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 
     /*
@@ -254,7 +252,7 @@ return [
         'Paytm' => Paytm\JsCheckout\Facades\Paytm::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Module' => Nwidart\Modules\Facades\Module::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
     ])->toArray(),
 

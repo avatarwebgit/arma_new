@@ -238,9 +238,14 @@
 <script src="{{ asset('admin/fullCKEditor/ckeditor/ckeditor.js') }}"></script>
 
 <script>
-    $(document).ready(function () {
-        alert('okk');
-    })
+    //remove style
+    // CKEDITOR.on('instanceReady', function (ev) {
+    //     ev.editor.on('paste', function (evt) {
+    //         if (evt.data.type == 'html') {
+    //             evt.data.dataValue = evt.data.dataValue.replace(/ style=".*?"/g, '');
+    //         }
+    //     }, null, null, 9);
+    // });
     $('.nav-link').click(function () {
         $('.dropdown-menu').removeClass('show');
         $(this).parent().addClass('show');

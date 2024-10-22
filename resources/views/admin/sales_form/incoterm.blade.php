@@ -103,11 +103,11 @@
     <label for="{{ filed_name($name) }}"
            class="mb-2">{!! $name.' '.$required_span !!}</label>
     <select {{ $required }} id="{{ filed_name($name) }}" type="text"
-            name="{{ filed_name($name) }}" class="form-control ">
+            name="{{ filed_name($name) }}" class="form-control" data-live-search="true">
         @foreach($countries as $item)
             <option
-                {{ $value==$item->title ? ' selected="selected"' : '' }}
-                value="{{ $item->title }}">{{ $item->title }}</option>
+                {{ $value==$item->countryName ? ' selected="selected"' : '' }}
+                value="{{ $item->countryName }}">{{ $item->countryName }}</option>
         @endforeach
     </select>
     @error(filed_name($name))
@@ -170,11 +170,12 @@
             }
         }
     @endphp
+    <label>{{ $label }}</label>
     <textarea rows="2"
               {{ $required }} id="{{ filed_name($name) }}"
               type="text"
               name="{{ filed_name($name) }}"
-              class="form-control" placeholder="{{ $label }}">{{ $value }}</textarea>
+              class="form-control">{{ $value }}</textarea>
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}

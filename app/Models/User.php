@@ -23,10 +23,7 @@ class User extends Authenticatable
     use HasRoles;
     use HasFactory;
 
-    protected $fillable = [
-        'name', 'email', 'password', 'type', 'profile', 'active_status', 'email_verified_at', 'lang', 'created_by', 'country',
-        'country_code', 'phone', 'isVerified', 'phone_verified_at', 'role_request_id', 'company_name', 'mobile_number'
-    ];
+    protected $guarded = [''];
 
     protected $hidden = [
         'password', 'remember_token',
@@ -83,5 +80,14 @@ class User extends Authenticatable
     public function wallets()
     {
         return $this->hasMany(Wallet::class,'user_id');
+    }
+    public function Transactions()
+    {
+        return $this->hasMany(Transaction::class,'user_id');
+    }
+
+    public function CreatedBy()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 }

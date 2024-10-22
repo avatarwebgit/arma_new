@@ -33,7 +33,7 @@
             name="{{ filed_name($name) }}" class="form-control ">
         @foreach($qualityQuantityInspector as $item)
             <option {{ $value==$item->title ? ' selected="selected"' : '' }}
-                    value="{{ $item->title }}">{{ $item->title }}</option>
+                    value="{{ $item->title }}">{{ ucfirst($item->title) }}</option>
         @endforeach
     </select>
     @error(filed_name($name))

@@ -20,9 +20,11 @@ class NewBidCreated implements ShouldBroadcast
      * @return void
      */
     public $market_id;
-    public function __construct($market_id)
+    public $is_delete;
+    public function __construct($market_id,$is_delete=false)
     {
         $this->market_id = $market_id;
+        $this->is_delete = $is_delete;
     }
 
     /**

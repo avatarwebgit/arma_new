@@ -563,9 +563,14 @@ pre code {
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
-        max-width: 1400px
+        max-width: 75%;
+    }
+}
+@media (max-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1000px
     }
 }
 
@@ -4509,8 +4514,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     }
 
     .navbar-expand-lg .navbar-collapse {
-        display: -ms-flexbox !important;
-        display: flex !important;
+        display: -ms-flexbox ;
+        display: flex ;
         -ms-flex-preferred-size: auto;
         flex-basis: auto
     }

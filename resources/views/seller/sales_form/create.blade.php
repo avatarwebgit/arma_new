@@ -79,11 +79,16 @@
                                                             class="btn btn-sm btn-success">
                                                         Save
                                                     </button>
-                                                    <button title="Your Information Permanently deleted" type="button"
-                                                            onclick="CancelForm({{ isset($form->id)?$form->id:0 }})"
-                                                            class="btn btn-sm btn-danger">
-                                                        Cancel
-                                                    </button>
+                                                    @if(request()->is('sale_form/Edit*'))
+
+                                                    @else
+                                                        <button title="Your Information Permanently deleted" type="button"
+                                                                onclick="CancelForm({{ isset($form->id)?$form->id:0 }})"
+                                                                class="btn btn-sm btn-danger">
+                                                            Cancel
+                                                        </button>
+                                                    @endif
+
                                                     {{--                                                    @include('admin.sales_form.change_status')--}}
                                                 </div>
                                             </div>

@@ -27,6 +27,7 @@
                                             <th>Status</th>
                                             <th>Action</th>
                                             <th>Date</th>
+                                            <th>Message</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -45,9 +46,17 @@
                                                     <a href="{{ route('sale_form.show',['id'=>$form->id]) }}" class="btn btn-sm btn-primary text-white mr-1">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
+                                                    @if($form->Status->id==4 or $form->Status->id==3)
+                                                        <a href="{{ route('sale_form.edit',['id'=>$form->id]) }}" class="btn btn-sm btn-success text-white mr-1">
+                                                            <i class="fa fa-pen"></i>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     {{ $form->created_at->format('Y-m-d') }}
+                                                </td>
+                                                <td class="text-danger">
+                                                    {{ $form->data_pending_message }}
                                                 </td>
                                             </tr>
                                         @endforeach

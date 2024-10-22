@@ -217,7 +217,7 @@ return [
     |
     */
 
-    'max_request_size_in_kb' => 250,
+    'max_request_size_in_kb' => 1000,
 
     /*
     |--------------------------------------------------------------------------
@@ -289,5 +289,4 @@ return [
     */
 
     'promise_resolver' => \React\Promise\FulfilledPromise::class,
-
 ];
