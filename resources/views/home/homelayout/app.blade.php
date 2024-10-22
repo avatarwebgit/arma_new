@@ -34,6 +34,22 @@
 <script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
+    $(document).ready(function() {
+
+        $('input[name="search"]').focus(function() {
+
+            $(this).attr('placeholder', ''); // حذف placeholder در زمان فوکوس
+
+        });
+
+
+        $('input[name="search"]').blur(function() {
+
+            $(this).attr('placeholder', 'search...'); // بازگشت placeholder در زمان از دست دادن فوکوس
+
+        });
+
+    });
     window.addEventListener('beforeunload', function (event) {
         // Call logout route
         fetch('/logout', {

@@ -24,6 +24,10 @@
 
     @vite(['resources/sass/app.scss','resources/js/app.js'])
     <style>
+        input[name="search"]:focus::placeholder {
+            color: transparent !important; /* مخفی کردن placeholder هنگام فوکوس */
+        }
+
         .header-img-icon .nav-link img{
             border-radius: 50% !important;
             border: 1px solid #C3C3C3;
