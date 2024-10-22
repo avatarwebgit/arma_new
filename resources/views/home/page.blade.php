@@ -1,7 +1,7 @@
 @extends('home.homelayout.app')
 
 @section('title')
-    {{ $page->title }}
+    {{ isset($page->title)   ? $page->title : 'صفحه وجود ندارد' }}
 @endsection
 
 @section('style')
@@ -109,11 +109,11 @@
             <div class="landing-feature container">
                 @if($page!=null)
                     <div class="row">
-                        @if($menus->id!=2)
-                            <div class="col-md-12">
-                                <h2>{{ $page->title }}</h2>
-                            </div>
-                        @endif
+{{--                        @if($menus->id!=2)--}}
+{{--                            <div class="col-md-12">--}}
+{{--                                <h2>{{ $page->title }}</h2>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
                         <div class="{{$page->id == 20 ? 'col-md-6' : 'col-md-12'}}">
                             {!! $page->description !!}
                         </div>
