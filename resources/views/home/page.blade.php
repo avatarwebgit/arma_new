@@ -19,6 +19,7 @@
                 margin: 0 !important;
             }
         }
+
         td, th {
             border: none !important;
             padding-left: 10px !important;
