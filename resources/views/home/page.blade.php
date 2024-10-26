@@ -6,6 +6,19 @@
 
 @section('style')
     <style>
+        span{
+           line-height: 9pt !important;
+        }
+
+        @media screen and (max-width: 768px){
+            span{
+                font-size:9pt !important;
+            }
+            .MsoTableGrid p{
+                line-height: 17px !important;
+                margin: 0 !important;
+            }
+        }
         td, th {
             border: none !important;
             padding-left: 10px !important;
