@@ -48,7 +48,7 @@
                 <ul class="social-icon" style="justify-content: flex-start !important;">
                     {{--                    <li class="icon-social-media"><a href="/{{ $facebook }}"><i class="icon ion-logo-facebook"></i></a></li>--}}
                     <li class="icon-social-media mr-2"><a href="{{ $twitter }}"><i
-                                class="icon ion-logo-twitter"></i></a></li>
+                                class="icon ion-logo-x"></i></a></li>
                     <li class="icon-social-media"><a href="{{ $linkedin }}"><i class="icon ion-logo-linkedin"></i></a>
                     </li>
                 </ul>

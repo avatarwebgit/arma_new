@@ -25,6 +25,12 @@
     @vite(['resources/sass/app.scss','resources/js/app.js'])
 
     <style>
+        .ion-logo-x::before {
+            content: "x" !important;
+            font-size: 29px;
+            font-style: normal !important;
+        }
+
         input[name="search"]:focus::placeholder {
             color: transparent !important; /* مخفی کردن placeholder هنگام فوکوس */
         }

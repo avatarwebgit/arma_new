@@ -328,10 +328,6 @@
             background-color: #f2f2f2 !important;
         }
 
-        .ion-logo-twitter::before {
-            content: "x" !important;
-            font-size: 32px;
-        }
 
         html {
             -webkit-overflow-scrolling: auto !important;
