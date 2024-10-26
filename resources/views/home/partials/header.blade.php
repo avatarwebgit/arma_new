@@ -320,7 +320,7 @@
                                 </a>
                             </li>
                         @else
-                            @if(count($menu->children()->where('priority','asc')->where('show_on_header',1)->get())>0)
+                            @if(count($menu->children)>0)
                             <li class="nav-item dropdown d-flex align-items-center mr-3">
                                 <a class="nav-link dropdown-toggle"
                                    href="{{ route('home.menus',['menus'=>$menu->id]) }}"
@@ -331,7 +331,7 @@
                                 </a>
 
                                     <div class="dropdown-menu">
-                                        @foreach($menu->children()->where('priority','asc')->where('show_on_header',1)->get() as $child)
+                                        @foreach($menu->children()->orderby('priority','asc')->where('show_on_header',1)->get() as $child)
                                             <a class='dropdown-item'
                                                href='{{ route('home.menus',['menus'=>$child->id]) }}'>
                                                 {{ $child->title }}
