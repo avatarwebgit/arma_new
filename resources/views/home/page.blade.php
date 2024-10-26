@@ -14,7 +14,7 @@
             span{
                 font-size:9pt !important;
             }
-            .MsoTableGrid p{
+            p{
                 line-height: 17px !important;
                 margin: 0 !important;
             }
