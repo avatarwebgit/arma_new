@@ -59,7 +59,7 @@
                 <span class="text-bold">Specification</span>
                 <span>
                                                                 @auth
-                        Available
+                        Display
                     @else
                         <a href="#" onclick="ShowLoginModal({{ $market->id }})" class="text-login">
                             Log in
