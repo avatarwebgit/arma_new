@@ -12,7 +12,7 @@
 
         @media screen and (max-width: 768px){
             span{
-                font-size:9pt !important;
+                font-size:10pt !important;
             }
             p{
                 line-height: 17px !important;
