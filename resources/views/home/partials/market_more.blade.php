@@ -59,7 +59,10 @@
                 <span class="text-bold">Specification</span>
                 <span>
                                                                 @auth
-                        Display
+                        <a target="_blank"
+                           href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$market->SalesForm->specification_file)) }}">
+                            Display
+                        </a>
                     @else
                         <a href="#" onclick="ShowLoginModal({{ $market->id }})" class="text-login">
                             Log in
