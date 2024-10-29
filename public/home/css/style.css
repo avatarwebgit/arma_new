@@ -2614,7 +2614,7 @@ tbody.ob-heading {
 @media (min-width: 1700px) {
     .header1 {
         width: max-content;
-        background-color: #e5e5e5 !important;
+        background-color: #dddddd !important;
     }
 
     .header2 {
