@@ -53,6 +53,20 @@
                         </span>
     </div>
     <div class="d-flex justify-content-between">
+        <span class="text-bold text-gray-100">Min Bid Price</span>
+        @php
+            $alpha=$market->alpha!==null?$market->alpha:0;
+        @endphp
+        <span class="text-bold text-light-blue ">
+{{--                           {{ $market->offer_price }}--}}
+            @if($market->SalesForm->price_type=='Fix')
+                <td class="text-center">{{ number_format(($market->SalesForm->price)-($alpha)) }}</td>
+            @else
+                <td class="text-center">{{ number_format(($market->SalesForm->alpha)-($alpha))  }}</td>
+            @endif
+                        </span>
+    </div>
+    <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Payment</span>
         <span class="text-bold text-light-blue ">
                             {{ strtoupper($market->SalesForm->payment_options) }}
