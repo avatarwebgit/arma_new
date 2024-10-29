@@ -155,7 +155,7 @@
                 display: none !important;
             }
             .menu-mobile input.form-control{
-                max-width: 300px;
+                max-width: 240px;
                 margin: 0 auto;
             }
         }
