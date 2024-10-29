@@ -1,7 +1,7 @@
-<div class="bid_term_condition p-3 text-justify mt-3">
+<div class="bid_term_condition p-3 text-justify">
     {!! $market->SalesForm->term_conditions !!}
 </div>
-<div class="form-check mt-5">
+<div class="form-check mt-2">
     <input class="form-check-input" type="checkbox" value="1" id="CheckTermCondition_{{ $market->id }}"
            name="term_condition">
     <label class="form-check-label" for="flexCheckDefault">

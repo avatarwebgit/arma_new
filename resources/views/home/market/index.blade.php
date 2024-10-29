@@ -930,7 +930,7 @@
             @include('home.market.mobile_table')
         </div>
         <div class="row">
-            <div class="col-12 mt-3">
+            <div class="col-12">
                 @include('home.market.term_condition')
             </div>
         </div>
