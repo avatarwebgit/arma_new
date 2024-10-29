@@ -94,7 +94,7 @@
                 <span class="text-bold">Payment</span>
                 <span>
                                     @auth
-                        LC/TT/DP/DA
+                       {{ strtoupper($market->SalesForm->payment_options) }}
                     @else
                         <a href="#" onclick="ShowLoginModal({{ $market->id }})" class="text-login">
                             Log in
