@@ -64,7 +64,7 @@
                                                                     data-offer="{{ $offer }}"
                                                                     data-quantity="{{ $item->max_quantity }}"
                                                                     data-term="{{ $item->incoterms }}"
-                                                                    data-rigen="{{ $item->country }}"
+                                                                    data-rigen="{{ $item->origin_country }}"
                                                                     data-packing="{{ $item->packing }}"
                                                                     {{ $market->commodity_id==$item->id?'selected':'' }} value="{{ $item->id }}">
                                                                     Commodity:{{ $item->commodity }}
