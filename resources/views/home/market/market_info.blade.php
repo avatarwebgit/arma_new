@@ -73,7 +73,7 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Delivery Period</span>
         <span class="text-bold text-light-blue ">
-            {{ 'from: '.$market->SalesForm->loading_from.' - to: '.$market->SalesForm->loading_to }}
+            {{ 'from: '.$market->SalesForm->loading_from.'    to: '.$market->SalesForm->loading_to }}
         </span>
     </div>
 
