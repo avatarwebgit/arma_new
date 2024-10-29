@@ -156,7 +156,7 @@
                     </td>
                     <td>
                     <span style="margin-left: 10px">
-                    {{ $market->SalesForm->country }}
+                    {{ $market->SalesForm->origin_country }}
                     </span>
                     </td>
                     <td>

@@ -80,7 +80,7 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Origin</span>
         <span class="text-bold text-light-blue ">
-                           {{ $market->SalesForm->country }}
+                           {{ $market->SalesForm->origin_country }}
                         </span>
     </div>
     <div class="d-flex justify-content-between">
