@@ -30,6 +30,8 @@
     </style>
 @endpush
 
+
+
 @push('script')
     <script>
         CKEDITOR.replace('message', {
@@ -268,6 +270,52 @@
                                                             <label class="form-check-label" for="alert_active">Active</label>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h3>Contact Us</h3>
+                                            <hr>
+                                            <div class="settings-profile">
+                                                <div class="row">
+                                                    <div class="col-12 mb-3">
+                                                        <label for="our_address">Our Address</label>
+                                                        <textarea id="our_address" name="our_address" class="form-control">{{ $our_address }}</textarea>
+                                                        @error('our_address')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <label for="our_number">Our Number</label>
+                                                        <input id="our_number" name="our_number" class="form-control" value="{{ $our_number }}">
+                                                        @error('alert_bg_color')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <label for="our_email">Our Email</label>
+                                                        <input id="our_email" name="our_email" class="form-control" value="{{ $our_email }}">
+                                                        @error('our_email')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    @foreach(['contact_us_banner' => $contact_us_banner] as $key => $image)
+                                                        <div class="col-12 mb-3 text-center">
+                                                            <div class="position-relative">
+                                                                <img class="small-image img-fluid" alt="{{ $key }}" src="{{ imageExist(env('UPLOAD_SETTING'), $image) }}">
+                                                                <button style="width: 50px" onclick="removeFile('{{ $image }}')" type="button" class="btn btn-danger btn-sm position-absolute bottom-0 end-0 m-1">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                            <label for="{{ $key }}" class="mt-2">{{ ucfirst($key) }}</label>
+                                                            <input id="{{ $key }}" type="file" name="{{ $key }}" class="form-control">
+                                                            @error($key)
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>

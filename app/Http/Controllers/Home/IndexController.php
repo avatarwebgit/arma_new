@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactFormEmail;
 use App\Models\BidHistory;
 use App\Models\Blog;
 use App\Models\Commodity;
+use App\Models\ContactForm;
 use App\Models\ContainerType;
 use App\Models\ContractType;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\Destination;
+use App\Models\Email;
 use App\Models\FlexiTankType;
 use App\Models\FormStatus;
 use App\Models\HeaderCategory;
@@ -47,6 +50,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use MongoDB\Driver\Session;
 
 class IndexController extends Controller
@@ -837,6 +841,45 @@ class IndexController extends Controller
                 'key' => 'logo_dark'
             ]);
         }
+    }
+
+    public function contact()
+    {
+        $page = Page::first();
+        return view('home.contact', compact('page'));
+    }
+
+    public function contact_save(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'email' => 'required|email',
+            'message' => 'required|string|max:10000',
+        ]);
+        $name = $request->name;
+        $email = $request->email;
+        $message = $request->message;
+
+        try {
+            //email to Admin
+            $settings = Setting::where('key', 'our_email')->first();
+            $our_email=$settings->value;
+            Mail::to($our_email)->send(new ContactFormEmail($name, $email, $message));
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+
+        //save to dataBase
+//        ContactForm::create([
+//            'name' => $name,
+//            'email' => $email,
+//            'message' => $message,
+//        ]);
+//        $receptor->notify(new ContactFormEmail());
+        $msg = 'Your Message Registered Successfully';
+        return response()->json([1, $msg]);
+
     }
 
 }

@@ -1,4 +1,4 @@
-<footer class="landing-footer-two mt-3">
+<footer class="landing-footer-two @unless(request()->is('contact')) mt-3 @endunless">
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-5">
@@ -13,7 +13,6 @@
             </div>
         </div>
         <div class="row">
-
             @php
                 $menus=\App\Models\Menus::where('parent',0)->where('show_on_footer',1)->get();
             @endphp

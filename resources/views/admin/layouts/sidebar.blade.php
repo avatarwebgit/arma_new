@@ -72,7 +72,6 @@
                         'Draft' => \App\Models\SalesOfferForm::where('user_id', \auth()->id())->where('is_save', 2)->count(),
                     ];
                 @endphp
-
                 @if($role == 'seller')
                     @include('admin.layouts.seller_sidebar')
                 @elseif($role == 'buyer')

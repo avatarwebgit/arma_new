@@ -40,10 +40,30 @@ class AppServiceProvider extends ServiceProvider
             'admin_avatar', 'top_bar_color', 'alert_description',
             'alert_bg_color', 'alert_text_color', 'alert_font_size',
             'alert_height', 'alert_active', 'about_arma', 'facebook',
-            'twitter', 'linkedin', 'copy_right'
+            'twitter', 'linkedin', 'copy_right','contact_us_banner','our_address','our_number','our_email'
         ];
 
         $settings = Setting::whereIn('key', $settingsKeys)->pluck('value', 'key');
+
+        // بررسی و ساخت مقادیر جدید اگر وجود نداشته باشند
+
+        foreach ($settingsKeys as $key) {
+
+            if (!$settings->has($key)) {
+
+                // اگر کلید وجود نداشت، آن را بسازید
+
+                Setting::create([
+
+                    'key' => $key,
+
+                    'value' => null, // مقدار پیش‌فرض یا سفارشی خود را اینجا قرار دهید
+
+                ]);
+
+            }
+
+        }
 
         $marketKeys = ['ready_to_duration', 'open_duration', 'q_1', 'q_2', 'q_3'];
         $marketSettings = MarketSetting::whereIn('key', $marketKeys)->pluck('value', 'key');
@@ -58,6 +78,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Combine settings
         $combinedSettings = array_merge($settings->toArray(), $marketSettings->toArray());
+
 
         view()->share(
             array_merge($combinedSettings, compact(

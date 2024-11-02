@@ -9,7 +9,7 @@ class ContactForm extends Model
 {
     use HasFactory;
 
-    protected $table = "form_contact";
+    protected $table = "contact_form";
     protected $guarded = [];
 
 }

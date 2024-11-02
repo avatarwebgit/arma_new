@@ -73,7 +73,9 @@ class SettingController extends Controller
 
             'copy_right',
 
-            'logo_dark' // افزودن کلید logo_dark
+            'logo_dark', // افزودن کلید logo_dark
+
+            'our_address'
         ];
 
 
@@ -159,7 +161,7 @@ class SettingController extends Controller
     {
         try {
             // آرایه‌ای برای ورودی‌های قابل دریافت
-            $fileFields = ['logo', 'fav_icon', 'footer_logo', 'admin_avatar','logo_dark'];
+            $fileFields = ['logo', 'fav_icon', 'footer_logo', 'admin_avatar','logo_dark','contact_us_banner'];
             $data = [];
 
             // بارگذاری فایل‌ها
@@ -176,7 +178,7 @@ class SettingController extends Controller
                 'facebook', 'twitter', 'linkedin', 'about_arma',
                 'copy_right',
                 'start_market',
-                'end_market',
+                'end_market','our_address','our_number','our_email'
             ];
 
             foreach ($fields as $field) {
