@@ -1,4 +1,3 @@
-
 <div class="col-12 col-md-12 col-xl-8 mb-5 menu-mobile mt-3">
     <div class="row mb-4">
         <div class="col-12 col-md-6 mb-3">
@@ -28,10 +27,10 @@
                             <tr>
                                 <th class="text-center text-white w-50">Max
                                     Quantity
-{{--                                    ( {{ $market->SalesForm->unit }} )--}}
+                                    {{--                                    ( {{ $market->SalesForm->unit }} )--}}
                                 </th>
                                 <th class="text-center text-white w-50">Price
-{{--                                    ( {{ $market->SalesForm->currency }} )--}}
+                                    {{--                                    ( {{ $market->SalesForm->currency }} )--}}
                                 </th>
                             </tr>
                             </thead>
@@ -51,7 +50,8 @@
                                             for="seller_price-{{ $market->id }}">Price
                                             ( {{ $market->SalesForm->currency }} )
                                         </label>
-                                        <input onkeyup="NumberFormat(this)" disabled id="seller_price-{{ $market->id }}" type="text"
+                                        <input onkeyup="NumberFormat(this)" disabled id="seller_price-{{ $market->id }}"
+                                               type="text"
                                                class="form-control"
                                                name="seller_quantity-{{ $market->id }}">
                                         <p id="seller_price_error" class="error_text">please enter price</p>
@@ -86,10 +86,10 @@
                                     Bidder
                                 </th>
                                 <th class="text-center text-white">Quantity
-{{--                                    ( {{ $market->SalesForm->unit }})--}}
+                                    {{--                                    ( {{ $market->SalesForm->unit }})--}}
                                 </th>
                                 <th class="text-center text-white">Price
-{{--                                    ( {{ $market->SalesForm->currency }})--}}
+                                    {{--                                    ( {{ $market->SalesForm->currency }})--}}
                                 </th>
 
                             </tr>
@@ -114,7 +114,8 @@
                                         for="bid_quantity-{{ $market->id }}">Quantity
                                         ( {{ $market->SalesForm->unit }} )
                                     </label>
-                                    <input onkeyup="NumberFormat(this)" disabled id="bid_quantity-{{ $market->id }}" type="text"
+                                    <input onkeyup="NumberFormat(this)" disabled id="bid_quantity-{{ $market->id }}"
+                                           type="text"
                                            class="form-control">
                                     <p id="bid_quantity_error" class="error_text">please enter quantity</p>
                                 </div>
@@ -125,7 +126,8 @@
                                         for="bid_price-{{ $market->id }}">Price
                                         ( {{ $market->SalesForm->currency }} )
                                     </label>
-                                    <input onkeyup="NumberFormat(this)" disabled id="bid_price-{{ $market->id }}" class="form-control">
+                                    <input onkeyup="NumberFormat(this)" disabled id="bid_price-{{ $market->id }}"
+                                           class="form-control">
                                     <p id="bid_price_error" class="error_text">please enter price</p>
                                 </div>
                             </div>
@@ -168,8 +170,18 @@
                         </th>
                     </tr>
                     </thead>
-                    <tbody class="d-none final_status_section_table" id="final_status_section_table-{{ $market->id }}">
-                    @include('home.market.final_status')
+                    <tbody class="final_status_section_table" id="final_status_section_table-{{ $market->id }}">
+                    <tr style="height: 27px;background-color: #e4e4e4">
+                        <td class="text-center ">
+
+                        </td>
+                        <td class="text-center">
+
+                        </td>
+                        <td class="text-center">
+
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -177,7 +189,7 @@
     </div>
     <div class="row">
         <div class="col-12 mt-3">
-{{--            @include('home.market.bid_deposit')--}}
+            {{--            @include('home.market.bid_deposit')--}}
         </div>
     </div>
 </div>
