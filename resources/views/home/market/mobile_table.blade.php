@@ -108,7 +108,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 mt-3">
                                 <div class="mt-3 text-center">
                                     <label
                                         for="bid_quantity-{{ $market->id }}">Quantity
@@ -129,7 +129,7 @@
                                     <p id="bid_price_error" class="error_text">please enter price</p>
                                 </div>
                             </div>
-                            <div class="col-12 text-center mt-3">
+                            <div class="col-12 text-center mt-5">
                                 <button id="bid_button-{{ $market->id }}" disabled onclick="Bid({{ $market->id }})"
                                         class="btn btn-secondary pt-1 pb-1 pr-5 pl-5">Bid
                                 </button>
