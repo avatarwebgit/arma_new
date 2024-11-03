@@ -224,7 +224,7 @@
                                 </div>
                             </div>
                         @endif
-                        @if($page->id == 4)
+                        @if($menus->id == 4)
                             {{ dd($markets) }}
                         @endif
                     </div>
