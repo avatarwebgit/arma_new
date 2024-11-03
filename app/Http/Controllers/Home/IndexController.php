@@ -270,7 +270,13 @@ class IndexController extends Controller
             return view('home.contact');
         }
         $page = $menus->Pages()->first();
-        return view('home.page', compact('page', 'menus'));
+        $markets=[];
+        if ($menus->id == 4) {
+            $yesterday = Carbon::yesterday();
+            $tomorrow = Carbon::tomorrow();
+            $markets = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get();
+        }
+        return view('home.page', compact('page', 'menus','markets'));
     }
 
     public function blogs()

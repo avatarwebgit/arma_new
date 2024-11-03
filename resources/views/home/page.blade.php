@@ -6,15 +6,16 @@
 
 @section('style')
     <style>
-        span{
-           line-height: 9pt !important;
+        span {
+            line-height: 9pt !important;
         }
 
-        @media screen and (max-width: 768px){
-            span{
-                font-size:10pt !important;
+        @media screen and (max-width: 768px) {
+            span {
+                font-size: 10pt !important;
             }
-            p{
+
+            p {
                 line-height: 17px !important;
                 margin: 0 !important;
             }
@@ -123,11 +124,11 @@
             <div class="landing-feature container">
                 @if($page!=null)
                     <div class="row">
-{{--                        @if($menus->id!=2)--}}
-{{--                            <div class="col-md-12">--}}
-{{--                                <h2>{{ $page->title }}</h2>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
+                        {{--                        @if($menus->id!=2)--}}
+                        {{--                            <div class="col-md-12">--}}
+                        {{--                                <h2>{{ $page->title }}</h2>--}}
+                        {{--                            </div>--}}
+                        {{--                        @endif--}}
                         <div class="{{$page->id == 20 ? 'col-md-6' : 'col-md-12'}}">
                             {!! $page->description !!}
                         </div>
@@ -222,6 +223,9 @@
                                     </form>
                                 </div>
                             </div>
+                        @endif
+                        @if($page->id == 4)
+                            {{ dd($markets) }}
                         @endif
                     </div>
                 @endif
