@@ -272,12 +272,10 @@ class IndexController extends Controller
         $page = $menus->Pages()->first();
         $markets=[];
         if ($menus->id == 4) {
-
             $time=Carbon::now()->format('h:i:s');
-            dd($time);
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
-            $markets = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->where('time',$time)->orderby('date', 'asc')->get();
+            $markets = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->where('time','<',$time)->orderby('date', 'asc')->get();
         }
         return view('home.page', compact('page', 'menus','markets'));
     }
