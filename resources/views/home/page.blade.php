@@ -44,7 +44,7 @@
         }
 
         .daily_report tbody tr:nth-child(2n+1) {
-            background: #f8f8f8 !important;
+            background: #f8f8f8;
         }
 
         thead td {
