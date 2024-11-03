@@ -338,13 +338,13 @@
                                                 </td>
                                                 <td>
              <span>
-            Delivery
+            {{ str_replace('-','/',$market->SalesForm->loading_from).' - '.str_replace('-','/',$market->SalesForm->loading_to) }}
             </span>
                                                 </td>
                                                 <td>
                         <span>
 
-            Region
+            {{ $market->SalesForm->origin_country }}
             </span>
                                                 </td>
                                                 <td>
