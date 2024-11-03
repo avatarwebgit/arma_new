@@ -230,8 +230,6 @@
                             </div>
                         @endif
                         @if($menus->id == 4)
-
-                            {{ dd($markets) }}
                             <div class="col-12">
                                 <div class="table-responsive">
                                     <table class="table">
@@ -307,7 +305,79 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($markets as $market)
+                                            <tr>
+                                                <td>
+              <span>
+            {{ $market->date }}
+            </span>
+                                                </td>
+                                                <td>
+            <span>
+            {{ $market->SalesForm->commodity }}
+            </span>
+                                                </td>
 
+                                                <td>
+            <span>
+              Quantity
+            </span>
+                                                </td>
+                                                <td>
+             <span>
+                  @php
+                      $minQuantity=str_replace(',','',$market->SalesForm->min_order);
+                  @endphp
+                 {{ number_format($minQuantity) }}
+            </span>
+                                                </td>
+                                                <td>
+            <span>
+             {{ $market->SalesForm->packing }}
+            </span>
+                                                </td>
+                                                <td>
+             <span>
+            Delivery
+            </span>
+                                                </td>
+                                                <td>
+                        <span>
+
+            Region
+            </span>
+                                                </td>
+                                                <td>
+                        <span>
+
+            {{ $market->SalesForm->price_type }}
+            </span>
+                                                </td>
+                                                @if($market->SalesForm->price_type=='Fix')
+                                                    <td class="text-center">{{ number_format($market->SalesForm->price) }}</td>
+                                                @else
+                                                    <td class="text-center">{{ number_format($market->SalesForm->alpha)  }}</td>
+                                                @endif
+                                                <td>
+                        <span>
+
+            Highest Bid
+            </span>
+                                                </td>
+                                                <td>
+                        <span>
+
+           Quantity
+            </span>
+                                                </td>
+                                                <td>
+                        <span>
+
+           Status
+            </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
