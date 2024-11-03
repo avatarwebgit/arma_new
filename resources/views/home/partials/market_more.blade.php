@@ -59,7 +59,7 @@
                 <span class="text-bold">Specification</span>
                 <span>
                     @auth
-                        <a style="color: black !important;" target="_blank"
+                        <a style="color: #4a4a4a !important;" target="_blank"
                            href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$market->SalesForm->specification_file)) }}">
                             Display
                         </a>

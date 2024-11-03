@@ -266,6 +266,9 @@ class IndexController extends Controller
 
     public function menus(Menus $menus)
     {
+        if ($menus == 23) {
+            return view('home.contact');
+        }
         $page = $menus->Pages()->first();
         return view('home.page', compact('page', 'menus'));
     }
@@ -863,7 +866,7 @@ class IndexController extends Controller
         try {
             //email to Admin
             $settings = Setting::where('key', 'our_email')->first();
-            $our_email=$settings->value;
+            $our_email = $settings->value;
             Mail::to($our_email)->send(new ContactFormEmail($name, $email, $message));
         } catch (\Exception $e) {
             dd($e->getMessage());

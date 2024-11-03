@@ -287,7 +287,7 @@
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
-                                                    <div class="col-12 mb-3">
+                                                    <div class="col-12 col-md-6 mb-3">
                                                         <label for="our_number">Our Number</label>
                                                         <textarea rows="5" id="our_number" name="our_number" class="form-control">{{ $our_number }}</textarea>
                                                         @error('alert_bg_color')
