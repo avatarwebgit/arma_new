@@ -274,6 +274,7 @@ class IndexController extends Controller
         if ($menus->id == 4) {
 
             $time=Carbon::now()->format('h:i:s');
+            dd($time);
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
             $markets = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->where('time',$time)->orderby('date', 'asc')->get();
