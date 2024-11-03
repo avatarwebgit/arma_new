@@ -361,7 +361,7 @@
                                                 <td>
                         <span>
 
-            Highest Bid
+            {{ $market->Bids()->orderBy('price','desc')->first() }}
             </span>
                                                 </td>
                                                 <td>
