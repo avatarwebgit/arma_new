@@ -43,8 +43,8 @@
             cursor: pointer;
         }
 
-        .daily_report tbody tr:nth-child(2n) {
-            background: #bebebe !important;
+        .daily_report tbody tr:nth-child(2n+1) {
+            background: #f8f8f8 !important;
         }
 
         thead td {
