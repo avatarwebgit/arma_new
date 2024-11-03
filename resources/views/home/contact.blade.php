@@ -222,12 +222,12 @@
             </div> <!-- end row -->
 
 
-            <div class="row">
-                <iframe lang="en"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2288.8411254008524!2d51.37486897704037!3d35.777584745954776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e07c6e16c6833%3A0x4eb8994cf0621fa8!2sQ9HF%2BRX6%2C%20Tehran%2C%20Tehran%20Province%2C%20Iran!5e0!3m2!1sen!2str!4v1730201261241!5m2!1sen!2str"
-                        width="600" height="450" style="border:0;width: 100%" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+{{--            <div class="row">--}}
+{{--                <iframe lang="en"--}}
+{{--                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2288.8411254008524!2d51.37486897704037!3d35.777584745954776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e07c6e16c6833%3A0x4eb8994cf0621fa8!2sQ9HF%2BRX6%2C%20Tehran%2C%20Tehran%20Province%2C%20Iran!5e0!3m2!1sen!2str!4v1730201261241!5m2!1sen!2str"--}}
+{{--                        width="600" height="450" style="border:0;width: 100%" allowfullscreen="" loading="lazy"--}}
+{{--                        referrerpolicy="no-referrer-when-downgrade"></iframe>--}}
+{{--            </div>--}}
 
 
         </div> <!-- end container -->
