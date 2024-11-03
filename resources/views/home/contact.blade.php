@@ -144,9 +144,6 @@
     <div class="position-relative">
         <img style="width: 100%;height: auto" alt="banner"
              src="{{ imageExist(env('UPLOAD_SETTING'),$contact_us_banner) }}">
-        <div style="position: absolute;top: 0;padding: 40px">
-            {!! $page->banner_description !!}
-        </div>
     </div>
 
     <!-- start contact-pg-section -->
