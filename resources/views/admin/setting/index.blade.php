@@ -282,21 +282,21 @@
                                                 <div class="row">
                                                     <div class="col-12 mb-3">
                                                         <label for="our_address">Our Address</label>
-                                                        <textarea id="our_address" name="our_address" class="form-control">{{ $our_address }}</textarea>
+                                                        <textarea rows="5" id="our_address" name="our_address" class="form-control">{{ $our_address }}</textarea>
                                                         @error('our_address')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
-                                                    <div class="col-12 col-md-6 mb-3">
+                                                    <div class="col-12 mb-3">
                                                         <label for="our_number">Our Number</label>
-                                                        <input id="our_number" name="our_number" class="form-control" value="{{ $our_number }}">
+                                                        <textarea rows="5" id="our_number" name="our_number" class="form-control">{{ $our_number }}</textarea>
                                                         @error('alert_bg_color')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-6 mb-3">
                                                         <label for="our_email">Our Email</label>
-                                                        <input id="our_email" name="our_email" class="form-control" value="{{ $our_email }}">
+                                                        <textarea rows="5" id="our_email" name="our_email" class="form-control">{{ $our_email }}</textarea>
                                                         @error('our_email')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror

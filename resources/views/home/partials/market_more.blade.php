@@ -58,8 +58,8 @@
             <td class="text-center">
                 <span class="text-bold">Specification</span>
                 <span>
-                                                                @auth
-                        <a target="_blank"
+                    @auth
+                        <a style="color: black !important;" target="_blank"
                            href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$market->SalesForm->specification_file)) }}">
                             Display
                         </a>
@@ -94,7 +94,7 @@
                 <span class="text-bold">Payment</span>
                 <span>
                                     @auth
-                       {{ strtoupper($market->SalesForm->payment_options) }}
+                        {{ strtoupper($market->SalesForm->payment_options) }}
                     @else
                         <a href="#" onclick="ShowLoginModal({{ $market->id }})" class="text-login">
                             Log in
@@ -131,7 +131,6 @@
             </td>
 
 
-
             <td class="text-center">
                 <span class="text-bold">Currency</span>
                 <span>
@@ -154,7 +153,7 @@
                                     @auth
                         {{ $market->SalesForm->unit }}
                     @else
-                        <a href="#" class="text-info" onclick="ShowLoginModal({{ $market->id }})">
+                        <a href="#" onclick="ShowLoginModal({{ $market->id }})">
                             Log in
                         </a>
                         /
