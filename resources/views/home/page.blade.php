@@ -11,7 +11,7 @@
         }
 
         .red td {
-            color: #c20000  !important;
+            color: #c20000 !important;
         }
 
         .green td {
@@ -40,6 +40,11 @@
 
         .daily_report tr:hover {
             background: #f6f8f9 !important;
+            cursor: pointer;
+        }
+
+        .daily_report tbody tr:nth-child(2n) {
+            background: #bebebe !important;
         }
 
         thead td {
@@ -75,7 +80,8 @@
         #url, #option_value {
             display: none;
         }
-        .table td{
+
+        .table td {
             padding: 6px 18px !important;
         }
     </style>
