@@ -30,6 +30,10 @@
             background: #f6f8f9;
         }
 
+        thead td {
+            color: black !important;
+        }
+
 
         td {
             color: #036f88 !important;
