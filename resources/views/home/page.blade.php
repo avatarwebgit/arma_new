@@ -39,7 +39,7 @@
         }
 
         .daily_report tr:hover {
-            background: #f6f8f9 !important;
+            background: #d9d9d9  !important;
             cursor: pointer;
         }
 
