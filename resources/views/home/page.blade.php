@@ -35,7 +35,7 @@
         }
 
         tbody td:hover {
-            background: #f6f8f9;
+            background: #d9d9d9;
         }
 
         .daily_report tr:hover {
