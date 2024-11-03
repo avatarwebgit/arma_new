@@ -266,7 +266,7 @@ class IndexController extends Controller
 
     public function menus(Menus $menus)
     {
-        if ($menus == 23) {
+        if ($menus->id == 23) {
             return view('home.contact');
         }
         $page = $menus->Pages()->first();
