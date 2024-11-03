@@ -10,10 +10,11 @@
             line-height: 9pt !important;
         }
 
-        .red td{
+        .red td {
             color: red !important;
         }
-        .green td{
+
+        .green td {
             color: green !important;
         }
 
@@ -69,6 +70,9 @@
 
         #url, #option_value {
             display: none;
+        }
+        .table td{
+            padding: 6px 18px !important;
         }
     </style>
 @endsection
@@ -378,9 +382,9 @@
             </span>
                                                 </td>
                                                 @if($market->SalesForm->price_type=='Fix')
-                                                    <td class="text-center">{{ number_format($market->SalesForm->price) }}</td>
+                                                    <td>{{ number_format($market->SalesForm->price) }}</td>
                                                 @else
-                                                    <td class="text-center">{{ number_format($market->SalesForm->alpha)  }}</td>
+                                                    <td>{{ number_format($market->SalesForm->alpha)  }}</td>
                                                 @endif
                                                 <td>
                         <span>
