@@ -272,6 +272,7 @@ class IndexController extends Controller
         $page = $menus->Pages()->first();
         $markets=[];
         if ($menus->id == 4) {
+
             $time=Carbon::now()->format('h:i:s');
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
