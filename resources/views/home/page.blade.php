@@ -11,7 +11,7 @@
         }
 
         .red td {
-            color: red !important;
+            color: #c20000  !important;
         }
 
         .green td {
@@ -36,6 +36,10 @@
 
         tbody td:hover {
             background: #f6f8f9;
+        }
+
+        .daily_report tr:hover {
+            background: #f6f8f9 !important;
         }
 
         thead td {
@@ -241,9 +245,10 @@
                             </div>
                         @endif
                         @if($menus->id == 4)
+
                             <div class="col-12">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table daily_report">
                                         <thead>
                                         <tr>
                                             <td>
