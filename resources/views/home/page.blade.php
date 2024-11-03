@@ -225,7 +225,57 @@
                             </div>
                         @endif
                         @if($menus->id == 4)
-                            {{ dd($markets) }}
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+            <span style="margin-left: 45px;width: 100% !important;">
+            Commodity
+            </span>
+                                            </th>
+                                            <th>
+              <span style="text-align: center;margin-left: 35px">
+            Quantity
+            </span>
+                                            </th>
+                                            <th>
+            <span style="text-align: center;margin-left: 50px">
+              Packaging
+            </span>
+                                            </th>
+                                            <th>
+             <span style="width: 90px;margin-left: 0">
+            Delivery
+            </span>
+                                            </th>
+                                            <th>
+            <span>
+            Region
+            </span>
+                                            </th>
+                                            <th>
+             <span style="width: 30px;margin-left: 65px">
+            Date
+            </span>
+                                            </th>
+                                            <th>
+                        <span style="margin-left: 45px">
+
+            Time
+            </span>
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         @endif
                     </div>
                 @endif
