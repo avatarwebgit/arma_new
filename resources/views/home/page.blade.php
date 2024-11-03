@@ -306,7 +306,24 @@
                                         </thead>
                                         <tbody>
                                         @foreach($markets as $market)
-                                            <tr>
+                                            @php
+                                                $bid=$market->Bids()->orderBy('price','desc')->first();
+                                                if ($bid){
+                                                    $highest=$bid->price;
+                                                }else{
+                                                    $highest=0;
+                                                }
+
+                                                $has_winner=$market->Bids()->where('is_win')->exists();
+                                                if ($has_winner){
+                                                    $status_color='green';
+                                                    $status_text='Done';
+                                                }else{
+                                                     $status_color='red';
+                                                    $status_text='Failed';
+                                                }
+                                            @endphp
+                                            <tr style="color: {{ $status_color }}">
                                                 <td>
               <span>
             {{ $market->date }}
@@ -361,7 +378,10 @@
                                                 <td>
                         <span>
 
-            {{ $market->Bids()->orderBy('price','desc')->first() }}
+
+
+                            {{ $highest }}
+
             </span>
                                                 </td>
                                                 <td>
@@ -373,7 +393,7 @@
                                                 <td>
                         <span>
 
-           Status
+           {{ $status_text }}
             </span>
                                                 </td>
                                             </tr>
