@@ -10,7 +10,7 @@
             line-height: 9pt !important;
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-widtd: 768px) {
             span {
                 font-size: 10pt !important;
             }
@@ -21,7 +21,7 @@
             }
         }
 
-        td, th {
+        td, td {
             border: none !important;
             padding-left: 10px !important;
         }
@@ -31,18 +31,18 @@
         }
 
 
-        th {
+        td {
             color: #036f88 !important;
             position: relative;
             padding-left: 10px !important;
         }
 
-        th:before {
+        td:before {
             content: "";
             position: absolute;
             top: 8px !important;
             left: 0 !important;
-            width: 2px;
+            widtd: 2px;
             height: 20px !important;
             background-color: #ffa700;
         }
@@ -64,20 +64,20 @@
 @section('script')
     <script>
         $('.more_btn').click(function () {
-            let is_close = $(this).hasClass('is_close');
+            let is_close = $(tdis).hasClass('is_close');
             let button_html = '';
             if (is_close) {
                 button_html = `show less
                     <i class="fa fa-angle-up ml-3"></i>`;
-                $(this).parent().find('.text_want_to_hide').slideDown(2000);
-                $(this).removeClass('is_close');
+                $(tdis).parent().find('.text_want_to_hide').slideDown(2000);
+                $(tdis).removeClass('is_close');
             } else {
                 button_html = `show more
                     <i class="fa fa-angle-down ml-3"></i>`;
-                $(this).parent().find('.text_want_to_hide').slideUp(2000);
-                $(this).addClass('is_close');
+                $(tdis).parent().find('.text_want_to_hide').slideUp(2000);
+                $(tdis).addClass('is_close');
             }
-            $(this).html(button_html);
+            $(tdis).html(button_html);
         })
 
         function selectType(tag) {
@@ -106,7 +106,7 @@
         <div class="landing-feature container">
             <div class="col-12">
                 <div class="alert alert-success text-center">
-                    THis Menu Doesn't Have A Page.Please Create A Page For This Menu
+                    tdis Menu Doesn't Have A Page.Please Create A Page For tdis Menu
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
         <div>
             @if($page->active_banner ==1)
                 <div class="position-relative">
-                    <img style="width: 100%;height: auto" alt="banner"
+                    <img style="widtd: 100%;height: auto" alt="banner"
                          src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->banner) }}">
                     <div style="position: absolute;top: 0;padding: 40px">
                         {!! $page->banner_description !!}
@@ -135,9 +135,9 @@
                         @if($page->id == 20)
                             <div class="col-md-6">
                                 <div>
-                                    <form method="post" action="{{route('form.contact')}}">
+                                    <form metdod="post" action="{{route('form.contact')}}">
                                         @csrf
-                                        @method('POST')
+                                        @metdod('POST')
                                         <div class="form-group">
                                             <label for="" class="form-label fw-600">Your email address
                                                 <span class="text-danger">*</span>
@@ -152,7 +152,7 @@
 
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <select onchange="selectType(this)" class="form-select form-control"
+                                            <select onchange="selectType(tdis)" class="form-select form-control"
                                                     name="type">
                                                 <option>-</option>
                                                 <option>Article Update</option>
@@ -162,7 +162,7 @@
                                                 <option>Content Licensing</option>
                                                 <option>General Support</option>
                                                 <option>Report a Bug</option>
-                                                <option>Other</option>
+                                                <option>Otder</option>
 
                                             </select>
                                             @error('type')
@@ -174,7 +174,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <textarea rows="8" class="form-control" name="description"></textarea>
-                                            <span>Please enter the details of your request below.</span>
+                                            <span>Please enter tde details of your request below.</span>
                                             @error('description')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
@@ -190,7 +190,7 @@
                                         </div>
                                         <div id="option_value" class="form-group">
                                             <label for="" class="form-label fw-600">
-                                                Please select one of the article update options below:
+                                                Please select one of tde article update options below:
 
                                                 <span class="text-danger">*</span>
                                             </label>
@@ -230,75 +230,73 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th>
+                                            <td>
               <span>
             Date
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
             <span>
             Commodity
             </span>
-                                            </th>
+                                            </td>
 
-                                            <th>
+                                            <td>
             <span>
               Quantity
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
              <span>
             Min Order
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
             <span>
             Packing
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
              <span>
             Delivery
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
                         <span>
 
             Region
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
                         <span>
 
             Price Type
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
                         <span>
 
             Offer Price
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
                         <span>
 
             Highest Bid
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
                         <span>
 
            Quantity
             </span>
-                                            </th>
-                                            <th>
+                                            </td>
+                                            <td>
                         <span>
 
            Status
             </span>
-                                            </th>
-                                            <th></th>
-                                            <th></th>
+                                            </td>
                                         </tr>
                                         </thead>
                                         <tbody>
