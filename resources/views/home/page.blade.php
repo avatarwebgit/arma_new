@@ -10,7 +10,14 @@
             line-height: 9pt !important;
         }
 
-        @media screen and (max-widtd: 768px) {
+        .red td{
+            color: red !important;
+        }
+        .green td{
+            color: green !important;
+        }
+
+        @media screen and (max-width: 768px) {
             span {
                 font-size: 10pt !important;
             }
@@ -323,7 +330,7 @@
                                                     $status_text='Failed';
                                                 }
                                             @endphp
-                                            <tr style="color: {{ $status_color }}">
+                                            <tr class="{{ $status_color }}">
                                                 <td>
               <span>
             {{ $market->date }}
