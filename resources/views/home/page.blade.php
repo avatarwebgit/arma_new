@@ -32,6 +32,7 @@
 
         thead td {
             color: black !important;
+            font-weight: bold !important;
         }
 
 
@@ -229,6 +230,8 @@
                             </div>
                         @endif
                         @if($menus->id == 4)
+
+                            {{ dd($markets) }}
                             <div class="col-12">
                                 <div class="table-responsive">
                                     <table class="table">
