@@ -228,42 +228,73 @@
                             <div class="col-12">
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <thead class="thead-dark">
+                                        <thead>
                                         <tr>
                                             <th>
-            <span style="margin-left: 45px;width: 100% !important;">
-            Commodity
-            </span>
-                                            </th>
-                                            <th>
-              <span style="text-align: center;margin-left: 35px">
-            Quantity
-            </span>
-                                            </th>
-                                            <th>
-            <span style="text-align: center;margin-left: 50px">
-              Packaging
-            </span>
-                                            </th>
-                                            <th>
-             <span style="width: 90px;margin-left: 0">
-            Delivery
-            </span>
-                                            </th>
-                                            <th>
-            <span>
-            Region
-            </span>
-                                            </th>
-                                            <th>
-             <span style="width: 30px;margin-left: 65px">
+              <span>
             Date
             </span>
                                             </th>
                                             <th>
-                        <span style="margin-left: 45px">
+            <span>
+            Commodity
+            </span>
+                                            </th>
 
-            Time
+                                            <th>
+            <span>
+              Quantity
+            </span>
+                                            </th>
+                                            <th>
+             <span>
+            Min Order
+            </span>
+                                            </th>
+                                            <th>
+            <span>
+            Packing
+            </span>
+                                            </th>
+                                            <th>
+             <span>
+            Delivery
+            </span>
+                                            </th>
+                                            <th>
+                        <span>
+
+            Region
+            </span>
+                                            </th>
+                                            <th>
+                        <span>
+
+            Price Type
+            </span>
+                                            </th>
+                                            <th>
+                        <span>
+
+            Offer Price
+            </span>
+                                            </th>
+                                            <th>
+                        <span>
+
+            Highest Bid
+            </span>
+                                            </th>
+                                            <th>
+                        <span>
+
+           Quantity
+            </span>
+                                            </th>
+                                            <th>
+                        <span>
+
+           Status
             </span>
                                             </th>
                                             <th></th>
