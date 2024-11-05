@@ -13,13 +13,13 @@
     <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="{{ imageExist(env('UPLOAD_SETTING'),$logo) }}">
 
     <!-- Mobile (Android, iOS & others) -->
-    <link rel="apple-touch-icon" sizes="57x57"   href="{{ asset('home/img/logos/apple-touch-icon') }}">
-    <link rel="apple-touch-icon-precomposed"     sizes="57x57" href="{{ asset('home/img/logos/apple-touch-icon') }}">
-    <link rel="apple-touch-icon" sizes="72x72"   href="{{ asset('home/img/logos/apple-touch-icon') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('home/img/logos/apple-touch-icon') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('home/img/logos/apple-touch-icon') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('home/img/logos/apple-touch-icon') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('home/img/logos/apple-touch-icon') }}">
+    <link rel="apple-touch-icon" sizes="57x57"   href="{{ asset('home/img/logos/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon-precomposed"     sizes="57x57" href="{{ asset('home/img/logos/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72"   href="{{ asset('home/img/logos/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('home/img/logos/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('home/img/logos/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('home/img/logos/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('home/img/logos/apple-touch-icon.png') }}">
 
     <!-- Windows 8 Tiles -->
     <meta name="application-name" content="Scotch Scotch scotch">
