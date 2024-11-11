@@ -124,7 +124,7 @@
                                                         </td>
 
                                                         <td>
-                                                            {{ substr($item->description_help_modal,0,400).'...' }}
+                                                            {{ substr($item->description_help_modal,0,50).'...' }}
                                                         </td>
                                                         <td>
                                                             {{ $item->link_help_modal }}
