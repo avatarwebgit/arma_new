@@ -421,10 +421,10 @@
         }
 
         #addresses_section {
-            margin: 20px 0;
+            margin-bottom: 50px;
         }
         #help_section {
-            margin: 20px 0;
+            margin-bottom: 50px;
         }
     </style>
 @endpush
