@@ -1,4 +1,4 @@
-<footer class="landing-footer-two @unless(request()->is('contact')) mt-3 @endunless">
+<footer class="landing-footer-two">
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-5">

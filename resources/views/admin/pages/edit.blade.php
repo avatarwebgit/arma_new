@@ -38,9 +38,9 @@
                                     </div>
                                     @if($page->id==20 and count($contact_addresses)>0)
                                         <div id="addresses_section">
-                                            <h5>
+                                            <h2>
                                                 Addresses
-                                            </h5>
+                                            </h2>
                                             <table class="table table-striped">
                                                 <thead>
                                                 <tr>
@@ -96,9 +96,9 @@
                                     @endif
                                     @if($page->id==20 and count($contact_helps)>0)
                                         <div id="help_section">
-                                            <h5>
+                                            <h2>
                                                 Help & Support
-                                            </h5>
+                                            </h2>
                                             <table class="table table-striped">
                                                 <thead>
                                                 <tr>

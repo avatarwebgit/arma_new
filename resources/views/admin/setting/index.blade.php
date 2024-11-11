@@ -98,13 +98,19 @@
                                                     @foreach(['logo' => $logo, 'fav_icon' => $fav_icon, 'footer_logo' => $footer_logo, 'admin_avatar' => $admin_avatar, 'logo_dark' => $logo_dark] as $key => $image)
                                                         <div class="col-12 col-md-6 mb-3 text-center">
                                                             <div class="position-relative">
-                                                                <img class="small-image img-fluid" alt="{{ $key }}" src="{{ imageExist(env('UPLOAD_SETTING'), $image) }}">
-                                                                <button style="width: 50px" onclick="removeFile('{{ $image }}')" type="button" class="btn btn-danger btn-sm position-absolute bottom-0 end-0 m-1">
+                                                                <img class="small-image img-fluid" alt="{{ $key }}"
+                                                                     src="{{ imageExist(env('UPLOAD_SETTING'), $image) }}">
+                                                                <button style="width: 50px"
+                                                                        onclick="removeFile('{{ $image }}')"
+                                                                        type="button"
+                                                                        class="btn btn-danger btn-sm position-absolute bottom-0 end-0 m-1">
                                                                     <i class="fa fa-trash"></i>
                                                                 </button>
                                                             </div>
-                                                            <label for="{{ $key }}" class="mt-2">{{ ucfirst($key) }}</label>
-                                                            <input id="{{ $key }}" type="file" name="{{ $key }}" class="form-control">
+                                                            <label for="{{ $key }}"
+                                                                   class="mt-2">{{ ucfirst($key) }}</label>
+                                                            <input id="{{ $key }}" type="file" name="{{ $key }}"
+                                                                   class="form-control">
                                                             @error($key)
                                                             <p class="text-danger">{{ $message }}</p>
                                                             @enderror
@@ -118,7 +124,7 @@
                             @endif
 
 
-                        @if($type == 'general')
+                            @if($type == 'general')
                                 <div class="col-12 mb-4">
                                     <div class="card">
                                         <div class="card-body">
@@ -128,35 +134,40 @@
                                                 <div class="row">
                                                     <div class="col-12 col-md-4 mb-3">
                                                         <label for="title">App Title</label>
-                                                        <input id="title" type="text" name="title" class="form-control" value="{{ $title }}">
+                                                        <input id="title" type="text" name="title" class="form-control"
+                                                               value="{{ $title }}">
                                                         @error('title')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-4 mb-3">
                                                         <label for="copy_right">Copy Right Text</label>
-                                                        <input id="copy_right" type="text" name="copy_right" class="form-control" value="{{ $copy_right }}">
+                                                        <input id="copy_right" type="text" name="copy_right"
+                                                               class="form-control" value="{{ $copy_right }}">
                                                         @error('copy_right')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-4 mb-3">
                                                         <label for="start_market">Time To Show Line 1 (ms)</label>
-                                                        <input id="start_market" name="start_market" class="form-control" value="{{ $start_market }}">
+                                                        <input id="start_market" name="start_market"
+                                                               class="form-control" value="{{ $start_market }}">
                                                         @error('start_market')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label for="end_market">Time to Show Line 2 (ms)</label>
-                                                        <input id="end_market" name="end_market" class="form-control" value="{{ $end_market }}">
+                                                        <input id="end_market" name="end_market" class="form-control"
+                                                               value="{{ $end_market }}">
                                                         @error('end_market')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label for="email">Admin Email</label>
-                                                        <input id="email" type="email" name="email" class="form-control" value="{{ $settings['email'] }}">
+                                                        <input id="email" type="email" name="email" class="form-control"
+                                                               value="{{ $settings['email'] }}">
                                                         @error('email')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
@@ -169,23 +180,30 @@
                                                 <div class="row">
                                                     <div class="col-12 mb-3">
                                                         <label for="meta_description">Meta Description</label>
-                                                        <textarea id="meta_description" name="meta_description" class="form-control">{{ $meta_description }}</textarea>
+                                                        <textarea id="meta_description" name="meta_description"
+                                                                  class="form-control">{{ $meta_description }}</textarea>
                                                         @error('meta_description')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-3 mb-3">
                                                         <label for="meta_keywords">Meta Keywords</label>
-                                                        <input id="meta_keywords" type="text" name="meta_keywords" class="form-control" value="{{ $meta_keywords }}">
+                                                        <input id="meta_keywords" type="text" name="meta_keywords"
+                                                               class="form-control" value="{{ $meta_keywords }}">
                                                         @error('meta_keywords')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-3 mb-3">
                                                         <label for="robot_index">Robot Index</label>
-                                                        <select id="robot_index" name="robot_index" class="form-control">
-                                                            <option value="0" {{ $robot_index == 0 ? 'selected' : '' }}>noindex,nofollow</option>
-                                                            <option value="1" {{ $robot_index == 1 ? 'selected' : '' }}>index,follow</option>
+                                                        <select id="robot_index" name="robot_index"
+                                                                class="form-control">
+                                                            <option value="0" {{ $robot_index == 0 ? 'selected' : '' }}>
+                                                                noindex,nofollow
+                                                            </option>
+                                                            <option value="1" {{ $robot_index == 1 ? 'selected' : '' }}>
+                                                                index,follow
+                                                            </option>
                                                         </select>
                                                         @error('robot_index')
                                                         <p class="text-danger">{{ $message }}</p>
@@ -196,31 +214,30 @@
                                         </div>
                                     </div>
 
-{{--                                    <div class="card mb-4">--}}
-{{--                                        <div class="card-body">--}}
-{{--                                            <h3>Admin Side Bar</h3>--}}
-{{--                                            <hr>--}}
-{{--                                            <div class="settings-profile">--}}
-{{--                                                <div class="row">--}}
-{{--                                                    <div class="col-12 col-md-3 mb-3">--}}
-{{--                                                        <label for="top_bar_color">Top Bar Color</label>--}}
-{{--                                                        <input id="top_bar_color" type="color" name="top_bar_color" class="form-control" value="{{ $top_bar_color }}">--}}
-{{--                                                        @error('top_bar_color')--}}
-{{--                                                        <p class="text-danger">{{ $message }}</p>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-12 col-md-3 mb-3">--}}
-{{--                                                        <label for="side_bar_color">Side Bar Color</label>--}}
-{{--                                                        <input id="side_bar_color" type="color" name="side_bar_color" class="form-control" value="{{ $side_bar_color }}">--}}
-{{--                                                        @error('side_bar_color')--}}
-{{--                                                        <p class="text-danger">{{ $message }}</p>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-
+                                    {{--                                    <div class="card mb-4">--}}
+                                    {{--                                        <div class="card-body">--}}
+                                    {{--                                            <h3>Admin Side Bar</h3>--}}
+                                    {{--                                            <hr>--}}
+                                    {{--                                            <div class="settings-profile">--}}
+                                    {{--                                                <div class="row">--}}
+                                    {{--                                                    <div class="col-12 col-md-3 mb-3">--}}
+                                    {{--                                                        <label for="top_bar_color">Top Bar Color</label>--}}
+                                    {{--                                                        <input id="top_bar_color" type="color" name="top_bar_color" class="form-control" value="{{ $top_bar_color }}">--}}
+                                    {{--                                                        @error('top_bar_color')--}}
+                                    {{--                                                        <p class="text-danger">{{ $message }}</p>--}}
+                                    {{--                                                        @enderror--}}
+                                    {{--                                                    </div>--}}
+                                    {{--                                                    <div class="col-12 col-md-3 mb-3">--}}
+                                    {{--                                                        <label for="side_bar_color">Side Bar Color</label>--}}
+                                    {{--                                                        <input id="side_bar_color" type="color" name="side_bar_color" class="form-control" value="{{ $side_bar_color }}">--}}
+                                    {{--                                                        @error('side_bar_color')--}}
+                                    {{--                                                        <p class="text-danger">{{ $message }}</p>--}}
+                                    {{--                                                        @enderror--}}
+                                    {{--                                                    </div>--}}
+                                    {{--                                                </div>--}}
+                                    {{--                                            </div>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
 
 
                                     <div class="card mb-4">
@@ -231,43 +248,52 @@
                                                 <div class="row">
                                                     <div class="col-12 mb-3">
                                                         <label for="alert_description">Alert Description</label>
-                                                        <textarea id="alert_description" name="alert_description" class="form-control">{{ $alert_description }}</textarea>
+                                                        <textarea id="alert_description" name="alert_description"
+                                                                  class="form-control">{{ $alert_description }}</textarea>
                                                         @error('alert_description')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-3 mb-3">
                                                         <label for="alert_bg_color">Background Color</label>
-                                                        <input id="alert_bg_color" type="color" name="alert_bg_color" class="form-control" value="{{ $alert_bg_color }}">
+                                                        <input id="alert_bg_color" type="color" name="alert_bg_color"
+                                                               class="form-control" value="{{ $alert_bg_color }}">
                                                         @error('alert_bg_color')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-3 mb-3">
                                                         <label for="alert_text_color">Text Color</label>
-                                                        <input id="alert_text_color" type="color" name="alert_text_color" class="form-control" value="{{ $alert_text_color }}">
+                                                        <input id="alert_text_color" type="color"
+                                                               name="alert_text_color" class="form-control"
+                                                               value="{{ $alert_text_color }}">
                                                         @error('alert_text_color')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-3 mb-3">
                                                         <label for="alert_font_size">Font Size (px)</label>
-                                                        <input id="alert_font_size" type="number" name="alert_font_size" class="form-control" value="{{ $alert_font_size }}">
+                                                        <input id="alert_font_size" type="number" name="alert_font_size"
+                                                               class="form-control" value="{{ $alert_font_size }}">
                                                         @error('alert_font_size')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 col-md-3 mb-3">
                                                         <label for="alert_height">Alert Height (px)</label>
-                                                        <input id="alert_height" type="number" name="alert_height" class="form-control" value="{{ $alert_height }}">
+                                                        <input id="alert_height" type="number" name="alert_height"
+                                                               class="form-control" value="{{ $alert_height }}">
                                                         @error('alert_height')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" id="alert_active" name="alert_active" {{ $alert_active == 1 ? 'checked' : '' }}>
-                                                            <label class="form-check-label" for="alert_active">Active</label>
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="alert_active"
+                                                                   name="alert_active" {{ $alert_active == 1 ? 'checked' : '' }}>
+                                                            <label class="form-check-label"
+                                                                   for="alert_active">Active</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -280,42 +306,14 @@
                                             <hr>
                                             <div class="settings-profile">
                                                 <div class="row">
-                                                    <div class="col-12 mb-3">
-                                                        <label for="our_address">Our Address</label>
-                                                        <textarea rows="5" id="our_address" name="our_address" class="form-control">{{ $our_address }}</textarea>
-                                                        @error('our_address')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                    </div>
                                                     <div class="col-12 col-md-6 mb-3">
-                                                        <label for="our_number">Our Number</label>
-                                                        <textarea rows="5" id="our_number" name="our_number" class="form-control">{{ $our_number }}</textarea>
-                                                        @error('alert_bg_color')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="col-12 col-md-6 mb-3">
-                                                        <label for="our_email">Our Email</label>
-                                                        <textarea rows="5" id="our_email" name="our_email" class="form-control">{{ $our_email }}</textarea>
+                                                        <label for="our_email">Email</label>
+                                                        <input type="email" id="our_email" name="our_email"
+                                                               class="form-control" value="{{ $our_email }}">
                                                         @error('our_email')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
-                                                    @foreach(['contact_us_banner' => $contact_us_banner] as $key => $image)
-                                                        <div class="col-12 mb-3 text-center">
-                                                            <div class="position-relative">
-                                                                <img class="small-image img-fluid" alt="{{ $key }}" src="{{ imageExist(env('UPLOAD_SETTING'), $image) }}">
-                                                                <button style="width: 50px" onclick="removeFile('{{ $image }}')" type="button" class="btn btn-danger btn-sm position-absolute bottom-0 end-0 m-1">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </button>
-                                                            </div>
-                                                            <label for="{{ $key }}" class="mt-2">{{ ucfirst($key) }}</label>
-                                                            <input id="{{ $key }}" type="file" name="{{ $key }}" class="form-control">
-                                                            @error($key)
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                            @enderror
-                                                        </div>
-                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -333,28 +331,32 @@
                                                 <div class="row">
                                                     <div class="col-12 mb-3">
                                                         <label for="about_arma">About Arma</label>
-                                                        <textarea id="about_arma" name="about_arma" class="form-control">{{ $about_arma }}</textarea>
+                                                        <textarea id="about_arma" name="about_arma"
+                                                                  class="form-control">{{ $about_arma }}</textarea>
                                                         @error('about_arma')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-4 mb-3">
                                                         <label for="facebook">Facebook</label>
-                                                        <input id="facebook" name="facebook" class="form-control" value="{{ $facebook }}">
+                                                        <input id="facebook" name="facebook" class="form-control"
+                                                               value="{{ $facebook }}">
                                                         @error('facebook')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-4 mb-3">
                                                         <label for="twitter">X (Twitter)</label>
-                                                        <input id="twitter" name="twitter" class="form-control" value="{{ $twitter }}">
+                                                        <input id="twitter" name="twitter" class="form-control"
+                                                               value="{{ $twitter }}">
                                                         @error('twitter')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-4 mb-3">
                                                         <label for="linkedin">Linkedin</label>
-                                                        <input id="linkedin" name="linkedin" class="form-control" value="{{ $linkedin }}">
+                                                        <input id="linkedin" name="linkedin" class="form-control"
+                                                               value="{{ $linkedin }}">
                                                         @error('linkedin')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror

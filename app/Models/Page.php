@@ -9,7 +9,7 @@ class Page extends Model
 {
     use HasFactory;
     protected $table='pages';
-    protected $fillable=['title','description','active_banner','banner','banner_description'];
+    protected $guarded=[];
 
     public function Menus(){
         return $this->belongsToMany(Menus::class,'menu_page','page_id','menu_id');

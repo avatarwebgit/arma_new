@@ -39,7 +39,7 @@
         }
 
         .daily_report tr:hover {
-            background: #d9d9d9  !important;
+            background: #d9d9d9 !important;
             cursor: pointer;
         }
 
@@ -84,26 +84,138 @@
         .table td {
             padding: 6px 18px !important;
         }
+
+        #help_support_section {
+            background-color: #dadada;
+        }
+
+        .font-address {
+            font-size: 14pt !important;
+            height: 180px !important;
+            position: relative;
+        }
+
+        .font-address .title::before {
+            content: " ";
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: blue;
+            position: absolute;
+            left: 0;
+            top: 9px;
+        }
+
+        .header-section {
+            position: relative;
+        }
+
+        .header-section::before {
+            content: " ";
+            display: block;
+            width: 4px;
+            height: 25px;
+            position: absolute;
+            left: -10px;
+            top: 7px;
+            background-color: blue;
+        }
+
+        label {
+            color: white;
+        }
+
+        .form-control {
+            border-radius: 0 !important;
+            height: 40px;
+        }
+
+        .send-btn {
+            height: 40px;
+        }
+
+        .error_input_validate {
+            font-size: 9pt;
+            font-weight: bold;
+            color: red;
+        }
+
+        footer {
+            margin-top: 0 !important;
+        }
     </style>
 @endsection
 
 @section('script')
     <script>
+        function submit() {
+            $('#name_error').text('');
+            $('#name_error').addClass('d-none');
+
+            $('#email_error').text('');
+            $('#email_error').addClass('d-none');
+
+            $('#send_to_error').text('');
+            $('#send_to_error').addClass('d-none');
+
+            $('#message_error').text('');
+            $('#message_error').addClass('d-none');
+            //
+            let name = $('#name').val();
+            let email = $('#email').val();
+            let send_to = $('#send_to').val();
+            let message = $('#message').val();
+            $.ajax({
+                url: "{{ route('home.contact') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    name: name,
+                    email: email,
+                    send_to: send_to,
+                    message: message,
+                },
+                success: function (response) {
+                    if (response[0] == 1) {
+                        $('#exampleModal').modal('show')
+
+                        $('#name').val('');
+                        $('#email').val('');
+                        $('#message').val('');
+
+                        $('#name_error').text('');
+                        $('#email_error').text('');
+                        $('#send_to_error').text('');
+                        $('#message_error').text('');
+                    }
+                },
+                error: function (response) {
+                    $('#name_error').text(response.responseJSON.errors.name);
+                    $('#name_error').removeClass('d-none');
+                    $('#email_error').text(response.responseJSON.errors.email);
+                    $('#email_error').removeClass('d-none');
+                    $('#message_error').text(response.responseJSON.errors.message);
+                    $('#message_error').removeClass('d-none');
+                }
+            })
+        }
+
         $('.more_btn').click(function () {
-            let is_close = $(tdis).hasClass('is_close');
+            let is_close = $(this).hasClass('is_close');
             let button_html = '';
             if (is_close) {
                 button_html = `show less
                     <i class="fa fa-angle-up ml-3"></i>`;
-                $(tdis).parent().find('.text_want_to_hide').slideDown(2000);
-                $(tdis).removeClass('is_close');
+                $(this).parent().find('.text_want_to_hide').slideDown(2000);
+                $(this).removeClass('is_close');
             } else {
                 button_html = `show more
                     <i class="fa fa-angle-down ml-3"></i>`;
-                $(tdis).parent().find('.text_want_to_hide').slideUp(2000);
-                $(tdis).addClass('is_close');
+                $(this).parent().find('.text_want_to_hide').slideUp(2000);
+                $(this).addClass('is_close');
             }
-            $(tdis).html(button_html);
+            $(this).html(button_html);
         })
 
         function selectType(tag) {
@@ -132,7 +244,7 @@
         <div class="landing-feature container">
             <div class="col-12">
                 <div class="alert alert-success text-center">
-                    tdis Menu Doesn't Have A Page.Please Create A Page For tdis Menu
+                    this Menu Doesn't Have A Page.Please Create A Page For this Menu
                 </div>
             </div>
         </div>
@@ -140,293 +252,131 @@
         <div>
             @if($page->active_banner ==1)
                 <div class="position-relative">
-                    <img style="widtd: 100%;height: auto" alt="banner"
+                    <img style="width: 100%;height: auto" alt="banner"
                          src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->banner) }}">
                     <div style="position: absolute;top: 0;padding: 40px">
                         {!! $page->banner_description !!}
                     </div>
                 </div>
             @endif
-            <div class="landing-feature container">
-                @if($page!=null)
+            <div class="position-relative">
+                <img style="width: 100%;height: auto" alt="banner"
+                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->map) }}">
+            </div>
+            <div id="help_support_section" class="landing-feature ">
+                <div class="container">
                     <div class="row">
-                        {{--                        @if($menus->id!=2)--}}
-                        {{--                            <div class="col-md-12">--}}
-                        {{--                                <h2>{{ $page->title }}</h2>--}}
-                        {{--                            </div>--}}
-                        {{--                        @endif--}}
-                        <div class="{{$page->id == 20 ? 'col-md-6' : 'col-md-12'}}">
+                        <div class="col-12">
+                            <h2 id="section-heading" class="header-section">
+                                Help and support
+                            </h2>
+                        </div>
+                        @foreach($help_and_support as $item)
+                            <div class="col-12 col-md-4">
+                                <h5>
+                                    <a href="{{ $item->link_help_modal }}">
+                                        {{ $item->title_help_modal }}
+                                    </a>
+                                </h5>
+                                <span>{{ $item->description_help_modal }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="landing-feature">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="header-section">
+                                Our office locations
+                            </h2>
+                        </div>
+                        @foreach($addresses as $item)
+                            <div class="col-12 col-md-4 mb-3 font-address">
+                                <div class="title">
+                                    {{ $item->title_modal }}
+                                </div>
+                                <div>
+                                    {{ $item->address_modal }}
+                                </div>
+                                <div>
+                                    {{ $item->tel_1_modal }}
+                                </div>
+                                <div>
+                                    {{ $item->tel_2_modal }}
+                                </div>
+                                <div>
+                                    {{ $item->tel_3_modal }}
+                                </div>
+
+                                <div>
+                                    {{ $item->email_modal }}
+                                </div>
+                                <div>
+                                    {{ $item->email_2_modal }}
+                                </div>
+
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="position-relative"
+                 style="background-image: url('{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->form_bg) }}');padding: 30px 0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="row">
+                                <div class="col col-12 col-md-6">
+                                    <label for="f-name">{{ __('full name') }}</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <p class="error_input_validate d-none" id="name_error"></p>
+                                </div>
+                                <div class="col col-12 col-md-6">
+                                    <label for="email">{{ __('email') }}</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                    <p class="error_input_validate d-none" id="email_error"></p>
+                                </div>
+                                <div class="col col-12 col-md-12">
+                                    <label for="message">{{ __('message') }}</label>
+                                    <textarea rows="4" class="form-control" id="message" name="message"></textarea>
+                                    <p class="error_input_validate d-none" id="message_error"></p>
+                                </div>
+                                <div class="col col-12 col-md-12">
+                                    <button type="button" onclick="submit()"
+                                            class="send-btn btn-info btn-block mt-2">{{ __('send') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
                             {!! $page->description !!}
                         </div>
-                        @if($page->id == 20)
-                            <div class="col-md-6">
-                                <div>
-                                    <form metdod="post" action="{{route('form.contact')}}">
-                                        @csrf
-                                        @metdod('POST')
-                                        <div class="form-group">
-                                            <label for="" class="form-label fw-600">Your email address
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input type="text" class="form-control" name="email">
-                                            @error('email')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="form-label fw-600">
 
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <select onchange="selectType(tdis)" class="form-select form-control"
-                                                    name="type">
-                                                <option>-</option>
-                                                <option>Article Update</option>
-                                                <option>Password Reset</option>
-                                                <option>Unsubscribe</option>
-                                                <option>Delete my Account</option>
-                                                <option>Content Licensing</option>
-                                                <option>General Support</option>
-                                                <option>Report a Bug</option>
-                                                <option>Otder</option>
-
-                                            </select>
-                                            @error('type')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="form-label fw-600">Description
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <textarea rows="8" class="form-control" name="description"></textarea>
-                                            <span>Please enter tde details of your request below.</span>
-                                            @error('description')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div id="url" class="form-group">
-                                            <label for="" class="form-label fw-600">URL of article or web page
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input type="text" class="form-control" name="url">
-                                            @error('url')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div id="option_value" class="form-group">
-                                            <label for="" class="form-label fw-600">
-                                                Please select one of tde article update options below:
-
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <select class="form-select form-control" name="option_value">
-                                                <option>-</option>
-                                                <option>Corrections</option>
-                                                <option>Outdated content</option>
-                                                <option>Typos or Grammer</option>
-                                            </select>
-                                            @error('option')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="form-label fw-600">
-                                                Attachments
-
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input type="file" class="form-control" name="file">
-                                            @error('file')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group text-center">
-
-                                            <button type="submit" class="btn btn-primary w-100">submit</button>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        @endif
-                        @if($menus->id == 4)
-
-                            <div class="col-12">
-                                <div class="table-responsive">
-                                    <table class="table daily_report">
-                                        <thead>
-                                        <tr>
-                                            <td>
-              <span>
-            Date
-            </span>
-                                            </td>
-                                            <td>
-            <span>
-            Commodity
-            </span>
-                                            </td>
-
-                                            <td>
-            <span>
-              Quantity
-            </span>
-                                            </td>
-                                            <td>
-             <span>
-            Min Order
-            </span>
-                                            </td>
-                                            <td>
-            <span>
-            Packing
-            </span>
-                                            </td>
-                                            <td>
-             <span>
-            Delivery
-            </span>
-                                            </td>
-                                            <td>
-                        <span>
-
-            Region
-            </span>
-                                            </td>
-                                            <td>
-                        <span>
-
-            Price Type
-            </span>
-                                            </td>
-                                            <td>
-                        <span>
-
-            Offer Price
-            </span>
-                                            </td>
-                                            <td>
-                        <span>
-
-            Highest Bid
-            </span>
-                                            </td>
-                                            <td>
-                        <span>
-
-           Quantity
-            </span>
-                                            </td>
-                                            <td>
-                        <span>
-
-           Status
-            </span>
-                                            </td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($markets as $market)
-                                            @php
-                                                $bid=$market->Bids()->orderBy('price','desc')->first();
-                                                if ($bid){
-                                                    $highest=$bid->price;
-                                                }else{
-                                                    $highest=0;
-                                                }
-
-                                                $has_winner=$market->Bids()->where('is_win')->exists();
-                                                if ($has_winner){
-                                                    $status_color='green';
-                                                    $status_text='Done';
-                                                }else{
-                                                     $status_color='red';
-                                                    $status_text='Failed';
-                                                }
-                                            @endphp
-                                            <tr class="{{ $status_color }}">
-                                                <td>
-              <span>
-            {{ $market->date }}
-            </span>
-                                                </td>
-                                                <td>
-            <span>
-            {{ $market->SalesForm->commodity }}
-            </span>
-                                                </td>
-
-                                                <td>
-            <span>
-              Quantity
-            </span>
-                                                </td>
-                                                <td>
-             <span>
-                  @php
-                      $minQuantity=str_replace(',','',$market->SalesForm->min_order);
-                  @endphp
-                 {{ number_format($minQuantity) }}
-            </span>
-                                                </td>
-                                                <td>
-            <span>
-             {{ $market->SalesForm->packing }}
-            </span>
-                                                </td>
-                                                <td>
-             <span>
-            {{ str_replace('-','/',$market->SalesForm->loading_from).' - '.str_replace('-','/',$market->SalesForm->loading_to) }}
-            </span>
-                                                </td>
-                                                <td>
-                        <span>
-
-            {{ $market->SalesForm->origin_country }}
-            </span>
-                                                </td>
-                                                <td>
-                        <span>
-
-            {{ $market->SalesForm->price_type }}
-            </span>
-                                                </td>
-                                                @if($market->SalesForm->price_type=='Fix')
-                                                    <td>{{ number_format($market->SalesForm->price) }}</td>
-                                                @else
-                                                    <td>{{ number_format($market->SalesForm->alpha)  }}</td>
-                                                @endif
-                                                <td>
-                        <span>
-
-
-
-                            {{ $highest }}
-
-            </span>
-                                                </td>
-                                                <td>
-                        <span>
-
-           Quantity
-            </span>
-                                                </td>
-                                                <td>
-                        <span>
-
-           {{ $status_text }}
-            </span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        @endif
                     </div>
-                @endif
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thank You</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success text-center">
+                            Your Message was sent successfully
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     @endif

@@ -7,7 +7,9 @@ use App\Mail\ContactFormEmail;
 use App\Models\BidHistory;
 use App\Models\Blog;
 use App\Models\Commodity;
+use App\Models\ContactAddress;
 use App\Models\ContactForm;
+use App\Models\ContactHelp;
 use App\Models\ContainerType;
 use App\Models\ContractType;
 use App\Models\Country;
@@ -269,17 +271,19 @@ class IndexController extends Controller
         $page = $menus->Pages()->first();
 
         if ($menus->id == 23) {
-            return view('home.contact',compact('page', 'menus'));
+            $addresses = ContactAddress::all();
+            $help_and_support = ContactHelp::all();
+            return view('home.contact', compact('page', 'menus', 'addresses', 'help_and_support'));
         }
 
-        $markets=[];
+        $markets = [];
         if ($menus->id == 4) {
-            $time=Carbon::now()->format('H:i:s');
+            $time = Carbon::now()->format('H:i:s');
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
-            $markets = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->where('time','<',$time)->orderby('date', 'asc')->get();
+            $markets = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'asc')->get();
         }
-        return view('home.page', compact('page', 'menus','markets'));
+        return view('home.page', compact('page', 'menus', 'markets'));
     }
 
     public function blogs()

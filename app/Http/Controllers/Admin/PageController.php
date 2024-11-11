@@ -82,7 +82,7 @@ class PageController extends Controller
         if ($request->has('map')) {
             $env = env('UPLOAD_BANNER_PAGE');
             $map = generateFileName($request->map->getClientOriginalName());
-            $request->map->move(public_path($env), $banner);
+            $request->map->move(public_path($env), $map);
         } else {
             $map = $page->map;
         }
@@ -90,7 +90,7 @@ class PageController extends Controller
         if ($request->has('form_bg')) {
             $env = env('UPLOAD_BANNER_PAGE');
             $form_bg = generateFileName($request->form_bg->getClientOriginalName());
-            $request->form_bg->move(public_path($env), $banner);
+            $request->form_bg->move(public_path($env), $form_bg);
         } else {
             $form_bg = $page->form_bg;
         }
