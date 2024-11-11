@@ -95,7 +95,7 @@
                                         </div>
                                     @endif
                                     @if($page->id==20 and count($contact_helps)>0)
-                                        <div id="addresses_section">
+                                        <div id="help_section">
                                             <h5>
                                                 Help & Support
                                             </h5>
@@ -124,7 +124,7 @@
                                                         </td>
 
                                                         <td>
-                                                            {{ $item->description_help_modal }}
+                                                            {{ substr($item->description_help_modal,400).'...' }}
                                                         </td>
                                                         <td>
                                                             {{ $item->link_help_modal }}
@@ -421,6 +421,9 @@
         }
 
         #addresses_section {
+            margin: 20px 0;
+        }
+        #help_section {
             margin: 20px 0;
         }
     </style>
