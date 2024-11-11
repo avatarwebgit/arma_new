@@ -266,10 +266,12 @@ class IndexController extends Controller
 
     public function menus(Menus $menus)
     {
-        if ($menus->id == 23) {
-            return view('home.contact');
-        }
         $page = $menus->Pages()->first();
+
+        if ($menus->id == 23) {
+            return view('home.contact',compact('page', 'menus'));
+        }
+
         $markets=[];
         if ($menus->id == 4) {
             $time=Carbon::now()->format('H:i:s');

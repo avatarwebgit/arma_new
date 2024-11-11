@@ -201,7 +201,7 @@ Route::name('admin.')->middleware('check.session')->prefix('/admin-panel/managem
 
     //settings
 
-    Route::resource('setting', SettingController::class)->except('update', 'destroy','index')->middleware('permission:Settings-Setting')->names('settings');
+    Route::resource('setting', SettingController::class)->except('update', 'destroy', 'index')->middleware('permission:Settings-Setting')->names('settings');
     Route::get('/admin/settings/index/{type}', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/admin/settings', [SettingController::class, 'update'])->name('settings.update');
     Route::post('/admin/settings/delete/{setting}', [SettingController::class, 'destroy'])->name('settings.destroy');
@@ -302,6 +302,14 @@ Route::name('admin.')->middleware('check.session')->prefix('/admin-panel/managem
     Route::post('/sales_form/remove', [FormController::class, 'sales_form_remove'])->name('sales_form.remove');
     Route::post('/sales_form/copy', [FormController::class, 'sales_form_copy'])->name('sales_form.copy');
 
+    //contact page address
+    Route::post('/contact/save_address', [\App\Http\Controllers\Admin\ContactController::class, 'save_address'])->name('contact.save_address');
+    Route::post('/contact/delete_address', [\App\Http\Controllers\Admin\ContactController::class, 'delete_address'])->name('contact.delete_address');
+
+    Route::post('/contact/save_help_support', [\App\Http\Controllers\Admin\ContactController::class, 'save_help_support'])->name('contact.save_help_support');
+    Route::post('/contact/delete_help_support', [\App\Http\Controllers\Admin\ContactController::class, 'delete_help_support'])->name('contact.delete_help_support');
+
+
 });
 
 Route::post('admin-panel/management/Final_Submit', [FormController::class, 'Final_Submit'])->name('admin.Final_Submit');
@@ -386,11 +394,11 @@ Route::get('/paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.
 Route::post('/refund', [Controller::class, 'refund'])->name('refund');
 Route::get('/loogout/{username}', function ($username) {
     $user = \App\Models\User::where('email', '=', $username)->first();
-    $session=\App\Models\SessionModel::where('user_id', '=', $user->id)->first();
+    $session = \App\Models\SessionModel::where('user_id', '=', $user->id)->first();
     $session->delete();
     dd('ok');
 });
-Route::get('/change_name/{username}/{full_name}', function ($username,$full_name) {
+Route::get('/change_name/{username}/{full_name}', function ($username, $full_name) {
     $user = \App\Models\User::where('email', '=', $username)->first();
     $user->update([
         'full_name' => $full_name

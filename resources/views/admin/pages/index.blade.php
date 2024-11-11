@@ -16,77 +16,84 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                        <div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-md-12 mb-3">
-                                        <a href="{{ route('admin.page.create') }}" class="btn btn-primary btn-sm">
-                                            Create
-                                        </a>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="markets-pair-list">
-                                            <div id="alert"></div>
-                                            <table class="table table-striped">
-                                                <thead>
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-md-12 mb-3">
+                                    <a href="{{ route('admin.page.create') }}" class="btn btn-primary btn-sm">
+                                        Create
+                                    </a>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="markets-pair-list">
+                                        <div id="alert"></div>
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Related Menu</th>
+                                                <th>banner</th>
+                                                <th>date</th>
+                                                <th>action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($pages as $key=>$item)
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Title</th>
-                                                    <th>Related Menu</th>
-                                                    <th>banner</th>
-                                                    <th>date</th>
-                                                    <th>action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($pages as $key=>$item)
-                                                    <tr>
-                                                        <td>
-                                                            {{ $key+1 }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->title }}
-                                                        </td>
-                                                        <td>
-                                                            @foreach($item->menus as $menu)
-                                                                {{ $menu->title }}
-                                                            @endforeach
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-left position-relative">
-                                                                <img width="100" alt="banner"
-                                                                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$item->banner) }}">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            {{ $item->created_at }}
-                                                        </td>
-                                                        <td>
-                                                            <a title="Edit" href="{{ route('admin.page.edit',['page'=>$item->id]) }}"
-                                                               class="btn btn-sm btn-primary">
-                                                                <i class="fa fa-list"></i>
-                                                                Edit
-                                                            </a>
+                                                    <td>
+                                                        {{ $key+1 }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->title }}
+                                                    </td>
+                                                    <td>
+                                                        @foreach($item->menus as $menu)
+                                                            {{ $menu->title }}
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-left position-relative">
+                                                            <img width="100" alt="banner"
+                                                                 src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$item->banner) }}">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->created_at }}
+                                                    </td>
+                                                    <td>
+                                                        <a title="Edit"
+                                                           href="{{ route('admin.page.edit',['page'=>$item->id]) }}"
+                                                           class="btn btn-sm btn-primary">
+                                                            <i class="fa fa-list"></i>
+                                                            Edit
+                                                        </a>
+                                                        @if($item->id!=20)
                                                             {!! Form::open([
 'method' => 'POST',
 'route' => ['admin.page.remove', $item->id],
 'class' => 'd-inline',
 ]) !!}
-                                                            <a href="#" class="btn btn-sm small btn-danger show_confirm" id="delete-form-{{ $item->id }}"
-                                                               data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                                               data-bs-original-title="{{ __('Delete') }}"><i class="ti ti-trash mr-1"></i></a>
+                                                            <a href="#" class="btn btn-sm small btn-danger show_confirm"
+                                                               id="delete-form-{{ $item->id }}"
+                                                               data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                               title=""
+                                                               data-bs-original-title="{{ __('Delete') }}"><i
+                                                                    class="ti ti-trash mr-1"></i></a>
                                                             <input type="hidden" name="id" value="{{ $item->id }}">
                                                             {!! Form::close() !!}
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                        @endif
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,8 +127,8 @@
                         console.log(msg);
                         let status_text = msg[1];
                         let status_color = msg[2];
-                        $('#market_status_'+market_id).text(status_text);
-                        $('#market_status_'+market_id).css('color',status_color);
+                        $('#market_status_' + market_id).text(status_text);
+                        $('#market_status_' + market_id).css('color', status_color);
                     }
                 }
             })

@@ -45,7 +45,7 @@ return new class extends Migration
             $table->dropColumn('paypal_term_and_conditions');
             $table->dropColumn('dp_term_and_conditions');
             $table->dropColumn('western_union_term_and_conditions');
-            $table->dropColumn('da_term_and_conditions')->nullable();
+            $table->dropColumn('da_term_and_conditions');
             $table->dropColumn('moneygram_term_and_conditions');
         });
     }
