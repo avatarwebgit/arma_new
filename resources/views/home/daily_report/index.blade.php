@@ -1,18 +1,21 @@
 <div class="col-12 mb-4">
     <form id="dateFilterForm" class="d-flex justify-content-between">
-        <div>
+        <div class="d-flex">
             <div>
                 <label for="startDate">Start Date:</label>
                 <input type="date" id="startDate" name="startDate" required>
             </div>
-            <div>
+            <div class="ml-3">
                 <label for="endDate">End Date:</label>
                 <input type="date" id="endDate" name="endDate" required>
             </div>
+            <div>
+                <button type="button" onclick="FilterMarket()" class="btn btn-sm btn-primary">Filter</button>
+            </div>
         </div>
         <div>
-            <button type="button" onclick="printReport()" class="btn btn-primary">Print</button>
-            <button type="button" onclick="exportToExcel()" class="btn btn-success">Excel</button>
+            <button type="button" onclick="printReport()" class="btn btn-sm btn-primary">Print</button>
+            <button type="button" onclick="exportToExcel()" class="btn btn-sm btn-success">Excel</button>
         </div>
     </form>
 </div>
