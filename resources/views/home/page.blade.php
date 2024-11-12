@@ -10,6 +10,7 @@
         .d-none {
             display: none !important;
         }
+
         span {
             line-height: 9pt !important;
         }
@@ -177,6 +178,10 @@
                 },
 
             });
+        }
+
+        function printReport() {
+            window.location.print();
         }
     </script>
 @endsection

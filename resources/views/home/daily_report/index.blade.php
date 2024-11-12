@@ -33,7 +33,7 @@
     </form>
 </div>
 <div class="col-12">
-    <div class="table-responsive">
+    <div id="daily_report_table" class="table-responsive">
         <table class="table daily_report">
             <thead>
             <tr style="background-color: #d9d9d9 !important">
