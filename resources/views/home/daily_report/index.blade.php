@@ -1,16 +1,18 @@
 <div class="col-12 mb-4">
     <form id="dateFilterForm" class="d-flex justify-content-between">
         <div>
-            <label for="startDate">شروع تاریخ:</label>
-            <input type="date" id="startDate" name="startDate" required>
+            <div>
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
+            <div>
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required>
+            </div>
         </div>
         <div>
-            <label for="endDate">پایان تاریخ:</label>
-            <input type="date" id="endDate" name="endDate" required>
-        </div>
-        <div>
-            <button type="button" onclick="printReport()" class="btn btn-primary">پرینت</button>
-            <button type="button" onclick="exportToExcel()" class="btn btn-success">خروجی اکسل</button>
+            <button type="button" onclick="printReport()" class="btn btn-primary">Print</button>
+            <button type="button" onclick="exportToExcel()" class="btn btn-success">Excel</button>
         </div>
     </form>
 </div>
