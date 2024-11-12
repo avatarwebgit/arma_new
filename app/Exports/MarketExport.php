@@ -60,7 +60,7 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             $items['Quantity'] = $market->SalesForm->max_quantity . ' ' . $unit;
             $items['Min Order'] = number_format($minQuantity) . ' ' . $unit;
             $items['Packing'] = $market->SalesForm->packing;
-            $items['Delivery'] = $market->SalesForm->packing
+            $items['Delivery'] = $market->SalesForm->packing;
         }
         return $items;
     }
