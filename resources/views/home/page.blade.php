@@ -363,7 +363,6 @@
 
                                                     $highest=$bid->price.' '.$currency;
                                                     $quantity=$bid->quantity.' '.$unit;
-                                                    dd($highest);
                                                 }else{
                                                     $highest=0;
                                                     $quantity=0;
@@ -428,14 +427,14 @@
 
 
 
-                            {{ $highest==0 ? 'N.A' : '' }}
+                            {{ $highest==0 ? 'N.A' : $highest }}
 
             </span>
                                                 </td>
                                                 <td>
                         <span>
 
-           {{ $quantity==0? 'N.A' :$quantity }}
+           {{ $quantity==0? 'N.A' : $quantity }}
             </span>
                                                 </td>
                                                 <td>
