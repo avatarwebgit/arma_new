@@ -259,35 +259,10 @@
                 $('#endDate_error').removeClass('d-none');
                 return;
             }
+            $('#excel_startDate').val(startDate);
+            $('#excel_endDate').val(endDate);
 
-            $.ajax({
-                url: "{{ route('home.daily_report.excel') }}",
-                dataType: "json",
-                method: "GET",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    startDate: startDate,
-                    endDate: endDate,
-                },
-                beforeSend: function () {
-                    $('#filter_loader').removeClass('d-none');
-                    $('#filter_loader_text').addClass('d-none');
-                },
-                success: function (msg) {
-                    $('#filter_loader').addClass('d-none');
-                    if (msg[0] == 1) {
-                        $('#market_daily_items').html(msg[1]);
-                        $('#daily_paginate').addClass('d-none');
-                        $('#filter_loader_text').removeClass('d-none');
-                    } else if (msg[0] == 2) {
-                        // اگر لینک فایل اکسل باشد، آن را دانلود می‌کنیم
-                        window.location.href = msg[1];
-                    } else {
-                        alert('serer Error')
-                    }
-                },
-
-            });
+            $('#excel_form').submit();
         }
 
 

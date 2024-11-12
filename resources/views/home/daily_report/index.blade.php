@@ -118,3 +118,10 @@
 <div id="daily_paginate" class="col-12 d-flex justify-content-center mt-5">
     {{ $markets->links() }}
 </div>
+
+<form id="excel_form" action="{{ route('home.daily_report.excel') }}" method="post">
+    @csrf
+    <input type="hidden" id="excel_startDate">
+    <input type="hidden" id="excel_endDate">
+
+</form>
