@@ -20,6 +20,11 @@
                     Filter
                 </button>
             </div>
+            <div class="ml-3">
+                <button style="padding: 2px 10px" type="button" onclick="window.location.reload()" class="btn btn-sm btn-danger">
+                    Clear Filter
+                </button>
+            </div>
         </div>
         <div>
             <button type="button" onclick="printReport()" class="btn btn-sm btn-primary">Print</button>
@@ -101,121 +106,13 @@
                 </td>
             </tr>
             </thead>
-            <tbody>
-            @foreach($markets as $market)
-                @php
-                    $bid=$market->Bids()->orderBy('price','desc')->first();
-
-                    $has_winner=$market->Bids()->where('is_win',1)->exists();
-                    if ($has_winner){
-                        $status_color='green';
-                        $status_text='Done';
-                    }else{
-                         $status_color='red';
-                        $status_text='Failed';
-                    }
-                    if ($market->SalesForm->unit=='other' or $market->SalesForm->unit=='Other'){
-                        $unit=$market->SalesForm->unit_other;
-                    }else{
-                        $unit=$market->SalesForm->unit;
-                    }
-                    if ($market->SalesForm->currency=='other' or $market->SalesForm->currency=='Other'){
-                        $currency=$market->SalesForm->currency_other.'/'.$unit;
-                    }else{
-                        $currency=$market->SalesForm->currency.'/'.$unit;
-                    }
-
-                    if ($bid){
-
-                        $highest=$bid->price.' '.$currency;
-                        $quantity=$bid->quantity.' '.$unit;
-                    }else{
-                        $highest=0;
-                        $quantity=0;
-                    }
-
-                @endphp
-                <tr class="{{ $status_color }}">
-                    <td>
-              <span>
-            {{ $market->date }}
-            </span>
-                    </td>
-                    <td>
-            <span>
-            {{ $market->SalesForm->commodity }}
-            </span>
-                    </td>
-
-                    <td>
-            <span>
-
-             {{ $market->SalesForm->max_quantity.' '.$unit }}
-            </span>
-                    </td>
-                    <td>
-             <span>
-                  @php
-                      $minQuantity=str_replace(',','',$market->SalesForm->min_order);
-                  @endphp
-                 {{ number_format($minQuantity).' '.$unit }}
-            </span>
-                    </td>
-                    <td>
-            <span>
-             {{ $market->SalesForm->packing }}
-            </span>
-                    </td>
-                    <td>
-             <span>
-            {{ $market->SalesForm->incoterms }}
-            </span>
-                    </td>
-                    <td>
-                        <span>
-
-            {{ $market->SalesForm->origin_country }}
-            </span>
-                    </td>
-                    <td>
-                        <span>
-
-            {{ $market->SalesForm->price_type }}
-            </span>
-                    </td>
-                    @if($market->SalesForm->price_type=='Fix')
-                        <td>{{ number_format($market->SalesForm->price).' '.$currency }}</td>
-                    @else
-                        <td>{{ number_format($market->SalesForm->alpha) .' '.$currency }}</td>
-                    @endif
-                    <td>
-                        <span>
-
-
-
-                            {{ $highest==0 ? 'N.A' : $highest }}
-
-            </span>
-                    </td>
-                    <td>
-                        <span>
-
-           {{ $quantity==0? 'N.A' : $quantity }}
-            </span>
-                    </td>
-                    <td>
-                        <span>
-
-           {{ $status_text }}
-            </span>
-                    </td>
-                </tr>
-            @endforeach
+            <tbody id="market_daily_items">
+           @include('home.daily_report.row')
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="col-12 d-flex justify-content-center mt-5">
+<div id="daily_paginate" class="col-12 d-flex justify-content-center mt-5">
     {{ $markets->links() }}
 </div>

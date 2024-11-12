@@ -683,6 +683,25 @@ class IndexController extends Controller
         dd('Congratulations');
     }
 
+    public function daily_report_filter(Request $request)
+    {
+        try {
+            $endDate = $request->endDate;
+            $startDate = $request->startDate;
+            $time = Carbon::now()->format('H:i:s');
+            $yesterday = Carbon::yesterday();
+            $tomorrow = Carbon::tomorrow();
+            $markets = Market::where(function ($query) use ($endDate, $startDate) {
+                $query->where('date', '>', $startDate)->where('date', '<', $endDate);
+            })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->get();
+            $html = view('home.daily_report.row', compact('markets'))->render();
+            return response()->json([1, $html]);
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
+        }
+
+    }
+
     public function Create_User_Activation_Status()
     {
         $items = UserActivationStatus::all();

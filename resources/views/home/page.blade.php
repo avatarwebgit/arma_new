@@ -138,9 +138,6 @@
             $('#startDate_error').addClass('d-none');
             $('#endDate_error').addClass('d-none');
 
-            console.log(startDate.length);
-            console.log(endDate.length);
-
             if (startDate.length == 0) {
                 $('#startDate_error').removeClass('d-none');
                 return;
@@ -149,6 +146,26 @@
                 $('#endDate_error').removeClass('d-none');
                 return;
             }
+
+            $.ajax({
+                url: "{{ route('home.daily_report.filter') }}",
+                dataType: "json",
+                method: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    startDate: startDate,
+                    endDate: endDate,
+                },
+                success: function (msg) {
+                    if (msg[0] == 1) {
+                        $('#market_daily_items').html(msg[1]);
+                        $('#daily_paginate').addClass('d-none');
+                    } else {
+                        alert('serer Error')
+                    }
+                },
+
+            });
         }
     </script>
 @endsection
