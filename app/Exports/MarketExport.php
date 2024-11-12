@@ -20,6 +20,7 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
     public function collection()
     {
         $items = [];
+        $item = [];
         $markets = $this->markets;
         foreach ($markets as $market) {
             //
@@ -55,12 +56,13 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             //
             $minQuantity = str_replace(',', '', $market->SalesForm->min_order);
 
-            $items['Data'] = $market->date;
-            $items['Commodity'] = $market->SalesForm->commodity;
-            $items['Quantity'] = $market->SalesForm->max_quantity . ' ' . $unit;
-            $items['Min Order'] = number_format($minQuantity) . ' ' . $unit;
-            $items['Packing'] = $market->SalesForm->packing;
-            $items['Delivery'] = $market->SalesForm->packing;
+            $item[] = $market->date;
+            $item[] = $market->SalesForm->commodity;
+            $item[] = $market->SalesForm->max_quantity . ' ' . $unit;
+            $item[] = number_format($minQuantity) . ' ' . $unit;
+            $item[] = $market->SalesForm->packing;
+            $item[] = $market->SalesForm->packing;
+            $items[] = $item;
         }
         dd($items);
         return $items;
