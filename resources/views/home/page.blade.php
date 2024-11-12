@@ -163,6 +163,7 @@
         }
 
         function FilterMarket() {
+
             let startDate = $('#startDate').val();
             let endDate = $('#endDate').val();
             $('#startDate_error').addClass('d-none');
@@ -186,7 +187,11 @@
                     startDate: startDate,
                     endDate: endDate,
                 },
+                beforeSend: function(){
+                    $('#filter_loader').removeClass('d-none');
+                },
                 success: function (msg) {
+                    $('#filter_loader').addClass('d-none');
                     if (msg[0] == 1) {
                         $('#market_daily_items').html(msg[1]);
                         $('#daily_paginate').addClass('d-none');
