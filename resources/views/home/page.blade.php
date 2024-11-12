@@ -401,7 +401,7 @@
                                                 </td>
                                                 <td>
              <span>
-            {{ strtoupper($market->SalesForm->payment_options) }}
+            {{ $market->SalesForm->incoterms }}
             </span>
                                                 </td>
                                                 <td>
