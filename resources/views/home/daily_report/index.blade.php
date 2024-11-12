@@ -186,3 +186,7 @@
         </table>
     </div>
 </div>
+
+<div class="col-12">
+    {{ $markets->links() }}
+</div>
