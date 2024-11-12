@@ -87,10 +87,11 @@
 
         @if($menus->id == 4)
             @media (min-width: 1400px) {
-                        .container, .container-lg, .container-md, .container-sm, .container-xl {
-                            max-width: 85% !important;
-                        }
-                    }
+            .container, .container-lg, .container-md, .container-sm, .container-xl {
+                max-width: 85% !important
+                F;
+            }
+        }
         @endif
     </style>
 @endsection
@@ -338,13 +339,6 @@
                                         @foreach($markets as $market)
                                             @php
                                                 $bid=$market->Bids()->orderBy('price','desc')->first();
-                                                if ($bid){
-                                                    $highest=$bid->price;
-                                                    $quantity=$bid->quantity;
-                                                }else{
-                                                    $highest=0;
-                                                    $quantity=0;
-                                                }
 
                                                 $has_winner=$market->Bids()->where('is_win')->exists();
                                                 if ($has_winner){
@@ -360,10 +354,19 @@
                                                     $unit=$market->SalesForm->unit;
                                                 }
                                                 if ($market->SalesForm->currency=='other' or $market->SalesForm->currency=='Other'){
-                                                    $currency=$market->SalesForm->currency_other;
+                                                    $currency=$market->SalesForm->currency_other.'/'.$unit;
                                                 }else{
-                                                    $currency=$market->SalesForm->currency;
+                                                    $currency=$market->SalesForm->currency.'/'.$unit;
                                                 }
+
+                                                if ($bid){
+                                                    $highest=$bid->price.' '.$currency;
+                                                    $quantity=$bid->quantity.' '.$unit;
+                                                }else{
+                                                    $highest=0;
+                                                    $quantity=0;
+                                                }
+
                                             @endphp
                                             <tr class="{{ $status_color }}">
                                                 <td>
@@ -380,7 +383,7 @@
                                                 <td>
             <span>
 
-             {{ $market->SalesForm->max_quantity.'('.$unit.')' }}
+             {{ $market->SalesForm->max_quantity.' '.$unit }}
             </span>
                                                 </td>
                                                 <td>
@@ -388,7 +391,7 @@
                   @php
                       $minQuantity=str_replace(',','',$market->SalesForm->min_order);
                   @endphp
-                 {{ number_format($minQuantity) }}
+                 {{ number_format($minQuantity).' '.$unit }}
             </span>
                                                 </td>
                                                 <td>
@@ -398,7 +401,7 @@
                                                 </td>
                                                 <td>
              <span>
-            {{ str_replace('-','/',$market->SalesForm->loading_from).' - '.str_replace('-','/',$market->SalesForm->loading_to) }}
+            {{ strtoupper($market->SalesForm->payment_options) }}
             </span>
                                                 </td>
                                                 <td>
@@ -414,9 +417,9 @@
             </span>
                                                 </td>
                                                 @if($market->SalesForm->price_type=='Fix')
-                                                    <td>{{ number_format($market->SalesForm->price).'('.$currency.')' }}</td>
+                                                    <td>{{ number_format($market->SalesForm->price).' '.$currency }}</td>
                                                 @else
-                                                    <td>{{ number_format($market->SalesForm->alpha) .'('.$currency.')' }}</td>
+                                                    <td>{{ number_format($market->SalesForm->alpha) .' '.$currency }}</td>
                                                 @endif
                                                 <td>
                         <span>
