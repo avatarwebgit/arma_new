@@ -433,7 +433,7 @@
                                                 <td>
                         <span>
 
-           {{ $quantity==0? 'N.A' :$quantity.'('.$unit.')' }}
+           {{ $quantity==0? 'N.A' :$quantity }}
             </span>
                                                 </td>
                                                 <td>
