@@ -17,7 +17,7 @@
             </div>
             <div class="ml-3">
                 <button style="padding: 2px 10px" type="button" onclick="FilterMarket()" class="btn btn-sm btn-primary">
-                    <img id="filter_loader" class="d-none" src="{{ asset('home/img/loader.gif') }}">
+                    <div id="filter_loader" class="loader"></div>
                     <span>Filter</span>
                 </button>
             </div>
