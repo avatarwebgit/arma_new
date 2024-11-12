@@ -181,7 +181,7 @@
         }
 
         function printReport() {
-            window.location.print();
+            window.print();
         }
     </script>
 @endsection
