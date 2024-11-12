@@ -351,6 +351,11 @@
                                                 }else{
                                                     $unit=$market->SalesForm->unit;
                                                 }
+                                                if ($market->SalesForm->currency=='other' or $market->SalesForm->currency=='Other'){
+                                                    $currency=$market->SalesForm->currency_other;
+                                                }else{
+                                                    $currency=$market->SalesForm->currency;
+                                                }
                                             @endphp
                                             <tr class="{{ $status_color }}">
                                                 <td>
@@ -401,9 +406,9 @@
             </span>
                                                 </td>
                                                 @if($market->SalesForm->price_type=='Fix')
-                                                    <td>{{ number_format($market->SalesForm->price) }}</td>
+                                                    <td>{{ number_format($market->SalesForm->price).'('.$currency.')' }}</td>
                                                 @else
-                                                    <td>{{ number_format($market->SalesForm->alpha)  }}</td>
+                                                    <td>{{ number_format($market->SalesForm->alpha) .'('.$currency.')' }}</td>
                                                 @endif
                                                 <td>
                         <span>
