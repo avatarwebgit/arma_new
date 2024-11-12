@@ -360,9 +360,10 @@
                                                 }
 
                                                 if ($bid){
-                                                    dd($bid);
+
                                                     $highest=$bid->price.' '.$currency;
                                                     $quantity=$bid->quantity.' '.$unit;
+                                                    dd($highest);
                                                 }else{
                                                     $highest=0;
                                                     $quantity=0;
