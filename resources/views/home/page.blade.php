@@ -39,7 +39,7 @@
         }
 
         .daily_report tr:hover {
-            background: #d9d9d9  !important;
+            background: #d9d9d9 !important;
             cursor: pointer;
         }
 
@@ -256,7 +256,7 @@
                                 <div class="table-responsive">
                                     <table class="table daily_report">
                                         <thead>
-                                        <tr>
+                                        <tr style="background-color: #d9d9d9 !important">
                                             <td>
               <span>
             Date
