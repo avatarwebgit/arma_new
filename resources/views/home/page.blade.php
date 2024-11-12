@@ -104,9 +104,27 @@
         }
 
         @endif
+ /* استایل‌های اضافی برای پرینت */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
 
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .table th, .table td {
+                border: 1px solid #000;
+                padding: 8px;
+                text-align: left;
+            }
+        }
 
     </style>
+
 @endsection
 
 @section('script')
@@ -181,9 +199,17 @@
         }
 
         function printReport() {
+            var printContents = document.getElementById('daily_report_table').innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
             window.print();
+
+            document.body.innerHTML = originalContents;
         }
     </script>
+
 @endsection
 
 
