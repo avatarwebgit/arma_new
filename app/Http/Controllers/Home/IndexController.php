@@ -709,9 +709,8 @@ class IndexController extends Controller
 
     public function daily_report_excel(Request $request)
     {
-
-        $endDate = $request->endDate;
-        $startDate = $request->startDate;
+        $endDate = $request->excel_endDate;
+        $startDate = $request->excel_startDate;
         $time = Carbon::now()->format('H:i:s');
         $yesterday = Carbon::yesterday();
         $tomorrow = Carbon::tomorrow();

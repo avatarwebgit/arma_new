@@ -121,7 +121,7 @@
 
 <form id="excel_form" action="{{ route('home.daily_report.excel') }}" method="post">
     @csrf
-    <input type="hidden" id="excel_startDate">
-    <input type="hidden" id="excel_endDate">
+    <input type="hidden" id="excel_startDate" name="excel_startDate">
+    <input type="hidden" id="excel_endDate" name="excel_endDate">
 
 </form>
