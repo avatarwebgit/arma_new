@@ -201,7 +201,7 @@
 
         }
 
-        function FilterMarket(export_excel = 0) {
+        function FilterMarket() {
 
             let startDate = $('#startDate').val();
             let endDate = $('#endDate').val();
@@ -225,7 +225,49 @@
                     _token: "{{ csrf_token() }}",
                     startDate: startDate,
                     endDate: endDate,
-                    export_excel: export_excel,
+                },
+                beforeSend: function () {
+                    $('#filter_loader').removeClass('d-none');
+                    $('#filter_loader_text').addClass('d-none');
+                },
+                success: function (msg) {
+                    $('#filter_loader').addClass('d-none');
+                    if (msg[0] == 1) {
+                        $('#market_daily_items').html(msg[1]);
+                        $('#daily_paginate').addClass('d-none');
+                        $('#filter_loader_text').removeClass('d-none');
+                    }  else {
+                        alert('serer Error')
+                    }
+                },
+
+            });
+        }
+
+        function ExcellExport() {
+
+            let startDate = $('#startDate').val();
+            let endDate = $('#endDate').val();
+            $('#startDate_error').addClass('d-none');
+            $('#endDate_error').addClass('d-none');
+
+            if (startDate.length == 0) {
+                $('#startDate_error').removeClass('d-none');
+                return;
+            }
+            if (endDate.length == 0) {
+                $('#endDate_error').removeClass('d-none');
+                return;
+            }
+
+            $.ajax({
+                url: "{{ route('home.daily_report.excel') }}",
+                dataType: "json",
+                method: "GET",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    startDate: startDate,
+                    endDate: endDate,
                 },
                 beforeSend: function () {
                     $('#filter_loader').removeClass('d-none');

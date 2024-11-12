@@ -53,7 +53,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use MongoDB\Driver\Session;
 use App\Exports\MarketExport;
@@ -697,18 +696,33 @@ class IndexController extends Controller
             $markets = Market::where(function ($query) use ($endDate, $startDate) {
                 $query->where('date', '>', $startDate)->where('date', '<', $endDate);
             })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->get();
-            if ($request->export_excel == 1) {
-                // ایجاد فایل اکسل به صورت موقت
-                $fileName = 'markets_' . time() . '.xlsx';
-                Excel::store(new MarketExport($markets), $fileName, 'public');
 
-                // برگرداندن لینک دانلود فایل اکسل
-                return response()->json([2, Storage::url($fileName)]);
-            } else {
-                $html = view('home.daily_report.row', compact('markets'))->render();
-            }
+            $html = view('home.daily_report.row', compact('markets'))->render();
+
 
             return response()->json([1, $html]);
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
+        }
+
+    }
+
+    public function daily_report_excel(Request $request)
+    {
+        try {
+            $endDate = $request->endDate;
+            $startDate = $request->startDate;
+            $time = Carbon::now()->format('H:i:s');
+            $yesterday = Carbon::yesterday();
+            $tomorrow = Carbon::tomorrow();
+            $markets = Market::where(function ($query) use ($endDate, $startDate) {
+                $query->where('date', '>', $startDate)->where('date', '<', $endDate);
+            })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->get();
+
+
+            return Excel::download(new MarketExport($markets), 'markets.xlsx');
+
+
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);
         }

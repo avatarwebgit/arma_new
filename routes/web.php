@@ -103,6 +103,7 @@ Route::get('/Destination', [IndexController::class, 'Destination'])->name('home.
 Route::get('/market_status_update', [IndexController::class, 'market_status_update'])->name('home.market_status_update');
 Route::get('/Create_User_Activation_Status', [IndexController::class, 'Create_User_Activation_Status'])->name('home.Create_User_Activation_Status');
 Route::post('/daily_report_filter', [IndexController::class, 'daily_report_filter'])->name('home.daily_report.filter');
+Route::get('/daily_report_excel', [IndexController::class, 'daily_report_excel'])->name('home.daily_report.excel');
 
 //Admin Panel Route
 Route::name('admin.')->middleware('check.session')->prefix('/admin-panel/management/')->group(function () {
