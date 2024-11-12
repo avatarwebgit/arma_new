@@ -138,12 +138,14 @@
             $('#startDate_error').addClass('d-none');
             $('#endDate_error').addClass('d-none');
 
+            console.log(startDate.length);
+            console.log(endDate.length);
+
             if (startDate.length == 0) {
-                $('#startDate').removeClass('d-none');
+                $('#startDate_error').removeClass('d-none');
                 return;
             }
             if (endDate.length == 0) {
-                $('#startDate_error').removeClass('d-none');
                 $('#endDate_error').removeClass('d-none');
                 return;
             }
