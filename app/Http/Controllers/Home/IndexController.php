@@ -283,12 +283,7 @@ class IndexController extends Controller
             $time = Carbon::now()->format('H:i:s');
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
-            $markets = Market::where('date', '<', $tomorrow)
-                ->where('time', '<', $time)
-                ->orderBy('date', 'desc')
-                ->distinct('date')
-                ->paginate(20);
-
+            $markets = Market::where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->paginate(20);
         }
         return view('home.page', compact('page', 'menus', 'markets'));
     }
@@ -700,7 +695,7 @@ class IndexController extends Controller
             $tomorrow = Carbon::tomorrow();
             $markets = Market::where(function ($query) use ($endDate, $startDate) {
                 $query->where('date', '>', $startDate)->where('date', '<', $endDate);
-            })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->groupby('date');
+            })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->get();
 
             $html = view('home.daily_report.row', compact('markets'))->render();
 
