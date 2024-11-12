@@ -131,49 +131,31 @@
         .loader {
             width: 50px;
             aspect-ratio: 1;
-            border-radius: 50%;
-            border: 8px solid #514b82;
-            animation: l20-1 0.8s infinite linear alternate,
-            l20-2 1.6s infinite linear;
+            display:grid;
+            -webkit-mask: conic-gradient(from 15deg,#0000,#000);
+            animation: l26 1s infinite steps(12);
+        }
+        .loader,
+        .loader:before,
+        .loader:after{
+            background:
+                radial-gradient(closest-side at 50% 12.5%,
+                #001ca1 96%,#0000) 50% 0/20% 80% repeat-y,
+                radial-gradient(closest-side at 12.5% 50%,
+                #0320c5 96%,#0000) 0 50%/80% 20% repeat-x;
+        }
+        .loader:before,
+        .loader:after {
+            content: "";
+            grid-area: 1/1;
+            transform: rotate(30deg);
+        }
+        .loader:after {
+            transform: rotate(60deg);
         }
 
-        @keyframes l20-1 {
-            0% {
-                clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%)
-            }
-            12.5% {
-                clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%)
-            }
-            25% {
-                clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%)
-            }
-            50% {
-                clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%)
-            }
-            62.5% {
-                clip-path: polygon(50% 50%, 100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%)
-            }
-            75% {
-                clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%)
-            }
-            100% {
-                clip-path: polygon(50% 50%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%)
-            }
-        }
-
-        @keyframes l20-2 {
-            0% {
-                transform: scaleY(1) rotate(0deg)
-            }
-            49.99% {
-                transform: scaleY(1) rotate(135deg)
-            }
-            50% {
-                transform: scaleY(-1) rotate(0deg)
-            }
-            100% {
-                transform: scaleY(-1) rotate(-135deg)
-            }
+        @keyframes l26 {
+            100% {transform:rotate(1turn)}
         }
 
     </style>
