@@ -20,52 +20,53 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
     public function collection()
     {
         $items = [];
-        $item = [];
         $markets = $this->markets;
+
         foreach ($markets as $market) {
-            //
             $bid = $market->Bids()->orderBy('price', 'desc')->first();
-
             $has_winner = $market->Bids()->where('is_win', 1)->exists();
-            if ($has_winner) {
-                $status_color = 'green';
-                $status_text = 'Done';
-            } else {
-                $status_color = 'red';
-                $status_text = 'Failed';
-            }
-            if ($market->SalesForm->unit == 'other' or $market->SalesForm->unit == 'Other') {
-                $unit = $market->SalesForm->unit_other;
-            } else {
-                $unit = $market->SalesForm->unit;
-            }
-            if ($market->SalesForm->currency == 'other' or $market->SalesForm->currency == 'Other') {
-                $currency = $market->SalesForm->currency_other . '/' . $unit;
-            } else {
-                $currency = $market->SalesForm->currency . '/' . $unit;
-            }
 
-            if ($bid) {
+            // تنظیم رنگ و متن وضعیت
+            $status_color = $has_winner ? 'green' : 'red';
+            $status_text = $has_winner ? 'Done' : 'Failed';
 
-                $highest = $bid->price . ' ' . $currency;
-                $quantity = $bid->quantity . ' ' . $unit;
-            } else {
-                $highest = 0;
-                $quantity = 0;
-            }
-            //
+            // تنظیم واحد
+            $unit = ($market->SalesForm->unit == 'other' || $market->SalesForm->unit == 'Other')
+                ? $market->SalesForm->unit_other
+                : $market->SalesForm->unit;
+
+            // تنظیم ارز
+            $currency = ($market->SalesForm->currency == 'other' || $market->SalesForm->currency == 'Other')
+                ? $market->SalesForm->currency_other . '/' . $unit
+                : $market->SalesForm->currency . '/' . $unit;
+
+            // بالاترین قیمت و مقدار در صورت وجود
+            $highest = $bid ? $bid->price . ' ' . $currency : 0;
+            $quantity = $bid ? $bid->quantity . ' ' . $unit : 0;
+
+            // حداقل مقدار
             $minQuantity = str_replace(',', '', $market->SalesForm->min_order);
 
-            $item[] = $market->date;
-            $item[] = $market->SalesForm->commodity;
-            $item[] = $market->SalesForm->max_quantity . ' ' . $unit;
-            $item[] = number_format($minQuantity) . ' ' . $unit;
-            $item[] = $market->SalesForm->packing;
-            $item[] = $market->SalesForm->packing;
-            $items[] = $item;
+            // افزودن اطلاعات به آیتم‌ها
+            $items[] = [
+                $market->date,
+                $market->SalesForm->commodity,
+                $market->SalesForm->max_quantity . ' ' . $unit,
+                number_format($minQuantity) . ' ' . $unit,
+                $market->SalesForm->packing,
+                $market->SalesForm->delivery,
+                $market->SalesForm->region,
+                $market->SalesForm->price_type,
+                $market->SalesForm->offer_price . ' ' . $currency,
+                $highest,
+                $quantity,
+                $status_text
+            ];
         }
-        return $items;
+
+        return collect($items);
     }
+
 
     public function columnWidths(): array
     {
