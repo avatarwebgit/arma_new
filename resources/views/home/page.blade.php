@@ -6,6 +6,9 @@
 
 @section('style')
     <style>
+        .d-none {
+            display: none !important;
+        }
         span {
             line-height: 9pt !important;
         }
@@ -100,9 +103,7 @@
 
         @endif
 
-        .d-none {
-            display: none;
-        }
+
     </style>
 @endsection
 
