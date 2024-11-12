@@ -131,27 +131,26 @@
         .loader {
             width: 50px;
             aspect-ratio: 1;
-            --c:no-repeat radial-gradient(farthest-side,#514b82 92%,#0000);
-            background:
-                var(--c) 50%  0,
-                var(--c) 50%  100%,
-                var(--c) 100% 50%,
-                var(--c) 0    50%;
-            background-size: 10px 10px;
-            animation: l18 1s infinite;
-            position: relative;
-        }
-        .loader::before {
-            content:"";
-            position: absolute;
-            inset:0;
-            margin: 3px;
-            background: repeating-conic-gradient(#0000 0 35deg,#514b82 0 90deg);
-            -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 3px),#000 0);
             border-radius: 50%;
+            border: 8px solid #514b82;
+            animation:
+                l20-1 0.8s infinite linear alternate,
+                l20-2 1.6s infinite linear;
         }
-        @keyframes l18 {
-            100%{transform: rotate(.5turn)}
+        @keyframes l20-1{
+            0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
+            12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
+            25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
+            50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+            62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+            75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
+            100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+        }
+        @keyframes l20-2{
+            0%    {transform:scaleY(1)  rotate(0deg)}
+            49.99%{transform:scaleY(1)  rotate(135deg)}
+            50%   {transform:scaleY(-1) rotate(0deg)}
+            100%  {transform:scaleY(-1) rotate(-135deg)}
         }
 
     </style>

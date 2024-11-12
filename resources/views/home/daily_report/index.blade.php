@@ -17,12 +17,13 @@
             </div>
             <div class="ml-3">
                 <button style="padding: 2px 10px" type="button" onclick="FilterMarket()" class="btn btn-sm btn-primary">
-                    <div id="filter_loader" class="loader"></div>
+                    <div id="filter_loader" class="loader d-none"></div>
                     <span>Filter</span>
                 </button>
             </div>
             <div class="ml-3">
-                <button style="padding: 2px 10px" type="button" onclick="window.location.reload()" class="btn btn-sm btn-danger">
+                <button style="padding: 2px 10px" type="button" onclick="window.location.reload()"
+                        class="btn btn-sm btn-danger">
                     Clear Filter
                 </button>
             </div>
@@ -108,7 +109,7 @@
             </tr>
             </thead>
             <tbody id="market_daily_items">
-           @include('home.daily_report.row')
+            @include('home.daily_report.row')
             </tbody>
         </table>
     </div>
