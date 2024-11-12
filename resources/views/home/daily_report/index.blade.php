@@ -18,7 +18,7 @@
             <div class="ml-3">
                 <button style="padding: 2px 10px" type="button" onclick="FilterMarket()" class="btn btn-sm btn-primary">
                     <div id="filter_loader" class="loader d-none"></div>
-                    <span>Filter</span>
+                    <span id="filter_loader_text">Filter</span>
                 </button>
             </div>
             <div class="ml-3">
