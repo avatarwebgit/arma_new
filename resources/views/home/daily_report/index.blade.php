@@ -30,7 +30,7 @@
         </div>
         <div>
             <button type="button" onclick="printReport()" class="btn btn-sm btn-primary">Print</button>
-            <button type="button" onclick="exportToExcel()" class="btn btn-sm btn-success">Excel</button>
+            <button type="button" onclick="FilterMarket(1)" class="btn btn-sm btn-success">Excel</button>
         </div>
     </form>
 </div>
