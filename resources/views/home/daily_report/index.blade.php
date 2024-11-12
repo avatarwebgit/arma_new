@@ -187,6 +187,6 @@
     </div>
 </div>
 
-<div class="col-12">
+<div class="col-12 d-flex justify-content-center mt-5">
     {{ $markets->links() }}
 </div>
