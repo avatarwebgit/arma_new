@@ -64,7 +64,7 @@
             position: absolute;
             top: 8px !important;
             left: 0 !important;
-            widtd: 2px;
+            width: 2px;
             height: 20px !important;
             background-color: #ffa700;
         }
@@ -108,6 +108,10 @@
 
 @section('script')
     <script>
+        $(document).ready(function () {
+            $('#startDate').val('');
+            $('#endDate').val('');
+        })
         $('.more_btn').click(function () {
             let is_close = $(this).hasClass('is_close');
             let button_html = '';
@@ -195,7 +199,7 @@
         <div>
             @if($page->active_banner ==1)
                 <div class="position-relative">
-                    <img style="widtd: 100%;height: auto" alt="banner"
+                    <img style="width: 100%;height: auto" alt="banner"
                          src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->banner) }}">
                     <div style="position: absolute;top: 0;padding: 40px">
                         {!! $page->banner_description !!}
