@@ -104,7 +104,7 @@
         }
 
         @endif
-  /* استایل‌های اضافی برای پرینت */
+   /* استایل‌های اضافی برای پرینت */
         @media print {
             body {
                 margin: 0;
@@ -131,31 +131,35 @@
         .loader {
             width: 50px;
             aspect-ratio: 1;
-            display:grid;
-            -webkit-mask: conic-gradient(from 15deg,#0000,#000);
+            display: grid;
+            -webkit-mask: conic-gradient(from 15deg, #0000, #000);
             animation: l26 1s infinite steps(12);
         }
+
         .loader,
         .loader:before,
-        .loader:after{
-            background:
-                radial-gradient(closest-side at 50% 12.5%,
-                #001ca1 96%,#0000) 50% 0/20% 80% repeat-y,
-                radial-gradient(closest-side at 12.5% 50%,
-                #0320c5 96%,#0000) 0 50%/80% 20% repeat-x;
+        .loader:after {
+            background: radial-gradient(closest-side at 50% 12.5%,
+            #001ca1 96%, #0000) 50% 0/20% 80% repeat-y,
+            radial-gradient(closest-side at 12.5% 50%,
+                #0320c5 96%, #0000) 0 50%/80% 20% repeat-x;
         }
+
         .loader:before,
         .loader:after {
             content: "";
             grid-area: 1/1;
             transform: rotate(30deg);
         }
+
         .loader:after {
             transform: rotate(60deg);
         }
 
         @keyframes l26 {
-            100% {transform:rotate(1turn)}
+            100% {
+                transform: rotate(1turn)
+            }
         }
 
     </style>
@@ -197,7 +201,7 @@
 
         }
 
-        function FilterMarket(export_excel=0) {
+        function FilterMarket(export_excel = 0) {
 
             let startDate = $('#startDate').val();
             let endDate = $('#endDate').val();
@@ -233,6 +237,9 @@
                         $('#market_daily_items').html(msg[1]);
                         $('#daily_paginate').addClass('d-none');
                         $('#filter_loader_text').removeClass('d-none');
+                    } else if (msg[0] == 2) {
+                        // اگر لینک فایل اکسل باشد، آن را دانلود می‌کنیم
+                        window.location.href = msg[1];
                     } else {
                         alert('serer Error')
                     }
@@ -240,7 +247,6 @@
 
             });
         }
-
 
 
         function printReport() {
