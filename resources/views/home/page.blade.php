@@ -88,8 +88,8 @@
         @if($menus->id == 4)
             @media (min-width: 1400px) {
             .container, .container-lg, .container-md, .container-sm, .container-xl {
-                max-width: 85% !important
-                F;
+                max-width: 95% !important;
+
             }
         }
         @endif
@@ -99,20 +99,20 @@
 @section('script')
     <script>
         $('.more_btn').click(function () {
-            let is_close = $(tdis).hasClass('is_close');
+            let is_close = $(this).hasClass('is_close');
             let button_html = '';
             if (is_close) {
                 button_html = `show less
                     <i class="fa fa-angle-up ml-3"></i>`;
-                $(tdis).parent().find('.text_want_to_hide').slideDown(2000);
-                $(tdis).removeClass('is_close');
+                $(this).parent().find('.text_want_to_hide').slideDown(2000);
+                $(this).removeClass('is_close');
             } else {
                 button_html = `show more
                     <i class="fa fa-angle-down ml-3"></i>`;
-                $(tdis).parent().find('.text_want_to_hide').slideUp(2000);
-                $(tdis).addClass('is_close');
+                $(this).parent().find('.text_want_to_hide').slideUp(2000);
+                $(this).addClass('is_close');
             }
-            $(tdis).html(button_html);
+            $(this).html(button_html);
         })
 
         function selectType(tag) {
@@ -141,7 +141,7 @@
         <div class="landing-feature container">
             <div class="col-12">
                 <div class="alert alert-success text-center">
-                    tdis Menu Doesn't Have A Page.Please Create A Page For tdis Menu
+                    this Menu Doesn't Have A Page.Please Create A Page For this Menu
                 </div>
             </div>
         </div>
@@ -187,7 +187,7 @@
 
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <select onchange="selectType(tdis)" class="form-select form-control"
+                                            <select onchange="selectType(this)" class="form-select form-control"
                                                     name="type">
                                                 <option>-</option>
                                                 <option>Article Update</option>
