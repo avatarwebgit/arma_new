@@ -344,6 +344,11 @@
                                                      $status_color='red';
                                                     $status_text='Failed';
                                                 }
+                                                if ($market->SalesForm->unit=='other' or $market->SalesForm->unit=='Other'){
+                                                    $unit=$market->SalesForm->unit_other;
+                                                }else{
+                                                    $unit=$market->SalesForm->unit;
+                                                }
                                             @endphp
                                             <tr class="{{ $status_color }}">
                                                 <td>
@@ -359,7 +364,8 @@
 
                                                 <td>
             <span>
-              Quantity
+
+             {{ $market->SalesForm->max_quantity.'('.$unit.')' }}
             </span>
                                                 </td>
                                                 <td>
@@ -402,7 +408,7 @@
 
 
 
-                            {{ $highest }}
+                            {{ $highest==0 ? 'N.A' : '' }}
 
             </span>
                                                 </td>
