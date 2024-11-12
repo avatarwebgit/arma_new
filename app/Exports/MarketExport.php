@@ -62,6 +62,7 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             $items['Packing'] = $market->SalesForm->packing;
             $items['Delivery'] = $market->SalesForm->packing;
         }
+        dd($items);
         return $items;
     }
 
