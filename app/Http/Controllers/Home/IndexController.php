@@ -717,7 +717,7 @@ class IndexController extends Controller
         $markets = Market::where(function ($query) use ($endDate, $startDate) {
             $query->where('date', '>', $startDate)->where('date', '<', $endDate);
         })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->get();
-
+dd($markets);
         return Excel::download(new MarketExport($markets), 'markets.xlsx');
 
     }
