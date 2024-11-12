@@ -53,7 +53,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use MongoDB\Driver\Session;
+use App\Exports\MarketExport;
 
 class IndexController extends Controller
 {
@@ -694,7 +696,12 @@ class IndexController extends Controller
             $markets = Market::where(function ($query) use ($endDate, $startDate) {
                 $query->where('date', '>', $startDate)->where('date', '<', $endDate);
             })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->get();
-            $html = view('home.daily_report.row', compact('markets'))->render();
+            if ($request->export_excel==1){
+                return Excel::download(new MarketExport($markets), 'markets.xlsx');
+            }else{
+                $html = view('home.daily_report.row', compact('markets'))->render();
+            }
+
             return response()->json([1, $html]);
         } catch (\Exception $e) {
             return response()->json([0, $e->getMessage()]);

@@ -197,7 +197,7 @@
 
         }
 
-        function FilterMarket() {
+        function FilterMarket(export_excel=0) {
 
             let startDate = $('#startDate').val();
             let endDate = $('#endDate').val();
@@ -221,6 +221,7 @@
                     _token: "{{ csrf_token() }}",
                     startDate: startDate,
                     endDate: endDate,
+                    export_excel: export_excel,
                 },
                 beforeSend: function () {
                     $('#filter_loader').removeClass('d-none');
@@ -239,6 +240,8 @@
 
             });
         }
+
+
 
         function printReport() {
             var printContents = document.getElementById('daily_report_table').innerHTML;
