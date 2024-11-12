@@ -85,6 +85,11 @@
             padding: 6px 18px !important;
         }
 
+        .input_error_validation {
+            font-size: 9pt;
+            color: red;
+        }
+
         @if($menus->id == 4)
             @media (min-width: 1400px) {
             .container, .container-lg, .container-md, .container-sm, .container-xl {
@@ -125,6 +130,23 @@
                 $('#option_value').fadeOut();
             }
 
+        }
+
+        function FilterMarket() {
+            let startDate = $('#startDate').val();
+            let endDate = $('#endDate').val();
+            $('#startDate_error').addClass('d-none');
+            $('#endDate_error').addClass('d-none');
+
+            if (startDate.length == 0) {
+                $('#startDate').removeClass('d-none');
+                return;
+            }
+            if (endDate.length == 0) {
+                $('#startDate_error').removeClass('d-none');
+                $('#endDate_error').removeClass('d-none');
+                return;
+            }
         }
     </script>
 @endsection
