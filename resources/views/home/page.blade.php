@@ -97,7 +97,12 @@
 
             }
         }
+
         @endif
+
+        .d-none {
+            display: none;
+        }
     </style>
 @endsection
 
