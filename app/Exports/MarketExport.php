@@ -64,7 +64,6 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             $item[] = $market->SalesForm->packing;
             $items[] = $item;
         }
-        dd($items);
         return $items;
     }
 
