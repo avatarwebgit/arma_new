@@ -332,8 +332,10 @@
                                                 $bid=$market->Bids()->orderBy('price','desc')->first();
                                                 if ($bid){
                                                     $highest=$bid->price;
+                                                    $quantity=$bid->quantity;
                                                 }else{
                                                     $highest=0;
+                                                    $quantity=0;
                                                 }
 
                                                 $has_winner=$market->Bids()->where('is_win')->exists();
@@ -415,7 +417,7 @@
                                                 <td>
                         <span>
 
-           Quantity
+           {{ $quantity==0? 'N.A' :$quantity.'('.$unit.')' }}
             </span>
                                                 </td>
                                                 <td>
