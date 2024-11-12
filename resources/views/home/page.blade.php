@@ -6,6 +6,7 @@
 
 @section('style')
     <style>
+
         .d-none {
             display: none !important;
         }
