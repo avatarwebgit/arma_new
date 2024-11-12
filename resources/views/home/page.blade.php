@@ -84,6 +84,14 @@
         .table td {
             padding: 6px 18px !important;
         }
+
+        @if($menus->id == 4)
+            @media (min-width: 1400px) {
+                        .container, .container-lg, .container-md, .container-sm, .container-xl {
+                            max-width: 85% !important;
+                        }
+                    }
+        @endif
     </style>
 @endsection
 
