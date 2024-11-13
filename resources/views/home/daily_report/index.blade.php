@@ -26,7 +26,7 @@
                         class="btn btn-sm btn-danger ml-1 p-button">
                     Clear Filter
                 </button>
-                <button type="button" onclick="printReport()" class="p-button btn btn-sm btn-primary ml-1">Print</button>
+                <button type="button" onclick="printReport()" class="p-button btn btn-sm btn-warning ml-1">Print</button>
                 <button type="button" onclick="ExcellExport()" class="p-button btn btn-sm btn-success ml-1">Excel</button>
             </div>
         </div>
