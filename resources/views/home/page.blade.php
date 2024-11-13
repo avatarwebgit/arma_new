@@ -171,9 +171,6 @@
                 flex-direction: column;
             }
 
-            .end_date {
-                margin: 0 !important;
-            }
         }
 
     </style>
