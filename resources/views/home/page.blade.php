@@ -104,7 +104,7 @@
         }
 
         @endif
-    /* استایل‌های اضافی برای پرینت */
+     /* استایل‌های اضافی برای پرینت */
         @media print {
             body {
                 margin: 0;
@@ -170,7 +170,10 @@
             #dateFilterForm > div {
                 flex-direction: column;
             }
+        }
 
+        .p-button {
+            padding: 10px 20px;
         }
 
     </style>

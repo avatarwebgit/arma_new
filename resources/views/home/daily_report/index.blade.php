@@ -18,16 +18,16 @@
                 </div>
             </div>
             <div class="mb-5">
-                <button style="padding: 2px 10px" type="button" onclick="FilterMarket()" class="btn btn-sm btn-primary ml-3">
+                <button type="button" onclick="FilterMarket()" class="p-button btn btn-sm btn-primary">
                     <div id="filter_loader" class="loader d-none"></div>
                     <span id="filter_loader_text">Filter</span>
                 </button>
-                <button style="padding: 2px 10px" type="button" onclick="window.location.reload()"
-                        class="btn btn-sm btn-danger ml-3">
+                <button type="button" onclick="window.location.reload()"
+                        class="btn btn-sm btn-danger ml-1 p-button">
                     Clear Filter
                 </button>
-                <button type="button" onclick="printReport()" class="btn btn-sm btn-primary ml-3">Print</button>
-                <button type="button" onclick="ExcellExport()" class="btn btn-sm btn-success ml-3">Excel</button>
+                <button type="button" onclick="printReport()" class="p-button btn btn-sm btn-primary ml-1">Print</button>
+                <button type="button" onclick="ExcellExport()" class="p-button btn btn-sm btn-success ml-1">Excel</button>
             </div>
         </div>
 
