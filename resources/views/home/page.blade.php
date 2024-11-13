@@ -13,7 +13,7 @@
 
         span {
             line-height: 9pt !important;
-            min-width: 90px !important;
+            min-width: 75px !important;
             display: block;
         }
 

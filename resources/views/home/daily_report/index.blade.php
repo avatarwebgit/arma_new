@@ -20,7 +20,7 @@
             <div class="mb-5">
                 <button type="button" onclick="FilterMarket()" class="p-button btn btn-sm btn-primary">
                     <div id="filter_loader" class="loader d-none"></div>
-                    <span id="filter_loader_text">Filter</span>
+                    <div id="filter_loader_text">Filter</div>
                 </button>
                 <button type="button" onclick="window.location.reload()"
                         class="btn btn-sm btn-danger ml-1 p-button">
