@@ -11,7 +11,7 @@
             display: none !important;
         }
 
-        span {
+        #daily_report_table span {
             line-height: 9pt !important;
             min-width: 75px !important;
             display: block;
