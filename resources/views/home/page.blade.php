@@ -100,7 +100,7 @@
         @if($menus->id == 4)
             @media (min-width: 1400px) {
             .container, .container-lg, .container-md, .container-sm, .container-xl {
-                max-width: 95% !important;
+                max-width: 93% !important;
 
             }
         }
