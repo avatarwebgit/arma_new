@@ -33,10 +33,10 @@
                     <button type="button" onclick="ExcellExport()" class="p-button btn btn-sm btn-success ml-1">Excel</button>
                 </div>
             </div>
-            <div id="button_mobile">
-                <button type="button" onclick="printReport()" class="p-button btn btn-sm btn-warning ml-1">Print</button>
-                <button type="button" onclick="ExcellExport()" class="p-button btn btn-sm btn-success ml-1">Excel</button>
-            </div>
+        </div>
+        <div id="button_mobile">
+            <button type="button" onclick="printReport()" class="p-button btn btn-sm btn-warning ml-1">Print</button>
+            <button type="button" onclick="ExcellExport()" class="p-button btn btn-sm btn-success ml-1">Excel</button>
         </div>
 
     </form>
