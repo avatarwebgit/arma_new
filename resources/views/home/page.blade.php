@@ -179,12 +179,13 @@
             .p-button{
                 padding: 3px 7px;
             }
-            #button_desktop{
+            #button_mobile {
                 display: none;
             }
         }
         @media screen and (min-width: 993px) {
-            #button_mobile {
+
+            #button_desktop{
                 display: none;
             }
         }
