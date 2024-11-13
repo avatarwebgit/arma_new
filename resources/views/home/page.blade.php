@@ -191,7 +191,6 @@
     <script>
         $(document).ready(function () {
             $('#startDate').val('');
-            $('#endDate').val('');
         })
         $('.more_btn').click(function () {
             let is_close = $(this).hasClass('is_close');
