@@ -3,9 +3,6 @@
 @endphp
 
 @foreach($groupedMarkets as $date => $marketsByDate)
-    <tr>
-        <td colspan="12" class="text-center font-bold">{{ $date }}</td>
-    </tr>
     @foreach($marketsByDate->sortByDesc('time') as $market)
         @php
             $bid = $market->Bids()->orderBy('price', 'desc')->first();
