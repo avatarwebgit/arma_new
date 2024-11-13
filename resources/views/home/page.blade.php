@@ -157,6 +157,10 @@
         .loader:after {
             transform: rotate(60deg);
         }
+        .p-button {
+            padding: 3px 20px;
+            color: white;
+        }
 
         @keyframes l26 {
             100% {
@@ -177,10 +181,7 @@
             }
         }
 
-        .p-button {
-            padding: 3px 20px;
-            color: white;
-        }
+
 
     </style>
 
