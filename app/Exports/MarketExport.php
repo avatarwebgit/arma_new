@@ -41,8 +41,8 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
                 : $market->SalesForm->currency . '/' . $unit;
 
             // بالاترین قیمت و مقدار در صورت وجود
-            $highest = $bid ? $bid->price . ' ' . $currency : 0;
-            $quantity = $bid ? $bid->quantity . ' ' . $unit : 0;
+            $highest = $bid ? number_format($bid->price) . ' ' . $currency : 0;
+            $quantity = $bid ? number_format($bid->quantity) . ' ' . $unit : 0;
 
             // حداقل مقدار
             $minQuantity = str_replace(',', '', $market->SalesForm->min_order);
@@ -56,13 +56,9 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             $highest == 0 ? 'N.A' : $highest;
             if ($highest == 0) {
                 $highest = 'n/a';
-            } else {
-                $highest = number_format($highest);
             }
             if ($quantity == 0) {
                 $quantity = 'n/a';
-            } else {
-                $quantity = number_format($quantity);
             }
 
 

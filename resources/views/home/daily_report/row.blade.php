@@ -23,8 +23,8 @@
 
         if ($bid){
 
-            $highest=$bid->price.' '.$currency;
-            $quantity=$bid->quantity.' '.$unit;
+            $highest=number_format($bid->price).' '.$currency;
+            $quantity=number_format($bid->quantity).' '.$unit;
         }else{
             $highest=0;
             $quantity=0;
@@ -89,14 +89,14 @@
 
 
 
-                            {{ $highest==0 ? 'n/a' : number_format($highest) }}
+                            {{ $highest==0 ? 'n/a' : $highest }}
 
             </span>
         </td>
         <td>
                         <span>
 
-           {{ $quantity==0? 'n/a' : number_format($quantity) }}
+           {{ $quantity==0? 'n/a' : $quantity }}
             </span>
         </td>
         <td>
