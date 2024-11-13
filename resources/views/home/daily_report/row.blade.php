@@ -3,8 +3,10 @@
 @endphp
 
 @foreach($groupedMarkets as $date => $marketsByDate)
+    <tr>
+        <td colspan="12" class="text-center font-bold">{{ $date }}</td>
+    </tr>
     @foreach($marketsByDate->sortByDesc('time') as $market)
-        {{ dd($market,$time,$today) }}
         @php
             $bid = $market->Bids()->orderBy('price', 'desc')->first();
             $has_winner = $market->Bids()->where('is_win', 1)->exists();
@@ -15,23 +17,26 @@
             $highest = $bid ? number_format($bid->price) . ' ' . $currency : 'n/a';
             $quantity = $bid ? number_format($bid->quantity) . ' ' . $unit : 'n/a';
             $minQuantity = str_replace(',', '', $market->SalesForm->min_order);
+            $marketDateTime = $market->date . ' ' . $market->time;
         @endphp
-        <tr class="{{ $status_color }}">
-            <td>{{ $market->date.' '.$market->time }}</td>
-            <td>{{ $market->SalesForm->commodity }}</td>
-            <td>{{ $market->SalesForm->max_quantity . ' ' . $unit }}</td>
-            <td>{{ number_format($minQuantity) . ' ' . $unit }}</td>
-            <td>{{ $market->SalesForm->packing }}</td>
-            <td>{{ $market->SalesForm->incoterms }}</td>
-            <td>{{ $market->SalesForm->origin_country }}</td>
-            <td>{{ $market->SalesForm->price_type }}</td>
-            <td>
-                {{ $market->SalesForm->price_type === 'Fix' ? number_format($market->SalesForm->price) . ' ' . $currency : number_format($market->SalesForm->alpha) . ' ' . $currency }}
-            </td>
-            <td>{{ $highest }}</td>
-            <td>{{ $quantity }}</td>
-            <td>{{ $status_text }}</td>
-        </tr>
+
+        @if($market->date !== $today || $market->time < $time)
+            <tr class="{{ $status_color }}">
+                <td>{{ $marketDateTime }}</td>
+                <td>{{ $market->SalesForm->commodity }}</td>
+                <td>{{ $market->SalesForm->max_quantity . ' ' . $unit }}</td>
+                <td>{{ number_format($minQuantity) . ' ' . $unit }}</td>
+                <td>{{ $market->SalesForm->packing }}</td>
+                <td>{{ $market->SalesForm->incoterms }}</td>
+                <td>{{ $market->SalesForm->origin_country }}</td>
+                <td>{{ $market->SalesForm->price_type }}</td>
+                <td>
+                    {{ $market->SalesForm->price_type === 'Fix' ? number_format($market->SalesForm->price) . ' ' . $currency : number_format($market->SalesForm->alpha) . ' ' . $currency }}
+                </td>
+                <td>{{ $highest }}</td>
+                <td>{{ $quantity }}</td>
+                <td>{{ $status_text }}</td>
+            </tr>
+        @endif
     @endforeach
 @endforeach
-
