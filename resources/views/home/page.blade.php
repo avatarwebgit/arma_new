@@ -13,6 +13,7 @@
 
         span {
             line-height: 9pt !important;
+            min-width: 90px !important;
         }
 
         .red td {
@@ -104,7 +105,7 @@
         }
 
         @endif
-      /* استایل‌های اضافی برای پرینت */
+       /* استایل‌های اضافی برای پرینت */
         @media print {
             body {
                 margin: 0;
