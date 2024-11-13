@@ -79,6 +79,7 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
 
     public function columnWidths(): array
     {
+
         return [
             'A' => 10,
             'B' => 15,
