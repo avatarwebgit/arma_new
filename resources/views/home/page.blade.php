@@ -170,6 +170,10 @@
             margin-bottom: 10px !important;
         }
 
+        #button_desktop > button{
+            margin: 0 !important;
+        }
+
 
         @media screen and (max-width: 992px) {
             #dateFilterForm {
