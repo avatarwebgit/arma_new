@@ -265,7 +265,7 @@ class IndexController extends Controller
     public function menus(Menus $menus)
     {
         $page = $menus->Pages()->first();
-        $today=Carbon::today();
+        $today=Carbon::today()->format('Y-m-d');
         $time = Carbon::now()->format('H:i:s');
 
         if ($menus->id == 23) {
