@@ -181,6 +181,9 @@
             }
         }
 
+        thead td {
+            padding: 12px 18px !important;
+        }
 
 
     </style>
