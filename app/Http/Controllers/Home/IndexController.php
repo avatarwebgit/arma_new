@@ -283,7 +283,7 @@ class IndexController extends Controller
             $time = Carbon::now()->format('H:i:s');
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
-            $markets = Market::where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->paginate(20);
+            $markets = Market::where('date', '<', $tomorrow)->orderby('date', 'desc')->paginate(20);
         }
         return view('home.page', compact('page', 'menus', 'markets'));
     }
@@ -907,7 +907,7 @@ class IndexController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:50',
-            'email' => 'required|email',
+            'email' => 'required',
             'message' => 'required|string|max:10000',
         ]);
         $name = $request->name;

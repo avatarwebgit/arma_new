@@ -54,11 +54,15 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             }
 
             $highest == 0 ? 'N.A' : $highest;
-            if ($highest==0){
-                $highest='n/a';
+            if ($highest == 0) {
+                $highest = 'n/a';
+            } else {
+                $highest = number_format($highest);
             }
-            if ($quantity==0){
-                $quantity='n/a';
+            if ($quantity == 0) {
+                $quantity = 'n/a';
+            } else {
+                $quantity = number_format($quantity);
             }
 
 

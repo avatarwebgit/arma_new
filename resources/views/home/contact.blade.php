@@ -289,7 +289,7 @@
                     <div class="row">
                         <div class="col-12">
                             <h2 class="header-section">
-                                Our office locations
+                                Our Offices
                             </h2>
                         </div>
                         @foreach($addresses as $item)
@@ -331,23 +331,23 @@
                         <div class="col-12 col-md-6">
                             <div class="row">
                                 <div class="col col-12 col-md-6">
-                                    <label for="f-name">{{ __('full name') }}</label>
+                                    <label for="f-name">{{ __('Name') }}</label>
                                     <input type="text" class="form-control" id="name" name="name" required>
                                     <p class="error_input_validate d-none" id="name_error"></p>
                                 </div>
                                 <div class="col col-12 col-md-6">
-                                    <label for="email">{{ __('email') }}</label>
-                                    <input type="email" class="form-control" id="email" name="email">
+                                    <label for="email">{{ __('Company') }}</label>
+                                    <input class="form-control" id="email" name="email">
                                     <p class="error_input_validate d-none" id="email_error"></p>
                                 </div>
                                 <div class="col col-12 col-md-12">
-                                    <label for="message">{{ __('message') }}</label>
+                                    <label for="message">{{ __('Message') }}</label>
                                     <textarea rows="4" class="form-control" id="message" name="message"></textarea>
                                     <p class="error_input_validate d-none" id="message_error"></p>
                                 </div>
                                 <div class="col col-12 col-md-12">
                                     <button type="button" onclick="submit()"
-                                            class="send-btn btn-info btn-block mt-2">{{ __('send') }}</button>
+                                            class="send-btn btn-info mt-2">{{ __('Send') }}</button>
                                 </div>
                             </div>
                         </div>
