@@ -1,7 +1,7 @@
 <div class="col-12 mb-4">
     <form id="dateFilterForm" class="d-flex justify-content-between">
         <div class="d-flex">
-            <div class="d-flex">
+            <div class="d-flex mb-3">
                 <div>
                     <label for="startDate">Start Date:</label>
                     <input type="date" id="startDate" name="startDate" required>
@@ -17,21 +17,20 @@
                     </p>
                 </div>
             </div>
-            <div class="ml-3">
-                <button style="padding: 2px 10px" type="button" onclick="FilterMarket()" class="btn btn-sm btn-primary">
+            <div class="mb-5">
+                <button style="padding: 2px 10px" type="button" onclick="FilterMarket()" class="btn btn-sm btn-primary ml-3">
                     <div id="filter_loader" class="loader d-none"></div>
                     <span id="filter_loader_text">Filter</span>
                 </button>
                 <button style="padding: 2px 10px" type="button" onclick="window.location.reload()"
-                        class="btn btn-sm btn-danger">
+                        class="btn btn-sm btn-danger ml-3">
                     Clear Filter
                 </button>
+                <button type="button" onclick="printReport()" class="btn btn-sm btn-primary ml-3">Print</button>
+                <button type="button" onclick="ExcellExport()" class="btn btn-sm btn-success ml-3">Excel</button>
             </div>
         </div>
-        <div>
-            <button type="button" onclick="printReport()" class="btn btn-sm btn-primary">Print</button>
-            <button type="button" onclick="ExcellExport()" class="btn btn-sm btn-success">Excel</button>
-        </div>
+
     </form>
 </div>
 <div class="col-12">
