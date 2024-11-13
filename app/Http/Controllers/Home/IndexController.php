@@ -695,7 +695,7 @@ class IndexController extends Controller
             $tomorrow = Carbon::tomorrow();
             $markets = Market::where(function ($query) use ($endDate, $startDate) {
                 $query->where('date', '>', $startDate)->where('date', '<', $endDate);
-            })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->get();
+            })->where('date', '<', $tomorrow)->orderby('date', 'desc')->get();
 
             $html = view('home.daily_report.row', compact('markets'))->render();
 
@@ -716,7 +716,7 @@ class IndexController extends Controller
         $tomorrow = Carbon::tomorrow();
         $markets = Market::where(function ($query) use ($endDate, $startDate) {
             $query->where('date', '>', $startDate)->where('date', '<', $endDate);
-        })->where('date', '<', $tomorrow)->where('time', '<', $time)->orderby('date', 'desc')->get();
+        })->where('date', '<', $tomorrow)->orderby('date', 'desc')->get();
 
         return Excel::download(new MarketExport($markets), 'markets.xlsx');
 
