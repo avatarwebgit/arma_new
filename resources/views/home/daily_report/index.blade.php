@@ -1,6 +1,6 @@
 <div class="col-12 mb-4">
     <form id="dateFilterForm" class="d-flex justify-content-between">
-        <div class="d-flex">
+        <div class="d-flex mr-3">
             <div class="d-flex mb-3">
                 <div>
                     <label for="startDate">Start Date:</label>
