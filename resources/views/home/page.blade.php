@@ -189,6 +189,9 @@
             #button_mobile {
                 display: none;
             }
+            #dateFilterForm button{
+                padding: 10px 15px;
+            }
         }
         @media screen and (min-width: 993px) {
 
