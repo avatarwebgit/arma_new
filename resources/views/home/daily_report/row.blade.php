@@ -3,7 +3,7 @@
 @endphp
 
 @foreach($groupedMarkets as $date => $marketsByDate)
-    @foreach($marketsByDate->sortBy('time') as $market)
+    @foreach($marketsByDate->sortByDesc('time') as $market)
         @php
             $bid = $market->Bids()->orderBy('price', 'desc')->first();
             $has_winner = $market->Bids()->where('is_win', 1)->exists();
