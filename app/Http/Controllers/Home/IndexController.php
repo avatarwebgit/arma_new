@@ -271,7 +271,7 @@ class IndexController extends Controller
     public function menus(Menus $menus)
     {
         $page = $menus->Pages()->first();
-
+        $today=Carbon::today();
         if ($menus->id == 23) {
             $addresses = ContactAddress::all();
             $help_and_support = ContactHelp::all();
@@ -284,8 +284,9 @@ class IndexController extends Controller
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
             $markets = Market::where('date', '<', $tomorrow)->orderby('date', 'desc')->paginate(20);
+
         }
-        return view('home.page', compact('page', 'menus', 'markets'));
+        return view('home.page', compact('page', 'menus', 'markets','today'));
     }
 
     public function blogs()
