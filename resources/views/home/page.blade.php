@@ -104,7 +104,7 @@
         }
 
         @endif
-   /* استایل‌های اضافی برای پرینت */
+    /* استایل‌های اضافی برای پرینت */
         @media print {
             body {
                 margin: 0;
@@ -159,6 +159,20 @@
         @keyframes l26 {
             100% {
                 transform: rotate(1turn)
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            #dateFilterForm {
+                flex-direction: column;
+            }
+
+            #dateFilterForm > div {
+                flex-direction: column;
+            }
+
+            .end_date {
+                margin: 0 !important;
             }
         }
 
@@ -236,7 +250,7 @@
                         $('#market_daily_items').html(msg[1]);
                         $('#daily_paginate').addClass('d-none');
                         $('#filter_loader_text').removeClass('d-none');
-                    }  else {
+                    } else {
                         alert('serer Error')
                     }
                 },

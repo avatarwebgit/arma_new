@@ -8,7 +8,7 @@
                     Start Date is Required
                 </p>
             </div>
-            <div class="ml-3">
+            <div class="ml-3 end_date">
                 <label for="endDate">End Date:</label>
                 <input type="date" id="endDate" name="endDate" required>
                 <p id="endDate_error" class="input_error_validation d-none">
