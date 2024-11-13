@@ -3,9 +3,6 @@
 @endphp
 
 @foreach($groupedMarkets as $date => $marketsByDate)
-    <tr>
-        <td colspan="12"><strong>{{ $date }}</strong></td>
-    </tr>
     @foreach($marketsByDate->sortBy('time') as $market)
         @php
             $bid = $market->Bids()->orderBy('price', 'desc')->first();
@@ -19,7 +16,7 @@
             $minQuantity = str_replace(',', '', $market->SalesForm->min_order);
         @endphp
         <tr class="{{ $status_color }}">
-            <td>{{ $market->date }}</td>
+            <td>{{ $market->date.' '.$market->time }}</td>
             <td>{{ $market->SalesForm->commodity }}</td>
             <td>{{ $market->SalesForm->max_quantity . ' ' . $unit }}</td>
             <td>{{ number_format($minQuantity) . ' ' . $unit }}</td>
