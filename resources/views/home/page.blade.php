@@ -190,7 +190,8 @@
                 display: none;
             }
             #dateFilterForm button{
-                padding: 10px 15px;
+                padding: 5px 8px;
+                width: 120px;
             }
         }
         @media screen and (min-width: 993px) {
