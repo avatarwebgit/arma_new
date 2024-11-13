@@ -192,6 +192,7 @@
             #dateFilterForm button{
                 padding: 5px 8px;
                 width: 120px;
+                margin: 5px 5px !important;
             }
         }
         @media screen and (min-width: 993px) {
