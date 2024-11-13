@@ -104,7 +104,7 @@
         }
 
         @endif
-     /* استایل‌های اضافی برای پرینت */
+      /* استایل‌های اضافی برای پرینت */
         @media print {
             body {
                 margin: 0;
@@ -174,6 +174,7 @@
 
         .p-button {
             padding: 3px 14px;
+            color: white;
         }
 
     </style>
