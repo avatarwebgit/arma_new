@@ -1,7 +1,7 @@
 <div class="col-12 mb-4">
     <form id="dateFilterForm" class="d-flex justify-content-between">
-        <div class="d-flex">
-            <div class="d-flex mb-3 mr-3 justify-content-between">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex mb-3 mr-3 align-items-start">
                 <div>
                     <label for="startDate">Start Date:</label>
                     <input type="date" id="startDate" name="startDate" required>
@@ -16,12 +16,12 @@
                         End Date is Required
                     </p>
                 </div>
-                <button type="button" onclick="FilterMarket()" class="p-button btn btn-sm btn-primary">
+                <button type="button" onclick="FilterMarket()" class="p-button btn btn-sm btn-primary ml-3">
                     <div id="filter_loader" class="loader d-none"></div>
                     <div id="filter_loader_text">Filter</div>
                 </button>
                 <button type="button" onclick="window.location.reload()"
-                        class="btn btn-sm btn-danger ml-1 p-button">
+                        class="btn btn-sm btn-danger ml-1 p-button ml-3">
                     Clear Filter
                 </button>
             </div>
