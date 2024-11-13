@@ -20,8 +20,6 @@
                     <div id="filter_loader" class="loader d-none"></div>
                     <span id="filter_loader_text">Filter</span>
                 </button>
-            </div>
-            <div class="ml-3">
                 <button style="padding: 2px 10px" type="button" onclick="window.location.reload()"
                         class="btn btn-sm btn-danger">
                     Clear Filter
