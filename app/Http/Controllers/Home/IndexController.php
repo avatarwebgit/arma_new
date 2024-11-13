@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Exports\MarketExport;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactFormEmail;
 use App\Models\BidHistory;
 use App\Models\Blog;
 use App\Models\Commodity;
 use App\Models\ContactAddress;
-use App\Models\ContactForm;
 use App\Models\ContactHelp;
 use App\Models\ContainerType;
 use App\Models\ContractType;
@@ -17,14 +17,12 @@ use App\Models\Currency;
 use App\Models\Destination;
 use App\Models\Email;
 use App\Models\FlexiTankType;
-use App\Models\FormStatus;
 use App\Models\HeaderCategory;
 use App\Models\HeaderCurencies;
 use App\Models\InspectionPlace;
 use App\Models\Market;
 use App\Models\MarketPermission;
 use App\Models\MarketSetting;
-use App\Models\MarketStatus;
 use App\Models\Menus;
 use App\Models\Message;
 use App\Models\Packing;
@@ -34,7 +32,6 @@ use App\Models\QualityQuantityInspector;
 use App\Models\RefundStatus;
 use App\Models\SalesOfferForm;
 use App\Models\SalesOfferFormCopy;
-use App\Models\SessionModel;
 use App\Models\Setting;
 use App\Models\ShippingTerm;
 use App\Models\TargetMarket;
@@ -50,12 +47,9 @@ use App\Models\UserStatus;
 use App\Models\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
-use MongoDB\Driver\Session;
-use App\Exports\MarketExport;
 
 class IndexController extends Controller
 {
@@ -272,6 +266,8 @@ class IndexController extends Controller
     {
         $page = $menus->Pages()->first();
         $today=Carbon::today();
+        $time = Carbon::now()->format('H:i:s');
+
         if ($menus->id == 23) {
             $addresses = ContactAddress::all();
             $help_and_support = ContactHelp::all();
@@ -280,13 +276,13 @@ class IndexController extends Controller
 
         $markets = [];
         if ($menus->id == 4) {
-            $time = Carbon::now()->format('H:i:s');
+
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
             $markets = Market::where('date', '<', $tomorrow)->orderby('date', 'desc')->paginate(20);
 
         }
-        return view('home.page', compact('page', 'menus', 'markets','today'));
+        return view('home.page', compact('page', 'menus', 'markets', 'today', 'time'));
     }
 
     public function blogs()
