@@ -47,6 +47,15 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             // حداقل مقدار
             $minQuantity = str_replace(',', '', $market->SalesForm->min_order);
 
+            if ($market->SalesForm->price_type == 'Fix') {
+                $price = number_format($market->SalesForm->price) . ' ' . $currency;
+            } else {
+                $price = number_format($market->SalesForm->alpha) . ' ' . $currency;
+            }
+
+            $highest == 0 ? 'N.A' : $highest;
+            $quantity == 0 ? 'N.A' : $quantity;
+
             // افزودن اطلاعات به آیتم‌ها
             $items[] = [
                 $market->date,
@@ -54,13 +63,13 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
                 $market->SalesForm->max_quantity . ' ' . $unit,
                 number_format($minQuantity) . ' ' . $unit,
                 $market->SalesForm->packing,
-                $market->SalesForm->delivery,
-                $market->SalesForm->region,
+                $market->SalesForm->incoterms,
+                $market->SalesForm->origin_country,
                 $market->SalesForm->price_type,
-                $market->SalesForm->offer_price . ' ' . $currency,
+                $price,
                 $highest,
                 $quantity,
-                $status_text
+                $status_text,
             ];
         }
 
