@@ -1,19 +1,21 @@
 <div class="col-12 mb-4">
     <form id="dateFilterForm" class="d-flex justify-content-between">
         <div class="d-flex">
-            <div>
-                <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate" name="startDate" required>
-                <p id="startDate_error" class="input_error_validation d-none">
-                    Start Date is Required
-                </p>
-            </div>
-            <div class="ml-3 end_date">
-                <label for="endDate">End Date:</label>
-                <input type="date" id="endDate" name="endDate" required>
-                <p id="endDate_error" class="input_error_validation d-none">
-                    End Date is Required
-                </p>
+            <div class="d-flex">
+                <div>
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" required>
+                    <p id="startDate_error" class="input_error_validation d-none">
+                        Start Date is Required
+                    </p>
+                </div>
+                <div class="ml-3 end_date">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" name="endDate" required>
+                    <p id="endDate_error" class="input_error_validation d-none">
+                        End Date is Required
+                    </p>
+                </div>
             </div>
             <div class="ml-3">
                 <button style="padding: 2px 10px" type="button" onclick="FilterMarket()" class="btn btn-sm btn-primary">
