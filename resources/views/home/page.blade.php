@@ -172,10 +172,13 @@
             #dateFilterForm > div {
                 flex-direction: column;
             }
+            .p-button{
+                padding: 3px 7px;
+            }
         }
 
         .p-button {
-            padding: 3px 14px;
+            padding: 3px 20px;
             color: white;
         }
 
