@@ -173,7 +173,7 @@
         }
 
         .p-button {
-            padding: 3px 28px;
+            padding: 3px 14px;
         }
 
     </style>
