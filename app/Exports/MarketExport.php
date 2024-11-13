@@ -115,7 +115,7 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             "Price Type",
             "Offer Price",
             "Highest Bid",
-            "Quantity",
+            "Quantity Bid",
             "Status",
         ];
     }

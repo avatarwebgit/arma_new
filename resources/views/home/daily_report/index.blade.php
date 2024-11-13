@@ -18,14 +18,22 @@
                 </div>
             </div>
             <div class="mb-1">
-                <button type="button" onclick="FilterMarket()" class="p-button btn btn-sm btn-primary">
-                    <div id="filter_loader" class="loader d-none"></div>
-                    <div id="filter_loader_text">Filter</div>
-                </button>
-                <button type="button" onclick="window.location.reload()"
-                        class="btn btn-sm btn-danger ml-1 p-button">
-                    Clear Filter
-                </button>
+               <div>
+                   <button type="button" onclick="FilterMarket()" class="p-button btn btn-sm btn-primary">
+                       <div id="filter_loader" class="loader d-none"></div>
+                       <div id="filter_loader_text">Filter</div>
+                   </button>
+                   <button type="button" onclick="window.location.reload()"
+                           class="btn btn-sm btn-danger ml-1 p-button">
+                       Clear Filter
+                   </button>
+               </div>
+                <div id="button_desktop">
+                    <button type="button" onclick="printReport()" class="p-button btn btn-sm btn-warning ml-1">Print</button>
+                    <button type="button" onclick="ExcellExport()" class="p-button btn btn-sm btn-success ml-1">Excel</button>
+                </div>
+            </div>
+            <div id="button_mobile">
                 <button type="button" onclick="printReport()" class="p-button btn btn-sm btn-warning ml-1">Print</button>
                 <button type="button" onclick="ExcellExport()" class="p-button btn btn-sm btn-success ml-1">Excel</button>
             </div>
@@ -96,7 +104,7 @@
                 <td>
                         <span>
 
-           Quantity
+           Quantity Bid
             </span>
                 </td>
                 <td>
