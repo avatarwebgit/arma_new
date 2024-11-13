@@ -1,4 +1,4 @@
-<div class="col-12 mb-4">
+<div class="col-12">
     <form id="dateFilterForm" class="d-flex justify-content-between">
         <div class="d-flex">
             <div class="d-flex mb-3 mr-3">
@@ -17,7 +17,7 @@
                     </p>
                 </div>
             </div>
-            <div class="mb-5">
+            <div class="mb-1">
                 <button type="button" onclick="FilterMarket()" class="p-button btn btn-sm btn-primary">
                     <div id="filter_loader" class="loader d-none"></div>
                     <div id="filter_loader_text">Filter</div>
