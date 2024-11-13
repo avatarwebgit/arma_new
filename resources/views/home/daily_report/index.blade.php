@@ -1,5 +1,5 @@
 <div class="col-12 mb-4">
-    <form id="dateFilterForm" class="d-flex justify-content-between">
+    <form id="dateFilterForm">
         <div class="d-flex justify-content-between">
             <div class="d-flex mb-3 mr-3 align-items-start">
                 <div>
