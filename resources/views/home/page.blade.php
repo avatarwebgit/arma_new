@@ -88,9 +88,7 @@
             display: none;
         }
 
-        .table td {
-            padding: 6px 18px !important;
-        }
+
 
         .input_error_validation {
             font-size: 9pt;
@@ -182,7 +180,7 @@
         }
 
         thead td {
-            padding: 12px 18px !important;
+            padding: 10px 12px !important;
         }
 
 
