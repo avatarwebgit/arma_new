@@ -11,7 +11,7 @@
                 </div>
                 <div class="ml-3 end_date">
                     <label for="endDate">End Date:</label>
-                    <input readonly id="endDate" name="endDate" required value="{{ $today }}">
+                    <input id="endDate" name="endDate" required value="" type="date">
                     <p id="endDate_error" class="input_error_validation d-none">
                         End Date is Required
                     </p>
