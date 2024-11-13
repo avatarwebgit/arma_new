@@ -166,6 +166,8 @@
             }
         }
 
+
+
         @media screen and (max-width: 992px) {
             #dateFilterForm {
                 flex-direction: column;
@@ -176,6 +178,14 @@
             }
             .p-button{
                 padding: 3px 7px;
+            }
+            #button_desktop{
+                display: none;
+            }
+        }
+        @media screen and (min-width: 993px) {
+            #button_mobile {
+                display: none;
             }
         }
 
