@@ -89,14 +89,14 @@
 
 
 
-                            {{ $highest==0 ? 'N.A' : $highest }}
+                            {{ $highest==0 ? 'n/a' : $highest }}
 
             </span>
         </td>
         <td>
                         <span>
 
-           {{ $quantity==0? 'N.A' : $quantity }}
+           {{ $quantity==0? 'n/a' : $quantity }}
             </span>
         </td>
         <td>

@@ -54,7 +54,13 @@ class MarketExport implements FromCollection, WithHeadings, WithColumnWidths
             }
 
             $highest == 0 ? 'N.A' : $highest;
-            $quantity == 0 ? 'N.A' : $quantity;
+            if ($highest==0){
+                $highest='n/a';
+            }
+            if ($quantity==0){
+                $quantity='n/a';
+            }
+
 
             // افزودن اطلاعات به آیتم‌ها
             $items[] = [
