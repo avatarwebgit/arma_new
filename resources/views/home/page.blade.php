@@ -14,6 +14,7 @@
         span {
             line-height: 9pt !important;
             min-width: 90px !important;
+            display: block;
         }
 
         .red td {
