@@ -14,12 +14,13 @@
             $highest = $bid ? number_format($bid->price) . ' ' . $currency : 'n/a';
             $quantity = $bid ? number_format($bid->quantity) . ' ' . $unit : 'n/a';
             $minQuantity = str_replace(',', '', $market->SalesForm->min_order);
-            $marketDateTime = $market->date . ' ' . $market->time;
+            $marketDateTime = $market->date .;
         @endphp
 
         @if($market->date !== $today || $market->time < $time)
             <tr class="{{ $status_color }}">
                 <td>{{ $marketDateTime }}</td>
+                <td>{{ $market->time }}</td>
                 <td>{{ $market->SalesForm->commodity }}</td>
                 <td>{{ $market->SalesForm->max_quantity . ' ' . $unit }}</td>
                 <td>{{ number_format($minQuantity) . ' ' . $unit }}</td>
