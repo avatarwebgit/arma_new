@@ -51,10 +51,10 @@
             Date
             </span>
                 </td>
-            <tr style="background-color: #d9d9d9 !important">
                 <td>
               <span>
-Date            </span>
+            Time
+            </span>
                 </td>
                 <td>
             <span>
