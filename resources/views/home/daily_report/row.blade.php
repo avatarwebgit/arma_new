@@ -14,7 +14,7 @@
             $highest = $bid ? number_format($bid->price) . ' ' . $currency : 'n/a';
             $quantity = $bid ? number_format($bid->quantity) . ' ' . $unit : 'n/a';
             $minQuantity = str_replace(',', '', $market->SalesForm->min_order);
-            $marketDateTime = $market->date .;
+            $marketDateTime = $market->date;
         @endphp
 
         @if($market->date !== $today || $market->time < $time)
