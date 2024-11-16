@@ -13,6 +13,7 @@
                                  Market
                             </span>
                 </div>
+                @can(['Market-Markets','Market-Setting'])
                 <div class="d-flex justify-content-center">
                     <button style="width: 150px;margin-right: 20px" onclick="createMarketModal()"
                             class="btn btn-primary btn-sm">
@@ -24,6 +25,7 @@
                         Setting
                     </a>
                 </div>
+                @endcan
             </div>
             <div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1"
                  style="margin-top: -100px">

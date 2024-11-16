@@ -259,10 +259,10 @@
                     </div>
                 </div>
             @endif
-            <div class="position-relative">
-                <img style="width: 100%;height: auto" alt="banner"
-                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->map) }}">
-            </div>
+{{--            <div class="position-relative">--}}
+{{--                <img style="width: 100%;height: auto" alt="banner"--}}
+{{--                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->map) }}">--}}
+{{--            </div>--}}
             <div id="help_support_section" class="landing-feature ">
                 <div class="container">
                     <div class="row">

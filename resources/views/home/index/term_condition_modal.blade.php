@@ -11,7 +11,10 @@
                     @php
                     $page=\App\Models\Page::where('id',39)->first();
                     @endphp
-                    {!! $page->description !!}
+                    @if($page)
+                        {!! $page->description !!}
+                    @endif
+
                 </div>
 
                 <div class="modal-footer">

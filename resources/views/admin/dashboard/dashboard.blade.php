@@ -15,13 +15,25 @@
 @section('content')
     <div class="row g-5 g-xl-8">
         @include('admin.dashboard.profile')
-        @can(['Market-Markets','Market-Setting'])
-            @include('admin.dashboard.markets')
-        @endcan
 
-{{--        @canany(['Settings-Setting','Line-1','Line-2'])--}}
+            @include('admin.dashboard.markets')
+
+        @if ($role == 'admin' or $role == 'Members')
+                    @canany(['Settings-Setting','Line-1','Line-2'])
             @include('admin.dashboard.settings')
-{{--        @endcanany--}}
+            @endcanany
+        @endif
+
+        @if($role=='seller')
+            @include('admin.dashboard.seller_buttons')
+        @endif
+
+        @if($role=='buyer')
+            @include('admin.dashboard.buyer_buttons')
+        @endif
+
+
+
 
 
         @include('admin.dashboard.market_chart')
