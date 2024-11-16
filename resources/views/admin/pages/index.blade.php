@@ -68,7 +68,7 @@
                                                             <i class="fa fa-list"></i>
                                                             Edit
                                                         </a>
-                                                        @if($item->id!=20)
+                                                        @if($item->id!=20 and $item->id!=39)
                                                             {!! Form::open([
 'method' => 'POST',
 'route' => ['admin.page.remove', $item->id],
