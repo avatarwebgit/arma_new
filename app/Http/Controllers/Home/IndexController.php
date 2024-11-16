@@ -279,7 +279,7 @@ class IndexController extends Controller
 
             $yesterday = Carbon::yesterday();
             $tomorrow = Carbon::tomorrow();
-            $markets = Market::where('date', '<', $tomorrow)->orderby('date', 'desc')->paginate(20);
+            $markets = Market::where('date', '<', $tomorrow)->whereIn([7, 8])->orderby('date', 'desc')->paginate(40);
 
         }
         return view('home.page', compact('page', 'menus', 'markets', 'today', 'time'));

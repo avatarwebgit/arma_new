@@ -20,7 +20,8 @@
         @if($market->date !== $today || $market->time < $time)
             <tr class="{{ $status_color }}">
                 <td>{{ $marketDateTime }}</td>
-                <td>{{ $market->time }}</td>
+                <td>{{ \Carbon\Carbon::parse($market->time)->format('H:i') }}</td>
+
                 <td>{{ $market->SalesForm->commodity }}</td>
                 <td>{{ $market->SalesForm->max_quantity . ' ' . $unit }}</td>
                 <td>{{ number_format($minQuantity) . ' ' . $unit }}</td>
