@@ -405,6 +405,10 @@
 
             backdrop-filter: blur(7px)
         }
+
+        #term_form_modal .modal-body {
+            max-height: 750px !important;
+        }
     </style>
 @endsection
 
