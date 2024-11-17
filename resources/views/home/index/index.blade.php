@@ -408,7 +408,7 @@
 
         #term_form_modal .modal-body {
             max-height: 770px !important;
-            overflow: scroll;
+            overflow-y: scroll;
         }
         #term_condition_modal .modal-dialog{
             max-width: 620px ;
