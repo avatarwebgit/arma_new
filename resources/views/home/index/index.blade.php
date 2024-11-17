@@ -408,6 +408,7 @@
 
         #term_form_modal .modal-body {
             max-height: 750px !important;
+            overflow: scroll;
         }
     </style>
 @endsection
