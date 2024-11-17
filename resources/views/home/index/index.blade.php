@@ -407,8 +407,11 @@
         }
 
         #term_form_modal .modal-body {
-            max-height: 750px !important;
+            max-height: 770px !important;
             overflow: scroll;
+        }
+        #term_condition_modal .modal-dialog{
+            max-width: 620px ;
         }
     </style>
 @endsection
