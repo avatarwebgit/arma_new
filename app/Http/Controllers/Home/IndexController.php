@@ -122,7 +122,18 @@ class IndexController extends Controller
 
     public function check_market_page_status(Request $request)
     {
-        dd($request->all());
+        $market = Market::where('id', $request->market_id)->first();
+        $result = $this->statusTimeMarket($market);
+        $market['difference'] = $result[0];
+        $market['status'] = $result[1];
+        $market['benchmark1'] = $result[2];
+        $market['benchmark2'] = $result[3];
+        $market['benchmark3'] = $result[4];
+        $market['benchmark4'] = $result[5];
+        $market['benchmark5'] = $result[6];
+        $market['benchmark6'] = $result[7];
+        $market['time_to_close_bid_deposit'] = $result[9];
+        dd($result);
     }
 
     public function search(Request $request)

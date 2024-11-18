@@ -33,15 +33,10 @@
                 let barColor = '#ec366b';
                 let backColor = '#feeff4';
                 let nextdeg;
-
-                console.error('market_page_id:' +market_page_id);
-                console.error('market_id:' +market_id);
-
                 $('#market-difference-' + market_id).html(timer);
                 $('#market-difference1-' + market_id).html(timer);
 
                 if (market_page_id == market_id) {
-                    console.log(market_page_id, market_id);
                     let remain = difference % 60;
                     pie = ((100 * remain) / 60);
                     TimerClock(difference, pie, status);
