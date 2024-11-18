@@ -52,12 +52,14 @@
         min_quantity = min_quantity.replaceAll(',', '');
         let max_quantity = $('#max_quantity').val();
         max_quantity = max_quantity.replaceAll(',', '');
-        console.log(min_quantity);
-        console.log(max_quantity);
+
         if (max_quantity == 0 || max_quantity == '' || max_quantity == null) {
             $(tag).val('');
             alert('Please Fill Max Quantity');
         } else {
+            console.log(min_quantity);
+            console.log(max_quantity);
+            console.log('else');
             if (min_quantity > max_quantity) {
                 $(tag).val('');
                 alert('Min Quantity must be more than Max Quantity');
