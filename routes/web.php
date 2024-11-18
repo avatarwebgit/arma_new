@@ -59,6 +59,7 @@ Route::post('/role-permission/{id}', [
 
 /////////////////////////////////web
 Route::get('/', [IndexController::class, 'index'])->name('home.index');
+Route::post('/', [IndexController::class, 'check_market_page_status'])->name('home.check_market_page_status');
 Route::get('/search', [IndexController::class, 'search'])->name('home.search');
 Route::post('/Market_Table_Index_Status', [IndexController::class, 'Market_Table_Index_Status'])->name('home.Market_Table_Index_Status');
 Route::get('/home', [IndexController::class, 'home'])->name('home');

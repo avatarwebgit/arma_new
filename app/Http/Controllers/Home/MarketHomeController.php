@@ -54,6 +54,7 @@ class MarketHomeController extends Controller
         $gtc_use = MarketSetting::where('key', 'gtc_use')->pluck('value')->first();
         $gtc_Link = MarketSetting::where('key', 'gtc_Link')->pluck('value')->first();
         $gtc_file = MarketSetting::where('key', 'gtc_file')->pluck('value')->first();
+
         return view('home.market.index', compact('market',
             'bids',
             'bid_deposit_text_area',

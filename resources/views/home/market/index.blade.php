@@ -10,6 +10,10 @@
             {{--now = new Date(now).getTime();--}}
             {{--MarketOnline({{ $market->id }}, now);--}}
 
+            setTimeout(function () {
+                check_market_page_status({{ $market->id }});
+            }, 3000);
+
         });
         let i = 0;
         let pie = 100;
@@ -71,6 +75,21 @@
 
 
             });
+
+        function check_market_page_status(market_id) {
+            $.ajax({
+                url: "{{ route('home.check_market_page_status') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    market_id: market_id
+                },
+                method: 'POST',
+                dataType: 'json',
+                success: function (msg) {
+                    console.error('msg:'+msg);
+                }
+            });
+        }
 
 
         function waiting_to_open(status, id, difference) {

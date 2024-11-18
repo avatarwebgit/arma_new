@@ -120,6 +120,11 @@ class IndexController extends Controller
             ));
     }
 
+    public function check_market_page_status(Request $request)
+    {
+        dd($request->all());
+    }
+
     public function search(Request $request)
     {
         $value = $request->search;
