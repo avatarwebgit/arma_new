@@ -20,14 +20,14 @@
 @else
     <tr style="height: 27px;background-color: #e4e4e4">
         {{--        <td class="text-center">{{ $item->quantity }}</td>--}}
-        <td class="text-center">
+        <td style="color: #c20000 !important" class="text-center">
             n/a
         </td>
-        <td class="text-center">
+        <td style="color: #c20000 !important" class="text-center">
             n/a
         </td>
         {{--        <td class="text-center">{{ $item->User->id }}</td>--}}
-        <td class="text-center">
+        <td style="color: #c20000 !important" class="text-center">
             Failed
         </td>
     </tr>
