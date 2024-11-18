@@ -156,6 +156,7 @@
             let color = '#c20000';
             let statusText = '<span>Close</span>';
             change_market_status(status, color, statusText, id);
+            $('.term_condition_parent').remove();
         }
 
         function Close_and_show_result(status, id) {
