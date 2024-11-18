@@ -651,12 +651,12 @@ class MarketHomeController extends Controller
                     'quantity_win' => $quantity_win,
                     'is_win' => $is_win,
                 ]);
-                if ($is_win == 1) {
-                    $bids[] = $bid;
-                }
+//                if ($is_win == 1) {
+//                    $bids[] = $bid;
+//                }
+                $bids[] = $bid;
 
             }
-            dd($bids);
             $view = view('home.market.final_status', compact('bids', 'market'))->render();
             $user_is_login = auth()->check();
             $id_exists_in_array = 0;
