@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Events\MarketStatusUpdated2;
+use App\Events\MarketStatusUpdated;
 use App\Exports\MarketExport;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactFormEmail;
@@ -141,7 +141,7 @@ class IndexController extends Controller
         $status = $market['status'];
         $step = $market->step_price_competition;
 
-        broadcast(new MarketStatusUpdated2($market_id, $difference, $timer, $status, $step));
+        broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status, $step));
     }
 
     public function search(Request $request)

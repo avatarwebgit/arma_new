@@ -29,10 +29,6 @@ Broadcast::channel('market-status-updated', function ($user, $id) {
 	return true;
     return (int) $user->id === (int) $id;
 });
-Broadcast::channel('market-status-updated2', function ($user, $id) {
-	return true;
-    return (int) $user->id === (int) $id;
-});
 Broadcast::channel('change-sales-offer', function ($user, $id){
     return true;
     return (int) $user->id === (int) $id;
@@ -42,10 +38,6 @@ Broadcast::channel('new_bid_created', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 Broadcast::channel('market-status-updated', function ($user, $id) {
-    return true;
-    return (int) $user->id === (int) $id;
-});
-Broadcast::channel('market-status-updated2', function ($user, $id) {
     return true;
     return (int) $user->id === (int) $id;
 });
