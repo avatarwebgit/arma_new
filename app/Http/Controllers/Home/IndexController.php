@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Events\MarketStatusUpdated;
 use App\Exports\MarketExport;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactFormEmail;
@@ -124,8 +125,8 @@ class IndexController extends Controller
     {
         $market = Market::where('id', $request->market_id)->first();
         $result = $this->statusTimeMarket($market);
-        $market['difference'] = $result[0];
-        $market['status'] = $result[1];
+        $difference = $result[0];
+        $status = $result[1];
         $market['benchmark1'] = $result[2];
         $market['benchmark2'] = $result[3];
         $market['benchmark3'] = $result[4];
@@ -133,7 +134,14 @@ class IndexController extends Controller
         $market['benchmark5'] = $result[6];
         $market['benchmark6'] = $result[7];
         $market['time_to_close_bid_deposit'] = $result[9];
-        dd($result);
+
+        $market_id = $market->id;
+        $difference = $result[0];
+        $timer = $this->MarketTimer($difference);
+        $status = $market['status'];
+        $step = $market->step_price_competition;
+
+        broadcast(new MarketStatusUpdated($market_id, $difference, $timer, $status, $step));
     }
 
     public function search(Request $request)
