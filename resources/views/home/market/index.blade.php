@@ -169,7 +169,7 @@
             change_market_status(status, color, statusText, id);
             console.error('sssssssstop');
             $('.term_condition_parent').remove();
-            let n_a='<tr style="height: 27px"><td class="text-center ">n/a</td><td class="text-center">n/a</td><td class="text-center"></td></tr>';
+            let n_a='<tr style="height: 27px"><td class="text-center "></td><td class="text-center">n/a</td><td class="text-center">n/a</td></tr>';
             $('.bidder_offer_table').html(n_a);
         }
 
