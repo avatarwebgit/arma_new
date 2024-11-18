@@ -17,8 +17,8 @@
         });
         let i = 0;
         let pie = 100;
-        window.Echo.channel('market-status-updated')
-            .listen('MarketStatusUpdated', function (e) {
+        window.Echo.channel('market-status-updated2')
+            .listen('MarketStatusUpdated2', function (e) {
 
                 let market_page_id = "{{ $market->id }}";
                 let market_id = e.market_id;
