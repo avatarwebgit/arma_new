@@ -39,7 +39,7 @@
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Price Type</span>
-        <span class="text-bold text-light-blue ">{{ $market->SalesForm->price_type }}</span>
+        <span class="text-bold text-light-blue ">{{ $market->SalesForm->price_type=='Formulla' ? 'Formula' : $market->SalesForm->price_type }}</span>
     </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Offer Price</span>
