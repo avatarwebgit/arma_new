@@ -156,8 +156,6 @@
             let color = '#c20000';
             let statusText = '<span>Close</span>';
             change_market_status(status, color, statusText, id);
-            console.error('sssssssstop');
-            $('.term_condition_parent').remove();
         }
 
         function Close_and_show_result(status, id) {
@@ -169,6 +167,8 @@
             $('#market-difference1-' + id).css({color: color})
             show_market_result(id);
             change_market_status(status, color, statusText, id);
+            console.error('sssssssstop');
+            $('.term_condition_parent').remove();
         }
 
         function close_bid_deposit(id) {
