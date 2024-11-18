@@ -15,6 +15,7 @@
         let pie = 100;
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
+            console.error('pppppppppppppppppppp');
                 let market_page_id = "{{ $market->id }}";
                 let market_id = e.market_id;
                 let difference = e.difference;
@@ -35,7 +36,6 @@
                 if (market_page_id == market_id) {
                     console.log(market_page_id, market_id);
                     let remain = difference % 60;
-                    console.log('remain:' +remain);
                     pie = ((100 * remain) / 60);
                     TimerClock(difference, pie, status);
                 }
