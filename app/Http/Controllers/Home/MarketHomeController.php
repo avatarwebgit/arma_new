@@ -3,21 +3,15 @@
 namespace App\Http\Controllers\Home;
 
 use App\Events\ChangeSaleOffer;
-use App\Events\MarketStatusUpdated;
 use App\Events\NewBidCreated;
-use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\BidHistory;
 use App\Models\Market;
 use App\Models\MarketPermission;
 use App\Models\MarketSetting;
-use App\Models\MarketStatus;
 use App\Models\Transaction;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use function Symfony\Component\Translation\t;
 
 class MarketHomeController extends Controller
 {
@@ -662,7 +656,7 @@ class MarketHomeController extends Controller
                 }
 
             }
-
+            dd($bids);
             $view = view('home.market.final_status', compact('bids', 'market'))->render();
             $user_is_login = auth()->check();
             $id_exists_in_array = 0;
