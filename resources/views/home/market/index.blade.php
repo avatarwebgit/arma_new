@@ -15,7 +15,7 @@
         let pie = 100;
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
-            console.error('pppppppppppppppppppp');
+
                 let market_page_id = "{{ $market->id }}";
                 let market_id = e.market_id;
                 let difference = e.difference;
@@ -29,6 +29,9 @@
                 let barColor = '#ec366b';
                 let backColor = '#feeff4';
                 let nextdeg;
+
+                console.error('market_page_id:' +market_page_id);
+                console.error('market_id:' +market_id);
 
                 $('#market-difference-' + market_id).html(timer);
                 $('#market-difference1-' + market_id).html(timer);
