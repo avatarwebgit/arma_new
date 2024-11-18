@@ -61,7 +61,7 @@
             console.log(max_quantity);
             console.log('else');
             console.log(min_quantity > max_quantity);
-            if (min_quantity > 1000) {
+            if (parseInt(min_quantity) > parseInt(max_quantity)) {
                 $(tag).val('');
                 alert('Min Quantity must be more than Max Quantity');
             }
