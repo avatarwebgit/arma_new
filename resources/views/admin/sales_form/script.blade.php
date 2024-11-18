@@ -60,6 +60,7 @@
             console.log(min_quantity);
             console.log(max_quantity);
             console.log('else');
+            console.log(min_quantity > max_quantity);
             if (min_quantity > max_quantity) {
                 $(tag).val('');
                 alert('Min Quantity must be more than Max Quantity');
