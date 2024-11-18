@@ -2,8 +2,6 @@
 
 @section('script')
     <script type="module">
-
-
         $(document).ready(function () {
 
             // TimerClock(60);
@@ -37,6 +35,7 @@
                 if (market_page_id == market_id) {
                     console.log(market_page_id, market_id);
                     let remain = difference % 60;
+                    console.log('remain:' +remain);
                     pie = ((100 * remain) / 60);
                     TimerClock(difference, pie, status);
                 }
