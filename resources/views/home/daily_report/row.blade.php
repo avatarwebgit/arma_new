@@ -18,7 +18,10 @@
         @endphp
 
         @if($market->date !== $today || $market->time < $time)
-            <tr class="{{ $status_color }}">
+            <tr
+                style="cursor: pointer"
+                onclick="ShowBidPage({{ $market->id }})"
+                class="{{ $status_color }}">
                 <td>{{ $marketDateTime }}</td>
                 <td>{{ \Carbon\Carbon::parse($market->time)->format('H:i') }}</td>
 
