@@ -7,7 +7,19 @@
         @php
             $bid = $market->Bids()->orderBy('price', 'desc')->first();
             $has_winner = $market->Bids()->where('is_win', 1)->exists();
-            $status_color = $has_winner ? 'green' : 'red';
+
+            if ($bid){
+                $highest=$bid->price;
+                if ($market->SalesForm->price_type === 'Fix'){
+                    $offer_price=$market->SalesForm->price;
+                }else{
+                    $offer_price=$market->SalesForm->alpha;
+                }
+                if ($offer_price<$highest){
+                    $has_winner=true;
+                }
+            }
+             $status_color = $has_winner ? 'green' : 'red';
             $status_text = $has_winner ? 'Done' : 'Failed';
             $unit = $market->SalesForm->unit === 'other' ? $market->SalesForm->unit_other : $market->SalesForm->unit;
             $currency = $market->SalesForm->currency === 'other' ? $market->SalesForm->currency_other . '/' . $unit : $market->SalesForm->currency . '/' . $unit;
@@ -19,9 +31,9 @@
 
         @if($market->date !== $today || $market->time < $time)
             <tr
-                style="cursor: pointer"
-                onclick="ShowBidPage({{ $market->id }})"
-                class="{{ $status_color }}">
+                    style="cursor: pointer"
+                    onclick="ShowBidPage({{ $market->id }})"
+                    class="{{ $status_color }}">
                 <td>{{ $marketDateTime }}</td>
                 <td>{{ \Carbon\Carbon::parse($market->time)->format('H:i') }}</td>
 
