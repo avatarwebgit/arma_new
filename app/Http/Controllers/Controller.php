@@ -96,6 +96,7 @@ class Controller extends BaseController
             $market_min_price = intval($market_min_price) - 1;
 
             $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->get();
+            dd($bid_touch_price);
             if (count($bid_touch_price) < 2) {
                 $status = 7;
                 $difference = 0;
