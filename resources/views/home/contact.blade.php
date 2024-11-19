@@ -135,7 +135,7 @@
             padding: 2px 30px;
             background: #006;
             border: 1px solid #006;
-            color:white;
+            color: white;
         }
 
         .error_input_validate {
@@ -262,10 +262,11 @@
                     </div>
                 </div>
             @endif
-{{--            <div class="position-relative">--}}
-{{--                <img style="width: 100%;height: auto" alt="banner"--}}
-{{--                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->map) }}">--}}
-{{--            </div>--}}
+            {{--            <div class="position-relative">--}}
+            {{--                <img style="width: 100%;height: auto" alt="banner"--}}
+            {{--                     src="{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->map) }}">--}}
+            {{--            </div>--}}
+            @if(count($help_and_support)>0)
             <div id="help_support_section" class="landing-feature ">
                 <div class="container">
                     <div class="row">
@@ -274,19 +275,29 @@
                                 Help and support
                             </h2>
                         </div>
-                        @foreach($help_and_support as $item)
-                            <div class="col-12 col-md-4">
-                                <h5>
-                                    <a href="{{ $item->link_help_modal }}">
-                                        {{ $item->title_help_modal }}
-                                    </a>
-                                </h5>
-                                <span>{{ $item->description_help_modal }}</span>
-                            </div>
+                        @php
+                            $i=0;
+                        @endphp
+                        @foreach($help_and_support as $k=>$item)
+                            @if($i==1)
+                                <div class="col-12 col-md-4"></div>
+                            @else
+                                <div class="col-12 col-md-4">
+                                    <h5>
+                                        <a href="{{ $item->link_help_modal }}">
+                                            {{ $item->title_help_modal }}
+                                        </a>
+                                    </h5>
+                                    <span>{{ $item->description_help_modal }}</span>
+                                </div>
+                            @endif
+
+                            $i++
                         @endforeach
                     </div>
                 </div>
             </div>
+            @endif
             <div class="landing-feature">
                 <div class="container">
                     <div class="row">
@@ -338,11 +349,11 @@
                                     <input type="text" class="form-control" id="name" name="name" required>
                                     <p class="error_input_validate d-none" id="name_error"></p>
                                 </div>
-{{--                                <div class="col col-12 col-md-6">--}}
-{{--                                    <label for="email">{{ __('Company') }}</label>--}}
-{{--                                    <input class="form-control" id="email" name="email">--}}
-{{--                                    <p class="error_input_validate d-none" id="email_error"></p>--}}
-{{--                                </div>--}}
+                                {{--                                <div class="col col-12 col-md-6">--}}
+                                {{--                                    <label for="email">{{ __('Company') }}</label>--}}
+                                {{--                                    <input class="form-control" id="email" name="email">--}}
+                                {{--                                    <p class="error_input_validate d-none" id="email_error"></p>--}}
+                                {{--                                </div>--}}
                                 <div class="col col-12 col-md-12 mt-3">
                                     <label for="message">{{ __('Message') }}</label>
                                     <textarea rows="4" class="form-control" id="message" name="message"></textarea>
