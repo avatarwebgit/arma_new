@@ -639,7 +639,7 @@ class MarketHomeController extends Controller
                     $is_win = 0;
                 }
                 if ($key==1){
-                    dd($is_win,$bid);
+                    dd($quantity_win,$market->SalesForm->min_order);
                 }
                 //در هر صورتی اگر قیمت را تاچ نکرد بازنده است
                 if ($bid->price < $price) {
