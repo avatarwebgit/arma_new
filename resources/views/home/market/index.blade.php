@@ -169,6 +169,32 @@
             change_market_status(status, color, statusText, id);
             let n_a='<tr style="height: 27px"><td class="text-center "></td><td class="text-center">n/a</td><td class="text-center">n/a</td></tr>';
             // $('#bidder_offer_'+id).html(n_a);
+
+            // انتخاب tbody با ID مشخص
+            const tbody = document.getElementById('bidder_offer_'+id);
+
+// یافتن تمام تگ‌های span داخل tbody
+            const spans = tbody.querySelectorAll('span');
+
+            let hasFilledSpan = false; // نشان‌دهنده وجود یک span پر
+
+// بررسی هر span
+            for (const span of spans) {
+                if (span.textContent.trim() !== '') { // اگر span پر باشد
+                    hasFilledSpan = true;
+                    break; // توقف حلقه
+                }
+            }
+
+// اجرای شرط
+            if (hasFilledSpan) {
+                console.log('حداقل یکی از span‌ها پر است!');
+                let n_a='<tr style="height: 27px"><td class="text-center "></td><td class="text-center">n/a</td><td class="text-center">n/a</td></tr>';
+                $('#bidder_offer_'+id).html(n_a);
+            } else {
+                console.log('همه span‌ها خالی هستند.');
+            }
+
         }
 
         function close_bid_deposit(id) {
