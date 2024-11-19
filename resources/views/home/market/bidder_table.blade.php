@@ -17,11 +17,9 @@
             </td>
             <td class="text-center">
                 {{ number_format($bid->price) }}
-
-
                 @if($key!=0 )
                     @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
-                        <span onclick="removeBid({{ $market->id }},{{ $bid->id }})">
+                        <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})">
                      <i  class="fa fa-times-circle text-danger"></i>
                 </span>
                     @endif

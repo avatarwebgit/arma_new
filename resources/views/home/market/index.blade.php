@@ -125,7 +125,8 @@
             active_bid(id);
             let color = '#1f9402';
             let statusText = '<span>Quotation 1/2</span>';
-            change_market_status(status, color, statusText, id)
+            change_market_status(status, color, statusText, id);
+            remove_delete_button(id);
         }
 
         function Quotation_2_2(status, id) {
@@ -135,7 +136,8 @@
             active_bid(id);
             let color = '#1f9402';
             let statusText = '<span>Quotation 2/2</span>';
-            change_market_status(status, color, statusText, id)
+            change_market_status(status, color, statusText, id);
+            remove_delete_button(id);
         }
 
         function Competition(status, id) {
@@ -146,7 +148,8 @@
             Competition_Bid_buttons(id);
             let color = '#1f9402';
             let statusText = '<span>Competition</span>';
-            change_market_status(status, color, statusText, id)
+            change_market_status(status, color, statusText, id);
+            remove_delete_button(id);
         }
 
         function Stop(status, id) {
@@ -156,6 +159,7 @@
             let color = '#c20000';
             let statusText = '<span>Close</span>';
             change_market_status(status, color, statusText, id);
+            remove_delete_button(id);
         }
 
         function Close_and_show_result(status, id) {
@@ -167,6 +171,7 @@
             $('#market-difference1-' + id).css({color: color})
             show_market_result(id);
             change_market_status(status, color, statusText, id);
+            remove_delete_button(id);
             let n_a='<tr style="height: 27px"><td class="text-center "></td><td class="text-center">n/a</td><td class="text-center">n/a</td></tr>';
             // $('#bidder_offer_'+id).html(n_a);
 
@@ -196,6 +201,10 @@
                 $('#bidder_offer_'+id).html(n_a);
             }
 
+        }
+
+        function remove_delete_button(id) {
+            $('#remove_btn_' + id).remove();
         }
 
         function close_bid_deposit(id) {
