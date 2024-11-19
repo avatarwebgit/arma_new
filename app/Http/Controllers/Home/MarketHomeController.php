@@ -635,11 +635,13 @@ class MarketHomeController extends Controller
                 }
 
                 //اگر تعداد کالا کمتر از مینیموم باشد بید بازنده است
-                if ($quantity_win < $market->SalesForm->min_order) {
+                $SalesForm_min_order=$market->SalesForm->min_order;
+                $SalesForm_min_order=str_replace(',','',$SalesForm_min_order);
+                if ($quantity_win < intval($SalesForm_min_order)) {
                     $is_win = 0;
                 }
                 if ($key==1){
-                    dd($quantity_win,$market->SalesForm->min_order);
+                    dd($quantity_win,$SalesForm_min_order,$is_win);
                 }
                 //در هر صورتی اگر قیمت را تاچ نکرد بازنده است
                 if ($bid->price < $price) {
