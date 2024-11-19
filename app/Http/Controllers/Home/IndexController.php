@@ -929,11 +929,11 @@ class IndexController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:50',
-            'email' => 'required',
+//            'email' => 'required',
             'message' => 'required|string|max:10000',
         ]);
         $name = $request->name;
-        $email = $request->email;
+        $email = 'email';
         $message = $request->message;
 
         try {

@@ -153,8 +153,8 @@
             $('#name_error').text('');
             $('#name_error').addClass('d-none');
 
-            $('#email_error').text('');
-            $('#email_error').addClass('d-none');
+            // $('#email_error').text('');
+            // $('#email_error').addClass('d-none');
 
             $('#send_to_error').text('');
             $('#send_to_error').addClass('d-none');
@@ -163,7 +163,7 @@
             $('#message_error').addClass('d-none');
             //
             let name = $('#name').val();
-            let email = $('#email').val();
+            // let email = $('#email').val();
             let send_to = $('#send_to').val();
             let message = $('#message').val();
             $.ajax({
@@ -172,7 +172,7 @@
                 data: {
                     _token: "{{ csrf_token() }}",
                     name: name,
-                    email: email,
+                    // email: email,
                     send_to: send_to,
                     message: message,
                 },
@@ -331,15 +331,15 @@
                         <div class="col-12 col-md-6">
                             <div class="row">
                                 <div class="col col-12 col-md-6">
-                                    <label for="f-name">{{ __('Name') }}</label>
+                                    <label for="f-name">{{ __('Company/Name') }}</label>
                                     <input type="text" class="form-control" id="name" name="name" required>
                                     <p class="error_input_validate d-none" id="name_error"></p>
                                 </div>
-                                <div class="col col-12 col-md-6">
-                                    <label for="email">{{ __('Company') }}</label>
-                                    <input class="form-control" id="email" name="email">
-                                    <p class="error_input_validate d-none" id="email_error"></p>
-                                </div>
+{{--                                <div class="col col-12 col-md-6">--}}
+{{--                                    <label for="email">{{ __('Company') }}</label>--}}
+{{--                                    <input class="form-control" id="email" name="email">--}}
+{{--                                    <p class="error_input_validate d-none" id="email_error"></p>--}}
+{{--                                </div>--}}
                                 <div class="col col-12 col-md-12">
                                     <label for="message">{{ __('Message') }}</label>
                                     <textarea rows="4" class="form-control" id="message" name="message"></textarea>
