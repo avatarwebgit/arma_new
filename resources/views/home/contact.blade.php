@@ -132,7 +132,9 @@
         }
 
         .send-btn {
-            height: 40px;
+            padding: 2px 30px;
+            background: #006;
+            border: 1px solid #006;
         }
 
         .error_input_validate {
@@ -340,14 +342,14 @@
 {{--                                    <input class="form-control" id="email" name="email">--}}
 {{--                                    <p class="error_input_validate d-none" id="email_error"></p>--}}
 {{--                                </div>--}}
-                                <div class="col col-12 col-md-12">
+                                <div class="col col-12 col-md-12 mt-3">
                                     <label for="message">{{ __('Message') }}</label>
                                     <textarea rows="4" class="form-control" id="message" name="message"></textarea>
                                     <p class="error_input_validate d-none" id="message_error"></p>
                                 </div>
                                 <div class="col col-12 col-md-12">
                                     <button type="button" onclick="submit()"
-                                            class="send-btn btn-info mt-2">{{ __('Send') }}</button>
+                                            class="send-btn mt-2">{{ __('Send') }}</button>
                                 </div>
                             </div>
                         </div>
