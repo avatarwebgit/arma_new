@@ -292,7 +292,9 @@
                                 </div>
                             @endif
 
-                            $i++
+                                @php
+                                    $i++;
+                                @endphp
                         @endforeach
                     </div>
                 </div>
