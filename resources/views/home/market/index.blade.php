@@ -189,10 +189,11 @@
 // اجرای شرط
             if (hasFilledSpan) {
                 console.log('حداقل یکی از span‌ها پر است!');
-                let n_a='<tr style="height: 27px"><td class="text-center "></td><td class="text-center">n/a</td><td class="text-center">n/a</td></tr>';
-                $('#bidder_offer_'+id).html(n_a);
+
             } else {
                 console.log('همه span‌ها خالی هستند.');
+                let n_a='<tr style="height: 27px"><td class="text-center "></td><td class="text-center">n/a</td><td class="text-center">n/a</td></tr>';
+                $('#bidder_offer_'+id).html(n_a);
             }
 
         }
