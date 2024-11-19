@@ -84,7 +84,7 @@
             @unless(request()->is('admin-panel/management/dashboard'))
                 <td>
                     <div class="d-flex justify-content-end">
-                        @if($show_btn==1)
+{{--                        @if($show_btn==1)--}}
                             <a href="{{ route('sale_form.preparation',['item'=>$item->SalesForm->id,'folder'=>$item->date]) }}"
                                class="btn btn-sm btn-warning text-white mr-1">
                                 <i class="fa fa-pen"></i>
@@ -126,7 +126,7 @@
                                     class="ti ti-trash mr-1"></i></a>
                             <input type="hidden" name="id" value="{{ $item->id }}">
                             {!! Form::close() !!}
-                        @endif
+{{--                        @endif--}}
                     </div>
                 </td>
             @endunless

@@ -26,6 +26,7 @@ class Controller extends BaseController
 
     public function statusTimeMarket($market, $force_determine_status = 0)
     {
+        dd('ok');
         $ready_to_duration = $market->ready_to_open;
         $open_duration = $market->opening;
         $q_1 = $market->q_1;
@@ -94,7 +95,7 @@ class Controller extends BaseController
                 $market_min_price = $market->SalesForm->alpha;
             }
             $market_min_price = intval($market_min_price) - 1;
-            dd($market_min_price);
+
             $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->get();
             if (count($bid_touch_price) < 2) {
                 $status = 7;
