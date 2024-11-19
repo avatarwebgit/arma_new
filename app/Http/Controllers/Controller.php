@@ -26,7 +26,6 @@ class Controller extends BaseController
 
     public function statusTimeMarket($market, $force_determine_status = 0)
     {
-        dd('ok');
         $ready_to_duration = $market->ready_to_open;
         $open_duration = $market->opening;
         $q_1 = $market->q_1;
