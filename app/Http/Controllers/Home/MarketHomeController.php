@@ -633,12 +633,13 @@ class MarketHomeController extends Controller
                     $alpha = $market->SalesForm->alpha;
                     $price = $alpha;
                 }
-                if ($key==1){
-                    dd($is_win,$bid);
-                }
+
                 //اگر تعداد کالا کمتر از مینیموم باشد بید بازنده است
                 if ($quantity_win < $market->SalesForm->min_order) {
                     $is_win = 0;
+                }
+                if ($key==1){
+                    dd($is_win,$bid);
                 }
                 //در هر صورتی اگر قیمت را تاچ نکرد بازنده است
                 if ($bid->price < $price) {
