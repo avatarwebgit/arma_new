@@ -168,7 +168,7 @@
             show_market_result(id);
             change_market_status(status, color, statusText, id);
             let n_a='<tr style="height: 27px"><td class="text-center "></td><td class="text-center">n/a</td><td class="text-center">n/a</td></tr>';
-            $('#bidder_offer_'+id).html(n_a);
+            // $('#bidder_offer_'+id).html(n_a);
         }
 
         function close_bid_deposit(id) {
