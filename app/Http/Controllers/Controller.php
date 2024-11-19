@@ -94,6 +94,7 @@ class Controller extends BaseController
                 $market_min_price = $market->SalesForm->alpha;
             }
             $market_min_price = intval($market_min_price) - 1;
+            dd($market_min_price);
             $bid_touch_price = $market->Bids()->Where('price', '>', $market_min_price)->get();
             if (count($bid_touch_price) < 2) {
                 $status = 7;
