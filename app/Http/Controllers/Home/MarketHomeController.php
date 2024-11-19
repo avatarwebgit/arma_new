@@ -640,9 +640,7 @@ class MarketHomeController extends Controller
                 if ($quantity_win < intval($SalesForm_min_order)) {
                     $is_win = 0;
                 }
-                if ($key==1){
-                    dd($quantity_win,$SalesForm_min_order,$is_win);
-                }
+
                 //در هر صورتی اگر قیمت را تاچ نکرد بازنده است
                 if ($bid->price < $price) {
                     $is_win = 0;
