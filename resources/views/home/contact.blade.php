@@ -135,6 +135,7 @@
             padding: 2px 30px;
             background: #006;
             border: 1px solid #006;
+            color:white;
         }
 
         .error_input_validate {
