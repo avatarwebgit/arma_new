@@ -603,7 +603,6 @@ class MarketHomeController extends Controller
             $market = Market::where('id', $market_id)->first();
             $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
             $ids = $this->BidWinner($market);
-            dd($ids);
             $bids = [];
             $max_quantity = str_replace(',', '', $market->SalesForm->max_quantity);
             $remain_quantity = $max_quantity;
@@ -614,6 +613,7 @@ class MarketHomeController extends Controller
 
                 $bid = BidHistory::where('id', $id)->first();
                 $bid_quantity = $bid->quantity;
+                dd($remain_quantity,$bid_quantity);
                 if ($remain_quantity == 0) {
                     $quantity_win = 0;
                 } else {
