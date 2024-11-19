@@ -613,7 +613,6 @@ class MarketHomeController extends Controller
 
                 $bid = BidHistory::where('id', $id)->first();
                 $bid_quantity = $bid->quantity;
-                dd($remain_quantity,$bid_quantity);
                 if ($remain_quantity == 0) {
                     $quantity_win = 0;
                 } else {
@@ -647,6 +646,8 @@ class MarketHomeController extends Controller
                 if ($is_win == 1) {
                     $win_user_ids[] = $bid->user_id;
                 }
+
+                dd($is_win,$bid);
 
                 $bid->update([
                     'quantity_win' => $quantity_win,
