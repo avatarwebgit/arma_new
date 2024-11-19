@@ -112,7 +112,7 @@
         }
 
         .header-section::before {
-            content: " ";
+            /*content: " ";*/
             display: block;
             width: 4px;
             height: 25px;
