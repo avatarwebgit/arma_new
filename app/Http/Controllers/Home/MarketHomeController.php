@@ -647,7 +647,10 @@ class MarketHomeController extends Controller
                     $win_user_ids[] = $bid->user_id;
                 }
 
-                dd($is_win,$bid);
+                if ($key==1){
+                    dd($is_win,$bid);
+                }
+
 
                 $bid->update([
                     'quantity_win' => $quantity_win,
