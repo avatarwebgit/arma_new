@@ -601,7 +601,7 @@ class MarketHomeController extends Controller
         try {
             $market_id = $request->id;
             $market = Market::where('id', $market_id)->first();
-            $bidhistories_groups = $market->Bids()->orderby('price', 'desc')->get()->groupby('price');
+            $bidhistories_groups = $market->Bids;
             dd($bidhistories_groups);
             $ids = $this->BidWinner($market);
 
