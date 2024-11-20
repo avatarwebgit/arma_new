@@ -847,7 +847,7 @@
                                     <th class="text-center text-white">Quantity
                                         {{--                                        ( {{ $market->SalesForm->unit }})--}}
                                     </th>
-                                    <th class="text-center text-white" style="width: 100px;padding-right: 80px !important;">Price
+                                    <th class="text-center text-white" style="width: 80px;padding-right: 0 !important;">Price
                                         {{--                                        ( {{ $market->SalesForm->currency }}--}}
                                         {{--                                        )--}}
                                     </th>
