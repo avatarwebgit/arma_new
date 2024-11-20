@@ -79,6 +79,7 @@ return new class extends Migration
             $table->text('loading_port_city')->nullable();
             $table->date('loading_from')->nullable();
             $table->date('loading_to')->nullable();
+            $table->date('period')->nullable();
             $table->text('bulk_loading_rate')->nullable();
             $table->text('loading_bulk_shipping_term')->nullable();
             $table->text('loading_container_type')->nullable();

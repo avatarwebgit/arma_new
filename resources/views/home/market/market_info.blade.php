@@ -87,7 +87,12 @@
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Delivery Period</span>
         <span class="text-bold text-light-blue ">
-            {{ str_replace('-','/',$market->SalesForm->loading_from).' - '.str_replace('-','/',$market->SalesForm->loading_to) }}
+            @if($market->SalesForm->loading_from=='' or $market->SalesForm->loading_from==null)
+                {{ $market->SalesForm->period }}
+            @else
+                {{ str_replace('-','/',$market->SalesForm->loading_from).' - '.str_replace('-','/',$market->SalesForm->loading_to) }}
+            @endif
+
         </span>
     </div>
 
