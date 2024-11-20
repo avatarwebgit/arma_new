@@ -94,6 +94,9 @@
             height: 180px !important;
             position: relative;
         }
+        .font-address .title{
+            position: relative;
+        }
 
         .font-address .title::before {
             content: " ";
@@ -103,7 +106,7 @@
             border-radius: 50%;
             background-color: blue;
             position: absolute;
-            left: 0;
+            left: -10px;
             top: 9px;
         }
 
