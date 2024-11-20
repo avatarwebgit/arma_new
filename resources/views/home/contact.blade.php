@@ -346,7 +346,7 @@
                                 </div>
                                 <div class="col col-12 col-md-6">
                                 </div>
-                                <div class="col col-12 col-md-12 mt-3">
+                                <div class="col col-12 col-md-6 mt-3">
                                     <label for="email">{{ __('Email') }}</label>
                                     <input class="form-control" id="email" name="email">
                                     <p class="error_input_validate d-none" id="email_error"></p>
