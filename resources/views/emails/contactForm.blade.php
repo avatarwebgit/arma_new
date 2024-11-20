@@ -44,7 +44,7 @@
 <div class="container">
     <h1>New Message from Contact Form</h1>
     <p><strong class="highlight">Name:</strong> {{ $name }}</p>
-{{--    <p><strong class="highlight">Email:</strong> {{ $email }}</p>--}}
+    <p><strong class="highlight">Email:</strong> {{ $email }}</p>
     <p><strong class="highlight">Message:</strong></p>
     <p>{{ nl2br(e($text)) }}</p>
 
