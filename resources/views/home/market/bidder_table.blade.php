@@ -31,6 +31,7 @@
             </td>
         </tr>
     @endforeach
+
 @else
     <tr style="height: 27px">
         <td class="text-center ">
