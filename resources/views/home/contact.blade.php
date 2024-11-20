@@ -300,7 +300,7 @@
                 </div>
             </div>
             @endif
-            <div class="">
+            <div style="margin-top: 40px">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
