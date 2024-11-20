@@ -15,16 +15,24 @@
                 {{ number_format($bid->quantity) }}
            </span>
             </td>
-            <td class="text-center">
+            <td class="text-center" style="position: relative">
                 {{ number_format($bid->price) }}
                 @if($key!=0 )
                     @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
 
-                        <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})">
+                        <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
+                              style="
+                              background: red;
+  padding: 2px 9px;
+  border-radius: 5px;
+  font-size: 7pt;
+  position: absolute;
+  right: 2px;
+  bottom: 9px;">
 {{--                     <i  class="fa fa-times-circle text-danger"></i>--}}
-                            <span style="display: block;padding: 5px 10px;background-color: red;color: white">
+
                                 Delete
-                            </span>
+
                 </span>
                     @endif
                 @endif
