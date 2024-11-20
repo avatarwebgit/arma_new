@@ -94,9 +94,6 @@
             height: 180px !important;
             position: relative;
         }
-        .font-address .title{
-            position: relative;
-        }
 
         .font-address .title::before {
             content: " ";
@@ -106,7 +103,7 @@
             border-radius: 50%;
             background-color: blue;
             position: absolute;
-            left: -10px;
+            left: 0;
             top: 9px;
         }
 
@@ -303,7 +300,7 @@
                 </div>
             </div>
             @endif
-
+            <div class="landing-feature">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -313,7 +310,7 @@
                         </div>
                         @foreach($addresses as $item)
                             <div class="col-12 col-md-4 font-address">
-                                <div class="p-5">
+                                <div>
                                     <div class="title">
                                         {{ $item->title_modal }}
                                     </div>
@@ -340,7 +337,7 @@
                         @endforeach
                     </div>
                 </div>
-
+            </div>
 
 
             <div class="position-relative"
