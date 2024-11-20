@@ -277,7 +277,6 @@
                         </div>
 
                         @foreach($help_and_support as $k=>$item)
-
                                 <div class="col-12 col-md-6">
                                     <h5>
                                         <a href="{{ $item->link_help_modal }}">
@@ -286,7 +285,6 @@
                                     </h5>
                                     <span>{{ $item->description_help_modal }}</span>
                                 </div>
-                            @endif
                         @endforeach
                     </div>
                 </div>
