@@ -275,14 +275,10 @@
                                 Help and support
                             </h2>
                         </div>
-                        @php
-                            $i=0;
-                        @endphp
+
                         @foreach($help_and_support as $k=>$item)
-                            @if($i==1)
-                                <div class="col-12 col-md-4"></div>
-                            @else
-                                <div class="col-12 col-md-4">
+
+                                <div class="col-12 col-md-6">
                                     <h5>
                                         <a href="{{ $item->link_help_modal }}">
                                             {{ $item->title_help_modal }}
@@ -291,10 +287,6 @@
                                     <span>{{ $item->description_help_modal }}</span>
                                 </div>
                             @endif
-
-                                @php
-                                    $i++;
-                                @endphp
                         @endforeach
                     </div>
                 </div>
