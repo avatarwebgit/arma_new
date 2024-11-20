@@ -61,8 +61,8 @@ class ContactController extends Controller
                 'link_help_modal' => $request->link_help_modal,
             ];
 
-            if ($request->address_modal_id !== null) {
-                $contact_help = ContactHelp::where('id', $request->address_modal_id)->first();
+            if ($request->help_modal_id !== null) {
+                $contact_help = ContactHelp::where('id', $request->help_modal_id)->first();
                 $contact_help->update($data);
                 $message = 'Item Is Updated Successfully!';
             } else {

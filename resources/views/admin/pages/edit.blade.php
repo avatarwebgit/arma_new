@@ -371,7 +371,7 @@
                                    value="">
                         </div>
 
-                        <input id="address_modal_id" value="" type="hidden">
+                        <input id="help_modal_id" value="" type="hidden">
                     </div>
                 </div>
 
@@ -471,7 +471,7 @@
             const fields = ['title_help_modal', 'description_help_modal', 'link_help_modal'];
             fields.forEach(field => $('#' + field).val(''));
             $('#HelpModal').modal('show');
-            $('#HelpModal_id').val(help_id);
+            $('#help_modal_id').val(help_id);
 
             if (help_id != null) {
                 const data = {
@@ -595,6 +595,7 @@
             let title_help_modal = $('#title_help_modal').val();
             let description_help_modal = $('#description_help_modal').val();
             let link_help_modal = $('#link_help_modal').val();
+            let help_modal_id = $('#help_modal_id').val();
 
             if (title_help_modal.length == 0) {
                 $('#title_help_modal_error').removeClass('d-none');
@@ -608,6 +609,7 @@
                     title_help_modal: title_help_modal,
                     description_help_modal: description_help_modal,
                     link_help_modal: link_help_modal,
+                    help_modal_id: help_modal_id,
                 },
                 dataType: 'json',
                 method: 'POST',
