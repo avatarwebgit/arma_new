@@ -389,7 +389,6 @@ class MarketHomeController extends Controller
                 $user_ids = array_filter($user_ids, function($id) use ($user_id) {
                     return $id !== $user_id;
                 });
-                dd($user_ids);
                 // سریالایز کردن دوباره آرایه
                 $marketPermissions->user_ids = serialize(array_values($user_ids));
                 // ذخیره تغییرات در دیتابیس
