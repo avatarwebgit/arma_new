@@ -300,7 +300,7 @@
                 </div>
             </div>
             @endif
-            <div class="landing-feature">
+            <div class="">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -310,29 +310,32 @@
                         </div>
                         @foreach($addresses as $item)
                             <div class="col-12 col-md-4 font-address">
-                                <div>
-                                    <div class="title">
-                                        {{ $item->title_modal }}
-                                    </div>
+                                <div style="padding-right: 20px">
                                     <div>
-                                        {{ $item->address_modal }}
-                                    </div>
-                                    <div>
-                                        {{ $item->tel_1_modal }}
-                                    </div>
-                                    <div>
-                                        {{ $item->tel_2_modal }}
-                                    </div>
-                                    <div>
-                                        {{ $item->tel_3_modal }}
-                                    </div>
-                                    <div>
-                                        {{ $item->email_modal }}
-                                    </div>
-                                    <div>
-                                        {{ $item->email_2_modal }}
+                                        <div class="title">
+                                            {{ $item->title_modal }}
+                                        </div>
+                                        <div>
+                                            {{ $item->address_modal }}
+                                        </div>
+                                        <div>
+                                            {{ $item->tel_1_modal }}
+                                        </div>
+                                        <div>
+                                            {{ $item->tel_2_modal }}
+                                        </div>
+                                        <div>
+                                            {{ $item->tel_3_modal }}
+                                        </div>
+                                        <div>
+                                            {{ $item->email_modal }}
+                                        </div>
+                                        <div>
+                                            {{ $item->email_2_modal }}
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         @endforeach
                     </div>
