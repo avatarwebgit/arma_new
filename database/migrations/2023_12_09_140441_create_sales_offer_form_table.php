@@ -121,6 +121,7 @@ return new class extends Migration
             $table->text('documents_count')->nullable();
             $table->text('documents_options')->nullable();
             $table->text('document_more_detail')->nullable();
+            $table->text('term_conditions')->nullable();
             //contact_person
             $table->text('contact_person_name')->nullable();
             $table->text('contact_person_job_title')->nullable();

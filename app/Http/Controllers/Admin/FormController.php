@@ -1027,6 +1027,7 @@ class FormController extends Controller
             'documents_count' => 'required',
             'documents_options' => ['required_if:documents_count,No'],
             'document_more_detail' => 'nullable',
+            'term_conditions' => 'required|min:400',
             //contact person
             'contact_person_name' => 'required',
             'contact_person_job_title' => 'required',

@@ -86,6 +86,8 @@
 
                                                 @include('admin.sales_form.documents')
 
+                                                @include('admin.sales_form.term_and_conditions')
+
                                                 @include('admin.sales_form.contact_person')
 
                                                 @include('admin.sales_form.last_section')
@@ -139,6 +141,9 @@
 
 
     <style>
+        #cke_1_contents{
+            height: 500px !important;
+        }
         @media (min-width: 576px) {
             #show_modal_form_exists .modal-dialog {
                 max-width: 30% !important;
@@ -173,5 +178,6 @@
 
 @push('script')
     @include('admin.sales_form.script')
+
 @endpush
 

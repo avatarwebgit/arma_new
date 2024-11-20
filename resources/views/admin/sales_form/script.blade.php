@@ -2,6 +2,8 @@
 <script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
 
 <script>
+
+
     $(document).ready(function () {
         @if(session()->exists('need_submit'))
         show_submit_modal();
