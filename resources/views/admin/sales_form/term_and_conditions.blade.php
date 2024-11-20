@@ -20,6 +20,7 @@
             }
         }
     @endphp
+
     <label>{{ $label }}</label>{!! $required_span !!}
     <textarea rows="10" id="{{ filed_name($name) }}" name="{{ filed_name($name) }}" class="form-control {{ filed_name($name) }}">{{ $value }}</textarea>
     @error(filed_name($name))
