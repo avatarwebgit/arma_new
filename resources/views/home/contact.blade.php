@@ -277,7 +277,7 @@
                         </div>
 
                         @foreach($help_and_support as $k=>$item)
-                                <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6" style="padding-right: 60px">
                                     <h5>
                                         <a href="{{ $item->link_help_modal }}">
                                             {{ $item->title_help_modal }}
