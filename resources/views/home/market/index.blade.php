@@ -847,11 +847,11 @@
                                     <th class="text-center text-white">Quantity
                                         {{--                                        ( {{ $market->SalesForm->unit }})--}}
                                     </th>
-                                    <th class="text-center text-white">Price
+                                    <th class="text-center text-white" style="width: 100px;padding-right: 0">Price
                                         {{--                                        ( {{ $market->SalesForm->currency }}--}}
                                         {{--                                        )--}}
                                     </th>
-                                    <th class="text-center text-white">
+                                    <th class="text-center text-white" style="width: 60px">
 
                                     </th>
 
