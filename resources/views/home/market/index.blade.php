@@ -851,6 +851,9 @@
                                         {{--                                        ( {{ $market->SalesForm->currency }}--}}
                                         {{--                                        )--}}
                                     </th>
+                                    <th class="text-center text-white">
+
+                                    </th>
 
                                 </tr>
                                 </thead>
