@@ -20,7 +20,10 @@
                 @if($key!=0 )
                     @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})">
-                     <i  class="fa fa-times-circle text-danger"></i>
+{{--                     <i  class="fa fa-times-circle text-danger"></i>--}}
+                            <span style="display: block;padding: 5px 10px;background-color: red;color: white">
+                                Delete
+                            </span>
                 </span>
                     @endif
                 @endif
