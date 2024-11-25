@@ -130,6 +130,9 @@
             border-radius: 0 !important;
             height: 40px;
         }
+        input::placeholder{
+color:#000;
+        }
 
         .send-btn {
             padding: 2px 30px;
