@@ -136,6 +136,17 @@
             background: #006;
             border: 1px solid #006;
             color: white;
+            border-radius: 2.7rem;
+    background-color: #33beee !important;
+    background-image: none;
+    border: 0;
+    padding: 0 15px;
+    height: 40px;
+    width: 100%;
+    color: #fff !important;
+    /* font-family: var(--merriweather); */
+    font-size: 1.6rem;
+    box-shadow: none;
         }
 
         .error_input_validate {
