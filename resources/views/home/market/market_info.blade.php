@@ -91,7 +91,7 @@
         </span>
     </div>
             <div class="d-flex justify-content-between">
-        <span class="text-bold text-gray-100">Port/City</span>
+        <span class="text-bold text-gray-100">Country</span>
         <span class="text-bold text-light-blue ">
             {{ $market->SalesForm->country }}
         </span>
