@@ -135,6 +135,10 @@
             font-weight:bold !important;
         }
 
+        input{
+padding: 25px 10px;
+        }
+
         .send-btn {
             padding: 2px 30px;
             background: #006;
@@ -144,7 +148,7 @@
     background-color: #33beee !important;
     background-image: none;
     border: 0;
-    padding: 0 15px;
+    padding: 10px 15px !important;
     height: 40px;
     width: 100%;
     color: #fff !important;
