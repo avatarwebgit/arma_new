@@ -364,7 +364,7 @@ padding: 30px 10px !important;
 
 
             <div class="position-relative"
-                 style="background-image: url('{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->form_bg) }}');padding: 30px 0">
+                 style="background-image: url('{{ imageExist(env('UPLOAD_BANNER_PAGE'),$page->form_bg) }}');padding: 120px 0">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-md-6">
