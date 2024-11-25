@@ -144,6 +144,7 @@
     padding: 0px 15px !important;
     height: 45px;
     width: 100%;
+            margin-top:5px;
     color: #fff !important;
     /* font-family: var(--merriweather); */
     font-size: 1.6rem;
@@ -164,10 +165,11 @@
                 input::placeholder,textarea::placeholder{
    color:#000 !important;
             font-weight:bold !important;
+                    font-size:18px !important;
         }
 
         input{
-padding: 25px 10px !important;
+padding: 30px 10px !important;
         }
     </style>
 @endsection
@@ -312,7 +314,7 @@ padding: 25px 10px !important;
                 </div>
             </div>
             @endif
-            <div style="margin-top: 40px">
+            <div style="margin-top: 40px;margin-bottom:40px">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
