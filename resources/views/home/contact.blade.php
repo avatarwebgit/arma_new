@@ -340,12 +340,11 @@
                         <div class="col-12 col-md-6">
                             <div class="row">
                                 <div class="col col-12 col-md-6">
-                                    <label for="f-name">{{ __('Company/Name') }}</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
+<!--                                     <label for="f-name">{{ __('Company/Name') }}</label> -->
+                                    <input type="text" placeholder="{{ __('Company/Name') }}" class="form-control" id="name" name="name" required>
                                     <p class="error_input_validate d-none" id="name_error"></p>
                                 </div>
-                                <div class="col col-12 col-md-6">
-                                </div>
+                            
                                 <div class="col col-12 col-md-6 mt-3">
                                     <label for="email">{{ __('Email') }}</label>
                                     <input class="form-control" id="email" name="email">
