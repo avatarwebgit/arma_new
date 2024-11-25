@@ -379,7 +379,7 @@ padding: 30px 10px !important;
                                     <textarea placeholder="{{ __('Message') }}" rows="4" class="form-control" id="message" name="message"></textarea>
                                     <p class="error_input_validate d-none" id="message_error"></p>
                                 </div>
-                                <div class="col col-12 col-md-12">
+                                <div class="col col-12 col-md-12 mt-3">
                                     <button type="button" onclick="submit()"
                                             class="send-btn mt-2">{{ __('Send') }}</button>
                                 </div>
