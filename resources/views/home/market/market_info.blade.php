@@ -90,6 +90,12 @@
             {{ $market->SalesForm->port_city }}
         </span>
     </div>
+            <div class="d-flex justify-content-between">
+        <span class="text-bold text-gray-100">Port/City</span>
+        <span class="text-bold text-light-blue ">
+            {{ $market->SalesForm->country }}
+        </span>
+    </div>
     <div class="d-flex justify-content-between">
         <span class="text-bold text-gray-100">Delivery Period</span>
         <span class="text-bold text-light-blue ">
