@@ -59,7 +59,7 @@
                 </td>
                 <td>{{ $highest }}</td>
                 <td>{{ $quantity }}</td>
-                <td>{{ $market->SalesForm->market_value }}</td>
+                <td>{{ $market->market_value }}</td>
                 <td>{{ $status_text }}</td>
             </tr>
         @endif
