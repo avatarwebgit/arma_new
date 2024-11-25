@@ -3207,6 +3207,6 @@ footer input::placeholder {
 .text-register{
     color: #1a54a8;
 }
-#market_daily_items tr{
+#market_daily_items td{
     font-weight:300 !important;
 }
