@@ -346,13 +346,13 @@
                                 </div>
                             
                                 <div class="col col-12 col-md-6 mt-3">
-                                    <label for="email">{{ __('Email') }}</label>
-                                    <input class="form-control" id="email" name="email">
+<!--                                     <label for="email">{{ __('Email') }}</label> -->
+                                    <input placeholder="{{ __('Email') }}" class="form-control" id="email" name="email">
                                     <p class="error_input_validate d-none" id="email_error"></p>
                                 </div>
                                 <div class="col col-12 col-md-12 mt-3">
-                                    <label for="message">{{ __('Message') }}</label>
-                                    <textarea rows="4" class="form-control" id="message" name="message"></textarea>
+<!--                                     <label for="message">{{ __('Message') }}</label> -->
+                                    <textarea placeholder="{{ __('Message') }}" rows="4" class="form-control" id="message" name="message"></textarea>
                                     <p class="error_input_validate d-none" id="message_error"></p>
                                 </div>
                                 <div class="col col-12 col-md-12">
