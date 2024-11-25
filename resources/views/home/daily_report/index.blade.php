@@ -115,7 +115,7 @@
                                 <td>
                         <span>
 
-           Tracking Value
+           Trade Value
             </span>
                 </td>
                 <td>
