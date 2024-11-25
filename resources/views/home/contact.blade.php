@@ -130,14 +130,7 @@
             border-radius: 0 !important;
             height: 40px;
         }
-        input::placeholder{
-   color:#000;
-            font-weight:bold !important;
-        }
 
-        input{
-padding: 25px 10px;
-        }
 
         .send-btn {
             padding: 2px 30px;
@@ -165,6 +158,16 @@ padding: 25px 10px;
 
         footer {
             margin-top: 0 !important;
+        }
+
+
+                input::placeholder{
+   color:#000 !important;
+            font-weight:bold !important;
+        }
+
+        input{
+padding: 25px 10px !important;
         }
     </style>
 @endsection
@@ -364,7 +367,7 @@ padding: 25px 10px;
                                     <p class="error_input_validate d-none" id="name_error"></p>
                                 </div>
                             
-                                <div class="col col-12 col-md-6 mt-3">
+                                <div class="col col-12 col-md-6 ">
 <!--                                     <label for="email">{{ __('Email') }}</label> -->
                                     <input placeholder="{{ __('Email') }}" class="form-control" id="email" name="email">
                                     <p class="error_input_validate d-none" id="email_error"></p>
