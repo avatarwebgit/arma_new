@@ -131,7 +131,8 @@
             height: 40px;
         }
         input::placeholder{
-color:#000;
+   color:#000;
+            font-weight:bold !important;
         }
 
         .send-btn {
