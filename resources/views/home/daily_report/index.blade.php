@@ -112,6 +112,12 @@
            Quantity Bid
             </span>
                 </td>
+                                <td>
+                        <span>
+
+           Tracking Value
+            </span>
+                </td>
                 <td>
                         <span>
 
