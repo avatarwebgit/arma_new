@@ -59,7 +59,7 @@
                 </td>
                 <td>{{ $highest }}</td>
                 <td>{{ $quantity }}</td>
-                <td>{{ $market->market_value }}</td>
+                <td>{{ number_format($market->market_value). ' ' . 'USD' }}</td>
                 <td>{{ $status_text }}</td>
             </tr>
         @endif
