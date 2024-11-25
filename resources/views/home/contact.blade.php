@@ -5,6 +5,9 @@
 @endsection
 
 @section('style')
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <style>
         span {
             line-height: 9pt !important;
@@ -162,14 +165,15 @@
         }
 
 
-                input::placeholder,textarea::placeholder{
+                .contact-form-section input::placeholder,.contact-form-section textarea::placeholder{
    color:#000 !important;
             font-weight:bold !important;
                     font-size:18px !important;
         }
 
-        input{
+        .contact-form-section input{
 padding: 30px 10px !important;
+            font-family: "Merriweather", serif !important;
         }
     </style>
 @endsection
@@ -362,7 +366,7 @@ padding: 30px 10px !important;
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <div class="row">
+                            <div class="row contact-form-section">
                                 <div class="col col-12 col-md-6">
 <!--                                     <label for="f-name">{{ __('Company/Name') }}</label> -->
                                     <input type="text" placeholder="{{ __('Company/Name') }}" class="form-control" id="name" name="name" required>
