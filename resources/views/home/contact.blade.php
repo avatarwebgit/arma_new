@@ -141,8 +141,8 @@
     background-color: #33beee !important;
     background-image: none;
     border: 0;
-    padding: 10px 15px !important;
-    height: 40px;
+    padding: 0px 15px !important;
+    height: 45px;
     width: 100%;
     color: #fff !important;
     /* font-family: var(--merriweather); */
@@ -161,7 +161,7 @@
         }
 
 
-                input::placeholder{
+                input::placeholder,textarea::placeholder{
    color:#000 !important;
             font-weight:bold !important;
         }
