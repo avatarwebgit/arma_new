@@ -51,9 +51,9 @@
 
     
     <style>
-        body{
+/*         body{
     font-family: "Merriweather Sans", sans-serif;
-        }
+        } */
         .ion-logo-x::before {
             content: "x" !important;
             font-size: 29px;
