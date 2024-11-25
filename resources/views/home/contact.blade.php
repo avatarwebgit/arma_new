@@ -146,6 +146,7 @@
     border: 0;
     padding: 0px 15px !important;
     height: 45px;
+              font-family: "Merriweather", serif !important;
     width: 100%;
             margin-top:5px;
     color: #fff !important;
@@ -169,6 +170,7 @@
    color:#000 !important;
             font-weight:bold !important;
                     font-size:18px !important;
+                      font-family: "Merriweather", serif !important;
         }
 
         .contact-form-section input{
