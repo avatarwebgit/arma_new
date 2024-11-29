@@ -50,7 +50,7 @@
                     {{ $market->SalesForm->incoterms }}
                 </td>
                 <td>
-                    {{ $market->SalesForm->country }}
+                    {{ $market->SalesForm->origin }}
                 </td>
                 <td>
                     {{ \Carbon\Carbon::parse($market->date_time)->format('Y-m-d') }}
