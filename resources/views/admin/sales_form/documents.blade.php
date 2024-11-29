@@ -6,6 +6,7 @@
         </strong>
     </div>
 </div>
+
 <div class="row" id="documents-box">
     <div class="col-12 col-md-3 mb-3">
         @php
@@ -18,7 +19,7 @@
             </label>
         </div>
         @php
-            $name='Packing Lis';
+            $name='Packing List';
         @endphp
         <div class="form-check">
             <input onchange="documentOptions()" class="form-check-input" type="checkbox" value="{{ filed_name($name) }}" id="{{ filed_name($name) }}">
@@ -96,7 +97,7 @@
             </label>
         </div>
         @php
-            $name='Cargo Manifes';
+            $name='Cargo Manifest';
         @endphp
         <div class="form-check">
             <input onchange="documentOptions()" class="form-check-input" type="checkbox" value="{{ filed_name($name) }}" id="{{ filed_name($name) }}">
@@ -141,7 +142,8 @@
             }
         }
     @endphp
-    <input name="{{ filed_name($name) }}" class="form-control" value="{{ $value }}" placeholder="more details">
+    <label>More Details</label>
+    <input name="{{ filed_name($name) }}" class="form-control" value="{{ $value }}">
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}

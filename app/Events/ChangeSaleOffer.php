@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Market;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -13,13 +14,13 @@ use Illuminate\Queue\SerializesModels;
 class ChangeSaleOffer implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
     /**
      * Create a new event instance.
      *
      * @return void
      */
     public $market_id;
+    public $market;
     public function __construct($market_id)
     {
         $this->market_id = $market_id;

@@ -1,26 +1,59 @@
 @extends('seller.layouts.main')
-@section('title', __('Dashboard'))
-@section('breadcrumb')
-    <div class="col-md-12">
-        <div class="page-header-title mb-3">
-            <h4 class="m-b-10">{{ __('Dashboard') }}</h4>
-        </div>
-    </div>
+@section('title')
+   Dashboard
 @endsection
+
+@section('style')
+    <link rel="stylesheet" href="{{ asset('home/css/profile_panel.css') }}">
+
+    <style>
+        .position-relative {
+            position: relative;
+        }
+
+        #close_alert {
+            position: absolute;
+            cursor: pointer;
+            top: 5px;
+            left: 5px;
+        }
+
+        .my-2 {
+            margin: 2rem 0;
+        }
+
+        .ht-btn {
+            border: none !important;
+            color: white !important;
+        }
+
+        .ht-btn:hover {
+            background-color: #E8D2A6 !important;
+            color: #000 !important;
+        }
+
+        .single-input-item > label, .single-input-item > input {
+            font-size: 14px !important;
+        }
+    </style>
+@endsection
+
+@section('script')
+
+@endsection
+
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    Seller Dashboard
+    <div class="settings mtb15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            Bidder Dashboard
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-@push('style')
-
-@endpush
-@push('script')
-
-@endpush

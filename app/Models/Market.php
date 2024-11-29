@@ -10,7 +10,7 @@ class Market extends Model
     use HasFactory;
 
     protected $table = "markets";
-    protected $guarded = [];
+    protected $guarded = ['id','offer_price'];
 
     public function SalesForm()
     {
@@ -21,9 +21,17 @@ class Market extends Model
     {
         return $this->belongsTo(MarketStatus::class, 'status', 'id');
     }
+    public function CreatedBy()
+    {
+        return $this->belongsTo(User::class, 'created_market_by', 'id');
+    }
 
     public function Bids()
     {
         return $this->hasMany(BidHistory::class, 'market_id');
+    }
+    public function Participants()
+    {
+        return $this->hasOne(MarketPermission::class,'market_id','id');
     }
 }

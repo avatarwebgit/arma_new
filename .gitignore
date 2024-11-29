@@ -1,3 +1,4 @@
+.env
 /node_modules
 /public/hot
 /public/storage
@@ -10,3 +11,7 @@ npm-debug.log
 yarn-error.log
 /vendor
 .idea
+<<<<<<< HEAD
+=======
+
+>>>>>>> fd2836e2d28e028db67d3f9e521df5829ae6a13b

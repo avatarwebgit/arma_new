@@ -42,6 +42,9 @@
     @else
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
     @endif
+
+
+
 </head>
 
 <body class="{{ $color }}">
@@ -188,6 +191,8 @@
 <!-- [ auth-signup ] end -->
 <script src="{{ asset('vendor/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendor-font-awsome.js') }}"></script>
+
+
 {{--<script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -243,11 +248,15 @@
         </div>
     </div>
 </div>
+
+
 <script src="{{ asset('vendor/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/notifier.js') }}"></script>
 @if (setting('rtl') == '1')
 @endif
 <script>
+
+
     @if (session('failed'))
     notifier.show('Failed!', '{{ session('failed') }}', 'danger',
         '{{ asset('assets/images/notification/high_priority-48.png') }}', 4000);
@@ -296,7 +305,7 @@
     feather.replace();
     var pctoggle = document.querySelector("#pct-toggler");
     if (pctoggle) {
-        pctoggle.addEventListener("click", function() {
+        pctoggle.addEventListener("click", function () {
             if (
                 !document.querySelector(".pct-customizer").classList.contains("active")
             ) {
@@ -309,7 +318,7 @@
     var themescolors = document.querySelectorAll(".themes-color > a");
     for (var h = 0; h < themescolors.length; h++) {
         var c = themescolors[h];
-        c.addEventListener("click", function(event) {
+        c.addEventListener("click", function (event) {
             var targetElement = event.target;
             if (targetElement.tagName == "SPAN") {
                 targetElement = targetElement.parentNode;
@@ -319,6 +328,7 @@
             document.querySelector("body").classList.add(temp);
         });
     }
+
     function removeClassByPrefix(node, prefix) {
         for (let i = 0; i < node.classList.length; i++) {
             let value = node.classList[i];

@@ -1,7 +1,9 @@
-@extends($role=='seller'?'seller.layouts.main':'admin.layouts.main')
+{{--@extends($role=='seller'?'seller.layouts.main':'admin.layouts.main')--}}
+@extends('admin.layouts.main')
 
 @section('content')
     @include('admin.sales_form.modal')
+
     <div class="settings mtb15">
         <div class="container-fluid">
             <div class="row">
@@ -12,12 +14,28 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div>
+
                                         @if ($sale_form_exist==1)
+                                            @if($form->is_complete===1)
+                                                <a href="{{ route('admin.sales_form.index',['status'=>$form->Status->id]) }}" class="btn btn-dark mb-3">
+                                                    Back
+                                                </a>
+                                            @endif
+
                                             <div>
                                                 <p>No: {{ $form->unique_number }}</p>
                                                 <p>Date: {{ $form->created_at->format('Y-M-d') }}</p>
-                                                <p>
-                                                    Status: {{ $form->is_complete===1?$form->Status->title:'The form is not complete' }}</p>
+                                                @if($form->is_complete==1)
+                                                    <p>Status: Complete</p>
+                                                @else
+                                                    @if($form->is_save==1)
+                                                        <p>Status: Save</p>
+                                                    @elseif($form->is_save==2)
+                                                        <p>Status: Draft</p>
+                                                    @else
+                                                        <p>Status: -</p>
+                                                    @endif
+                                                @endif
                                             </div>
                                         @endif
                                         <hr>
@@ -31,6 +49,8 @@
                                                 @include('admin.sales_form.company')
 
                                                 @include('admin.sales_form.unit_currency')
+
+                                                @include('admin.sales_form.contract')
 
                                                 @include('admin.sales_form.product')
 
@@ -48,6 +68,8 @@
 
                                                 @include('admin.sales_form.origin')
 
+                                                @include('admin.sales_form.delivery_period')
+
                                                 @include('admin.sales_form.loading')
 
                                                 @include('admin.sales_form.discharging')
@@ -64,6 +86,8 @@
 
                                                 @include('admin.sales_form.documents')
 
+                                                @include('admin.sales_form.term_and_conditions')
+
                                                 @include('admin.sales_form.contact_person')
 
                                                 @include('admin.sales_form.last_section')
@@ -76,16 +100,26 @@
                                                     </button>
                                                 </div>
                                                 <div class="col-md-12" style="text-align: right">
+                                                    <button title=""
+                                                            type="button" onclick="submitForm(2)"
+                                                            class="btn btn-sm btn-warning">
+                                                        Draft
+                                                    </button>
                                                     <button title="Your Information Saved But Not Submitted"
                                                             type="button" onclick="submitForm(1)"
                                                             class="btn btn-sm btn-success">
                                                         Save
                                                     </button>
-                                                    <button title="Your Information Permanently deleted" type="button"
-                                                            onclick="CancelForm({{ isset($form->id)?$form->id:0 }})"
-                                                            class="btn btn-sm btn-danger">
-                                                        Cancel
-                                                    </button>
+                                                    @if(request()->is('sale_form/Create'))
+
+                                                    @else
+                                                        <button title="Your Information Permanently deleted" type="button"
+                                                                onclick="CancelForm({{ isset($form->id)?$form->id:0 }})"
+                                                                class="btn btn-sm btn-danger">
+                                                            Cancel
+                                                        </button>
+                                                    @endif
+
                                                     {{--                                                    @include('admin.sales_form.change_status')--}}
                                                 </div>
                                             </div>
@@ -104,22 +138,46 @@
 
 @push('style')
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"
-          integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
 
     <style>
+        #cke_1_contents{
+            height: 500px !important;
+        }
         @media (min-width: 576px) {
             #show_modal_form_exists .modal-dialog {
                 max-width: 30% !important;
                 margin: 1.75rem auto;
             }
         }
+        .disabled{
+            background: #c6c6c6;
+            color: black;
+        }
+        #NeedToSubmitModal .modal-footer > button{
+            background: white !important;
+            color: black !important;
+            border: 1px solid black;
+            margin: 5px 16px;
+            width: 140px;
+        }
+        .form-control:disabled,
+        .custom-select:disabled,
+        .dataTable-selector:disabled,
+        .dataTable-input:disabled,
+        .form-control[readonly],
+        .custom-select[readonly],
+        .dataTable-selector[readonly],
+        .dataTable-input[readonly] {
+            background-color: #ffffff !important;
+            opacity: 1;
+            color: #606060;
+        }
     </style>
 @endpush
 
 @push('script')
     @include('admin.sales_form.script')
+
 @endpush
 

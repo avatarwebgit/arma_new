@@ -30,7 +30,7 @@
         @foreach($priceTypes as $item)
             <option
                 {{ $value==$item->title ? ' selected="selected"' : '' }}
-                value="{{ $item->title }}">{{ $item->title }}</option>
+                value="{{ $item->title }}">{{ $item->title=='Formulla' ? 'Formula' : $item->title }}</option>
         @endforeach
     </select>
     @error(filed_name($name))

@@ -26,9 +26,9 @@
     @endphp
     <label for="{{ filed_name($name) }}"
            class="mb-2">{!! $name.' '.$required_span !!}</label>
-    <input {{ $required }} id="{{ filed_name($name) }}" type="text"
-           name="{{ filed_name($name) }}" class="form-control"
-           value="{{ $value }}" placeholder="Please Enter The Product Specification Or Attach As A File">
+    <textarea {{ $required }} id="{{ filed_name($name) }}" type="text"
+              name="{{ filed_name($name) }}" class="form-control"
+              placeholder="Write the Product Specification Or Attach as a File">{{ $value }}</textarea>
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}
@@ -88,7 +88,7 @@
     @endphp
     <div>
         <label for="quality_inspection_report" class="mb-2">
-            quality inspection/analyse?
+            The latest cargo analysis?
         </label>
         @error('quality_inspection_report')
         <p class="input-error-validate">

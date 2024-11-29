@@ -79,6 +79,7 @@ return new class extends Migration
             $table->text('loading_port_city')->nullable();
             $table->date('loading_from')->nullable();
             $table->date('loading_to')->nullable();
+            $table->date('period')->nullable();
             $table->text('bulk_loading_rate')->nullable();
             $table->text('loading_bulk_shipping_term')->nullable();
             $table->text('loading_container_type')->nullable();
@@ -121,6 +122,7 @@ return new class extends Migration
             $table->text('documents_count')->nullable();
             $table->text('documents_options')->nullable();
             $table->text('document_more_detail')->nullable();
+            $table->text('term_conditions')->nullable();
             //contact_person
             $table->text('contact_person_name')->nullable();
             $table->text('contact_person_job_title')->nullable();
@@ -135,7 +137,7 @@ return new class extends Migration
             $table->integer('status')->default(0);
             $table->text('has_deposit')->nullable();
             $table->text('deposit_value')->nullable();
-            $table->text('data_pending_message')->nullable();
+            $table->text('message')->nullable();
             $table->timestamps();
         });
     }

@@ -18,20 +18,50 @@ use Illuminate\Support\Facades\Broadcast;
 //});
 
 Broadcast::channel('reza', function ($user, $id) {
+	return true;
     return (int) $user->id === (int) $id;
 });
 Broadcast::channel('new_bid_created', function ($user, $id) {
+	return true;
     return (int) $user->id === (int) $id;
 });
 Broadcast::channel('market-status-updated', function ($user, $id) {
+	return true;
+    return (int) $user->id === (int) $id;
+});
+Broadcast::channel('change-sales-offer', function ($user, $id){
+    return true;
+    return (int) $user->id === (int) $id;
+});
+Broadcast::channel('new_bid_created', function ($user, $id) {
+    return true;
+    return (int) $user->id === (int) $id;
+});
+Broadcast::channel('market-status-updated', function ($user, $id) {
+    return true;
     return (int) $user->id === (int) $id;
 });
 Broadcast::channel('change-sales-offer', function ($user, $id) {
+    return true;
     return (int) $user->id === (int) $id;
 });
 
 Broadcast::channel('market-setting-updated-channel', function ($user, $id) {
+    return true;
     return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('market-index-result-channel', function ($user, $id) {
+    return true;
+    return (int) $user->id === (int) $id;
+});
+Broadcast::channel('market-index-table', function ($user, $id) {
+    return true;
+    return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('line_header_updated', function () {
+    return true;
 });
 
 //

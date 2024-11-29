@@ -20,7 +20,8 @@
             }
         }
     @endphp
-    <textarea name="{{ filed_name($name) }}" class="form-control form-control-sm" placeholder="{{ $label }}">{{ $value }}</textarea>
+    <label>{{ $label }}</label>
+    <textarea name="{{ filed_name($name) }}" class="form-control form-control-sm">{{ $value }}</textarea>
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}

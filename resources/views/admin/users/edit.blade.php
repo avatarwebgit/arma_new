@@ -1,13 +1,13 @@
 @extends('admin.layouts.main')
 
 @section('title')
-    {{ $user_status }} Users
+    Edit User Information
 @endsection
 
 @push('script')
     <script>
         $(document).ready(function () {
-            $('#new_password').val(' ');
+            $('#new_password').val('');
         })
 
         // Generate a Password string
@@ -34,6 +34,12 @@
             $('#new_password').val(text);
         }
 
+        function cancelSavePassword(){
+            $('#old_password').val('');
+            $('#new_password').val('');
+            $('#repeat_password').val('');
+        }
+
         CKEDITOR.replace('message', {
             filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
@@ -52,121 +58,90 @@
                 <div id="settings-profile"
                      aria-labelledby="settings-profile-tab">
                     <div class="row">
-                        <div class="col-12 col-xl-6">
+{{--                        <div class="col-12 {{ $type!=null ? 'col-xl-3' : 'col-xl-6' }} "> --}}
+                            <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div>
-                                        <h3>Edit User</h3>
-                                        <hr>
-                                    </div>
                                     <div class="settings-profile">
-                                        <form method="POST"
-                                              action="{{ route('admin.user.update',['type'=>$type,'user'=>$user->id]) }}">
+                                        <form method="POST" action="{{ route('admin.user.update', ['user' => $user->id]) }}" enctype="multipart/form-data">
                                             @csrf
                                             @method('put')
-                                            <div class="row mt-4">
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="name">Name</label>
-                                                    <input id="name" type="text" name="name"
-                                                           class="form-control"
-                                                           placeholder="Name" value="{{ $user->name }}">
-                                                    @error('name')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="email">Email</label>
-                                                    <input id="email" type="text" name="email"
-                                                           class="form-control"
-                                                           placeholder="Email" value="{{ $user->email }}">
-                                                    @error('name')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="company_name">Company Name</label>
-                                                    <input id="company_name" type="text" name="company_name"
-                                                           class="form-control"
-                                                           placeholder="Company Name"
-                                                           value="{{ $user->company_name }}">
-                                                    @error('company_name')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="field">Field</label>
-                                                    <input id="field" type="text" name="field"
-                                                           class="form-control"
-                                                           placeholder="Field" value="{{ $user->field }}">
-                                                    @error('field')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                @can('user')
-                                                    <div class="col-md-6 mb-2">
-                                                        <label for="role_request_id">Role Request</label>
-                                                        <select
-                                                            id="role_request_id"
-                                                            type="text"
-                                                            class="form-control"
-                                                            name="role_request_id">
-                                                            @if($user->type!='Admin')
-                                                                <option value="0">Nothing</option>
-                                                                @foreach($userTypes as $type)
-                                                                    <option
-                                                                        {{ $user->role_request_id==$type->id ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->name }}</option>
-                                                                @endforeach
-                                                            @else
-                                                                <option value="1">Admin</option>
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                @endcan
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="mobile_number">Mobile Number</label>
-                                                    <input id="mobile_number" type="text" name="mobile_number"
-                                                           class="form-control"
-                                                           placeholder="Mobile Number"
-                                                           value="{{ $user->mobile_number }}">
-                                                    @error('mobile_number')
-                                                    <p class="input-error-validate">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror
-                                                </div>
-                                                @can('user')
-                                                <div class="col-12 mb-2">
-                                                    <label for="status">User Status</label>
-                                                    <select name="active_status" id="status"
-                                                            class="form-control">
-                                                        @foreach($userStatus as $status)
-                                                            <option
-                                                                {{ $user->active_status == $status->id ? 'selected' : ' ' }} value="{{ $status->id }}">{{ $status->title }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
 
-                                                <div class="col-12 mb-3 mb-2">
-                                                    <label for="note">Note:</label>
-                                                    <textarea rows="5" id="note" name="note"
-                                                              class="form-control">{{ $user->note }}</textarea>
+                                            @if($type != null)
+                                                <h5 class="mt-4">Update Password</h5>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="form-group col-12">
+                                                        <label for="old_password" class="mb-1">Old Password</label>
+                                                        <input id="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" name="old_password" required>
+                                                        @error('old_password')
+                                                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                                                        @enderror
+                                                    </div> <div class="form-group col-12">
+                                                        <label for="new_password" class="mb-1">New Password</label>
+                                                        <input id="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" name="new_password" required>
+                                                        @error('new_password')
+                                                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group col-12">
+                                                        <label for="repeat_password" class="mb-1">Repeat Password</label>
+                                                        <input id="repeat_password" type="password" class="form-control @error('repeat_password') is-invalid @enderror" name="repeat_password" required>
+                                                        @error('repeat_password')
+                                                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                @endcan
-                                                <div class="col-md-12">
-                                                    <button class="btn btn-info btn-sm mb-2" type="submit">
-                                                        Update
-                                                    </button>
+                                                <div class="col-md-12 mt-4 d-flex justify-content-between">
+                                                    <button class="btn btn-success btn-sm mb-2" type="submit">change password</button>
+                                                    <button onclick="cancelSavePassword()" class="btn btn-dark btn-sm mb-2">cancel</button>
                                                 </div>
-                                            </div>
+                                            @else
+                                                <h5 class="mt-4">Update Profile</h5>
+                                            <hr>
+                                                <div class="row">
+                                                    <div class="form-group col-12 text-center">
+                                                        <div class="user-img mb-2">
+                                                            <img src="{{ imageExist(env('UPLOAD_IMAGE_PROFILE'),auth()->user()->image) }}" alt="{{ auth()->user()->name }}" class="rounded-circle" width="50">
+                                                        </div>
+                                                        <h5>{{ auth()->user()->user_id }}</h5>
+                                                    </div>
+
+                                                    <div class="form-group col-12 col-md-6">
+                                                        <label for="profile_picture" class="mb-1">Profile Picture</label>
+                                                        <input type="file" class="form-control" name="image" id="image">
+                                                        @error('image')
+                                                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                                                        @enderror
+                                                    </div>
+
+                                                    @if($user->Roles[0]->name == 'seller' or $user->Roles[0]->name == 'buyer')
+                                                        @include('admin.users.user_seller_info')
+                                                    @elseif($user->Roles[0]->name == 'Representatives' or $user->Roles[0]->name == 'Brokers')
+                                                        @include('admin.users.brokers_representatives_info')
+                                                    @else
+                                                        @include('admin.users.admin_user_info')
+                                                    @endif
+
+
+
+                                                </div>
+                                                <div class="col-md-12 mt-4 text-center">
+                                                    <button class="btn btn-info btn-sm mb-2" type="submit">Update</button>
+                                                </div>
+                                            @endif
+
+
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -315,8 +290,10 @@
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" id="can_bid" name="can_bid" {{ $user->can_bid==1 ? 'checked' : '' }}>
-                                                            <label class="form-check-label" for="can_bid">this User Can Bid</label>
+                                                            <input class="form-check-input" type="checkbox" id="can_bid"
+                                                                   name="can_bid" {{ $user->can_bid==1 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="can_bid">this User Can
+                                                                Bid</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">

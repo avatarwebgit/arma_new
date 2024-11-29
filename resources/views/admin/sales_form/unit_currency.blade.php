@@ -3,6 +3,7 @@
         Unit and Currency
     </strong>
 </div>
+
 <div class="col-12 col-md-6 mb-3">
     @php
         $name='Unit';
@@ -28,7 +29,7 @@
            class="mb-2">{!! $name.' '.$required_span !!}</label>
     <select onchange="hasOther(this)"
             {{ $required }} id="{{ filed_name($name) }}" type="text"
-            name="{{ filed_name($name) }}" class="form-control ">
+            name="{{ filed_name($name) }}" class="form-control " data-live-search="true">
         @foreach($unites as $item)
             <option
                 {{ $value==$item->title ? ' selected="selected"' : '' }} value="{{ $item->title }}">{{ $item->title }}</option>
@@ -65,13 +66,12 @@
            class="mb-2">{!! $name.' '.$required_span !!}</label>
     <select onchange="hasOther(this)"
             {{ $required }} id="{{ filed_name($name) }}" type="text"
-            name="{{ filed_name($name) }}" class="form-control ">
-        @foreach($currencies as $item)
-            <option
-                {{ $value==$item->title ? ' selected="selected"' : '' }}
-                value="{{ $item->title }}">{{ $item->title }}</option>
+            name="{{ filed_name($name) }}" class="form-control" data-live-search="true">
+        @foreach($currencies as $key=>$item)
+            <option value="{{ $item->title }}"  {{ $value==$item->title ? 'selected' : '' }} data-content="<img src='{{ imageExist(env('UPLOAD_IMAGE_CURRENCY'),$item->image) }}' width='20'  /> {{ $item->title }}"></option>
         @endforeach
     </select>
+
     @error(filed_name($name))
     <p class="input-error-validate">
         {{ $message }}

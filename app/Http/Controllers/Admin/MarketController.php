@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\FormValuesDataTable;
+use App\Events\MarketStatusUpdated;
 use App\Events\MarketTimeUpdated;
 use App\Facades\UtilityFacades;
 use App\Http\Controllers\Controller;
@@ -45,14 +46,20 @@ class MarketController extends Controller
 {
     public function index()
     {
-        $group_markets = Market::all()->groupby('date');
+        $group_markets = Market::orderby('date', 'desc')->get()->groupby('date');
         return view('admin.markets.index', compact('group_markets'));
     }
 
-    public function create()
+    public function folder($date)
     {
-        $sales_offer_form_copy = SalesOfferForm::where('status', 5)->get();
-        return view('admin.markets.create', compact('sales_offer_form_copy'));
+        $markets = Market::where('date', $date)->get();
+        return view('admin.markets.folder', compact('markets', 'date'));
+    }
+
+    public function create($market_data)
+    {
+        $sales_offer_form = SalesOfferForm::where('status', 5)->where('used_in_market', 0)->get();
+        return view('admin.markets.create', compact('sales_offer_form', 'market_data'));
     }
 
     public function store(Request $request)
@@ -63,37 +70,93 @@ class MarketController extends Controller
             'commodity_id' => 'required',
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
-            'offer_price' => 'required',
+            'market_value' => 'required',
             'description' => 'nullable',
+            'ready_to_open' => 'required',
+            'opening' => 'required',
+            'q_1' => 'required',
+            'q_2' => 'required',
+            'q_3' => 'required',
+//            'alpha' => $request->show_alpha == 1 ? 'required' : '',
+            'alpha' => 'required',
+//            'term_conditions' => 'nullable',
+            'show_alpha' => 'required',
         ]);
-        Market::create($request->all());
+        $market_value = str_replace(',', '', $request->market_value);
+        $request['market_value'] = $market_value;
+        $created_market_by = auth()->id();
+        $request['created_market_by'] = $created_market_by;
+        $sales_form = SalesOfferForm::where('id', $request->commodity_id)->first();
+        $sales_form->update(['used_in_market' => 1]);
+        $market = Market::create($request->all());
+        $this->statusTimeMarket($market, 1);
+        $now = Carbon::now();
+        $this->StartCheck();
+        $this->broadcastMarket($market);
         session()->flash('success', 'New Market Created Successfully');
-        return redirect()->route('admin.markets.index');
+        return redirect()->route('admin.markets.folder', ['date' => $market->date]);
     }
 
     public function edit(Market $market)
     {
-        $sales_offer_form_copy = SalesOfferForm::where('status', 5)->get();
-        return view('admin.markets.edit', compact('market', 'sales_offer_form_copy'));
+        $sales_offer_form = SalesOfferForm::where('status', 5)->get();
+        return view('admin.markets.edit', compact('market', 'sales_offer_form'));
+    }
+
+    public function remove(Request $request)
+    {
+        $market = Market::where('id', $request->id)->first();
+        $result = $this->remove_market($market);
+        if ($result[0] == 1) {
+            return redirect()->back();
+        }
+
+        dd('Contact Programmer');
+
     }
 
     public function update(Market $market, Request $request)
     {
         $request->validate([
-            'date' => 'required|date',
+//            'date' => 'required|date',
             'time' => 'required',
-            'commodity_id' => 'required',
+//            'commodity_id' => 'required',
             'step_price_competition' => 'required',
             'bid_deposit' => 'required',
-            'offer_price' => 'required',
+            'market_value' => 'required',
             'description' => 'nullable',
+            'ready_to_open' => 'required',
+            'opening' => 'required',
+            'q_1' => 'required',
+            'q_2' => 'required',
+            'q_3' => 'required',
+//            'alpha' => $request->show_alpha == 1 ? 'required' : '',
+            'alpha' => 'required',
+            'term_conditions' => 'nullable',
+            'show_alpha' => 'required',
         ]);
-        $request['status'] = 7;
-        if (Carbon::now() < $request->start) {
-            $request['status'] = 1;
-        }
+        $market_value = str_replace(',', '', $request->market_value);
+        $request['market_value'] = $market_value;
         $market->update($request->all());
-        return redirect()->route('admin.markets.index')->with('success', 'Market updated successfully');
+        $this->statusTimeMarket($market, 1);
+        $now = Carbon::now();
+        $this->StartCheck();
+
+        $this->broadcastMarket($market);
+
+        return redirect()->route('admin.markets.folder', ['date' => $market->date])->with('success', 'Market updated successfully');
+    }
+
+    public function copy(Request $request)
+    {
+        try {
+            $market = Market::where('id', $request->market_id)->first()->toArray();
+            Market::create($market);
+            return response()->json([1, 'ok']);
+        } catch (\Exception $e) {
+            return response()->json([0, $e->getMessage()]);
+        }
+
     }
 
     public function sales_form($page_type = 'Create', $item = 'null')
@@ -114,13 +177,14 @@ class MarketController extends Controller
             $route = route('admin.market.sale_form.update_or_store', ['item' => $item]);
             $form = SalesOfferForm::where('id', $item)->first();
         }
+
         $company_types = CompanyType::all();
         $unites = Units::all();
         $currencies = Currency::all();
         $tolerance_weight_by = ToleranceWeightBy::all();
         $Incoterms = Incoterms::all();
         $incoterms_version = IncotermsVersion::all();
-        $countries = Country::all();
+        $countries = Country::OrderBy('countryName', 'asc')->get();
         $priceTypes = PriceType::all();
         $paymentTerms = PaymentTerm::all();
         $packing = Packing::all();
@@ -166,9 +230,31 @@ class MarketController extends Controller
         $q_1 = MarketSetting::where('key', 'q_1')->pluck('value')->first();
         $q_2 = MarketSetting::where('key', 'q_2')->pluck('value')->first();
         $q_3 = MarketSetting::where('key', 'q_3')->pluck('value')->first();
-        $bid_deposit_text_area=MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
-        $term_conditions=MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
-        return view('admin.markets.setting', compact('q_1', 'q_2', 'q_3', 'ready_to_open', 'opening','bid_deposit_text_area','term_conditions'));
+        $bid_deposit_text_area = MarketSetting::where('key', 'bid_deposit_text_area')->pluck('value')->first();
+        $term_conditions = MarketSetting::where('key', 'term_conditions')->pluck('value')->first();
+        $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
+        $bid_use = MarketSetting::where('key', 'bid_use')->pluck('value')->first();
+        $Bid_Instructions_link = MarketSetting::where('key', 'Bid_Instructions_link')->pluck('value')->first();
+        $Bid_Instructions_file = MarketSetting::where('key', 'Bid_Instructions_file')->pluck('value')->first();
+        $gtc_use = MarketSetting::where('key', 'gtc_use')->pluck('value')->first();
+        $gtc_Link = MarketSetting::where('key', 'gtc_Link')->pluck('value')->first();
+        $gtc_file = MarketSetting::where('key', 'gtc_file')->pluck('value')->first();
+        return view('admin.markets.setting', compact(
+            'q_1',
+            'q_2',
+            'q_3',
+            'ready_to_open',
+            'opening',
+            'bid_deposit_text_area',
+            'term_conditions',
+            'change_time',
+            'bid_use',
+            'Bid_Instructions_link',
+            'Bid_Instructions_file',
+            'gtc_use',
+            'gtc_Link',
+            'gtc_file',
+        ));
     }
 
     public function settings_update(Request $request)
@@ -178,8 +264,35 @@ class MarketController extends Controller
         $q_1 = $request->q_1;
         $q_2 = $request->q_2;
         $q_3 = $request->q_3;
+        $change_time = $request->change_time;
         $bid_deposit_text_area = $request->bid_deposit_text_area;
         $term_conditions = $request->term_conditions;
+        $bid_use = $request->bid_use;
+        $Bid_Instructions_link = $request->Bid_Instructions_link;
+        $gtc_use = $request->gtc_use;
+        $gtc_Link = $request->gtc_Link;
+
+
+        if ($request->has('Bid_Instructions_file')) {
+            $file_name = $request->Bid_Instructions_file;
+            $env = env('UPLOAD_SETTING');
+            $fileNameImage = generateFileName($file_name->getClientOriginalName());
+            $file_name->move(public_path($env), $fileNameImage);
+            $Bid_Instructions_file = $fileNameImage;
+        } else {
+            $item = MarketSetting::where('key', 'Bid_Instructions_file')->first();
+            $Bid_Instructions_file = $item->value;
+        }
+        if ($request->has('gtc_file')) {
+            $file_name = $request->gtc_file;
+            $env = env('UPLOAD_SETTING');
+            $fileNameImage = generateFileName($file_name->getClientOriginalName());
+            $file_name->move(public_path($env), $fileNameImage);
+            $gtc_file = $fileNameImage;
+        } else {
+            $item = MarketSetting::where('key', 'gtc_file')->first();
+            $gtc_file = $item->value;
+        }
         $array = [
             'ready_to_open' => $ready_to_open,
             'opening' => $opening,
@@ -188,12 +301,34 @@ class MarketController extends Controller
             'q_3' => $q_3,
             'bid_deposit_text_area' => $bid_deposit_text_area,
             'term_conditions' => $term_conditions,
+            'change_time' => $change_time,
+            'bid_use' => $bid_use,
+            'Bid_Instructions_link' => $Bid_Instructions_link,
+            'Bid_Instructions_file' => $Bid_Instructions_file,
+            'gtc_use' => $gtc_use,
+            'gtc_Link' => $gtc_Link,
+            'gtc_file' => $gtc_file,
         ];
         foreach ($array as $key => $val) {
-            MarketSetting::where('key', $key)->update(['value' => $val]);
+            $item = MarketSetting::where('key', $key)->first();
+            if ($item) {
+                $item->update(['value' => $val]);
+            } else {
+                MarketSetting::create([
+                    'key' => $key,
+                    'value' => $val
+                ]);
+            }
         }
         session()->flash('success', 'Successfully updated');
-        broadcast(new MarketTimeUpdated());
+        $yesterday = Carbon::yesterday();
+        $future = $yesterday->copy()->addDay(4);
+        $markets = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get();
+        foreach ($markets as $market) {
+            $this->statusTimeMarket($market, 1);
+        }
+        $now = Carbon::now();
+        broadcast(new MarketTimeUpdated($now));
         return redirect()->back();
     }
 
@@ -277,49 +412,6 @@ class MarketController extends Controller
 
     }
 
-    public function check_market_status_for_continue(Request $request)
-    {
-        try {
-            $market_id = $request->market_id;
-            $status = $request->status;
-            $market = Market::find($market_id);
-            $price = $market->offer_price;
-            $max_quantity = $market->SalesForm->max_quantity;
-            if ($status===4){
-                $base_price = $price / 2;
-                $bids = $market->Bids()->where('price', '>=', $base_price)->get();
-                if (count($bids)>0){
-                    return response()->json([1,'continue']);
-                }
-                $market->update([
-                    'status'=>7
-                ]);
-                return response()->json([1,'close']);
-            }
-            if ($status==6){
-                $bids_exists = $market->Bids()->where('price', '>=', $price)->exists();
-                if (!$bids_exists){
-                    $market->update([
-                        'status'=>7
-                    ]);
-                    return response()->json([1,'close']);
-                }
-                $bids_quantity = $market->Bids()->where('price', '>=', $price)->sum('quantity');
-                if ($max_quantity>=$bids_quantity){
-                    $market->update([
-                        'status'=>8
-                    ]);
-                    return response()->json([1,'finish']);
-                }else{
-                    return response()->json([1,'continue']);
-                }
-            }
-
-        }catch (\Exception $e) {
-            dd($e->getMessage());
-        }
-    }
-
     public function Upload_files($env, $file)
     {
         $fileNamePrimaryImage = generateFileName($file->getClientOriginalName());
@@ -337,7 +429,7 @@ class MarketController extends Controller
             'currency' => 'required',
             'currency_other' => ['required_if:currency,other'],
             'commodity' => 'required',
-            'type_grade' => 'required',
+            'type_grade' => 'nullable',
             'hs_code' => 'nullable',
             'cas_no' => 'nullable',
             'product_more_details' => 'nullable',
@@ -372,15 +464,18 @@ class MarketController extends Controller
             'possible_buyers' => 'nullable',
             'cost_per_unit' => ['required_if:possible_buyers,Yes'],
             'origin_country' => 'required',
-            'origin_port_city' => 'required',
+            'origin_port_city' => 'nullable',
             'origin_more_details' => 'nullable',
             //loading
             'has_loading' => 'nullable',
             'loading_type' => ['required_if:has_loading,1'],
             'loading_country' => ['required_unless:loading_type,null'],
             'loading_port_city' => ['required_unless:loading_type,null'],
-            'loading_from' => ['required_unless:loading_type,null'],
-            'loading_to' => ['required_unless:loading_type,null'],
+//            'loading_from' => ['required_unless:loading_type,null'],
+//            'loading_to' => ['required_unless:loading_type,null'],
+            'loading_from' => ['required_if,period,null'],
+            'loading_to' => ['required_if,period,null'],
+            'period' => ['required_if,loading_to,null'],
             'bulk_loading_rate' => 'nullable|number|integer',
             'loading_bulk_shipping_term' => 'nullable',
             'loading_container_type' => 'nullable',
@@ -393,8 +488,8 @@ class MarketController extends Controller
             'discharging_type' => ['required_if:has_discharging,1'],
             'discharging_country' => ['required_unless:discharging_type,null'],
             'discharging_port_city' => ['required_unless:discharging_type,null'],
-            'discharging_from' => ['required_unless:discharging_type,null'],
-            'discharging_to' => ['required_unless:discharging_type,null'],
+//            'discharging_from' => ['required_unless:discharging_type,null'],
+//            'discharging_to' => ['required_unless:discharging_type,null'],
             'bulk_discharging_rate' => 'nullable|number|integer',
             'discharging_bulk_shipping_term' => 'nullable',
             'discharging_container_type' => 'nullable',
@@ -423,6 +518,7 @@ class MarketController extends Controller
             'documents_count' => 'required',
             'documents_options' => ['required_if:documents_count,No'],
             'document_more_detail' => 'nullable',
+            'term_conditions' => 'required|min:400',
             //contact person
             'contact_person_name' => 'required',
             'contact_person_job_title' => 'required',
@@ -505,5 +601,52 @@ class MarketController extends Controller
 
         }
         return $rules;
+    }
+
+    public function FolderMarketRemove(Request $request, $date)
+    {
+        $markets = Market::where('date', $date)->get();
+        foreach ($markets as $market) {
+            $result = $this->remove_market($market);
+            if ($result[0] != 1) {
+                dd('Contact Programmer');
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function remove_market($market)
+    {
+        try {
+            $bids = $market->Bids;
+            foreach ($bids as $bid) {
+                $bid->delete();
+            }
+            $market->delete();
+            return [1, 'success'];
+        } catch (\Exception $e) {
+            return [0, $e->getMessage()];
+        }
+
+    }
+
+    private function broadcastMarket($market)
+    {
+//        $result = $this->statusTimeMarket($market);
+//        $market['difference'] = $result[0];
+//        $market['status'] = $result[1];
+//        $market['benchmark1'] = $result[2];
+//        $market['benchmark2'] = $result[3];
+//        $market['benchmark3'] = $result[4];
+//        $market['benchmark4'] = $result[5];
+//        $market['benchmark5'] = $result[6];
+//        $market['benchmark6'] = $result[7];
+//        $market['date_time'] = $result[8];
+//        $market_id = $market->id;
+//        $difference = $result[0];
+//        $timer = $this->MarketTimer($difference);
+//        $status = $market['status'];
+//        broadcast(new MarketStatusUpdated($market_id, $difference, $timer,$status));
+        $this->today_market_status();
     }
 }

@@ -1,17 +1,25 @@
-<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
 <!-- MDB -->
+<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
+
 <script>
+
+
     $(document).ready(function () {
         @if(session()->exists('need_submit'))
         show_submit_modal();
         @endif
-        @if(session()->exists('form_id_exists'))
-        show_modal_form_exists();
+
+        @if(isset($previous_form_id) && !$previous_form_id==false)
+        let previous_form_id = '{{ $previous_form_id }}';
+        show_modal_form_exists(previous_form_id);
         @endif
+
         check_unit();
         check_currency();
+        check_contract_type();
         check_quality_inspection_report_file();
         check_partial_shipment();
+        check_transshipment();
         check_increase_quantity();
         check_increase_quantity();
         check_incoterms();
@@ -41,6 +49,29 @@
         @endif
     });
 
+    function CheckMinOrder(tag) {
+        let min_quantity = $(tag).val();
+        min_quantity = min_quantity.replaceAll(',', '');
+        let max_quantity = $('#max_quantity').val();
+        max_quantity = max_quantity.replaceAll(',', '');
+
+        if (max_quantity == 0 || max_quantity == '' || max_quantity == null) {
+            $(tag).val('');
+            alert('Please Fill Max Quantity');
+        } else {
+            console.log(min_quantity);
+            console.log(max_quantity);
+            console.log('else');
+            console.log(min_quantity > max_quantity);
+            if (parseInt(min_quantity) > parseInt(max_quantity)) {
+                $(tag).val('');
+                alert('Min Quantity must be more than Max Quantity');
+            }
+        }
+
+
+    }
+
     function maybe_first_in_object(ob) {
         for (var props in ob) {
             return prop;
@@ -50,14 +81,18 @@
     function show_submit_modal() {
         let Sales_offer_form_html = $('#sales_offer_form_inputs').html();
         $('#modal_body').html(Sales_offer_form_html);
-        $('#modal_body').find('input').prop('disabled', true);
-        $('#modal_body').find('textarea').prop('disabled', true);
-        $('#modal_body').find('select').prop('disabled', true);
-        $('#modal_body').find('button').prop('disabled', true);
         let id = '{{ $item }}';
         $('#modal_form_id').val(id);
         let NeedToSubmitModal = $('#NeedToSubmitModal');
         NeedToSubmitModal.modal('show');
+        setTimeout(function () {
+            $('#modal_body').find('input').prop('disabled', true);
+            $('#modal_body').find('textarea').prop('disabled', true);
+            $('#modal_body').find('select').prop('disabled', true);
+            $('#modal_body').find('button').prop('disabled', true);
+            $('#modal_body').find('.bootstrap-select').addClass('disabled');
+            $('#NeedToSubmitModal #currency_other').addClass('disabled');
+        });
     }
 
     function show_page() {
@@ -90,10 +125,9 @@
         })
     }
 
-    function show_modal_form_exists() {
+    function show_modal_form_exists(previous_form) {
         let show_modal_form_exists = $('#show_modal_form_exists');
         show_modal_form_exists.modal('show');
-        let previous_form = {{ session()->exists('form_id_exists')?session()->get('form_id_exists'):0 }};
         $('#previous_form').val(previous_form);
     }
 
@@ -200,6 +234,42 @@
         }
     }
 
+    function check_contract_type() {
+        let old_value = "{{ old('contract_type') }}";
+        let value;
+        let other_value;
+        let sale_form_exist = {{ $sale_form_exist }};
+        if (old_value !== '') {
+            value = old_value;
+        } else {
+            if (sale_form_exist === 1) {
+                value = "{{ isset($form['contract_type'])?$form['contract_type']:'' }}";
+
+            }
+        }
+        let has_currency_other = 0;
+        if (value == 'other' || value == 'Contract') {
+            has_currency_other = 1;
+        }
+        if (has_currency_other) {
+            let has_old = "{{ old('contract_type_other') }}";
+            if (has_old !== '') {
+                other_value = "{{ old('contract_type_other') }}";
+            } else {
+                other_value = "{{ isset($form['contract_type_other'])?$form['contract_type_other']:'' }}"
+            }
+            hasOtherContractTypes($('#contract_type'));
+            $('#contract_type_other').val(other_value);
+        }
+        //check errors
+        let contract_type_other = "{{ $errors->has('contract_type_other') }}";
+        if (contract_type_other) {
+            let contract_type_other_error = "{{ $errors->first('contract_type_other') }}";
+            let error_message = `<p class="input-error-validate">${contract_type_other_error}</p>`;
+            $(error_message).insertAfter($('#contract_type_other'));
+        }
+    }
+
     function check_quality_inspection_report_file() {
         let old_value = "{{ old('quality_inspection_report') }}";
         let value;
@@ -223,6 +293,8 @@
             addAttachmentFile($('#quality_inspection_report'), 0, other_value, src);
         }
         let quality_inspection_report_file_error = "{{ $errors->has('quality_inspection_report_file') }}";
+        console.log(quality_inspection_report_file_error);
+        console.log('/////////////////////////');
         if (quality_inspection_report_file_error) {
             let quality_inspection_report_file = "{{ $errors->first('quality_inspection_report_file') }}";
             let error_message = `<p class="input-error-validate">${quality_inspection_report_file}</p>`;
@@ -256,6 +328,34 @@
             $(error_message).insertAfter($('#partial_shipment_number'));
         }
     }
+
+    function check_transshipment() {
+        let old_value = "{{ old('transshipment') }}";
+        let value;
+        let other_value;
+        let sale_form_exist = {{ $sale_form_exist }};
+        let src = null;
+        if (old_value !== '') {
+            value = old_value;
+        } else {
+            if (sale_form_exist === 1) {
+                value = "{{ isset($form['transshipment'])?$form['transshipment']:'' }}";
+                other_value = "{{ isset($form['transshipment_other'])?$form['transshipment_other']:'' }}";
+            }
+        }
+        let transshipment = value === 'Yes' ? 1 : 0;
+        if (transshipment === 1) {
+            addTransshipment($('#transshipment'));
+            $('#transshipment_other').val(other_value);
+        }
+        let transshipment_other_error = "{{ $errors->has('transshipment_other') }}";
+        if (transshipment_other_error) {
+            let transshipment_other = "{{ $errors->first('transshipment_other') }}";
+            let error_message = `<p class="input-error-validate">${transshipment_other}</p>`;
+            $(error_message).insertAfter($('#transshipment_other'));
+        }
+    }
+
     function check_increase_quantity() {
         let old_value = "{{ old('increase_quantity') }}";
         let value;
@@ -382,11 +482,11 @@
         } else {
             if (sale_form_exist === 1) {
                 value = "{{ isset($form['price_type'])?$form['price_type']:'' }}";
-
             }
         }
+        PriceType($('#price_type'));
+
         if (value == 'Fix') {
-            PriceType($('#price_type'));
             old_value = "{{ old('price') }}";
             if (old_value !== '') {
                 other_value = old_value;
@@ -397,18 +497,59 @@
             }
         }
         if (value == 'Formulla') {
-            PriceType($('#price_type'));
             old_value = "{{ old('formulla') }}";
+            let Operator = "{{ old('Operator') }}";
+            let alpha = "{{ old('alpha') }}";
+            let formulla_more_details = "{{ old('formulla_more_details') }}";
+            let base_price_notes = "{{ old('base_price_notes') }}";
             if (old_value !== '') {
                 other_value = old_value;
             } else {
                 if (sale_form_exist === 1) {
                     other_value = "{{ isset($form['formulla'])?$form['formulla']:'' }}";
+                    Operator = "{{ isset($form['Operator'])?$form['Operator']:'' }}";
+                    alpha = "{{ isset($form['alpha'])?$form['alpha']:'' }}";
+                    formulla_more_details = "{{ isset($form['formulla_more_details'])?$form['formulla_more_details']:'' }}";
+                    base_price_notes = "{{ isset($form['base_price_notes'])?$form['base_price_notes']:'' }}";
                 }
             }
-        }
-        $('#price_type_select').val(other_value);
 
+            $('#alpha').val(alpha);
+            $('#formulla_more_details').val(formulla_more_details);
+            $('#base_price_notes').val(base_price_notes);
+            $('#Operator').find('option[value="' + Operator + '"]').attr('selected', true);
+
+            //errors
+            let Operator_error = "{{ $errors->has('Operator') }}";
+            if (Operator_error) {
+                let Operator_error = "{{ $errors->first('Operator') }}";
+                let error_message = `<p class="input-error-validate">${Operator_error}</p>`;
+                $(error_message).insertAfter($('#Operator'));
+            }
+            //errors
+            let alpha_error = "{{ $errors->has('alpha') }}";
+            if (alpha_error) {
+                let alpha_error = "{{ $errors->first('alpha') }}";
+                let error_message = `<p class="input-error-validate">${alpha_error}</p>`;
+                $(error_message).insertAfter($('#alpha'));
+            }
+            //errors
+            let formulla_more_details_error = "{{ $errors->has('formulla_more_details') }}";
+            if (formulla_more_details_error) {
+                let formulla_more_details_error = "{{ $errors->first('formulla_more_details') }}";
+                let error_message = `<p class="input-error-validate">${formulla_more_details_error}</p>`;
+                $(error_message).insertAfter($('#formulla_more_details'));
+            }
+            //errors
+            let base_price_notes_error = "{{ $errors->has('base_price_notes') }}";
+            if (base_price_notes_error) {
+                let base_price_notes_error = "{{ $errors->first('base_price_notes') }}";
+                let error_message = `<p class="input-error-validate">${base_price_notes_error}</p>`;
+                $(error_message).insertAfter($('#base_price_notes'));
+            }
+        }
+
+        $('#price_type_select').val(other_value);
     }
 
     function check_safety_file() {
@@ -486,6 +627,7 @@
                 value = "{{ isset($form['documents_options'])?$form['documents_options']:'' }}";
             }
         }
+
         let documents_options = value;
         documents_options = documents_options.split(",");
         let documents_options_length = documents_options.length;
@@ -530,32 +672,53 @@
     }
 
     function check_payment_term() {
-        let old_value = "{{ old('payment_term') }}";
+
+        let old_value = "{{ old('payment_options') }}";
         let value;
         let other_value;
         let sale_form_exist = {{ $sale_form_exist }};
+        let src = null;
         if (old_value !== '') {
             value = old_value;
-            other_value = "{{ old('payment_term_description') }}";
         } else {
             if (sale_form_exist === 1) {
-                value = "{{ isset($form['payment_term'])?$form['payment_term']:'' }}";
-                other_value = "{{ isset($form['payment_term_description'])?$form['payment_term_description']:'' }}";
+                value = "{{ isset($form['payment_options'])?$form['payment_options']:'' }}";
             }
         }
-        let has_payment_term = value;
-        if (has_payment_term.length !== 0) {
-            PaymentTerm($('#payment_term'));
-            $('#payment_term_description').val(other_value);
-        }
+        let payment_options = value;
+        payment_options = payment_options.split(",");
+        let payment_options_length = payment_options.length;
+        $('#payment_options').val(payment_options);
+        $('#payment_count').val(payment_options_length);
+        $.each(payment_options, function (key, value) {
+            $("#payment-term-box input[value='" + value + "']").prop('checked', true);
+        });
+        paymentTermOptions();
+        {{--let old_value = "{{ old('payment_term') }}";--}}
+        {{--let value;--}}
+        {{--let other_value;--}}
+        {{--let sale_form_exist = {{ $sale_form_exist }};--}}
+        {{--if (old_value !== '') {--}}
+        {{--    value = old_value;--}}
+        {{--    other_value = "{{ old('payment_term_description') }}";--}}
+        {{--} else {--}}
+        {{--    if (sale_form_exist === 1) {--}}
+        {{--        value = "{{ isset($form['payment_term'])?$form['payment_term']:'' }}";--}}
+        {{--        other_value = "{{ isset($form['payment_term_description'])?$form['payment_term_description']:'' }}";--}}
+        {{--    }--}}
+        {{--}--}}
+        {{--let has_payment_term = value;--}}
+        {{--if (has_payment_term.length !== 0) {--}}
+        {{--    PaymentTerm($('#payment_term'));--}}
+        {{--    $('#payment_term_description').val(other_value);--}}
+        {{--}--}}
     }
 
     function hasOther(tag, is_yes = 0) {
-
         let name = $(tag).attr('name');
         let value = $(tag).val();
         if (is_yes === 0) {
-            if (value === 'other') {
+            if (value === 'other' || value === 'Other') {
                 let element = createOtherElement(name);
                 $(element).insertAfter($(tag).parent().parent());
             } else {
@@ -574,6 +737,24 @@
         }
     }
 
+
+    function hasOtherContractTypes(tag) {
+        let name = $(tag).attr('name');
+        let value = $(tag).val();
+        removeOtherElement(name);
+        if (value === 'other' || value === 'Other' || value === 'Contract') {
+            let label = '';
+            if (value === 'other' || value === 'Other') {
+                label = 'Contract Type';
+            }
+            if (value === 'Contract') {
+                label = 'Duration Months';
+            }
+            let element = createOtherContractElement(name, label);
+            $(element).insertAfter($(tag).parent().parent());
+        }
+    }
+
     function DestinationOption(tag) {
 
 
@@ -584,7 +765,7 @@
         let field_name = 'exclude_market';
         $('#' + field_name).parent().remove();
 
-        if (value !== 'open') {
+        if (value !== 'Open') {
             let element = '<div class="col-12 col-md-4 mb-3"><label for="' + field_name + `" class="mb-2">${label} Market<span class="text-danger ml-2">*</span></label>` +
                 '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
                 '</div>';
@@ -595,6 +776,7 @@
     function PriceType(tag) {
         let name = $(tag).attr('name');
         let value = $(tag).val();
+
         let id = 'price_type_select';
         let field_label = '';
         let field_name = '';
@@ -602,16 +784,36 @@
         if (value === 'Formulla') {
             field_label = 'Formulla (Magazine & Index & Discount & Pricing Period)';
             field_name = 'formulla';
-            field_type = 'number';
+            field_type = 'text';
         } else {
             field_label = 'Price';
             field_name = 'price';
             field_type = 'text';
         }
-        $('#' + id).parent().remove();
-        let element = '<div class="col-12 col-md-6 mb-3"><label for="' + id + `" class="mb-2">${field_label}<span class="text-danger">*</span></label>` +
-            '<input required id="' + id + `" type="${field_type}" name="` + field_name + '" class="form-control" ' +
+        $('.price_type_remove').remove();
+        let formulla = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="' + id + `" class="mb-2">${field_label}<span class="text-danger">*</span></label>` +
+            '<input required id="' + id + `" type="${field_type}" name="` + field_name + '" class="form-control" >' +
             '</div>';
+        let formulla_text = '<div class="col-12 mb-3 price_type_remove">' +
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed lectus. Non nisi est sit amet facilisis magna. Dignissim diam quis enim lobortis scelerisque fermentum. Odio ut enim blandit volutpat maecenas volutpat. Ornare lectus sit amet est placerat in egestas erat. Nisi vitae suscipit tellus mauris a ' +
+            'diam maecenas sed. Placerat duis ultricies lacus sed turpis tincidunt id aliquet. </p>' +
+            '</div>';
+        let formulla_operator = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="Operator" class="mb-2">Telorance<span class="text-danger">*</span></label>' +
+            '<select required id="Operator" type="text" name="Operator" class="form-control" ><option value="+">+</option><option value="-">-</option><option value="-/+">-/+</option></select>' +
+            '</div>';
+        let alpha = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="alpha" class="mb-2">alpha<span class="text-danger">*</span></label>' +
+            '<input required id="alpha" name="alpha" class="form-control" >' +
+            '</div>';
+        let more_details = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="formulla_more_details" class="mb-2">More Details</label>' +
+            '<input required id="formulla_more_details" name="formulla_more_details" class="form-control" >' +
+            '</div>';
+        let base_price_notes = '<div class="col-12 col-md-6 mb-3 price_type_remove"><label for="base_price_notes" class="mb-2">Base Price</label>' +
+            '<input required id="base_price_notes" name="base_price_notes" class="form-control" >' +
+            '</div>';
+        let element = formulla;
+        if (value === 'Formulla') {
+            element = formulla_text + formulla + formulla_operator + alpha + more_details;
+        }
         $(element).insertAfter($(tag).parent().parent());
     }
 
@@ -626,15 +828,30 @@
         let element = '<div class="col-12 col-md-6 mb-3"><label for="' + id + `" class="mb-2">${field_label}<span class="text-danger">*</span></label>` +
             '<input required id="' + id + `" type="${field_type}" name="` + field_name + '" class="form-control" ' +
             '</div>';
+
         $(element).insertAfter($(tag).parent().parent());
     }
 
     function addShipmentNumber(tag) {
         let value = $(tag).val();
+        let shipment_number_value = "{{ old('partial_shipment_number') }}";
         let field_name = 'partial_shipment_number';
         if (value === 'Yes') {
             let element = '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">Shipment Number<span class="text-danger">*</span></label>` +
-                '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
+                '<input required id="' + field_name + '" type="text" name="' + field_name + '"  value="' + shipment_number_value + '" class="form-control" >' +
+                '</div>';
+            $(element).insertAfter($(tag).parent().parent().parent());
+        } else {
+            $(('#' + field_name)).parent().remove();
+        }
+    }
+
+    function addTransshipment(tag) {
+        let value = $(tag).val();
+        let field_name = 'transshipment_other';
+        if (value === 'Yes') {
+            let element = '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">More Details<span class="text-danger">*</span></label>` +
+                '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control">' +
                 '</div>';
             $(element).insertAfter($(tag).parent().parent().parent());
         } else {
@@ -673,7 +890,14 @@
 
     function createOtherElement(name) {
         let field_name = name + '_other';
-        return '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">Write Your ${name} <span class="text-danger">*</span></label>` +
+        return '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">New ${name} <span class="text-danger">*</span></label>` +
+            '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
+            '</div>';
+    }
+
+    function createOtherContractElement(name, label) {
+        let field_name = name + '_other';
+        return '<div class="col-12 col-md-6 mb-3"><label for="' + field_name + `" class="mb-2">${label} <span class="text-danger">*</span></label>` +
             '<input required id="' + field_name + '" type="text" name="' + field_name + '" class="form-control" >' +
             '</div>';
     }
@@ -851,7 +1075,7 @@
             }
         }
         let is_open = value === 'open' ? 1 : 0;
-        if (!is_open && value!=='') {
+        if (!is_open && value !== '') {
             let has_old = "{{ old('exclude_market') }}";
 
             if (has_old !== '') {
@@ -918,6 +1142,32 @@
 
     //end
 
+    function paymentTermOptions() {
+        let check_inputs = $("#payment-term-box input[type='checkbox']:checked");
+        $('.term_condition_option').addClass('d-none');
+        let payments = '';
+        let pass = 'Yes';
+
+        $.each(check_inputs, function (index, value) {
+            let param = $(value).val();
+            $('#' + param + '_term_and_conditions_parent').removeClass('d-none');
+            if (payments == '') {
+                payments = param;
+            } else {
+                payments = payments + ',' + param;
+            }
+        });
+        $('#payment_options').val(payments);
+        if (check_inputs.length < 2) {
+            pass = 'No';
+            $('#documents_options').val('');
+        }
+
+        $('#payment_count').val(pass);
+
+
+    }
+
     function documentOptions() {
         let check_inputs = $("#documents-box input[type='checkbox']:checked");
         let documents = '';
@@ -939,7 +1189,17 @@
         $('#documents_count').val(pass);
     }
 
+    $('#specification').click(function () {
+        $(this).removeAttr('placeholder');
+    });
+
+    $('#specification').blur(function () {
+        $(this).attr('placeholder', 'Write the Product Specification Or Attach as a File');
+    });
+
+
     $('select').selectpicker({
         'title': 'Select'
     });
+
 </script>
