@@ -67,11 +67,7 @@
               Quantity
             </span>
                 </td>
-                <td>
-             <span>
-            Min Order
-            </span>
-                </td>
+
                 <td>
             <span>
             Packing
