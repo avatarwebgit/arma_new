@@ -32,6 +32,7 @@
                                 <th class="text-center text-white w-50">Price
                                     {{--                                    ( {{ $market->SalesForm->currency }} )--}}
                                 </th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody id="seller_offer_table">
