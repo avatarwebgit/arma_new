@@ -49,7 +49,7 @@
 
                 <td>{{ $market->SalesForm->commodity }}</td>
                 <td>{{ $market->SalesForm->max_quantity . ' ' . $unit }}</td>
-                <td>{{ number_format($minQuantity) . ' ' . $unit }}</td>
+
                 <td>{{ $market->SalesForm->packing }}</td>
                 <td>{{ $market->SalesForm->incoterms }}</td>
                 <td>{{ $market->SalesForm->origin_country }}</td>
