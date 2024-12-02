@@ -52,7 +52,7 @@
 
                 <td>{{ $market->SalesForm->packing }}</td>
                 <td>{{ $market->SalesForm->incoterms }}</td>
-                <td>{{ $market->SalesForm->origin_country }}</td>
+                <td>{{ $market->SalesForm->country }}</td>
                 <td>{{ $market->SalesForm->price_type }}</td>
                 <td>
                     {{ $market->SalesForm->price_type === 'Fix' ? number_format($market->SalesForm->price) . ' ' . $currency : number_format($market->SalesForm->alpha) . ' ' . $currency }}
