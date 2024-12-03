@@ -93,6 +93,11 @@
                                     {{--                                    ( {{ $market->SalesForm->currency }})--}}
                                 </th>
 
+
+                                <th>
+                                    
+                                </th>
+
                             </tr>
                             </thead>
                             <tbody class="bidder_offer_table" id="bidder_offer_{{ $market->id }}">
