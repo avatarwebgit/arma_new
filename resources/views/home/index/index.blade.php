@@ -353,7 +353,7 @@
         width: 100vw;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.3);
-        display: none;
+        display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
@@ -393,6 +393,7 @@
       }
       .o0 {
         opacity: 0;
+          display:none !important;
       }
       .dn {
         display: none;
