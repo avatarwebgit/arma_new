@@ -490,6 +490,14 @@
 @endsection
 
 @section('content')
+<div class="modal_parent" onclick="removeImageModal()">
+      <div class="modal" onclick="event.stopPropagation();">
+        <img class="modal_image_11" alt="" />
+      </div>
+      <button class="modal_close_button" onclick="removeImageModal()">
+        Close
+      </button>
+    </div>
     <div onclick="CloseMenu()" id="bg-mute"></div>
     <div id="clockkNow" style="text-align: center;font-size:25px"></div>
     <div id="time"></div>
