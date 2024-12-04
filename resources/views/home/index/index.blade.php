@@ -315,7 +315,24 @@
                 svg.addClass('fa-angle-down');
             }
         }
+  const modalParent = document.querySelector(".modal_parent");
+      const modalImage = document.querySelector(".modal_image_11");
+      const modalImageWrapper = document.querySelector(".modal");
+      const modalCloseButton = document.querySelector(".modal_close_button");
 
+      const showImageModal = (e, url) => {
+        e.stopImmediatePropagation();
+        modalImage.src = url;
+        modalImageWrapper.classList.remove("o0");
+        modalParent.classList.remove("o0");
+        modalParent.classList.remove("dn");
+      };
+
+      const removeImageModal = () => {
+        modalImageWrapper.classList.add("o0");
+        modalParent.classList.add("o0");
+        modalParent.classList.add("dn");
+      };
 
     </script>
 
@@ -323,7 +340,63 @@
 
 @section('style')
     <style>
-
+  * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .modal_parent {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 9999;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        transition: all 0.2s;
+      }
+      .modal_image_wrapper {
+        width: fit-content;
+        height: fit-content;
+        margin: 0 auto;
+        background-color: transparent;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        transition: all 0.2s;
+        border: none;
+      }
+      .modal_close_button {
+        position: absolute;
+        top: 3%;
+        right: 3%;
+        width: 3rem;
+        height: 3rem;
+        border: none;
+        outline: none;
+        background-color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all .25s;
+      }
+      .modal_close_button:hover{
+        transform: scale(1.1);
+        box-shadow: 0px 0px 8px rgb(95, 95, 95);
+      }
+      .modal_image_11 {
+        max-width: 100vw;
+        max-height: 100vh;
+      }
+      .o0 {
+        opacity: 0;
+      }
+      .dn {
+        display: none;
+      }
         .navbar {
             background-color: #f2f2f2 !important;
         }
