@@ -140,7 +140,14 @@
 @endsection
 
 @section('content')
-
+<div class="modal_parent" onclick="removeImageModal()">
+      <div class="modal" onclick="event.stopPropagation();">
+        <img class="modal_image_11" alt="" />
+      </div>
+      <button class="modal_close_button" onclick="removeImageModal()">
+        Close
+      </button>
+    </div>
     <div id="time"></div>
     @if($alert_active==1)
         <div style="background-color: {{ $alert_bg_color }} !important;height: {{ $alert_height.'px' }} !important;"
