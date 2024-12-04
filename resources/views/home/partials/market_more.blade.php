@@ -60,7 +60,7 @@
                 <span>
                     @auth
                         <a style="color: #4a4a4a !important;" target="_blank"
-                           href="{{ asset(imageExist(env('SALE_OFFER_FORM'),$market->SalesForm->specification_file)) }}">
+                             onclick="showImageModal(event, '{{ asset(imageExist(env('SALE_OFFER_FORM'),$market->SalesForm->specification_file)) }}')">
                             Display
                         </a>
                     @else
