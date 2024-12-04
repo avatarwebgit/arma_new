@@ -491,7 +491,7 @@
 @endsection
 
 @section('content')
-<div class="modal_parent" onclick="removeImageModal()">
+<div class="modal_parent o0" onclick="removeImageModal()">
       <div class="modal" onclick="event.stopPropagation();">
         <img class="modal_image_11" alt="" />
       </div>
