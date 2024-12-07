@@ -235,26 +235,25 @@ padding: 30px 10px !important;
         }
 
 
-        // گرفتن تمام اینپوت‌ها
-        const inputs = document.querySelectorAll('input');
+                // گرفتن تمام اینپوت‌ها و تکست‌اریاها
+        const elements = document.querySelectorAll('input, textarea');
 
-        // افزودن eventListener به همه اینپوت‌ها
-        inputs.forEach(input => {
-            const originalPlaceholder = input.placeholder;
+        // افزودن eventListener به همه اینپوت‌ها و تکست‌اریاها
+        elements.forEach(element => {
+            const originalPlaceholder = element.placeholder;
 
             // هنگام فوکوس
-            input.addEventListener('focus', () => {
-                input.placeholder = '';
+            element.addEventListener('focus', () => {
+                element.placeholder = '';
             });
 
             // هنگام از دست دادن فوکوس
-            input.addEventListener('blur', () => {
-                if (input.value === '') {
-                    input.placeholder = originalPlaceholder;
+            element.addEventListener('blur', () => {
+                if (element.value === '') {
+                    element.placeholder = originalPlaceholder;
                 }
             });
         });
-
         $('.more_btn').click(function () {
             let is_close = $(this).hasClass('is_close');
             let button_html = '';
