@@ -378,6 +378,7 @@ top: 23%;
         height: 3rem;
         border: none;
         outline: none;
+          color:white;
         background-color: red;
         border-radius: 50%;
         cursor: pointer;
