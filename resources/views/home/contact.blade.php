@@ -234,6 +234,11 @@ padding: 30px 10px !important;
             })
         }
 
+
+        $('input').click(fucntion(){
+                         $(this).attr('placeholder','');
+        });
+
         $('.more_btn').click(function () {
             let is_close = $(this).hasClass('is_close');
             let button_html = '';
