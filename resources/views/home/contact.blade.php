@@ -235,8 +235,24 @@ padding: 30px 10px !important;
         }
 
 
-        $('input').click(fucntion(){
-                         $(this).attr('placeholder','');
+        // گرفتن تمام اینپوت‌ها
+        const inputs = document.querySelectorAll('input');
+
+        // افزودن eventListener به همه اینپوت‌ها
+        inputs.forEach(input => {
+            const originalPlaceholder = input.placeholder;
+
+            // هنگام فوکوس
+            input.addEventListener('focus', () => {
+                input.placeholder = '';
+            });
+
+            // هنگام از دست دادن فوکوس
+            input.addEventListener('blur', () => {
+                if (input.value === '') {
+                    input.placeholder = originalPlaceholder;
+                }
+            });
         });
 
         $('.more_btn').click(function () {
