@@ -372,8 +372,8 @@
       }
       .modal_close_button {
         position: absolute;
-        top: 3%;
-        right: 3%;
+top: 23%;
+    right: 20%;
         width: 3rem;
         height: 3rem;
         border: none;
