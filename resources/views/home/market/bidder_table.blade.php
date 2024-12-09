@@ -32,7 +32,7 @@
     })->isNotEmpty();
 
             @endphp
-            @if($bid_exists_with_same_price)
+            @if(!$bid_exists_with_same_price)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
