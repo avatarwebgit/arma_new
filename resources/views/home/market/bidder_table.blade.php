@@ -40,10 +40,23 @@ $is_first = $history->is_first;
                  $bids = $market->Bids;
     $bid_exists_with_same_price = $bids->filter(function ($other_bid) use ($bid) {
         return $other_bid->price == $bid->price && $other_bid->id != $bid->id; // مطمئن شویم که خود bid فعلی را در نظر نمی‌گیریم
-    })->isEmpty();
+    })->isNotEmpty();
 
             @endphp
-            @if(!$bid_exists_with_same_price or $is_first)
+            @if(!$bid_exists_with_same_price )
+                        <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
+                              style="
+                              background: red;
+  padding: 2px 9px;
+  border-radius: 5px;
+  font-size: 7pt;">
+{{--                     <i  class="fa fa-times-circle text-danger"></i>--}}
+
+                                Delete
+
+                </span>
+
+                @elseif($is_first)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
