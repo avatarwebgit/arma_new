@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BidHistory;
 use App\Models\Market;
 use App\Models\MarketPermission;
+use App\Models\MarketHistory;
 use App\Models\MarketSetting;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -366,6 +367,25 @@ class MarketHomeController extends Controller
                 'quantity' => $request->quantity,
                 'tries' => $tries,
             ]);
+
+
+            $markethistoryexists = MarketHistory::where('market_id',$request->market)->where('user_id',auth()->id())->exists();
+            $is_first = 0;
+            if($markethistoryexists){
+            $is_first = 1;
+            }
+            MarketHistory::create([
+                'user_id' => auth()->id(),
+                'market_id' => $request->market,
+                'price' => $request->price,
+                'is_first'=>$is_first,
+                'quantity' => $request->quantity,
+                
+            ]);
+
+
+
+            
             broadcast(new NewBidCreated($request->market));
             return response()->json([1, 'success']);
         } catch (\Exception $e) {
