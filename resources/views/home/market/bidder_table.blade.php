@@ -26,17 +26,13 @@
                       
                         @php
                 $is_delete = false;
-                 $bid_exists = $market->Bids()->exists();
-                    if ($bid_exists) {
-                        $highest_price = $market->Bids()->orderBy('price', 'desc')->first();
-                        $highest_price = $highest_price->price;
-                        if ($bid->price == $highest_price) {
-                $is_delete =true;
-                       }
-                    }
+                 $bids = $market->Bids;
+    $bid_exists_with_same_price = $bids->filter(function ($other_bid) use ($bid) {
+        return $other_bid->price == $bid->price && $other_bid->id != $bid->id; // مطمئن شویم که خود bid فعلی را در نظر نمی‌گیریم
+    })->isNotEmpty();
 
             @endphp
-            @if($is_delete)
+            @if($bid_exists_with_same_price)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
