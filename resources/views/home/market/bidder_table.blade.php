@@ -4,7 +4,7 @@
     @foreach($bids as $key=>$bid)
 
 @php
-$is_first = false; 
+$is_first = 0; 
 $history_exists = \App\Models\MarketHistory::where('bid_id',$bid->id)->exists();
 if($history_exists){
 $history = \App\Models\MarketHistory::where('bid_id',$bid->id)->first();
