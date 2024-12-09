@@ -1,4 +1,6 @@
 @if(count($bids)>0)
+
+
     @foreach($bids as $key=>$bid)
         <tr class="@if(auth()->id()===$bid->user_id) btn-info @endif">
             <td class="text-center ">
