@@ -73,7 +73,19 @@ $is_first = $history->is_first;
                 @endif
                     @endif
 @else
--
+                @if($is_first == 1)
+                        <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
+                              style="
+                              background: red;
+  padding: 2px 9px;
+  border-radius: 5px;
+  font-size: 7pt;">
+{{--                     <i  class="fa fa-times-circle text-danger"></i>--}}
+
+                                Delete
+
+                </span>
+                @endif
                 @endif
             </td>
         </tr>
