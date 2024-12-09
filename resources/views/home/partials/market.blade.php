@@ -25,7 +25,7 @@
             </th>
             <th>
             <span>
-            Region
+            Country
             </span>
             </th>
             <th>
