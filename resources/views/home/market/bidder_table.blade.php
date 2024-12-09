@@ -58,7 +58,7 @@ $is_first = $history->is_first;
 
                 </span>
 
-                @elseif($is_first)
+                @elseif($is_first == 1)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
