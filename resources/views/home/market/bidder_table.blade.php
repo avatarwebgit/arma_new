@@ -40,7 +40,7 @@ $is_first = $history->is_first;
                  $bids = $market->Bids;
     $bid_exists_with_same_price = $bids->filter(function ($other_bid) use ($bid) {
         return $other_bid->price == $bid->price && $other_bid->id != $bid->id; // مطمئن شویم که خود bid فعلی را در نظر نمی‌گیریم
-    })->isNotEmpty();
+    })->isEmpty();
 
             @endphp
             @if(!$bid_exists_with_same_price or $is_first)
