@@ -11,6 +11,8 @@ $history = \App\Models\MarketHistory::where('bid_id',$bid->id)->first();
 $is_first = $history->is_first;
 }
 @endphp
+<input type="hidden" value="{{$is_false}}">
+<input type="hidden" value="{{$bid->id}}">
         <tr class="@if(auth()->id()===$bid->user_id) btn-info @endif">
             <td class="text-center ">
             <span>
