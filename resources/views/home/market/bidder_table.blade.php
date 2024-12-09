@@ -72,6 +72,8 @@ $is_first = $history->is_first;
                 </span>
                 @endif
                     @endif
+@else
+-
                 @endif
             </td>
         </tr>
