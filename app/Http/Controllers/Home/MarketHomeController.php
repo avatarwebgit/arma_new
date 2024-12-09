@@ -369,7 +369,7 @@ class MarketHomeController extends Controller
             ]);
 
 
-            $markethistoryexists = MarketHistory::where('market_id',$request->market)->where('user_id',auth()->id())->exists();
+            $markethistoryexists = MarketHistory::where('market_id',$request->market)->where('is_first',1)->exists();
             $is_first = 0;
             if(!$markethistoryexists){
             $is_first = 1;
