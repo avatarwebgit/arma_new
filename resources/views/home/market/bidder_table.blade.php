@@ -7,7 +7,8 @@
 $is_first = false; 
 $history_exists = \App\Models\MarketHistory::where('bid_id',$bid->id)->exists();
 if($history_exists){
-$is_first = $history_exists->is_first;
+$history = \App\Models\MarketHistory::where('bid_id',$bid->id)->first();
+$is_first = $history->is_first;
 }
 @endphp
         <tr class="@if(auth()->id()===$bid->user_id) btn-info @endif">
