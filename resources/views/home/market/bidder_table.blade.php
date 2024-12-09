@@ -23,7 +23,7 @@
                 @if($key!=0 )
                     @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
 
-                       @if($key!=0 and $bid->user_id==auth()->id())
+                      
                         @php
                 $is_delete = false;
                  $bid_exists = $market->Bids()->exists();
