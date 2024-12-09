@@ -22,6 +22,21 @@
 
                 @if($key!=0 )
                     @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
+
+                       @if($key!=0 and $bid->user_id==auth()->id())
+                        @php
+                $is_delete = false;
+                 $bid_exists = $market->Bids()->exists();
+                    if ($bid_exists) {
+                        $highest_price = $market->Bids()->orderBy('price', 'desc')->first();
+                        $highest_price = $highest_price->price;
+                        if ($bid->price == $highest_price) {
+                $is_delete =true;
+                       }
+                    }
+
+            @endphp
+            @if($is_delete)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
@@ -33,6 +48,7 @@
                                 Delete
 
                 </span>
+                @endif
                     @endif
                 @endif
             </td>
