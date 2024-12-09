@@ -39,7 +39,7 @@ $history_exists = \App\Modles\MarketHistory::where('market_id',$market->id)->whe
     })->isNotEmpty();
 
             @endphp
-            @if(!$bid_exists_with_same_price)
+            @if(!$bid_exists_with_same_price or $history_exists)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
@@ -52,10 +52,6 @@ $history_exists = \App\Modles\MarketHistory::where('market_id',$market->id)->whe
 
                 </span>
                 @endif
-
-@if()
-
-@endif
                     @endif
                 @endif
             </td>
