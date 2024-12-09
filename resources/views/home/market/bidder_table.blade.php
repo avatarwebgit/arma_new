@@ -6,7 +6,7 @@
 @php
 $is_first = false; 
 $history_exists = \App\Models\MarketHistory::where('bid_id',$bid->id)->exists();
-if($is_first){
+if($history_exists){
 $is_first = $history_exists->is_first;
 }
 @endphp
