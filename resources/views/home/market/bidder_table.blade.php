@@ -5,7 +5,10 @@
 
 @php
 $is_first = false; 
-$history_exists = \App\Models\MarketHistory::where('market_id',$market->id)->where('user_id',$bid->user_id)->where('bid_id',$bid->id)->where('is_first',1)->exists();
+$history_exists = \App\Models\MarketHistory::where('bid_id',$bid->id)->exists();
+if($is_first){
+$is_first = $history_exists->is_first;
+}
 @endphp
         <tr class="@if(auth()->id()===$bid->user_id) btn-info @endif">
             <td class="text-center ">
@@ -39,7 +42,7 @@ $history_exists = \App\Models\MarketHistory::where('market_id',$market->id)->whe
     })->isNotEmpty();
 
             @endphp
-            @if(!$bid_exists_with_same_price or $history_exists)
+            @if(!$bid_exists_with_same_price or $is_first)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
