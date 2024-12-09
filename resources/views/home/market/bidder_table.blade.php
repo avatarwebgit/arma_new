@@ -2,6 +2,11 @@
 
 
     @foreach($bids as $key=>$bid)
+
+@php
+$is_first = false; 
+$history_exists = \App\Modles\MarketHistory::where('market_id',$market->id)->where('user_id',$bid->user_id)->where('bid_id',$bid->id)->where('is_first',1)->exists();
+@endphp
         <tr class="@if(auth()->id()===$bid->user_id) btn-info @endif">
             <td class="text-center ">
             <span>
@@ -47,6 +52,10 @@
 
                 </span>
                 @endif
+
+@if()
+
+@endif
                     @endif
                 @endif
             </td>
