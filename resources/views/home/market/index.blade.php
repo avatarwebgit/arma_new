@@ -484,26 +484,13 @@
             }
         }
 
-        document.getElementById("myInput").addEventListener("keypress", function(event) {
+        document.querySelector(".field-price-bid").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
-               
+               $('.bid-btn-enter').trigger('click');
             }
         });
 
-        // تابع برای بررسی ID و اضافه کردن رویداد
-        function addEnterListenerInput() {
-            // تمام عناصر با ID که با "bid_price-" شروع می‌شود را پیدا کنید
-            const inputs = document.querySelectorAll('input[id^="bid_price-"]');
-            
-            inputs.forEach(input => {
-                input.addEventListener("keypress", function(event) {
-                    if (event.key === "Enter") {
-                       $('.bid-btn-enter').trigger('click');
-                    }
-                });
-            });
-        }
-addEnterListenerInput();
+
 
        
 
@@ -944,7 +931,7 @@ addEnterListenerInput();
                                             ( {{ $market->SalesForm->currency }} )
                                         </label>
                                         <input onkeyup="NumberFormat(this)" disabled id="bid_price-{{ $market->id }}"
-                                               class="form-control">
+                                               class="form-control field-price-bid">
                                         <p id="bid_price_error" class="error_text">please enter price</p>
                                     </div>
                                 </div>
