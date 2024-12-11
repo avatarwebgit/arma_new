@@ -402,6 +402,14 @@ class MarketHomeController extends Controller
             $bid_id = $request->bid_id;
             $bid = BidHistory::where('id', $bid_id,)->where('user_id', $user_id)->first();
             $market_id = $bid->market_id;
+            MarketHistory::create([
+                'user_id' => auth()->id(),
+                'market_id' => $bid->market_id,
+                'price' => $bid->price,
+                'bid_id'=>$bid->id,
+                'is_delete'=>1,
+                'quantity' => $bid->quantity,
+            ]);
             $bid->delete();
             $marketPermissions = MarketPermission::where('market_id', $market_id)->first();
             if ($marketPermissions && $marketPermissions->user_ids != null) {
