@@ -361,7 +361,7 @@ class MarketHomeController extends Controller
 
 
             $bid = BidHistory::create([
-                'user_id' => auth()->user()->id(),
+                'user_id' => auth()->user()->id,
                 'market_id' => $request->market,
                 'price' => $request->price,
                 'quantity' => $request->quantity,
