@@ -73,7 +73,7 @@ $is_first = $history->is_first;
                 @endif
                     @endif
 @else
-@if(count($bids)>0)
+@if(count($bids)>1)
                  @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
                 @if($is_first == 1)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
