@@ -407,7 +407,7 @@ class MarketHomeController extends Controller
                 'market_id' => $bid->market_id,
                 'price' => $bid->price,
                 'bid_id'=>$bid->id,
-                'is_delete'=>1,
+                'is_deleted'=>1,
                 'quantity' => $bid->quantity,
             ]);
             $bid->delete();
@@ -512,7 +512,7 @@ class MarketHomeController extends Controller
         }
 
         
-        $bid_history_delete= MarketHistory::where('user_id',auth()->user()->id)->where('is_delete',1)->exists();
+        $bid_history_delete= MarketHistory::where('user_id',auth()->user()->id)->where('is_deleted',1)->exists();
         if($bid_history_delete){
 
          if ($request['price'] < $base_price) {
