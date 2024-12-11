@@ -483,6 +483,30 @@
                 return x1 + x2;
             }
         }
+
+        document.getElementById("myInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+               
+            }
+        });
+
+        // تابع برای بررسی ID و اضافه کردن رویداد
+        function addEnterListenerInput() {
+            // تمام عناصر با ID که با "bid_price-" شروع می‌شود را پیدا کنید
+            const inputs = document.querySelectorAll('input[id^="bid_price-"]');
+            
+            inputs.forEach(input => {
+                input.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") {
+                       $('.bid-btn-enter').trigger('click');
+                    }
+                });
+            });
+        }
+addEnterListenerInput();
+
+       
+
     </script>
 @endsection
 
@@ -926,7 +950,7 @@
                                 </div>
                                 <div class="col-12 text-center mt-3">
                                     <button id="bid_button-{{ $market->id }}" disabled onclick="Bid({{ $market->id }})"
-                                            class="btn btn-secondary pt-1 pb-1 pr-5 pl-5">Bid
+                                            class="btn bid-btn-enter btn-secondary pt-1 pb-1 pr-5 pl-5">Bid
                                     </button>
                                 </div>
                             </div>
