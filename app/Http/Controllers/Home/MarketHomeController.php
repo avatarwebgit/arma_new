@@ -511,6 +511,19 @@ class MarketHomeController extends Controller
             return [0 => false, 'validate_error' => 'alert', 'key' => $key, 'message' => $message];
         }
 
+        
+        $bid_history_delete= MarketHistory::where('user_id',auth()->user()->id)->where('is_delete',1)->exists();
+        if($bid_history_delete){
+
+         if ($request['price'] < $base_price) {
+            $key = 'price';
+//            $message = 'min price you can enter is: ' . $base_price . ' ' . $currency;
+            $message = 'You can not place a bid less than ' . $base_price . ' ' . $currency;
+            return [0 => false, 'validate_error' => 'price_quantity', 'key' => $key, 'message' => $message];
+        }
+
+        }
+
         if ($market->status == 6) {
             $market_step = $market->step_price_competition;
             $best_bid_price = $market->Bids()->orderBy('price', 'desc')->first()->price;
