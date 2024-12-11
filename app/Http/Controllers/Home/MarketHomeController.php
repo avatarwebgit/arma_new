@@ -512,7 +512,7 @@ class MarketHomeController extends Controller
         }
 
         
-        $bid_history_delete= MarketHistory::where('user_id',auth()->id)->where('market_id',$market->id)->where('is_deleted',1)->exists();
+        $bid_history_delete= MarketHistory::where('user_id',auth()->user()->id)->where('market_id',$market->id)->where('is_deleted',1)->exists();
         if($bid_history_delete){
          $best_price = MarketHistory::where('is_deleted',0)->max('price');
          if ($request['price'] < $best_price) {
