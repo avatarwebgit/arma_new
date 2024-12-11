@@ -402,6 +402,7 @@ class MarketHomeController extends Controller
             $bid_id = $request->bid_id;
             $bid = BidHistory::where('id', $bid_id,)->where('user_id', $user_id)->first();
             $market_id = $bid->market_id;
+            MarketHistory::where('id',$bid->id)->delete();
             MarketHistory::create([
                 'user_id' => auth()->id(),
                 'market_id' => $bid->market_id,
