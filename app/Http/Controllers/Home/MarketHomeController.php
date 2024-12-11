@@ -361,7 +361,7 @@ class MarketHomeController extends Controller
 
 
             $bid = BidHistory::create([
-                'user_id' => auth()->id(),
+                'user_id' => auth()->user()->id(),
                 'market_id' => $request->market,
                 'price' => $request->price,
                 'quantity' => $request->quantity,
@@ -390,7 +390,7 @@ class MarketHomeController extends Controller
             broadcast(new NewBidCreated($request->market));
             return response()->json([1, 'success']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            dd($e->getMessage(),$e->getLine());
             return response()->json([0, 'error']);
         }
     }
