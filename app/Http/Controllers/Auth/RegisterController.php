@@ -122,7 +122,7 @@ class RegisterController extends Controller
             }],
 //            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'commodity' => ['required', 'string', 'max:255'],
-            'full_name' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
+            'full_name' => ['required'],
             'salutation' => ['nullable', 'string'],
             'function_in_company' => ['required', 'string'],
 //            'email' => ['required', 'email'],
