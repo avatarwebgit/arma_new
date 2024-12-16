@@ -56,7 +56,7 @@ $bid_history_delete= \App\Models\MarketHistory::where('user_id',auth()->user()->
   padding: 2px 9px;
   border-radius: 5px;
   font-size: 7pt;">
-{{--                     <i  class="fa fa-times-circle text-danger"></i>--}}
+
 
                                 Delete
 
