@@ -11,7 +11,7 @@ $history = \App\Models\MarketHistory::where('bid_id',$bid->id)->first();
 $is_first = $history->is_first;
 }
 $best_price = \App\Models\MarketHistory::where('market_id', $market->id)->orderBy('price', 'desc')->first();
-$bid_history_delete= MarketHistory::where('user_id',auth()->user()->id)->where('market_id',$market->id)->where('is_deleted',1)->exists();
+$bid_history_delete= \App\Models\MarketHistory::where('user_id',auth()->user()->id)->where('market_id',$market->id)->where('is_deleted',1)->exists();
 
 
 @endphp
