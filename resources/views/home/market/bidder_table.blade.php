@@ -10,6 +10,10 @@ if($history_exists){
 $history = \App\Models\MarketHistory::where('bid_id',$bid->id)->first();
 $is_first = $history->is_first;
 }
+$best_price = \App\Models\MarketHistory::where('market_id', $market->id)->orderBy('price', 'desc')->first();
+
+
+
 @endphp
 <input type="hidden" value="{{$is_first}}">
 <input type="hidden" value="{{$bid->id}}">
@@ -58,7 +62,7 @@ $is_first = $history->is_first;
 
                 </span>
 
-                @elseif($is_first == 1)
+                @elseif($is_first == 1 and ($best_price->bid_id == $bid->id))
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
@@ -75,7 +79,7 @@ $is_first = $history->is_first;
 @else
 @if(count($bids)>1)
                  @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
-                @if($is_first == 1)
+                @if($is_first == 1 and ($best_price->bid_id == $bid->id))
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
