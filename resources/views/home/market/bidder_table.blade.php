@@ -50,6 +50,7 @@ $bid_history_delete= \App\Models\MarketHistory::where('user_id',auth()->user()->
 
             @endphp
             @if(!$bid_exists_with_same_price )
+                @if(!$bid_history_delete)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
@@ -61,6 +62,7 @@ $bid_history_delete= \App\Models\MarketHistory::where('user_id',auth()->user()->
                                 Delete
 
                 </span>
+                @endif
 
                 @elseif($is_first == 1 and ($best_price->bid_id != $bid->id))
 @if(!$bid_history_delete)
