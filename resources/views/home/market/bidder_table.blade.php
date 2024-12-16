@@ -11,7 +11,7 @@ $history = \App\Models\MarketHistory::where('bid_id',$bid->id)->first();
 $is_first = $history->is_first;
 }
 $best_price = \App\Models\MarketHistory::where('market_id', $market->id)->orderBy('price', 'desc')->first();
-
+$bid_history_delete= MarketHistory::where('user_id',auth()->user()->id)->where('market_id',$market->id)->where('is_deleted',1)->exists();
 
 
 @endphp
@@ -63,6 +63,8 @@ $best_price = \App\Models\MarketHistory::where('market_id', $market->id)->orderB
                 </span>
 
                 @elseif($is_first == 1 and ($best_price->bid_id != $bid->id))
+@if(!$bid_history_delete)
+                
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
@@ -75,11 +77,13 @@ $best_price = \App\Models\MarketHistory::where('market_id', $market->id)->orderB
 
                 </span>
                 @endif
+                @endif
                     @endif
 @else
 @if(count($bids)>1)
                  @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
                 @if($is_first == 1 and ($best_price->bid_id != $bid->id))
+                @if(!$bid_history_delete)
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
@@ -91,6 +95,7 @@ $best_price = \App\Models\MarketHistory::where('market_id', $market->id)->orderB
                                 Delete
 
                 </span>
+                @endif
                 @endif
                 @endif
 @endif
