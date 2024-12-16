@@ -62,7 +62,7 @@ $best_price = \App\Models\MarketHistory::where('market_id', $market->id)->orderB
 
                 </span>
 
-                @elseif($is_first == 1 and ($best_price->bid_id == $bid->id))
+                @elseif($is_first == 1 and ($best_price->bid_id != $bid->id))
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
@@ -79,7 +79,7 @@ $best_price = \App\Models\MarketHistory::where('market_id', $market->id)->orderB
 @else
 @if(count($bids)>1)
                  @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
-                @if($is_first == 1 and ($best_price->bid_id == $bid->id))
+                @if($is_first == 1 and ($best_price->bid_id != $bid->id))
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
