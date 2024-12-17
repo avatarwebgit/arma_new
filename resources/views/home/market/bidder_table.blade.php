@@ -68,6 +68,15 @@
                             @endif
 
                         @elseif($is_first == 1 and ($best_price->bid_id != $bid->id))
+                @php
+                $filtered_bids = $bids->filter(function ($other_bid) use ($bid) {
+    return ($other_bid->price == $bid->price) && ($other_bid->id != $bid->id);
+});
+
+// چاپ بیدهای فیلتر شده برای دیباگ
+dd($filtered_bids);
+
+                @endphp
 
                             @if(!$bid_history_delete)
 
