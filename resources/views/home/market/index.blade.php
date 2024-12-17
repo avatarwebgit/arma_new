@@ -259,6 +259,8 @@
                 // seller_quantity.prop('disabled', true);
                 seller_price.prop('disabled', false);
                 seller_button.prop('disabled', false);
+                seller_button.removeClass('btn-secondary');
+                seller_button.addClass('btn-success');
                 seller_price.addClass('btn-success');
             }
             if (status == 6) {
