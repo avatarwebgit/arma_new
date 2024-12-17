@@ -915,7 +915,7 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="mt-3 text-center">
-                                        <label
+                                        <label class="label-quantity"
                                             for="bid_quantity-{{ $market->id }}">Quantity
                                             ( {{ $market->SalesForm->unit }}
                                             )
