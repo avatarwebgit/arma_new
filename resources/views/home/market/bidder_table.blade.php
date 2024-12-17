@@ -47,7 +47,7 @@
                 $bid_exists_with_same_price = $bids->filter(function ($other_bid) use ($bid) {
                     return ($other_bid->price == $bid->price) && ($other_bid->id != $bid->id); // مطمئن شویم که خود bid فعلی را در نظر نمی‌گیریم
                 })->count() > 0;
-                dd($bid_exists_with_same_price);
+              
              
 
                         @endphp
@@ -69,7 +69,19 @@
                             @endif
 
                         @elseif($is_first == 1 and ($best_price->bid_id != $bid->id))
+
                             @if(!$bid_history_delete)
+                        @php
+                            $is_delete = false;
+                             $bids = $market->Bids;
+                $bid_exists_with_same_price = $bids->filter(function ($other_bid) use ($bid) {
+                    return ($other_bid->price == $bid->price) && ($other_bid->id != $bid->id); // مطمئن شویم که خود bid فعلی را در نظر نمی‌گیریم
+                })->count() > 0;
+              
+             
+
+                        @endphp
+        @if(!$bid_exists_with_same_price )
 
                                 <span id="remove_btn_{{ $market->id }}"
                                       onclick="removeBid({{ $market->id }},{{ $bid->id }})"
@@ -83,6 +95,7 @@
                                 Delete
 
                 </span>
+@endif
                             @endif
                         @endif
                     @endif
