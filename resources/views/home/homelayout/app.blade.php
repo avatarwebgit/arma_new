@@ -427,6 +427,13 @@
 
         $('#bid_button-' + id).prop('disabled', false);
         $('#bid_button-' + id).addClass('btn-success');
+        $('.box-quantity-col').addClass('order-2');
+        $('.box-bidder-row').addClass('d-flex');
+        $('.box-bidder-row').addClass('justify-content-center');
+        
+        
+
+
     }
 
     function deactive_bid(id) {
