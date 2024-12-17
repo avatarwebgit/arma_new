@@ -907,13 +907,13 @@
                     </div>
                     <div class="col-12  col-md-6">
                         @unless(auth()->user()->hasRole('seller'))
-                            <div class="row">
+                            <div class="row box-bidder-row">
                                 <div class="col-12">
                                     <div id="bid_validate_error" class="alert alert-danger text-left p-2 ">
 
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-6 box-quantity-col">
                                     <div class="mt-3 text-center">
                                         <label class="label-quantity"
                                             for="bid_quantity-{{ $market->id }}">Quantity
