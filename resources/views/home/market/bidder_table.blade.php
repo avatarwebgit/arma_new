@@ -51,7 +51,7 @@ $bid_history_delete= \App\Models\MarketHistory::where('user_id',auth()->user()->
             @endphp
             @if(!$bid_exists_with_same_price )
                 @if(!$bid_history_delete)
-                        <span data-id="{{$bid_exists_with_same_price}}" id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
+                        <span data-best-price="{{$bid_exists_with_same_price}}" id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
   padding: 2px 9px;
@@ -86,6 +86,15 @@ $bid_history_delete= \App\Models\MarketHistory::where('user_id',auth()->user()->
                  @if($bid->user_id==auth()->id() and $bid->Market->status==3 )
                 @if($is_first == 1 and ($best_price->bid_id != $bid->id))
                 @if(!$bid_history_delete)
+                                    @php
+                $is_delete = false;
+                 $bids = $market->Bids;
+    $bid_exists_with_same_price = $bids->filter(function ($other_bid) use ($bid) {
+        return $other_bid->price == $bid->price && $other_bid->id != $bid->id; // مطمئن شویم که خود bid فعلی را در نظر نمی‌گیریم
+    })->isNotEmpty();
+
+            @endphp
+      @if(!$bid_exists_with_same_price )
                         <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
@@ -97,6 +106,7 @@ $bid_history_delete= \App\Models\MarketHistory::where('user_id',auth()->user()->
                                 Delete
 
                 </span>
+@endif
                 @endif
                 @endif
                 @endif
