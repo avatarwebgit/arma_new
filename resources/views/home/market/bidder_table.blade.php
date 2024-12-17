@@ -51,7 +51,7 @@ $bid_history_delete= \App\Models\MarketHistory::where('user_id',auth()->user()->
             @endphp
             @if(!$bid_exists_with_same_price )
                 @if(!$bid_history_delete)
-                        <span id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
+                        <span data-id="{{$bid_exists_with_same_price}}" id="remove_btn_{{ $market->id }}" onclick="removeBid({{ $market->id }},{{ $bid->id }})"
                               style="
                               background: red;
   padding: 2px 9px;
