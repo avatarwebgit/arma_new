@@ -68,6 +68,13 @@
                             @endif
 
                         @elseif($is_first == 1 and ($best_price->bid_id != $bid->id))
+                       @php
+                            $is_delete = false;
+                             $bids = $market->Bids;
+dd($bids);
+         
+
+                        @endphp
                             @if(!$bid_history_delete)
 
                                 <span id="remove_btn_{{ $market->id }}"
