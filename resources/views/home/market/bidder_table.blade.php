@@ -68,17 +68,6 @@
                             @endif
 
                         @elseif($is_first == 1 and ($best_price->bid_id != $bid->id))
-
-                        @php
-                            $is_delete = false;
-                             $bids = $market->Bids;
-                $bid_exists_with_same_price = $bids->filter(function ($other_bid) use ($bid) {
-                    return $other_bid->price == $bid->price && $other_bid->id != $bid->id; // مطمئن شویم که خود bid فعلی را در نظر نمی‌گیریم
-                })->isNotEmpty();
-dd($bid_exists_with_same_price);
-             
-
-                        @endphp
                             @if(!$bid_history_delete)
 
                                 <span id="remove_btn_{{ $market->id }}"
