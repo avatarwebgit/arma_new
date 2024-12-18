@@ -129,11 +129,11 @@
 
                         @else
                                    <a href="{{route('admin.market.bid.history',['market_id',$item->id])}}"
-                               class="btn btn-sm small btn-primary show_confirm ml-2"
+                               class="btn btn-sm small btn-primary  ml-2"
                                
                                
                                title=""
-                               data-bs-original-title="History">
+                            >
 
                                        Result
                                    
