@@ -654,7 +654,7 @@ class MarketController extends Controller
     public function market_bid_history($market_id)
     {
         $bids = BidHistory::where('market_id',$market_id)->get();
-        dd($bids,$market_id);
+        
         return view('admin.markets.market_history',compact('bids'));
     }
 }
