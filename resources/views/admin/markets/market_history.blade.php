@@ -7,7 +7,7 @@
 @section('breadcrumb')
     <div class="col-md-12 mb-3">
         <div class="page-header-title">
-            <h4 class="m-b-10">{{ __('Markets').'-'.$date }}</h4>
+            <h4 class="m-b-10">Markets History</h4>
         </div>
     </div>
 @endsection
@@ -29,7 +29,32 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="markets-pair-list">
-                                        <div id="alert"></div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>User</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Tries</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($bids as $bid)
+                                                <tr>
+                                                    <td>{{$bid->User->full_name ?? $bid->User->company_name}}</td>
+                                                    <td>{{$bid->price}}</td>
+                                                    <td>{{$bid->quantity}}</td>
+                                                    <td>{{$bid->tries}}</td>
+                                                    <td>
+                                                        <span class="{{$bid->is_win ? 'text-success' : 'text-danger'}}">
+                                                            {{$bid->is_win ? 'Win' : 'Lose' }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                       
                                     </div>
                                 </div>
