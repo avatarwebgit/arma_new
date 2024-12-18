@@ -34,12 +34,12 @@
                                     <a href="{{ route('admin.markets.index') }}" class="btn btn-sm btn-dark">
                                         Back
                                     </a>
-{{--                                    @if($close==0)--}}
+                                    @if($close==0)
                                         <a href="{{ route('admin.market.create',['market_data'=>$date]) }}"
                                            class="btn btn-sm btn-success">
                                             Create
                                         </a>
-{{--                                    @endif--}}
+                                   @endif
                                     {{--                                        <a href="{{ route('admin.market.create') }}" class="btn btn-primary btn-sm">--}}
                                     {{--                                            Create--}}
                                     {{--                                        </a>--}}
