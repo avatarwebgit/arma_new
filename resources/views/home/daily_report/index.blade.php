@@ -81,7 +81,7 @@
                 <td>
                         <span>
 
-            Region
+            Country
             </span>
                 </td>
                 <td>
