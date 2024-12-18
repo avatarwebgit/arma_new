@@ -128,7 +128,7 @@
                             {!! Form::close() !!}
 
                         @else
-                                   <a href="{{route('admin.market.bid.history',['market_id',$item->id])}}"
+                                   <a href="{{route('admin.market.bid.history',['market_id'=>$item->id])}}"
                                class="btn btn-sm small btn-primary  ml-2"
                                
                                
