@@ -93,7 +93,7 @@
                     }
                     if ($market->status == 7 or $market->status == 8 or $market->status == 9){
                          $color = '#c20000';
-                         $statusText = 'Close';
+                         $statusText = 'Closed';
                     }
                     if (\Carbon\Carbon::now()->format('Y-m-d')!=$key){
                          $color = 'black';
