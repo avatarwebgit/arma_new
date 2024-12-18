@@ -126,6 +126,15 @@
                                     class="ti ti-trash mr-1"></i></a>
                             <input type="hidden" name="id" value="{{ $item->id }}">
                             {!! Form::close() !!}
+
+                        @else
+                                   <a href="#"
+                               class="btn btn-sm small btn-primary show_confirm ml-2"
+                               id="delete-form-{{ $item->id }}"
+                               data-bs-toggle="tooltip" data-bs-placement="bottom"
+                               title=""
+                               data-bs-original-title="History"><i
+                                    class="ti ti-time mr-1"></i></a>
                         @endif
                     </div>
                 </td>
