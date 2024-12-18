@@ -17,6 +17,7 @@ use App\Models\Currency;
 use App\Models\Destination;
 use App\Models\FlexiTankType;
 use App\Models\Form;
+use App\Models\BidHistory;
 use App\Models\FormValue;
 use App\Models\Incoterms;
 use App\Models\IncotermsVersion;
@@ -648,5 +649,11 @@ class MarketController extends Controller
 //        $status = $market['status'];
 //        broadcast(new MarketStatusUpdated($market_id, $difference, $timer,$status));
         $this->today_market_status();
+    }
+
+    public function market_bid_history($market_id)
+    {
+        $bids = BidHistory::where('market_id',$markt_id)->get();
+        return view('admin.markets.market_history',compact('bids'));
     }
 }
