@@ -301,7 +301,7 @@ Route::name('admin.')->middleware('check.session')->prefix('/admin-panel/managem
     Route::post('market/sales_form/update_or_store/{item?}', [MarketController::class, 'sales_form_update_or_store'])->name('market.sale_form.update_or_store');
     Route::post('market/getMarket', [MarketController::class, 'getMarket'])->name('getMarket');
     Route::post('market/FolderMarketRemove/{date}', [MarketController::class, 'FolderMarketRemove'])->name('market.folder.remove');
-
+    Route::get('market/bid/history{market_id}', [MarketController::class, 'market_bid_history'])->name('market.bid.history');
     Route::post('/sales_form/remove', [FormController::class, 'sales_form_remove'])->name('sales_form.remove');
     Route::post('/sales_form/copy', [FormController::class, 'sales_form_copy'])->name('sales_form.copy');
 
