@@ -102,7 +102,7 @@
                                                     <input disabled id="DeliveryInput" type="text" class="form-control">
                                                 </div>
                                                 <div class="col-12 col-md-4 mb-3">
-                                                    <label for="RigenInput">Rigen</label>
+                                                    <label for="RigenInput">Country</label>
                                                     <input disabled id="RigenInput" type="text" class="form-control">
                                                 </div>
                                                 <div class="col-12 col-md-4 mb-3" id="alpha_parent">
