@@ -716,7 +716,7 @@ class IndexController extends Controller
             $tomorrow = Carbon::tomorrow();
             $markets = Market::where(function ($query) use ($endDate, $startDate) {
                 $query->where('date', '>', $startDate)->where('date', '<', $endDate);
-            })->where('date', '<', $tomorrow)->orderby('date', 'desc')->get();
+            })->orderby('date', 'desc')->get();
             dd($endDate,$startDate,$markets);
             $today=Carbon::today()->format('Y-m-d');
             $time = Carbon::now()->format('H:i:s');
