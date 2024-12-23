@@ -191,46 +191,52 @@ class IndexController extends Controller
             $yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time', '>', $change_time)->orderby('date', 'asc')->get()->groupby('date');
 
             
-            // $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
-           
-            
-            $found_markets = false;
-        $max_tries = 5; // حداکثر دفعات جستجو
-        $tries = 0;
+          // $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
 
-        // حلقه‌ای برای جستجو در روزهای بعدی
-        while (!$found_markets && $tries < $max_tries) {
-            
+       
 
-            // بررسی بازارها برای روزهای مورد نظر (از دیروز تا ۴ روز آینده)
-            $markets_groups = Market::where('date', '>', $yesterday->copy()->addDay($tries))
-                ->where('date', '<', $future->copy()->addDay($tries))
-                ->orderby('date', 'asc')
-                ->get()
-                ->groupby('date');
-            
-            // بررسی اینکه آیا در تمام ۴ روز آینده بازار موجود است یا خیر
-            $markets_available_for_all_days = true;
-            $dates_to_check = [];
-            foreach (range(0, 3) as $i) {
-                $dates_to_check[] = $yesterday->copy()->addDay($tries + $i)->format('Y-m-d');
-            }
-            
-            // بررسی برای هر تاریخ در بازه ۴ روزه
-            foreach ($dates_to_check as $date) {
-                if (!isset($markets_groups[$date]) || $markets_groups[$date]->isEmpty()) {
-                    $markets_available_for_all_days = false;
-                    break;  // اگر یکی از روزها بازار نداشت، می‌رویم به روز بعد
-                }
-            }
+// سه روز آینده
+$nextThreeDays = [
+    $today->addDays(1), 
+    $today->addDays(2), 
+    $today->addDays(3)
+];
+            $markets_groups = Market::whereIn('date', $nextThreeDays)
+                ->orderBy('date', 'asc')
+                ->get()->groupBy('date');
 
-            // اگر تمام روزها بازار دارند، آن را پیدا کردیم و ادامه می‌دهیم
-            if ($markets_available_for_all_days) {
-                $found_markets = true;
-                break;  // از حلقه خارج می‌شویم
+// حالا بررسی می‌کنیم که برای هر روز آیا مارکت داریم یا نه
+foreach ($nextThreeDays as $index => $day) {
+    $dayFormatted = $day->format('Y-m-d');
+    
+    // اگر مارکت برای این روز وجود ندارد، جستجو از روز 4 ام به بعد
+    if (!$markets_groups->has($dayFormatted)) {
+        $foundMarket = false;
+
+        // از روز 4 ام به بعد به مدت 3 روز بررسی می‌کنیم
+        for ($i = 4; $i <= 7; $i++) {
+            $futureDay = $today->addDays($i); // روزهای بعد از روز 4 ام
+            $futureFormatted = $futureDay->format('Y-m-d');
+            
+            // اگر برای این روز مارکت وجود دارد، آن را جایگزین می‌کنیم
+            if ($markets_groups->has($futureFormatted)) {
+                // پیدا کردن مارکت‌ها برای این روز
+                $markets_for_this_day = $markets_groups->get($futureFormatted);
+                
+                // جایگزینی مارکت‌ها
+                $markets_groups->put($dayFormatted, $markets_for_this_day);
+                $foundMarket = true;
+                break;
             }
-            $tries++;
         }
+
+        // اگر مارکت پیدا نشد، عملیات یا پیام خطا
+        if (!$foundMarket) {
+             break;
+        }
+    }
+}
+      
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
             foreach ($markets_groups as $markets) {
