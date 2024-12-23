@@ -379,15 +379,13 @@ class Controller extends BaseController
 
             if ($now >= $change_time) {
                 $future = $today->copy()->addDay(4);
-                $markets_g = Market::where('date', '>', $today)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
+                $markets_g = Market::where('date', '>', $today)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get();
             } else {
                 $future = $yesterday->copy()->addDay(4);
-                $markets_g = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
+                $markets_g = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get();
             }
 
-            $markets_groups = $markets_g->groupBy(function ($market) {
-    return Carbon::parse($market->date)->format('Y-m-d'); // گروه‌بندی بر اساس تاریخ (روز ماه سال)
-});
+            $markets_groups = $markets_g->groupby('date');
 
 // تاریخ‌های سه روز آینده
 $nextThreeDays = [
