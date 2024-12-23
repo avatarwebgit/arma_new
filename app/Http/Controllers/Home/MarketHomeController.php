@@ -109,7 +109,7 @@ class MarketHomeController extends Controller
         $endMinutes = $open_duration + $q_1 + $q_2 + $q_3 + 3;
         try {
             $markets = Market::where('start', '>', Carbon::yesterday())->orderBy('start', 'asc')->get();
-            dd($markets);
+        
             foreach ($markets as $market) {
                 $this->statusTimeMarket($market, $ready_to_duration, $open_duration, $q_1, $q_2, $q_3);
             }
