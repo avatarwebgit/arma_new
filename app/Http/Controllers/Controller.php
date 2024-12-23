@@ -394,7 +394,7 @@ class Controller extends BaseController
                 $future = $yesterday->copy()->addDay(4);
                 $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->take(25)->get();
             }
-dd($markets_g,$nextThreeDays);
+
 
             $markets_groups = $markets_g->groupby('date');
 
@@ -407,6 +407,7 @@ foreach ($nextThreeDays as $index => $day) {
     
     // اگر مارکت برای این روز وجود ندارد، جستجو از روز 4 ام به بعد
     if (!$markets_groups->has($dayFormatted)) {
+        dd($dayFormatted);
         $foundMarket = false;
 
         // از روز 4 ام به بعد به مدت 3 روز بررسی می‌کنیم
