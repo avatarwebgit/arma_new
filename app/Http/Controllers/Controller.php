@@ -416,17 +416,15 @@ foreach ($nextThreeDays as $index => $day) {
           
             $futureFormatted = $futureDay->format('Y-m-d');
             
-            dd($futureDay,$futureFormatted);
-            // اگر برای این روز مارکت وجود دارد، آن را جایگزین می‌کنیم
-            if ($markets_groups->has($futureFormatted)) {
-                // پیدا کردن مارکت‌ها برای این روز
-                $markets_for_this_day = $markets_groups->get($futureFormatted);
-                
-                // جایگزینی مارکت‌ها
-                $markets_groups->put($dayFormatted, $markets_for_this_day);
-                $foundMarket = true;
-                break;
-            }
+             $marketsForThisDay = Market::where('date', $futureFormatted)->get();
+    
+    // اگر مارکت‌ها برای این روز پیدا شدند، آن‌ها را جایگزین می‌کنیم
+    if ($marketsForThisDay->isNotEmpty()) {
+        // جایگزینی مارکت‌ها برای روز بدون مارکت
+        $markets_groups->put($dayFormatted, $marketsForThisDay);
+        $foundMarket = true;
+        break; // اگر مارکت پیدا شد، از حلقه خارج می‌شویم
+    }
         }
 
         // اگر مارکت پیدا نشد، عملیات یا پیام خطا
