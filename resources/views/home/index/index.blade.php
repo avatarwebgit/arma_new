@@ -5,6 +5,7 @@
     <script type="module">
         window.Echo.channel('market-index-table')
             .listen('MarketTableIndex', function (e) {
+                console.log('modue')
 
                 let view_table = e.view_table;
                 let market_values_html = e.market_values_html;
