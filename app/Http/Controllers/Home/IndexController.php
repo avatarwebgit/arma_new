@@ -181,6 +181,7 @@ class IndexController extends Controller
 
     public function MarketTableIndex()
     {
+        dd('ok');
         try {
             $change_time = MarketSetting::where('key', 'change_time')->pluck('value')->first();
             $yesterday = Carbon::yesterday();
