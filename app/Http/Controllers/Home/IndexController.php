@@ -189,7 +189,48 @@ class IndexController extends Controller
             $tomorrow = Carbon::tomorrow();
             $future = $yesterday->copy()->addDay(4);
             $yesterday_markets_groups = Market::where('date', '>', $pre_yesterday)->where('date', '<', $today)->where('time', '>', $change_time)->orderby('date', 'asc')->get()->groupby('date');
-            $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
+
+            
+            // $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->get()->groupby('date');
+           
+            
+            $found_markets = false;
+        $max_tries = 5; // حداکثر دفعات جستجو
+        $tries = 0;
+
+        // حلقه‌ای برای جستجو در روزهای بعدی
+        while (!$found_markets && $tries < $max_tries) {
+            
+
+            // بررسی بازارها برای روزهای مورد نظر (از دیروز تا ۴ روز آینده)
+            $markets_groups = Market::where('date', '>', $yesterday->copy()->addDay($tries))
+                ->where('date', '<', $future->copy()->addDay($tries))
+                ->orderby('date', 'asc')
+                ->get()
+                ->groupby('date');
+            
+            // بررسی اینکه آیا در تمام ۴ روز آینده بازار موجود است یا خیر
+            $markets_available_for_all_days = true;
+            $dates_to_check = [];
+            foreach (range(0, 3) as $i) {
+                $dates_to_check[] = $yesterday->copy()->addDay($tries + $i)->format('Y-m-d');
+            }
+            
+            // بررسی برای هر تاریخ در بازه ۴ روزه
+            foreach ($dates_to_check as $date) {
+                if (!isset($markets_groups[$date]) || $markets_groups[$date]->isEmpty()) {
+                    $markets_available_for_all_days = false;
+                    break;  // اگر یکی از روزها بازار نداشت، می‌رویم به روز بعد
+                }
+            }
+
+            // اگر تمام روزها بازار دارند، آن را پیدا کردیم و ادامه می‌دهیم
+            if ($markets_available_for_all_days) {
+                $found_markets = true;
+                break;  // از حلقه خارج می‌شویم
+            }
+            $tries++;
+        }
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
             foreach ($markets_groups as $markets) {
@@ -207,6 +248,9 @@ class IndexController extends Controller
                     $ids[] = $market->id;
                 }
             }
+
+
+            
             foreach ($yesterday_markets_groups as $markets) {
                 foreach ($markets as $market) {
                     $result = $this->statusTimeMarket($market);
