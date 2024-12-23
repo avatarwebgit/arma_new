@@ -384,6 +384,53 @@ class Controller extends BaseController
                 $future = $yesterday->copy()->addDay(4);
                 $markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get()->groupby('date');
             }
+
+            $markets_groups = $markets->groupBy(function ($market) {
+    return Carbon::parse($market->market_date)->format('Y-m-d'); // گروه‌بندی بر اساس تاریخ (روز ماه سال)
+});
+
+// تاریخ‌های سه روز آینده
+$nextThreeDays = [
+    $today->copy()->addDay(1),
+    $today->copy()->addDay(2),
+    $today->copy()->addDay(3),
+];
+
+// حالا بررسی می‌کنیم که برای هر روز آیا مارکت داریم یا نه
+foreach ($nextThreeDays as $index => $day) {
+    $dayFormatted = $day->format('Y-m-d');
+    
+    // اگر مارکت برای این روز وجود ندارد، جستجو از روز 4 ام به بعد
+    if (!$markets_groups->has($dayFormatted)) {
+        $foundMarket = false;
+
+        // از روز 4 ام به بعد به مدت 3 روز بررسی می‌کنیم
+        for ($i = 4; $i <= 7; $i++) {
+            $futureDay = $today->copy()->addDays($i); // روزهای بعد از روز 4 ام
+            $futureFormatted = $futureDay->format('Y-m-d');
+            
+            // اگر برای این روز مارکت وجود دارد، آن را جایگزین می‌کنیم
+            if ($markets_groups->has($futureFormatted)) {
+                // پیدا کردن مارکت‌ها برای این روز
+                $markets_for_this_day = $markets_groups->get($futureFormatted);
+                
+                // جایگزینی مارکت‌ها
+                $markets_groups->put($dayFormatted, $markets_for_this_day);
+                $foundMarket = true;
+                break;
+            }
+        }
+
+        // اگر مارکت پیدا نشد، عملیات یا پیام خطا
+        if (!$foundMarket) {
+            // می‌توانید پیام خطا را اینجا نمایش دهید
+            break;
+        }
+    }
+}
+
+
+            
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
             foreach ($markets_groups as $markets) {
