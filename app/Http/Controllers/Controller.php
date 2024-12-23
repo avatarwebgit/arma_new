@@ -407,14 +407,16 @@ foreach ($nextThreeDays as $index => $day) {
     
     // اگر مارکت برای این روز وجود ندارد، جستجو از روز 4 ام به بعد
     if (!$markets_groups->has($dayFormatted)) {
-        dd($dayFormatted);
+   
         $foundMarket = false;
 
         // از روز 4 ام به بعد به مدت 3 روز بررسی می‌کنیم
         for ($i = 4; $i <= 7; $i++) {
             $futureDay = $today->copy()->addDays($i); // روزهای بعد از روز 4 ام
+          
             $futureFormatted = $futureDay->format('Y-m-d');
             
+            dd($futureDay,$futureFormatted);
             // اگر برای این روز مارکت وجود دارد، آن را جایگزین می‌کنیم
             if ($markets_groups->has($futureFormatted)) {
                 // پیدا کردن مارکت‌ها برای این روز
