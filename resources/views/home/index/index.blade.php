@@ -4,27 +4,27 @@
 
     <script type="module">
         
-        // window.Echo.channel('market-index-table')
-        //     .listen('MarketTableIndex', function (e) {
-        //         console.log('modue')
+        window.Echo.channel('market-index-table')
+            .listen('MarketTableIndex', function (e) {
+                console.log('modue')
 
-        //         let view_table = e.view_table;
-        //         let market_values_html = e.market_values_html;
-        //         let show_market_value = e.show_market_value;
-        //         let timer = e.timer;
-        //         $('#market_table').html(view_table);
-        //         $('#market_value').html(market_values_html);
-        //         if (show_market_value == 0) {
-        //             $('#total_trade_value').addClass('d-none');
-        //         } else {
-        //             $('#total_trade_value').removeClass('d-none');
-        //         }
-        //         if (timer == null) {
+                let view_table = e.view_table;
+                let market_values_html = e.market_values_html;
+                let show_market_value = e.show_market_value;
+                let timer = e.timer;
+                $('#market_table').html(view_table);
+                $('#market_value').html(market_values_html);
+                if (show_market_value == 0) {
+                    $('#total_trade_value').addClass('d-none');
+                } else {
+                    $('#total_trade_value').removeClass('d-none');
+                }
+                if (timer == null) {
 
-        //         } else {
-        //             $('#timer_section').html(timer);
-        //         }
-        //     });
+                } else {
+                    $('#timer_section').html(timer);
+                }
+            });
         
         window.Echo.channel('market-status-updated')
             .listen('MarketStatusUpdated', function (e) {
