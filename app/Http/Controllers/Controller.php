@@ -378,21 +378,27 @@ class Controller extends BaseController
             $now = Carbon::now()->format("H:i:s");
 
             if ($now >= $change_time) {
+                $nextThreeDays = [
+    $today->copy()->addDay(1),
+    $today->copy()->addDay(2),
+    $today->copy()->addDay(3),
+];
                 $future = $today->copy()->addDay(4);
-                $markets_g = Market::where('date', '>', $today)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get();
+                $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->take(25)->get();
             } else {
+                $nextThreeDays = [
+    $yesterday->copy()->addDay(1),
+    $yesterday->copy()->addDay(2),
+    $yesterday->copy()->addDay(3),
+];
                 $future = $yesterday->copy()->addDay(4);
-                $markets_g = Market::where('date', '>', $yesterday)->where('date', '<', $future)->orderby('date', 'asc')->take(25)->get();
+                $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->take(25)->get();
             }
 
             $markets_groups = $markets_g->groupby('date');
 
 // تاریخ‌های سه روز آینده
-$nextThreeDays = [
-    $today->copy()->addDay(1),
-    $today->copy()->addDay(2),
-    $today->copy()->addDay(3),
-];
+
 
 // حالا بررسی می‌کنیم که برای هر روز آیا مارکت داریم یا نه
 foreach ($nextThreeDays as $index => $day) {
