@@ -379,6 +379,7 @@ class Controller extends BaseController
 
             if ($now >= $change_time) {
                 $nextThreeDays = [
+                      $today,
     $today->copy()->addDay(1),
     $today->copy()->addDay(2),
     $today->copy()->addDay(3),
@@ -446,7 +447,7 @@ foreach ($nextThreeDays as $index => $day) {
     }
 }
 
-dd($markets_groups);
+
             
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
