@@ -415,7 +415,7 @@ foreach ($nextThreeDays as $index => $day) {
 
       
         // از روز 4 ام به بعد به مدت 3 روز بررسی می‌کنیم
-        for ($i = 4; $i <= 19; $i++) {
+        for ($i = 1; $i <= 19; $i++) {
             $futureDay = $today->copy()->addDays($i); // روزهای بعد از روز 4 ام
 
             $futureFormatted = $futureDay->format('Y-m-d');
