@@ -387,9 +387,10 @@ class Controller extends BaseController
                 $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->get();
             } else {
                 $nextThreeDays = [
-    $yesterday->copy()->addDay(1),
-    $yesterday->copy()->addDay(2),
-    $yesterday->copy()->addDay(3),
+                    $today,
+    $today->copy()->addDay(1),
+    $today->copy()->addDay(2),
+    $today->copy()->addDay(3),
 ];
                 $future = $yesterday->copy()->addDay(4);
                 $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->get();
@@ -403,7 +404,7 @@ class Controller extends BaseController
 
 // تاریخ‌های سه روز آینده
 
-    dd($markets_g,$nextThreeDays);
+  
 
 // حالا بررسی می‌کنیم که برای هر روز آیا مارکت داریم یا نه
 foreach ($nextThreeDays as $index => $day) {
