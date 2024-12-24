@@ -398,6 +398,9 @@ class Controller extends BaseController
 
             $markets_groups = $markets_g->groupby('date');
 
+
+            dd($nextThreeDays,$markets_groups);
+
 // تاریخ‌های سه روز آینده
 
 
