@@ -429,7 +429,7 @@ foreach ($nextThreeDays as $index => $day) {
         
         // جایگزینی مارکت‌ها برای روز بدون مارکت
                         if (!$markets_groups->has($futureFormatted)) {
-                            dd($markets_groups,$futureFormatted,$marketsForThisDay);
+                           
                     // جایگزینی مارکت‌ها برای روز بدون مارکت
                     $markets_groups->put($futureFormatted, $marketsForThisDay);
                 }
@@ -446,7 +446,7 @@ foreach ($nextThreeDays as $index => $day) {
     }
 }
 
-
+dd($markets_groups);
             
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
             $ids = [];
