@@ -384,7 +384,7 @@ class Controller extends BaseController
     $today->copy()->addDay(3),
 ];
                 $future = $today->copy()->addDay(4);
-                $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->take(25)->get();
+                $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->get();
             } else {
                 $nextThreeDays = [
     $yesterday->copy()->addDay(1),
@@ -392,7 +392,7 @@ class Controller extends BaseController
     $yesterday->copy()->addDay(3),
 ];
                 $future = $yesterday->copy()->addDay(4);
-                $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->take(25)->get();
+                $markets_g = Market::whereIn('date', $nextThreeDays)->orderby('date', 'asc')->get();
             }
 
 
