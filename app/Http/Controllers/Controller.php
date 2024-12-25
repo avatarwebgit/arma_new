@@ -420,14 +420,14 @@ foreach ($nextThreeDays as $index => $day) {
         // از روز 4 ام به بعد به مدت 3 روز بررسی می‌کنیم
         for ($i = 4; $i <= 19; $i++) {
             $futureDay = $today->copy()->addDays($i); // روزهای بعد از روز 4 ام
-            if($i == 5 or $i == 6){
-                 dd($futureDay);
-            }
+
            
             $futureFormatted = $futureDay->format('Y-m-d');
             
              $marketsForThisDay = Market::where('date', $futureFormatted)->get();
-    
+                if($i == 7 or $i == 8){
+                 dd($futureDay , $marketsForThisDay ,$futureFormatted);
+            }
     // اگر مارکت‌ها برای این روز پیدا شدند، آن‌ها را جایگزین می‌کنیم
     if ($marketsForThisDay->isNotEmpty()) {
         
