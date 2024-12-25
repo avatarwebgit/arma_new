@@ -17,7 +17,11 @@
                 if (show_market_value == 0) {
                     $('#total_trade_value').addClass('d-none');
                 } else {
+                    
                     $('#total_trade_value').removeClass('d-none');
+                }
+                if(market_values_html == ''){
+                      $('#total_trade_value').addClass('d-none');
                 }
                 if (timer == null) {
 
