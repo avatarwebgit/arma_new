@@ -522,7 +522,7 @@ top: 23%;
                 <h3 id="Market_Status_Text">
 
                 </h3>
-                <div class="text-left" id="total_trade_value">
+                <div class="text-left d-none" id="total_trade_value">
                     <span>Today Trade Value:</span>
                     <span id="market_value">0</span>
                 </div>
