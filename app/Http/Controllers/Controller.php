@@ -436,7 +436,7 @@ foreach ($nextThreeDays as $index => $day) {
                     $markets_groups->put($futureFormatted, $marketsForThisDay);
                             }
                     $foundMarket = true;
-                    countinue; // اگر مارکت پیدا شد، از حلقه خارج می‌شویم
+                    break; // اگر مارکت پیدا شد، از حلقه خارج می‌شویم
                 }
         }
 
