@@ -405,7 +405,7 @@ class Controller extends BaseController
 
 // تاریخ‌های سه روز آینده
 
-  
+  dd($nextThreeDays);
 
 // حالا بررسی می‌کنیم که برای هر روز آیا مارکت داریم یا نه
 foreach ($nextThreeDays as $index => $day) {
