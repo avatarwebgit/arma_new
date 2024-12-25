@@ -22,6 +22,8 @@
                 }
                 if(market_values_html == ''){
                       $('#total_trade_value').addClass('d-none');
+                }else{
+                     $('#total_trade_value').removeClass('d-none');
                 }
                 if (timer == null) {
 
