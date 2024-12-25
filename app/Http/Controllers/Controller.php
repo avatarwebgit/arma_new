@@ -427,7 +427,7 @@ foreach ($nextThreeDays as $index => $day) {
              $marketsForThisDay = Market::where('date', $futureFormatted)->get();
 
     // اگر مارکت‌ها برای این روز پیدا شدند، آن‌ها را جایگزین می‌کنیم
-    if ($marketsForThisDay->isNotEmpty()) {
+    if ($marketsForThisDay->isNotEmpty() and !$markets_groups->has($futureFormatted)) {
         
         // جایگزینی مارکت‌ها برای روز بدون مارکت
                         if (!$markets_groups->has($futureFormatted)) {
