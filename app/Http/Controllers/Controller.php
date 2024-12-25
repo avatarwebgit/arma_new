@@ -446,7 +446,7 @@ foreach ($nextThreeDays as $index => $day) {
         }
     }
 }
-
+dd($markets_groups);
 
             
             $today_markets_groups = Market::where('date', '>', $yesterday)->where('date', '<', $tomorrow)->orderby('date', 'asc')->get()->groupby('date');
