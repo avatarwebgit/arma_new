@@ -443,7 +443,7 @@ foreach ($nextThreeDays as $index => $day) {
         // اگر مارکت پیدا نشد، عملیات یا پیام خطا
         if (!$foundMarket) {
             // می‌توانید پیام خطا را اینجا نمایش دهید
-            countinue;
+            break;
         }
     }
 }
