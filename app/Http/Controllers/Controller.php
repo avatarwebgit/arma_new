@@ -436,16 +436,16 @@ foreach ($nextThreeDays as $index => $day) {
                            
                     // جایگزینی مارکت‌ها برای روز بدون مارکت
                     $markets_groups->put($futureFormatted, $marketsForThisDay);
+                            }
+                    $foundMarket = true;
+                    break; // اگر مارکت پیدا شد، از حلقه خارج می‌شویم
                 }
-        $foundMarket = true;
-        break; // اگر مارکت پیدا شد، از حلقه خارج می‌شویم
-    }
         }
 
         // اگر مارکت پیدا نشد، عملیات یا پیام خطا
         if (!$foundMarket) {
             // می‌توانید پیام خطا را اینجا نمایش دهید
-            break;
+            countinue;
         }
     }
 }
