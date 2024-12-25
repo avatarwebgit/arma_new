@@ -511,8 +511,12 @@ foreach ($nextThreeDays as $index => $day) {
             $color = $timer_and_value_color['color'];
             $show_market_value = $timer_and_value_color['show_market_value'];
 
-
-            $market_values_html = '<span style="color: ' . $color . '">' . $market_values_html . '</span>';
+if($market_values != 0){
+       $market_values_html = '<span style="color: ' . $color . '">' . $market_values_html . '</span>';
+}else{
+$market_values_html = '';
+}
+     
 
             $now = Carbon::now();
             $is_login = auth()->check();
