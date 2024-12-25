@@ -425,7 +425,7 @@ foreach ($nextThreeDays as $index => $day) {
             $futureFormatted = $futureDay->format('Y-m-d');
             
              $marketsForThisDay = Market::where('date', $futureFormatted)->get();
-                if($i == 7 or $i == 8){
+                if($i == 7 || $i == 8){
                  dd($futureDay , $marketsForThisDay ,$futureFormatted);
             }
     // اگر مارکت‌ها برای این روز پیدا شدند، آن‌ها را جایگزین می‌کنیم
