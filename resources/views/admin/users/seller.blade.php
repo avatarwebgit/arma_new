@@ -14,6 +14,7 @@
     </tr>
     </thead>
     <tbody>
+        {{dd($users)}}
     @foreach($users as $key=>$item)
         <tr class="text-center">
             <td>
