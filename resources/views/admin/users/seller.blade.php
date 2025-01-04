@@ -18,7 +18,7 @@
         <tr class="text-center">
             <td>
                @if($item->created_by!=null)
-                    {{ $item->CreatedBy->email }}
+                    {{ $item->CreatedBy }}
                @endif
             </td>
 {{--            <td>--}}
