@@ -14,8 +14,9 @@
     </tr>
     </thead>
     <tbody>
-        {{dd($users)}}
+        
     @foreach($users as $key=>$item)
+        {{dd($item->CreatedBy)}}
         <tr class="text-center">
             <td>
                @if($item->created_by!=null)
