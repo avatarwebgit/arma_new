@@ -21,7 +21,7 @@
             <td>
                @if($item->created_by!=null)
                  
-                    {{ $item->CreatedBy }}
+                    {{ $item->CreatedBy->email ?? '-' }}
                @endif
             </td>
 
