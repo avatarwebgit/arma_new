@@ -20,7 +20,7 @@
         <tr class="text-center">
             <td>
                @if($item->created_by!=null)
-                  {{dd($item->CreatedBy)}}
+                 
                     {{ $item->CreatedBy }}
                @endif
             </td>
@@ -36,6 +36,7 @@
                 {{ $item->company_country }}
             </td>
             <td>
+                {{dd($item->Roles()->first()->name)}}
                 {{ isset($item->Roles()->first()->name) ? ucfirst($item->Roles()->first()->name) : '-' }}
             </td>
             <td>
