@@ -21,15 +21,11 @@
                     {{ $item->CreatedBy }}
                @endif
             </td>
-{{--            <td>--}}
-{{--                {{ $item->user_id }}--}}
-{{--            </td>--}}
+
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
             </td>
-{{--            <td>--}}
-{{--                {{ \Carbon\Carbon::parse($item->created_at)->format('h:i a') }}--}}
-{{--            </td>--}}
+
             <td>
                 {{ $item->email }}
             </td>
