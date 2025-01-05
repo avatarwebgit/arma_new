@@ -951,7 +951,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 my-3">
-                        <div style="background-color: #1A1A2E; padding: 20px; border-radius: 8px; color: white; max-width: 600px; margin: auto;">
+                        <div style="background-color: #162fa2; padding: 15px; color: white; max-width: 300px; margin: auto;">
     <h2 style="color: #E50914; font-size: 24px; font-family: Arial, sans-serif;">Important Notice:</h2>
     <p style="color: black; font-size: 16px; font-family: Arial, sans-serif;">
         Please attention that the transaction is physical and real, therefore if you place a bid and win, you must
