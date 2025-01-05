@@ -155,6 +155,16 @@
         </div>
     </div>
     <div class="row">
+                           <div class="col-12 my-3">
+                        <div style="background-color: #162fa2; padding: 5px; color: white; max-width: 520px;">
+    <h2 style="color: #E50914; font-size: 20px; text-align:center">Important Notice</h2>
+    <p style="color: white; font-size: 14px; text-align:justify">
+        Please attention that the transaction is physical and real, therefore if you place a bid and win, you must
+        complete the transaction and purchase the commodity according to the terms and conditions, otherwise
+        you will be block in the system and have to pay all losses.
+    </p>
+</div>
+                    </div>
         <div class="col-12 mt-3" id="final_status_section-{{ $market->id }}">
             <div class="bid_textarea">
                 <table class="table">
