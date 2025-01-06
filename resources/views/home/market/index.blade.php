@@ -955,7 +955,7 @@
     <h2 style="color: #E50914; font-size: 14px; text-align:center">Important Notice</h2>
     <p style="color: white; font-size: 11px; text-align:justify">
         Please attention that the transaction is physical and real, therefore if you place a bid and win, you must
-        complete the transaction and purchase the commodity according to the terms and conditions, otherwise
+        complete the transaction according to the terms and conditions, otherwise
         you will be block in the system and have to pay all losses.
     </p>
 </div>
