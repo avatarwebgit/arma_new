@@ -950,8 +950,8 @@
                     {{--                    </div>--}}
                 </div>
                 <div class="row">
-                    <div style="display:flex;justify-content:center" class="col-12 my-3">
-                        <div style="background-color: #162fa2; padding: 3px; color: white; max-width: 468px;">
+                    <div style="display:flex;justify-content:center" class="col-12 mt-3 mb-1">
+                        <div style="background-color: #162fa2; padding: 3px 10px; color: white; max-width: 468px;">
     <h2 style="color: #E50914; font-size: 14px; text-align:center">Important Notice</h2>
     <p style="color: white; font-size: 11px; text-align:justify">
         Please attention that the transaction is physical and real, therefore if you place a bid and win, you must
