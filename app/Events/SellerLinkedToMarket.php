@@ -25,6 +25,6 @@ class SellerLinkedToMarket implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel('market.' . $this->marketId);
+        return new Channel('Seller-Linked-To-Market');
     }
 }
