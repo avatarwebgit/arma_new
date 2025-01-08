@@ -14,7 +14,7 @@
     <script type="module">
   window.Echo.channel('Seller-Linked-To-Market')
     .listen('SellerLinkedToMarket', (event) => {
-        alert('ok');
+       
 
         // وقتی رویداد ارسال شد، بررسی کنید و وضعیت نمایش را به‌روزرسانی کنید
         if (event.sellerId.includes('{{ auth()->user()->id }}') ) {
