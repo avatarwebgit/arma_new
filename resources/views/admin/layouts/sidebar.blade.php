@@ -73,7 +73,7 @@
                     ];
                 @endphp
                 @if($role == 'seller')
-                    @include('admin.layouts.seller_sidebar')
+                    @include('admin.layouts.buyer_sidebar')
                 @elseif($role == 'buyer')
                     @include('admin.layouts.buyer_sidebar')
                 @elseif($role == 'Brokers' or $role == 'Representatives')
