@@ -7,10 +7,10 @@
 
 @endphp
 @section('script')
-    <script type="module">
-window.Echo.channel('Seller-Linked-To-Market')
+<script>
+    window.Echo.channel('Seller-Linked-To-Market')
     .listen('SellerLinkedToMarket', (event) => {
-        alert(event);
+        alert('ok');
 
         // وقتی رویداد ارسال شد، بررسی کنید و وضعیت نمایش را به‌روزرسانی کنید
         if (event.sellerId.includes('{{ auth()->user()->id }}') ) {
@@ -23,6 +23,9 @@ window.Echo.channel('Seller-Linked-To-Market')
             marketSection.style.display = 'none'; // نمایش دادن بخش
         }
     });
+
+</script>
+    <script type="module">
 
         $(document).ready(function () {
 
