@@ -849,6 +849,8 @@ class FormController extends Controller
             // به‌روزرسانی شناسه‌های کاربران
             $market->user_ids = serialize($unique_user_ids);
             $market->save();
+event(new SellerLinkedToMarket($market_id, $market->user_ids));
+
             return response()->json([1, 'ok']);
         } catch (\Exception $exception) {
             return response()->json([0, $exception->getMessage()]);
