@@ -8,7 +8,7 @@
 @endphp
 @section('script')
     <script type="module">
-window.Echo.channel('Seller-Linked-To-Market)
+window.Echo.channel('Seller-Linked-To-Market')
     .listen('SellerLinkedToMarket', (event) => {
 console.log(event);
         // وقتی رویداد ارسال شد، بررسی کنید و وضعیت نمایش را به‌روزرسانی کنید
