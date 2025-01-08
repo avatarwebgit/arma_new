@@ -10,7 +10,8 @@
     <script type="module">
 window.Echo.channel('Seller-Linked-To-Market')
     .listen('SellerLinkedToMarket', (event) => {
-console.log(event.sellerId.includes('{{ auth()->user()->id }}'));
+        alert(event);
+
         // وقتی رویداد ارسال شد، بررسی کنید و وضعیت نمایش را به‌روزرسانی کنید
         if (event.sellerId.includes('{{ auth()->user()->id }}') ) {
             // تغییر وضعیت نمایش برای سلر
