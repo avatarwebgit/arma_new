@@ -8,7 +8,11 @@
 @endphp
 @section('script')
 <script>
-    window.Echo.channel('Seller-Linked-To-Market')
+  
+
+</script>
+    <script type="module">
+  window.Echo.channel('Seller-Linked-To-Market')
     .listen('SellerLinkedToMarket', (event) => {
         alert('ok');
 
@@ -23,10 +27,6 @@
             marketSection.style.display = 'none'; // نمایش دادن بخش
         }
     });
-
-</script>
-    <script type="module">
-
         $(document).ready(function () {
 
             // TimerClock(60);
