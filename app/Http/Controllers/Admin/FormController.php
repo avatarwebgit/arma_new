@@ -877,6 +877,7 @@ event(new SellerLinkedToMarket($market_id, $market->user_ids));
         $marketPermission->update([
             'user_ids' => $user_ids
         ]);
+event(new SellerLinkedToMarket($market, $user_ids));
         return redirect()->back();
     }
 
