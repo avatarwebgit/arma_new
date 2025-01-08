@@ -65,6 +65,7 @@ Broadcast::channel('line_header_updated', function () {
 });
 Broadcast::channel('Seller-Linked-To-Market', function () {
     return true;
+    return (int) $user->id === (int) $id;
 });
 
 //
