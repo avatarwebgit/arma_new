@@ -8,6 +8,18 @@
 @endphp
 @section('script')
     <script type="module">
+window.Echo.channel('market.' + marketId)
+    .listen('SellerLinkedToMarket', (event) => {
+console.log(event);
+        // وقتی رویداد ارسال شد، بررسی کنید و وضعیت نمایش را به‌روزرسانی کنید
+        if (event.sellerId.includes('{{ auth()->user()->id }}') ) {
+            // تغییر وضعیت نمایش برای سلر
+            const marketSection = document.getElementById('market_section-' + event.marketId);
+            marketSection.style.display = 'block'; // نمایش دادن بخش
+
+        }
+    });
+
         $(document).ready(function () {
 
             // TimerClock(60);
