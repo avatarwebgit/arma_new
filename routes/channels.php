@@ -63,6 +63,9 @@ Broadcast::channel('market-index-table', function ($user, $id) {
 Broadcast::channel('line_header_updated', function () {
     return true;
 });
+Broadcast::channel('Seller-Linked-To-Market', function () {
+    return true;
+});
 
 //
 //
