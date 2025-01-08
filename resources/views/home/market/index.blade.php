@@ -1,8 +1,8 @@
 @extends('home.homelayout.app')
 @php
     $market_id = $market->id;
-    $market = \App\Models\MarketPermission::where('market_id', $market_id)->first(); // استفاده از findOrFail به‌جای where و first
-    $market_user_ids = $market->user_ids ? unserialize($market->user_ids) : [];
+    $market_permission = \App\Models\MarketPermission::where('market_id', $market_id)->first(); // استفاده از findOrFail به‌جای where و first
+    $market_user_ids = $market_permission>user_ids ? unserialize($market_permission->user_ids) : [];
 @endphp
 @section('script')
     <script type="module">
