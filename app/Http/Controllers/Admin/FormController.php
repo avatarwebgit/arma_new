@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\FormsDataTable;
 use App\Facades\UtilityFacades;
+use App\Events\SellerLinkedToMarket;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaleFormRequest;
 use App\Mail\FormSubmitEmail;
