@@ -3,7 +3,7 @@
     $market_id = $market->id;
     $market_permission = \App\Models\MarketPermission::where('market_id', $market_id)->first(); // استفاده از findOrFail به‌جای where و first
     $market_user_ids = $market_permission->user_ids ? unserialize($market_permission->user_ids) : [];
-dd(!in_array(auth()->user()->id, $market_user_ids));
+
 
 @endphp
 @section('script')
@@ -260,7 +260,7 @@ dd(!in_array(auth()->user()->id, $market_user_ids));
                 // seller_quantity.prop('disabled', false);
                 @auth
                 @if(auth()->user()->hasRole('seller'))
-                @if(!in_array(auth()->user()->id, $market_user_ids)) 
+                @if(in_array(auth()->user()->id, $market_user_ids)) 
                     seller_price.prop('disabled', true);
                     seller_button.prop('disabled', false);
                 @endif
@@ -271,7 +271,7 @@ dd(!in_array(auth()->user()->id, $market_user_ids));
                 // seller_quantity.prop('disabled', true);
                       @auth
                 @if(auth()->user()->hasRole('seller'))
-                @if(!in_array(auth()->user()->id, $market_user_ids)) 
+                @if(in_array(auth()->user()->id, $market_user_ids)) 
                 seller_price.prop('disabled', false);
                 seller_button.prop('disabled', false);
                 seller_button.removeClass('btn-secondary');
