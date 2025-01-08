@@ -901,7 +901,7 @@
                         @auth
                             @if(auth()->user()->hasRole('seller') or auth()->user()->hasRole('admin'))
 
-                                <div style="display: {{in_array(auth()->user()->id, $market_user_ids) ? 'none !important': ''}}" class="row mb-4">
+                                <div style="display: {{!in_array(auth()->user()->id, $market_user_ids) ? 'none !important': ''}}" class="row mb-4">
                                     <div class="col-12">
                                         <div class="mt-3 text-center">
                                             <label
