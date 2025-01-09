@@ -15,6 +15,7 @@
   window.Echo.channel('Seller-Linked-To-Market')
     .listen('SellerLinkedToMarket', (event) => {
         console.log(event);
+        alert(event.sellerId);
        
        
 
