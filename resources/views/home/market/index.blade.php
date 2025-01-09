@@ -922,7 +922,7 @@
                         @auth
                             @if(auth()->user()->hasRole('seller') or auth()->user()->hasRole('admin'))
 
-                                <div id="market-seller-section" style="display: {{!in_array(auth()->user()->id, $market_user_ids) ? 'none !important': ''}}" class="row mb-4">
+                                <div id="{{auth()->user()->hasRole('admin') ? '': 'market-seller-section'}}" style="display: {{ auth()->user()->hasRole('admin') ? 'block': (!in_array(auth()->user()->id, $market_user_ids) ? 'none !important': '') }}" class="row mb-4">
                                     <div class="col-12">
                                         <div class="mt-3 text-center">
                                             <label
