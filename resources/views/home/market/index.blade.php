@@ -20,14 +20,13 @@
 
         // وقتی رویداد ارسال شد، بررسی کنید و وضعیت نمایش را به‌روزرسانی کنید
         if (event.sellerId.includes('{{ auth()->user()->id }}') ) {
-               console.log(event);
-        alert(event.sellerId);
+ 
             // تغییر وضعیت نمایش برای سلر
-            const marketSection = document.getElementById('market_section-' + event.marketId);
+            const marketSection = document.getElementById('market-seller-section');
             marketSection.style.display = 'block'; // نمایش دادن بخش
 
         }else{
-                        const marketSection = document.getElementById('market_section-' + event.marketId);
+                        const marketSection = document.getElementById('market-seller-section');
             marketSection.style.display = 'none'; // نمایش دادن بخش
         }
     });
@@ -924,7 +923,7 @@
                         @auth
                             @if(auth()->user()->hasRole('seller') or auth()->user()->hasRole('admin'))
 
-                                <div style="display: {{!in_array(auth()->user()->id, $market_user_ids) ? 'none !important': ''}}" class="row mb-4">
+                                <div id="market-seller-section" style="display: {{!in_array(auth()->user()->id, $market_user_ids) ? 'none !important': ''}}" class="row mb-4">
                                     <div class="col-12">
                                         <div class="mt-3 text-center">
                                             <label
