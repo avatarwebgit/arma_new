@@ -25,8 +25,15 @@
             const marketSection = document.getElementById('market-seller-section');
             marketSection.style.display = 'block'; // نمایش دادن بخش
 
+
+                        const marketSectionMobile = document.getElementById('market-seller-section-mobile');
+            marketSection.style.display = 'block'; // نمایش دادن بخش
+
         }else{
                         const marketSection = document.getElementById('market-seller-section');
+            marketSection.style.display = 'none'; // نمایش دادن بخش
+
+                                    const marketSectionMobile = document.getElementById('market-seller-section-mobile');
             marketSection.style.display = 'none'; // نمایش دادن بخش
         }
     });
