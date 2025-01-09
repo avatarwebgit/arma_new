@@ -280,28 +280,20 @@
             }
             if (status == 4) {
                 // seller_quantity.prop('disabled', false);
-                @auth
-                @if(auth()->user()->hasRole('seller'))
-                @if(in_array(auth()->user()->id, $market_user_ids)) 
+
                     seller_price.prop('disabled', true);
                     seller_button.prop('disabled', false);
-                @endif
-                @endif
-                @endauth
+     
             }
             if (status == 5) {
                 // seller_quantity.prop('disabled', true);
-                      @auth
-                @if(auth()->user()->hasRole('seller'))
-                @if(in_array(auth()->user()->id, $market_user_ids)) 
+
                 seller_price.prop('disabled', false);
                 seller_button.prop('disabled', false);
                 seller_button.removeClass('btn-secondary');
                 seller_button.addClass('btn-success');
                 seller_price.addClass('btn-success');
-         @endif
-                @endif
-                @endauth
+  
 
             }
             if (status == 6) {
