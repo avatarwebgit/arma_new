@@ -15,7 +15,7 @@
   window.Echo.channel('Seller-Linked-To-Market')
     .listen('SellerLinkedToMarket', (event) => {
         console.log(event);
-        alert(event.sellerId);
+       
        
 
         // وقتی رویداد ارسال شد، بررسی کنید و وضعیت نمایش را به‌روزرسانی کنید
