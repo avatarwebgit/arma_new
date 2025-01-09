@@ -850,7 +850,7 @@ class FormController extends Controller
             // به‌روزرسانی شناسه‌های کاربران
             $market->user_ids = serialize($unique_user_ids);
             $market->save();
-broadcast(new SellerLinkedToMarket($market_id, $market->user_ids));
+broadcast(new SellerLinkedToMarket($market_id, unserialize($market->user_ids)));
 
             return response()->json([1, 'ok']);
         } catch (\Exception $exception) {
@@ -878,7 +878,7 @@ broadcast(new SellerLinkedToMarket($market_id, $market->user_ids));
         $marketPermission->update([
             'user_ids' => $user_ids
         ]);
-broadcast(new SellerLinkedToMarket($market, $user_ids));
+broadcast(new SellerLinkedToMarket($market, unserialize($user_ids)));
         return redirect()->back();
     }
 
