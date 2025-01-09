@@ -44,7 +44,7 @@
                 <div class="col-12 col-md-12">
                     @auth
                         @if(auth()->user()->hasRole('seller') or auth()->user()->hasRole('admin'))
-                            <div class="row mb-4">
+                            <div id="market-seller-section-mobile" class="row mb-4">
                                 <div class="col-12">
                                     <div class="mt-3 text-center">
                                         <label
