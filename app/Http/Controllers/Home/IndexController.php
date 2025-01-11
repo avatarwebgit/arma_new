@@ -202,7 +202,7 @@ $nextThreeDays = [
     $today->addDays(2), 
     $today->addDays(3)
 ];
-            dd($nextThreeDays);
+            
             $markets_groups = Market::whereIn('date', $nextThreeDays)
                 ->orderBy('date', 'asc')
                 ->get()->groupBy('date');
