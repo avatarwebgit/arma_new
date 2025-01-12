@@ -21,7 +21,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-md-12 mb-3">
-                                    <a href="{{ route('admin.markets.index') }}" class="btn btn-sm btn-dark">
+                                    <a href="{{ url()->previous() }}" class="btn btn-sm btn-dark">
                                         Back
                                     </a>
 
