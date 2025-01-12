@@ -39,7 +39,8 @@
                 @endif
             </td>
             <td>
-                {{ $item->commodity }}
+
+                {{ dd($item->commodity) }}
             </td>
             <td class="text-right">
                 <a onclick="showUserPreview({{ $item->id }})"
