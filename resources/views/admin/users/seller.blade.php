@@ -19,10 +19,11 @@
       
         <tr class="text-center">
             <td>
-               @if($item->created_by!=null)
+<!--                @if($item->created_by!=null)
                  
                     {{ $item->CreatedBy->email ?? '-' }}
-               @endif
+               @endif -->
+                {{$item->category ?? '-'}}
             </td>
 
             <td>
