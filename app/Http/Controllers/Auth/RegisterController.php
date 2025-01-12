@@ -95,6 +95,7 @@ class RegisterController extends Controller
             // 'company_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z0-9\s\p{P}]*$/u'],
             'company_name' => ['required', 'string'],
             'user_type' => ['required', 'string'],
+                               'category' => ['required'],
             'company_country' => ['required', 'string', 'max:255'],
             // 'company_address' => ['required', 'string', 'min:10', 'max:255', 'regex:/^[A-Za-z0-9\s\p{P}]*$/u'],
      'company_address' => ['required', 'string', 'min:10', 'max:255'],
@@ -168,6 +169,7 @@ class RegisterController extends Controller
         return User::create([
             'company_name' => $data['company_name'],
             'user_type' => $data['user_type'],
+                            'category' => $data['category'],
             'company_country' => $data['company_country'],
             'company_address' => $data['company_address'],
             'company_phone' => $data['company_phone'],
