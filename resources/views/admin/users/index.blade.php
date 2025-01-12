@@ -78,7 +78,7 @@
                 {{--                                                               class="btn btn-sm btn-warning mr-1">--}}
                 {{--                                                                Mails--}}
                 {{--                                                            </a>--}}
-            </td>
+         {{--    </td>
         </tr>
     @endforeach
     </tbody>
