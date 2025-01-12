@@ -92,7 +92,7 @@
     <thead>
     <tr class="text-center">
         <th>#</th>
-        <th>Confirmed By</th>
+        <th>Category</th>
         <th>Date</th>
 {{--        <th>Time</th>--}}
         <th>email</th>
@@ -109,9 +109,10 @@
                 {{ $users->firstItem()+$key }}
             </td>
             <td>
-                @if($item->created_by!=null)
+<!--                 @if($item->created_by!=null)
                     {{ $item->CreatedBy->email }}
-                @endif
+                @endif -->
+                {{$item->category ?? ' - '}}
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
