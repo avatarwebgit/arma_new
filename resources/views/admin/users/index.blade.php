@@ -112,7 +112,7 @@
 <!--                 @if($item->created_by!=null)
                     {{ $item->CreatedBy->email }}
                 @endif -->
-                {{$item->category ?? ' - '}}
+                {{($item->category == 1 ? 'Producer': ($item->category == 2 ? 'Trading Company': '')) }}
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
