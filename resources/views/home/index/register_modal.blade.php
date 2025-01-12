@@ -76,17 +76,7 @@
 
                         </p>
                     </div>
-                    <div class="form-group col-12 col-md-6">
-                        <label for="company_address" class="mb-1">Address *</label>
-                        <input
-                            id="company_address"
-                            type="text"
-                            class="form-control"
-                            name="company_address" required>
-                        <p id="company_address_error" class="error-message ">
-
-                        </p>
-                    </div>
+              
                     <div class="form-group col-12 col-md-6">
                         <label for="company_phone" class="mb-1">Main Telephone Number *</label>
                         <input
@@ -133,6 +123,18 @@
                             @endforeach
                         </select>
                         <p id="commodity_error" class="error-message ">
+
+                        </p>
+                    </div>
+
+                          <div class="form-group col-12 col-md-12">
+                        <label for="company_address" class="mb-1">Address *</label>
+                        <input
+                            id="company_address"
+                            type="text"
+                            class="form-control"
+                            name="company_address" required>
+                        <p id="company_address_error" class="error-message ">
 
                         </p>
                     </div>
