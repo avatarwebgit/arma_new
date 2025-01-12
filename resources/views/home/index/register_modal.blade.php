@@ -44,7 +44,7 @@
                             
                         </select>
 
-                        <p id="user_type_error" class="error-message ">
+                        <p id="category_error" class="error-message ">
 
                         </p>
                     </div>
