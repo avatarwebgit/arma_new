@@ -180,9 +180,18 @@ class UserController extends Controller
 //            }
             $password = Hash::make($request->password);
             $created_by = \auth()->id();
+            $new_status = 1;
+
+        $reject_reason = $user->reject_reason;
+
+
+  
             $user->update([
                 'user_id' => $USER_ID,
                 'password' => $password,
+            'active_status' => $new_status,
+            'reject_reason' => $reject_reason,
+            'created_by' => \auth()->id(),
                 'created_by' => $created_by,
             ]);
             $message = 'The Item Updated Successfully';
