@@ -92,12 +92,12 @@
     <thead>
     <tr class="text-center">
         <th>#</th>
-        <th>Category</th>
+        <th>Type</th>
         <th>Date</th>
 {{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
-        <th>Type</th>
+        <th>Category</th>
         <th>Commodity</th>
         <th></th>
     </tr>
