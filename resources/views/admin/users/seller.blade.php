@@ -1,7 +1,7 @@
 <table class="table table-striped">
     <thead>
     <tr class="text-center">
-        <th>Confirmed By</th>
+        <th>Category</th>
 {{--        <th>User ID</th>--}}
         <th>Date</th>
 {{--        <th>Time</th>--}}
