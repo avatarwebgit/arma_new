@@ -31,8 +31,25 @@
 
                         </p>
                     </div>
+                     <div class="form-group col-12 col-md-6">
+                        <label for="category" class="mb-1">Company Type *</label>
+                        <select
+                            id="category"
+                            type="text"
+                            class="form-control"
+                            name="category">
+                          
+                                <option value="1">Producer</option>
+                                <option value="2">Trading Company</option>
+                            
+                        </select>
+
+                        <p id="user_type_error" class="error-message ">
+
+                        </p>
+                    </div>
                     <div class="form-group col-12 col-md-6">
-                        <label for="user_type" class="mb-1">Company Type *</label>
+                        <label for="user_type" class="mb-1">Category *</label>
                         <select
                             id="user_type"
                             type="text"
@@ -47,6 +64,7 @@
 
                         </p>
                     </div>
+                    
                     <div class="form-group col-12 col-md-6">
                         <label for="company_country" class="mb-1">Country *</label>
                         <select name="company_country" id="company_country" class="form-control">
