@@ -1,4 +1,4 @@
-// <table class="table table-striped">
+{{-- // <table class="table table-striped">
 //     <thead>
 //     <tr class="text-center">
 //         <th>#</th>
@@ -83,6 +83,10 @@
 //     @endforeach
 //     </tbody>
 // </table>
+
+--}}
+
+
 <table class="table table-striped">
     <thead>
     <tr class="text-center">
