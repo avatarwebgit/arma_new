@@ -151,6 +151,7 @@
         let company_name = $('#company_name').val();
         //user type or company type
         let user_type = $('#user_type').val();
+let category = $('#category').val();
         let company_country = $('#company_country').val();
         let company_address = $('#company_address').val();
         let company_phone = $('#company_phone').val();
@@ -169,6 +170,7 @@
             data: {
                 company_name: company_name,
                 user_type: user_type,
+category: category,
                 company_country: company_country,
                 company_address: company_address,
                 company_phone: company_phone,
