@@ -40,7 +40,7 @@
             </td>
             <td>
 
-                {{ dd($item->commodity) }}
+                {{ $item->commodity }}
             </td>
             <td class="text-right">
                 <a onclick="showUserPreview({{ $item->id }})"
@@ -134,6 +134,7 @@
                     Broker
                 @endif
             </td>
+            <td>{{$item->commodity}}</td>
             <td class="text-right">
 
 {{--                <a onclick="RejectedUser({{ $item->id }},'{{ $item->reject_reason }}')"--}}
