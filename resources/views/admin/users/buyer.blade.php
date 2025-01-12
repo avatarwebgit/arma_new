@@ -38,6 +38,12 @@
 {{--                {{ isset($item->Roles()->first()->name) ? ucfirst($item->Roles()->first()->name) : '-' }}--}}
 {{--            </td>--}}
             <td>
+                          <a onclick="showUserPreview({{ $item->id }})"
+                   style="margin-right: 10px;padding: 5px 20px"
+                   class="btn btn-sm btn-info text-white">
+                    <i class="fa fa-eye text-white"></i>
+
+                </a>
                 <select onchange="ChangeActivationStatus(this,{{ $item->id }})" class="form-control">
                     @foreach($activation_status as   $activation)
                         <option {{ $item->active==$activation->id ? 'selected' : '' }} value="{{ $activation->id}}">{{ $activation->title }}</option>
