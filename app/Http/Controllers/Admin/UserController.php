@@ -180,7 +180,7 @@ class UserController extends Controller
 //            }
             $password = Hash::make($request->password);
             $created_by = \auth()->id();
-            $new_status = 1;
+            $new_status = 2;
 
         $reject_reason = $user->reject_reason;
 
