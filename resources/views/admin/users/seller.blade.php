@@ -1,7 +1,7 @@
 <table class="table table-striped">
     <thead>
     <tr class="text-center">
-        <th>Category</th>
+        <th>Confirmed By</th>
 {{--        <th>User ID</th>--}}
         <th>Date</th>
 {{--        <th>Time</th>--}}
@@ -19,11 +19,11 @@
       
         <tr class="text-center">
             <td>
-<!--                @if($item->created_by!=null)
+                @if($item->created_by!=null)
                  
                     {{ $item->CreatedBy->email ?? '-' }}
-               @endif -->
-                {{$item->category ?? '-'}}
+               @endif 
+            
             </td>
 
             <td>
