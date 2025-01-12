@@ -44,14 +44,14 @@
                 </a>
             </li>
         @endcan
-        @can('Users-Registering')
+<!--         @can('Users-Registering')
             <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
                 <a class="dash-link" href="{{ route('admin.users.first.index', ['type' => 1]) }}">
                     <span class="dash-micon"><i class="fas fa-user-plus"></i></span>
                     Registering ({{ $userCounts['registering'] }})
                 </a>
             </li>
-        @endcan
+        @endcan -->
         @can('Users-Rejected')
             <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
                 <a class="dash-link" href="{{ route('admin.users.third.index', ['type' => 3]) }}">
@@ -60,14 +60,14 @@
                 </a>
             </li>
         @endcan
-        @can('Users-Confirmed')
+<!--         @can('Users-Confirmed')
             <li class="dash-item">
                 <a class="dash-link" href="{{ route('admin.users.second.index', ['type' => 2]) }}">
                     <span class="dash-micon"><i class="fas fa-user-check"></i></span>
                     Confirmed ({{ $userCounts['confirmed'] }})
                 </a>
             </li>
-        @endcan
+        @endcan -->
         @can('Users-Sellers')
             <li class="dash-item">
                 <a class="dash-link" href="{{ route('admin.users.seller.index', ['type' => 'seller']) }}">
