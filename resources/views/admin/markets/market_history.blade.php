@@ -33,6 +33,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>User</th>
+                                                    <th>Email</th>
                                                     <th>Price</th>
                                                     <th>Quantity</th>
                                                     <th>Tries</th>
@@ -43,6 +44,7 @@
                                                 @foreach($bids as $bid)
                                                 <tr>
                                                     <td>{{$bid->User->full_name ?? $bid->User->company_name}}</td>
+                                                    <td>{{$bid->User->email}}</td>
                                                     <td>{{$bid->price}}</td>
                                                     <td>{{$bid->quantity}}</td>
                                                     <td>{{$bid->tries}}</td>
