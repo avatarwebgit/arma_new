@@ -50,6 +50,12 @@
                 </select>
             </td>
             <td>
+                                          <a onclick="showUserPreview({{ $item->id }})"
+                   style="margin-right: 10px;padding: 5px 20px"
+                   class="btn btn-sm btn-info text-white">
+                    <i class="fa fa-eye text-white"></i>
+
+                </a>
                 <a style="margin-left: 20px" onclick="removeModal({{ $item->id }},event)"
                    class="btn btn-sm btn-danger text-white">
                     <i class="fa fa-trash text-white"></i>
