@@ -7,7 +7,8 @@
 {{--        <th>Time</th>--}}
         <th>email</th>
         <th>Country</th>
-        <th>Type</th>
+<th>Type</th>
+        <th>Category</th>
         <th>Commodity</th>
         <th>Status</th>
         <th></th>
@@ -36,6 +37,7 @@
             <td>
                 {{ $item->company_country }}
             </td>
+<td>{{$item->category ?? '-'}}</td>
             <td>
    
                 {{ isset($item->Roles()->first()->name) ? ucfirst($item->Roles()->first()->name) : '-' }}
