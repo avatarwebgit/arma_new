@@ -349,6 +349,9 @@
     function createMarketModal() {
         $('#CreateMarketModal').modal('show');
     }
+    function ModalResetPassword() {
+        $('#reset-password-modal').modal('show');
+    }
 
     function CreateMarketModal() {
         let Market_Date = $('#Market_Date').val();
