@@ -37,7 +37,8 @@
             <td>
                 {{ $item->company_country }}
             </td>
-<td> {{($item->category == 1 ? 'Producer': ($item->category == 2 ? 'Trading Company': 'Broker')) }}</td>
+<td> {{ ($item->category == 1 ? 'Producer' : ($item->category == 2 ? 'Trading Company' : ($item->category == 3 ? 'Broker' : '-'))) }}
+</td>
             <td>
    
                 {{ isset($item->Roles()->first()->name) ? ucfirst($item->Roles()->first()->name) : '-' }}
