@@ -93,11 +93,14 @@
     <tr class="text-center">
         <th>#</th>
          <th>Date</th>
+<th>Time</th>
+        <th>email</th>
+          <th>Country</th>
         <th>Type</th>
        
-{{--        <th>Time</th>--}}
-        <th>email</th>
-        <th>Country</th>
+        
+        
+      
         <th>Category</th>
         <th>Commodity</th>
         <th></th>
@@ -106,6 +109,19 @@
     <tbody>
     @foreach($users as $key=>$item)
         <tr class="text-center">
+                       <td>
+                {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
+            </td>
+                <td>
+                {{ \Carbon\Carbon::parse($item->created_at)->format('h:i a') }}
+           </td>
+                 
+            <td>
+                {{ $item->email }}
+            </td>
+                    <td>
+                {{ $item->company_country }}
+            </td>
                         <td>
 <!--                 @if($item->created_by!=null)
                     {{ $item->CreatedBy->email }}
@@ -116,18 +132,9 @@
                 {{ $users->firstItem()+$key }}
             </td>
 
-            <td>
-                {{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}
-            </td>
-{{--            <td>--}}
-{{--                {{ \Carbon\Carbon::parse($item->created_at)->format('h:i a') }}--}}
-{{--            </td>--}}
-            <td>
-                {{ $item->email }}
-            </td>
-            <td>
-                {{ $item->company_country }}
-            </td>
+ 
+   
+    
             <td>
                 @if($item->user_type==2)
                     Seller
