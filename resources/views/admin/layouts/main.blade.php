@@ -350,7 +350,7 @@
         $('#CreateMarketModal').modal('show');
     }
     function ModalResetPassword() {
-        $('#reset-password-modal').modal('show');
+        $('#reset_password_modal').modal('show');
     }
 
     function CreateMarketModal() {
