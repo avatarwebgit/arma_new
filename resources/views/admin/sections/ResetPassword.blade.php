@@ -20,11 +20,11 @@
                  
                 </div>
                 <div class="mb-3" style="width: 70%;margin: 10px auto">
-                    <button onclick="randString()" class="w-100 btn btn-success mb-3" type="button">
+                    <button onclick="CreateNewPassword()" class="w-100 btn btn-success mb-3" type="button">
                         Create a Password
                     </button>
-                    <input readonly type="text" class="form-control mb-3" id="new_password" data-character-set="a-z,A-Z,0-9,#">
-                    <p id="new_password_copied" style="text-align: left;" class="d-none mb-3">
+                    <input readonly type="text" class="form-control mb-3" id="new_password_reset" data-character-set="a-z,A-Z,0-9,#">
+                    <p id="new_password_reset_copied" style="text-align: left;" class="d-none mb-3">
                         password was copied
                     </p>
                     <button onclick="UpdatePasswordUser()" class="w-100 btn btn-info mb-3" type="button">
