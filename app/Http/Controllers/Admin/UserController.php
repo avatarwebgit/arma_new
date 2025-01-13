@@ -248,7 +248,7 @@ class UserController extends Controller
         // اعتبارسنجی داده‌ها
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'username' => 'required|string',
+            'username' => 'required|string|unique:users,email,' . $request->user_id,
             'password' => 'required|string|min:8', // حداقل طول پسورد
         ]);
 
