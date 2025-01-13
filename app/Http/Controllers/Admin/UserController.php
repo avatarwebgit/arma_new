@@ -243,6 +243,30 @@ class UserController extends Controller
 
     }
 
+    public function updatePasswordUser(Request $request)
+    {
+        // اعتبارسنجی داده‌ها
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'username' => 'required|string',
+            'password' => 'required|string|min:8', // حداقل طول پسورد
+        ]);
+
+        // پیدا کردن کاربر بر اساس user_id
+        $user = User::find($request->user_id);
+        
+        if ($user) {
+            // آپدیت پسورد جدید (هش کردن پسورد قبل از ذخیره)
+            $user->email = $request->username;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false], 400);
+    }
+
     public function member_update(User $user, Request $request)
     {
         try {
