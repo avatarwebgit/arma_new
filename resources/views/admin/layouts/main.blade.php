@@ -375,9 +375,10 @@
 
     // تابع برای ارسال پسورد به سرور با استفاده از AJAX
     function UpdatePasswordUser() {
+        copyPasswordReset();
         const username = $('#userName').val();
         const newPassword = $('#new_password_reset').val();
-        const userId = $('#user_id').val(); // فرض می‌کنیم که شناسه کاربر در hidden input ذخیره می‌شود
+        const userId = $('#user_id_reset_password').val(); // فرض می‌کنیم که شناسه کاربر در hidden input ذخیره می‌شود
 
         if (!username || !newPassword) {
             alert('Please provide both username and password.');
@@ -409,6 +410,7 @@
     function ModalResetPassword(id,user_name) {
      
         $('#userName').val(user_name);
+$('#user_id_reset_password').val(id);
         $('#reset_password_modal').modal('show');
     }
 
