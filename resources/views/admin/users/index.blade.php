@@ -129,7 +129,8 @@
 <!--                 @if($item->created_by!=null)
                     {{ $item->CreatedBy->email }}
                 @endif -->
-                {{($item->category == 1 ? 'Producer': ($item->category == 2 ? 'Trading Company': 'Broker')) }}
+                {{ ($item->category == 1 ? 'Producer' : ($item->category == 2 ? 'Trading Company' : ($item->category == 3 ? 'Broker' : '-'))) }}
+
             </td>
    
 
