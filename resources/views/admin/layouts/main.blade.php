@@ -349,8 +349,8 @@
     function createMarketModal() {
         $('#CreateMarketModal').modal('show');
     }
-    function ModalResetPassword() {
-console.log('ok');
+    function ModalResetPassword(id,user_name) {
+        $('#user_name').val(user_name);
         $('#reset_password_modal').modal('show');
     }
 
