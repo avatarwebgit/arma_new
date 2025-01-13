@@ -14,7 +14,7 @@
             <div class="modal-body p-5 row text-center">
  
 
-                <div class="mb-3">
+                <div class="mb-3" style="width: 70%;margin: 10px auto">
                     <span>Username:</span>
                  <input  type="text" class="form-control mb-3" id="user_name">
                  
