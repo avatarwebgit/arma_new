@@ -108,6 +108,7 @@ Route::post('/daily_report_excel', [IndexController::class, 'daily_report_excel'
 
 //Admin Panel Route
 Route::name('admin.')->middleware('check.session')->prefix('/admin-panel/management/')->group(function () {
+    Route::post('/update-password/user/reset', [UserController::class, 'updatePasswordUser'])->name('reset.password');
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //users-list
