@@ -41,6 +41,7 @@
                           
                                 <option value="1">Producer</option>
                                 <option value="2">Trading Company</option>
+                                <option value="3">Broker</option>
                             
                         </select>
 
@@ -56,7 +57,9 @@
                             class="form-control"
                             name="user_type">
                             @foreach($types as $type)
+                                @if($type->name != 'Broker')
                                 <option value="{{ $type->id }}">{{ ucfirst($type->name) }}</option>
+                                @endif
                             @endforeach
                         </select>
 
