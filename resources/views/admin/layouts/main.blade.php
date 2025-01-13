@@ -349,6 +349,63 @@
     function createMarketModal() {
         $('#CreateMarketModal').modal('show');
     }
+    function CreateNewPassword() {
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#";
+        let password = '';
+        const passwordLength = 12; // طول پسورد دلخواه
+
+        for (let i = 0; i < passwordLength; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset[randomIndex];
+        }
+
+        // نمایش پسورد ساخته شده در فیلد
+        $('#new_password_reset').val(password);
+        $('#new_password_reset_copied').addClass('d-none'); // مخفی کردن پیام کپی
+    }
+
+    function copyPasswordReset() {
+        const passwordField = document.getElementById("new_password_reset");
+        passwordField.select();
+        document.execCommand("copy");
+
+        // نمایش پیام کپی شده
+        $('#new_password_reset_copied').removeClass('d-none');
+    }
+
+    // تابع برای ارسال پسورد به سرور با استفاده از AJAX
+    function UpdatePasswordUser() {
+        const username = $('#userName').val();
+        const newPassword = $('#new_password_reset').val();
+        const userId = $('#user_id').val(); // فرض می‌کنیم که شناسه کاربر در hidden input ذخیره می‌شود
+
+        if (!username || !newPassword) {
+            alert('Please provide both username and password.');
+            return;
+        }
+
+        $.ajax({
+            url: '/update-password', // آدرس API که پسورد را آپدیت می‌کند
+            method: 'POST',
+            data: {
+                user_id: userId,
+                username: username,
+                password: newPassword,
+                _token: '{{ csrf_token() }}' // اضافه کردن توکن CSRF برای امنیت
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert('Password updated successfully!');
+                    $('#reset_password_modal').modal('hide');
+                } else {
+                    alert('Error updating password.');
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('There was an error updating the password.');
+            }
+        });
+    }
     function ModalResetPassword(id,user_name) {
      
         $('#userName').val(user_name);
