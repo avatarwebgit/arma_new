@@ -105,6 +105,7 @@
     @include('admin.sections.ShowPreviewSections')
     @include('admin.sections.RejectedUser')
     @include('admin.sections.create_account_modal')
+ @include('admin.sections.ResetPassword')
     @include('admin.sections.add_member_modal')
     <div id="edit_member_modal_div">
 
