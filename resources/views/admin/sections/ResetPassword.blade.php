@@ -16,7 +16,7 @@
 
                 <div class="mb-3" style="width: 70%;margin: 10px auto">
                     <span>Username:</span>
-                 <input  type="text" class="form-control mb-3" id="user_name">
+                 <input  type="text" class="form-control mb-3" id="userName">
                  
                 </div>
                 <div class="mb-3" style="width: 70%;margin: 10px auto">
