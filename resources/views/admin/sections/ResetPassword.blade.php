@@ -17,6 +17,7 @@
                 <div class="mb-3" style="width: 70%;margin: 10px auto">
                     <span>Username:</span>
                  <input  type="text" class="form-control mb-3" id="userName">
+<input type="hidden" id="user_id_reset_password">
                  
                 </div>
                 <div class="mb-3" style="width: 70%;margin: 10px auto">
