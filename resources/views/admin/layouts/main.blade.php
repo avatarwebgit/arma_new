@@ -398,6 +398,7 @@
                 if (response.success) {
                     alert('Password updated successfully!');
                     $('#reset_password_modal').modal('hide');
+                    window.location.reload();
                 } else {
                     alert('Error updating password.');
                 }
