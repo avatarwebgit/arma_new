@@ -25,10 +25,10 @@
                         <input onclick="ShowName('Buyer')" type="radio" name="role" id="Buyer" value="3">
                         <label for="Buyer">Buyer</label>
                     </div>
-                    <div class="ml5">
+<!--                     <div class="ml5">
                         <input onclick="ShowName('Broker')" type="radio" name="role" id="Broker" value="6">
                         <label for="Broker">Broker</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="mb-3">
                     <strong>Status:</strong>
