@@ -386,7 +386,7 @@
         }
 
         $.ajax({
-            url: '/update-password', // آدرس API که پسورد را آپدیت می‌کند
+            url: "{{route('admin.reset.password.user')}}", // آدرس API که پسورد را آپدیت می‌کند
             method: 'POST',
             data: {
                 user_id: userId,
