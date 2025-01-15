@@ -408,11 +408,19 @@
             }
         });
     }
-    function ModalResetPassword(id,user_name) {
+    function ModalResetPassword(id,user_name,user_type) {
      
         $('#userName').val(user_name);
 $('#user_id_reset_password').val(id);
         $('#reset_password_modal').modal('show');
+             if (user_type == 2) {
+                //seller
+                $('#Seller_reset_password').prop('checked', true);
+            }
+            if (user_type == 3) {
+                //seller
+                $('#Buyer_reset_password').prop('checked', true);
+            }
     }
 
     function CreateMarketModal() {
