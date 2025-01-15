@@ -282,14 +282,15 @@
         gtag('config', '{{ setting('gtag') }}');
     </script>
 @endif
-    $(document).ready(function() {
+
+
+<script>
+        $(document).ready(function() {
     $('input[name="role-reset-password"]').change(function() {
         var selectedRole = $('input[name="role-reset-password"]:checked').val();
         console.log("Selected role:", selectedRole); // مقدار انتخاب شده
     });
 });
-
-<script>
     $('select').selectpicker({
         'title': 'Select'
     });
