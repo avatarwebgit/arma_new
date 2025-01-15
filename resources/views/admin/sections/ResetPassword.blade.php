@@ -12,7 +12,25 @@
 
             </div>
             <div class="modal-body p-5 row text-center">
- 
+                 <div class="d-flex mb-3 justify-content-between">
+{{--                    <div>--}}
+{{--                        <input type="radio" name="role" id="Admin" value="1">--}}
+{{--                        <label for="Admin">Admin</label>--}}
+{{--                    </div>--}}
+                    <div class="ml5">
+                        <input onclick="ShowName('Seller')" type="radio" name="role" id="Seller" value="2">
+                        <label for="Seller">Seller</label>
+
+                    </div>
+                    <div class="ml5">
+                        <input onclick="ShowName('Buyer')" type="radio" name="role" id="Buyer" value="3">
+                        <label for="Buyer">Buyer</label>
+                    </div>
+<!--                     <div class="ml5">
+                        <input onclick="ShowName('Broker')" type="radio" name="role" id="Broker" value="6">
+                        <label for="Broker">Broker</label>
+                    </div> -->
+                </div>
 
                 <div class="mb-3" style="width: 70%;margin: 10px auto">
                     <span>Username:</span>
