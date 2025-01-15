@@ -414,6 +414,7 @@ role:role,
         $('#userName').val(user_name);
 $('#user_id_reset_password').val(id);
         $('#reset_password_modal').modal('show');
+console.log(user_type);
              if (user_type == 2) {
                 //seller
                 $('#Seller-reset-password').prop('checked', true);
