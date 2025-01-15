@@ -103,14 +103,7 @@
                 </a>
             </li>
         @endcan
-                @can('Users-Rejected')
-            <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
-                <a class="dash-link" href="{{ route('admin.users.third.index', ['type' => 3]) }}">
-                    <span class="dash-micon"><i class="fas fa-user-times"></i></span>
-                    Rejected ({{ $userCounts['rejected'] }})
-                </a>
-            </li>
-        @endcan
+
         <li class="dash-item">
             <a class="dash-link" href="{{ route('admin.users.status', ['status' => 2]) }}">
                 <span class="dash-micon"><i class="fas fa-user-slash"></i></span>
@@ -123,6 +116,14 @@
                 Blocked ({{ $userCounts['blocked'] }})
             </a>
         </li>
+                        @can('Users-Rejected')
+            <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
+                <a class="dash-link" href="{{ route('admin.users.third.index', ['type' => 3]) }}">
+                    <span class="dash-micon"><i class="fas fa-user-times"></i></span>
+                    Rejected ({{ $userCounts['rejected'] }})
+                </a>
+            </li>
+        @endcan
     </ul>
 </li>
 
