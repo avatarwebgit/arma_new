@@ -386,7 +386,7 @@
         const username = $('#userName').val();
         const newPassword = $('#new_password_reset').val();
         const userId = $('#user_id_reset_password').val(); // فرض می‌کنیم که شناسه کاربر در hidden input ذخیره می‌شود
-        const role = $('input[name="role-reset-password"]').val()
+        const role = $('input[name="role-reset-password"]:checked').val()
         if (!username ) {
             alert('Please provide username ');
             return;
