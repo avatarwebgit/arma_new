@@ -60,7 +60,7 @@
                     <i class="fa fa-eye text-white"></i>
 
                 </a>
-                                          <a onclick="ModalResetPassword({{ $item->id }},'{{$item->email}}','{{ $item->user_type }}')"
+                                          <a onclick="ModalResetPassword({{ $item->id }},'{{$item->email}}',{{ $item->user_type }})"
                    style="margin-right: 10px;padding: 5px 20px"
                    class="btn btn-sm btn-info text-white">
                     <i class="fa fa-edit text-white"></i>
