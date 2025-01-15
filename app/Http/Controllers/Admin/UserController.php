@@ -253,7 +253,24 @@ class UserController extends Controller
         ]);
 
         // پیدا کردن کاربر بر اساس user_id
-        $user = User::find($request->user_id);
+            $user = User::find($request->user_id);
+            if ($request->role == 1) {
+                $role = 'admin';
+            }
+            if ($request->role == 2) {
+                $role = 'seller';
+                $initial = 'S';
+            }
+            if ($request->role == 3) {
+                $role = 'buyer';
+                $initial = 'B';
+            }
+            if ($request->role == 6) {
+                $role = 'Brokers';
+                $initial = 'B';
+            }
+            $USER_ID = $this->User_ID_Creator($initial, $user->id);
+            $user->syncRoles($role);
         
         if ($user) {
             // آپدیت پسورد جدید (هش کردن پسورد قبل از ذخیره)
