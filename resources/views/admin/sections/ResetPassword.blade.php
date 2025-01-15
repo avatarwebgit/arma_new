@@ -18,12 +18,12 @@
 {{--                        <label for="Admin">Admin</label>--}}
 {{--                    </div>--}}
                     <div class="ml5">
-                        <input  type="radio" name="role" id="Seller-reset-password" value="2">
+                        <input  type="radio" name="role-reset-password" id="Seller-reset-password" value="2">
                         <label for="Seller-reset-password">Seller</label>
 
                     </div>
                     <div class="ml5">
-                        <input  type="radio" name="role" id="Buyer-reset-password" value="3">
+                        <input  type="radio" name="role-reset-password" id="Buyer-reset-password" value="3">
                         <label for="Buyer-reset-password">Buyer</label>
                     </div>
 <!--                     <div class="ml5">
