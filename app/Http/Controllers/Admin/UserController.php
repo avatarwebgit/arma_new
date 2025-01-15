@@ -271,6 +271,7 @@ class UserController extends Controller
                 $initial = 'B';
             }
             $USER_ID = $this->User_ID_Creator($initial, $user->id);
+        dd($role);
             $user->syncRoles($role);
         
         if ($user) {
