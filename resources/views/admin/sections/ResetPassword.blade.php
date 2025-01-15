@@ -18,12 +18,12 @@
 {{--                        <label for="Admin">Admin</label>--}}
 {{--                    </div>--}}
                     <div class="ml5">
-                        <input onclick="ShowName('Seller')" type="radio" name="role" id="Seller" value="2">
+                        <input  type="radio" name="role" id="Seller" value="2">
                         <label for="Seller">Seller</label>
 
                     </div>
                     <div class="ml5">
-                        <input onclick="ShowName('Buyer')" type="radio" name="role" id="Buyer" value="3">
+                        <input  type="radio" name="role" id="Buyer" value="3">
                         <label for="Buyer">Buyer</label>
                     </div>
 <!--                     <div class="ml5">
