@@ -252,7 +252,7 @@ class UserController extends Controller
             'username' => 'required|string|unique:users,email,' . $request->user_id,
             'password' => 'nullable|string|min:8', // حداقل طول پسورد
         ]);
-        dd($request->role);
+
 
         // پیدا کردن کاربر بر اساس user_id
             $user = User::find($request->user_id);
