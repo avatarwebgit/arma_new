@@ -249,7 +249,7 @@ class UserController extends Controller
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'username' => 'required|string|unique:users,email,' . $request->user_id,
-            'password' => 'required|string|min:8', // حداقل طول پسورد
+            'password' => 'nullable|string|min:8', // حداقل طول پسورد
         ]);
 
         // پیدا کردن کاربر بر اساس user_id
@@ -275,7 +275,10 @@ class UserController extends Controller
         if ($user) {
             // آپدیت پسورد جدید (هش کردن پسورد قبل از ذخیره)
             $user->email = $request->username;
-            $user->password = Hash::make($request->password);
+            if($request->has('password') and $request->password != null){
+$user->password = Hash::make($request->password);
+            }
+            
             $user->save();
             
             return response()->json(['success' => true]);
