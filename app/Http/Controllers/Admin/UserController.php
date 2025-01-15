@@ -245,6 +245,7 @@ class UserController extends Controller
 
     public function updatePasswordUser(Request $request)
     {
+dd($request->all());
         // اعتبارسنجی داده‌ها
         $request->validate([
             'user_id' => 'required|exists:users,id',
