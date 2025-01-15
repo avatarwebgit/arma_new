@@ -530,7 +530,7 @@ top: 23%;
                 </div>
 
             </div>
-            <div class="col-12 col-sm-4 d-flex justify-content-center mb-3 p-0 ">
+            <div class="col-12 col-sm-4 d-flex justify-content-center align-items-center mb-3 p-0 ">
 <h3>Physical Transactions</h3>
 </div>
             <div style="display:none !important" id="timer_section" class="col-12 col-sm-4 d-flex justify-content-center mb-3 p-0 ">
