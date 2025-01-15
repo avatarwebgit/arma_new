@@ -379,7 +379,7 @@
         const username = $('#userName').val();
         const newPassword = $('#new_password_reset').val();
         const userId = $('#user_id_reset_password').val(); // فرض می‌کنیم که شناسه کاربر در hidden input ذخیره می‌شود
-
+        const role = $('input[name="role"]').val()
         if (!username ) {
             alert('Please provide username ');
             return;
@@ -391,6 +391,7 @@
             data: {
                 user_id: userId,
                 username: username,
+role:role,
                 password: newPassword,
                 _token: '{{ csrf_token() }}' // اضافه کردن توکن CSRF برای امنیت
             },
