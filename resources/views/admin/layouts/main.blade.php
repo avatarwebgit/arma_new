@@ -380,8 +380,8 @@
         const newPassword = $('#new_password_reset').val();
         const userId = $('#user_id_reset_password').val(); // فرض می‌کنیم که شناسه کاربر در hidden input ذخیره می‌شود
 
-        if (!username || !newPassword) {
-            alert('Please provide both username and password.');
+        if (!username ) {
+            alert('Please provide username ');
             return;
         }
 
