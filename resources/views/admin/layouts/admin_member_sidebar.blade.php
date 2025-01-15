@@ -44,6 +44,22 @@
                 </a>
             </li>
         @endcan
+                @can('Users-Buyers')
+            <li class="dash-item">
+                <a class="dash-link" href="{{ route('admin.users.buyer.index', ['type' => 'buyer']) }}">
+                    <span class="dash-micon"><i class="fas fa-shopping-basket"></i></span>
+                    Buyers ({{ $roleCounts['buyers'] }})
+                </a>
+            </li>
+        @endcan
+                @can('Users-Sellers')
+            <li class="dash-item">
+                <a class="dash-link" href="{{ route('admin.users.seller.index', ['type' => 'seller']) }}">
+                    <span class="dash-micon"><i class="fas fa-shopping-cart"></i></span>
+                    Sellers ({{ $roleCounts['sellers'] }})
+                </a>
+            </li>
+        @endcan
 <!--         @can('Users-Registering')
             <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
                 <a class="dash-link" href="{{ route('admin.users.first.index', ['type' => 1]) }}">
@@ -52,14 +68,7 @@
                 </a>
             </li>
         @endcan -->
-        @can('Users-Rejected')
-            <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
-                <a class="dash-link" href="{{ route('admin.users.third.index', ['type' => 3]) }}">
-                    <span class="dash-micon"><i class="fas fa-user-times"></i></span>
-                    Rejected ({{ $userCounts['rejected'] }})
-                </a>
-            </li>
-        @endcan
+
 <!--         @can('Users-Confirmed')
             <li class="dash-item">
                 <a class="dash-link" href="{{ route('admin.users.second.index', ['type' => 2]) }}">
@@ -68,22 +77,8 @@
                 </a>
             </li>
         @endcan -->
-        @can('Users-Sellers')
-            <li class="dash-item">
-                <a class="dash-link" href="{{ route('admin.users.seller.index', ['type' => 'seller']) }}">
-                    <span class="dash-micon"><i class="fas fa-shopping-cart"></i></span>
-                    Sellers ({{ $roleCounts['sellers'] }})
-                </a>
-            </li>
-        @endcan
-        @can('Users-Buyers')
-            <li class="dash-item">
-                <a class="dash-link" href="{{ route('admin.users.buyer.index', ['type' => 'buyer']) }}">
-                    <span class="dash-micon"><i class="fas fa-shopping-basket"></i></span>
-                    Buyers ({{ $roleCounts['buyers'] }})
-                </a>
-            </li>
-        @endcan
+
+
 <!--         @can('Users-Brokers')
             <li class="dash-item">
                 <a class="dash-link" href="{{ route('admin.users.brokers.index', ['type' => 'Brokers']) }}">
@@ -105,6 +100,14 @@
                 <a class="dash-link" href="{{ route('admin.users.Representatives.index', ['type' => 'Representatives']) }}">
                     <span class="dash-micon"><i class="fas fa-user-tag"></i></span>
                     Representatives ({{ $roleCounts['representatives'] }})
+                </a>
+            </li>
+        @endcan
+                @can('Users-Rejected')
+            <li class="dash-item {{ request()->is('users*') ? 'active' : '' }}">
+                <a class="dash-link" href="{{ route('admin.users.third.index', ['type' => 3]) }}">
+                    <span class="dash-micon"><i class="fas fa-user-times"></i></span>
+                    Rejected ({{ $userCounts['rejected'] }})
                 </a>
             </li>
         @endcan
